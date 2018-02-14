@@ -1,0 +1,255 @@
+/**************************************
+ * Column settings and offset, push, pull need to separate or column will overwrite
+ **************************************/
+
+.row {
+	//margin: 0 auto rem-calc(20px) auto;
+
+	// Clear floating children
+	&:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+
+	.col {
+		float: left;
+		@include box-sizing(border-box);
+		padding: ($gutter / 2);
+		margin: 0;
+
+		@media #{$small-up} {
+			padding: ($large-gutter / 2);
+			margin: 0;
+		}
+
+		&[class*="push-"],
+		&[class*="pull-"] {
+			position: relative;
+		}
+
+		$i: 1;
+		@while $i <= $xsmall-columns {
+			$percent: unquote(( 100 / ( $xsmall-columns / $i ) ) + "%");
+			&.xs#{$i} {
+				width: $percent;
+				margin-left: auto;
+				left: auto;
+				right: auto;
+			}
+			$i: $i + 1;
+		}
+
+		$i: 1;
+		@while $i <= $xsmall-columns {
+			$percent: unquote(( 100 / ( $xsmall-columns / $i ) ) + "%");
+			&.offset-xs#{$i} {
+				margin-left: $percent;
+			}
+
+			&.pull-xs#{$i} {
+				right: $percent;
+			}
+
+			&.push-xs#{$i} {
+				left: $percent;
+			}
+			$i: $i + 1;
+		}
+
+		@media #{$small-up} {
+			// Change between 8 and 12 columns default
+			// Columns 8
+			@media only screen and (max-width: 720px) {
+				$i: 1;
+				@while $i <= $small-columns {
+					$percent: unquote(( 100 / ( $small-columns / $i ) ) + "%");
+					&.s#{$i} {
+						width: $percent;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1;
+				}
+
+				$i: 1;
+				@while $i <= $small-columns {
+					$percent: unquote(( 100 / ( $small-columns / $i ) ) + "%");
+					&.offset-s#{$i} {
+						margin-left: $percent;
+					}
+
+					&.pull-s#{$i} {
+						right: $percent;
+					}
+
+					&.push-s#{$i} {
+						left: $percent;
+					}
+					$i: $i + 1;
+				}
+			}
+
+			// Columns 12
+			@media only screen and (min-width: 721px) {
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.s#{$i} {
+						width: $percent;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1;
+				}
+
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.offset-s#{$i} {
+						margin-left: $percent;
+					}
+
+					&.pull-s#{$i} {
+						right: $percent;
+					}
+
+					&.push-s#{$i} {
+						left: $percent;
+					}
+					$i: $i + 1;
+				}
+			}
+		}
+		@if ($amp == false) {
+			@media #{$medium-up} {
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.m#{$i} {
+						width: $percent;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1
+				}
+
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.offset-m#{$i} {
+						margin-left: $percent;
+					}
+
+					&.pull-m#{$i} {
+						right: $percent;
+					}
+
+					&.push-m#{$i} {
+						left: $percent;
+					}
+					$i: $i + 1
+				}
+			}
+
+			@media #{$large-up} {
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.l#{$i} {
+						width: $percent;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1;
+				}
+
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.offset-l#{$i} {
+						margin-left: $percent;
+					}
+
+					&.pull-l#{$i} {
+						right: $percent;
+					}
+
+					&.push-l#{$i} {
+						left: $percent;
+					}
+					$i: $i + 1;
+				}
+			}
+
+			@media #{$xlarge-up} {
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.xl#{$i} {
+						width: $percent;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1;
+				}
+
+				$i: 1;
+				@while $i <= $columns {
+					$percent: unquote(( 100 / ( $columns / $i ) ) + "%");
+					&.offset-xl#{$i} {
+						margin-left: $percent;
+					}
+
+					&.pull-xl#{$i} {
+						right: $percent;
+					}
+
+					&.push-xl#{$i} {
+						left: $percent;
+					}
+					$i: $i + 1;
+				}
+			}
+		}
+	}
+}
+
+@if( in-array( 'hidden', $grid ) ) {
+	.xs-hidden {
+		@media #{$xsmall-only} {
+			display: none;
+		}
+	}
+
+	.s-hidden {
+		@media #{$small-only} {
+			display: none;
+		}
+	}
+
+	@if( $amp == false ) {
+		.m-hidden {
+			@media #{$medium-only} {
+				display: none;
+			}
+		}
+
+		.l-hidden {
+			@media #{$large-only} {
+				display: none;
+			}
+		}
+
+		.xl-hidden {
+			@media #{$xlarge-only} {
+				display: none;
+			}
+		}
+	}
+}

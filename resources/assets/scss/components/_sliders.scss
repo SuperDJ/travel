@@ -1,0 +1,302 @@
+/**************************************
+ * Sliders
+ *
+ * http://www.google.com/design/spec/components/sliders.html
+ **************************************/
+
+input[type="range"] {
+	background: $slider-off-color;
+	height: $slider-track-height;
+	margin: 0;
+	outline: none;
+	@include appearance(none);
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	@include range-track() {
+		@include appearance(none);
+		height: $slider-track-height;
+		@include transition(background $transition-small-duration $standard-transition);
+
+		@if( $amp == false ) {
+			@media #{$medium-up} {
+				@include transition(background $transition-medium-duration $standard-transition);
+			}
+
+			@media #{$large-up} {
+				@include transition(background $transition-large-duration $standard-transition);
+			}
+		}
+
+		&:focus, &:active {
+			background: $slider-on-color;
+		}
+	}
+
+	&::-moz-range-track {
+		@include opacity(0);
+	}
+
+	&::-ms-tooltip {
+		display: none;
+	}
+
+	@include range-thumb() {
+		@include square($slider-thumb-size);
+		background: $slider-thumb-background;
+		border: $slider-track-height solid $slider-off-color;
+		@include border-radius(50%);
+		margin: $slider-thumb-margin;
+		@include appearance(none);
+		@include transition(all $transition-small-duration $standard-transition);
+
+		@if( $amp == false ) {
+			@media #{$medium-only} {
+				@include transition(all $transition-medium-duration $standard-transition);
+			}
+
+			@media #{$medium-up} {
+				@include transition(all $transition-large-duration $standard-transition);
+			}
+		}
+
+		&:focus, &:active {
+			@include square($slider-thumb-active-size);
+			background: $slider-on-color;
+			border: $slider-track-height solid $slider-on-color;
+			margin: $slider-thumb-on-margin;
+		}
+	}
+
+	&:disabled {
+		@include range-thumb() {
+			@include square($slider-thumb-size);
+			margin: $slider-thumb-margin;
+			background: $slider-off-color;
+			border: $slider-track-height solid var(--background, $background);
+		}
+
+		&:active, &:focus {
+			@include range-track() {
+				background: none;
+			}
+		}
+	}
+}
+
+.range {
+	display: inline-block;
+	position: relative;
+	// Hide track
+	input[type="range"] {
+		background: transparent;
+		position: relative;
+		z-index: 3;
+		@include appearance(none);
+
+		@include range-track() {
+			&:focus, &:active {
+				background: transparent;
+			}
+		}
+
+		@if( in-array( 'discrete', $slider ) ) {
+			&.slider-discrete, &.slider-discrete.not-null {
+				@include range-thumb() {
+					background: transparent;
+					border: $slider-track-height solid transparent;
+				}
+			}
+		}
+
+		// When thumb over 0%
+		&.not-null {
+			@include range-thumb() {
+				@include border-radius(50%);
+				@include square($slider-thumb-size);
+				background: $slider-on-color;
+				border: $slider-track-height solid $slider-on-color;
+				margin: $slider-thumb-margin;
+
+				&:active, &:focus {
+					@include square($slider-thumb-active-size);
+					margin: $slider-thumb-on-margin;
+				}
+			}
+		}
+	}
+
+	.range-track {
+		height: $slider-track-height;
+		margin: (($slider-thumb-size * -1) - $slider-track-height) 0 0 0;
+		position: relative;
+		width: 100%;
+		z-index: 1;
+
+		> div {
+			display: inline-block;
+			height: 100%;
+		}
+
+		.range-track-before {
+			background: $slider-on-color;
+		}
+
+		.range-track-after {
+			background: $slider-off-color;
+		}
+	}
+
+	&:active, &:focus {
+		.slider-bubble {
+			@include square($slider-bubble-active-size);
+			background: $slider-off-color;
+			border: none;
+			bottom: $slider-track-height;
+			color: $slider-bubble-font-color;
+			font-size: $slider-bubble-font-size;
+			margin: 0 0 0 ( ( $slider-bubble-active-size  / 2 ) * -1 );
+			text-align: center;
+
+			&:before {
+				border-left: $slider-triangle-border-hidden;
+				border-right: $slider-triangle-border-hidden;
+				border-top: $slider-triangle-size solid $slider-off-color;
+				right: rem-calc(3.5px);
+				top: $slider-bubble-active-size - ( $slider-track-height * 2 );
+			}
+
+			&.not-null {
+				background: $slider-on-color;
+				border: none;
+				font-size: $slider-bubble-font-size;
+
+				&:before {
+					border-left: $slider-triangle-border-hidden;
+					border-right: $slider-triangle-border-hidden;
+					border-top: $slider-triangle-size solid $slider-on-color;
+				}
+			}
+		}
+	}
+
+	@if( in-array( 'discrete', $slider ) ) {
+		.slider-bubble {
+			@include border-radius(50%);
+			@include square($slider-thumb-size);
+			background: $slider-bubble-background;
+			border: $slider-track-height solid $slider-bubble-background;
+			//bottom: ( $slider-thumb-active-size + ( $slider-track-height * 2 ) ) * -1;
+			color: $slider-bubble-font-color;
+			font-size: 0;
+			margin: (($slider-thumb-size / 2) + $slider-track-height) 0 0 (($slider-thumb-size * -1) / 2);
+			position: absolute;
+			z-index: 2;
+			@include transition(background $transition-small-duration $standard-transition unquote(',')
+								width $transition-small-duration $standard-transition unquote(',')
+								height $transition-small-duration $standard-transition unquote(',')
+								border $transition-small-duration $standard-transition unquote(',')
+								bottom $transition-small-duration $standard-transition unquote(',')
+								margin $transition-small-duration $standard-transition
+			);
+
+			@if( $amp == false ) {
+				@media #{$medium-only} {
+					@include transition(background $transition-medium-duration $standard-transition unquote(',') width $transition-medium-duration $standard-transition unquote(',') height $transition-medium-duration $standard-transition unquote(',') border $transition-medium-duration $standard-transition unquote(',') bottom $transition-medium-duration $standard-transition unquote(',') margin $transition-medium-duration $standard-transition
+					);
+				}
+
+				@media #{$medium-up} {
+					@include transition(background $transition-large-duration $standard-transition unquote(',') width $transition-large-duration $standard-transition unquote(',') height $transition-large-duration $standard-transition unquote(',') border $transition-large-duration $standard-transition unquote(',') bottom $transition-large-duration $standard-transition unquote(',') margin $transition-large-duration $standard-transition
+					);
+				}
+			}
+
+			&:before {
+				@include square(0);
+				border-left: none;
+				border-right: none;
+				border-top: none;
+				content: '';
+				position: absolute;
+				right: 0;
+				top: 0;
+				@include transition(border-left $transition-small-duration $standard-transition unquote(',')
+									border-right $transition-small-duration $standard-transition unquote(',')
+									border-top $transition-small-duration $standard-transition unquote(',')
+									top $transition-small-duration $standard-transition
+				);
+
+				@if( $amp == false ) {
+					@media #{$medium-only} {
+						@include transition(border-left $transition-medium-duration $standard-transition unquote(',') border-right $transition-medium-duration $standard-transition unquote(',') border-top $transition-medium-duration $standard-transition unquote(',') top $transition-medium-duration $standard-transition
+						);
+					}
+
+					@media #{$medium-up} {
+						@include transition(border-left $transition-large-duration $standard-transition unquote(',') border-right $transition-large-duration $standard-transition unquote(',') border-top $transition-large-duration $standard-transition unquote(',') top $transition-large-duration $standard-transition
+						);
+					}
+				}
+			}
+
+			&.not-null {
+				background: $slider-on-color;
+				border: $slider-track-height solid $slider-on-color;
+				color: $slider-bubble-font-color;
+				font-size: 0;
+			}
+		}
+	}
+
+	&:disabled, &.disabled {
+		input[type="range"] {
+			@include range-thumb() {
+				background: $slider-thumb-background;
+				border: $slider-track-height solid $slider-off-color;
+			}
+
+			&.not-null {
+				@include range-thumb() {
+					background: $slider-off-color;
+					border: $slider-track-height solid var(--background, $background);
+				}
+			}
+
+			@if( in-array( 'discrete', $slider ) ) {
+				&.slider-discrete {
+					@include range-thumb() {
+						background: transparent;
+						border: $slider-track-height solid transparent;
+					}
+				}
+			}
+		}
+
+		.range-track-before {
+			background: $slider-off-color;
+		}
+
+		.slider-bubble {
+			background: $slider-off-color;
+			border: $slider-track-height solid var(--background, $background);
+		}
+
+		@if( in-array( 'discrete', $slider ) ) {
+			&:active, &:focus {
+				.slider-bubble {
+					background: $slider-off-color;
+					border: none;
+
+					&:before {
+						border-left: $slider-triangle-border-hidden;
+						border-right: $slider-triangle-border-hidden;
+						border-top: $slider-triangle-size solid $slider-off-color;
+					}
+				}
+			}
+		}
+	}
+}

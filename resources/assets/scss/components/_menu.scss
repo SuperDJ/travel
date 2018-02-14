@@ -1,0 +1,101 @@
+/**************************************
+ * Menus
+ *
+ * https://material.io/guidelines/components/menus.html
+ **************************************/
+
+.menu {
+	background: if( $var == true, var(--background, $background), $background);
+	visibility: hidden;
+	@include font($font-size-menu, 0, $font-weight-menu, $line-height-menu, $font-color-menu, $letter-spacing-menu);
+	@include opacity(0);
+	position: absolute;
+	@include material-shadow(8);
+	@include flex-container(column, null);
+	@include border-radius(if( $var == true, var(--border-size, $border-size), $border-size));
+	padding: $menu-padding;
+	white-space: nowrap;
+	text-align: left;
+	max-height: 50vh;
+	overflow: auto;
+	z-index: 4;
+	@include transition(max-width $transition-small-duration $standard-transition unquote(',') max-height $transition-small-duration $standard-transition);
+
+	@if( $amp == false ) {
+		@media #{$medium-only} {
+			@include transition(max-width $transition-medium-duration $standard-transition unquote(',') max-height $transition-medium-duration $standard-transition);
+		}
+
+		@media #{$medium-up} {
+			@include transition(max-width $transition-large-duration $standard-transition unquote(',') max-height $transition-large-duration $standard-transition);
+		}
+	}
+
+	a {
+		display: block;
+		height: $menu-item-height;
+		@include font($font-size-menu, 0, $font-weight-menu, $line-height-menu, $font-color-menu, $letter-spacing-menu);
+		color: $menu-item-font-color;
+		padding: $menu-item-padding;
+		@include transition(background $transition-small-duration $standard-transition);
+
+		@if( $amp == false ) {
+			@media #{$medium-only} {
+				@include transition(background $transition-medium-duration $standard-transition);
+			}
+
+			@media #{$medium-up} {
+				@include transition(background $transition-large-duration $standard-transition);
+			}
+		}
+
+		&:hover {
+			background: if( $theme == light, $grey-200, null);
+			color: if( $theme == light, initial, $white);
+
+			.material-icons {
+				color: if($theme == light, initial, $white);
+			}
+		}
+	}
+
+	&.expanded {
+		visibility: visible;
+		@include opacity(1);
+	}
+
+	&-cascading {
+		padding: $menu-cascading-padding;
+
+		a {
+			@include font(15, 0, $font-weight-menu, $line-height-menu, $font-color-menu, $letter-spacing-menu);
+			height: $menu-cascading-item-height;
+			line-height: $menu-cascading-item-height;
+			padding: $menu-cascading-item-padding;
+		}
+	}
+
+	&-sub {
+		@include material-shadow(9);
+	}
+}
+
+select.select {
+	display: none;
+}
+
+div.select {
+	padding: $menu-select-padding;
+	border-bottom: $textfield-border-size solid if($theme == light, rgba($black, .38), rgba($white, .5));
+	position: relative;
+	margin: $menu-select-margin;
+
+	.menu {
+		top: 0;
+		width: 100%;
+	}
+
+	.active {
+		color: if( $var, var(--main-color, $main-color), $main-color);
+	}
+}

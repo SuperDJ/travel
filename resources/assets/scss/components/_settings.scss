@@ -1,0 +1,655 @@
+/**************************************
+ * Imports
+ **************************************/
+@import 'mixins';
+// Font size
+$font-size: 14 !default;
+@import 'functions';
+
+/**************************************
+ * Colors
+ **************************************/
+/*
+ * Add / remove colors you would like to use in CSS
+ * NOTE In SCSS all color variables stay accessible
+ *
+ * Accent means all colors with leading a
+  Text means classes that define text color
+ */
+
+$allowed-colors: (
+	'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green',
+	'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'shades', 'accent', 'text') !default;
+
+@import 'colors';
+
+$main-color: $indigo !default;
+$secondary-color: $blue !default;
+
+$var: true !default
+$link-color: if( $var == true, var(--main-color, $main-color), $main-color );
+$link-hover: if( $var == true, var(--secondary-color, $secondary-color), $secondary-color );
+
+/**************************************
+ * Global
+ **************************************/
+$amp: false !default;
+$theme: light !default;
+$typography-type: english !default;
+$select-background: $cyan-a200 !default;
+$standard-transition: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
+$deceleration-transition: cubic-bezier(0.0, 0.0, 0.2, 1) !default;
+$acceleration-transition: cubic-bezier(0.4, 0.0, 1, 1) !default;
+$sharp-transition: cubic-bezier(0.4, 0.0, 0.6, 1) !default;
+$transition-small-duration: 300ms !default;
+$transition-medium-duration: 390ms !default;
+$transition-large-duration: 200ms !default;
+$background: if( $theme == light, $white, $grey-800 ) !default;
+$text-direction: ltr !default;
+$border-size: rem-calc(2px) !default;
+
+/**************************************
+ * Typography settings
+ * Default font size under imports
+ **************************************/
+// Font paths
+$roboto-font-path: '/stylesheets/fonts/Roboto/' !default;
+$noto-font-path: '/stylesheets/fonts/Noto/' !default;
+
+// Typographic Scale
+$font-size-display-4: 112 !default;
+$font-size-display-3: 56 !default;
+$font-size-display-2: 45 !default;
+$font-size-display-1: 34 !default;
+$font-size-headline: 24 !default;
+$font-size-title: 20 !default;
+$font-size-subhead-2: 15 !default;
+$font-size-subhead-1: 15 !default;
+$font-size-body-2: 13 !default;
+$font-size-body-1: 13 !default;
+$font-size-caption: 12 !default;
+$font-size-label: 12 !default;
+$font-size-menu: 13 !default;
+$font-size-button: 14 !default;
+
+// Typographic Scale for devices (max-width: 960px)
+$font-size-small-subhead: 16 !default;
+$font-size-small-body: 14 !default;
+
+// Basic Styles
+$font-weight-display-4: 300 !default;
+$font-weight-display-3: 400 !default;
+$font-weight-display-2: 400 !default;
+$font-weight-display-1: 400 !default;
+$font-weight-headline: 400 !default;
+$font-weight-title: 500 !default;
+$font-weight-subhead-2: 400 !default;
+$font-weight-subhead-1: 300 !default;
+$font-weight-body-2: 500 !default;
+$font-weight-body-1: 400 !default;
+$font-weight-caption: 400 !default;
+$font-weight-label: 300 !default;
+$font-weight-menu: 400 !default;
+$font-weight-button: 500 !default;
+
+// Line Height
+$line-height-display-4: 128 !default;
+$line-height-display-3: 84 !default;
+$line-height-display-2: 64 !default;
+$line-height-display-1: 40 !default;
+$line-height-headline: 32 !default;
+$line-height-title: 28 !default;
+$line-height-subhead-2: 28 !default;
+$line-height-subhead-1: 24 !default;
+$line-height-body-2: 24 !default;
+$line-height-body-1: 20 !default;
+$line-height-caption: 20 !default;
+$line-height-label: 20 !default;
+$line-height-menu: 20 !default;
+$line-height-button: 20 !default;
+
+// Tracking and kerning
+$letter-spacing-display-4: -0.1 !default;
+$letter-spacing-display-3: -0.05 !default;
+$letter-spacing-display-2: 0 !default;
+$letter-spacing-display-1: 0 !default;
+$letter-spacing-headline: 0 !default;
+$letter-spacing-title: 0.05 !default;
+$letter-spacing-subhead-2: 0.1 !default;
+$letter-spacing-subhead-1: 0.1 !default;
+$letter-spacing-body-2: 0.1 !default;
+$letter-spacing-body-1: 0.1 !default;
+$letter-spacing-caption: 0.2 !default;
+$letter-spacing-label: 0.1 !default;
+$letter-spacing-menu: 0.1 !default;
+$letter-spacing-button: 0.1 !default;
+
+// Colors
+$font-color-display-4: if( $var == true, var(--font-color-1, if( $theme == light, rgba($black, .54), rgba($white, .54) ) ), if( $theme == light, rgba($black, .54), rgba($white, .54) )) !default;
+$font-color-display-3: $font-color-display-4 !default;
+$font-color-display-2: $font-color-display-4 !default;
+$font-color-display-1: $font-color-display-4 !default;
+$font-color-headline: if( $var == true, var(--font-color-2, if( $theme == light, rgba($black, .87), rgba($white, .87) ) ), if( $theme == light, rgba($black, .87), rgba($white, .87) ) ) !default;
+$font-color-title: $font-color-headline !default;
+$font-color-subhead: $font-color-headline !default;
+$font-color-body-2: $font-color-headline !default;
+$font-color-body-1: $font-color-headline !default;
+$font-color-caption: $font-color-display-4 !default;
+$font-color-label: $font-color-display-4 !default;
+$font-color-menu: $font-color-headline !default;
+$font-color-button: $font-color-headline !default;
+
+/**************************************
+ * Grid settings
+ **************************************/
+// Break points
+$xsmall-screen: 600px !default;
+$small-screen: 960px !default;
+$medium-screen: 1280px !default;
+$large-screen: 1600px !default;
+$xlarge-screen: 1920px !default;
+
+// Columns
+$xsmall-columns: 4 !default;
+$small-columns: 8 !default;
+$columns: 12 !default;
+
+// Gutter
+$gutter: rem-calc(16px) !default;
+$large-gutter: rem-calc(24px) !default;
+
+/**************************************
+ * Icons
+ **************************************/
+$icon-size: rem-calc(24px) !default;
+
+/**************************************
+ * Lists
+ **************************************/
+$list-item-height: rem-calc(48px) !default;
+$list-font-color: $font-color-headline !default;
+$list-font-size: rem-calc(14px) !default;
+$list-item-padding: 0 rem-calc(16px) !default;
+
+/**************************************
+ * AppBar
+ **************************************/
+$appbar-padding: ( $gutter / 2 ) !default;
+$appbar-padding-large: ( $large-gutter / 2 ) !default;
+$appbar-mobile-landscape-height: rem-calc(48px) !default;
+$appbar-mobile-portrait-height: rem-calc(56px) !default;
+$appbar-large-height: rem-calc(64px) !default;
+$appbar-background: if( $theme == light, if( $var == true, var(--main-color, $main-color), $main-color ), $grey-900 ) !default;
+$appbar-font-color: $white !default;
+$appbar-title-margin-left: rem-calc(72px) !default;
+$appbar-title-padding-bottom: rem-calc(20px) !default;
+$appbar-more-margin: rem-calc(4px) !default;
+$appbar-item-margin: 0 ( $gutter / 2 ) !default;
+$appbar-item-margin-large: 0 ( $large-gutter / 2 ) !default;
+$appbar-icon-landscape-size: $appbar-mobile-landscape-height - ($gutter * 2);
+$appbar-icon-portrait-size: $appbar-mobile-portrait-height - ($gutter * 2);
+$appbar-icon-large-size: $appbar-large-height - (rem-calc(20px) * 2);
+$appbar-portrait-padding: ( ( $appbar-mobile-portrait-height - $appbar-icon-landscape-size ) / 2 );
+$appbar-landscape-padding: ( ( $appbar-mobile-landscape-height - $appbar-icon-landscape-size ) / 2 );
+$appbar-large-padding: ( ( $appbar-large-height - $appbar-icon-large-size ) / 2 );
+
+/**************************************
+ * Badges
+ **************************************/
+$badge-background: $red !default;
+
+/**************************************
+ * Bottom navigation
+ **************************************/
+$bottom-nav-font-size: rem-calc(12px) !default;
+$bottom-nav-font-size-active: rem-calc(14px) !default;
+$bottom-nav-height: rem-calc(56px) !default;
+$bottom-nav-icon-size: rem-calc(24px) !default;
+$bottom-nav-background: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$bottom-nav-off-color: rgba($white, .7) !default;
+$bottom-nav-on-color: $white !default;
+$bottom-nav-padding: rem-calc(8px) rem-calc(12px) rem-calc(10px) rem-calc(12px) !default;
+$bottom-nav-padding-active: rem-calc(6px) rem-calc(12px) rem-calc(10px) rem-calc(12px) !default
+$bottom-nav-min-width: rem-calc(80px) !default;
+$bottom-nav-min-width-large: rem-calc(120px) !default;
+$bottom-nav-max-width: rem-calc(168px) !default;
+$bottom-shifting-max-width: rem-calc(96px) !default;
+$bottom-shifting-max-width-active: rem-calc(168px);
+$bottom-shifting-min-width: rem-calc(56px) !default;
+$bottom-shifting-min-width-active: rem-calc(96px);
+$bottom-shifting-padding: $gutter 0 !default;
+$bottom-shifting-padding-active: rem-calc(6px) 0 rem-calc(10px) 0 !default;
+$bottom-shifting-content-margin: rem-calc(6px) 0 0 0  !default;
+
+/**************************************
+ * Bottom sheet
+ **************************************/
+$bottom-sheet-background: $background !default;
+$bottom-sheet-padding-size: $gutter !default;
+$bottom-sheet-padding: ( $bottom-sheet-padding-size / 2 ) $bottom-sheet-padding-size !default;
+
+$bottom-sheet-icon-size: $icon-size !default;
+$bottom-sheet-icon-margin: 0 ( $gutter * 2 ) 0 0 !default;
+
+$bottom-sheet-item-height: $list-item-height !default;
+$bottom-sheet-title-height: rem-calc(56px);
+
+$bottom-sheet-color: $font-color-headline !default;
+$bottom-sheet-font-size: rem-calc(16px) !default;
+$bottom-sheet-font-weight: 400 !default;
+$bottom-sheet-title-color: $font-color-display-4 !default;
+$bottom-sheet-title-font-size: rem-calc(16px) !default;
+$bottom-sheet-title-font-weight: 400 !default;
+
+$bottom-sheet-grid-padding-size: $large-gutter !default;
+$bottom-sheet-grid-padding: $bottom-sheet-grid-padding-size !default;
+$bottom-sheet-grid-icon-size: rem-calc(48px) !default;
+
+/**************************************
+ * Buttons
+ **************************************/
+$button-height: rem-calc(36px) !default;
+$button-dense-height: rem-calc(32px) !default;
+$raised-background: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$raised-font-color: $white !default;
+$raised-icon-color: $raised-font-color !default;
+$raised-disabled-background: if( $theme == light, rgba($black, .12), rgba($white, .12) ) !default;
+$raised-disabled-font-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default;
+
+$flat-color: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$flat-icon-color: $flat-color !default;
+$flat-active-background: if( $theme == light, rgba(153, 153, 153, .4), rgba(204, 204, 204, .25) ) !default;
+$flat-disabled-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default;
+
+$floating-background: if( $var == true, var(--secondary-color, $secondary-color), $secondary-color ) !default;
+$floating-icon-color: $white !default;
+
+
+$toggle-size: rem-calc(40px) !default;
+$toggle-icon-size: $icon-size !default;
+
+/**************************************
+ * Cards
+ **************************************/
+$card-primary-font-size: rem-calc(24px) !default;
+$card-primary-small-font-size: rem-calc(14px) !default;
+$card-subhead-font-size: rem-calc(14px) !default;
+$card-subhead-font-color: rgba($black, .38) !default;
+$card-supporting-font-size: rem-calc(14px) !default;
+$card-actions-padding: $gutter / 2 !default;
+$card-background: $background !default;
+
+/**************************************
+ * Chips
+ **************************************/
+$chips-size: rem-calc(32px) !default;
+$chips-font-size: rem-calc(13px) !default;
+$chips-delete-size: rem-calc(15px) !default;
+$chips-font-color: $font-color-headline !default;
+$chips-padding: 0 rem-calc(12px) !default;
+$chips-delete-margin: 0 ( ($gutter / 2 ) * -1 ) 0 ( $gutter / 4 ) !default;
+$chips-contact-font-size: rem-calc(14px) !default;
+$chips-contact-img-margin: 0 ( $gutter / 2 ) 0 rem-calc(-12px) !default;
+$chips-font-hover-color: $white !default;
+$chips-background: $grey-200 !default;
+$chips-background-hover: $grey-600 !default;
+$chips-delete-cross: $chips-background !default;
+$chips-delete-cross-hover: $chips-background-hover !default;
+$chips-delete-background: rgba($black, .54) !default;
+$chips-delete-background-hover: $chips-font-hover-color !default;
+
+/**************************************
+ * Data tables
+ **************************************/
+$table-content-size: rem-calc(48px) !default;
+$table-content-font-size: rem-calc(13px) !default;
+$table-content-font-color: $font-color-headline !default;
+$table-column-padding: rem-calc(56px) !default;
+$table-first-column-padding: rem-calc(24px) !default;
+$table-checkbox-size: rem-calc(18px) !default;
+
+$table-header-font-color: $font-color-display-4 !default;
+$table-header-size: rem-calc(56px) !default;
+$table-header-font-size: rem-calc(12px) !default;
+
+/**************************************
+ * Dialogs
+ **************************************/
+$dialog-max-width: calc(100% - ( 2 * #{$gutter})) !default;
+$dialog-max-width-large: calc(100% - (2 * #{$large-gutter})) !default;
+$dialog-content-padding: 0 $large-gutter $large-gutter $large-gutter !default;
+$dialog-title-padding: $large-gutter $large-gutter rem-calc(20px) $large-gutter !default;
+$dialog-background: if( $theme == light, if( $var == true, var(--background, $background), $background ), $grey-800 ) !default;
+$dialog-actions-height: rem-calc(52px) !default;
+$dialog-actions-padding: rem-calc(8px) !default;
+
+/**************************************
+ * Dividers
+ **************************************/
+$divider-height: rem-calc(1px) !default;
+$divider-color: if($theme == light, rgba($black, .12), rgba($white, .12)) !default;
+
+/**************************************
+ * Expansion panels
+ **************************************/
+$expansion-header-height: rem-calc(48px) !default;
+$expansion-label-font-size: rem-calc(15px) !default;
+$expansion-label-font-color: $font-color-headline !default;
+
+/**************************************
+ * Grid lists
+ **************************************/
+$grid-background: rgba($black, .3) !default;
+$grid-font-color: $white !default;
+
+/**************************************
+ * Menu
+ **************************************/
+$menu-padding: ( $gutter / 2 ) 0 !default;
+$menu-item-height: $list-item-height !default;
+$menu-item-font-color: if( $theme == light, initial, rgba($white, .7)) !default;
+$menu-item-padding: ($menu-item-height - (rem-calc(20px) + rem-calc($font-size-menu + 0px))) $gutter rem-calc(20px) $gutter !default;
+$menu-cascading-padding: $gutter 0 !default;
+$menu-cascading-item-height: rem-calc(32px) !default;
+$menu-cascading-item-padding: 0 $large-gutter rem-calc(20px) $large-gutter;
+$menu-select-padding: $gutter 0 ( $gutter / 2 ) 0;
+$menu-select-margin: 0 0 ( $gutter / 2 ) 0;
+
+/**************************************
+ * Navigation drawer
+ **************************************/
+$drawer-padding: $gutter !default;
+$drawer-item-height: $list-item-height !default;
+$drawer-icon-size: $icon-size !default;
+$drawer-profile-img: rem-calc(40px) !default;
+$drawer-profile-top: $drawer-padding !default;
+$drawer-profile-content-height: rem-calc(56px) !default;
+$drawer-profile-bottom-padding: $gutter / 2 !default;
+$drawer-profile-scrim: to top, rgba($grey-900, 0.4) 15%, rgba($white, 0) 33% !default;
+$drawer-profile-height: $drawer-padding + $drawer-profile-img + $drawer-profile-content-height + $drawer-profile-bottom-padding !default;
+$drawer-background: $background !default;
+$drawer-hover: $main-color !default;
+$drawer-small-width: rem-calc(280px) !default;
+$drawer-medium-width: rem-calc(320px) !default;
+$drawer-border: ( $border-size / 2 ) solid if($theme == light, rgba($black, .12), rgba($white, .12)) !default;
+$drawer-item-font-color: $list-font-color !default;
+
+/**************************************
+* Notifications
+***************************************/
+$notification-background: if( $var == true, var(--background, $background), $background ) !default;
+$notification-header-icon-size: rem-calc(14px) !default;
+$notification-media-icon-size: rem-calc(35px) !default;
+$notification-content-top: rem-calc(5px) !default;
+$notification-content-sides: $gutter / 2 !default;
+$notification-content-bottom: rem-calc(10px) !default;
+$notification-image-size: rem-calc(40px) !default;
+$notification-header-padding: ( $gutter / 2 ) ( $gutter / 2 ) 0 ( $gutter / 2 ) !default;
+
+/**************************************
+ * Pickers
+ **************************************/
+$picker-color: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+
+/**************************************
+ * Progress & activity
+ **************************************/
+$progressbar-background: rgba($main-color, .4) !default;
+$progress-background: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+
+// Circular
+$circular-width: rem-calc(50px) !default;
+$circular-path-width: rem-calc(5px) !default;
+$circular-color1: $red !default;
+$circular-color2: $green !default;
+$circular-color3: $indigo !default;
+$circular-color4: $orange !default;
+
+/**************************************
+ * Selection controls
+ **************************************/
+// Checkbox
+$selection-size: rem-calc($font-size-body-1+0px) !default;
+$selection-border-size: $border-size !default;
+$selection-color: if( $theme == light, rgba($black, .54), rgba($white, .7) ) !default;
+$selection-active-color: rgba( if( color($main-color, 500) != false, color($main-color, 500), $main-color ), 1) !default;
+$selection-disabled-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default;
+
+// Switch
+$switch-track-height: rem-calc(12px) !default;
+$switch-track-width: rem-calc(24px) !default;
+$switch-thumb-size: rem-calc(14px) !default;
+$switch-thumb-top: ( $switch-track-height - $switch-thumb-size ) / 2;
+$switch-thumb-left: $switch-track-width - $switch-thumb-size;
+$switch-thumb-radial-size: $switch-thumb-size * 2;
+$switch-thumb-radial-top: ($switch-track-height - $switch-thumb-radial-size ) / 2;
+$switch-thumb-radial-left: $switch-thumb-size / -2;
+$switch-thumb-radial-left-active: $switch-thumb-left - ($switch-thumb-size / 2 );
+$switch-track-background: if( $theme == light, rgba($black, .38), rgba($white, .3) ) !default;
+$switch-track-background-active: if( $theme == light, rgba($main-color, .5), rgba(color($main-color, 200), .5) ) !default;
+$switch-thumb-background: if( $theme == light ,rgba($grey-50, 1), rgba($grey-400, 1) ) !default;
+$switch-thumb-background-active: if( $theme == light, rgba($main-color, 1), rgba(color($main-color, 200), 1) ) !default;
+$switch-thumb-radial-background: if( $theme == light, rgba($grey-400, .2), rgba($grey-400, .2) ) !default;
+$switch-thumb-radial-background-active: if( $theme == light, rgba($main-color, .2), rgba(color($main-color, 200), .2) ) !default;
+$switch-track-disabled-background: if( $theme == light, rgba($black, .12), rgba($white, .1) ) !default;
+$switch-thumb-disabled-background: if( $theme == light, rgba($grey-400, 1), rgba($grey-800, 1) ) !default;
+$switch-thumb-radial-disabled-background: rgba($grey-400, .2) !default;
+
+/**************************************
+ * Shadow & elevation
+ **************************************/
+$elevation-umbra-color: rgba($black, .14) !default;
+$elevation-penumbra-color: rgba($black, .12) !default;
+$elevation-ambient-color: rgba($black, .2) !default;
+
+$elevation-umbra-map: (
+	1: rem-calc(0px) rem-calc(0px) rem-calc(2px) rem-calc(0px),
+	2: rem-calc(0px) rem-calc(0px) rem-calc(2px) rem-calc(0px),
+	3: rem-calc(0px) rem-calc(3px) rem-calc(3px) rem-calc(0px),
+	4: rem-calc(0px) rem-calc(2px) rem-calc(4px) rem-calc(0px),
+	6: rem-calc(0px) rem-calc(6px) rem-calc(10px) rem-calc(0px),
+	8: rem-calc(0px) rem-calc(8px) rem-calc(10px) rem-calc(1px),
+	9: rem-calc(0px) rem-calc(9px) rem-calc(12px) rem-calc(1px),
+	12: rem-calc(0px) rem-calc(12px) rem-calc(17px) rem-calc(2px),
+	16: rem-calc(0px) rem-calc(16px) rem-calc(24px) rem-calc(2px),
+	24: rem-calc(0px) rem-calc(24px) rem-calc(38px) rem-calc(3px)
+);
+
+$elevation-penumbra-map: (
+	1: rem-calc(0px) rem-calc(2px) rem-calc(2px) rem-calc(0px),
+	2: rem-calc(0px) rem-calc(3px) rem-calc(4px) rem-calc(0px),
+	3: rem-calc(0px) rem-calc(3px) rem-calc(4px) rem-calc(0px),
+	4: rem-calc(0px) rem-calc(4px) rem-calc(5px) rem-calc(0px),
+	6: rem-calc(0px) rem-calc(1px) rem-calc(18px) rem-calc(0px),
+	8: rem-calc(0px) rem-calc(3px) rem-calc(14px) rem-calc(3px),
+	9: rem-calc(0px) rem-calc(3px) rem-calc(16px) rem-calc(2px),
+	12: rem-calc(0px) rem-calc(5px) rem-calc(22px) rem-calc(4px),
+	16: rem-calc(0px) rem-calc(6px) rem-calc(30px) rem-calc(5px),
+	24: rem-calc(0px) rem-calc(9px) rem-calc(46px) rem-calc(8px)
+);
+
+$elevation-ambient-map: (
+	1: rem-calc(0px) rem-calc(1px) rem-calc(3px) rem-calc(0px),
+	2: rem-calc(0px) rem-calc(1px) rem-calc(5px) rem-calc(0px),
+	3: rem-calc(0px) rem-calc(1px) rem-calc(8px) rem-calc(0px),
+	4: rem-calc(0px) rem-calc(1px) rem-calc(10px) rem-calc(0px),
+	6: rem-calc(0px) rem-calc(3px) rem-calc(5px) rem-calc(0px),
+	8: rem-calc(0px) rem-calc(4px) rem-calc(15px) rem-calc(0px),
+	9: rem-calc(0px) rem-calc(5px) rem-calc(6px) rem-calc(0px),
+	12: rem-calc(0px) rem-calc(7px) rem-calc(8px) rem-calc(0px),
+	16: rem-calc(0px) rem-calc(8px) rem-calc(10px) rem-calc(0px),
+	24: rem-calc(0px) rem-calc(11px) rem-calc(15px) rem-calc(0px)
+);
+
+/**************************************
+ * Sliders
+ **************************************/
+$slider-track-height: $border-size !default;
+$slider-thumb-size: rem-calc(14px) !default;
+$slider-thumb-active-size: rem-calc(16px) !default;
+$slider-thumb-margin: ( ( ( $slider-thumb-size / 2 ) - $slider-track-height ) * -1 ) 0 0 0 !default;
+$slider-thumb-on-margin: ( ( ( $slider-thumb-active-size / 2 ) - $slider-track-height ) * -1 ) 0 0 0 !default;
+$slider-bubble-active-size: rem-calc(25px) !default;
+$slider-bubble-font-size: rem-calc(10px) !default;
+$slider-triangle-size: rem-calc(10px) !default;
+$slider-triangle-border-hidden: $slider-triangle-size solid transparent !default;
+
+// Track
+$slider-off-color: lighten($black, (100% - 26%)) !default;
+$slider-thumb-background: $white !default;
+$slider-on-color: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+
+// Bubble
+$slider-bubble-background: $black !default;
+$slider-bubble-font-color: $white !default;
+
+/**************************************
+ * Snackbars and toasts
+ **************************************/
+$snackbar-action-margin: rem-calc(24px) !default;
+$snackbar-min-height: $list-item-height !default;
+$snackbar-max-height: rem-calc(80px) !default;
+$snackbar-font-size: rem-calc(14px) !default;
+$snackbar-padding: rem-calc(14px) rem-calc(24px);
+$snackbar-color-code: #323232 !default;
+$snackbar-background: rgba($snackbar-color-code, 1) !default;
+$snackbar-font-color: $white !default;
+
+/**************************************
+ * Steppers
+ **************************************/
+$stepper-circle-off-color: rgba($black, .38) !default;
+$stepper-circle-on-color: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$stepper-circle-font-color: $white !default;
+$stepper-step-off-font-color: rgba($black, .38) !default;
+$stepper-step-on-font-color: rgba($black, .87) !default;
+
+/**************************************
+ * Tabs
+ **************************************/
+$tab-indicator-size: $border-size !default;
+$tab-height: $list-item-height !default;
+$tab-icon-size: $icon-size !default;
+$tab-icon-text-height: rem-calc(72px) !default;
+$tab-padding: 0 rem-calc(12px) rem-calc(20px) rem-calc(12px) !default;
+$tab-icon-padding: 0 $tab-indicator-size rem-calc(12px) $tab-indicator-size !default;
+$tab-icon-text-padding: rem-calc(10px) rem-calc(12px) $gutter rem-calc(12px);
+$tab-font-size: rem-calc(14px) !default;
+$tab-max-width: rem-calc(264px) !default;
+$tab-min-width: rem-calc(72px) !default;
+$tab-min-width-large: rem-calc(160px) !default;
+$tab-background: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$tab-font-color: rgba($white, .7) !default;
+$tab-font-on-color: $white !default;
+$tab-indicator-on-color: $white !default;
+
+/**************************************
+ * Text fields
+ **************************************/
+$textfield-border-size: if( $var == true, var(--border-size, $border-size), $border-size ) !default;
+$textfield-off-color: $grey !default;
+$textfield-on-color: if( $var == true, var(--main-color, $main-color), $main-color ) !default;
+$textfield-disabled-color: $textfield-off-color !default;
+$textfield-required-color: $red !default;
+$textfield-error-color: $textfield-required-color !default;
+$textfield-border: ($border-size / 2) solid if($theme == light, rgba($black, .42), rgba($white, .7)) !default;
+$textfield-label-font-color: if($theme == light, rgba($black, .54), rgba($white, .7)) !default;
+$textfield-active-color: if($theme == light, color($main-color, 'a700'), color($main-color, 'a200')) !default;
+
+$textfield-disabled-font-color: if($theme == light, rgba($black, .42), rgba($white, .5)) !default;
+$textfield-disabled-label-font-color: if($theme == light, rgba($black, .42), rgba($white, .7)) !default;
+
+/**************************************
+ * Tooltips
+ **************************************/
+$tooltip-font-size: rem-calc(14px) !default;
+$tooltip-font-size-large: rem-calc(10px) !default;
+$tooltip-small-top: rem-calc(24px) !default;
+$tooltip-large-top: rem-calc(14px) !default;
+$tooltip-small-height: rem-calc(32px) !default;
+$tooltip-large-height: rem-calc(22px) !default;
+$tooltip-small-padding: 0 $gutter !default;
+$tooltip-large-padding: 0 ($gutter / 2) !default;
+$tooltip-background: rgba($grey-700, .9) !default;
+$tooltip-font-color: $white !default;
+
+/**************************************
+ * Small screen (Not mobile screen. Used when you don't want 100% screen width)
+ **************************************/
+$small-small-screen-width: 90%;
+$large-small-screen-width: 80%;
+
+/**************************************
+ * Components
+ **************************************/
+
+$appbar: null !default;
+$grid: null !default;
+$flex-grid: null !default;
+$normalize: null !default;
+$shadow-depths: null !default;
+$typography: null !default;
+$icons: null !default;
+
+// Components
+$bottom-nav: null !default;
+$bottom-sheet: null !default;
+$button: null !default;
+$chip: null !default;
+$navigation-drawer: null !default;
+$notification: null !default;
+$progress: null !default;
+$selection: null !default;
+$slider: null !default;
+$stepper: null !default;
+$tab: null !default;
+$textfield: null !default;
+
+@if( $amp == false ) {
+	// Style
+	$appbar: ('badge') !default;
+	$grid: ('hidden') !default;
+	$flex-grid: (/*'order',*/'hidden') !default;
+	$normalize: ('scrollbar', 'selection', 'helper-classes') !default;
+	$shadow-depths: (0, 1, 2, 3, 4, 6, 8, 9, 10, 12, 16, 24) !default;
+	$typography: ('display-4', 'display-3', 'display-2', 'display-1', 'headline', 'title', 'subhead-1', 'subhead-2', 'body-1', 'body-2', 'caption', 'label', 'menu', 'button', 'icons') !default;
+	$icons: (18, 24, 36, 48) !default;
+
+	// Components
+	$bottom-nav: ('bottom-nav', 'bottom-shifting') !default;
+	$bottom-sheet: ('bottom-sheet', 'grid') !default;
+	$button: ('raised', 'dense', 'flat', 'floating', 'mini', /*'toggle', 'ripple'*/) !default;
+	$chip: ('deletable', 'contact') !default;
+	$navigation-drawer: ('full-height', 'clipped', 'floating', 'persistent', 'temporary') !default;
+	$notification: ('big-text', 'big-picture', 'progress', 'media') !default;
+	$progress: ('determinate', 'indeterminate', 'buffer', 'circular') !default;
+	$selection: ('checkbox', 'radio', 'switch') !default;
+	$slider: ('discrete') !default;
+	$stepper: ('horizontal', 'vertical') !default;
+	$tab: ('tab', 'tab-icon', 'tab-icon-text') !default;
+	$textfield: ('input', 'textarea') !default;
+
+} @else if $amp == true {
+	// Style
+	$appbar: ('badge') !default;
+	$grid: (/*'hidden'*/) !default;
+	$flex-grid: (/*'order', 'hidden'*/) !default;
+	$normalize: (/*'scrollbar', 'selection', 'helper-classes'*/ ) !default;
+	$shadow-depths: ('0', '1', '2', '3', '4', '6', '8', '9', '10', '12', '16', '24') !default;
+	$typography: ('display-4', 'display-3', 'display-2', 'display-1', 'headline', 'title', 'subhead-1', 'subhead-2', 'body-1', 'body-2', 'caption', 'label'/*, 'icons', 'menu', 'button'*/) !default;
+	$icons: (/*18, 24, 36, 48*/) !default;
+
+	// Components
+	$bottom-nav: ('bottom-nav', 'bottom-shifting') !default;
+	$bottom-sheet: ('bottom-sheet', 'grid') !default;
+	$button: ('raised', /*'dense',*/ 'flat', 'floating', /*'mini', 'toggle', 'ripple'*/) !default;
+	$chip: ('deletable', 'contact') !default;
+	$navigation-drawer: (/*'full-height', 'clipped', 'floating', 'persistent',*/ 'temporary') !default;
+	$notification: ('big-text', 'big-picture', 'progress', 'media') !default;
+	$progress: ('determinate', 'indeterminate', /*'buffer',*/ 'circular') !default;
+	$selection: ('checkbox', 'radio', 'switch') !default;
+	$slider: (/*'discrete'*/) !default;
+	$stepper: ('horizontal', 'vertical') !default;
+	$tab: ('tab', 'tab-icon', 'tab-icon-text') !default;
+	$textfield: ('input', 'textarea') !default;
+}

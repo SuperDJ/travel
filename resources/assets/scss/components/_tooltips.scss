@@ -1,0 +1,69 @@
+/**************************************
+ * Tooltips
+ *
+ * http://www.google.com/design/spec/components/tooltips.html
+ **************************************/
+
+.tooltip {
+	display: inline;
+	background: $tooltip-background;
+	color: $tooltip-font-color;
+	font-size: $tooltip-font-size;
+	font-weight: 500;
+	height: $tooltip-small-height;
+	left: 0;
+	line-height: $tooltip-small-height;
+	margin: 0;
+	padding: $tooltip-small-padding;
+	position: absolute;
+	top: 0;
+	white-space: nowrap;
+	width: auto;
+	z-index: 10;
+	@include opacity(0);
+	visibility: hidden;
+	@include transition(top $transition-small-duration $standard-transition unquote(',')
+						margin $transition-small-duration $standard-transition);
+
+	@if( $amp == false ) {
+		@media #{$medium-only} {
+			@include transition(top $transition-medium-duration $standard-transition unquote(',') margin $transition-medium-duration $standard-transition);
+		}
+
+		@media #{$medium-up} {
+			font-size: $tooltip-font-size-large;
+			height: $tooltip-large-height;
+			line-height: $tooltip-large-height;
+			padding: $tooltip-large-padding;
+			@include transition(top $transition-large-duration $standard-transition unquote(',') margin $transition-large-duration $standard-transition);
+		}
+	}
+}
+
+.activate-tooltip:hover .tooltip {
+	@include opacity(1);
+	visibility: visible;
+	top: $tooltip-small-top;
+	margin: $tooltip-small-top 0 0 0;
+
+	@if( $amp == false ) {
+		@media #{$medium-up} {
+			top: $tooltip-large-top;
+			margin: $tooltip-large-top 0 0 0;
+		}
+	}
+}
+
+.raised-button.activate-tooltip:hover, flat-button.activate-tooltip:hover {
+	@include opacity(1);
+	visibility: visible;
+	top: $button-height;
+	margin: $tooltip-small-top 0 0 0;
+
+	@if( $amp == false ) {
+		@media #{$medium-up} {
+			top: $button-height;
+			margin: $tooltip-large-top 0 0 0;
+		}
+	}
+}

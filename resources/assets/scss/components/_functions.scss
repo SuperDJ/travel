@@ -1,0 +1,86 @@
+@function rem-calc( $size, $font-size : $font-size ) {
+	@return $size / ($font-size + 0px) * 1rem;
+}
+
+@function em-calc( $size, $font-size : $font-size ) {
+	@return $size / ($font-size + 0px) * 1em;
+}
+
+@function decimal-round( $number, $digits: 0, $mode: round ) {
+	$n: 1;
+	// $number must be a number
+	@if type-of($number) != number {
+		@warn '#{$number} is not a number.';
+		@return $number;
+	}
+	// $digits must be a unitless number
+	@if type-of($digits) != number {
+		@warn '#{$digits} is not a number.';
+		@return $number;
+	} @else if not unitless($digits) {
+		@warn '#{$digits} has a unit.';
+		@return $number;
+	}
+	@for $i from 1 through $digits {
+		$n: $n * 10;
+	}
+	@if $mode == round {
+		@return round($number * $n) / $n;
+	} @else if $mode == ceil {
+		@return ceil($number * $n) / $n;
+	} @else if $mode == floor {
+		@return floor($number * $n) / $n;
+	} @else {
+		@warn '#{$mode} is undefined keyword.';
+		@return $number;
+	}
+}
+
+@function in-array( $value, $array ) {
+	@if index( $array, $value ) {
+		@return true;
+	} @else {
+		@return false;
+	}
+}
+
+@function str_replace( $string, $search, $replace: '' ) {
+	$index: str-index( $string, $search );
+
+	@if $index {
+		@return str-slice( $string, 1, $index - 1 ) + $replace + str-replace( str-slice( $string, $index + str-length( $search ) ), $search, $replace );
+	} @else {
+		@return $string;
+	}
+}
+
+@function to-string( $value ) {
+	@return '#{$value}';
+}
+
+@function color( $color, $accent, $colors: $colors ) {
+	$color-search: null; // Store color name array
+	$accent: to-string($accent);
+
+	// Search color name array
+	@each $color-name, $swatches in $colors {
+		@each $color-type, $color-value in $swatches {
+			@if $color == $color-value {
+				$color-search: $color-name; // Set color array name
+			}
+		}
+	}
+
+	// Return color $accent
+	@each $color-name, $swatches in $colors {
+		@if $color-name == $color-search {
+			@each $color-type, $color-value in $swatches {
+				@if $color-type == $accent {
+					@return $color-value;
+				}
+			}
+		}
+	}
+
+	@return false;
+}

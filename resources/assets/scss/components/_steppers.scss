@@ -1,0 +1,61 @@
+/**************************************
+ * Steppers
+ *
+ * https://material.google.com/components/steppers.html
+ **************************************/
+
+.stepper {
+	@if( in-array( 'horizontal', $stepper ) ) {
+		&-horizontal {
+			li {
+				height: rem-calc(72px);
+				float: left;
+				padding: rem-calc(24px) 0 rem-calc(24px) rem-calc(24px);
+			}
+
+			.step-circle {
+				margin: 0 rem-calc(12px) 0 0;
+			}
+		}
+	}
+
+	@if( in-array( 'vertical', $stepper ) ) {
+		&-vertical {
+			li {
+				padding: 0 0 0 rem-calc(24px);
+			}
+
+			.step-circle {
+				margin: 0 rem-calc(8px) 0 0;
+			}
+		}
+	}
+}
+
+.step {
+	padding: 0;
+	color: $stepper-step-off-font-color;
+	font-weight: 400;
+	font-size: rem-calc(14px);
+
+	&.active {
+		color: $stepper-step-on-font-color;
+		font-weight: 500;
+	}
+
+	&-circle {
+		@include square(rem-calc(24px));
+		@include border-radius(50%);
+		color: $stepper-circle-font-color;
+		background: $stepper-circle-off-color;
+		font-size: rem-calc(12px);
+		font-weight: 400;
+		text-align: center;
+		line-height: rem-calc(24px);
+		display: inline-block;
+
+		&.active {
+			background: $stepper-circle-on-color;
+		}
+	}
+}

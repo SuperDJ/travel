@@ -1,0 +1,140 @@
+/**************************************
+ * Remove browser default styles
+ *
+ * https://material.google.com/motion/duration-easing.html
+ **************************************/
+
+html, body {
+	background: if( $var == true, var(--background, $background), $background );
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: #{$font-size}px;
+	-webkit-print-color-adjust: exact; // Make Chrome print the colors
+}
+
+label {
+	cursor: pointer;
+}
+
+figure {
+	margin: 0;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	word-wrap: break-word;
+}
+
+@if( $amp == false ) {
+	@if (in-array('scrollbar', $normalize)) {
+		@include scrollbar();
+	}
+
+	@if (in-array('selection', $normalize)) {
+		@include selection() {
+			background: $select-background;
+		}
+	}
+}
+
+* {
+	@include box-sizing(border-box);
+}
+
+a {
+	color: $link-color;
+	outline: none;
+	text-decoration: none;
+	@include transition(color 300ms cubic-bezier(0.4, 0.0, 0.2, 1));
+
+	@if( $amp == false ) {
+		@media #{$medium-up} {
+			@include transition(color 390ms cubic-bezier(0.4, 0.0, 0.2, 1));
+		}
+
+		@media #{$large-up} {
+			@include transition(color 200ms cubic-bezier(0.4, 0.0, 0.2, 1));
+		}
+	}
+
+	&:hover {
+		color: $link-hover;
+
+		.material-icons {
+			color: $link-hover;
+		}
+	}
+
+	img {
+		outline: none;
+	}
+}
+
+main, .main-content {
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	padding: ($gutter / 2);
+	position: fixed;
+	right: 0;
+	top: $appbar-mobile-portrait-height;
+
+	@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+		top: $appbar-mobile-landscape-height;
+		padding: ($gutter / 2);
+	}
+
+	@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+		top: $appbar-mobile-portrait-height;
+		padding: ($gutter / 2);
+	}
+
+	@if( $amp == false ) {
+		@media #{$small-up} {
+			top: $appbar-large-height;
+			left: $drawer-small-width;
+			padding: ($large-gutter / 2);
+		}
+	}
+}
+
+.trigger {
+	cursor: pointer;
+}
+
+@if( in-array( 'helper-classes', $normalize ) ) {
+	.circle {
+		@include border-radius(50%);
+	}
+
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+
+	.center {
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	hr {
+		background: $divider-color;
+		border: ($divider-height / 2) solid $divider-color;
+		height: $divider-height;
+	}
+}

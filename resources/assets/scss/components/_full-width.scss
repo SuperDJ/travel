@@ -1,0 +1,66 @@
+@if( $amp == false ) {
+	body.full-width {
+		.appbar {
+			@media #{$small-up} {
+				.appbar-title {
+					margin-left: $appbar-title-margin-left - (($large-gutter * 1.5) + $appbar-icon-large-size);
+				}
+			}
+		}
+
+		.bottom-nav, .bottom-shifting {
+			@media #{$small-up} {
+				left: 0;
+				width: 100%;
+			}
+		}
+
+		.drawer {
+			margin: 0 0 0 -102%;
+
+			@media #{$small-up} {
+				margin: 0 0 0 -102%;
+			}
+
+			~ main {
+				left: 0;
+				@include transition(left $transition-small-duration $deceleration-transition);
+
+				@media #{$medium-only} {
+					@include transition(left $transition-medium-duration $deceleration-transition);
+				}
+
+				@media #{$medium-up} {
+					@include transition(left $transition-large-duration $deceleration-transition);
+				}
+			}
+
+			&.expanded {
+				margin: 0;
+
+				@media #{$small-up} {
+					~ main {
+						left: $drawer-small-width;
+
+						@include transition(left $transition-small-duration $sharp-transition);
+
+						@media #{$medium-only} {
+							@include transition(left $transition-medium-duration $sharp-transition);
+						}
+
+						@media #{$medium-up} {
+							@include transition(left $transition-large-duration $sharp-transition);
+						}
+					}
+				}
+			}
+		}
+
+		.tabs {
+			@media #{$small-up} {
+				left: 0;
+				width: 100%;
+			}
+		}
+	}
+}

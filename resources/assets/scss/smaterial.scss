@@ -1,0 +1,47 @@
+/**************************************
+ * All stylesheets
+ *
+ * Some may be turned off by commenting them
+ * NOTE that some classes are extended and could there for cause problems when turned off
+ **************************************/
+
+// Style
+@import 'components/settings'; // All settings
+@import 'components/media-queries'; // All possible media queries
+@import 'components/root'; // All CSS variables
+//@import 'components/grid'; // Grid functionality
+@import 'components/flex-grid'; // Grid functionality
+@import 'components/normalize'; // Remove browser default styles add Material default styles
+@import 'components/shadows'; // Shadow depths (Can be turned off)
+@import 'components/typography'; // Typography
+@import 'components/icons'; // Icons with their shadow (can be turned off)
+
+// Components
+@import 'components/appbar'; // Top menu bar (can be turned off)
+@import 'components/bottom-navigation'; // Used to style the bottom navigation
+@import 'components/bottom-sheet'; // Used to style bottom sheet / modal (can be turned off)
+@import 'components/buttons'; // Used to style buttons (can be turned off)
+@import 'components/cards'; // Used to style cards (can be turned off)
+@import 'components/chips'; // Used to style chips (can be turned off)
+@import 'components/data-tables'; // Used to style tables (can be turned off)
+@import 'components/dialogs'; // Used to style dialog (can be turned off)
+@import 'components/expansion-panels'; // Used to style expansion panels (can be turned off)
+@import 'components/grid-lists'; // Used to style grid lists (can be turned off)
+@import 'components/menu'; // Used to style menus (can be turned off) is used for appbar, navigation drawer dropdown and select
+@import 'components/navigation-drawer'; // Used to style navigation drawer (can be turned off)
+@import 'components/lists'; // Used to style lists (can be turned off)
+@import 'components/notifications'; // Notifications style (can be turned off)
+@import 'components/pickers'; // Used to style date and time picker (can be turned off)
+@import 'components/progress'; // Used to style progress and activity indicators (can be turned off)
+@import 'components/selection'; // Used to style selection controls (checkbox, radio button, switch) (can be turned off)
+@import 'components/sliders'; // Used to style sliders (can be turned off)
+@import 'components/snackbars'; // Used to style snackbars and toasts (can be turned off)
+@import 'components/steppers'; // Used to style steppers (can be turned off)
+@import 'components/tabs'; // Used to style tabs (can be turned off)
+@import 'components/text-fields'; // used to style input (can be turned off)
+@import 'components/tooltips'; // Used to style tooltips (can be turned off)
+@import 'components/colors-create'; // Used to create colors(can be turned off)
+
+// Layout
+@import 'components/full-width'; // Used to style elements for full screen
+@import 'components/small-width'; // Used to style elements for partial screen

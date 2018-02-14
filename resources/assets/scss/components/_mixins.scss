@@ -1,0 +1,437 @@
+@mixin box-shadow( $settings ) {
+	-moz-box-shadow: $settings;
+	-webkit-box-shadow: $settings;
+	-ms-box-shadow: $settings;
+	-o-box-shadow: $settings;
+	box-shadow: $settings;
+}
+
+@mixin border-radius( $settings ) {
+	-webkit-border-radius: $settings;
+	-moz-border-radius: $settings;
+	-ms-border-radius: $settings;
+	-o-border-radius: $settings;
+	border-radius: $settings;
+}
+
+@mixin box-sizing( $settings: border-box ) {
+	@if( in-array( $settings, (content-box, border-box, inherit, initial, unset) ) ) {
+		-webkit-box-sizing: $settings;
+		-moz-box-sizing: $settings;
+		-ms-box-sizing: $settings;
+		-o-box-sizing: $settings;
+		box-sizing: $settings;
+	} @else {
+		@warn 'Property for "box-sizing" not supported: '#{$setting};
+	}
+}
+
+@mixin material-shadow( $depth ) {
+	@if( $depth >= 1 ) {
+		@include box-shadow(
+				#{map-get($elevation-umbra-map, $depth)} $elevation-umbra-color unquote(',')
+				#{map-get($elevation-penumbra-map, $depth)} $elevation-penumbra-color unquote(',')
+				#{map-get($elevation-ambient-map, $depth)} $elevation-ambient-color
+		);
+	}
+
+	@if( $amp == false ) {
+		@if( map_has_key($elevation-ambient-map, ($depth - 2 ) ) == true ) {
+			@media #{$medium-up} {
+				@include box-shadow(
+						#{map-get($elevation-umbra-map, ( $depth - 2 ))} $elevation-umbra-color unquote(',')
+						#{map-get($elevation-penumbra-map, ( $depth - 2 ))} $elevation-penumbra-color unquote(',')
+						#{map-get($elevation-ambient-map, ( $depth - 2 ))} $elevation-ambient-color
+				);
+			}
+		}
+	}
+}
+
+@mixin transition( $settings ) {
+	-webkit-transition: $settings;
+	-moz-transition: $settings;
+	-o-transition: $settings;
+	transition: $settings;
+}
+
+@mixin transition-duration( $settings ) {
+	-webkit-transition-duration: $settings;
+	-moz-transition-duration: $settings;
+	-o-transition-duration: $settings;
+	transition-duration: $settings;
+}
+
+@mixin transition-property( $settings ) {
+	-webkit-transition-property: $settings;
+	-moz-transition-property: $settings;
+	-o-transition-property: $settings;
+	transition-property: $settings;
+}
+
+@mixin transform( $settings ) {
+	-webkit-transform: $settings;
+	-moz-transform: $settings;
+	-ms-transform: $settings;
+	-o-transform: $settings;
+	transform: $settings;
+}
+
+@mixin animation( $settings ) {
+	-webkit-animation: $settings;
+	-moz-animation: $settings;
+	-ms-animation: $settings;
+	-o-animation: $settings;
+	animation: $settings;
+}
+
+@mixin keyframes( $name ) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+
+	@-o-keyframes #{$name} {
+		@content
+	}
+
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
+@mixin border-top-left-radius( $px ) {
+	-webkit-border-top-left-radius: $px;
+	-moz-border-radius-topleft: $px;
+	border-top-left-radius: $px;
+}
+
+@mixin user-select( $settings ) {
+	-webkit-user-select: $settings;
+	-moz-user-select: $settings;
+	-ms-user-select: $settings;
+	-o-user-select: $settings;
+	user-select: $settings;
+}
+
+@mixin border-top-right-radius( $px ) {
+	-webkit-border-top-right-radius: $px;
+	-moz-border-radius-topright: $px;
+	border-top-right-radius: $px;
+}
+
+@mixin border-radius-top( $px ) {
+	@include border-top-left-radius( $px );
+	@include border-top-right-radius( $px );
+}
+
+@mixin border-bottom-left-radius( $px ) {
+	-webkit-border-bottom-left-radius: $px;
+	-moz-border-radius-bottomleft: $px;
+	border-bottom-left-radius: $px;
+}
+
+@mixin border-bottom-right-radius( $px ) {
+	-webkit-border-bottom-right-radius: $px;
+	-moz-border-radius-bottomright: $px;
+	border-bottom-right-radius: $px;
+}
+
+@mixin border-radius-bottom( $px ) {
+	@include border-bottom-left-radius( $px );
+	@include border-bottom-right-radius( $px );
+}
+
+@mixin opacity( $settings ) {
+	-webkit-opacity: $settings;
+	opacity: $settings;
+}
+
+@mixin mask( $settings ) {
+	-webkit-mask: $settings;
+	mask: $settings;
+}
+
+@mixin filter( $settings ) {
+	-webkit-filter: $settings;
+	-moz-filter: $settings;
+	-o-filter: $settings;
+	-ms-filter: $settings;
+	filter: $settings;
+}
+
+@mixin transition-delay( $setting ) {
+	-webkit-transition-delay: $setting;
+	-moz-transition-delay: $setting;
+	-ms-transition-delay: $setting;
+	transition-delay: $setting;
+}
+
+@mixin button( $border-radius: if( $var == true, var(--border-size, $border-size), $border-size) ) {
+	cursor: pointer;
+	@include border-radius( $border-radius );
+	text-decoration: none;
+	border: none;
+	outline: none;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	vertical-align: middle;
+
+	.material-icons {
+		width: rem-calc($font-size-button + 0px);
+		height: $button-height;
+		line-height: $button-height;
+		vertical-align: middle;
+
+		&.left {
+			margin-right: $gutter;
+		}
+
+		&.right {
+			margin-left: $gutter;
+		}
+	}
+}
+
+@mixin font( $font-size, $small-font-size, $weight, $leading, $color, $tracking, $transform: inherit ) {
+	font-size: rem-calc($font-size+0px);
+	line-height: rem-calc($leading+0px);
+	letter-spacing: rem-calc($tracking+0px);
+
+	font-weight: $weight;
+	color: $color;
+	text-transform: $transform;
+
+	@if( $amp == false ) {
+		@if ($small-font-size > 0) {
+			@media #{$medium-down} {
+				font-size: rem-calc($small-font-size+0px);
+			}
+		}
+	}
+}
+
+@mixin radial-gradient( $setting ) {
+	background: -webkit-radial-gradient($setting);
+	background: -moz-radial-gradient($setting);
+	background: -o-radial-gradient($setting);
+	background: radial-gradient($setting);
+}
+
+@mixin linear-gradient( $setting ) {
+	background: -webkit-linear-gradient($setting);
+	background: -moz-linear-gradient($setting);
+	background: -o-linear-gradient($setting);
+	background: linear-gradient($setting);
+}
+
+@mixin scrollbar() {
+	::-webkit-scrollbar, ::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-button, ::-webkit-scrollbar-corner, ::-webkit-resizer {
+		display: none;
+	}
+
+	::-webkit-scrollbar {
+		@include square(rem-calc(3px));
+
+		@media #{$small-up} {
+			@include square(rem-calc(10px));
+		}
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgba($black, .2);
+	}
+}
+
+@mixin square( $setting ) {
+	width: $setting;
+	height: $setting;
+}
+
+@mixin transform-origin( $setting ) {
+	-webkit-transform-origin: $setting;
+	-moz-transform-origin: $setting;
+	-ms-transform-origin: $setting;
+	-o-transform-origin: $setting;
+}
+
+@mixin appearance( $setting ) {
+ 	-webkit-appearance: $setting;
+	-moz-appearance: $setting;
+	appearance: $setting;
+}
+
+@mixin range-track() {
+	&::-webkit-slider-runnable-track {
+		@content;
+	}
+
+	&::-moz-range-track {
+		@content;
+	}
+
+	&::-ms-track {
+		@content;
+	}
+}
+
+@mixin range-thumb() {
+	&::-webkit-slider-thumb {
+		@content;
+	}
+
+	&::-moz-range-thumb {
+		@content;
+	}
+
+	&::-ms-thumb {
+		@content;
+	}
+}
+
+@mixin selection() {
+	::-moz-selection {
+		@content;
+	}
+
+	::selection {
+		@content;
+	}
+}
+
+@mixin align-content( $setting: stretch ) {
+	@if( in-array( $setting, (flex-start, flex-end, center, space-between, space-around, stretch, inherit, initial, unset) ) ) {
+		-webkit-align-content: $setting;
+		align-content: $setting;
+	} @else {
+		@warn 'Property for "align-content" not supported: '#{$setting};
+	}
+}
+
+@mixin align-items( $setting: stretch ) {
+	@if( in-array( $setting, (flex-start, flex-end, center, baseline, stretch, inherit, initial, unset) ) ) {
+		-webkit-align-items: $setting;
+		align-items: $setting;
+	} @else {
+		@warn 'Property for "align-items" not supported: '#{$setting};
+	}
+}
+
+@mixin align-self( $setting: auto ) {
+	@if( in-array( $setting, (auto, flex-start, flex-end, center, baseline, stretch, inherit, initial, unset) ) ) {
+		-webkit-align-self: $setting;
+		align-self: $setting;
+	} @else {
+		@warn 'Property for "align-self" not supported: '#{$setting};
+	}
+}
+
+@mixin flex( $setting: 0 1 auto ) {
+	-webkit-flex: $setting;
+	flex: $setting;
+}
+
+@mixin flex-basis( $setting: auto ) {
+	-webkit-flex-basis: $setting;
+	flex-basis: $setting;
+}
+
+@mixin flex-direction( $setting: row ) {
+	@if( in-array( $setting, (row, row-reversed, column, column-reversed, inherit, initial, unset) ) ) {
+		-webkit-flex-direction: $setting;
+		-ms-flex-direction: $setting;
+		flex-direction: $setting;
+	} @else {
+		@warn 'Property for "flex-direction" not supported: '#{$setting};
+	}
+}
+
+@mixin flex-flow( $setting: row nowrap ) {
+	-webkit-flex-flow: $setting;
+	flex-flow: $setting;
+}
+
+@mixin flex-grow( $setting: 0 ) {
+	-webkit-flex-grow: $setting;
+	flex-grow: $setting;
+}
+
+@mixin flex-shrink( $setting: 1 ) {
+	-webkit-flex-shrink: $setting;
+	flex-shrink: $setting;
+}
+
+@mixin flex-wrap( $setting: nowrap ) {
+	@if( in-array( $setting, (nowrap, wrap, wrap-reverse, inherit, initial, unset) ) ) {
+		-webkit-flex-wrap: $setting;
+		-mox-flex-wrap: $setting;
+		flex-wrap: $setting;
+	} @else {
+		@warn 'Property for "flex-wrap" not supported: '#{$setting};
+	}
+}
+
+@mixin justify-content( $setting: flex-start ) {
+	@if( in-array( $setting, (flex-start, flex-end, center, space-between, space-around, space-evenly, inherit, initial, unset) ) ) {
+		-webkit-justify-content: $setting;
+		justify-content: $setting;
+	} @else {
+		@warn 'Property for "justify-content" not supported: '#{$setting};
+	}
+}
+
+@mixin order( $setting: 0 ) {
+	-webkit-order: $setting;
+	-ms-flex-order: $setting;
+	order: $setting;
+}
+
+@mixin flex-container( $direction: row, $wrap: nowrap, $justify: flex-start, $items: stretch, $content: stretch ) {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	@include flex-flow( $direction $wrap );
+	@include justify-content( $justify );
+	@include align-items( $items );
+	@include align-content( $content );
+}
+
+@mixin flex-item( $grow: 0, $shrink: 1, $basis: auto, $order: 0, $self: auto ) {
+	@if( $order > 0 ) {
+		@include order( $order );
+	}
+	@include flex( $grow $shrink $basis );
+	@include align-self( $self );
+}
+
+@mixin perspective( $setting ) {
+	-webkit-perspective: $setting;
+	-moz-perspective: $setting;
+	perspective: $setting;
+}
+
+@mixin placeholder() {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+
+	&::-moz-placeholder {
+		@content;
+	}
+
+	&:-ms-input-placeholder {
+		@content;
+	}
+
+	&::placeholder {
+		@content;
+	}
+}

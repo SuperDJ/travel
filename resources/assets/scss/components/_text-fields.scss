@@ -1,0 +1,324 @@
+/**************************************
+ * Text fields
+ *
+ * http://www.google.com/design/spec/components/text-fields.html
+ **************************************/
+
+@if( in-array('input', $textfield) ) {
+	.input {
+		position: relative;
+		height: (2 * rem-calc(12px) ) + $border-size + ( 3 * ( $gutter / 2 ) ) + ( 2 * $gutter );
+
+		input {
+			outline: none;
+			width: 100%;
+			border: none;
+			background: none;
+			border-bottom: $textfield-border;
+			font-size: rem-calc(16px);
+			padding-bottom: ( $gutter / 2 );
+			position: absolute;
+			bottom: ( $gutter / 2 ) + rem-calc(12px);
+			@include transition(all $transition-small-duration $standard-transition);
+
+			@if ($amp == false) {
+				@media #{$medium-only} {
+					@include transition(all $transition-medium-duration $standard-transition);
+				}
+
+				@media #{$medium-up} {
+					@include transition(all $transition-large-duration $standard-transition);
+				}
+			}
+
+			&:disabled, &:disabled:hover {
+				border-bottom: ( $border-size / 2 ) dotted;
+				color: $textfield-disabled-font-color;
+
+				~ label {
+					color: $textfield-disabled-label-font-color;
+				}
+
+				~ .expander {
+					display: none;
+				}
+			}
+
+			&:hover + label {
+				color: $textfield-label-font-color;
+			}
+
+			&:hover, &:active, &:focus, &:active:hover, &:focus:hover {
+				border-bottom: $border-size solid if($theme == light, rgba($black, .87), $white);
+				padding-bottom: rem-calc(7px);
+			}
+
+			&:active, &:focus {
+				caret-color: $textfield-active-color;
+
+				~ label {
+					color: $textfield-active-color;
+					font-size: rem-calc(12px);
+					bottom: ( 3 * rem-calc(8px) ) + rem-calc(12px) + $border-size + rem-calc(16px); // 3 * padding + helper font size + bottom border size + input font size
+				}
+
+				~ .material-icons {
+					color: $textfield-active-color;
+				}
+
+				&:required ~ label:after {
+					color: $red-a400;
+				}
+
+				@include placeholder() {
+					@include opacity(1);
+				}
+
+				~ .expander {
+					width: 100%;
+					left: 0;
+					height: $border-size;
+				}
+			}
+
+			@include placeholder() {
+				@include opacity(0);
+				font-size: rem-calc(16px);
+				color: if($theme == light, rgba($black, .42), rgba($white, .5));
+			}
+
+			&:required ~ label:after {
+				content: ' \e838';
+				font-family: 'Material Icons';
+				font-size: rem-calc(7px);
+				vertical-align: super;
+			}
+		}
+
+		label {
+			color: $textfield-label-font-color;
+			font-size: rem-calc(16px);
+			position: absolute;
+			pointer-events: none;
+			left: 0;
+			bottom: ( 2 * rem-calc(8px) ) + rem-calc(12px) + ( $border-size / 2 ); // 2 * padding + helper font size + bottom border size
+			font-weight: 400;
+			@include transition(all $standard-transition $transition-small-duration);
+
+			@if ($amp == false) {
+				@media #{$medium-only} {
+					@include transition(all $standard-transition $transition-medium-duration);
+				}
+
+				@media #{$medium-up} {
+					@include transition(all $standard-transition $transition-large-duration);
+				}
+			}
+
+			&.active {
+				font-size: rem-calc(12px);
+				bottom: ( 3 * rem-calc(8px) ) + rem-calc(12px) + $border-size + rem-calc(16px); // 3 * padding + helper font size + bottom border size + input font size
+			}
+		}
+
+		.helper-text {
+			font-size: rem-calc(12px);
+			color: $textfield-label-font-color;
+			position: absolute;
+			bottom: 0;
+			line-height: normal;
+
+			.material-icons {
+				font-size: rem-calc(12px);
+				@include square(rem-calc(12px));
+			}
+		}
+
+		.expander {
+			width: 0;
+			background: $textfield-active-color;
+			position: absolute;
+			height: ($border-size / 2);
+			left: 50%;
+			bottom: rem-calc(8px) + rem-calc(12px);
+			@include transition(left $standard-transition $transition-small-duration unquote(',') width $standard-transition $transition-small-duration);
+
+			@if ($amp == false) {
+				@media #{$medium-only} {
+					@include transition(left $standard-transition $transition-medium-duration unquote(',') width $standard-transition $transition-medium-duration);
+				}
+
+				@media #{$medium-up} {
+					@include transition(left $standard-transition $transition-large-duration unquote(',') width $standard-transition $transition-large-duration);
+				}
+			}
+		}
+
+		&.invalid {
+			label, input:active + label, input:focus + label, .helper-text, .material-icons, input:active ~ .material-icons, input:focus ~ .material-icons {
+				color: $red-a400;
+			}
+
+			.expander {
+				background: $red-a400;
+			}
+		}
+
+		&.icon {
+			> .material-icons {
+				font-size: rem-calc(24px);
+				@include square(rem-calc(24px));
+				bottom: rem-calc(12px) + ( 2 * rem-calc(8px) );
+				position: absolute;
+			}
+
+			input, label {
+				left: rem-calc(16px) + rem-calc(24px);
+			}
+
+			input:active ~ .expander, input:focus ~ .expander {
+				left: rem-calc(16px) + rem-calc(24px);
+			}
+
+			input, input:active ~ .expander, input:focus ~ .expander {
+				width: calc(100% - (#{rem-calc(16px)} + #{rem-calc(24px)}));
+			}
+		}
+	}
+}
+
+@if( in-array( 'textarea', $textfield ) ) {
+	.textarea {
+		border: ($border-size / 2) solid if($theme == light, $black, $white);
+		@include border-radius($border-size);
+		padding: rem-calc(8px) rem-calc(16px) rem-calc(8px) rem-calc(16px);
+		margin-bottom: rem-calc(8px) + rem-calc(12px);
+		position: relative;
+		min-height: rem-calc(100px) + ( 3 * rem-calc(8px) ) + rem-calc(12px);
+		@include transition(border $standard-transition $transition-small-duration unquote(',') width $standard-transition $transition-small-duration);
+
+		@if ($amp == false) {
+			@media #{$medium-only} {
+				@include transition(border $standard-transition $transition-medium-duration unquote(',') width $standard-transition $transition-medium-duration);
+			}
+
+			@media #{$medium-up} {
+				@include transition(border $standard-transition $transition-large-duration unquote(',') width $standard-transition $transition-large-duration);
+			}
+		}
+
+		textarea {
+			position: absolute;
+			font-family: inherit;
+			outline: none;
+			border: none;
+			width: 100%;
+			background: transparent;
+			bottom: rem-calc(8px);
+			right: rem-calc(16px);
+			left: rem-calc(16px);
+			top: ( 2 * rem-calc(8px) ) + rem-calc(12px);
+			min-height: rem-calc(100px);
+			@include transition(all $standard-transition $transition-small-duration unquote(',') width $standard-transition $transition-small-duration);
+
+			@if ($amp == false) {
+				@media #{$medium-only} {
+					@include transition(all $standard-transition $transition-medium-duration unquote(',') width $standard-transition $transition-medium-duration);
+				}
+
+				@media #{$medium-up} {
+					@include transition(all $standard-transition $transition-large-duration unquote(',') width $standard-transition $transition-large-duration);
+				}
+			}
+
+			&:active, &:focus {
+				caret-color: $textfield-active-color;
+
+				~ label {
+					top: rem-calc(8px);
+					font-size: rem-calc(12px);
+					color: $textfield-active-color;
+				}
+			}
+
+			&:required ~ label:after {
+				content: ' \e838';
+				font-family: 'Material Icons';
+				font-size: rem-calc(7px);
+				vertical-align: super;
+			}
+		}
+
+		label {
+			pointer-events: none;
+			position: absolute;
+			top: rem-calc(16px);
+			font-weight: 400;
+			font-size: rem-calc(16px);
+			@include transition(all $standard-transition $transition-small-duration unquote(',') width $standard-transition $transition-small-duration);
+
+			@if ($amp == false) {
+				@media #{$medium-only} {
+					@include transition(all $standard-transition $transition-medium-duration unquote(',') width $standard-transition $transition-medium-duration);
+				}
+
+				@media #{$medium-up} {
+					@include transition(all $standard-transition $transition-large-duration unquote(',') width $standard-transition $transition-large-duration);
+				}
+			}
+		}
+
+		&.hover {
+			border: $border-size solid if($theme == light, rgba($black, .42), rgba($white, .7));
+
+			label {
+				top: rem-calc(15px);
+			}
+		}
+
+		&.hover, &.active {
+			padding: rem-calc(7px) rem-calc(15px) rem-calc(7px) rem-calc(15px);
+
+			textarea {
+				bottom: rem-calc(7px);
+				right: rem-calc(15px);
+				left: rem-calc(15px);
+				top: ( 2 * rem-calc(8px) ) + rem-calc(11px);
+
+				&:required ~ label:after {
+					color: $red-a400;
+				}
+			}
+		}
+
+		&.active {
+			border: $border-size solid $textfield-active-color;
+		}
+
+		&.invalid {
+			border: $border-size solid $red-a400;
+
+			label, textarea:active + label, textarea:focus + label, .helper-text, .helper-text .material-icons {
+				color: $red-a400;
+			}
+		}
+
+		.helper-text {
+			font-size: rem-calc(12px);
+			line-height: normal;
+			position: absolute;
+			bottom: rem-calc(-8px) + rem-calc(-12px);
+			left: 0;
+
+			.material-icons {
+				font-size: rem-calc(12px);
+				@include square(rem-calc(12px));
+			}
+		}
+
+		&.disabled {
+			background: $grey-300;
+			border: ($border-size / 2) solid if($theme == light, rgba($black, .42), rgba($white, .7))
+		}
+	}
+}

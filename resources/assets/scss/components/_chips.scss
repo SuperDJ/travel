@@ -1,0 +1,85 @@
+/**************************************
+ * Chips
+ *
+ * http://www.google.com/design/spec/components/chips.html
+ **************************************/
+
+.chip {
+	@include border-radius($chips-size);
+	background: $chips-background;
+	color: $chips-font-color;
+	display: inline-block;
+	font-size: $chips-font-size;
+	font-weight: 400;
+	height: $chips-size;
+	line-height: $chips-size;
+	padding: $chips-padding;
+
+	@if( in-array( 'deletable', $chip ) ) {
+		&-deletable {
+			.chip-delete {
+				@include border-radius(50%);
+				@include transition(color $transition-small-duration $standard-transition unquote(',') background $transition-small-duration $standard-transition);
+				background: $chips-delete-background;
+				color: $chips-delete-cross;
+				display: inline-block;
+				height: $chips-delete-size;
+				margin: $chips-delete-margin;
+				line-height: $chips-delete-size;
+				text-align: center;
+				vertical-align: middle;
+				width: $chips-delete-size;
+				font-size: $chips-font-size;
+				cursor: pointer;
+
+				@if( $amp == false ) {
+					@media #{$medium-only} {
+						@include transition(color $transition-medium-duration $standard-transition unquote(',') background $transition-medium-duration $standard-transition);
+					}
+
+					@media #{$medium-up} {
+						@include transition(color $transition-large-duration $standard-transition unquote(',') background $transition-large-duration $standard-transition);
+					}
+				}
+			}
+
+			&:hover {
+				background: $chips-background-hover;
+				color: $chips-font-hover-color;
+
+				.chip-delete {
+					background: $chips-delete-background-hover;
+					color: $chips-delete-cross-hover;
+				}
+			}
+		}
+	}
+
+
+	@if( in-array( 'contact', $chip ) ) {
+		&-contact {
+			font-size: $chips-contact-font-size;
+			@include transition(box-shadow $transition-small-duration $standard-transition);
+
+			@if( $amp == false ) {
+				@media #{$medium-only} {
+					@include transition(box-shadow $transition-medium-duration $standard-transition);
+				}
+
+				@media #{$medium-up} {
+					@include transition(box-shadow $transition-large-duration $standard-transition);
+				}
+			}
+
+			img {
+				@include border-radius(50%);
+				@include square($chips-size);
+				margin: $chips-contact-img-margin;
+			}
+
+			&:hover {
+				@include material-shadow(2);
+			}
+		}
+	}
+}

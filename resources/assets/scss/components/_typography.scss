@@ -1,0 +1,206 @@
+/**************************************
+ * Typography
+ *
+ * http://www.google.com/design/spec/style/typography.html
+ * http://codepen.io/zavoloklom/pen/IkaFL/
+ * https://www.google.com/fonts
+ **************************************/
+
+// Load requested fonts
+@import '../../fonts/fonts';
+
+@if( in-array( 'display-4', $typography ) ) {
+	.display-4, h1 {
+		@include font($font-size-display-4, 0, $font-weight-display-4, $line-height-display-4, $font-color-display-4, $letter-spacing-display-4);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-display-4 + 0px);
+				@include square(rem-calc($font-size-display-4 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'display-3', $typography ) ) {
+	.display-3, h2 {
+		@include font($font-size-display-3, 0, $font-weight-display-3, $line-height-display-3, $font-color-display-3, $letter-spacing-display-3);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-display-3 + 0px);
+				@include square(rem-calc($font-size-display-3 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'display-2', $typography ) ) {
+	.display-2, h3 {
+		@include font($font-size-display-2, 0, $font-weight-display-2, $line-height-display-2, $font-color-display-2, $letter-spacing-display-2);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-display-2 + 0px);
+				@include square(rem-calc($font-size-display-2 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'display-1', $typography ) ) {
+	.display-1, h4 {
+		@include font($font-size-display-1, 0, $font-weight-display-1, $line-height-display-1, $font-color-display-1, $letter-spacing-display-1);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-display-1 + 0px);
+				@include square(rem-calc($font-size-display-1 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'headline', $typography ) ) {
+	.headline, h5 {
+		@include font($font-size-headline, 0, $font-weight-headline, $line-height-headline, $font-color-headline, $letter-spacing-headline);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-headline + 0px);
+				@include square(rem-calc($font-size-headline + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'title', $typography ) ) {
+	.title, h6, .appbar-title h1, .appbar-title h2, .appbar-title h3, .appbar-title h4, .appbar-title h5, .appbar-title h6 {
+		@include font($font-size-title, 0, $font-weight-title, $line-height-title, $font-color-title, $letter-spacing-title);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-title + 0px);
+				@include square(rem-calc($font-size-title + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'subhead-2', $typography ) ) {
+	.subhead-2 {
+		@include font($font-size-subhead-2, $font-size-small-subhead, $font-weight-subhead-2, $line-height-subhead-2, $font-color-subhead, $letter-spacing-subhead-2);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-subhead-2 + 0px);
+				@include square(rem-calc($font-size-subhead-2 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'subhead-1', $typography ) ) {
+	.subhead-1 {
+		@include font($font-size-subhead-1, $font-size-small-subhead, $font-weight-subhead-1, $line-height-subhead-1, $font-color-subhead, $letter-spacing-subhead-1);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-subhead-1 + 0px);
+				@include square(rem-calc($font-size-subhead-1 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'body-2', $typography ) ) {
+	.body-2 {
+		@include font($font-size-body-2, $font-size-small-body, $font-weight-body-2, $line-height-body-2, $font-color-body-2, $letter-spacing-body-2);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-body-2 + 0px);
+				@include square(rem-calc($font-size-body-2 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'body-1', $typography ) ) {
+	.body-1 {
+		@include font($font-size-body-1, $font-size-small-body, $font-weight-body-1, $line-height-body-1, $font-color-body-1, $letter-spacing-body-1);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-body-1 + 0px);
+				@include square(rem-calc($font-size-body-1 + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'caption', $typography ) ) {
+	.caption {
+		@include font($font-size-caption, 0, $font-weight-caption, $line-height-caption, $font-color-caption, $letter-spacing-caption);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-caption + 0px);
+				@include square(rem-calc($font-size-caption + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'label', $typography ) ) {
+	.label, label {
+		@include font($font-size-label, 0, $font-weight-label, $line-height-label, $font-color-label, $letter-spacing-label);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-label + 0px);
+				@include square(rem-calc($font-size-label + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'menu', $typography ) ) {
+	.menu {
+		@include font($font-size-menu, 0, $font-weight-menu, $line-height-menu, $font-color-menu, $letter-spacing-menu);
+
+		@if( in-array('icons', $typography ) ) {
+			.material-icons {
+				font-size: rem-calc($font-size-menu + 0px);
+				@include square(rem-calc($font-size-menu + 0px));
+			}
+		}
+	}
+}
+
+@if( in-array( 'button', $typography ) ) {
+	.button, .raised-button, .flat-button {
+		@include font($font-size-button, 0, $font-weight-button, $line-height-button, $font-color-button, $letter-spacing-button, uppercase);
+	}
+}
+
+body {
+	@include font($font-size-body-1, $font-size-small-body, $font-weight-body-1, $line-height-body-1, $font-color-body-1, $letter-spacing-body-1);
+	direction: $text-direction;
+	font-family: 'Roboto', sans-serif, 'Helvetica Neue', Helvetica, Arial;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+.body-1-light {
+	color: rgba($white, .87);
+}
+
+.body-1-dark {
+	color: rgba($black, .87);
+}

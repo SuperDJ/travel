@@ -1,0 +1,63 @@
+$small-screen-leftover: (100% - $small-small-screen-width) / 2;
+$large-small-screen-leftover: (100% - $large-small-screen-width) / 2;
+
+.container {
+	width: $small-small-screen-width;
+	margin: 0 auto;
+
+	@if( $amp == false ) {
+		@media #{$medium-up} {
+			width: $large-small-screen-width;
+		}
+	}
+
+	.appbar {
+		width: $small-small-screen-width;
+
+		@if( $amp == false ) {
+			@media #{$medium-up} {
+				width: $large-small-screen-width;
+			}
+		}
+	}
+
+
+	.drawer {
+		left: initial;
+	}
+
+	main, .main-content, .bottom-nav, .bottom-shifting {
+		left: $small-screen-leftover;
+		right: $small-screen-leftover;
+
+		@if( $amp == false ) {
+			@media #{$medium-up} {
+				left: calc(#{$large-small-screen-leftover} + #{$drawer-small-width});
+				right: $large-small-screen-leftover;
+			}
+		}
+	}
+
+	.bottom-nav, .bottom-shifting {
+		width: calc( 100% - #{$drawer-small-width} - ( #{$small-screen-leftover} * 2 ) );
+
+		@if( $amp == false ) {
+			@media #{$medium-up} {
+				width: calc(100% - #{$drawer-small-width} - (#{$large-small-screen-leftover} * 2));
+			}
+		}
+	}
+
+	.tabs {
+		left: $small-screen-leftover;
+		right: $small-screen-leftover;
+
+		@if( $amp == false ) {
+			@media #{$medium-up} {
+				width: calc( #{$large-small-screen-width} - #{$drawer-small-width} + #{rem-calc(1px)} );
+				left: calc( #{$large-small-screen-leftover} + ( #{$drawer-small-width} - #{rem-calc(1px)} ) );
+				right: $large-small-screen-leftover;
+			}
+		}
+	}
+}

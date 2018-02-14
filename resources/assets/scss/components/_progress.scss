@@ -1,0 +1,170 @@
+/**************************************
+ * Progress & activity
+ *
+ * http://www.google.com/design/spec/components/progress-activity.html
+ **************************************/
+
+.determinate, .indeterminate, .buffer {
+	width: 100%;
+	height: rem-calc(5px);
+	position: relative;
+}
+
+@if( in-array( 'determinate', $progress ) ) {
+	.determinate {
+		background: $progressbar-background;
+	}
+}
+
+.progressbar {
+	background: $progress-background;
+	@include transition(width $transition-small-duration $standard-transition);
+	bottom: 0;
+	position: absolute;
+	top: 0;
+	width: 0%;
+}
+
+@if( in-array( 'indeterminate', $progress ) ) {
+	.indeterminate {
+		background: $progressbar-background;
+		overflow: hidden;
+
+		.progressbar {
+			width: 60%;
+			@include animation(indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite);
+			@include keyframes(indeterminate) {
+				0% {
+					left: 0;
+					width: 0%;
+				}
+
+				25% {
+					width: 60%;
+				}
+
+				50% {
+					width: 60%;
+				}
+
+				75% {
+					left: 75%;
+					width: 60%;
+				}
+
+				100% {
+					left: 100%;
+					width: 0%;
+				}
+			}
+		}
+	}
+}
+
+@if( in-array( 'buffer', $progress ) ) {
+	.buffer {
+		overflow: hidden;
+
+		> div {
+			display: inline-block;
+		}
+
+		.buffer-progress {
+			background: $progressbar-background;
+			bottom: 0;
+			position: absolute;
+			top: 0;
+		}
+
+		.buffering {
+			background-image: linear-gradient(to right, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)), linear-gradient(to right, $main-color, $main-color);
+			bottom: 0;
+			position: absolute;
+			@include mask(url('data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTBweCIgdmlld1BvcnQ9IjAgMCAxMiA0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGVsbGlwc2UgY3g9IjIiIGN5PSIyIiByeD0iMiIgcnk9IjIiPjwvZWxsaXBzZT48ZWxsaXBzZSBjeD0iMTQiIGN5PSIyIiByeD0iMiIgcnk9IjIiIGNsYXNzPSJsb2FkZXIiPjwvZWxsaXBzZT48L3N2Zz4='));
+			top: 0;
+			@include animation(buffer 1.5s linear infinite);
+			@include keyframes(buffer) {
+				0% {
+					width: 200%;
+					left: 100%;
+				}
+				100% {
+					left: auto;
+				}
+			}
+		}
+	}
+}
+
+@if( in-array( 'circular', $progress ) ) {
+	.circular {
+		position: relative;
+		margin: 0 auto;
+		width: $circular-width;
+
+		&:before {
+			content: '';
+			display: block;
+			padding-top: 100%;
+		}
+
+		svg {
+			@include animation(rotate 2s linear infinite);
+			@include transform-origin(center center);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+
+		circle {
+			@include animation(dash 1.5s ease-in-out infinite unquote(',') color 6s ease-in-out infinite);
+			stroke-dasharray: 1, 200;
+			stroke-dashoffset: 0;
+			stroke-width: $circular-path-width;
+			r: 20;
+		}
+
+		@include keyframes(rotate) {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@include keyframes(dash) {
+			0% {
+				stroke-dasharray: 1, 200;
+				stroke-dashoffset: 0;
+			}
+			50% {
+				stroke-dasharray: 89, 200;
+				stroke-dashoffset: rem-calc(-35px);
+			}
+			100% {
+				stroke-dasharray: 89, 200;
+				stroke-dashoffset: rem-calc(-124px);
+			}
+		}
+
+		@include keyframes(color) {
+			100%,
+			0% {
+				stroke: $circular-color1;
+			}
+			40% {
+				stroke: $circular-color2;
+			}
+			66% {
+				stroke: $circular-color3;
+			}
+			80%,
+			90% {
+				stroke: $circular-color4;
+			}
+		}
+	}
+}

@@ -1,6 +1,6 @@
 <template>
     <header class="appbar">
-        <Icon name="menu" @click="triggerDrawer()"/>
+        <Icon name="menu" class="trigger" :data-trigger="drawerId"/>
 
         <div class="appbar-title">
             <h1>{{title}}</h1>
@@ -19,7 +19,12 @@
                 type: String,
                 required: true,
                 default: ''
-            }
+            },
+			drawerId: {
+				type: String,
+				required: true,
+				default: ''
+			}
         }
     }
 </script>

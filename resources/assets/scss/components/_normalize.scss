@@ -5,7 +5,7 @@
  **************************************/
 
 html, body {
-	background: if( $var == true, var(--background, $background), $background );
+	background: $body-background;
 	margin: 0;
 	padding: 0;
 }

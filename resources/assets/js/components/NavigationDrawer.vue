@@ -1,5 +1,5 @@
 <template>
-    <nav class="drawer">
+    <nav class="drawer" :id="drawerId">
         <div class="drawer-header">
             <slot name="header"/>
         </div>
@@ -10,5 +10,12 @@
 
 <script>
     export default {
+    	props: {
+    	    drawerId: {
+    	    	type: String,
+                required: true,
+                default: ''
+            }
+        }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <i class="material-icons">{{name}}</i>
+    <i class="material-icons" :class="{trigger}" :data-trigger="trigger">{{name}}</i>
 </template>
 
 <script>
@@ -8,10 +8,13 @@
             name: {
             	type: String,
 				required: true,
-				default: function(value) {
-					return value.replace(' ', '_')
-                }
-			}
+				default: ''
+			},
+            trigger: {
+            	type: String,
+                required: false,
+                default: ''
+            }
         }
     }
 </script>

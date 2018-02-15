@@ -1,5 +1,6 @@
 const path = require('path'),
-	ExtractTextPlugin = require('extract-text-webpack-plugin');
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	GoogleFonts = require('google-fonts-webpack-plugin');
 
 module.exports = env => {
 	return {
@@ -15,14 +16,14 @@ module.exports = env => {
 			rules: [
 				{
 					test: /\.js$/,
-					exclude: ['/node_modules/', '/stylesheets/'],
+					exclude: ['/vendor/', '/node_modules/', '/public/', '/resources/assets/scss/'],
 					use: [
 						'babel-loader'
 					]
 				},
 				{
 					test: /\.vue$/,
-					exclude: ['/node_modules'],
+					exclude: ['/vendor/', '/node_modules', '/public/', '/resources/assets/scss/'],
 					loader: 'vue-loader',
 					options: {
 						loaders: {
@@ -36,6 +37,7 @@ module.exports = env => {
 				},
 				{
 					test: /\.scss$/,
+					exclude: ['/vendor/', '/node_modules/', '/public/', '/resources/assets/scss/'],
 					use: ExtractTextPlugin.extract( {
 						fallback: 'style-loader',
 						use: [
@@ -55,7 +57,19 @@ module.exports = env => {
 			extensions: ['.js', '.vue']
 		},
 		plugins: [
-			new ExtractTextPlugin( 'stylesheets/[name].css' )
+			new ExtractTextPlugin( 'public/css/[name].css' ),
+			new GoogleFonts({
+				fonts: [
+					{
+						family: 'Roboto',
+						variants: ['100','300','500','700','900','100italic','300italic','regular','italic','500italic','700italic','900italic'],
+						formats: ['woff', 'woff2', 'ttf']
+					}
+				],
+				path: 'public/fonts/',
+				apiUrl: 'https://google-webfonts-helper.herokuapp.com/api/fonts',
+				filename: './resources/assets/scss/components/_fonts.scss'
+			})
 		]
 	}
 };

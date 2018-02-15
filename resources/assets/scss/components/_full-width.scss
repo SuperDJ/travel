@@ -1,5 +1,5 @@
 @if( $amp == false ) {
-	body.full-width {
+	.full-width {
 		.appbar {
 			@media #{$small-up} {
 				.appbar-title {

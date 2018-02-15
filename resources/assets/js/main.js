@@ -15,6 +15,7 @@ Vue.component('Icon', Icon);
 Vue.component('Button', Button);
 
 import { store } from './store/store';
+import { WebRoutes } from './routes/web-routes';
 
 new Vue({
 	el: '#app',

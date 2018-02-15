@@ -60,11 +60,13 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -173,7 +175,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -366,7 +368,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -396,7 +398,7 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7602,10 +7604,10 @@ Vue$3.nextTick(function () {
 /*  */
 
 exports.default = Vue$3;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(2), __webpack_require__(10).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4), __webpack_require__(12).setImmediate))
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7619,7 +7621,7 @@ var _Appbar = __webpack_require__(18);
 
 var _Appbar2 = _interopRequireDefault(_Appbar);
 
-var _NavigationDrawer = __webpack_require__(20);
+var _NavigationDrawer = __webpack_require__(22);
 
 var _NavigationDrawer2 = _interopRequireDefault(_NavigationDrawer);
 
@@ -7645,16 +7647,76 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     components: {
         'Appbar': _Appbar2.default,
         'NavigationDrawer': _NavigationDrawer2.default
+    },
+
+    data: function data() {
+        return {
+            drawerId: 'drawer'
+        };
     }
 };
 
 /***/ }),
-/* 5 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        title: {
+            type: String,
+            required: true,
+            default: ''
+        },
+        drawerId: {
+            type: String,
+            required: true,
+            default: ''
+        }
+    }
+};
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7663,10 +7725,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
 //
 //
 //
@@ -7680,7 +7738,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
   props: {
-    title: {
+    drawerId: {
       type: String,
       required: true,
       default: ''
@@ -7689,30 +7747,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {};
-
-/***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7731,15 +7766,18 @@ exports.default = {
         name: {
             type: String,
             required: true,
-            default: function _default(value) {
-                return value.replace(' ', '_');
-            }
+            default: ''
+        },
+        trigger: {
+            type: String,
+            required: false,
+            default: ''
         }
     }
 };
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7770,29 +7808,31 @@ exports.default = {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _vue = __webpack_require__(3);
+var _vue = __webpack_require__(5);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _Index = __webpack_require__(12);
+var _Index = __webpack_require__(14);
 
 var _Index2 = _interopRequireDefault(_Index);
 
-var _Icon = __webpack_require__(23);
+var _Icon = __webpack_require__(27);
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
-var _Button = __webpack_require__(25);
+var _Button = __webpack_require__(31);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _store = __webpack_require__(27);
+var _store = __webpack_require__(35);
+
+var _webRoutes = __webpack_require__(46);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7816,7 +7856,7 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7870,16 +7910,16 @@ exports._unrefActive = exports.active = function (item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(11);
+__webpack_require__(13);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
 exports.setImmediate = typeof self !== "undefined" && self.setImmediate || typeof global !== "undefined" && global.setImmediate || undefined && undefined.setImmediate;
 exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || typeof global !== "undefined" && global.clearImmediate || undefined && undefined.clearImmediate;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8067,24 +8107,20 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
 })(typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(3)))
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8ba542a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8ba542a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(26);
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(13)
-}
-var normalizeComponent = __webpack_require__(0)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 
@@ -8093,7 +8129,7 @@ var normalizeComponent = __webpack_require__(0)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -8128,402 +8164,20 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(14);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(16)("02e89b68", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b8ba542a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Index.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b8ba542a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/**************************************\n * All stylesheets\n *\n * Some may be turned off by commenting them\n * NOTE that some classes are extended and could there for cause problems when turned off\n **************************************/\n/**************************************\n * Imports\n **************************************/\n/**************************************\n * Colors\n **************************************/\n/*\n * Add / remove colors you would like to use in CSS\n * NOTE In SCSS all color variables stay accessible\n *\n * Accent means all colors with leading a\n  Text means classes that define text color\n */\n/**************************************\n * Colors\n *\n * http://www.google.com/design/spec/style/color.html#color-color-palette\n ***************************************/\n/**************************************\n * Global\n **************************************/\n/**************************************\n * Typography settings\n * Default font size under imports\n **************************************/\n/**************************************\n * Grid settings\n **************************************/\n/**************************************\n * Icons\n **************************************/\n/**************************************\n * Lists\n **************************************/\n/**************************************\n * AppBar\n **************************************/\n/**************************************\n * Badges\n **************************************/\n/**************************************\n * Bottom navigation\n **************************************/\n/**************************************\n * Bottom sheet\n **************************************/\n/**************************************\n * Buttons\n **************************************/\n/**************************************\n * Cards\n **************************************/\n/**************************************\n * Chips\n **************************************/\n/**************************************\n * Data tables\n **************************************/\n/**************************************\n * Dialogs\n **************************************/\n/**************************************\n * Dividers\n **************************************/\n/**************************************\n * Expansion panels\n **************************************/\n/**************************************\n * Grid lists\n **************************************/\n/**************************************\n * Menu\n **************************************/\n/**************************************\n * Navigation drawer\n **************************************/\n/**************************************\n* Notifications\n***************************************/\n/**************************************\n * Pickers\n **************************************/\n/**************************************\n * Progress & activity\n **************************************/\n/**************************************\n * Selection controls\n **************************************/\n/**************************************\n * Shadow & elevation\n **************************************/\n/**************************************\n * Sliders\n **************************************/\n/**************************************\n * Snackbars and toasts\n **************************************/\n/**************************************\n * Steppers\n **************************************/\n/**************************************\n * Tabs\n **************************************/\n/**************************************\n * Text fields\n **************************************/\n/**************************************\n * Tooltips\n **************************************/\n/**************************************\n * Small screen (Not mobile screen. Used when you don't want 100% screen width)\n **************************************/\n/**************************************\n * Components\n **************************************/\n/**************************************\n * Grid\n *\n * http://www.google.com/design/spec/layout/responsive-ui.html\n **************************************/\n/**************************************\n * Define all CSS variables\n **************************************/\n:root {\n  --main-color: #3F51B5;\n  --secondary-color: #2196F3;\n  --background: #FFFFFF;\n  --border-size: 0.14286rem;\n  --gutter: 1.14286rem;\n  --font-color-1: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  --font-color-2: var(--font-color-2, rgba(0, 0, 0, 0.87));\n}\n@media only screen and (min-width: 961px) {\n:root {\n      --gutter: 1.71429rem;\n}\n}\n.row {\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  -webkit-justify-content: flex-start;\n  justify-content: flex-start;\n  -webkit-align-items: flex-start;\n  align-items: flex-start;\n  -webkit-align-content: flex-start;\n  align-content: flex-start;\n  width: 100%;\n}\n.col {\n  flex-grow: 1;\n  padding: 0.57143rem;\n  margin: 0;\n}\n@media only screen and (min-width: 961px) {\n.col {\n      padding: 0.85714rem;\n      margin: 0;\n}\n}\n.xs {\n  flex-grow: 1;\n  flex-basis: 0;\n  max-width: 100%;\n}\n.xs1 {\n  flex-basis: 25%;\n  max-width: 25%;\n}\n.offset-xs1 {\n  margin-left: 25%;\n}\n.xs2 {\n  flex-basis: 50%;\n  max-width: 50%;\n}\n.offset-xs2 {\n  margin-left: 50%;\n}\n.xs3 {\n  flex-basis: 75%;\n  max-width: 75%;\n}\n.offset-xs3 {\n  margin-left: 75%;\n}\n.xs4 {\n  flex-basis: 100%;\n  max-width: 100%;\n}\n.offset-xs4 {\n  margin-left: 100%;\n}\n@media only screen and (min-width: 601px) {\n.s {\n    flex-grow: 1;\n    flex-basis: 0;\n    max-width: 100%;\n}\n.s1 {\n    flex-basis: 12.5%;\n    max-width: 12.5%;\n}\n.offset-s1 {\n    margin-left: 12.5%;\n}\n.s2 {\n    flex-basis: 25%;\n    max-width: 25%;\n}\n.offset-s2 {\n    margin-left: 25%;\n}\n.s3 {\n    flex-basis: 37.5%;\n    max-width: 37.5%;\n}\n.offset-s3 {\n    margin-left: 37.5%;\n}\n.s4 {\n    flex-basis: 50%;\n    max-width: 50%;\n}\n.offset-s4 {\n    margin-left: 50%;\n}\n.s5 {\n    flex-basis: 62.5%;\n    max-width: 62.5%;\n}\n.offset-s5 {\n    margin-left: 62.5%;\n}\n.s6 {\n    flex-basis: 75%;\n    max-width: 75%;\n}\n.offset-s6 {\n    margin-left: 75%;\n}\n.s7 {\n    flex-basis: 87.5%;\n    max-width: 87.5%;\n}\n.offset-s7 {\n    margin-left: 87.5%;\n}\n.s8 {\n    flex-basis: 100%;\n    max-width: 100%;\n}\n.offset-s8 {\n    margin-left: 100%;\n}\n}\n@media only screen and (min-width: 841px) {\n.s {\n    flex-grow: 1;\n    flex-basis: 0;\n    max-width: 100%;\n}\n.s1 {\n    flex-basis: 8.33333%;\n    max-width: 8.33333%;\n}\n.offset-s1 {\n    margin-left: 8.33333%;\n}\n.s2 {\n    flex-basis: 16.66667%;\n    max-width: 16.66667%;\n}\n.offset-s2 {\n    margin-left: 16.66667%;\n}\n.s3 {\n    flex-basis: 25%;\n    max-width: 25%;\n}\n.offset-s3 {\n    margin-left: 25%;\n}\n.s4 {\n    flex-basis: 33.33333%;\n    max-width: 33.33333%;\n}\n.offset-s4 {\n    margin-left: 33.33333%;\n}\n.s5 {\n    flex-basis: 41.66667%;\n    max-width: 41.66667%;\n}\n.offset-s5 {\n    margin-left: 41.66667%;\n}\n.s6 {\n    flex-basis: 50%;\n    max-width: 50%;\n}\n.offset-s6 {\n    margin-left: 50%;\n}\n.s7 {\n    flex-basis: 58.33333%;\n    max-width: 58.33333%;\n}\n.offset-s7 {\n    margin-left: 58.33333%;\n}\n.s8 {\n    flex-basis: 66.66667%;\n    max-width: 66.66667%;\n}\n.offset-s8 {\n    margin-left: 66.66667%;\n}\n.s9 {\n    flex-basis: 75%;\n    max-width: 75%;\n}\n.offset-s9 {\n    margin-left: 75%;\n}\n.s10 {\n    flex-basis: 83.33333%;\n    max-width: 83.33333%;\n}\n.offset-s10 {\n    margin-left: 83.33333%;\n}\n.s11 {\n    flex-basis: 91.66667%;\n    max-width: 91.66667%;\n}\n.offset-s11 {\n    margin-left: 91.66667%;\n}\n.s12 {\n    flex-basis: 100%;\n    max-width: 100%;\n}\n.offset-s12 {\n    margin-left: 100%;\n}\n}\n@media only screen and (min-width: 961px) {\n.m {\n    flex-grow: 1;\n    flex-basis: 0;\n    max-width: 100%;\n}\n.m1 {\n    flex-basis: 8.33333%;\n    max-width: 8.33333%;\n}\n.offset-m1 {\n    margin-left: 8.33333%;\n}\n.m2 {\n    flex-basis: 16.66667%;\n    max-width: 16.66667%;\n}\n.offset-m2 {\n    margin-left: 16.66667%;\n}\n.m3 {\n    flex-basis: 25%;\n    max-width: 25%;\n}\n.offset-m3 {\n    margin-left: 25%;\n}\n.m4 {\n    flex-basis: 33.33333%;\n    max-width: 33.33333%;\n}\n.offset-m4 {\n    margin-left: 33.33333%;\n}\n.m5 {\n    flex-basis: 41.66667%;\n    max-width: 41.66667%;\n}\n.offset-m5 {\n    margin-left: 41.66667%;\n}\n.m6 {\n    flex-basis: 50%;\n    max-width: 50%;\n}\n.offset-m6 {\n    margin-left: 50%;\n}\n.m7 {\n    flex-basis: 58.33333%;\n    max-width: 58.33333%;\n}\n.offset-m7 {\n    margin-left: 58.33333%;\n}\n.m8 {\n    flex-basis: 66.66667%;\n    max-width: 66.66667%;\n}\n.offset-m8 {\n    margin-left: 66.66667%;\n}\n.m9 {\n    flex-basis: 75%;\n    max-width: 75%;\n}\n.offset-m9 {\n    margin-left: 75%;\n}\n.m10 {\n    flex-basis: 83.33333%;\n    max-width: 83.33333%;\n}\n.offset-m10 {\n    margin-left: 83.33333%;\n}\n.m11 {\n    flex-basis: 91.66667%;\n    max-width: 91.66667%;\n}\n.offset-m11 {\n    margin-left: 91.66667%;\n}\n.m12 {\n    flex-basis: 100%;\n    max-width: 100%;\n}\n.offset-m12 {\n    margin-left: 100%;\n}\n}\n@media only screen and (min-width: 1281px) {\n.l {\n    flex-grow: 1;\n    flex-basis: 0;\n    max-width: 100%;\n}\n.l1 {\n    flex-basis: 8.33333%;\n    max-width: 8.33333%;\n}\n.offset-l1 {\n    margin-left: 8.33333%;\n}\n.l2 {\n    flex-basis: 16.66667%;\n    max-width: 16.66667%;\n}\n.offset-l2 {\n    margin-left: 16.66667%;\n}\n.l3 {\n    flex-basis: 25%;\n    max-width: 25%;\n}\n.offset-l3 {\n    margin-left: 25%;\n}\n.l4 {\n    flex-basis: 33.33333%;\n    max-width: 33.33333%;\n}\n.offset-l4 {\n    margin-left: 33.33333%;\n}\n.l5 {\n    flex-basis: 41.66667%;\n    max-width: 41.66667%;\n}\n.offset-l5 {\n    margin-left: 41.66667%;\n}\n.l6 {\n    flex-basis: 50%;\n    max-width: 50%;\n}\n.offset-l6 {\n    margin-left: 50%;\n}\n.l7 {\n    flex-basis: 58.33333%;\n    max-width: 58.33333%;\n}\n.offset-l7 {\n    margin-left: 58.33333%;\n}\n.l8 {\n    flex-basis: 66.66667%;\n    max-width: 66.66667%;\n}\n.offset-l8 {\n    margin-left: 66.66667%;\n}\n.l9 {\n    flex-basis: 75%;\n    max-width: 75%;\n}\n.offset-l9 {\n    margin-left: 75%;\n}\n.l10 {\n    flex-basis: 83.33333%;\n    max-width: 83.33333%;\n}\n.offset-l10 {\n    margin-left: 83.33333%;\n}\n.l11 {\n    flex-basis: 91.66667%;\n    max-width: 91.66667%;\n}\n.offset-l11 {\n    margin-left: 91.66667%;\n}\n.l12 {\n    flex-basis: 100%;\n    max-width: 100%;\n}\n.offset-l12 {\n    margin-left: 100%;\n}\n}\n@media only screen and (min-width: 1601px) {\n.xl {\n    flex-grow: 1;\n    flex-basis: 0;\n    max-width: 100%;\n}\n.xl1 {\n    flex-basis: 8.33333%;\n    max-width: 8.33333%;\n}\n.offset-xl1 {\n    margin-left: 8.33333%;\n}\n.xl2 {\n    flex-basis: 16.66667%;\n    max-width: 16.66667%;\n}\n.offset-xl2 {\n    margin-left: 16.66667%;\n}\n.xl3 {\n    flex-basis: 25%;\n    max-width: 25%;\n}\n.offset-xl3 {\n    margin-left: 25%;\n}\n.xl4 {\n    flex-basis: 33.33333%;\n    max-width: 33.33333%;\n}\n.offset-xl4 {\n    margin-left: 33.33333%;\n}\n.xl5 {\n    flex-basis: 41.66667%;\n    max-width: 41.66667%;\n}\n.offset-xl5 {\n    margin-left: 41.66667%;\n}\n.xl6 {\n    flex-basis: 50%;\n    max-width: 50%;\n}\n.offset-xl6 {\n    margin-left: 50%;\n}\n.xl7 {\n    flex-basis: 58.33333%;\n    max-width: 58.33333%;\n}\n.offset-xl7 {\n    margin-left: 58.33333%;\n}\n.xl8 {\n    flex-basis: 66.66667%;\n    max-width: 66.66667%;\n}\n.offset-xl8 {\n    margin-left: 66.66667%;\n}\n.xl9 {\n    flex-basis: 75%;\n    max-width: 75%;\n}\n.offset-xl9 {\n    margin-left: 75%;\n}\n.xl10 {\n    flex-basis: 83.33333%;\n    max-width: 83.33333%;\n}\n.offset-xl10 {\n    margin-left: 83.33333%;\n}\n.xl11 {\n    flex-basis: 91.66667%;\n    max-width: 91.66667%;\n}\n.offset-xl11 {\n    margin-left: 91.66667%;\n}\n.xl12 {\n    flex-basis: 100%;\n    max-width: 100%;\n}\n.offset-xl12 {\n    margin-left: 100%;\n}\n}\n@media only screen and (max-width: 600px) {\n.xs-hidden-down {\n    display: none;\n}\n}\n@media only screen and (max-width: 600px) {\n.xs-hidden {\n    display: none;\n}\n}\n@media only screen and (min-width: 601px) {\n.xs-hidden-up {\n    display: none;\n}\n}\n@media only screen and (max-width: 960px) {\n.s-hidden-down {\n    display: none;\n}\n}\n@media only screen and (min-width: 601px) and (max-width: 960px) {\n.s-hidden {\n    display: none;\n}\n}\n@media only screen and (min-width: 961px) {\n.s-hidden-up {\n    display: none;\n}\n}\n@media only screen and (max-width: 1280px) {\n.m-hidden-down {\n    display: none;\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.m-hidden {\n    display: none;\n}\n}\n@media only screen and (min-width: 1281px) {\n.m-hidden-up {\n    display: none;\n}\n}\n@media only screen and (max-width: 1600px) {\n.l-hidden-down {\n    display: none;\n}\n}\n@media only screen and (min-width: 1281px) and (max-width: 1600px) {\n.l-hidden {\n    display: none;\n}\n}\n@media only screen and (min-width: 1601px) {\n.l-hidden-up {\n    display: none;\n}\n}\n@media only screen and (max-width: 1920px) {\n.xl-hidden-down {\n    display: none;\n}\n}\n@media only screen and (min-width: 1601px) and (max-width: 1920px) {\n.xl-hidden {\n    display: none;\n}\n}\n@media only screen and (min-width: 1921px) {\n.xl-hidden-up {\n    display: none;\n}\n}\n\n/**************************************\n * Remove browser default styles\n *\n * https://material.google.com/motion/duration-easing.html\n **************************************/\nhtml, body {\n  background: var(--background, #FFFFFF);\n  margin: 0;\n  padding: 0;\n}\nhtml {\n  font-size: 14px;\n  -webkit-print-color-adjust: exact;\n}\nlabel {\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\nfigure img {\n    max-width: 100%;\n}\nimg {\n  height: auto;\n  max-width: 100%;\n  display: block;\n}\nh1, h2, h3, h4, h5, h6 {\n  word-wrap: break-word;\n}\n::-webkit-scrollbar, ::-webkit-scrollbar-track {\n  background: transparent;\n}\n::-webkit-scrollbar-button, ::-webkit-scrollbar-corner, ::-webkit-resizer {\n  display: none;\n}\n::-webkit-scrollbar {\n  width: 0.21429rem;\n  height: 0.21429rem;\n}\n@media only screen and (min-width: 961px) {\n::-webkit-scrollbar {\n      width: 0.71429rem;\n      height: 0.71429rem;\n}\n}\n::-webkit-scrollbar-thumb {\n  background: rgba(0, 0, 0, 0.2);\n}\n::-moz-selection {\n  background: #18FFFF;\n}\n::selection {\n  background: #18FFFF;\n}\n* {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  -ms-box-sizing: border-box;\n  -o-box-sizing: border-box;\n  box-sizing: border-box;\n}\na {\n  color: var(--main-color, #3F51B5);\n  outline: none;\n  text-decoration: none;\n  -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\na {\n      -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1601px) {\na {\n      -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\na:hover {\n    color: var(--secondary-color, #2196F3);\n}\na:hover .material-icons {\n      color: var(--secondary-color, #2196F3);\n}\na img {\n    outline: none;\n}\nmain, .main-content {\n  bottom: 0;\n  left: 0;\n  overflow: auto;\n  padding: 0.57143rem;\n  position: fixed;\n  right: 0;\n  top: 4rem;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\nmain, .main-content {\n      top: 3.42857rem;\n      padding: 0.57143rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\nmain, .main-content {\n      top: 4rem;\n      padding: 0.57143rem;\n}\n}\n@media only screen and (min-width: 961px) {\nmain, .main-content {\n      top: 4.57143rem;\n      left: 20rem;\n      padding: 0.85714rem;\n}\n}\n.trigger {\n  cursor: pointer;\n}\n.circle {\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  -ms-border-radius: 50%;\n  -o-border-radius: 50%;\n  border-radius: 50%;\n}\n.left {\n  float: left;\n}\n.right {\n  float: right;\n}\n.center {\n  text-align: center;\n  vertical-align: middle;\n}\nhr {\n  background: rgba(0, 0, 0, 0.12);\n  border: 0.03571rem solid rgba(0, 0, 0, 0.12);\n  height: 0.07143rem;\n}\n\n/**************************************\n * Elevation and shadows\n *\n * http://www.google.com/design/spec/what-is-material/elevation-shadows.html\n * http://material-components-web.appspot.com/elevation.html\n * https://material.io/guidelines/resources/shadows.html#shadows-sketch\n **************************************/\n.z1 {\n  -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n}\n.z2 {\n  -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n.z3 {\n  -moz-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.z3 {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.z4 {\n  -moz-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.z4 {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.z6 {\n  -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.z6 {\n      -moz-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.z8 {\n  -moz-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.z8 {\n      -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.z9 {\n  -moz-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n}\n.z12 {\n  -moz-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n}\n.z16 {\n  -moz-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n}\n.z24 {\n  -moz-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n}\n\n/**************************************\n * Typography\n *\n * http://www.google.com/design/spec/style/typography.html\n * http://codepen.io/zavoloklom/pen/IkaFL/\n * https://www.google.com/fonts\n **************************************/\n/**************************************\n * Load fonts\n *\n * This includes both Roboto and Noto\n * Check https://www.google.com/get/noto/ to see which font to uncomment\n * Roboto is default\n **************************************/\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Thin.ttf\");\n  font-weight: 100;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-ThinItalic.ttf\");\n  font-weight: 100;\n  font-style: italic;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Light.ttf\");\n  font-weight: 300;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-LightItalic.ttf\");\n  font-weight: 300;\n  font-style: italic;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Regular.ttf\");\n  font-weight: 400;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Italic.ttf\");\n  font-weight: 400;\n  font-style: italic;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Medium.ttf\");\n  font-weight: 500;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-MediumItalic.ttf\");\n  font-weight: 500;\n  font-style: italic;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Bold.ttf\");\n  font-weight: 700;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-BoldItalic.ttf\");\n  font-weight: 700;\n  font-style: italic;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-Black.ttf\");\n  font-weight: 900;\n  font-style: normal;\n}\n@font-face {\n  font-family: \"Roboto\";\n  src: url(\"/stylesheets/fonts/Roboto/Roboto-BlackItalic.ttf\");\n  font-weight: 900;\n  font-style: italic;\n}\n\n/*\n@if( $amp == false ) {\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoKufiArabic-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoKufiArabic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoMono-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoNaskhArabic-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoNaskhArabic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoNastaliqUrdu-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSans-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSans-BoldItalic.ttf');\n\tfont-weight: 700;\n\tfont-style: italic;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSans-Italic.ttf');\n\tfont-weight: 400;\n\tfont-style: italic;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSans-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansArmenian-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansArmenian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansAvestan-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBalinese-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBamum-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBatak-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBengali-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBengali-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBrahmi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBuginese-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansBuhid-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Black.otf');\n\tfont-weight: 900;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-DemiLight.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Light.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Medium.otf');\n\tfont-weight: 500;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKjp-Thin.otf');\n\tfont-weight: 100;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Black.otf');\n\tfont-weight: 900;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-DemiLight.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Light.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Medium.otf');\n\tfont-weight: 500;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKkr-Thin.otf');\n\tfont-weight: 100;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKBlack.otf');\n\tfont-weight: 900;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKBold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKDemiLight.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKLight.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKMedium.otf');\n\tfont-weight: 500;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKRegular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKThin.otf');\n\tfont-weight: 100;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Black.otf');\n\tfont-weight: 900;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-DemiLight.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Light.otf');\n\tfont-weight: 300;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Medium.otf');\n\tfont-weight: 500;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCJKtc-Thin.otf');\n\tfont-weight: 100;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCanadianAboriginal-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCarian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCham-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCham-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCherokee-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCoptic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCuneiform-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansCypriot-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansDeseret-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansDevanagari-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansDevanagari-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansEgyptianHieroglyphs-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansEthiopic-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansEthiopic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGeorgian-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGeorgian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGlagolitic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGothic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGujarati-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGujarati-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGurmukhi-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansGurmukhi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansHanunoo-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansHebrew-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansHebrew-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansImperialAramaic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansInscriptionalPahlavi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansInscriptionalParthian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansJavanese-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKaithi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKannada-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKannada-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKayahLi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKharoshthi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKhmer-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansKhmer-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLao-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLao-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLepcha-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLimbu-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLinearB-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLisu-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLycian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansLydian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMalayalam-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMalayalam-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMandaic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMeeteiMayek-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMongolian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKjp-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKjp-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKkr-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKkr-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKBold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKRegular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKtc-Bold.otf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMonoCJKtc-Regular.otf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMyanmar-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansMyanmar-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansNKo-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansNewTaiLue-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOgham-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOlChiki-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOldItalic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: italic;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOldPersian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOldSouthArabian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOldTurkic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOriya-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOriya-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansOsmanya-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansPhagsPa-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansPhoenician-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansRejang-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansRunic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSamaritan-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSaurashtra-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansShavian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSinhala-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSinhala-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSundanese-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSylotiNagri-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSymbols-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSyriacEastern-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSyriacEstrangela-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansSyriacWestern-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTagalog-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTagbanwa-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTaiLe-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTaiTham-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTaiViet-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTamil-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTamil-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTelugu-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTelugu-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansThaana-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansThaana-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansThai-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansThai-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTibetan-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTibetan-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansTifinagh-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansUgaritic-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansVai-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSansYi-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerif-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerif-BoldItalic.ttf');\n\tfont-weight: 700;\n\tfont-style: italic;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerif-Italic.ttf');\n\tfont-weight: 400;\n\tfont-style: italic;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerif-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifArmenian-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifArmenian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifBengali-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifBengali-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifDevanagari-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifDevanagari-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifGeorgian-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifGeorgian-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifGujarati-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifGujarati-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifKannada-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifKannada-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifKhmer-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifKhmer-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifLao-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifLao-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifMalayalam-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifMalayalam-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifTamil-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifTamil-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifTelugu-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifTelugu-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifThai-Bold.ttf');\n\tfont-weight: 700;\n\tfont-style: normal;\n}\n\n@font-face {\n\tfont-family: \"Noto\";\n\tsrc: url('/stylesheets/fonts/Noto/NotoSerifThai-Regular.ttf');\n\tfont-weight: 400;\n\tfont-style: normal;\n}\n}\n*/\n.display-4, h1 {\n  font-size: 8rem;\n  line-height: 9.14286rem;\n  letter-spacing: -0.00714rem;\n  font-weight: 300;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.display-4 .material-icons, h1 .material-icons {\n    font-size: 8rem;\n    width: 8rem;\n    height: 8rem;\n}\n.display-3, h2 {\n  font-size: 4rem;\n  line-height: 6rem;\n  letter-spacing: -0.00357rem;\n  font-weight: 400;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.display-3 .material-icons, h2 .material-icons {\n    font-size: 4rem;\n    width: 4rem;\n    height: 4rem;\n}\n.display-2, h3 {\n  font-size: 3.21429rem;\n  line-height: 4.57143rem;\n  letter-spacing: 0rem;\n  font-weight: 400;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.display-2 .material-icons, h3 .material-icons {\n    font-size: 3.21429rem;\n    width: 3.21429rem;\n    height: 3.21429rem;\n}\n.display-1, h4 {\n  font-size: 2.42857rem;\n  line-height: 2.85714rem;\n  letter-spacing: 0rem;\n  font-weight: 400;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.display-1 .material-icons, h4 .material-icons {\n    font-size: 2.42857rem;\n    width: 2.42857rem;\n    height: 2.42857rem;\n}\n.headline, h5 {\n  font-size: 1.71429rem;\n  line-height: 2.28571rem;\n  letter-spacing: 0rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n.headline .material-icons, h5 .material-icons {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n}\n.title, h6, .appbar-title h1, .appbar-title h2, .appbar-title h3, .appbar-title h4, .appbar-title h5, .appbar-title h6 {\n  font-size: 1.42857rem;\n  line-height: 2rem;\n  letter-spacing: 0.00357rem;\n  font-weight: 500;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n.title .material-icons, h6 .material-icons, .appbar-title h1 .material-icons, .appbar-title h2 .material-icons, .appbar-title h3 .material-icons, .appbar-title h4 .material-icons, .appbar-title h5 .material-icons, .appbar-title h6 .material-icons {\n    font-size: 1.42857rem;\n    width: 1.42857rem;\n    height: 1.42857rem;\n}\n.subhead-2 {\n  font-size: 1.07143rem;\n  line-height: 2rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n@media only screen and (max-width: 1280px) {\n.subhead-2 {\n      font-size: 1.14286rem;\n}\n}\n.subhead-2 .material-icons {\n    font-size: 1.07143rem;\n    width: 1.07143rem;\n    height: 1.07143rem;\n}\n.subhead-1 {\n  font-size: 1.07143rem;\n  line-height: 1.71429rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 300;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n@media only screen and (max-width: 1280px) {\n.subhead-1 {\n      font-size: 1.14286rem;\n}\n}\n.subhead-1 .material-icons {\n    font-size: 1.07143rem;\n    width: 1.07143rem;\n    height: 1.07143rem;\n}\n.body-2 {\n  font-size: 0.92857rem;\n  line-height: 1.71429rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 500;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n@media only screen and (max-width: 1280px) {\n.body-2 {\n      font-size: 1rem;\n}\n}\n.body-2 .material-icons {\n    font-size: 0.92857rem;\n    width: 0.92857rem;\n    height: 0.92857rem;\n}\n.body-1 {\n  font-size: 0.92857rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n@media only screen and (max-width: 1280px) {\n.body-1 {\n      font-size: 1rem;\n}\n}\n.body-1 .material-icons {\n    font-size: 0.92857rem;\n    width: 0.92857rem;\n    height: 0.92857rem;\n}\n.caption {\n  font-size: 0.85714rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.01429rem;\n  font-weight: 400;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.caption .material-icons {\n    font-size: 0.85714rem;\n    width: 0.85714rem;\n    height: 0.85714rem;\n}\n.label, label {\n  font-size: 0.85714rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 300;\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  text-transform: inherit;\n}\n.label .material-icons, label .material-icons {\n    font-size: 0.85714rem;\n    width: 0.85714rem;\n    height: 0.85714rem;\n}\n.menu {\n  font-size: 0.92857rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n}\n.menu .material-icons {\n    font-size: 0.92857rem;\n    width: 0.92857rem;\n    height: 0.92857rem;\n}\n.button, .raised-button, .flat-button {\n  font-size: 1rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 500;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: uppercase;\n}\nbody {\n  font-size: 0.92857rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n  direction: ltr;\n  font-family: 'Roboto', sans-serif, 'Helvetica Neue', Helvetica, Arial;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n@media only screen and (max-width: 1280px) {\nbody {\n      font-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\n  margin: 0;\n}\n.body-1-light {\n  color: rgba(255, 255, 255, 0.87);\n}\n.body-1-dark {\n  color: rgba(0, 0, 0, 0.87);\n}\n\n/**************************************\n * Icons\n *\n * http://www.google.com/design/spec/style/icons.html\n * https://design.google.com/icons/\n **************************************/\n.material-icons {\n  font-size: 1.71429rem;\n  width: 1.71429rem;\n  height: 1.71429rem;\n  color: rgba(0, 0, 0, 0.38);\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  vertical-align: middle;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  -moz-osx-font-smoothing: grayscale;\n  font-feature-settings: 'liga';\n}\n.material-icons:active, .material-icons.active {\n    color: rgba(0, 0, 0, 0.87);\n}\n.material-icons.size-18 {\n    font-size: 1.28571rem;\n    width: 1.28571rem;\n    height: 1.28571rem;\n}\n.material-icons.size-24 {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n}\n.material-icons.size-36 {\n    font-size: 2.57143rem;\n    width: 2.57143rem;\n    height: 2.57143rem;\n}\n.material-icons.size-48 {\n    font-size: 3.42857rem;\n    width: 3.42857rem;\n    height: 3.42857rem;\n}\n\n/**************************************\n * AppBar\n *\n * http://www.google.com/design/spec/layout/structure.html#structure-app-bar\n * http://www.google.com/design/spec/layout/structure.html#structure-toolbars\n **************************************/\n.appbar {\n  -moz-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  background: var(--main-color, #3F51B5);\n  color: #FFFFFF;\n  line-height: normal;\n  min-height: 4rem;\n  position: fixed;\n  width: 100%;\n  z-index: 2;\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: flex;\n  -webkit-justify-content: flex-start;\n  justify-content: flex-start;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  -webkit-align-content: stretch;\n  align-content: stretch;\n  justify-content: flex-start;\n  padding: 0.57143rem;\n}\n@media only screen and (min-width: 1281px) {\n.appbar {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.appbar {\n      min-height: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.appbar {\n      min-height: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.appbar {\n      min-height: 4.57143rem;\n      padding: 1.42857rem;\n}\n}\n.appbar a, .appbar h1, .appbar h2, .appbar h3, .appbar h4, .appbar h5, .appbar h6, .appbar .material-icons, .appbar .title {\n    color: #FFFFFF;\n}\n.appbar a {\n    display: block;\n    position: relative;\n    font-weight: 500;\n    margin: 0 0.57143rem;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.appbar a {\n        margin: 0 0.57143rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.appbar a {\n        margin: 0 0.57143rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.appbar a {\n        margin: 0 0.85714rem;\n}\n}\n.appbar .material-icons {\n    margin: 0 0.57143rem;\n    font-size: 1.71429rem;\n    position: relative;\n    width: 1.71429rem;\n    height: 1.71429rem;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.appbar .material-icons {\n        font-size: 1.14286rem;\n        width: 1.14286rem;\n        height: 1.14286rem;\n        margin: 0 0.57143rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.appbar .material-icons {\n        font-size: 1.71429rem;\n        width: 1.71429rem;\n        height: 1.71429rem;\n        margin: 0 0.57143rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.appbar .material-icons {\n        font-size: 1.71429rem;\n        width: 1.71429rem;\n        height: 1.71429rem;\n        margin: 0 0.85714rem;\n}\n}\n.appbar-spacer {\n    -webkit-flex-grow: 1;\n    flex-grow: 1;\n}\n.appbar-title {\n    margin: 0 0 -0.85714rem 2.28571rem;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.appbar-title {\n        margin: 0 0 -0.85714rem 2.85714rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.appbar-title {\n        margin: 0 0 -0.85714rem 2.28571rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.appbar-title {\n        margin: 0 0 -0.57143rem 16.57143rem;\n}\n}\n.appbar .search-input {\n    display: none;\n}\n.appbar .badge {\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    background: #F44336;\n    -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n    font-size: 0.71429rem;\n    padding: 0.35714rem;\n    position: absolute;\n    right: -0.71429rem;\n    top: -0.85714rem;\n    text-align: center;\n    width: 1.42857rem;\n    height: 1.42857rem;\n}\n.appbar-menu {\n    top: 0.28571rem;\n    right: 0.28571rem;\n    left: auto;\n}\n.appbar-menu a {\n      margin: 0;\n}\n\n/**************************************\n * Bottom navigation\n *\n * http://www.google.com/design/spec/components/bottom-navigation.html\n **************************************/\n.bottom-nav, .bottom-shifting {\n  background: var(--main-color, #3F51B5);\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  -moz-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  width: 100%;\n  margin: 0 0 -102% 0;\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: flex;\n  -webkit-justify-content: space-between;\n  justify-content: space-between;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  -webkit-align-content: stretch;\n  align-content: stretch;\n  -webkit-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\n.bottom-nav, .bottom-shifting {\n      -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n@media only screen and (min-width: 961px) {\n.bottom-nav, .bottom-shifting {\n      left: 20rem;\n      width: calc(100% - 20rem);\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-nav, .bottom-shifting {\n      -webkit-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-nav, .bottom-shifting {\n      -webkit-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-nav .material-icons, .bottom-shifting .material-icons {\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-nav .material-icons, .bottom-shifting .material-icons {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-nav .material-icons, .bottom-shifting .material-icons {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-nav.expanded, .bottom-shifting.expanded {\n    margin: 0;\n}\n.bottom-nav a, .bottom-shifting a {\n    color: rgba(255, 255, 255, 0.7);\n    display: block;\n    line-height: normal;\n    text-align: center;\n}\n.bottom-nav a:hover, .bottom-nav a:hover .material-icons, .bottom-shifting a:hover, .bottom-shifting a:hover .material-icons {\n      color: #FFFFFF;\n}\n.bottom-nav a.active, .bottom-shifting a.active {\n      color: #FFFFFF;\n}\n.bottom-nav a.active .material-icons, .bottom-shifting a.active .material-icons {\n        color: #FFFFFF;\n}\n.bottom-nav a {\n  font-size: 0.85714rem;\n  height: 4rem;\n  max-width: 12rem;\n  min-width: 5.71429rem;\n  padding: 0.57143rem 0.85714rem 0.71429rem 0.85714rem;\n}\n@media only screen and (min-width: 1281px) {\n.bottom-nav a {\n      min-width: 8.57143rem;\n}\n}\n.bottom-nav a .material-icons {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n}\n.bottom-nav a.active {\n    font-size: 1rem;\n    padding: 0.42857rem 0.85714rem 0.71429rem 0.85714rem;\n}\n.bottom-shifting a {\n  height: 4rem;\n  max-width: 6.85714rem;\n  min-width: 4rem;\n  padding: 1.14286rem 0;\n}\n.bottom-shifting a .material-icons {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n}\n.bottom-shifting a .content {\n    display: none;\n}\n.bottom-shifting a.active {\n    font-size: 1rem;\n    max-width: 12rem;\n    min-width: 6.85714rem;\n    padding: 0.42857rem 0 0.71429rem 0;\n}\n.bottom-shifting a.active .content {\n      display: block;\n      margin: 0.42857rem 0 0 0;\n}\n\n/**************************************\n * Bottom sheet / modal\n *\n * http://www.google.com/design/spec/components/bottom-sheets.html\n **************************************/\n.bottom-sheet, .bottom-sheet-grid {\n  -webkit-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  background: #FFFFFF;\n  bottom: 0;\n  display: block;\n  margin: 0 auto -102% auto;\n  height: auto;\n  left: 0;\n  overflow: inherit;\n  position: fixed;\n  right: 0;\n  width: 100%;\n  z-index: 5;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-sheet, .bottom-sheet-grid {\n      -webkit-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      max-width: 60%;\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-sheet, .bottom-sheet-grid {\n      -webkit-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      max-width: 40%;\n      -webkit-border-top-left-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius-topleft: var(--border-size, 0.14286rem);\n      border-top-left-radius: var(--border-size, 0.14286rem);\n      -webkit-border-top-right-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius-topright: var(--border-size, 0.14286rem);\n      border-top-right-radius: var(--border-size, 0.14286rem);\n}\n}\n.bottom-sheet .bottom-sheet-background, .bottom-sheet-grid .bottom-sheet-background {\n    background: rgba(0, 0, 0, 0.2);\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    position: fixed;\n    z-index: 4;\n    visibility: hidden;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-sheet .bottom-sheet-background, .bottom-sheet-grid .bottom-sheet-background {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-sheet .bottom-sheet-background, .bottom-sheet-grid .bottom-sheet-background {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-sheet.expanded, .bottom-sheet-grid.expanded {\n    margin: 0 auto;\n}\n.bottom-sheet.expanded ~ .bottom-sheet-background, .bottom-sheet-grid.expanded ~ .bottom-sheet-background {\n      visibility: visible;\n}\n.bottom-sheet {\n  padding: 0.57143rem 1.14286rem;\n}\n.bottom-sheet a {\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    font-size: 1.14286rem;\n    font-weight: 400;\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-sheet a {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-sheet a {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-sheet a:hover, .bottom-sheet a:hover .material-icons {\n      color: inherit;\n}\n.bottom-sheet .material-icons {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n    margin: 0 2.28571rem 0 0;\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-sheet .material-icons {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-sheet .material-icons {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-sheet ul li {\n    padding: 0;\n    height: 3.42857rem;\n}\n.bottom-sheet ul li.bottom-sheet-header {\n      height: 4rem;\n      line-height: 4rem;\n      margin-top: -1.14286rem;\n      font-size: 1.14286rem;\n      font-weight: 400;\n      color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n}\n.bottom-sheet ul li.divider {\n      height: 0.07143rem;\n      background: rgba(0, 0, 0, 0.12);\n      margin: 1.67857rem -1.14286rem 1.67857rem -1.14286rem;\n}\n.bottom-sheet-grid {\n  padding: 1.71429rem;\n}\n.bottom-sheet-grid .row {\n    -webkit-justify-content: space-between;\n    justify-content: space-between;\n    margin: 0 0 1.71429rem 0;\n}\n.bottom-sheet-grid .row:last-of-type {\n      margin: 0;\n}\n.bottom-sheet-grid .grid-item {\n    text-align: center;\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    font-size: 1.14286rem;\n    font-weight: 400;\n    display: block;\n}\n.bottom-sheet-grid .material-icons {\n    font-size: 3.42857rem;\n    height: 3.42857rem;\n    width: 100%;\n    margin: 0 0 0.57143rem 0;\n}\n.bottom-sheet-grid a {\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.bottom-sheet-grid a {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.bottom-sheet-grid a {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.bottom-sheet-grid a:hover .material-icons {\n    color: inherit;\n}\n.bottom-sheet-grid-header {\n    height: 4rem;\n    line-height: 4rem;\n    margin-top: -1.71429rem;\n    font-size: 1.14286rem;\n    font-weight: 400;\n    color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n}\n.bottom-sheet-grid .divider {\n    height: 0.07143rem;\n    background: rgba(0, 0, 0, 0.12);\n    margin: 1.67857rem -1.71429rem 1.67857rem -1.71429rem;\n}\n\n/**************************************\n * Buttons\n *\n * http://www.google.com/design/spec/components/buttons.html\n * http://www.google.com/design/spec/components/buttons-floating-action-button.html\n **************************************/\n.raised-button {\n  cursor: pointer;\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  text-decoration: none;\n  border: none;\n  outline: none;\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  vertical-align: middle;\n  -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  background: var(--main-color, #3F51B5);\n  color: #FFFFFF;\n  height: 2.57143rem;\n  line-height: 2.57143rem;\n  min-width: 6.28571rem;\n  padding: 0 1.14286rem;\n  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n.raised-button .material-icons {\n    width: 1rem;\n    height: 2.57143rem;\n    line-height: 2.57143rem;\n    vertical-align: middle;\n}\n.raised-button .material-icons.left {\n      margin-right: 1.14286rem;\n}\n.raised-button .material-icons.right {\n      margin-left: 1.14286rem;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.raised-button {\n      -webkit-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.raised-button {\n      -webkit-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.raised-button:active {\n    -moz-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.raised-button:active {\n        -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.raised-button:hover, .raised-button:hover .material-icons {\n    color: #FFFFFF;\n}\n.raised-button .material-icons {\n    color: #FFFFFF;\n}\n.raised-button-dense {\n    font-size: 0.92857rem;\n    height: 2.28571rem;\n    line-height: 2.28571rem;\n}\n.raised-button-dense .material-icons {\n      width: 2.28571rem;\n      height: 2.28571rem;\n      line-height: 2.28571rem;\n}\n.raised-button.disabled, .raised-button:disabled {\n    background: rgba(0, 0, 0, 0.12);\n    color: rgba(0, 0, 0, 0.26);\n}\n.raised-button.disabled:hover, .raised-button:disabled:hover {\n      background: rgba(0, 0, 0, 0.12);\n      color: rgba(0, 0, 0, 0.26);\n}\n.flat-button {\n  cursor: pointer;\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  text-decoration: none;\n  border: none;\n  outline: none;\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  vertical-align: middle;\n  background: none;\n  color: var(--main-color, #3F51B5);\n  height: 2.57143rem;\n  line-height: 2.57143rem;\n  min-width: 4.57143rem;\n  padding: 0 1.14286rem;\n}\n.flat-button .material-icons {\n    width: 1rem;\n    height: 2.57143rem;\n    line-height: 2.57143rem;\n    vertical-align: middle;\n}\n.flat-button .material-icons.left {\n      margin-right: 1.14286rem;\n}\n.flat-button .material-icons.right {\n      margin-left: 1.14286rem;\n}\n.flat-button:hover, .flat-button:hover .material-icons {\n    color: var(--main-color, #3F51B5);\n}\n.flat-button:active {\n    background: rgba(153, 153, 153, 0.4);\n}\n.flat-button .material-icons {\n    color: var(--main-color, #3F51B5);\n}\n.flat-button.disabled, .flat-button:disabled {\n    background: none;\n    color: rgba(0, 0, 0, 0.26);\n}\n.flat-button.disabled:hover, .flat-button:disabled:hover {\n      color: rgba(0, 0, 0, 0.26);\n}\n.flat-button.disabled .material-icons, .flat-button:disabled .material-icons {\n      color: rgba(0, 0, 0, 0.26);\n}\n.floating-button {\n  cursor: pointer;\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  -ms-border-radius: 50%;\n  -o-border-radius: 50%;\n  border-radius: 50%;\n  text-decoration: none;\n  border: none;\n  outline: none;\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  vertical-align: middle;\n  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  width: 4rem;\n  height: 4rem;\n  background: var(--secondary-color, #2196F3);\n  line-height: 4rem;\n  position: relative;\n}\n.floating-button .material-icons {\n    width: 1rem;\n    height: 2.57143rem;\n    line-height: 2.57143rem;\n    vertical-align: middle;\n}\n.floating-button .material-icons.left {\n      margin-right: 1.14286rem;\n}\n.floating-button .material-icons.right {\n      margin-left: 1.14286rem;\n}\n@media only screen and (min-width: 1281px) {\n.floating-button {\n      -moz-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.floating-button:hover {\n    -moz-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0.85714rem 1.21429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.35714rem 1.57143rem 0.28571rem rgba(0, 0, 0, 0.12) , 0rem 0.5rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n}\n.floating-button:hover .material-icons {\n      color: #FFFFFF;\n}\n.floating-button .material-icons {\n    width: 1.71429rem;\n    height: 1.71429rem;\n    color: #FFFFFF;\n    vertical-align: middle;\n}\n.floating-button-mini {\n    width: 2.85714rem;\n    height: 2.85714rem;\n    line-height: 2.85714rem;\n}\n.floating-button ul {\n    left: 0.6rem;\n    position: absolute;\n    visibility: hidden;\n    -webkit-opacity: 0;\n    opacity: 0;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n.floating-button ul.expanded {\n      visibility: visible;\n      -webkit-opacity: 1;\n      opacity: 1;\n}\n.floating-button ul.expanded li {\n        margin-top: 1.4rem;\n}\n.floating-button li {\n    margin-top: -2.8rem;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    width: 2.8rem;\n    height: 2.8rem;\n}\n.floating-button a {\n    display: block;\n    position: absolute;\n    line-height: 2.8rem;\n    width: 2.8rem;\n    height: 2.8rem;\n    margin-left: -1.16667rem;\n}\n.floating-button img {\n    width: 2.8rem;\n    height: 2.8rem;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n}\n\n/**************************************\n * Cards\n *\n * http://www.google.com/design/spec/components/cards.html#cards-usage\n **************************************/\n.card {\n  -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  width: 100%;\n  padding: 0;\n  position: relative;\n  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  background: #FFFFFF;\n}\n.card:hover {\n    -moz-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n}\n@media only screen and (min-width: 1281px) {\n.card:hover {\n        -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n        box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.card {\n      -webkit-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.card {\n      -webkit-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.card-actions {\n    padding: 0.57143rem;\n}\n.card-actions > * {\n      margin: 0 0.57143rem 0.28571rem 0;\n}\n.card-actions > *:last-of-type {\n        margin: 0 0 0.28571rem 0;\n}\n.card-primary {\n    padding-left: 1.14286rem;\n    padding-right: 1.14286rem;\n    padding-top: 1.71429rem;\n    padding-bottom: 1.71429rem;\n    font-size: 1.71429rem;\n}\n.card-primary-small {\n      font-size: 1rem;\n      padding-top: 1.14286rem;\n}\n.card-primary-additional {\n      padding-bottom: 1.14286rem;\n}\n.card-primary only screen and {\n      padding: 1.14286rem 1.71429rem;\n}\n.card-primary .subhead-1 {\n      font-size: 1rem;\n      color: rgba(0, 0, 0, 0.38);\n      font-weight: 400;\n}\n.card-supporting {\n    font-size: 1rem;\n    padding-top: 1.14286rem;\n    padding-left: 1.14286rem;\n    padding-right: 1.14286rem;\n    padding-bottom: 1.71429rem;\n}\n.card-supporting-additional {\n      padding-bottom: 1.14286rem;\n}\n@media only screen and (min-width: 1281px) {\n.card-supporting {\n        padding-left: 1.71429rem;\n        padding-right: 1.71429rem;\n}\n}\n.card img {\n    width: 100%;\n}\n.card img.card-top {\n      -webkit-border-top-left-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius-topleft: var(--border-size, 0.14286rem);\n      border-top-left-radius: var(--border-size, 0.14286rem);\n      -webkit-border-top-right-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius-topright: var(--border-size, 0.14286rem);\n      border-top-right-radius: var(--border-size, 0.14286rem);\n}\n.card img.card-background {\n      -webkit-border-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius: var(--border-size, 0.14286rem);\n      -ms-border-radius: var(--border-size, 0.14286rem);\n      -o-border-radius: var(--border-size, 0.14286rem);\n      border-radius: var(--border-size, 0.14286rem);\n      height: 100%;\n}\n.card img.card-avatar {\n      float: left;\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      margin: 1.14286rem;\n      width: 2.85714rem;\n      height: 2.85714rem;\n}\n.card .card-content {\n    -webkit-border-bottom-left-radius: var(--border-size, 0.14286rem);\n    -moz-border-radius-bottomleft: var(--border-size, 0.14286rem);\n    border-bottom-left-radius: var(--border-size, 0.14286rem);\n    -webkit-border-bottom-right-radius: var(--border-size, 0.14286rem);\n    -moz-border-radius-bottomright: var(--border-size, 0.14286rem);\n    border-bottom-right-radius: var(--border-size, 0.14286rem);\n    background: rgba(0, 0, 0, 0.54);\n    position: absolute;\n    bottom: 0;\n    width: 100%;\n}\n.card .card-content div {\n      color: #FFFFFF;\n}\n\n/**************************************\n * Chips\n *\n * http://www.google.com/design/spec/components/chips.html\n **************************************/\n.chip {\n  -webkit-border-radius: 2.28571rem;\n  -moz-border-radius: 2.28571rem;\n  -ms-border-radius: 2.28571rem;\n  -o-border-radius: 2.28571rem;\n  border-radius: 2.28571rem;\n  background: #EEEEEE;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  display: inline-block;\n  font-size: 0.92857rem;\n  font-weight: 400;\n  height: 2.28571rem;\n  line-height: 2.28571rem;\n  padding: 0 0.85714rem;\n}\n.chip-deletable .chip-delete {\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    background: rgba(0, 0, 0, 0.54);\n    color: #EEEEEE;\n    display: inline-block;\n    height: 1.07143rem;\n    margin: 0 -0.57143rem 0 0.28571rem;\n    line-height: 1.07143rem;\n    text-align: center;\n    vertical-align: middle;\n    width: 1.07143rem;\n    font-size: 0.92857rem;\n    cursor: pointer;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.chip-deletable .chip-delete {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.chip-deletable .chip-delete {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.chip-deletable:hover {\n    background: #757575;\n    color: #FFFFFF;\n}\n.chip-deletable:hover .chip-delete {\n      background: #FFFFFF;\n      color: #757575;\n}\n.chip-contact {\n    font-size: 1rem;\n    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.chip-contact {\n        -webkit-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: box-shadow 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.chip-contact {\n        -webkit-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.chip-contact img {\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      width: 2.28571rem;\n      height: 2.28571rem;\n      margin: 0 0.57143rem 0 -0.85714rem;\n}\n.chip-contact:hover {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n\n/**************************************\n * Tables\n *\n * http://www.google.com/design/spec/components/data-tables.html\n **************************************/\ntable {\n  border-collapse: collapse;\n  white-space: nowrap;\n  display: table;\n  width: 100%;\n}\ntable .numeric-col {\n    text-align: right;\n    padding-left: 4rem;\n    padding-right: 0;\n}\ntable .checkbox-col {\n    padding: 0 1.71429rem;\n}\ntable .checkbox-col .checkbox + label {\n      padding: 0;\n}\ntable.table-hover tbody tr {\n    -webkit-transition: background 0.2s ease-in-out;\n    -moz-transition: background 0.2s ease-in-out;\n    -o-transition: background 0.2s ease-in-out;\n    transition: background 0.2s ease-in-out;\n}\ntable.table-hover tbody tr:hover {\n      background: #EEEEEE;\n}\nthead th {\n  color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n  font-size: 0.85714rem;\n  font-weight: 500;\n  height: 4rem;\n  line-height: 4rem;\n}\nthead th:hover {\n    background: none;\n}\nthead th a, thead th .sorted {\n    color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n}\nthead th a .material-icons, thead th .sorted .material-icons {\n      color: var(--font-color-1, rgba(0, 0, 0, 0.54));\n}\nthead th a:hover, thead th .sorted:hover {\n      color: #000000;\n}\nthead th a:hover .material-icons, thead th .sorted:hover .material-icons {\n        color: #000000;\n}\ntd {\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  font-size: 0.92857rem;\n  font-weight: 400;\n  height: 3.42857rem;\n  line-height: 3.42857rem;\n}\ntd, th {\n  text-align: left;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  -ms-box-sizing: border-box;\n  -o-box-sizing: border-box;\n  box-sizing: border-box;\n  padding-right: 4rem;\n}\ntd:first-of-type, th:first-of-type {\n    padding-left: 1.71429rem;\n}\ntd:last-of-type, th:last-of-type {\n    padding-right: 1.71429rem;\n}\n.table-responsive {\n  overflow-x: scroll;\n}\n\n/**************************************\n * Dialogs\n *\n * http://www.google.com/design/spec/components/dialogs.html\n **************************************/\n.dialog {\n  -moz-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  background: var(--background, #FFFFFF);\n  visibility: hidden;\n  -webkit-opacity: 0;\n  opacity: 0;\n  position: fixed;\n  width: 100%;\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  z-index: 5;\n  top: 50%;\n  left: 50%;\n  max-width: calc(100% - ( 2 * 1.14286rem));\n  -webkit-transform: translateX(-50%) translateY(-50%);\n  -moz-transform: translateX(-50%) translateY(-50%);\n  -ms-transform: translateX(-50%) translateY(-50%);\n  -o-transform: translateX(-50%) translateY(-50%);\n  transform: translateX(-50%) translateY(-50%);\n  -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.dialog {\n      -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.dialog {\n      width: auto;\n      -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      max-width: calc(100% - (2 * 1.71429rem));\n}\n}\n.dialog-background {\n    width: 100%;\n    height: 100%;\n    background: rgba(0, 0, 0, 0.87);\n    top: 0;\n    left: 0;\n    position: fixed;\n    z-index: 4;\n    visibility: hidden;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.dialog-background {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.dialog-background {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.dialog.expanded {\n    visibility: visible;\n    -webkit-opacity: 1;\n    opacity: 1;\n}\n.dialog.expanded ~ .dialog-background {\n      visibility: visible;\n      -webkit-opacity: 0.3;\n      opacity: 0.3;\n}\n.dialog-content {\n    padding: 0 1.71429rem 1.71429rem 1.71429rem;\n    max-height: 50vh;\n    overflow: auto;\n}\n.dialog-title {\n    width: 100%;\n    font-size: 1.42857rem;\n    line-height: 2rem;\n    letter-spacing: 0.00357rem;\n    font-weight: 500;\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    text-transform: inherit;\n    padding: 1.71429rem 1.71429rem 1.42857rem 1.71429rem;\n}\n.dialog-actions {\n    width: 100%;\n    text-align: right;\n    min-height: 3.71429rem;\n    padding: 0.57143rem;\n}\n.dialog-actions * {\n      margin: 0 0 0 0.57143rem;\n      min-width: 4.57143rem;\n}\n\n/**************************************\n * Expansion panel\n *\n * https://material.google.com/components/expansion-panels.html\n **************************************/\n.expansion-panel {\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\n.expansion-panel-header {\n    height: 3.42857rem;\n}\n.expansion-panel-content {\n    max-height: 0;\n    visibility: hidden;\n    -webkit-opacity: 0;\n    opacity: 0;\n    -webkit-transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.expansion-panel-content {\n        -webkit-transition: max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.expansion-panel-content {\n        -webkit-transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.expansion-panel label {\n    font-weight: 400;\n    font-size: 1.07143rem;\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    margin: 0 1.14286rem 0 0;\n}\n.expansion-panel .expand-icon {\n    color: rgba(0, 0, 0, 0.38);\n    position: absolute;\n    right: 1.71429rem;\n    line-height: 3.42857rem;\n    cursor: pointer;\n    margin: 0 0 0 1.14286rem;\n    vertical-align: middle;\n}\n.expansion-panel .expand-icon .material-icons {\n      font-size: 1.71429rem;\n      width: 1.71429rem;\n      height: 1.71429rem;\n      cursor: pointer;\n      -webkit-transform: rotate(0deg);\n      -moz-transform: rotate(0deg);\n      -ms-transform: rotate(0deg);\n      -o-transform: rotate(0deg);\n      transform: rotate(0deg);\n      -webkit-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.expansion-panel .expand-icon .material-icons {\n          -webkit-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.expansion-panel .expand-icon .material-icons {\n          -webkit-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.expansion-panel li {\n    padding: 0 1.71429rem;\n    font-weight: 400;\n    color: rgba(0, 0, 0, 0.54);\n    font-size: 0.85714rem;\n    border-bottom: 0.07143rem solid rgba(0, 0, 0, 0.12);\n    position: relative;\n    background: var(--background, #FFFFFF);\n}\n.expansion-panel li.expanded {\n      margin: 1.14286rem 0;\n}\n.expansion-panel li.expanded .expand-icon .material-icons {\n        -webkit-transform: rotate(180deg);\n        -moz-transform: rotate(180deg);\n        -ms-transform: rotate(180deg);\n        -o-transform: rotate(180deg);\n        transform: rotate(180deg);\n}\n.expansion-panel li.expanded .expansion-panel-content {\n        max-height: 100%;\n        padding: 0 0 1.14286rem 0;\n        -webkit-opacity: 1;\n        opacity: 1;\n        visibility: visible;\n}\n.expansion-panel li:focus {\n      background: #EEEEEE;\n}\n.expansion-panel li:focus .expand-icon {\n        color: rgba(0, 0, 0, 0.54);\n}\n\n/**************************************\n * Grid lists\n *\n * https://material.google.com/components/grid-lists.html\n **************************************/\n.grid {\n  position: relative;\n}\n.grid img {\n    position: relative;\n}\n.grid-header, .grid-footer {\n    position: absolute;\n    left: 0;\n    width: 100%;\n    color: #FFFFFF;\n    padding: 1.14286rem;\n    background: rgba(0, 0, 0, 0.3);\n}\n.grid-header .material-icons, .grid-footer .material-icons {\n      color: #FFFFFF;\n}\n.grid-header {\n    top: 0;\n}\n.grid-footer {\n    bottom: 0;\n}\n.grid-single {\n    height: 3.42857rem;\n    font-size: 1.14286rem;\n}\n.grid-two {\n    height: 4.85714rem;\n}\n.grid-two .first {\n      max-width: 75%;\n}\n.grid-two .first-small {\n        font-size: 0.85714rem;\n}\n.grid-two .first-large {\n        font-size: 1.14286rem;\n}\n.grid-two .second {\n      max-width: 75%;\n      font-size: 1rem;\n}\n.grid .action {\n    max-width: 25%;\n}\n.grid .action .material-icons {\n      padding: 1.14286rem;\n      font-size: 1.14286rem;\n      cursor: pointer;\n}\n.grid .action .material-icons.left {\n        float: left;\n}\n.grid .action .material-icons.right {\n        float: right;\n}\n\n/**************************************\n * Menus\n *\n * https://material.io/guidelines/components/menus.html\n **************************************/\n.menu {\n  background: var(--background, #FFFFFF);\n  visibility: hidden;\n  font-size: 0.92857rem;\n  line-height: 1.42857rem;\n  letter-spacing: 0.00714rem;\n  font-weight: 400;\n  color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n  text-transform: inherit;\n  -webkit-opacity: 0;\n  opacity: 0;\n  position: absolute;\n  -moz-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.57143rem 0.71429rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1rem 0.21429rem rgba(0, 0, 0, 0.12) , 0rem 0.28571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: flex;\n  -webkit-flex-flow: column;\n  flex-flow: column;\n  -webkit-justify-content: flex-start;\n  justify-content: flex-start;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  -webkit-align-content: stretch;\n  align-content: stretch;\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  padding: 0.57143rem 0;\n  white-space: nowrap;\n  text-align: left;\n  max-height: 50vh;\n  overflow: auto;\n  z-index: 4;\n  -webkit-transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: max-width 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\n.menu {\n      -moz-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0.42857rem 0.71429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.07143rem 1.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.21429rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.menu {\n      -webkit-transition: max-width 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: max-width 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: max-width 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: max-width 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.menu {\n      -webkit-transition: max-width 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: max-width 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: max-width 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: max-width 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.menu a {\n    display: block;\n    height: 3.42857rem;\n    font-size: 0.92857rem;\n    line-height: 1.42857rem;\n    letter-spacing: 0.00714rem;\n    font-weight: 400;\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    text-transform: inherit;\n    color: initial;\n    padding: 1.07143rem 1.14286rem 1.42857rem 1.14286rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.menu a {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.menu a {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.menu a:hover {\n      background: #EEEEEE;\n      color: initial;\n}\n.menu a:hover .material-icons {\n        color: initial;\n}\n.menu.expanded {\n    visibility: visible;\n    -webkit-opacity: 1;\n    opacity: 1;\n}\n.menu-cascading {\n    padding: 1.14286rem 0;\n}\n.menu-cascading a {\n      font-size: 1.07143rem;\n      line-height: 1.42857rem;\n      letter-spacing: 0.00714rem;\n      font-weight: 400;\n      color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n      text-transform: inherit;\n      height: 2.28571rem;\n      line-height: 2.28571rem;\n      padding: 0 1.71429rem 1.42857rem 1.71429rem;\n}\n.menu-sub {\n    -moz-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0.64286rem 0.85714rem 0.07143rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 1.14286rem 0.14286rem rgba(0, 0, 0, 0.12) , 0rem 0.35714rem 0.42857rem 0rem rgba(0, 0, 0, 0.2);\n}\nselect.select {\n  display: none;\n}\ndiv.select {\n  padding: 1.14286rem 0 0.57143rem 0;\n  border-bottom: var(--border-size, 0.14286rem) solid rgba(0, 0, 0, 0.38);\n  position: relative;\n  margin: 0 0 0.57143rem 0;\n}\ndiv.select .menu {\n    top: 0;\n    width: 100%;\n}\ndiv.select .active {\n    color: var(--main-color, #3F51B5);\n}\n\n/**************************************\n * Navigation drawer\n *\n * https://material.google.com/patterns/navigation-drawer.html\n **************************************/\n.drawer {\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 20rem;\n  height: 100%;\n  background: #FFFFFF;\n  bottom: 0;\n  overflow-x: hidden;\n  max-width: calc(100% - 4rem);\n  /*&-persistent-mini {\n\t\ttop: $appbar-small-height;\n\n\t\t// Add extra width for scrollbar TODO somehow fix it\n\t\twidth: calc( (1.14286rem * 2) + 1.71429rem + 0.21429rem);\n\n\t\t@media only screen and (min-width: 960px + 1px) {\n\t\t\twidth: calc( (1.14286rem * 2) + 1.71429rem + 0.71429rem);\n\t\t}\n\n\t\t@media only screen and (min-width: 960px + 1px) and (max-width: 1280px) {\n\t\t\ttop: $appbar-medium-height;\n\t\t}\n\n\t\t@media only screen and (min-width: 1280px + 1px) {\n\t\t\ttop: $appbar-large-height;\n\t\t}\n\n\t\tli:first-of-type {\n\t\t\tmargin: rem-calc(8px) 0 0 0;\n\t\t}\n\n\t\t.divider, .arrow, .drawer-profile-name, .drawer-profile-dropdown, .text {\n\t\t\tdisplay: none;\n\t\t}\n\n\t\t.drawer-header {\n\t\t\theight: rem-calc(48px);\n\t\t\tline-height: rem-calc(48px);\n\n\t\t\t.drawer-profile-img {\n\t\t\t\t@include square($drawer-icon-size);\n\t\t\t\tmargin: 0 calc(5.14286rem - 1.71429rem - 1.14286rem) 0 0;\n\t\t\t\t@include border-radius(50%);\n\t\t\t\tborder: $drawer-border;\n\t\t\t\ttop: 50%;\n\t\t\t\tposition: inherit;\n\t\t\t\t@include transform(translate(0, -50%));\n\t\t\t}\n\t\t}\n\n\t\t&.expanded {\n\t\t\twidth: 100%;\n\t\t\ttop: 0;\n\t\t\tborder-right: $drawer-border;\n\t\t\tz-index: 3;\n\n\t\t\t.drawer-header {\n\t\t\t\tposition: relative;\n\t\t\t\theight: $appbar-small-height;\n\t\t\t\tline-height: $appbar-small-height;\n\t\t\t\tmargin: 0 0 rem-calc(8px) 0;\n\t\t\t\tborder-bottom: $drawer-border;\n\n\t\t\t\t@media only screen and (min-width: 960px + 1px) and (max-width: 1280px) {\n\t\t\t\t\theight: $appbar-medium-height;\n\t\t\t\t\tline-height: $appbar-medium-height;\n\t\t\t\t}\n\n\t\t\t\t@media only screen and (min-width: 1280px + 1px) {\n\t\t\t\t\theight: $appbar-large-height;\n\t\t\t\t\tline-height: $appbar-large-height;\n\t\t\t\t}\n\n\t\t\t\t&:hover {\n\t\t\t\t\tbackground: none;\n\t\t\t\t}\n\n\t\t\t\t> * {\n\t\t\t\t\tfloat: left;\n\t\t\t\t}\n\t\t   }\n\t   }\n\t}*/\n}\n.drawer-permanent-full-height, .drawer-permanent-clipped, .drawer-permanent-floating, .drawer-persistent, .drawer-temporary {\n    margin: 0 0 0 -102%;\n    -webkit-transition: margin 300ms cubic-bezier(0, 0, 0.2, 1);\n    -moz-transition: margin 300ms cubic-bezier(0, 0, 0.2, 1);\n    -o-transition: margin 300ms cubic-bezier(0, 0, 0.2, 1);\n    transition: margin 300ms cubic-bezier(0, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) {\n.drawer-permanent-full-height, .drawer-permanent-clipped, .drawer-permanent-floating, .drawer-persistent, .drawer-temporary {\n        margin: 0;\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer-permanent-full-height, .drawer-permanent-clipped, .drawer-permanent-floating, .drawer-persistent, .drawer-temporary {\n        -webkit-transition: margin 390ms cubic-bezier(0, 0, 0.2, 1);\n        -moz-transition: margin 390ms cubic-bezier(0, 0, 0.2, 1);\n        -o-transition: margin 390ms cubic-bezier(0, 0, 0.2, 1);\n        transition: margin 390ms cubic-bezier(0, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer-permanent-full-height, .drawer-permanent-clipped, .drawer-permanent-floating, .drawer-persistent, .drawer-temporary {\n        -webkit-transition: margin 200ms cubic-bezier(0, 0, 0.2, 1);\n        -moz-transition: margin 200ms cubic-bezier(0, 0, 0.2, 1);\n        -o-transition: margin 200ms cubic-bezier(0, 0, 0.2, 1);\n        transition: margin 200ms cubic-bezier(0, 0, 0.2, 1);\n}\n}\n.drawer.expanded {\n    margin: 0;\n    -webkit-transition: margin 300ms cubic-bezier(0.4, 0, 0.6, 1);\n    -moz-transition: margin 300ms cubic-bezier(0.4, 0, 0.6, 1);\n    -o-transition: margin 300ms cubic-bezier(0.4, 0, 0.6, 1);\n    transition: margin 300ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer.expanded {\n        -webkit-transition: margin 390ms cubic-bezier(0.4, 0, 0.6, 1);\n        -moz-transition: margin 390ms cubic-bezier(0.4, 0, 0.6, 1);\n        -o-transition: margin 390ms cubic-bezier(0.4, 0, 0.6, 1);\n        transition: margin 390ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer.expanded {\n        -webkit-transition: margin 200ms cubic-bezier(0.4, 0, 0.6, 1);\n        -moz-transition: margin 200ms cubic-bezier(0.4, 0, 0.6, 1);\n        -o-transition: margin 200ms cubic-bezier(0.4, 0, 0.6, 1);\n        transition: margin 200ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n}\n@media only screen and (max-width: 960px) {\n.drawer.expanded ~ .drawer-background {\n        visibility: visible;\n}\n}\n.drawer-background {\n    background: rgba(0, 0, 0, 0.2);\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    position: fixed;\n    z-index: 2;\n    visibility: hidden;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer-background {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer-background {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.drawer .drawer-header {\n    position: relative;\n}\n.drawer .drawer-header:hover {\n      background: none;\n}\n.drawer-permanent-full-height {\n    top: 0;\n    border-right: 0.07143rem solid rgba(0, 0, 0, 0.12);\n    z-index: 3;\n}\n.drawer-permanent-full-height .drawer-header {\n      padding: 1.14286rem 1.14286rem 0.57143rem 1.14286rem;\n      border-bottom: 0.07143rem solid rgba(0, 0, 0, 0.12);\n      height: 4rem;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.drawer-permanent-full-height .drawer-header {\n          height: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.drawer-permanent-full-height .drawer-header {\n          height: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.drawer-permanent-full-height .drawer-header {\n          height: 4.57143rem;\n}\n}\n.drawer-permanent-clipped {\n    top: 4rem;\n    z-index: 1;\n    border-right: 0.07143rem solid rgba(0, 0, 0, 0.12);\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.drawer-permanent-clipped {\n        top: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.drawer-permanent-clipped {\n        top: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.drawer-permanent-clipped {\n        top: 4.57143rem;\n}\n}\n.drawer-permanent-clipped li:first-of-type {\n      margin: 0.57143rem 0 0 0;\n}\n.drawer-permanent-floating {\n    top: 4rem;\n    z-index: 1;\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.drawer-permanent-floating {\n        top: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.drawer-permanent-floating {\n        top: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.drawer-permanent-floating {\n        top: 4.57143rem;\n}\n}\n.drawer-permanent-floating li:first-of-type {\n      margin: 0.57143rem 0 0 0;\n}\n.drawer-persistent {\n    top: 0;\n    border-right: 0.07143rem solid rgba(0, 0, 0, 0.12);\n    z-index: 3;\n}\n.drawer-persistent .menu {\n      top: 1.14286rem;\n}\n.drawer-persistent .drawer-header {\n      height: 4rem;\n      line-height: 4rem;\n      margin: 0 0 0.57143rem 0;\n      border-bottom: 0.07143rem solid rgba(0, 0, 0, 0.12);\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.drawer-persistent .drawer-header {\n          height: 3.42857rem;\n          line-height: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.drawer-persistent .drawer-header {\n          height: 4rem;\n          line-height: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.drawer-persistent .drawer-header {\n          height: 4.57143rem;\n          line-height: 4.57143rem;\n}\n}\n.drawer-persistent .drawer-header > * {\n        float: left;\n}\n.drawer-persistent .drawer-profile-img {\n      width: 1.71429rem;\n      height: 1.71429rem;\n      margin: 0 2.28571rem 0 1.14286rem;\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      border: 0.07143rem solid rgba(0, 0, 0, 0.12);\n      top: 50%;\n      position: inherit;\n      -webkit-transform: translate(0, -50%);\n      -moz-transform: translate(0, -50%);\n      -ms-transform: translate(0, -50%);\n      -o-transform: translate(0, -50%);\n      transform: translate(0, -50%);\n}\n.drawer-persistent .drawer-profile-name {\n      color: inherit;\n}\n.drawer-temporary {\n    top: 0;\n    z-index: 3;\n    -moz-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 1.14286rem 1.71429rem 0.14286rem rgba(0, 0, 0, 0.14) , 0rem 0.42857rem 2.14286rem 0.35714rem rgba(0, 0, 0, 0.12) , 0rem 0.57143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n}\n.drawer-temporary .menu {\n      top: 6rem;\n}\n.drawer-temporary .drawer-header {\n      padding: 0 0 0.57143rem 0;\n      margin: 0 0 0.57143rem 0;\n      height: 8.57143rem;\n}\n.drawer-temporary .drawer-profile-background {\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 8.57143rem;\n}\n.drawer-temporary .scrim {\n      background: -webkit-linear-gradient(to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%);\n      background: -moz-linear-gradient(to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%);\n      background: -o-linear-gradient(to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%);\n      background: linear-gradient(to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%);\n      bottom: 0.57143rem;\n      content: '';\n      left: 0;\n      position: absolute;\n      right: 0;\n      top: 0;\n      margin: 0 0 -0.57143rem 0;\n}\n.drawer-temporary .drawer-profile-background, .drawer-temporary .drawer-profile-img, .drawer-temporary .drawer-profile-name, .drawer-temporary .drawer-profile-email, .drawer-temporary .drawer-profile-more {\n      position: absolute;\n}\n.drawer-temporary .drawer-profile-img {\n      top: 1.14286rem;\n      left: 1.14286rem;\n      width: 2.85714rem;\n      height: 2.85714rem;\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n}\n.drawer-temporary .drawer-profile-name, .drawer-temporary .drawer-profile-email {\n      line-height: 2rem;\n      left: 1.14286rem;\n      height: 2rem;\n      color: #FFFFFF;\n}\n.drawer-temporary .drawer-profile-name {\n      top: 4rem;\n      font-size: 1rem;\n      font-weight: 500;\n      right: 0;\n}\n.drawer-temporary .drawer-profile-email {\n      top: 6rem;\n      font-size: 1rem;\n      font-weight: 400;\n      right: 5.14286rem;\n}\n.drawer-temporary .drawer-profile-more {\n      height: 2rem;\n      line-height: 4rem;\n      right: 1.14286rem;\n      top: 6rem;\n      text-align: right;\n      position: relative;\n}\n.drawer-temporary .drawer-profile-more .material-icons {\n        margin: -1rem -1.14286rem 0 0;\n        color: #FFFFFF;\n}\n.drawer-temporary.expanded {\n      margin: 0;\n}\n.drawer a {\n    cursor: pointer;\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    font-weight: 500;\n    width: 100%;\n    display: block;\n    height: 3.42857rem;\n    font-size: 1rem;\n    line-height: 3.42857rem;\n    position: relative;\n    padding: 0 1.14286rem;\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer a {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer a {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.drawer a:hover, .drawer a.active {\n      color: #3F51B5;\n}\n.drawer a:hover .material-icons, .drawer a.active .material-icons {\n        color: #3F51B5;\n}\n.drawer a:hover .arrow, .drawer a.active .arrow {\n        color: initial;\n}\n.drawer a.no-background {\n      background: transparent;\n}\n.drawer a.no-background:hover {\n        background: transparent;\n}\n.drawer .subheader {\n    color: rgba(0, 0, 0, 0.54);\n    font-size: 1rem;\n    font-weight: 500;\n    margin: 0 1.14286rem;\n    height: 3.42857rem;\n    line-height: 3.42857rem;\n}\n.drawer .dropdown {\n    visibility: hidden;\n    -webkit-opacity: 0;\n    opacity: 0;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer .dropdown {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer .dropdown {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.drawer .dropdown a {\n      font-weight: 400;\n      padding: 0 0 0 2.28571rem;\n}\n.drawer .dropdown.expanded {\n      visibility: visible;\n      -webkit-opacity: 1;\n      opacity: 1;\n}\n.drawer .material-icons {\n    width: 1.71429rem;\n    height: 1.71429rem;\n    font-size: 1.71429rem;\n    vertical-align: middle;\n    color: rgba(0, 0, 0, 0.54);\n    margin: 0 2.28571rem 0 0;\n    -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer .material-icons {\n        -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer .material-icons {\n        -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.drawer .drawer-dropdown.expanded .arrow {\n    -webkit-transform: rotate(180deg);\n    -moz-transform: rotate(180deg);\n    -ms-transform: rotate(180deg);\n    -o-transform: rotate(180deg);\n    transform: rotate(180deg);\n}\n.drawer .arrow {\n    position: absolute;\n    right: 1.14286rem;\n    top: 1.14286rem;\n    margin: 0;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.drawer .arrow {\n        top: 0.85714rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.drawer .arrow {\n        top: 1.14286rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.drawer .arrow {\n        top: 1.42857rem;\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.drawer .arrow {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.drawer .arrow {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.drawer .divider {\n    margin: 0.57143rem 0;\n    height: 0.07143rem;\n    background: rgba(0, 0, 0, 0.12);\n}\n.drawer .menu {\n    position: fixed;\n    z-index: 4;\n    left: 0.28571rem;\n}\n\n/**************************************\n * Lists\n *\n * https://material.google.com/components/lists.html#\n **************************************/\nol, ul {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\nol li, ol a, ul li, ul a {\n    color: var(--font-color-2, rgba(0, 0, 0, 0.87));\n    font-size: 1rem;\n    font-weight: 400;\n    height: auto;\n    line-height: 3.42857rem;\n    padding: 0 1.14286rem;\n}\nol a, ul a {\n    height: 3.42857rem;\n}\n\n/**************************************\n * Notifications\n *\n *  https://material.google.com/patterns/notifications.html\n **************************************/\n.notification {\n  -moz-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.21429rem 0.21429rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.57143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-border-radius: 0.14286rem;\n  -moz-border-radius: 0.14286rem;\n  -ms-border-radius: 0.14286rem;\n  -o-border-radius: 0.14286rem;\n  border-radius: 0.14286rem;\n  background: var(--background, #FFFFFF);\n  float: left;\n  max-width: 100%;\n  position: relative;\n  width: auto;\n}\n@media only screen and (min-width: 1281px) {\n.notification {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n.notification-header {\n    padding: 0.57143rem 0.57143rem 0 0.57143rem;\n    width: 100%;\n}\n.notification-header > div {\n      display: inline-block;\n}\n.notification-header .separator:after {\n      color: rgba(0, 0, 0, 0.54);\n      content: '\\25CF';\n      padding: 0.35714rem;\n}\n.notification-header-app-icon .material-icons {\n      font-size: 1rem;\n      height: auto;\n      width: 1.28571rem;\n}\n.notification-header-text, .notification-header-timestamp {\n      color: rgba(0, 0, 0, 0.54);\n}\n.notification-header-expand .material-icons {\n      font-size: 1rem;\n      width: 1rem;\n      height: 1rem;\n      cursor: pointer;\n      -webkit-transform: rotate(0deg);\n      -moz-transform: rotate(0deg);\n      -ms-transform: rotate(0deg);\n      -o-transform: rotate(0deg);\n      transform: rotate(0deg);\n      -webkit-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification-header-expand .material-icons {\n          -webkit-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: transform 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification-header-expand .material-icons {\n          -webkit-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification-content {\n    padding: 0.35714rem 0.57143rem 0.71429rem 0.57143rem;\n    position: relative;\n}\n.notification-content-title, .notification-content .subject {\n      color: rgba(0, 0, 0, 0.87);\n      font-weight: 500;\n}\n.notification-content-text {\n      color: rgba(0, 0, 0, 0.54);\n}\n.notification-actions {\n    background: transparent;\n    -webkit-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) , background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    max-height: 0;\n    -webkit-opacity: 0;\n    opacity: 0;\n    visibility: hidden;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification-actions {\n        -webkit-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 390ms cubic-bezier(0.4, 0, 0.2, 1) , background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification-actions {\n        -webkit-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) , max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) , background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification-actions > * {\n      display: inline-block;\n      margin: 0 !important;\n      visibility: hidden;\n      -webkit-opacity: 0;\n      opacity: 0;\n      -webkit-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification-actions > * {\n          -webkit-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification-actions > * {\n          -webkit-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) , opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.standard .notification-content > div {\n    width: 75%;\n}\n.notification.standard img {\n    width: 2.85714rem;\n    height: 2.85714rem;\n    max-width: 25%;\n    position: absolute;\n    right: 0.57143rem;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    top: 0.35714rem;\n}\n.notification.big-text .notification-content-text {\n    max-height: 0;\n    -webkit-opacity: 0;\n    opacity: 0;\n    visibility: hidden;\n}\n.notification.big-text img {\n    width: 2.85714rem;\n    height: 2.85714rem;\n    position: absolute;\n    right: 0.57143rem;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    top: 0.35714rem;\n}\n.notification.big-picture .notification-content {\n    position: relative;\n}\n.notification.big-picture .notification-content-text img {\n      max-width: 100%;\n      visibility: hidden;\n      -webkit-opacity: 0;\n      opacity: 0;\n      width: 0;\n      -webkit-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n      -moz-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n      -o-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms , visibility 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.big-picture .notification-content-text img {\n          -webkit-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n          -moz-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n          -o-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n          transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms , visibility 390ms cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.big-picture .notification-content-text img {\n          -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n          -moz-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n          -o-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n          transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms , visibility 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.notification.big-picture .notification-content > img {\n      width: 2.85714rem;\n      height: 2.85714rem;\n      position: absolute;\n      right: 0.57143rem;\n      top: 0.35714rem;\n      -webkit-opacity: 1;\n      opacity: 1;\n      -webkit-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.big-picture .notification-content > img {\n          -webkit-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: opacity 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.big-picture .notification-content > img {\n          -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.progress .notification-content-title, .notification.progress .notification-content-text {\n    display: inline-block;\n    width: 50%;\n}\n.notification.progress .notification-content-text {\n    float: right;\n    text-align: right;\n}\n.notification.media {\n    width: 28.57143rem;\n}\n.notification.media .notification-content {\n      -webkit-transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.media .notification-content {\n          -webkit-transition: height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: height 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.media .notification-content {\n          -webkit-transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.media .actions {\n      left: auto;\n      position: absolute;\n      right: 3.42857rem;\n      text-align: right;\n      top: 0.35714rem;\n      width: calc(2.5rem * 4);\n      -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.media .actions {\n          -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.media .actions {\n          -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.media .actions .material-icons {\n        width: 2.5rem;\n        height: 2.5rem;\n        color: rgba(0, 0, 0, 0.54);\n        font-size: 2.5rem;\n        line-height: calc((1.42857rem * 2));\n}\n.notification.media .actions .material-icons:first-of-type, .notification.media .actions .material-icons:last-of-type {\n          visibility: hidden;\n          -webkit-opacity: 0;\n          opacity: 0;\n          width: 0;\n          -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.media .actions .material-icons:first-of-type, .notification.media .actions .material-icons:last-of-type {\n              -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n              -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n              -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n              transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.media .actions .material-icons:first-of-type, .notification.media .actions .material-icons:last-of-type {\n              -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n              -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n              -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n              transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.media img {\n      width: 2.85714rem;\n      height: 2.85714rem;\n      position: absolute;\n      right: 0.57143rem;\n      top: 0.35714rem;\n      -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.notification.media img {\n          -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.notification.media img {\n          -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.notification.expanded .notification-actions {\n    background: #EEEEEE;\n    -webkit-opacity: 1;\n    opacity: 1;\n    max-height: 142.85714rem;\n    visibility: visible;\n}\n.notification.expanded .notification-actions > * {\n      visibility: visible;\n      -webkit-opacity: 1;\n      opacity: 1;\n}\n.notification.expanded .notification-header-expand .material-icons {\n    -webkit-transform: rotate(180deg);\n    -moz-transform: rotate(180deg);\n    -ms-transform: rotate(180deg);\n    -o-transform: rotate(180deg);\n    transform: rotate(180deg);\n}\n.notification.expanded.big-text .notification-content-text {\n    max-height: 142.85714rem;\n    -webkit-opacity: 1;\n    opacity: 1;\n    visibility: visible;\n}\n.notification.expanded.big-picture .notification-content-text img {\n    visibility: visible;\n    -webkit-opacity: 1;\n    opacity: 1;\n    width: 100%;\n}\n.notification.expanded.big-picture .notification-content > img {\n    -webkit-opacity: 0;\n    opacity: 0;\n}\n.notification.expanded.media .notification-content {\n    height: calc((1.42857rem * 2) + 2.5rem + 0.35714rem + 0.71429rem);\n}\n.notification.expanded.media .notification-content .actions {\n      left: 0.57143rem;\n      text-align: left;\n      right: auto;\n      top: calc(1.42857rem * 2);\n      width: calc(2.5rem * 6);\n}\n.notification.expanded.media .notification-content .actions .material-icons:first-of-type, .notification.expanded.media .notification-content .actions :last-of-type {\n        visibility: visible;\n        width: 2.5rem;\n        height: 2.5rem;\n        -webkit-opacity: 1;\n        opacity: 1;\n}\n.notification.expanded.media .notification-content img {\n      width: calc((1.42857rem * 2) + 2.5rem);\n      height: calc((1.42857rem * 2) + 2.5rem);\n}\n\n/**************************************\n * Pickers\n *\n * https://material.google.com/components/pickers.html\n***************************************/\n.picker {\n  -moz-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 1.71429rem 2.71429rem 0.21429rem rgba(0, 0, 0, 0.14) , 0rem 0.64286rem 3.28571rem 0.57143rem rgba(0, 0, 0, 0.12) , 0rem 0.78571rem 1.07143rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-border-radius: var(--border-size, 0.14286rem);\n  -moz-border-radius: var(--border-size, 0.14286rem);\n  -ms-border-radius: var(--border-size, 0.14286rem);\n  -o-border-radius: var(--border-size, 0.14286rem);\n  border-radius: var(--border-size, 0.14286rem);\n  background: var(--background, #FFFFFF);\n  width: 100%;\n}\n.picker-titlebar {\n    -webkit-border-top-left-radius: var(--border-size, 0.14286rem);\n    -moz-border-radius-topleft: var(--border-size, 0.14286rem);\n    border-top-left-radius: var(--border-size, 0.14286rem);\n    -webkit-border-top-right-radius: var(--border-size, 0.14286rem);\n    -moz-border-radius-topright: var(--border-size, 0.14286rem);\n    border-top-right-radius: var(--border-size, 0.14286rem);\n    background: var(--main-color, #3F51B5);\n    color: rgba(255, 255, 255, 0.54);\n    padding: 1.71429rem;\n}\n.picker-titlebar-year {\n      font-size: 1.14286rem;\n      line-height: 1.42857rem;\n}\n.picker-titlebar-date {\n      font-size: 1.71429rem;\n      line-height: 2.14286rem;\n}\n.picker .active {\n    color: #FFFFFF;\n}\n\n/**************************************\n * Progress & activity\n *\n * http://www.google.com/design/spec/components/progress-activity.html\n **************************************/\n.determinate, .indeterminate, .buffer {\n  width: 100%;\n  height: 0.35714rem;\n  position: relative;\n}\n.determinate {\n  background: rgba(63, 81, 181, 0.4);\n}\n.progressbar {\n  background: var(--main-color, #3F51B5);\n  -webkit-transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  bottom: 0;\n  position: absolute;\n  top: 0;\n  width: 0%;\n}\n.indeterminate {\n  background: rgba(63, 81, 181, 0.4);\n  overflow: hidden;\n}\n.indeterminate .progressbar {\n    width: 60%;\n    -webkit-animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n    -moz-animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n    -ms-animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n    -o-animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n    animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n}\n@-webkit-keyframes indeterminate {\n0% {\n    left: 0;\n    width: 0%;\n}\n25% {\n    width: 60%;\n}\n50% {\n    width: 60%;\n}\n75% {\n    left: 75%;\n    width: 60%;\n}\n100% {\n    left: 100%;\n    width: 0%;\n}\n}\n@-moz-keyframes indeterminate {\n0% {\n    left: 0;\n    width: 0%;\n}\n25% {\n    width: 60%;\n}\n50% {\n    width: 60%;\n}\n75% {\n    left: 75%;\n    width: 60%;\n}\n100% {\n    left: 100%;\n    width: 0%;\n}\n}\n@-o-keyframes indeterminate {\n0% {\n    left: 0;\n    width: 0%;\n}\n25% {\n    width: 60%;\n}\n50% {\n    width: 60%;\n}\n75% {\n    left: 75%;\n    width: 60%;\n}\n100% {\n    left: 100%;\n    width: 0%;\n}\n}\n@keyframes indeterminate {\n0% {\n    left: 0;\n    width: 0%;\n}\n25% {\n    width: 60%;\n}\n50% {\n    width: 60%;\n}\n75% {\n    left: 75%;\n    width: 60%;\n}\n100% {\n    left: 100%;\n    width: 0%;\n}\n}\n.buffer {\n  overflow: hidden;\n}\n.buffer > div {\n    display: inline-block;\n}\n.buffer .buffer-progress {\n    background: rgba(63, 81, 181, 0.4);\n    bottom: 0;\n    position: absolute;\n    top: 0;\n}\n.buffer .buffering {\n    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), linear-gradient(to right, #3F51B5, #3F51B5);\n    bottom: 0;\n    position: absolute;\n    -webkit-mask: url(\"data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTBweCIgdmlld1BvcnQ9IjAgMCAxMiA0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGVsbGlwc2UgY3g9IjIiIGN5PSIyIiByeD0iMiIgcnk9IjIiPjwvZWxsaXBzZT48ZWxsaXBzZSBjeD0iMTQiIGN5PSIyIiByeD0iMiIgcnk9IjIiIGNsYXNzPSJsb2FkZXIiPjwvZWxsaXBzZT48L3N2Zz4=\");\n    mask: url(\"data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTBweCIgdmlld1BvcnQ9IjAgMCAxMiA0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGVsbGlwc2UgY3g9IjIiIGN5PSIyIiByeD0iMiIgcnk9IjIiPjwvZWxsaXBzZT48ZWxsaXBzZSBjeD0iMTQiIGN5PSIyIiByeD0iMiIgcnk9IjIiIGNsYXNzPSJsb2FkZXIiPjwvZWxsaXBzZT48L3N2Zz4=\");\n    top: 0;\n    -webkit-animation: buffer 1.5s linear infinite;\n    -moz-animation: buffer 1.5s linear infinite;\n    -ms-animation: buffer 1.5s linear infinite;\n    -o-animation: buffer 1.5s linear infinite;\n    animation: buffer 1.5s linear infinite;\n}\n@-webkit-keyframes buffer {\n0% {\n    width: 200%;\n    left: 100%;\n}\n100% {\n    left: auto;\n}\n}\n@-moz-keyframes buffer {\n0% {\n    width: 200%;\n    left: 100%;\n}\n100% {\n    left: auto;\n}\n}\n@-o-keyframes buffer {\n0% {\n    width: 200%;\n    left: 100%;\n}\n100% {\n    left: auto;\n}\n}\n@keyframes buffer {\n0% {\n    width: 200%;\n    left: 100%;\n}\n100% {\n    left: auto;\n}\n}\n.circular {\n  position: relative;\n  margin: 0 auto;\n  width: 3.57143rem;\n}\n.circular:before {\n    content: '';\n    display: block;\n    padding-top: 100%;\n}\n.circular svg {\n    -webkit-animation: rotate 2s linear infinite;\n    -moz-animation: rotate 2s linear infinite;\n    -ms-animation: rotate 2s linear infinite;\n    -o-animation: rotate 2s linear infinite;\n    animation: rotate 2s linear infinite;\n    -webkit-transform-origin: center center;\n    -moz-transform-origin: center center;\n    -ms-transform-origin: center center;\n    -o-transform-origin: center center;\n    height: 100%;\n    width: 100%;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    margin: auto;\n}\n.circular circle {\n    -webkit-animation: dash 1.5s ease-in-out infinite , color 6s ease-in-out infinite;\n    -moz-animation: dash 1.5s ease-in-out infinite , color 6s ease-in-out infinite;\n    -ms-animation: dash 1.5s ease-in-out infinite , color 6s ease-in-out infinite;\n    -o-animation: dash 1.5s ease-in-out infinite , color 6s ease-in-out infinite;\n    animation: dash 1.5s ease-in-out infinite , color 6s ease-in-out infinite;\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n    stroke-width: 0.35714rem;\n    r: 20;\n}\n@-webkit-keyframes rotate {\n100% {\n    transform: rotate(360deg);\n}\n}\n@-moz-keyframes rotate {\n100% {\n    transform: rotate(360deg);\n}\n}\n@-o-keyframes rotate {\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes rotate {\n100% {\n    transform: rotate(360deg);\n}\n}\n@-webkit-keyframes dash {\n0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n}\n50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -2.5rem;\n}\n100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -8.85714rem;\n}\n}\n@-moz-keyframes dash {\n0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n}\n50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -2.5rem;\n}\n100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -8.85714rem;\n}\n}\n@-o-keyframes dash {\n0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n}\n50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -2.5rem;\n}\n100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -8.85714rem;\n}\n}\n@keyframes dash {\n0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n}\n50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -2.5rem;\n}\n100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -8.85714rem;\n}\n}\n@-webkit-keyframes color {\n100%,\n  0% {\n    stroke: #F44336;\n}\n40% {\n    stroke: #4CAF50;\n}\n66% {\n    stroke: #3F51B5;\n}\n80%,\n  90% {\n    stroke: #FF9800;\n}\n}\n@-moz-keyframes color {\n100%,\n  0% {\n    stroke: #F44336;\n}\n40% {\n    stroke: #4CAF50;\n}\n66% {\n    stroke: #3F51B5;\n}\n80%,\n  90% {\n    stroke: #FF9800;\n}\n}\n@-o-keyframes color {\n100%,\n  0% {\n    stroke: #F44336;\n}\n40% {\n    stroke: #4CAF50;\n}\n66% {\n    stroke: #3F51B5;\n}\n80%,\n  90% {\n    stroke: #FF9800;\n}\n}\n@keyframes color {\n100%,\n  0% {\n    stroke: #F44336;\n}\n40% {\n    stroke: #4CAF50;\n}\n66% {\n    stroke: #3F51B5;\n}\n80%,\n  90% {\n    stroke: #FF9800;\n}\n}\n\n/**************************************\n * Selection controls\n *\n * http://www.google.com/design/spec/components/selection-controls.html\n **************************************/\n.checkbox, .radio {\n  -webkit-opacity: 0;\n  opacity: 0;\n  left: -102%;\n  position: absolute;\n}\n.checkbox + label, .radio + label {\n    padding: 0 0.35714rem 0 0.71429rem;\n}\n.checkbox + label:before, .radio + label:before {\n      content: '';\n      display: inline-block;\n      background: transparent;\n      border: 0.14286rem solid rgba(0, 0, 0, 0.54);\n      width: 0.92857rem;\n      height: 0.92857rem;\n      font-family: 'Material Icons';\n      position: relative;\n      vertical-align: middle;\n      left: 0;\n      line-height: 0.92857rem;\n}\n.checkbox {\n  /*@media only screen and (max-width: 1280px) {\n\t\t\t&:active + label:after {\n\t\t\t\tdisplay: inline-block;\n\t\t\t\tcontent: '';\n\t\t\t\t@include square(calc(0.92857rem * 2));\n\t\t\t\t@include border-radius(50%);\n\t\t\t\tposition: relative;\n\t\t\t\ttop: $selection-size;\n\t\t\t\tleft: calc(0.92857rem * -2);\n\t\t\t\tbackground: rgba($black, .2);\n\t\t\t}\n\n\t\t\t&:checked:active + label:after {\n\t\t\t\tbackground: rgba($main-color, .2);\n\t\t\t}\n\t\t}*/\n}\n.checkbox + label:before {\n    -webkit-border-radius: 0.14286rem;\n    -moz-border-radius: 0.14286rem;\n    -ms-border-radius: 0.14286rem;\n    -o-border-radius: 0.14286rem;\n    border-radius: 0.14286rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , content 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , content 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , content 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , content 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.checkbox + label:before {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , content 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , content 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , content 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , content 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.checkbox + label:before {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , content 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , content 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , content 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , content 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.checkbox:checked + label:before {\n    background: #3f51b5;\n    border: 0.14286rem solid #3f51b5;\n    content: '\\E5CA';\n    color: var(--background, #FFFFFF);\n}\n.checkbox:disabled + label:before {\n    border: 0.14286rem solid rgba(0, 0, 0, 0.26);\n}\n.checkbox:disabled:checked + label:before {\n    background: rgba(0, 0, 0, 0.26);\n    border: none;\n    width: 1.21429rem;\n    height: 1.21429rem;\n    line-height: 1.21429rem;\n    text-align: center;\n}\n.radio + label:before {\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  -ms-border-radius: 50%;\n  -o-border-radius: 50%;\n  border-radius: 50%;\n  -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.radio + label:before {\n      -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.radio + label:before {\n      -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.radio + label:after {\n  display: inline-block;\n  position: relative;\n  top: -0.30952rem;\n  left: -0.61905rem;\n  width: 0;\n  height: 0;\n  content: '';\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  -ms-border-radius: 50%;\n  -o-border-radius: 50%;\n  border-radius: 50%;\n  -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.radio + label:after {\n      -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.radio + label:after {\n      -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.radio:checked + label:before {\n  border: 0.14286rem solid #3f51b5;\n}\n.radio:checked + label:after {\n  background: #3f51b5;\n  top: 0.07143rem;\n  left: -0.92857rem;\n  width: 0.61905rem;\n  height: 0.61905rem;\n  margin: 0 -0.61905rem 0 0;\n}\n.radio:disabled + label:before {\n  border: 0.14286rem solid rgba(0, 0, 0, 0.26);\n}\n.radio:disabled:checked + label:after {\n  background: rgba(0, 0, 0, 0.26);\n}\n.switch .lever {\n  background: rgba(0, 0, 0, 0.38);\n  display: inline-block;\n  height: 0.85714rem;\n  margin: 1rem;\n  -webkit-border-radius: 0.85714rem;\n  -moz-border-radius: 0.85714rem;\n  -ms-border-radius: 0.85714rem;\n  -o-border-radius: 0.85714rem;\n  border-radius: 0.85714rem;\n  position: relative;\n  vertical-align: middle;\n  width: 1.71429rem;\n  -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.switch .lever {\n      -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.switch .lever {\n      -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      margin: 0;\n}\n}\n.switch .lever:after {\n    -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n    -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n    -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n    -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n    box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.14286rem 0.14286rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.21429rem 0rem rgba(0, 0, 0, 0.2);\n    background: #fafafa;\n    content: '';\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    height: 1rem;\n    left: 0;\n    position: absolute;\n    top: -0.07143rem;\n    width: 1rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.switch .lever:after {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.switch .lever:after {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , left 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , left 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , left 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , left 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (max-width: 1280px) {\n.switch .lever:before {\n      content: '';\n      width: 1rem;\n      height: 1rem;\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      left: 0.71429rem;\n      position: absolute;\n      top: -0.07143rem;\n      -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , left 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (max-width: 1280px) and (min-width: 961px) and (max-width: 1280px) {\n.switch .lever:before {\n      -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , left 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (max-width: 1280px) {\n.switch .lever:active:before, .switch .lever:focus:before {\n      background: rgba(189, 189, 189, 0.2);\n      width: 2rem;\n      height: 2rem;\n      left: -0.5rem;\n      top: -0.57143rem;\n}\n}\n.switch input[type=\"checkbox\"] {\n  display: none;\n}\n.switch input[type=\"checkbox\"]:checked + .lever {\n    background: rgba(63, 81, 181, 0.5);\n}\n.switch input[type=\"checkbox\"]:checked + .lever:after {\n      background: #3f51b5;\n      left: 0.71429rem;\n}\n@media only screen and (max-width: 1280px) {\n.switch input[type=\"checkbox\"]:checked + .lever:active:before, .switch input[type=\"checkbox\"]:checked + .lever:focus:before {\n        left: 0.21429rem;\n        background: rgba(63, 81, 181, 0.2);\n}\n}\n.switch input[type=\"checkbox\"]:disabled + .lever {\n    background: rgba(0, 0, 0, 0.12);\n}\n.switch input[type=\"checkbox\"]:disabled + .lever:after {\n      background: #bdbdbd;\n}\n@media only screen and (max-width: 1280px) {\n.switch input[type=\"checkbox\"]:disabled + .lever:active:before, .switch input[type=\"checkbox\"]:disabled + .lever:focus:before {\n        background: rgba(189, 189, 189, 0.2);\n}\n}\n\n/**************************************\n * Sliders\n *\n * http://www.google.com/design/spec/components/sliders.html\n **************************************/\ninput[type=\"range\"] {\n  background: #bdbdbd;\n  height: 0.14286rem;\n  margin: 0;\n  outline: none;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n}\ninput[type=\"range\"]:hover {\n    cursor: pointer;\n}\ninput[type=\"range\"]::-webkit-slider-runnable-track {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    height: 0.14286rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-webkit-slider-runnable-track {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1601px) {\ninput[type=\"range\"]::-webkit-slider-runnable-track {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-webkit-slider-runnable-track:focus, input[type=\"range\"]::-webkit-slider-runnable-track:active {\n      background: var(--main-color, #3F51B5);\n}\ninput[type=\"range\"]::-moz-range-track {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    height: 0.14286rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-moz-range-track {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1601px) {\ninput[type=\"range\"]::-moz-range-track {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-moz-range-track:focus, input[type=\"range\"]::-moz-range-track:active {\n      background: var(--main-color, #3F51B5);\n}\ninput[type=\"range\"]::-ms-track {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    height: 0.14286rem;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-ms-track {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1601px) {\ninput[type=\"range\"]::-ms-track {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-ms-track:focus, input[type=\"range\"]::-ms-track:active {\n      background: var(--main-color, #3F51B5);\n}\ninput[type=\"range\"]::-moz-range-track {\n    -webkit-opacity: 0;\n    opacity: 0;\n}\ninput[type=\"range\"]::-ms-tooltip {\n    display: none;\n}\ninput[type=\"range\"]::-webkit-slider-thumb {\n    width: 1rem;\n    height: 1rem;\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    margin: -0.35714rem 0 0 0;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\ninput[type=\"range\"]::-webkit-slider-thumb {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-webkit-slider-thumb {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-webkit-slider-thumb:focus, input[type=\"range\"]::-webkit-slider-thumb:active {\n      width: 1.14286rem;\n      height: 1.14286rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.42857rem 0 0 0;\n}\ninput[type=\"range\"]::-moz-range-thumb {\n    width: 1rem;\n    height: 1rem;\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    margin: -0.35714rem 0 0 0;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\ninput[type=\"range\"]::-moz-range-thumb {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-moz-range-thumb {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-moz-range-thumb:focus, input[type=\"range\"]::-moz-range-thumb:active {\n      width: 1.14286rem;\n      height: 1.14286rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.42857rem 0 0 0;\n}\ninput[type=\"range\"]::-ms-thumb {\n    width: 1rem;\n    height: 1rem;\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    margin: -0.35714rem 0 0 0;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\ninput[type=\"range\"]::-ms-thumb {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\ninput[type=\"range\"]::-ms-thumb {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\ninput[type=\"range\"]::-ms-thumb:focus, input[type=\"range\"]::-ms-thumb:active {\n      width: 1.14286rem;\n      height: 1.14286rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.42857rem 0 0 0;\n}\ninput[type=\"range\"]:disabled::-webkit-slider-thumb {\n    width: 1rem;\n    height: 1rem;\n    margin: -0.35714rem 0 0 0;\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\ninput[type=\"range\"]:disabled::-moz-range-thumb {\n    width: 1rem;\n    height: 1rem;\n    margin: -0.35714rem 0 0 0;\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\ninput[type=\"range\"]:disabled::-ms-thumb {\n    width: 1rem;\n    height: 1rem;\n    margin: -0.35714rem 0 0 0;\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\ninput[type=\"range\"]:disabled:active::-webkit-slider-runnable-track, input[type=\"range\"]:disabled:focus::-webkit-slider-runnable-track {\n    background: none;\n}\ninput[type=\"range\"]:disabled:active::-moz-range-track, input[type=\"range\"]:disabled:focus::-moz-range-track {\n    background: none;\n}\ninput[type=\"range\"]:disabled:active::-ms-track, input[type=\"range\"]:disabled:focus::-ms-track {\n    background: none;\n}\n.range {\n  display: inline-block;\n  position: relative;\n}\n.range input[type=\"range\"] {\n    background: transparent;\n    position: relative;\n    z-index: 3;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.range input[type=\"range\"]::-webkit-slider-runnable-track:focus, .range input[type=\"range\"]::-webkit-slider-runnable-track:active {\n      background: transparent;\n}\n.range input[type=\"range\"]::-moz-range-track:focus, .range input[type=\"range\"]::-moz-range-track:active {\n      background: transparent;\n}\n.range input[type=\"range\"]::-ms-track:focus, .range input[type=\"range\"]::-ms-track:active {\n      background: transparent;\n}\n.range input[type=\"range\"].slider-discrete::-webkit-slider-thumb, .range input[type=\"range\"].slider-discrete.not-null::-webkit-slider-thumb {\n      background: transparent;\n      border: 0.14286rem solid transparent;\n}\n.range input[type=\"range\"].slider-discrete::-moz-range-thumb, .range input[type=\"range\"].slider-discrete.not-null::-moz-range-thumb {\n      background: transparent;\n      border: 0.14286rem solid transparent;\n}\n.range input[type=\"range\"].slider-discrete::-ms-thumb, .range input[type=\"range\"].slider-discrete.not-null::-ms-thumb {\n      background: transparent;\n      border: 0.14286rem solid transparent;\n}\n.range input[type=\"range\"].not-null::-webkit-slider-thumb {\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      width: 1rem;\n      height: 1rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.35714rem 0 0 0;\n}\n.range input[type=\"range\"].not-null::-webkit-slider-thumb:active, .range input[type=\"range\"].not-null::-webkit-slider-thumb:focus {\n        width: 1.14286rem;\n        height: 1.14286rem;\n        margin: -0.42857rem 0 0 0;\n}\n.range input[type=\"range\"].not-null::-moz-range-thumb {\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      width: 1rem;\n      height: 1rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.35714rem 0 0 0;\n}\n.range input[type=\"range\"].not-null::-moz-range-thumb:active, .range input[type=\"range\"].not-null::-moz-range-thumb:focus {\n        width: 1.14286rem;\n        height: 1.14286rem;\n        margin: -0.42857rem 0 0 0;\n}\n.range input[type=\"range\"].not-null::-ms-thumb {\n      -webkit-border-radius: 50%;\n      -moz-border-radius: 50%;\n      -ms-border-radius: 50%;\n      -o-border-radius: 50%;\n      border-radius: 50%;\n      width: 1rem;\n      height: 1rem;\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      margin: -0.35714rem 0 0 0;\n}\n.range input[type=\"range\"].not-null::-ms-thumb:active, .range input[type=\"range\"].not-null::-ms-thumb:focus {\n        width: 1.14286rem;\n        height: 1.14286rem;\n        margin: -0.42857rem 0 0 0;\n}\n.range .range-track {\n    height: 0.14286rem;\n    margin: -1.14286rem 0 0 0;\n    position: relative;\n    width: 100%;\n    z-index: 1;\n}\n.range .range-track > div {\n      display: inline-block;\n      height: 100%;\n}\n.range .range-track .range-track-before {\n      background: var(--main-color, #3F51B5);\n}\n.range .range-track .range-track-after {\n      background: #bdbdbd;\n}\n.range:active .slider-bubble, .range:focus .slider-bubble {\n    width: 1.78571rem;\n    height: 1.78571rem;\n    background: #bdbdbd;\n    border: none;\n    bottom: 0.14286rem;\n    color: #FFFFFF;\n    font-size: 0.71429rem;\n    margin: 0 0 0 -0.89286rem;\n    text-align: center;\n}\n.range:active .slider-bubble:before, .range:focus .slider-bubble:before {\n      border-left: 0.71429rem solid transparent;\n      border-right: 0.71429rem solid transparent;\n      border-top: 0.71429rem solid #bdbdbd;\n      right: 0.25rem;\n      top: 1.5rem;\n}\n.range:active .slider-bubble.not-null, .range:focus .slider-bubble.not-null {\n      background: var(--main-color, #3F51B5);\n      border: none;\n      font-size: 0.71429rem;\n}\n.range:active .slider-bubble.not-null:before, .range:focus .slider-bubble.not-null:before {\n        border-left: 0.71429rem solid transparent;\n        border-right: 0.71429rem solid transparent;\n        border-top: 0.71429rem solid var(--main-color, #3F51B5);\n}\n.range .slider-bubble {\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    width: 1rem;\n    height: 1rem;\n    background: #000000;\n    border: 0.14286rem solid #000000;\n    color: #FFFFFF;\n    font-size: 0;\n    margin: 0.64286rem 0 0 -0.5rem;\n    position: absolute;\n    z-index: 2;\n    -webkit-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1) , width 300ms cubic-bezier(0.4, 0, 0.2, 1) , height 300ms cubic-bezier(0.4, 0, 0.2, 1) , border 300ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.range .slider-bubble {\n        -webkit-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 390ms cubic-bezier(0.4, 0, 0.2, 1) , width 390ms cubic-bezier(0.4, 0, 0.2, 1) , height 390ms cubic-bezier(0.4, 0, 0.2, 1) , border 390ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.range .slider-bubble {\n        -webkit-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , width 200ms cubic-bezier(0.4, 0, 0.2, 1) , height 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , width 200ms cubic-bezier(0.4, 0, 0.2, 1) , height 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , width 200ms cubic-bezier(0.4, 0, 0.2, 1) , height 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) , width 200ms cubic-bezier(0.4, 0, 0.2, 1) , height 200ms cubic-bezier(0.4, 0, 0.2, 1) , border 200ms cubic-bezier(0.4, 0, 0.2, 1) , bottom 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.range .slider-bubble:before {\n      width: 0;\n      height: 0;\n      border-left: none;\n      border-right: none;\n      border-top: none;\n      content: '';\n      position: absolute;\n      right: 0;\n      top: 0;\n      -webkit-transition: border-left 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: border-left 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: border-left 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: border-left 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 300ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 300ms cubic-bezier(0.4, 0, 0.2, 1) , top 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.range .slider-bubble:before {\n          -webkit-transition: border-left 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: border-left 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: border-left 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: border-left 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 390ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 390ms cubic-bezier(0.4, 0, 0.2, 1) , top 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.range .slider-bubble:before {\n          -webkit-transition: border-left 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 200ms cubic-bezier(0.4, 0, 0.2, 1) , top 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: border-left 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 200ms cubic-bezier(0.4, 0, 0.2, 1) , top 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: border-left 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 200ms cubic-bezier(0.4, 0, 0.2, 1) , top 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: border-left 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-right 200ms cubic-bezier(0.4, 0, 0.2, 1) , border-top 200ms cubic-bezier(0.4, 0, 0.2, 1) , top 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.range .slider-bubble.not-null {\n      background: var(--main-color, #3F51B5);\n      border: 0.14286rem solid var(--main-color, #3F51B5);\n      color: #FFFFFF;\n      font-size: 0;\n}\n.range:disabled input[type=\"range\"]::-webkit-slider-thumb, .range.disabled input[type=\"range\"]::-webkit-slider-thumb {\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n}\n.range:disabled input[type=\"range\"]::-moz-range-thumb, .range.disabled input[type=\"range\"]::-moz-range-thumb {\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n}\n.range:disabled input[type=\"range\"]::-ms-thumb, .range.disabled input[type=\"range\"]::-ms-thumb {\n    background: #FFFFFF;\n    border: 0.14286rem solid #bdbdbd;\n}\n.range:disabled input[type=\"range\"].not-null::-webkit-slider-thumb, .range.disabled input[type=\"range\"].not-null::-webkit-slider-thumb {\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\n.range:disabled input[type=\"range\"].not-null::-moz-range-thumb, .range.disabled input[type=\"range\"].not-null::-moz-range-thumb {\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\n.range:disabled input[type=\"range\"].not-null::-ms-thumb, .range.disabled input[type=\"range\"].not-null::-ms-thumb {\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\n.range:disabled input[type=\"range\"].slider-discrete::-webkit-slider-thumb, .range.disabled input[type=\"range\"].slider-discrete::-webkit-slider-thumb {\n    background: transparent;\n    border: 0.14286rem solid transparent;\n}\n.range:disabled input[type=\"range\"].slider-discrete::-moz-range-thumb, .range.disabled input[type=\"range\"].slider-discrete::-moz-range-thumb {\n    background: transparent;\n    border: 0.14286rem solid transparent;\n}\n.range:disabled input[type=\"range\"].slider-discrete::-ms-thumb, .range.disabled input[type=\"range\"].slider-discrete::-ms-thumb {\n    background: transparent;\n    border: 0.14286rem solid transparent;\n}\n.range:disabled .range-track-before, .range.disabled .range-track-before {\n    background: #bdbdbd;\n}\n.range:disabled .slider-bubble, .range.disabled .slider-bubble {\n    background: #bdbdbd;\n    border: 0.14286rem solid var(--background, #FFFFFF);\n}\n.range:disabled:active .slider-bubble, .range:disabled:focus .slider-bubble, .range.disabled:active .slider-bubble, .range.disabled:focus .slider-bubble {\n    background: #bdbdbd;\n    border: none;\n}\n.range:disabled:active .slider-bubble:before, .range:disabled:focus .slider-bubble:before, .range.disabled:active .slider-bubble:before, .range.disabled:focus .slider-bubble:before {\n      border-left: 0.71429rem solid transparent;\n      border-right: 0.71429rem solid transparent;\n      border-top: 0.71429rem solid #bdbdbd;\n}\n\n/**************************************\n * Snackbars & toasts\n *\n * http://www.google.com/design/spec/components/snackbars-toasts.html\n **************************************/\n.snackbar {\n  background: #323232;\n  bottom: 0;\n  color: #FFFFFF;\n  font-size: 1rem;\n  min-height: 3.42857rem;\n  max-height: 5.71429rem;\n  left: 0;\n  overflow: hidden;\n  padding: 1rem 1.71429rem;\n  position: fixed;\n  right: 0;\n}\n@media only screen and (min-width: 1281px) {\n.snackbar {\n      left: auto;\n      right: auto;\n      min-width: 20.57143rem;\n      max-width: 40.57143rem;\n      -webkit-border-radius: var(--border-size, 0.14286rem);\n      -moz-border-radius: var(--border-size, 0.14286rem);\n      -ms-border-radius: var(--border-size, 0.14286rem);\n      -o-border-radius: var(--border-size, 0.14286rem);\n      border-radius: var(--border-size, 0.14286rem);\n}\n}\n.snackbar-action {\n    float: right;\n    font-weight: 500;\n    margin: 0 0 0 1.71429rem;\n    text-transform: uppercase;\n}\n@media only screen and (min-width: 1601px) {\n.snackbar-action {\n        margin: 0 0 0 3.42857rem;\n}\n}\n\n/**************************************\n * Steppers\n *\n * https://material.google.com/components/steppers.html\n **************************************/\n.stepper-horizontal li {\n  height: 5.14286rem;\n  float: left;\n  padding: 1.71429rem 0 1.71429rem 1.71429rem;\n}\n.stepper-horizontal .step-circle {\n  margin: 0 0.85714rem 0 0;\n}\n.stepper-vertical li {\n  padding: 0 0 0 1.71429rem;\n}\n.stepper-vertical .step-circle {\n  margin: 0 0.57143rem 0 0;\n}\n.step {\n  padding: 0;\n  color: rgba(0, 0, 0, 0.38);\n  font-weight: 400;\n  font-size: 1rem;\n}\n.step.active {\n    color: rgba(0, 0, 0, 0.87);\n    font-weight: 500;\n}\n.step-circle {\n    width: 1.71429rem;\n    height: 1.71429rem;\n    -webkit-border-radius: 50%;\n    -moz-border-radius: 50%;\n    -ms-border-radius: 50%;\n    -o-border-radius: 50%;\n    border-radius: 50%;\n    color: #FFFFFF;\n    background: rgba(0, 0, 0, 0.38);\n    font-size: 0.85714rem;\n    font-weight: 400;\n    text-align: center;\n    line-height: 1.71429rem;\n    display: inline-block;\n}\n.step-circle.active {\n      background: var(--main-color, #3F51B5);\n}\n\n/**************************************\n * Tabs\n *\n * https://material.google.com/components/tabs.html\n **************************************/\n.tabs {\n  -moz-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -ms-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  -o-box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  box-shadow: 0rem 0.14286rem 0.28571rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.28571rem 0.35714rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.71429rem 0rem rgba(0, 0, 0, 0.2);\n  background: var(--main-color, #3F51B5);\n  overflow: auto;\n  overflow-y: hidden;\n  position: relative;\n  top: 4rem;\n  width: 100%;\n  z-index: 2;\n  left: 0;\n  right: 0;\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: flex;\n  -webkit-justify-content: space-between;\n  justify-content: space-between;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  -webkit-align-content: stretch;\n  align-content: stretch;\n}\n@media only screen and (min-width: 1281px) {\n.tabs {\n      -moz-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -webkit-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -ms-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      -o-box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n      box-shadow: 0rem 0rem 0.14286rem 0rem rgba(0, 0, 0, 0.14) , 0rem 0.21429rem 0.28571rem 0rem rgba(0, 0, 0, 0.12) , 0rem 0.07143rem 0.35714rem 0rem rgba(0, 0, 0, 0.2);\n}\n}\n@media only screen and (orientation: landscape) and (max-width: 960px) {\n.tabs {\n      top: 3.42857rem;\n}\n}\n@media only screen and (orientation: portrait) and (max-width: 600px) {\n.tabs {\n      top: 4rem;\n}\n}\n@media only screen and (min-width: 961px) {\n.tabs {\n      width: calc(100% - 20rem + 0.07143rem);\n      left: 19.92857rem;\n      top: 4.57143rem;\n}\n}\n.tabs .tab, .tabs .tab-icon, .tabs .tab-icon-text {\n    -webkit-flex: 1 0 auto;\n    flex: 1 0 auto;\n    -webkit-align-self: auto;\n    align-self: auto;\n    border-bottom: 0.14286rem solid var(--main-color, #3F51B5);\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1rem;\n    font-weight: 500;\n    max-width: 18.85714rem;\n    min-width: 5.14286rem;\n    text-align: center;\n    text-overflow: ellipsis;\n    text-transform: uppercase;\n    white-space: nowrap;\n    -webkit-transition: border 300ms cubic-bezier(0.4, 0, 0.2, 1) , color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: border 300ms cubic-bezier(0.4, 0, 0.2, 1) , color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: border 300ms cubic-bezier(0.4, 0, 0.2, 1) , color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: border 300ms cubic-bezier(0.4, 0, 0.2, 1) , color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) {\n.tabs .tab, .tabs .tab-icon, .tabs .tab-icon-text {\n        min-width: 11.42857rem;\n}\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.tabs .tab, .tabs .tab-icon, .tabs .tab-icon-text {\n        -webkit-transition: border 390ms cubic-bezier(0.4, 0, 0.2, 1) , color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: border 390ms cubic-bezier(0.4, 0, 0.2, 1) , color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: border 390ms cubic-bezier(0.4, 0, 0.2, 1) , color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: border 390ms cubic-bezier(0.4, 0, 0.2, 1) , color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.tabs .tab, .tabs .tab-icon, .tabs .tab-icon-text {\n        -webkit-transition: border 200ms cubic-bezier(0.4, 0, 0.2, 1) , color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: border 200ms cubic-bezier(0.4, 0, 0.2, 1) , color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: border 200ms cubic-bezier(0.4, 0, 0.2, 1) , color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: border 200ms cubic-bezier(0.4, 0, 0.2, 1) , color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.tabs .tab:hover, .tabs .tab.active, .tabs .tab-icon:hover, .tabs .tab-icon.active, .tabs .tab-icon-text:hover, .tabs .tab-icon-text.active {\n      border-bottom: 0.14286rem solid #FFFFFF;\n      color: #FFFFFF;\n}\n.tabs .tab:hover .material-icons, .tabs .tab.active .material-icons, .tabs .tab-icon:hover .material-icons, .tabs .tab-icon.active .material-icons, .tabs .tab-icon-text:hover .material-icons, .tabs .tab-icon-text.active .material-icons {\n        color: #FFFFFF;\n}\n.tabs .tab .material-icons, .tabs .tab-icon .material-icons, .tabs .tab-icon-text .material-icons {\n      width: 1.71429rem;\n      height: 1.71429rem;\n      font-size: 1.71429rem;\n      color: rgba(255, 255, 255, 0.7);\n      -webkit-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.tabs .tab .material-icons, .tabs .tab-icon .material-icons, .tabs .tab-icon-text .material-icons {\n          -webkit-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: color 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.tabs .tab .material-icons, .tabs .tab-icon .material-icons, .tabs .tab-icon-text .material-icons {\n          -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -moz-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          -o-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n          transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.tabs .tab {\n    height: 3.42857rem;\n    line-height: 3.42857rem;\n    padding: 0 0.85714rem 1.42857rem 0.85714rem;\n}\n.tabs .tab-icon {\n    height: 3.42857rem;\n    line-height: 3.42857rem;\n    padding: 0 0.14286rem 0.85714rem 0.14286rem;\n}\n.tabs .tab-icon-text {\n    height: 5.14286rem;\n    padding: 0.71429rem 0.85714rem 1.14286rem 0.85714rem;\n}\n.tabs .tab-icon-text span {\n      display: block;\n      margin: 0.71429rem 0 0 0;\n      width: 100%;\n}\n\n/**************************************\n * Text fields\n *\n * http://www.google.com/design/spec/components/text-fields.html\n **************************************/\n.input {\n  position: relative;\n  height: 5.85714rem;\n}\n.input input {\n    outline: none;\n    width: 100%;\n    border: none;\n    background: none;\n    border-bottom: 0.07143rem solid rgba(0, 0, 0, 0.42);\n    font-size: 1.14286rem;\n    padding-bottom: 0.57143rem;\n    position: absolute;\n    bottom: 1.42857rem;\n    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -moz-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    -o-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.input input {\n        -webkit-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.input input {\n        -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -moz-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        -o-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.input input:disabled, .input input:disabled:hover {\n      border-bottom: 0.07143rem dotted;\n      color: rgba(0, 0, 0, 0.42);\n}\n.input input:disabled ~ label, .input input:disabled:hover ~ label {\n        color: rgba(0, 0, 0, 0.42);\n}\n.input input:disabled ~ .expander, .input input:disabled:hover ~ .expander {\n        display: none;\n}\n.input input:hover + label {\n      color: rgba(0, 0, 0, 0.54);\n}\n.input input:hover, .input input:active, .input input:focus, .input input:active:hover, .input input:focus:hover {\n      border-bottom: 0.14286rem solid rgba(0, 0, 0, 0.87);\n      padding-bottom: 0.5rem;\n}\n.input input:active, .input input:focus {\n      caret-color: #304FFE;\n}\n.input input:active ~ label, .input input:focus ~ label {\n        color: #304FFE;\n        font-size: 0.85714rem;\n        bottom: 3.85714rem;\n}\n.input input:active ~ .material-icons, .input input:focus ~ .material-icons {\n        color: #304FFE;\n}\n.input input:active:required ~ label:after, .input input:focus:required ~ label:after {\n        color: #FF1744;\n}\n.input input:active::-webkit-input-placeholder, .input input:focus::-webkit-input-placeholder {\n        -webkit-opacity: 1;\n        opacity: 1;\n}\n.input input:active::-moz-placeholder, .input input:focus::-moz-placeholder {\n        -webkit-opacity: 1;\n        opacity: 1;\n}\n.input input:active:-ms-input-placeholder, .input input:focus:-ms-input-placeholder {\n        -webkit-opacity: 1;\n        opacity: 1;\n}\n.input input:active::placeholder, .input input:focus::placeholder {\n        -webkit-opacity: 1;\n        opacity: 1;\n}\n.input input:active ~ .expander, .input input:focus ~ .expander {\n        width: 100%;\n        left: 0;\n        height: 0.14286rem;\n}\n.input input::-webkit-input-placeholder {\n      -webkit-opacity: 0;\n      opacity: 0;\n      font-size: 1.14286rem;\n      color: rgba(0, 0, 0, 0.42);\n}\n.input input::-moz-placeholder {\n      -webkit-opacity: 0;\n      opacity: 0;\n      font-size: 1.14286rem;\n      color: rgba(0, 0, 0, 0.42);\n}\n.input input:-ms-input-placeholder {\n      -webkit-opacity: 0;\n      opacity: 0;\n      font-size: 1.14286rem;\n      color: rgba(0, 0, 0, 0.42);\n}\n.input input::placeholder {\n      -webkit-opacity: 0;\n      opacity: 0;\n      font-size: 1.14286rem;\n      color: rgba(0, 0, 0, 0.42);\n}\n.input input:required ~ label:after {\n      content: ' \\E838';\n      font-family: 'Material Icons';\n      font-size: 0.5rem;\n      vertical-align: super;\n}\n.input label {\n    color: rgba(0, 0, 0, 0.54);\n    font-size: 1.14286rem;\n    position: absolute;\n    pointer-events: none;\n    left: 0;\n    bottom: 2.07143rem;\n    font-weight: 400;\n    -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.input label {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.input label {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.input label.active {\n      font-size: 0.85714rem;\n      bottom: 3.85714rem;\n}\n.input .helper-text {\n    font-size: 0.85714rem;\n    color: rgba(0, 0, 0, 0.54);\n    position: absolute;\n    bottom: 0;\n    line-height: normal;\n}\n.input .helper-text .material-icons {\n      font-size: 0.85714rem;\n      width: 0.85714rem;\n      height: 0.85714rem;\n}\n.input .expander {\n    width: 0;\n    background: #304FFE;\n    position: absolute;\n    height: 0.07143rem;\n    left: 50%;\n    bottom: 1.42857rem;\n    -webkit-transition: left cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -moz-transition: left cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -o-transition: left cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    transition: left cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.input .expander {\n        -webkit-transition: left cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -moz-transition: left cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -o-transition: left cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        transition: left cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.input .expander {\n        -webkit-transition: left cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -moz-transition: left cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -o-transition: left cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        transition: left cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.input.invalid label, .input.invalid input:active + label, .input.invalid input:focus + label, .input.invalid .helper-text, .input.invalid .material-icons, .input.invalid input:active ~ .material-icons, .input.invalid input:focus ~ .material-icons {\n    color: #FF1744;\n}\n.input.invalid .expander {\n    background: #FF1744;\n}\n.input.icon > .material-icons {\n    font-size: 1.71429rem;\n    width: 1.71429rem;\n    height: 1.71429rem;\n    bottom: 2rem;\n    position: absolute;\n}\n.input.icon input, .input.icon label {\n    left: 2.85714rem;\n}\n.input.icon input:active ~ .expander, .input.icon input:focus ~ .expander {\n    left: 2.85714rem;\n}\n.input.icon input, .input.icon input:active ~ .expander, .input.icon input:focus ~ .expander {\n    width: calc(100% - (1.14286rem + 1.71429rem));\n}\n.textarea {\n  border: 0.07143rem solid #000000;\n  -webkit-border-radius: 0.14286rem;\n  -moz-border-radius: 0.14286rem;\n  -ms-border-radius: 0.14286rem;\n  -o-border-radius: 0.14286rem;\n  border-radius: 0.14286rem;\n  padding: 0.57143rem 1.14286rem 0.57143rem 1.14286rem;\n  margin-bottom: 1.42857rem;\n  position: relative;\n  min-height: 9.71429rem;\n  -webkit-transition: border cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n  -moz-transition: border cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n  -o-transition: border cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n  transition: border cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.textarea {\n      -webkit-transition: border cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n      -moz-transition: border cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n      -o-transition: border cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n      transition: border cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.textarea {\n      -webkit-transition: border cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n      -moz-transition: border cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n      -o-transition: border cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n      transition: border cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.textarea textarea {\n    position: absolute;\n    font-family: inherit;\n    outline: none;\n    border: none;\n    width: 100%;\n    background: transparent;\n    bottom: 0.57143rem;\n    right: 1.14286rem;\n    left: 1.14286rem;\n    top: 2rem;\n    min-height: 7.14286rem;\n    -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.textarea textarea {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.textarea textarea {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.textarea textarea:active, .textarea textarea:focus {\n      caret-color: #304FFE;\n}\n.textarea textarea:active ~ label, .textarea textarea:focus ~ label {\n        top: 0.57143rem;\n        font-size: 0.85714rem;\n        color: #304FFE;\n}\n.textarea textarea:required ~ label:after {\n      content: ' \\E838';\n      font-family: 'Material Icons';\n      font-size: 0.5rem;\n      vertical-align: super;\n}\n.textarea label {\n    pointer-events: none;\n    position: absolute;\n    top: 1.14286rem;\n    font-weight: 400;\n    font-size: 1.14286rem;\n    -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n    transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms , width cubic-bezier(0.4, 0, 0.2, 1) 300ms;\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.textarea label {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 390ms , width cubic-bezier(0.4, 0, 0.2, 1) 390ms;\n}\n}\n@media only screen and (min-width: 1281px) {\n.textarea label {\n        -webkit-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -moz-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        -o-transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n        transition: all cubic-bezier(0.4, 0, 0.2, 1) 200ms , width cubic-bezier(0.4, 0, 0.2, 1) 200ms;\n}\n}\n.textarea.hover {\n    border: 0.14286rem solid rgba(0, 0, 0, 0.42);\n}\n.textarea.hover label {\n      top: 1.07143rem;\n}\n.textarea.hover, .textarea.active {\n    padding: 0.5rem 1.07143rem 0.5rem 1.07143rem;\n}\n.textarea.hover textarea, .textarea.active textarea {\n      bottom: 0.5rem;\n      right: 1.07143rem;\n      left: 1.07143rem;\n      top: 1.92857rem;\n}\n.textarea.hover textarea:required ~ label:after, .textarea.active textarea:required ~ label:after {\n        color: #FF1744;\n}\n.textarea.active {\n    border: 0.14286rem solid #304FFE;\n}\n.textarea.invalid {\n    border: 0.14286rem solid #FF1744;\n}\n.textarea.invalid label, .textarea.invalid textarea:active + label, .textarea.invalid textarea:focus + label, .textarea.invalid .helper-text, .textarea.invalid .helper-text .material-icons {\n      color: #FF1744;\n}\n.textarea .helper-text {\n    font-size: 0.85714rem;\n    line-height: normal;\n    position: absolute;\n    bottom: -1.42857rem;\n    left: 0;\n}\n.textarea .helper-text .material-icons {\n      font-size: 0.85714rem;\n      width: 0.85714rem;\n      height: 0.85714rem;\n}\n.textarea.disabled {\n    background: #E0E0E0;\n    border: 0.07143rem solid rgba(0, 0, 0, 0.42);\n}\n\n/**************************************\n * Tooltips\n *\n * http://www.google.com/design/spec/components/tooltips.html\n **************************************/\n.tooltip {\n  display: inline;\n  background: rgba(97, 97, 97, 0.9);\n  color: #FFFFFF;\n  font-size: 1rem;\n  font-weight: 500;\n  height: 2.28571rem;\n  left: 0;\n  line-height: 2.28571rem;\n  margin: 0;\n  padding: 0 1.14286rem;\n  position: absolute;\n  top: 0;\n  white-space: nowrap;\n  width: auto;\n  z-index: 10;\n  -webkit-opacity: 0;\n  opacity: 0;\n  visibility: hidden;\n  -webkit-transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -moz-transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  -o-transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n  transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) , margin 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\n.tooltip {\n      -webkit-transition: top 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: top 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: top 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: top 390ms cubic-bezier(0.4, 0, 0.2, 1) , margin 390ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\n.tooltip {\n      font-size: 0.71429rem;\n      height: 1.57143rem;\n      line-height: 1.57143rem;\n      padding: 0 0.57143rem;\n      -webkit-transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -moz-transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      -o-transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n      transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1) , margin 200ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n}\n.activate-tooltip:hover .tooltip {\n  -webkit-opacity: 1;\n  opacity: 1;\n  visibility: visible;\n  top: 1.71429rem;\n  margin: 1.71429rem 0 0 0;\n}\n@media only screen and (min-width: 1281px) {\n.activate-tooltip:hover .tooltip {\n      top: 1rem;\n      margin: 1rem 0 0 0;\n}\n}\n.raised-button.activate-tooltip:hover, flat-button.activate-tooltip:hover {\n  -webkit-opacity: 1;\n  opacity: 1;\n  visibility: visible;\n  top: 2.57143rem;\n  margin: 1.71429rem 0 0 0;\n}\n@media only screen and (min-width: 1281px) {\n.raised-button.activate-tooltip:hover, flat-button.activate-tooltip:hover {\n      top: 2.57143rem;\n      margin: 1rem 0 0 0;\n}\n}\n.red, .red-500 {\n  background: #F44336;\n}\n.red-text, .red-500-text, .red-text .material-icons, .red-500-text .material-icons {\n  color: #F44336;\n}\n.red-50 {\n  background: #FFEBEE;\n}\n.red-50-text, .red-50-text .material-icons {\n  color: #FFEBEE;\n}\n.red-100 {\n  background: #FFCDD2;\n}\n.red-100-text, .red-100-text .material-icons {\n  color: #FFCDD2;\n}\n.red-200 {\n  background: #EF9A9A;\n}\n.red-200-text, .red-200-text .material-icons {\n  color: #EF9A9A;\n}\n.red-300 {\n  background: #E57373;\n}\n.red-300-text, .red-300-text .material-icons {\n  color: #E57373;\n}\n.red-400 {\n  background: #EF5350;\n}\n.red-400-text, .red-400-text .material-icons {\n  color: #EF5350;\n}\n.red-600 {\n  background: #E53935;\n}\n.red-600-text, .red-600-text .material-icons {\n  color: #E53935;\n}\n.red-700 {\n  background: #D32F2F;\n}\n.red-700-text, .red-700-text .material-icons {\n  color: #D32F2F;\n}\n.red-800 {\n  background: #C62828;\n}\n.red-800-text, .red-800-text .material-icons {\n  color: #C62828;\n}\n.red-900 {\n  background: #B71C1C;\n}\n.red-900-text, .red-900-text .material-icons {\n  color: #B71C1C;\n}\n.red-a100 {\n  background: #FF8A80;\n}\n.red-a100-text, .red-a100-text .material-icons {\n  color: #FF8A80;\n}\n.red-a200 {\n  background: #FF5252;\n}\n.red-a200-text, .red-a200-text .material-icons {\n  color: #FF5252;\n}\n.red-a400 {\n  background: #FF1744;\n}\n.red-a400-text, .red-a400-text .material-icons {\n  color: #FF1744;\n}\n.red-a700 {\n  background: #D50000;\n}\n.red-a700-text, .red-a700-text .material-icons {\n  color: #D50000;\n}\n.pink, .pink-500 {\n  background: #E91E63;\n}\n.pink-text, .pink-500-text, .pink-text .material-icons, .pink-500-text .material-icons {\n  color: #E91E63;\n}\n.pink-50 {\n  background: #FCE4EC;\n}\n.pink-50-text, .pink-50-text .material-icons {\n  color: #FCE4EC;\n}\n.pink-100 {\n  background: #F8BBD0;\n}\n.pink-100-text, .pink-100-text .material-icons {\n  color: #F8BBD0;\n}\n.pink-200 {\n  background: #F48FB1;\n}\n.pink-200-text, .pink-200-text .material-icons {\n  color: #F48FB1;\n}\n.pink-300 {\n  background: #F06292;\n}\n.pink-300-text, .pink-300-text .material-icons {\n  color: #F06292;\n}\n.pink-400 {\n  background: #EC407A;\n}\n.pink-400-text, .pink-400-text .material-icons {\n  color: #EC407A;\n}\n.pink-600 {\n  background: #D81B60;\n}\n.pink-600-text, .pink-600-text .material-icons {\n  color: #D81B60;\n}\n.pink-700 {\n  background: #C2185B;\n}\n.pink-700-text, .pink-700-text .material-icons {\n  color: #C2185B;\n}\n.pink-800 {\n  background: #AD1457;\n}\n.pink-800-text, .pink-800-text .material-icons {\n  color: #AD1457;\n}\n.pink-900 {\n  background: #880E4F;\n}\n.pink-900-text, .pink-900-text .material-icons {\n  color: #880E4F;\n}\n.pink-a100 {\n  background: #FF80AB;\n}\n.pink-a100-text, .pink-a100-text .material-icons {\n  color: #FF80AB;\n}\n.pink-a200 {\n  background: #FF4081;\n}\n.pink-a200-text, .pink-a200-text .material-icons {\n  color: #FF4081;\n}\n.pink-a400 {\n  background: #F50057;\n}\n.pink-a400-text, .pink-a400-text .material-icons {\n  color: #F50057;\n}\n.pink-a700 {\n  background: #C51162;\n}\n.pink-a700-text, .pink-a700-text .material-icons {\n  color: #C51162;\n}\n.purple, .purple-500 {\n  background: #9C27B0;\n}\n.purple-text, .purple-500-text, .purple-text .material-icons, .purple-500-text .material-icons {\n  color: #9C27B0;\n}\n.purple-50 {\n  background: #F3E5F5;\n}\n.purple-50-text, .purple-50-text .material-icons {\n  color: #F3E5F5;\n}\n.purple-100 {\n  background: #E1BEE7;\n}\n.purple-100-text, .purple-100-text .material-icons {\n  color: #E1BEE7;\n}\n.purple-200 {\n  background: #CE93D8;\n}\n.purple-200-text, .purple-200-text .material-icons {\n  color: #CE93D8;\n}\n.purple-300 {\n  background: #BA68C8;\n}\n.purple-300-text, .purple-300-text .material-icons {\n  color: #BA68C8;\n}\n.purple-400 {\n  background: #AB47BC;\n}\n.purple-400-text, .purple-400-text .material-icons {\n  color: #AB47BC;\n}\n.purple-600 {\n  background: #8E24AA;\n}\n.purple-600-text, .purple-600-text .material-icons {\n  color: #8E24AA;\n}\n.purple-700 {\n  background: #7B1FA2;\n}\n.purple-700-text, .purple-700-text .material-icons {\n  color: #7B1FA2;\n}\n.purple-800 {\n  background: #6A1B9A;\n}\n.purple-800-text, .purple-800-text .material-icons {\n  color: #6A1B9A;\n}\n.purple-900 {\n  background: #4A148C;\n}\n.purple-900-text, .purple-900-text .material-icons {\n  color: #4A148C;\n}\n.purple-a100 {\n  background: #EA80FC;\n}\n.purple-a100-text, .purple-a100-text .material-icons {\n  color: #EA80FC;\n}\n.purple-a200 {\n  background: #E040FB;\n}\n.purple-a200-text, .purple-a200-text .material-icons {\n  color: #E040FB;\n}\n.purple-a400 {\n  background: #D500F9;\n}\n.purple-a400-text, .purple-a400-text .material-icons {\n  color: #D500F9;\n}\n.purple-a700 {\n  background: #AA00FF;\n}\n.purple-a700-text, .purple-a700-text .material-icons {\n  color: #AA00FF;\n}\n.deep-purple, .deep-purple-500 {\n  background: #673AB7;\n}\n.deep-purple-text, .deep-purple-500-text, .deep-purple-text .material-icons, .deep-purple-500-text .material-icons {\n  color: #673AB7;\n}\n.deep-purple-50 {\n  background: #EDE7F6;\n}\n.deep-purple-50-text, .deep-purple-50-text .material-icons {\n  color: #EDE7F6;\n}\n.deep-purple-100 {\n  background: #D1C4E9;\n}\n.deep-purple-100-text, .deep-purple-100-text .material-icons {\n  color: #D1C4E9;\n}\n.deep-purple-200 {\n  background: #B39DDB;\n}\n.deep-purple-200-text, .deep-purple-200-text .material-icons {\n  color: #B39DDB;\n}\n.deep-purple-300 {\n  background: #9575CD;\n}\n.deep-purple-300-text, .deep-purple-300-text .material-icons {\n  color: #9575CD;\n}\n.deep-purple-400 {\n  background: #7E57C2;\n}\n.deep-purple-400-text, .deep-purple-400-text .material-icons {\n  color: #7E57C2;\n}\n.deep-purple-600 {\n  background: #5E35B1;\n}\n.deep-purple-600-text, .deep-purple-600-text .material-icons {\n  color: #5E35B1;\n}\n.deep-purple-700 {\n  background: #512DA8;\n}\n.deep-purple-700-text, .deep-purple-700-text .material-icons {\n  color: #512DA8;\n}\n.deep-purple-800 {\n  background: #4527A0;\n}\n.deep-purple-800-text, .deep-purple-800-text .material-icons {\n  color: #4527A0;\n}\n.deep-purple-900 {\n  background: #311B92;\n}\n.deep-purple-900-text, .deep-purple-900-text .material-icons {\n  color: #311B92;\n}\n.deep-purple-a100 {\n  background: #B388FF;\n}\n.deep-purple-a100-text, .deep-purple-a100-text .material-icons {\n  color: #B388FF;\n}\n.deep-purple-a200 {\n  background: #7C4DFF;\n}\n.deep-purple-a200-text, .deep-purple-a200-text .material-icons {\n  color: #7C4DFF;\n}\n.deep-purple-a400 {\n  background: #651FFF;\n}\n.deep-purple-a400-text, .deep-purple-a400-text .material-icons {\n  color: #651FFF;\n}\n.deep-purple-a700 {\n  background: #6200EA;\n}\n.deep-purple-a700-text, .deep-purple-a700-text .material-icons {\n  color: #6200EA;\n}\n.indigo, .indigo-500 {\n  background: #3F51B5;\n}\n.indigo-text, .indigo-500-text, .indigo-text .material-icons, .indigo-500-text .material-icons {\n  color: #3F51B5;\n}\n.indigo-50 {\n  background: #E8EAF6;\n}\n.indigo-50-text, .indigo-50-text .material-icons {\n  color: #E8EAF6;\n}\n.indigo-100 {\n  background: #C5CAE9;\n}\n.indigo-100-text, .indigo-100-text .material-icons {\n  color: #C5CAE9;\n}\n.indigo-200 {\n  background: #9FA8DA;\n}\n.indigo-200-text, .indigo-200-text .material-icons {\n  color: #9FA8DA;\n}\n.indigo-300 {\n  background: #7986CB;\n}\n.indigo-300-text, .indigo-300-text .material-icons {\n  color: #7986CB;\n}\n.indigo-400 {\n  background: #5C6BC0;\n}\n.indigo-400-text, .indigo-400-text .material-icons {\n  color: #5C6BC0;\n}\n.indigo-600 {\n  background: #3949AB;\n}\n.indigo-600-text, .indigo-600-text .material-icons {\n  color: #3949AB;\n}\n.indigo-700 {\n  background: #303F9F;\n}\n.indigo-700-text, .indigo-700-text .material-icons {\n  color: #303F9F;\n}\n.indigo-800 {\n  background: #283593;\n}\n.indigo-800-text, .indigo-800-text .material-icons {\n  color: #283593;\n}\n.indigo-900 {\n  background: #1A237E;\n}\n.indigo-900-text, .indigo-900-text .material-icons {\n  color: #1A237E;\n}\n.indigo-a100 {\n  background: #8C9EFF;\n}\n.indigo-a100-text, .indigo-a100-text .material-icons {\n  color: #8C9EFF;\n}\n.indigo-a200 {\n  background: #536DFE;\n}\n.indigo-a200-text, .indigo-a200-text .material-icons {\n  color: #536DFE;\n}\n.indigo-a400 {\n  background: #3D5AFE;\n}\n.indigo-a400-text, .indigo-a400-text .material-icons {\n  color: #3D5AFE;\n}\n.indigo-a700 {\n  background: #304FFE;\n}\n.indigo-a700-text, .indigo-a700-text .material-icons {\n  color: #304FFE;\n}\n.blue, .blue-500 {\n  background: #2196F3;\n}\n.blue-text, .blue-500-text, .blue-text .material-icons, .blue-500-text .material-icons {\n  color: #2196F3;\n}\n.blue-50 {\n  background: #E3F2FD;\n}\n.blue-50-text, .blue-50-text .material-icons {\n  color: #E3F2FD;\n}\n.blue-100 {\n  background: #BBDEFB;\n}\n.blue-100-text, .blue-100-text .material-icons {\n  color: #BBDEFB;\n}\n.blue-200 {\n  background: #90CAF9;\n}\n.blue-200-text, .blue-200-text .material-icons {\n  color: #90CAF9;\n}\n.blue-300 {\n  background: #64B5F6;\n}\n.blue-300-text, .blue-300-text .material-icons {\n  color: #64B5F6;\n}\n.blue-400 {\n  background: #42A5F5;\n}\n.blue-400-text, .blue-400-text .material-icons {\n  color: #42A5F5;\n}\n.blue-600 {\n  background: #1E88E5;\n}\n.blue-600-text, .blue-600-text .material-icons {\n  color: #1E88E5;\n}\n.blue-700 {\n  background: #1976D2;\n}\n.blue-700-text, .blue-700-text .material-icons {\n  color: #1976D2;\n}\n.blue-800 {\n  background: #1565C0;\n}\n.blue-800-text, .blue-800-text .material-icons {\n  color: #1565C0;\n}\n.blue-900 {\n  background: #0D47A1;\n}\n.blue-900-text, .blue-900-text .material-icons {\n  color: #0D47A1;\n}\n.blue-a100 {\n  background: #82B1FF;\n}\n.blue-a100-text, .blue-a100-text .material-icons {\n  color: #82B1FF;\n}\n.blue-a200 {\n  background: #448AFF;\n}\n.blue-a200-text, .blue-a200-text .material-icons {\n  color: #448AFF;\n}\n.blue-a400 {\n  background: #2979FF;\n}\n.blue-a400-text, .blue-a400-text .material-icons {\n  color: #2979FF;\n}\n.blue-a700 {\n  background: #2962FF;\n}\n.blue-a700-text, .blue-a700-text .material-icons {\n  color: #2962FF;\n}\n.light-blue, .light-blue-500 {\n  background: #03A9F4;\n}\n.light-blue-text, .light-blue-500-text, .light-blue-text .material-icons, .light-blue-500-text .material-icons {\n  color: #03A9F4;\n}\n.light-blue-50 {\n  background: #E1F5FE;\n}\n.light-blue-50-text, .light-blue-50-text .material-icons {\n  color: #E1F5FE;\n}\n.light-blue-100 {\n  background: #B3E5FC;\n}\n.light-blue-100-text, .light-blue-100-text .material-icons {\n  color: #B3E5FC;\n}\n.light-blue-200 {\n  background: #81D4FA;\n}\n.light-blue-200-text, .light-blue-200-text .material-icons {\n  color: #81D4FA;\n}\n.light-blue-300 {\n  background: #4FC3F7;\n}\n.light-blue-300-text, .light-blue-300-text .material-icons {\n  color: #4FC3F7;\n}\n.light-blue-400 {\n  background: #29B6F6;\n}\n.light-blue-400-text, .light-blue-400-text .material-icons {\n  color: #29B6F6;\n}\n.light-blue-600 {\n  background: #039BE5;\n}\n.light-blue-600-text, .light-blue-600-text .material-icons {\n  color: #039BE5;\n}\n.light-blue-700 {\n  background: #0288D1;\n}\n.light-blue-700-text, .light-blue-700-text .material-icons {\n  color: #0288D1;\n}\n.light-blue-800 {\n  background: #0277BD;\n}\n.light-blue-800-text, .light-blue-800-text .material-icons {\n  color: #0277BD;\n}\n.light-blue-900 {\n  background: #01579B;\n}\n.light-blue-900-text, .light-blue-900-text .material-icons {\n  color: #01579B;\n}\n.light-blue-a100 {\n  background: #80D8FF;\n}\n.light-blue-a100-text, .light-blue-a100-text .material-icons {\n  color: #80D8FF;\n}\n.light-blue-a200 {\n  background: #40C4FF;\n}\n.light-blue-a200-text, .light-blue-a200-text .material-icons {\n  color: #40C4FF;\n}\n.light-blue-a400 {\n  background: #00B0FF;\n}\n.light-blue-a400-text, .light-blue-a400-text .material-icons {\n  color: #00B0FF;\n}\n.light-blue-a700 {\n  background: #0091EA;\n}\n.light-blue-a700-text, .light-blue-a700-text .material-icons {\n  color: #0091EA;\n}\n.cyan, .cyan-500 {\n  background: #00BCD4;\n}\n.cyan-text, .cyan-500-text, .cyan-text .material-icons, .cyan-500-text .material-icons {\n  color: #00BCD4;\n}\n.cyan-50 {\n  background: #E0F7FA;\n}\n.cyan-50-text, .cyan-50-text .material-icons {\n  color: #E0F7FA;\n}\n.cyan-100 {\n  background: #B2EBF2;\n}\n.cyan-100-text, .cyan-100-text .material-icons {\n  color: #B2EBF2;\n}\n.cyan-200 {\n  background: #80DEEA;\n}\n.cyan-200-text, .cyan-200-text .material-icons {\n  color: #80DEEA;\n}\n.cyan-300 {\n  background: #4DD0E1;\n}\n.cyan-300-text, .cyan-300-text .material-icons {\n  color: #4DD0E1;\n}\n.cyan-400 {\n  background: #26C6DA;\n}\n.cyan-400-text, .cyan-400-text .material-icons {\n  color: #26C6DA;\n}\n.cyan-600 {\n  background: #00ACC1;\n}\n.cyan-600-text, .cyan-600-text .material-icons {\n  color: #00ACC1;\n}\n.cyan-700 {\n  background: #0097A7;\n}\n.cyan-700-text, .cyan-700-text .material-icons {\n  color: #0097A7;\n}\n.cyan-800 {\n  background: #00838F;\n}\n.cyan-800-text, .cyan-800-text .material-icons {\n  color: #00838F;\n}\n.cyan-900 {\n  background: #006064;\n}\n.cyan-900-text, .cyan-900-text .material-icons {\n  color: #006064;\n}\n.cyan-a100 {\n  background: #84FFFF;\n}\n.cyan-a100-text, .cyan-a100-text .material-icons {\n  color: #84FFFF;\n}\n.cyan-a200 {\n  background: #18FFFF;\n}\n.cyan-a200-text, .cyan-a200-text .material-icons {\n  color: #18FFFF;\n}\n.cyan-a400 {\n  background: #00E5FF;\n}\n.cyan-a400-text, .cyan-a400-text .material-icons {\n  color: #00E5FF;\n}\n.cyan-a700 {\n  background: #00B8D4;\n}\n.cyan-a700-text, .cyan-a700-text .material-icons {\n  color: #00B8D4;\n}\n.teal, .teal-500 {\n  background: #009688;\n}\n.teal-text, .teal-500-text, .teal-text .material-icons, .teal-500-text .material-icons {\n  color: #009688;\n}\n.teal-50 {\n  background: #E0F2F1;\n}\n.teal-50-text, .teal-50-text .material-icons {\n  color: #E0F2F1;\n}\n.teal-100 {\n  background: #B2DFDB;\n}\n.teal-100-text, .teal-100-text .material-icons {\n  color: #B2DFDB;\n}\n.teal-200 {\n  background: #80CBC4;\n}\n.teal-200-text, .teal-200-text .material-icons {\n  color: #80CBC4;\n}\n.teal-300 {\n  background: #4DB6AC;\n}\n.teal-300-text, .teal-300-text .material-icons {\n  color: #4DB6AC;\n}\n.teal-400 {\n  background: #26A69A;\n}\n.teal-400-text, .teal-400-text .material-icons {\n  color: #26A69A;\n}\n.teal-600 {\n  background: #00897B;\n}\n.teal-600-text, .teal-600-text .material-icons {\n  color: #00897B;\n}\n.teal-700 {\n  background: #00796B;\n}\n.teal-700-text, .teal-700-text .material-icons {\n  color: #00796B;\n}\n.teal-800 {\n  background: #00695C;\n}\n.teal-800-text, .teal-800-text .material-icons {\n  color: #00695C;\n}\n.teal-900 {\n  background: #004D40;\n}\n.teal-900-text, .teal-900-text .material-icons {\n  color: #004D40;\n}\n.teal-a100 {\n  background: #A7FFEB;\n}\n.teal-a100-text, .teal-a100-text .material-icons {\n  color: #A7FFEB;\n}\n.teal-a200 {\n  background: #64FFDA;\n}\n.teal-a200-text, .teal-a200-text .material-icons {\n  color: #64FFDA;\n}\n.teal-a400 {\n  background: #1DE9B6;\n}\n.teal-a400-text, .teal-a400-text .material-icons {\n  color: #1DE9B6;\n}\n.teal-a700 {\n  background: #00BFA5;\n}\n.teal-a700-text, .teal-a700-text .material-icons {\n  color: #00BFA5;\n}\n.green, .green-500 {\n  background: #4CAF50;\n}\n.green-text, .green-500-text, .green-text .material-icons, .green-500-text .material-icons {\n  color: #4CAF50;\n}\n.green-50 {\n  background: #E8F5E9;\n}\n.green-50-text, .green-50-text .material-icons {\n  color: #E8F5E9;\n}\n.green-100 {\n  background: #C8E6C9;\n}\n.green-100-text, .green-100-text .material-icons {\n  color: #C8E6C9;\n}\n.green-200 {\n  background: #A5D6A7;\n}\n.green-200-text, .green-200-text .material-icons {\n  color: #A5D6A7;\n}\n.green-300 {\n  background: #81C784;\n}\n.green-300-text, .green-300-text .material-icons {\n  color: #81C784;\n}\n.green-400 {\n  background: #66BB6A;\n}\n.green-400-text, .green-400-text .material-icons {\n  color: #66BB6A;\n}\n.green-600 {\n  background: #43A047;\n}\n.green-600-text, .green-600-text .material-icons {\n  color: #43A047;\n}\n.green-700 {\n  background: #388E3C;\n}\n.green-700-text, .green-700-text .material-icons {\n  color: #388E3C;\n}\n.green-800 {\n  background: #2E7D32;\n}\n.green-800-text, .green-800-text .material-icons {\n  color: #2E7D32;\n}\n.green-900 {\n  background: #1B5E20;\n}\n.green-900-text, .green-900-text .material-icons {\n  color: #1B5E20;\n}\n.green-a100 {\n  background: #B9F6CA;\n}\n.green-a100-text, .green-a100-text .material-icons {\n  color: #B9F6CA;\n}\n.green-a200 {\n  background: #69F0AE;\n}\n.green-a200-text, .green-a200-text .material-icons {\n  color: #69F0AE;\n}\n.green-a400 {\n  background: #00E676;\n}\n.green-a400-text, .green-a400-text .material-icons {\n  color: #00E676;\n}\n.green-a700 {\n  background: #00C853;\n}\n.green-a700-text, .green-a700-text .material-icons {\n  color: #00C853;\n}\n.light-green, .light-green-500 {\n  background: #8BC34A;\n}\n.light-green-text, .light-green-500-text, .light-green-text .material-icons, .light-green-500-text .material-icons {\n  color: #8BC34A;\n}\n.light-green-50 {\n  background: #F1F8E9;\n}\n.light-green-50-text, .light-green-50-text .material-icons {\n  color: #F1F8E9;\n}\n.light-green-100 {\n  background: #DCEDC8;\n}\n.light-green-100-text, .light-green-100-text .material-icons {\n  color: #DCEDC8;\n}\n.light-green-200 {\n  background: #C5E1A5;\n}\n.light-green-200-text, .light-green-200-text .material-icons {\n  color: #C5E1A5;\n}\n.light-green-300 {\n  background: #AED581;\n}\n.light-green-300-text, .light-green-300-text .material-icons {\n  color: #AED581;\n}\n.light-green-400 {\n  background: #9CCC65;\n}\n.light-green-400-text, .light-green-400-text .material-icons {\n  color: #9CCC65;\n}\n.light-green-600 {\n  background: #7CB342;\n}\n.light-green-600-text, .light-green-600-text .material-icons {\n  color: #7CB342;\n}\n.light-green-700 {\n  background: #689F38;\n}\n.light-green-700-text, .light-green-700-text .material-icons {\n  color: #689F38;\n}\n.light-green-800 {\n  background: #558B2F;\n}\n.light-green-800-text, .light-green-800-text .material-icons {\n  color: #558B2F;\n}\n.light-green-900 {\n  background: #33691E;\n}\n.light-green-900-text, .light-green-900-text .material-icons {\n  color: #33691E;\n}\n.light-green-a100 {\n  background: #CCFF90;\n}\n.light-green-a100-text, .light-green-a100-text .material-icons {\n  color: #CCFF90;\n}\n.light-green-a200 {\n  background: #B2FF59;\n}\n.light-green-a200-text, .light-green-a200-text .material-icons {\n  color: #B2FF59;\n}\n.light-green-a400 {\n  background: #76FF03;\n}\n.light-green-a400-text, .light-green-a400-text .material-icons {\n  color: #76FF03;\n}\n.light-green-a700 {\n  background: #64DD17;\n}\n.light-green-a700-text, .light-green-a700-text .material-icons {\n  color: #64DD17;\n}\n.lime, .lime-500 {\n  background: #CDDC39;\n}\n.lime-text, .lime-500-text, .lime-text .material-icons, .lime-500-text .material-icons {\n  color: #CDDC39;\n}\n.lime-50 {\n  background: #F9FBE7;\n}\n.lime-50-text, .lime-50-text .material-icons {\n  color: #F9FBE7;\n}\n.lime-100 {\n  background: #F0F4C3;\n}\n.lime-100-text, .lime-100-text .material-icons {\n  color: #F0F4C3;\n}\n.lime-200 {\n  background: #E6EE9C;\n}\n.lime-200-text, .lime-200-text .material-icons {\n  color: #E6EE9C;\n}\n.lime-300 {\n  background: #DCE775;\n}\n.lime-300-text, .lime-300-text .material-icons {\n  color: #DCE775;\n}\n.lime-400 {\n  background: #D4E157;\n}\n.lime-400-text, .lime-400-text .material-icons {\n  color: #D4E157;\n}\n.lime-600 {\n  background: #C0CA33;\n}\n.lime-600-text, .lime-600-text .material-icons {\n  color: #C0CA33;\n}\n.lime-700 {\n  background: #AFB42B;\n}\n.lime-700-text, .lime-700-text .material-icons {\n  color: #AFB42B;\n}\n.lime-800 {\n  background: #9E9D24;\n}\n.lime-800-text, .lime-800-text .material-icons {\n  color: #9E9D24;\n}\n.lime-900 {\n  background: #827717;\n}\n.lime-900-text, .lime-900-text .material-icons {\n  color: #827717;\n}\n.lime-a100 {\n  background: #F4FF81;\n}\n.lime-a100-text, .lime-a100-text .material-icons {\n  color: #F4FF81;\n}\n.lime-a200 {\n  background: #EEFF41;\n}\n.lime-a200-text, .lime-a200-text .material-icons {\n  color: #EEFF41;\n}\n.lime-a400 {\n  background: #C6FF00;\n}\n.lime-a400-text, .lime-a400-text .material-icons {\n  color: #C6FF00;\n}\n.lime-a700 {\n  background: #AEEA00;\n}\n.lime-a700-text, .lime-a700-text .material-icons {\n  color: #AEEA00;\n}\n.yellow, .yellow-500 {\n  background: #FFEB3B;\n}\n.yellow-text, .yellow-500-text, .yellow-text .material-icons, .yellow-500-text .material-icons {\n  color: #FFEB3B;\n}\n.yellow-50 {\n  background: #FFFDE7;\n}\n.yellow-50-text, .yellow-50-text .material-icons {\n  color: #FFFDE7;\n}\n.yellow-100 {\n  background: #FFF9C4;\n}\n.yellow-100-text, .yellow-100-text .material-icons {\n  color: #FFF9C4;\n}\n.yellow-200 {\n  background: #FFF59D;\n}\n.yellow-200-text, .yellow-200-text .material-icons {\n  color: #FFF59D;\n}\n.yellow-300 {\n  background: #FFF176;\n}\n.yellow-300-text, .yellow-300-text .material-icons {\n  color: #FFF176;\n}\n.yellow-400 {\n  background: #FFEE58;\n}\n.yellow-400-text, .yellow-400-text .material-icons {\n  color: #FFEE58;\n}\n.yellow-600 {\n  background: #FDD835;\n}\n.yellow-600-text, .yellow-600-text .material-icons {\n  color: #FDD835;\n}\n.yellow-700 {\n  background: #FBC02D;\n}\n.yellow-700-text, .yellow-700-text .material-icons {\n  color: #FBC02D;\n}\n.yellow-800 {\n  background: #F9A825;\n}\n.yellow-800-text, .yellow-800-text .material-icons {\n  color: #F9A825;\n}\n.yellow-900 {\n  background: #F57F17;\n}\n.yellow-900-text, .yellow-900-text .material-icons {\n  color: #F57F17;\n}\n.yellow-a100 {\n  background: #FFFF8D;\n}\n.yellow-a100-text, .yellow-a100-text .material-icons {\n  color: #FFFF8D;\n}\n.yellow-a200 {\n  background: #FFFF00;\n}\n.yellow-a200-text, .yellow-a200-text .material-icons {\n  color: #FFFF00;\n}\n.yellow-a400 {\n  background: #FFEA00;\n}\n.yellow-a400-text, .yellow-a400-text .material-icons {\n  color: #FFEA00;\n}\n.yellow-a700 {\n  background: #FFD600;\n}\n.yellow-a700-text, .yellow-a700-text .material-icons {\n  color: #FFD600;\n}\n.amber, .amber-500 {\n  background: #FFC107;\n}\n.amber-text, .amber-500-text, .amber-text .material-icons, .amber-500-text .material-icons {\n  color: #FFC107;\n}\n.amber-50 {\n  background: #FFF8E1;\n}\n.amber-50-text, .amber-50-text .material-icons {\n  color: #FFF8E1;\n}\n.amber-100 {\n  background: #FFECB3;\n}\n.amber-100-text, .amber-100-text .material-icons {\n  color: #FFECB3;\n}\n.amber-200 {\n  background: #FFE082;\n}\n.amber-200-text, .amber-200-text .material-icons {\n  color: #FFE082;\n}\n.amber-300 {\n  background: #FFD54F;\n}\n.amber-300-text, .amber-300-text .material-icons {\n  color: #FFD54F;\n}\n.amber-400 {\n  background: #FFCA28;\n}\n.amber-400-text, .amber-400-text .material-icons {\n  color: #FFCA28;\n}\n.amber-600 {\n  background: #FFB300;\n}\n.amber-600-text, .amber-600-text .material-icons {\n  color: #FFB300;\n}\n.amber-700 {\n  background: #FFA000;\n}\n.amber-700-text, .amber-700-text .material-icons {\n  color: #FFA000;\n}\n.amber-800 {\n  background: #FF8F00;\n}\n.amber-800-text, .amber-800-text .material-icons {\n  color: #FF8F00;\n}\n.amber-900 {\n  background: #FF6F00;\n}\n.amber-900-text, .amber-900-text .material-icons {\n  color: #FF6F00;\n}\n.amber-a100 {\n  background: #FFE57F;\n}\n.amber-a100-text, .amber-a100-text .material-icons {\n  color: #FFE57F;\n}\n.amber-a200 {\n  background: #FFD740;\n}\n.amber-a200-text, .amber-a200-text .material-icons {\n  color: #FFD740;\n}\n.amber-a400 {\n  background: #FFC400;\n}\n.amber-a400-text, .amber-a400-text .material-icons {\n  color: #FFC400;\n}\n.amber-a700 {\n  background: #FFAB00;\n}\n.amber-a700-text, .amber-a700-text .material-icons {\n  color: #FFAB00;\n}\n.orange, .orange-500 {\n  background: #FF9800;\n}\n.orange-text, .orange-500-text, .orange-text .material-icons, .orange-500-text .material-icons {\n  color: #FF9800;\n}\n.orange-50 {\n  background: #FFF3E0;\n}\n.orange-50-text, .orange-50-text .material-icons {\n  color: #FFF3E0;\n}\n.orange-100 {\n  background: #FFE0B2;\n}\n.orange-100-text, .orange-100-text .material-icons {\n  color: #FFE0B2;\n}\n.orange-200 {\n  background: #FFCC80;\n}\n.orange-200-text, .orange-200-text .material-icons {\n  color: #FFCC80;\n}\n.orange-300 {\n  background: #FFB74D;\n}\n.orange-300-text, .orange-300-text .material-icons {\n  color: #FFB74D;\n}\n.orange-400 {\n  background: #FFA726;\n}\n.orange-400-text, .orange-400-text .material-icons {\n  color: #FFA726;\n}\n.orange-600 {\n  background: #FB8C00;\n}\n.orange-600-text, .orange-600-text .material-icons {\n  color: #FB8C00;\n}\n.orange-700 {\n  background: #F57C00;\n}\n.orange-700-text, .orange-700-text .material-icons {\n  color: #F57C00;\n}\n.orange-800 {\n  background: #EF6C00;\n}\n.orange-800-text, .orange-800-text .material-icons {\n  color: #EF6C00;\n}\n.orange-900 {\n  background: #E65100;\n}\n.orange-900-text, .orange-900-text .material-icons {\n  color: #E65100;\n}\n.orange-a100 {\n  background: #FFD180;\n}\n.orange-a100-text, .orange-a100-text .material-icons {\n  color: #FFD180;\n}\n.orange-a200 {\n  background: #FFAB40;\n}\n.orange-a200-text, .orange-a200-text .material-icons {\n  color: #FFAB40;\n}\n.orange-a400 {\n  background: #FF9100;\n}\n.orange-a400-text, .orange-a400-text .material-icons {\n  color: #FF9100;\n}\n.orange-a700 {\n  background: #FF6D00;\n}\n.orange-a700-text, .orange-a700-text .material-icons {\n  color: #FF6D00;\n}\n.deep-orange, .deep-orange-500 {\n  background: #FF5722;\n}\n.deep-orange-text, .deep-orange-500-text, .deep-orange-text .material-icons, .deep-orange-500-text .material-icons {\n  color: #FF5722;\n}\n.deep-orange-50 {\n  background: #FBE9E7;\n}\n.deep-orange-50-text, .deep-orange-50-text .material-icons {\n  color: #FBE9E7;\n}\n.deep-orange-100 {\n  background: #FFCCBC;\n}\n.deep-orange-100-text, .deep-orange-100-text .material-icons {\n  color: #FFCCBC;\n}\n.deep-orange-200 {\n  background: #FFAB91;\n}\n.deep-orange-200-text, .deep-orange-200-text .material-icons {\n  color: #FFAB91;\n}\n.deep-orange-300 {\n  background: #FF8A65;\n}\n.deep-orange-300-text, .deep-orange-300-text .material-icons {\n  color: #FF8A65;\n}\n.deep-orange-400 {\n  background: #FF7043;\n}\n.deep-orange-400-text, .deep-orange-400-text .material-icons {\n  color: #FF7043;\n}\n.deep-orange-600 {\n  background: #F4511E;\n}\n.deep-orange-600-text, .deep-orange-600-text .material-icons {\n  color: #F4511E;\n}\n.deep-orange-700 {\n  background: #E64A19;\n}\n.deep-orange-700-text, .deep-orange-700-text .material-icons {\n  color: #E64A19;\n}\n.deep-orange-800 {\n  background: #D84315;\n}\n.deep-orange-800-text, .deep-orange-800-text .material-icons {\n  color: #D84315;\n}\n.deep-orange-900 {\n  background: #BF360C;\n}\n.deep-orange-900-text, .deep-orange-900-text .material-icons {\n  color: #BF360C;\n}\n.deep-orange-a100 {\n  background: #FF9E80;\n}\n.deep-orange-a100-text, .deep-orange-a100-text .material-icons {\n  color: #FF9E80;\n}\n.deep-orange-a200 {\n  background: #FF6E40;\n}\n.deep-orange-a200-text, .deep-orange-a200-text .material-icons {\n  color: #FF6E40;\n}\n.deep-orange-a400 {\n  background: #FF3D00;\n}\n.deep-orange-a400-text, .deep-orange-a400-text .material-icons {\n  color: #FF3D00;\n}\n.deep-orange-a700 {\n  background: #DD2C00;\n}\n.deep-orange-a700-text, .deep-orange-a700-text .material-icons {\n  color: #DD2C00;\n}\n.brown, .brown-500 {\n  background: #795548;\n}\n.brown-text, .brown-500-text, .brown-text .material-icons, .brown-500-text .material-icons {\n  color: #795548;\n}\n.brown-50 {\n  background: #EFEBE9;\n}\n.brown-50-text, .brown-50-text .material-icons {\n  color: #EFEBE9;\n}\n.brown-100 {\n  background: #D7CCC8;\n}\n.brown-100-text, .brown-100-text .material-icons {\n  color: #D7CCC8;\n}\n.brown-200 {\n  background: #BCAAA4;\n}\n.brown-200-text, .brown-200-text .material-icons {\n  color: #BCAAA4;\n}\n.brown-300 {\n  background: #A1887F;\n}\n.brown-300-text, .brown-300-text .material-icons {\n  color: #A1887F;\n}\n.brown-400 {\n  background: #8D6E63;\n}\n.brown-400-text, .brown-400-text .material-icons {\n  color: #8D6E63;\n}\n.brown-600 {\n  background: #6D4C41;\n}\n.brown-600-text, .brown-600-text .material-icons {\n  color: #6D4C41;\n}\n.brown-700 {\n  background: #5D4037;\n}\n.brown-700-text, .brown-700-text .material-icons {\n  color: #5D4037;\n}\n.brown-800 {\n  background: #4E342E;\n}\n.brown-800-text, .brown-800-text .material-icons {\n  color: #4E342E;\n}\n.brown-900 {\n  background: #3E2723;\n}\n.brown-900-text, .brown-900-text .material-icons {\n  color: #3E2723;\n}\n.grey, .grey-500 {\n  background: #9E9E9E;\n}\n.grey-text, .grey-500-text, .grey-text .material-icons, .grey-500-text .material-icons {\n  color: #9E9E9E;\n}\n.grey-50 {\n  background: #FAFAFA;\n}\n.grey-50-text, .grey-50-text .material-icons {\n  color: #FAFAFA;\n}\n.grey-100 {\n  background: #F5F5F5;\n}\n.grey-100-text, .grey-100-text .material-icons {\n  color: #F5F5F5;\n}\n.grey-200 {\n  background: #EEEEEE;\n}\n.grey-200-text, .grey-200-text .material-icons {\n  color: #EEEEEE;\n}\n.grey-300 {\n  background: #E0E0E0;\n}\n.grey-300-text, .grey-300-text .material-icons {\n  color: #E0E0E0;\n}\n.grey-400 {\n  background: #BDBDBD;\n}\n.grey-400-text, .grey-400-text .material-icons {\n  color: #BDBDBD;\n}\n.grey-600 {\n  background: #757575;\n}\n.grey-600-text, .grey-600-text .material-icons {\n  color: #757575;\n}\n.grey-700 {\n  background: #616161;\n}\n.grey-700-text, .grey-700-text .material-icons {\n  color: #616161;\n}\n.grey-800 {\n  background: #424242;\n}\n.grey-800-text, .grey-800-text .material-icons {\n  color: #424242;\n}\n.grey-900 {\n  background: #212121;\n}\n.grey-900-text, .grey-900-text .material-icons {\n  color: #212121;\n}\n.blue-grey, .blue-grey-500 {\n  background: #607D8B;\n}\n.blue-grey-text, .blue-grey-500-text, .blue-grey-text .material-icons, .blue-grey-500-text .material-icons {\n  color: #607D8B;\n}\n.blue-grey-50 {\n  background: #ECEFF1;\n}\n.blue-grey-50-text, .blue-grey-50-text .material-icons {\n  color: #ECEFF1;\n}\n.blue-grey-100 {\n  background: #CFD8DC;\n}\n.blue-grey-100-text, .blue-grey-100-text .material-icons {\n  color: #CFD8DC;\n}\n.blue-grey-200 {\n  background: #B0BEC5;\n}\n.blue-grey-200-text, .blue-grey-200-text .material-icons {\n  color: #B0BEC5;\n}\n.blue-grey-300 {\n  background: #90A4AE;\n}\n.blue-grey-300-text, .blue-grey-300-text .material-icons {\n  color: #90A4AE;\n}\n.blue-grey-400 {\n  background: #78909C;\n}\n.blue-grey-400-text, .blue-grey-400-text .material-icons {\n  color: #78909C;\n}\n.blue-grey-600 {\n  background: #546E7A;\n}\n.blue-grey-600-text, .blue-grey-600-text .material-icons {\n  color: #546E7A;\n}\n.blue-grey-700 {\n  background: #455A64;\n}\n.blue-grey-700-text, .blue-grey-700-text .material-icons {\n  color: #455A64;\n}\n.blue-grey-800 {\n  background: #37474F;\n}\n.blue-grey-800-text, .blue-grey-800-text .material-icons {\n  color: #37474F;\n}\n.blue-grey-900 {\n  background: #263238;\n}\n.blue-grey-900-text, .blue-grey-900-text .material-icons {\n  color: #263238;\n}\n.black {\n  background: #000000;\n}\n.black-text, .black-text .material-icons {\n  color: #000000;\n}\n.white {\n  background: #FFFFFF;\n}\n.white-text, .white-text .material-icons {\n  color: #FFFFFF;\n}\n@media only screen and (min-width: 961px) {\nbody.full-width .appbar .appbar-title {\n    margin-left: 0.85714rem;\n}\n}\n@media only screen and (min-width: 961px) {\nbody.full-width .bottom-nav, body.full-width .bottom-shifting {\n    left: 0;\n    width: 100%;\n}\n}\nbody.full-width .drawer {\n  margin: 0 0 0 -102%;\n}\n@media only screen and (min-width: 961px) {\nbody.full-width .drawer {\n      margin: 0 0 0 -102%;\n}\n}\nbody.full-width .drawer ~ main {\n    left: 0;\n    -webkit-transition: left 300ms cubic-bezier(0, 0, 0.2, 1);\n    -moz-transition: left 300ms cubic-bezier(0, 0, 0.2, 1);\n    -o-transition: left 300ms cubic-bezier(0, 0, 0.2, 1);\n    transition: left 300ms cubic-bezier(0, 0, 0.2, 1);\n}\n@media only screen and (min-width: 961px) and (max-width: 1280px) {\nbody.full-width .drawer ~ main {\n        -webkit-transition: left 390ms cubic-bezier(0, 0, 0.2, 1);\n        -moz-transition: left 390ms cubic-bezier(0, 0, 0.2, 1);\n        -o-transition: left 390ms cubic-bezier(0, 0, 0.2, 1);\n        transition: left 390ms cubic-bezier(0, 0, 0.2, 1);\n}\n}\n@media only screen and (min-width: 1281px) {\nbody.full-width .drawer ~ main {\n        -webkit-transition: left 200ms cubic-bezier(0, 0, 0.2, 1);\n        -moz-transition: left 200ms cubic-bezier(0, 0, 0.2, 1);\n        -o-transition: left 200ms cubic-bezier(0, 0, 0.2, 1);\n        transition: left 200ms cubic-bezier(0, 0, 0.2, 1);\n}\n}\nbody.full-width .drawer.expanded {\n    margin: 0;\n}\n@media only screen and (min-width: 961px) {\nbody.full-width .drawer.expanded ~ main {\n        left: 20rem;\n        -webkit-transition: left 300ms cubic-bezier(0.4, 0, 0.6, 1);\n        -moz-transition: left 300ms cubic-bezier(0.4, 0, 0.6, 1);\n        -o-transition: left 300ms cubic-bezier(0.4, 0, 0.6, 1);\n        transition: left 300ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n}\n@media only screen and (min-width: 961px) and (min-width: 961px) and (max-width: 1280px) {\nbody.full-width .drawer.expanded ~ main {\n      -webkit-transition: left 390ms cubic-bezier(0.4, 0, 0.6, 1);\n      -moz-transition: left 390ms cubic-bezier(0.4, 0, 0.6, 1);\n      -o-transition: left 390ms cubic-bezier(0.4, 0, 0.6, 1);\n      transition: left 390ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n}\n@media only screen and (min-width: 961px) and (min-width: 1281px) {\nbody.full-width .drawer.expanded ~ main {\n      -webkit-transition: left 200ms cubic-bezier(0.4, 0, 0.6, 1);\n      -moz-transition: left 200ms cubic-bezier(0.4, 0, 0.6, 1);\n      -o-transition: left 200ms cubic-bezier(0.4, 0, 0.6, 1);\n      transition: left 200ms cubic-bezier(0.4, 0, 0.6, 1);\n}\n}\n@media only screen and (min-width: 961px) {\nbody.full-width .tabs {\n    left: 0;\n    width: 100%;\n}\n}\n.container {\n  width: 90%;\n  margin: 0 auto;\n}\n@media only screen and (min-width: 1281px) {\n.container {\n      width: 80%;\n}\n}\n.container .appbar {\n    width: 90%;\n}\n@media only screen and (min-width: 1281px) {\n.container .appbar {\n        width: 80%;\n}\n}\n.container .drawer {\n    left: initial;\n}\n.container main, .container .main-content, .container .bottom-nav, .container .bottom-shifting {\n    left: 5%;\n    right: 5%;\n}\n@media only screen and (min-width: 1281px) {\n.container main, .container .main-content, .container .bottom-nav, .container .bottom-shifting {\n        left: calc(10% + 20rem);\n        right: 10%;\n}\n}\n.container .bottom-nav, .container .bottom-shifting {\n    width: calc( 100% - 20rem - ( 5% * 2 ));\n}\n@media only screen and (min-width: 1281px) {\n.container .bottom-nav, .container .bottom-shifting {\n        width: calc(100% - 20rem - (10% * 2));\n}\n}\n.container .tabs {\n    left: 5%;\n    right: 5%;\n}\n@media only screen and (min-width: 1281px) {\n.container .tabs {\n        width: calc( 80% - 20rem + 0.07143rem);\n        left: calc( 10% + ( 20rem - 0.07143rem ));\n        right: 10%;\n}\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(17)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles(parentId, list) {
-  var styles = [];
-  var newStyles = {};
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i];
-    var id = item[0];
-    var css = item[1];
-    var media = item[2];
-    var sourceMap = item[3];
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    };
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] });
-    } else {
-      newStyles[id].parts.push(part);
-    }
-  }
-  return styles;
-};
-
-/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
 /* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__ = __webpack_require__(42);
 var disposed = false
-var normalizeComponent = __webpack_require__(0)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 
@@ -8567,61 +8221,20 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "header",
-    { staticClass: "appbar" },
-    [
-      _c("Icon", {
-        attrs: { name: "menu" },
-        on: {
-          click: function($event) {
-            _vm.triggerDrawer()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "appbar-title" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.title))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "appbar-spacer" }),
-      _vm._v(" "),
-      _vm._t("default")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7240db89", esExports)
-  }
-}
-
-/***/ }),
-/* 20 */
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__ = __webpack_require__(43);
 var disposed = false
-var normalizeComponent = __webpack_require__(0)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 
@@ -8665,38 +8278,10 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "drawer" },
-    [
-      _c("div", { staticClass: "drawer-header" }, [_vm._t("header")], 2),
-      _vm._v(" "),
-      _vm._t("content")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-119c4d1c", esExports)
-  }
-}
-
-/***/ }),
-/* 22 */
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8706,10 +8291,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "full-width" },
     [
       _c(
         "Appbar",
-        { attrs: { title: "Home" } },
+        { attrs: { title: "Home", "drawer-id": _vm.drawerId } },
         [
           _c("Icon", { attrs: { name: "search" } }),
           _vm._v(" "),
@@ -8720,9 +8306,78 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("NavigationDrawer", { staticClass: "drawer-permanent" }, [
-        _c("div", { attrs: { slot: "content" }, slot: "content" })
-      ]),
+      _c(
+        "NavigationDrawer",
+        {
+          staticClass: "drawer-persistent",
+          attrs: { "drawer-id": _vm.drawerId }
+        },
+        [
+          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+            _c("img", {
+              staticClass: "drawer-profile-img",
+              attrs: {
+                src: "/images/profile-icon.jpg",
+                alt: "SMaterial profile example"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "drawer-profile-name" }, [_vm._v("John")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "drawer-profile-more",
+                attrs: { id: "drawer-profile-more" }
+              },
+              [
+                _c("Icon", {
+                  staticClass: "trigger",
+                  attrs: { name: "arrow_drop_down", trigger: "profile" }
+                }),
+                _vm._v(" "),
+                _c("nav", { staticClass: "menu", attrs: { id: "profile" } }, [
+                  _c(
+                    "a",
+                    { attrs: { href: "#" } },
+                    [
+                      _c("Icon", { attrs: { name: "power_settings_new" } }),
+                      _vm._v(" Aanmelden")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { attrs: { href: "#" } },
+                    [
+                      _c("Icon", { attrs: { name: "person_add" } }),
+                      _vm._v(" Registeren")
+                    ],
+                    1
+                  )
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "i",
+                {
+                  staticClass: "material-icons arrow trigger",
+                  attrs: { "data-trigger": "drawer" }
+                },
+                [_vm._v("chevron_left")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "content" }, slot: "content" }, [
+            _vm._v("\n            Test\n        ")
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("main")
     ],
@@ -8741,17 +8396,17 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__ = __webpack_require__(44);
 var disposed = false
-var normalizeComponent = __webpack_require__(0)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 
@@ -8795,39 +8450,20 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("i", { staticClass: "material-icons" }, [_vm._v(_vm._s(_vm.name))])
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a3f17420", esExports)
-  }
-}
-
-/***/ }),
-/* 25 */
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__ = __webpack_require__(41);
 var disposed = false
-var normalizeComponent = __webpack_require__(0)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 
@@ -8871,29 +8507,10 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("router-link", { staticClass: "button-{type}" })
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-897e5f2e", esExports)
-  }
-}
-
-/***/ }),
-/* 27 */
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8904,23 +8521,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.store = undefined;
 
-var _vue = __webpack_require__(3);
+var _vue = __webpack_require__(5);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(28);
+var _vuex = __webpack_require__(36);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _getters = __webpack_require__(29);
+var _getters = __webpack_require__(37);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _actions = __webpack_require__(30);
+var _actions = __webpack_require__(38);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(31);
+var _mutations = __webpack_require__(39);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
@@ -8936,7 +8553,7 @@ var store = exports.store = new _vuex2.default.Store({
 });
 
 /***/ }),
-/* 28 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9900,10 +9517,10 @@ exports.mapGetters = mapGetters;
 exports.mapActions = mapActions;
 exports.createNamespacedHelpers = createNamespacedHelpers;
 exports.default = index_esm;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 29 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9915,7 +9532,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 30 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9927,7 +9544,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 31 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9937,6 +9554,3731 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {};
+
+/***/ }),
+/* 40 */,
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("router-link", { staticClass: "button-{type}" })
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-897e5f2e", esExports)
+  }
+}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "header",
+    { staticClass: "appbar" },
+    [
+      _c("Icon", {
+        staticClass: "trigger",
+        attrs: { name: "menu", "data-trigger": _vm.drawerId }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "appbar-title" }, [
+        _c("h1", [_vm._v(_vm._s(_vm.title))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "appbar-spacer" }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7240db89", esExports)
+  }
+}
+
+/***/ }),
+/* 43 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "drawer", attrs: { id: _vm.drawerId } },
+    [
+      _c("div", { staticClass: "drawer-header" }, [_vm._t("header")], 2),
+      _vm._v(" "),
+      _vm._t("content")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-119c4d1c", esExports)
+  }
+}
+
+/***/ }),
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "i",
+    {
+      staticClass: "material-icons",
+      class: { trigger: _vm.trigger },
+      attrs: { "data-trigger": _vm.trigger }
+    },
+    [_vm._v(_vm._s(_vm.name))]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a3f17420", esExports)
+  }
+}
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * vue-meta v1.4.3
+ * (c) 2018 Declan de Wet & Atinux
+ * @license MIT
+ */
+(function (global, factory) {
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.VueMeta = factory();
+})(undefined, function () {
+  'use strict';
+
+  /*
+  object-assign
+  (c) Sindre Sorhus
+  @license MIT
+  */
+
+  /* eslint-disable no-unused-vars */
+
+  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+  function toObject(val) {
+    if (val === null || val === undefined) {
+      throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+
+    return Object(val);
+  }
+
+  function shouldUseNative() {
+    try {
+      if (!Object.assign) {
+        return false;
+      }
+
+      // Detect buggy property enumeration order in older V8 versions.
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
+      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
+      test1[5] = 'de';
+      if (Object.getOwnPropertyNames(test1)[0] === '5') {
+        return false;
+      }
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      var test2 = {};
+      for (var i = 0; i < 10; i++) {
+        test2['_' + String.fromCharCode(i)] = i;
+      }
+      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+        return test2[n];
+      });
+      if (order2.join('') !== '0123456789') {
+        return false;
+      }
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      var test3 = {};
+      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+        test3[letter] = letter;
+      });
+      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      // We don't expect any of the above to throw, but better to be safe.
+      return false;
+    }
+  }
+
+  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+    var arguments$1 = arguments;
+
+    var from;
+    var to = toObject(target);
+    var symbols;
+
+    for (var s = 1; s < arguments.length; s++) {
+      from = Object(arguments$1[s]);
+
+      for (var key in from) {
+        if (hasOwnProperty.call(from, key)) {
+          to[key] = from[key];
+        }
+      }
+
+      if (getOwnPropertySymbols) {
+        symbols = getOwnPropertySymbols(from);
+        for (var i = 0; i < symbols.length; i++) {
+          if (propIsEnumerable.call(from, symbols[i])) {
+            to[symbols[i]] = from[symbols[i]];
+          }
+        }
+      }
+    }
+
+    return to;
+  };
+
+  var isMergeableObject = function isMergeableObject(value) {
+    return isNonNullObject(value) && !isSpecial(value);
+  };
+
+  function isNonNullObject(value) {
+    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object';
+  }
+
+  function isSpecial(value) {
+    var stringValue = Object.prototype.toString.call(value);
+
+    return stringValue === '[object RegExp]' || stringValue === '[object Date]' || isReactElement(value);
+  }
+
+  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
+
+  function isReactElement(value) {
+    return value.$$typeof === REACT_ELEMENT_TYPE;
+  }
+
+  function emptyTarget(val) {
+    return Array.isArray(val) ? [] : {};
+  }
+
+  function cloneUnlessOtherwiseSpecified(value, optionsArgument) {
+    var clone = !optionsArgument || optionsArgument.clone !== false;
+
+    return clone && isMergeableObject(value) ? deepmerge(emptyTarget(value), value, optionsArgument) : value;
+  }
+
+  function defaultArrayMerge(target, source, optionsArgument) {
+    return target.concat(source).map(function (element) {
+      return cloneUnlessOtherwiseSpecified(element, optionsArgument);
+    });
+  }
+
+  function mergeObject(target, source, optionsArgument) {
+    var destination = {};
+    if (isMergeableObject(target)) {
+      Object.keys(target).forEach(function (key) {
+        destination[key] = cloneUnlessOtherwiseSpecified(target[key], optionsArgument);
+      });
+    }
+    Object.keys(source).forEach(function (key) {
+      if (!isMergeableObject(source[key]) || !target[key]) {
+        destination[key] = cloneUnlessOtherwiseSpecified(source[key], optionsArgument);
+      } else {
+        destination[key] = deepmerge(target[key], source[key], optionsArgument);
+      }
+    });
+    return destination;
+  }
+
+  function deepmerge(target, source, optionsArgument) {
+    var sourceIsArray = Array.isArray(source);
+    var targetIsArray = Array.isArray(target);
+    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
+    var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+    if (!sourceAndTargetTypesMatch) {
+      return cloneUnlessOtherwiseSpecified(source, optionsArgument);
+    } else if (sourceIsArray) {
+      var arrayMerge = options.arrayMerge || defaultArrayMerge;
+      return arrayMerge(target, source, optionsArgument);
+    } else {
+      return mergeObject(target, source, optionsArgument);
+    }
+  }
+
+  deepmerge.all = function deepmergeAll(array, optionsArgument) {
+    if (!Array.isArray(array)) {
+      throw new Error('first argument should be an array');
+    }
+
+    return array.reduce(function (prev, next) {
+      return deepmerge(prev, next, optionsArgument);
+    }, {});
+  };
+
+  var deepmerge_1 = deepmerge;
+
+  /**
+   * lodash (Custom Build) <https://lodash.com/>
+   * Build: `lodash modularize exports="npm" -o ./`
+   * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+   * Released under MIT license <https://lodash.com/license>
+   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+   */
+
+  /** `Object#toString` result references. */
+  var objectTag = '[object Object]';
+
+  /**
+   * Checks if `value` is a host object in IE < 9.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+   */
+  function isHostObject(value) {
+    // Many host objects are `Object` objects that can coerce to strings
+    // despite having improperly defined `toString` methods.
+    var result = false;
+    if (value != null && typeof value.toString != 'function') {
+      try {
+        result = !!(value + '');
+      } catch (e) {}
+    }
+    return result;
+  }
+
+  /**
+   * Creates a unary function that invokes `func` with its argument transformed.
+   *
+   * @private
+   * @param {Function} func The function to wrap.
+   * @param {Function} transform The argument transform.
+   * @returns {Function} Returns the new function.
+   */
+  function overArg(func, transform) {
+    return function (arg) {
+      return func(transform(arg));
+    };
+  }
+
+  /** Used for built-in method references. */
+  var funcProto = Function.prototype;
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the decompiled source of functions. */
+  var funcToString = funcProto.toString;
+
+  /** Used to check objects for own properties. */
+  var hasOwnProperty$1 = objectProto.hasOwnProperty;
+
+  /** Used to infer the `Object` constructor. */
+  var objectCtorString = funcToString.call(Object);
+
+  /**
+   * Used to resolve the
+   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+   * of values.
+   */
+  var objectToString = objectProto.toString;
+
+  /** Built-in value references. */
+  var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+  /**
+   * Checks if `value` is object-like. A value is object-like if it's not `null`
+   * and has a `typeof` result of "object".
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+   * @example
+   *
+   * _.isObjectLike({});
+   * // => true
+   *
+   * _.isObjectLike([1, 2, 3]);
+   * // => true
+   *
+   * _.isObjectLike(_.noop);
+   * // => false
+   *
+   * _.isObjectLike(null);
+   * // => false
+   */
+  function isObjectLike(value) {
+    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+  }
+
+  /**
+   * Checks if `value` is a plain object, that is, an object created by the
+   * `Object` constructor or one with a `[[Prototype]]` of `null`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.8.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   * }
+   *
+   * _.isPlainObject(new Foo);
+   * // => false
+   *
+   * _.isPlainObject([1, 2, 3]);
+   * // => false
+   *
+   * _.isPlainObject({ 'x': 0, 'y': 0 });
+   * // => true
+   *
+   * _.isPlainObject(Object.create(null));
+   * // => true
+   */
+  function isPlainObject(value) {
+    if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
+      return false;
+    }
+    var proto = getPrototype(value);
+    if (proto === null) {
+      return true;
+    }
+    var Ctor = hasOwnProperty$1.call(proto, 'constructor') && proto.constructor;
+    return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+  }
+
+  var lodash_isplainobject = isPlainObject;
+
+  /**
+   * checks if passed argument is an array
+   * @param  {any}  arr - the object to check
+   * @return {Boolean} - true if `arr` is an array
+   */
+  function isArray(arr) {
+    return Array.isArray ? Array.isArray(arr) : Object.prototype.toString.call(arr) === '[object Array]';
+  }
+
+  /**
+   * Returns the `opts.option` $option value of the given `opts.component`.
+   * If methods are encountered, they will be bound to the component context.
+   * If `opts.deep` is true, will recursively merge all child component
+   * `opts.option` $option values into the returned result.
+   *
+   * @param  {Object} opts - options
+   * @param  {Object} opts.component - Vue component to fetch option data from
+   * @param  {String} opts.option - what option to look for
+   * @param  {Boolean} opts.deep - look for data in child components as well?
+   * @param  {Function} opts.arrayMerge - how should arrays be merged?
+   * @param  {Object} [result={}] - result so far
+   * @return {Object} result - final aggregated result
+   */
+  function getComponentOption(opts, result) {
+    if (result === void 0) result = {};
+
+    var component = opts.component;
+    var option = opts.option;
+    var deep = opts.deep;
+    var arrayMerge = opts.arrayMerge;
+    var $options = component.$options;
+
+    if (component._inactive) {
+      return result;
+    }
+
+    // only collect option data if it exists
+    if (typeof $options[option] !== 'undefined' && $options[option] !== null) {
+      var data = $options[option];
+
+      // if option is a function, replace it with it's result
+      if (typeof data === 'function') {
+        data = data.call(component);
+      }
+
+      if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
+        // merge with existing options
+        result = deepmerge_1(result, data, { arrayMerge: arrayMerge });
+      } else {
+        result = data;
+      }
+    }
+
+    // collect & aggregate child options if deep = true
+    if (deep && component.$children.length) {
+      component.$children.forEach(function (childComponent) {
+        result = getComponentOption({
+          component: childComponent,
+          option: option,
+          deep: deep,
+          arrayMerge: arrayMerge
+        }, result);
+      });
+    }
+
+    return result;
+  }
+
+  var escapeHTML = function escapeHTML(str) {
+    return typeof window === 'undefined'
+    // server-side escape sequence
+    ? String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;')
+    // client-side escape sequence
+    : String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, '\'');
+  };
+
+  function _getMetaInfo(options) {
+    if (options === void 0) options = {};
+
+    var keyName = options.keyName;
+    var tagIDKeyName = options.tagIDKeyName;
+    /**
+     * Returns the correct meta info for the given component
+     * (child components will overwrite parent meta info)
+     *
+     * @param  {Object} component - the Vue instance to get meta info from
+     * @return {Object} - returned meta info
+     */
+    return function getMetaInfo(component) {
+      // set some sane defaults
+      var defaultInfo = {
+        title: '',
+        titleChunk: '',
+        titleTemplate: '%s',
+        htmlAttrs: {},
+        bodyAttrs: {},
+        headAttrs: {},
+        meta: [],
+        base: [],
+        link: [],
+        style: [],
+        script: [],
+        noscript: [],
+        __dangerouslyDisableSanitizers: [],
+        __dangerouslyDisableSanitizersByTagID: {}
+      };
+
+      // collect & aggregate all metaInfo $options
+      var info = getComponentOption({
+        component: component,
+        option: keyName,
+        deep: true,
+        arrayMerge: function arrayMerge(target, source) {
+          // we concat the arrays without merging objects contained in,
+          // but we check for a `vmid` property on each object in the array
+          // using an O(1) lookup associative array exploit
+          // note the use of "for in" - we are looping through arrays here, not
+          // plain objects
+          var destination = [];
+          for (var targetIndex in target) {
+            var targetItem = target[targetIndex];
+            var shared = false;
+            for (var sourceIndex in source) {
+              var sourceItem = source[sourceIndex];
+              if (targetItem[tagIDKeyName] && targetItem[tagIDKeyName] === sourceItem[tagIDKeyName]) {
+                shared = true;
+                break;
+              }
+            }
+            if (!shared) {
+              destination.push(targetItem);
+            }
+          }
+
+          return destination.concat(source);
+        }
+      });
+
+      // backup the title chunk in case user wants access to it
+      if (info.title) {
+        info.titleChunk = info.title;
+      }
+
+      // replace title with populated template
+      if (info.titleTemplate) {
+        if (typeof info.titleTemplate === 'function') {
+          info.title = info.titleTemplate.call(component, info.titleChunk);
+        } else {
+          info.title = info.titleTemplate.replace(/%s/g, info.titleChunk);
+        }
+      }
+
+      // convert base tag to an array so it can be handled the same way
+      // as the other tags
+      if (info.base) {
+        info.base = Object.keys(info.base).length ? [info.base] : [];
+      }
+
+      var ref = info.__dangerouslyDisableSanitizers;
+      var refByTagID = info.__dangerouslyDisableSanitizersByTagID;
+
+      // sanitizes potentially dangerous characters
+      var escape = function escape(info) {
+        return Object.keys(info).reduce(function (escaped, key) {
+          var isDisabled = ref && ref.indexOf(key) > -1;
+          var tagID = info[tagIDKeyName];
+          if (!isDisabled && tagID) {
+            isDisabled = refByTagID && refByTagID[tagID] && refByTagID[tagID].indexOf(key) > -1;
+          }
+          var val = info[key];
+          escaped[key] = val;
+          if (key === '__dangerouslyDisableSanitizers' || key === '__dangerouslyDisableSanitizersByTagID') {
+            return escaped;
+          }
+          if (!isDisabled) {
+            if (typeof val === 'string') {
+              escaped[key] = escapeHTML(val);
+            } else if (lodash_isplainobject(val)) {
+              escaped[key] = escape(val);
+            } else if (isArray(val)) {
+              escaped[key] = val.map(escape);
+            } else {
+              escaped[key] = val;
+            }
+          } else {
+            escaped[key] = val;
+          }
+
+          return escaped;
+        }, {});
+      };
+
+      // merge with defaults
+      info = deepmerge_1(defaultInfo, info);
+
+      // begin sanitization
+      info = escape(info);
+
+      return info;
+    };
+  }
+
+  function _titleGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates title output for the server
+     *
+     * @param  {'title'} type - the string "title"
+     * @param  {String} data - the title text
+     * @return {Object} - the title generator
+     */
+    return function titleGenerator(type, data) {
+      return {
+        text: function text() {
+          return "<" + type + " " + attribute + "=\"true\">" + data + "</" + type + ">";
+        }
+      };
+    };
+  }
+
+  function _attrsGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates tag attributes for use on the server.
+     *
+     * @param  {('bodyAttrs'|'htmlAttrs'|'headAttrs')} type - the type of attributes to generate
+     * @param  {Object} data - the attributes to generate
+     * @return {Object} - the attribute generator
+     */
+    return function attrsGenerator(type, data) {
+      return {
+        text: function text() {
+          var attributeStr = '';
+          var watchedAttrs = [];
+          for (var attr in data) {
+            if (data.hasOwnProperty(attr)) {
+              watchedAttrs.push(attr);
+              attributeStr += (typeof data[attr] !== 'undefined' ? attr + "=\"" + data[attr] + "\"" : attr) + " ";
+            }
+          }
+          attributeStr += attribute + "=\"" + watchedAttrs.join(',') + "\"";
+          return attributeStr.trim();
+        }
+      };
+    };
+  }
+
+  function _tagGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates meta, base, link, style, script, noscript tags for use on the server
+     *
+     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} the name of the tag
+     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
+     * @return {Object} - the tag generator
+     */
+    return function tagGenerator(type, tags) {
+      return {
+        text: function text(ref) {
+          if (ref === void 0) ref = {};
+          var body = ref.body;if (body === void 0) body = false;
+
+          // build a string containing all tags of this type
+          return tags.reduce(function (tagsStr, tag) {
+            if (!!tag.body !== body) {
+              return tagsStr;
+            }
+            // build a string containing all attributes of this tag
+            var attrs = Object.keys(tag).reduce(function (attrsStr, attr) {
+              switch (attr) {
+                // these attributes are treated as children on the tag
+                case 'innerHTML':
+                case 'cssText':
+                case 'once':
+                  return attrsStr;
+                // these form the attribute list for this tag
+                default:
+                  if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
+                    return attrsStr + " data-" + attr + "=\"" + tag[attr] + "\"";
+                  }
+                  return typeof tag[attr] === 'undefined' ? attrsStr + " " + attr : attrsStr + " " + attr + "=\"" + tag[attr] + "\"";
+              }
+            }, '').trim();
+
+            // grab child content from one of these attributes, if possible
+            var content = tag.innerHTML || tag.cssText || '';
+
+            // these tag types will have content inserted
+            var closed = ['noscript', 'script', 'style'].indexOf(type) === -1;
+
+            // generate tag exactly without any other redundance attribute
+            var observeTag = tag.once ? '' : attribute + "=\"true\" ";
+
+            // the final string for this specific tag
+            return closed ? tagsStr + "<" + type + " " + observeTag + attrs + "/>" : tagsStr + "<" + type + " " + observeTag + attrs + ">" + content + "</" + type + ">";
+          }, '');
+        }
+      };
+    };
+  }
+
+  function _generateServerInjector(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Converts a meta info property to one that can be stringified on the server
+     *
+     * @param  {String} type - the type of data to convert
+     * @param  {(String|Object|Array<Object>)} data - the data value
+     * @return {Object} - the new injector
+     */
+    return function generateServerInjector(type, data) {
+      switch (type) {
+        case 'title':
+          return _titleGenerator(options)(type, data);
+        case 'htmlAttrs':
+        case 'bodyAttrs':
+        case 'headAttrs':
+          return _attrsGenerator(options)(type, data);
+        default:
+          return _tagGenerator(options)(type, data);
+      }
+    };
+  }
+
+  function _inject(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Converts the state of the meta info object such that each item
+     * can be compiled to a tag string on the server
+     *
+     * @this {Object} - Vue instance - ideally the root component
+     * @return {Object} - server meta info with `toString` methods
+     */
+    return function inject() {
+      // get meta info with sensible defaults
+      var info = _getMetaInfo(options)(this.$root);
+
+      // generate server injectors
+      for (var key in info) {
+        if (info.hasOwnProperty(key) && key !== 'titleTemplate' && key !== 'titleChunk') {
+          info[key] = _generateServerInjector(options)(key, info[key]);
+        }
+      }
+
+      return info;
+    };
+  }
+
+  function _updateTitle() {
+    /**
+     * updates the document title
+     *
+     * @param  {String} title - the new title of the document
+     */
+    return function updateTitle(title) {
+      if (title === void 0) title = document.title;
+
+      document.title = title;
+    };
+  }
+
+  function _updateTagAttributes(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * updates the document's html tag attributes
+     *
+     * @param  {Object} attrs - the new document html attributes
+     * @param  {HTMLElement} tag - the HTMLElment tag to update with new attrs
+     */
+    return function updateTagAttributes(attrs, tag) {
+      var vueMetaAttrString = tag.getAttribute(attribute);
+      var vueMetaAttrs = vueMetaAttrString ? vueMetaAttrString.split(',') : [];
+      var toRemove = [].concat(vueMetaAttrs);
+      for (var attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          var val = attrs[attr] || '';
+          tag.setAttribute(attr, val);
+          if (vueMetaAttrs.indexOf(attr) === -1) {
+            vueMetaAttrs.push(attr);
+          }
+          var saveIndex = toRemove.indexOf(attr);
+          if (saveIndex !== -1) {
+            toRemove.splice(saveIndex, 1);
+          }
+        }
+      }
+      var i = toRemove.length - 1;
+      for (; i >= 0; i--) {
+        tag.removeAttribute(toRemove[i]);
+      }
+      if (vueMetaAttrs.length === toRemove.length) {
+        tag.removeAttribute(attribute);
+      } else {
+        tag.setAttribute(attribute, vueMetaAttrs.join(','));
+      }
+    };
+  }
+
+  // borrow the slice method
+  var toArray = Function.prototype.call.bind(Array.prototype.slice);
+
+  function _updateTags(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Updates meta tags inside <head> and <body> on the client. Borrowed from `react-helmet`:
+     * https://github.com/nfl/react-helmet/blob/004d448f8de5f823d10f838b02317521180f34da/src/Helmet.js#L195-L245
+     *
+     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} type - the name of the tag
+     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
+     * @return {Object} - a representation of what tags changed
+     */
+    return function updateTags(type, tags, headTag, bodyTag) {
+      var oldHeadTags = toArray(headTag.querySelectorAll(type + "[" + attribute + "]"));
+      var oldBodyTags = toArray(bodyTag.querySelectorAll(type + "[" + attribute + "][data-body=\"true\"]"));
+      var newTags = [];
+      var indexToDelete;
+
+      if (tags.length > 1) {
+        // remove duplicates that could have been found by merging tags
+        // which include a mixin with metaInfo and that mixin is used
+        // by multiple components on the same page
+        var found = [];
+        tags = tags.map(function (x) {
+          var k = JSON.stringify(x);
+          if (found.indexOf(k) < 0) {
+            found.push(k);
+            return x;
+          }
+        }).filter(function (x) {
+          return x;
+        });
+      }
+
+      if (tags && tags.length) {
+        tags.forEach(function (tag) {
+          var newElement = document.createElement(type);
+          var oldTags = tag.body !== true ? oldHeadTags : oldBodyTags;
+
+          for (var attr in tag) {
+            if (tag.hasOwnProperty(attr)) {
+              if (attr === 'innerHTML') {
+                newElement.innerHTML = tag.innerHTML;
+              } else if (attr === 'cssText') {
+                if (newElement.styleSheet) {
+                  newElement.styleSheet.cssText = tag.cssText;
+                } else {
+                  newElement.appendChild(document.createTextNode(tag.cssText));
+                }
+              } else if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
+                var _attr = "data-" + attr;
+                var value = typeof tag[attr] === 'undefined' ? '' : tag[attr];
+                newElement.setAttribute(_attr, value);
+              } else {
+                var value$1 = typeof tag[attr] === 'undefined' ? '' : tag[attr];
+                newElement.setAttribute(attr, value$1);
+              }
+            }
+          }
+
+          newElement.setAttribute(attribute, 'true');
+
+          // Remove a duplicate tag from domTagstoRemove, so it isn't cleared.
+          if (oldTags.some(function (existingTag, index) {
+            indexToDelete = index;
+            return newElement.isEqualNode(existingTag);
+          })) {
+            oldTags.splice(indexToDelete, 1);
+          } else {
+            newTags.push(newElement);
+          }
+        });
+      }
+      var oldTags = oldHeadTags.concat(oldBodyTags);
+      oldTags.forEach(function (tag) {
+        return tag.parentNode.removeChild(tag);
+      });
+      newTags.forEach(function (tag) {
+        if (tag.getAttribute('data-body') === 'true') {
+          bodyTag.appendChild(tag);
+        } else {
+          headTag.appendChild(tag);
+        }
+      });
+
+      return { oldTags: oldTags, newTags: newTags };
+    };
+  }
+
+  function _updateClientMetaInfo(options) {
+    if (options === void 0) options = {};
+
+    var ssrAttribute = options.ssrAttribute;
+
+    /**
+     * Performs client-side updates when new meta info is received
+     *
+     * @param  {Object} newInfo - the meta info to update to
+     */
+    return function updateClientMetaInfo(newInfo) {
+      var htmlTag = document.getElementsByTagName('html')[0];
+      // if this is not a server render, then update
+      if (htmlTag.getAttribute(ssrAttribute) === null) {
+        // initialize tracked changes
+        var addedTags = {};
+        var removedTags = {};
+
+        Object.keys(newInfo).forEach(function (key) {
+          switch (key) {
+            // update the title
+            case 'title':
+              _updateTitle(options)(newInfo.title);
+              break;
+            // update attributes
+            case 'htmlAttrs':
+              _updateTagAttributes(options)(newInfo[key], htmlTag);
+              break;
+            case 'bodyAttrs':
+              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('body')[0]);
+              break;
+            case 'headAttrs':
+              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('head')[0]);
+              break;
+            // ignore these
+            case 'titleChunk':
+            case 'titleTemplate':
+            case 'changed':
+            case '__dangerouslyDisableSanitizers':
+              break;
+            // catch-all update tags
+            default:
+              var headTag = document.getElementsByTagName('head')[0];
+              var bodyTag = document.getElementsByTagName('body')[0];
+              var ref = _updateTags(options)(key, newInfo[key], headTag, bodyTag);
+              var oldTags = ref.oldTags;
+              var newTags = ref.newTags;
+              if (newTags.length) {
+                addedTags[key] = newTags;
+                removedTags[key] = oldTags;
+              }
+          }
+        });
+
+        // emit "event" with new info
+        if (typeof newInfo.changed === 'function') {
+          newInfo.changed.call(this, newInfo, addedTags, removedTags);
+        }
+      } else {
+        // remove the server render attribute so we can update on changes
+        htmlTag.removeAttribute(ssrAttribute);
+      }
+    };
+  }
+
+  function _refresh(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * When called, will update the current meta info with new meta info.
+     * Useful when updating meta info as the result of an asynchronous
+     * action that resolves after the initial render takes place.
+     *
+     * Credit to [Sébastien Chopin](https://github.com/Atinux) for the suggestion
+     * to implement this method.
+     *
+     * @return {Object} - new meta info
+     */
+    return function refresh() {
+      var info = _getMetaInfo(options)(this.$root);
+      _updateClientMetaInfo(options).call(this, info);
+      return info;
+    };
+  }
+
+  function _$meta(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Returns an injector for server-side rendering.
+     * @this {Object} - the Vue instance (a root component)
+     * @return {Object} - injector
+     */
+    return function $meta() {
+      return {
+        inject: _inject(options).bind(this),
+        refresh: _refresh(options).bind(this)
+      };
+    };
+  }
+
+  // fallback to timers if rAF not present
+  var stopUpdate = (typeof window !== 'undefined' ? window.cancelAnimationFrame : null) || clearTimeout;
+  var startUpdate = (typeof window !== 'undefined' ? window.requestAnimationFrame : null) || function (cb) {
+    return setTimeout(cb, 0);
+  };
+
+  /**
+   * Performs a batched update. Uses requestAnimationFrame to prevent
+   * calling a function too many times in quick succession.
+   * You need to pass it an ID (which can initially be `null`),
+   * but be sure to overwrite that ID with the return value of batchUpdate.
+   *
+   * @param  {(null|Number)} id - the ID of this update
+   * @param  {Function} callback - the update to perform
+   * @return {Number} id - a new ID
+   */
+  function batchUpdate(id, callback) {
+    stopUpdate(id);
+    return startUpdate(function () {
+      id = null;
+      callback();
+    });
+  }
+
+  /**
+   * These are constant variables used throughout the application.
+   */
+
+  // This is the name of the component option that contains all the information that
+  // gets converted to the various meta tags & attributes for the page.
+  var VUE_META_KEY_NAME = 'metaInfo';
+
+  // This is the attribute vue-meta augments on elements to know which it should
+  // manage and which it should ignore.
+  var VUE_META_ATTRIBUTE = 'data-vue-meta';
+
+  // This is the attribute that goes on the `html` tag to inform `vue-meta`
+  // that the server has already generated the meta tags for the initial render.
+  var VUE_META_SERVER_RENDERED_ATTRIBUTE = 'data-vue-meta-server-rendered';
+
+  // This is the property that tells vue-meta to overwrite (instead of append)
+  // an item in a tag list. For example, if you have two `meta` tag list items
+  // that both have `vmid` of "description", then vue-meta will overwrite the
+  // shallowest one with the deepest one.
+  var VUE_META_TAG_LIST_ID_KEY_NAME = 'vmid';
+
+  // automatic install
+  if (typeof window !== 'undefined' && typeof window.Vue !== 'undefined') {
+    Vue.use(VueMeta);
+  }
+
+  /**
+   * Plugin install function.
+   * @param {Function} Vue - the Vue constructor.
+   */
+  function VueMeta(Vue, options) {
+    if (options === void 0) options = {};
+
+    // set some default options
+    var defaultOptions = {
+      keyName: VUE_META_KEY_NAME,
+      attribute: VUE_META_ATTRIBUTE,
+      ssrAttribute: VUE_META_SERVER_RENDERED_ATTRIBUTE,
+      tagIDKeyName: VUE_META_TAG_LIST_ID_KEY_NAME
+    };
+    // combine options
+    options = objectAssign(defaultOptions, options);
+
+    // bind the $meta method to this component instance
+    Vue.prototype.$meta = _$meta(options);
+
+    // store an id to keep track of DOM updates
+    var batchID = null;
+
+    // watch for client side component updates
+    Vue.mixin({
+      beforeCreate: function beforeCreate() {
+        // Add a marker to know if it uses metaInfo
+        if (typeof this.$options[options.keyName] !== 'undefined') {
+          this._hasMetaInfo = true;
+        }
+        // coerce function-style metaInfo to a computed prop so we can observe
+        // it on creation
+        if (typeof this.$options[options.keyName] === 'function') {
+          if (typeof this.$options.computed === 'undefined') {
+            this.$options.computed = {};
+          }
+          this.$options.computed.$metaInfo = this.$options[options.keyName];
+        }
+      },
+      created: function created() {
+        var this$1 = this;
+
+        // if computed $metaInfo exists, watch it for updates & trigger a refresh
+        // when it changes (i.e. automatically handle async actions that affect metaInfo)
+        // credit for this suggestion goes to [Sébastien Chopin](https://github.com/Atinux)
+        if (!this.$isServer && this.$metaInfo) {
+          this.$watch('$metaInfo', function () {
+            // batch potential DOM updates to prevent extraneous re-rendering
+            batchID = batchUpdate(batchID, function () {
+              return this$1.$meta().refresh();
+            });
+          });
+        }
+      },
+      activated: function activated() {
+        var this$1 = this;
+
+        if (this._hasMetaInfo) {
+          // batch potential DOM updates to prevent extraneous re-rendering
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      deactivated: function deactivated() {
+        var this$1 = this;
+
+        if (this._hasMetaInfo) {
+          // batch potential DOM updates to prevent extraneous re-rendering
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      beforeMount: function beforeMount() {
+        var this$1 = this;
+
+        // batch potential DOM updates to prevent extraneous re-rendering
+        if (this._hasMetaInfo) {
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      destroyed: function destroyed() {
+        var this$1 = this;
+
+        // do not trigger refresh on the server side
+        if (this.$isServer) {
+          return;
+        }
+        // re-render meta data when returning from a child component to parent
+        if (this._hasMetaInfo) {
+          // Wait that element is hidden before refreshing meta tags (to support animations)
+          var interval = setInterval(function () {
+            if (this$1.$el.offsetParent !== null) {
+              return;
+            }
+            clearInterval(interval);
+            batchID = batchUpdate(batchID, function () {
+              return this$1.$meta().refresh();
+            });
+          }, 50);
+        }
+      }
+    });
+  }
+
+  var version = "1.4.3";
+
+  VueMeta.version = version;
+
+  return VueMeta;
+});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WebRoutes = undefined;
+
+var _vue = __webpack_require__(5);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueRouter = __webpack_require__(47);
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _vueMeta = __webpack_require__(45);
+
+var _vueMeta2 = _interopRequireDefault(_vueMeta);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueRouter2.default);
+_vue2.default.use(_vueMeta2.default);
+
+var WebRoutes = exports.WebRoutes = new _vueRouter2.default({});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+  * vue-router v3.0.1
+  * (c) 2017 Evan You
+  * @license MIT
+  */
+/*  */
+
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error("[vue-router] " + message);
+  }
+}
+
+function warn(condition, message) {
+  if (process.env.NODE_ENV !== 'production' && !condition) {
+    typeof console !== 'undefined' && console.warn("[vue-router] " + message);
+  }
+}
+
+function isError(err) {
+  return Object.prototype.toString.call(err).indexOf('Error') > -1;
+}
+
+var View = {
+  name: 'router-view',
+  functional: true,
+  props: {
+    name: {
+      type: String,
+      default: 'default'
+    }
+  },
+  render: function render(_, ref) {
+    var props = ref.props;
+    var children = ref.children;
+    var parent = ref.parent;
+    var data = ref.data;
+
+    data.routerView = true;
+
+    // directly use parent context's createElement() function
+    // so that components rendered by router-view can resolve named slots
+    var h = parent.$createElement;
+    var name = props.name;
+    var route = parent.$route;
+    var cache = parent._routerViewCache || (parent._routerViewCache = {});
+
+    // determine current view depth, also check to see if the tree
+    // has been toggled inactive but kept-alive.
+    var depth = 0;
+    var inactive = false;
+    while (parent && parent._routerRoot !== parent) {
+      if (parent.$vnode && parent.$vnode.data.routerView) {
+        depth++;
+      }
+      if (parent._inactive) {
+        inactive = true;
+      }
+      parent = parent.$parent;
+    }
+    data.routerViewDepth = depth;
+
+    // render previous view if the tree is inactive and kept-alive
+    if (inactive) {
+      return h(cache[name], data, children);
+    }
+
+    var matched = route.matched[depth];
+    // render empty node if no matched route
+    if (!matched) {
+      cache[name] = null;
+      return h();
+    }
+
+    var component = cache[name] = matched.components[name];
+
+    // attach instance registration hook
+    // this will be called in the instance's injected lifecycle hooks
+    data.registerRouteInstance = function (vm, val) {
+      // val could be undefined for unregistration
+      var current = matched.instances[name];
+      if (val && current !== vm || !val && current === vm) {
+        matched.instances[name] = val;
+      }
+    }
+
+    // also register instance in prepatch hook
+    // in case the same component instance is reused across different routes
+    ;(data.hook || (data.hook = {})).prepatch = function (_, vnode) {
+      matched.instances[name] = vnode.componentInstance;
+    };
+
+    // resolve props
+    var propsToPass = data.props = resolveProps(route, matched.props && matched.props[name]);
+    if (propsToPass) {
+      // clone to prevent mutation
+      propsToPass = data.props = extend({}, propsToPass);
+      // pass non-declared props as attrs
+      var attrs = data.attrs = data.attrs || {};
+      for (var key in propsToPass) {
+        if (!component.props || !(key in component.props)) {
+          attrs[key] = propsToPass[key];
+          delete propsToPass[key];
+        }
+      }
+    }
+
+    return h(component, data, children);
+  }
+};
+
+function resolveProps(route, config) {
+  switch (typeof config === 'undefined' ? 'undefined' : _typeof(config)) {
+    case 'undefined':
+      return;
+    case 'object':
+      return config;
+    case 'function':
+      return config(route);
+    case 'boolean':
+      return config ? route.params : undefined;
+    default:
+      if (process.env.NODE_ENV !== 'production') {
+        warn(false, "props in \"" + route.path + "\" is a " + (typeof config === 'undefined' ? 'undefined' : _typeof(config)) + ", " + "expecting an object, function or boolean.");
+      }
+  }
+}
+
+function extend(to, from) {
+  for (var key in from) {
+    to[key] = from[key];
+  }
+  return to;
+}
+
+/*  */
+
+var encodeReserveRE = /[!'()*]/g;
+var encodeReserveReplacer = function encodeReserveReplacer(c) {
+  return '%' + c.charCodeAt(0).toString(16);
+};
+var commaRE = /%2C/g;
+
+// fixed encodeURIComponent which is more conformant to RFC3986:
+// - escapes [!'()*]
+// - preserve commas
+var encode = function encode(str) {
+  return encodeURIComponent(str).replace(encodeReserveRE, encodeReserveReplacer).replace(commaRE, ',');
+};
+
+var decode = decodeURIComponent;
+
+function resolveQuery(query, extraQuery, _parseQuery) {
+  if (extraQuery === void 0) extraQuery = {};
+
+  var parse = _parseQuery || parseQuery;
+  var parsedQuery;
+  try {
+    parsedQuery = parse(query || '');
+  } catch (e) {
+    process.env.NODE_ENV !== 'production' && warn(false, e.message);
+    parsedQuery = {};
+  }
+  for (var key in extraQuery) {
+    parsedQuery[key] = extraQuery[key];
+  }
+  return parsedQuery;
+}
+
+function parseQuery(query) {
+  var res = {};
+
+  query = query.trim().replace(/^(\?|#|&)/, '');
+
+  if (!query) {
+    return res;
+  }
+
+  query.split('&').forEach(function (param) {
+    var parts = param.replace(/\+/g, ' ').split('=');
+    var key = decode(parts.shift());
+    var val = parts.length > 0 ? decode(parts.join('=')) : null;
+
+    if (res[key] === undefined) {
+      res[key] = val;
+    } else if (Array.isArray(res[key])) {
+      res[key].push(val);
+    } else {
+      res[key] = [res[key], val];
+    }
+  });
+
+  return res;
+}
+
+function stringifyQuery(obj) {
+  var res = obj ? Object.keys(obj).map(function (key) {
+    var val = obj[key];
+
+    if (val === undefined) {
+      return '';
+    }
+
+    if (val === null) {
+      return encode(key);
+    }
+
+    if (Array.isArray(val)) {
+      var result = [];
+      val.forEach(function (val2) {
+        if (val2 === undefined) {
+          return;
+        }
+        if (val2 === null) {
+          result.push(encode(key));
+        } else {
+          result.push(encode(key) + '=' + encode(val2));
+        }
+      });
+      return result.join('&');
+    }
+
+    return encode(key) + '=' + encode(val);
+  }).filter(function (x) {
+    return x.length > 0;
+  }).join('&') : null;
+  return res ? "?" + res : '';
+}
+
+/*  */
+
+var trailingSlashRE = /\/?$/;
+
+function createRoute(record, location, redirectedFrom, router) {
+  var stringifyQuery$$1 = router && router.options.stringifyQuery;
+
+  var query = location.query || {};
+  try {
+    query = clone(query);
+  } catch (e) {}
+
+  var route = {
+    name: location.name || record && record.name,
+    meta: record && record.meta || {},
+    path: location.path || '/',
+    hash: location.hash || '',
+    query: query,
+    params: location.params || {},
+    fullPath: getFullPath(location, stringifyQuery$$1),
+    matched: record ? formatMatch(record) : []
+  };
+  if (redirectedFrom) {
+    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery$$1);
+  }
+  return Object.freeze(route);
+}
+
+function clone(value) {
+  if (Array.isArray(value)) {
+    return value.map(clone);
+  } else if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+    var res = {};
+    for (var key in value) {
+      res[key] = clone(value[key]);
+    }
+    return res;
+  } else {
+    return value;
+  }
+}
+
+// the starting route that represents the initial state
+var START = createRoute(null, {
+  path: '/'
+});
+
+function formatMatch(record) {
+  var res = [];
+  while (record) {
+    res.unshift(record);
+    record = record.parent;
+  }
+  return res;
+}
+
+function getFullPath(ref, _stringifyQuery) {
+  var path = ref.path;
+  var query = ref.query;if (query === void 0) query = {};
+  var hash = ref.hash;if (hash === void 0) hash = '';
+
+  var stringify = _stringifyQuery || stringifyQuery;
+  return (path || '/') + stringify(query) + hash;
+}
+
+function isSameRoute(a, b) {
+  if (b === START) {
+    return a === b;
+  } else if (!b) {
+    return false;
+  } else if (a.path && b.path) {
+    return a.path.replace(trailingSlashRE, '') === b.path.replace(trailingSlashRE, '') && a.hash === b.hash && isObjectEqual(a.query, b.query);
+  } else if (a.name && b.name) {
+    return a.name === b.name && a.hash === b.hash && isObjectEqual(a.query, b.query) && isObjectEqual(a.params, b.params);
+  } else {
+    return false;
+  }
+}
+
+function isObjectEqual(a, b) {
+  if (a === void 0) a = {};
+  if (b === void 0) b = {};
+
+  // handle null value #1566
+  if (!a || !b) {
+    return a === b;
+  }
+  var aKeys = Object.keys(a);
+  var bKeys = Object.keys(b);
+  if (aKeys.length !== bKeys.length) {
+    return false;
+  }
+  return aKeys.every(function (key) {
+    var aVal = a[key];
+    var bVal = b[key];
+    // check nested equality
+    if ((typeof aVal === 'undefined' ? 'undefined' : _typeof(aVal)) === 'object' && (typeof bVal === 'undefined' ? 'undefined' : _typeof(bVal)) === 'object') {
+      return isObjectEqual(aVal, bVal);
+    }
+    return String(aVal) === String(bVal);
+  });
+}
+
+function isIncludedRoute(current, target) {
+  return current.path.replace(trailingSlashRE, '/').indexOf(target.path.replace(trailingSlashRE, '/')) === 0 && (!target.hash || current.hash === target.hash) && queryIncludes(current.query, target.query);
+}
+
+function queryIncludes(current, target) {
+  for (var key in target) {
+    if (!(key in current)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/*  */
+
+// work around weird flow bug
+var toTypes = [String, Object];
+var eventTypes = [String, Array];
+
+var Link = {
+  name: 'router-link',
+  props: {
+    to: {
+      type: toTypes,
+      required: true
+    },
+    tag: {
+      type: String,
+      default: 'a'
+    },
+    exact: Boolean,
+    append: Boolean,
+    replace: Boolean,
+    activeClass: String,
+    exactActiveClass: String,
+    event: {
+      type: eventTypes,
+      default: 'click'
+    }
+  },
+  render: function render(h) {
+    var this$1 = this;
+
+    var router = this.$router;
+    var current = this.$route;
+    var ref = router.resolve(this.to, current, this.append);
+    var location = ref.location;
+    var route = ref.route;
+    var href = ref.href;
+
+    var classes = {};
+    var globalActiveClass = router.options.linkActiveClass;
+    var globalExactActiveClass = router.options.linkExactActiveClass;
+    // Support global empty active class
+    var activeClassFallback = globalActiveClass == null ? 'router-link-active' : globalActiveClass;
+    var exactActiveClassFallback = globalExactActiveClass == null ? 'router-link-exact-active' : globalExactActiveClass;
+    var activeClass = this.activeClass == null ? activeClassFallback : this.activeClass;
+    var exactActiveClass = this.exactActiveClass == null ? exactActiveClassFallback : this.exactActiveClass;
+    var compareTarget = location.path ? createRoute(null, location, null, router) : route;
+
+    classes[exactActiveClass] = isSameRoute(current, compareTarget);
+    classes[activeClass] = this.exact ? classes[exactActiveClass] : isIncludedRoute(current, compareTarget);
+
+    var handler = function handler(e) {
+      if (guardEvent(e)) {
+        if (this$1.replace) {
+          router.replace(location);
+        } else {
+          router.push(location);
+        }
+      }
+    };
+
+    var on = { click: guardEvent };
+    if (Array.isArray(this.event)) {
+      this.event.forEach(function (e) {
+        on[e] = handler;
+      });
+    } else {
+      on[this.event] = handler;
+    }
+
+    var data = {
+      class: classes
+    };
+
+    if (this.tag === 'a') {
+      data.on = on;
+      data.attrs = { href: href };
+    } else {
+      // find the first <a> child and apply listener and href
+      var a = findAnchor(this.$slots.default);
+      if (a) {
+        // in case the <a> is a static node
+        a.isStatic = false;
+        var extend = _Vue.util.extend;
+        var aData = a.data = extend({}, a.data);
+        aData.on = on;
+        var aAttrs = a.data.attrs = extend({}, a.data.attrs);
+        aAttrs.href = href;
+      } else {
+        // doesn't have <a> child, apply listener to self
+        data.on = on;
+      }
+    }
+
+    return h(this.tag, data, this.$slots.default);
+  }
+};
+
+function guardEvent(e) {
+  // don't redirect with control keys
+  if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) {
+    return;
+  }
+  // don't redirect when preventDefault called
+  if (e.defaultPrevented) {
+    return;
+  }
+  // don't redirect on right click
+  if (e.button !== undefined && e.button !== 0) {
+    return;
+  }
+  // don't redirect if `target="_blank"`
+  if (e.currentTarget && e.currentTarget.getAttribute) {
+    var target = e.currentTarget.getAttribute('target');
+    if (/\b_blank\b/i.test(target)) {
+      return;
+    }
+  }
+  // this may be a Weex event which doesn't have this method
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+  return true;
+}
+
+function findAnchor(children) {
+  if (children) {
+    var child;
+    for (var i = 0; i < children.length; i++) {
+      child = children[i];
+      if (child.tag === 'a') {
+        return child;
+      }
+      if (child.children && (child = findAnchor(child.children))) {
+        return child;
+      }
+    }
+  }
+}
+
+var _Vue;
+
+function install(Vue) {
+  if (install.installed && _Vue === Vue) {
+    return;
+  }
+  install.installed = true;
+
+  _Vue = Vue;
+
+  var isDef = function isDef(v) {
+    return v !== undefined;
+  };
+
+  var registerInstance = function registerInstance(vm, callVal) {
+    var i = vm.$options._parentVnode;
+    if (isDef(i) && isDef(i = i.data) && isDef(i = i.registerRouteInstance)) {
+      i(vm, callVal);
+    }
+  };
+
+  Vue.mixin({
+    beforeCreate: function beforeCreate() {
+      if (isDef(this.$options.router)) {
+        this._routerRoot = this;
+        this._router = this.$options.router;
+        this._router.init(this);
+        Vue.util.defineReactive(this, '_route', this._router.history.current);
+      } else {
+        this._routerRoot = this.$parent && this.$parent._routerRoot || this;
+      }
+      registerInstance(this, this);
+    },
+    destroyed: function destroyed() {
+      registerInstance(this);
+    }
+  });
+
+  Object.defineProperty(Vue.prototype, '$router', {
+    get: function get() {
+      return this._routerRoot._router;
+    }
+  });
+
+  Object.defineProperty(Vue.prototype, '$route', {
+    get: function get() {
+      return this._routerRoot._route;
+    }
+  });
+
+  Vue.component('router-view', View);
+  Vue.component('router-link', Link);
+
+  var strats = Vue.config.optionMergeStrategies;
+  // use the same hook merging strategy for route hooks
+  strats.beforeRouteEnter = strats.beforeRouteLeave = strats.beforeRouteUpdate = strats.created;
+}
+
+/*  */
+
+var inBrowser = typeof window !== 'undefined';
+
+/*  */
+
+function resolvePath(relative, base, append) {
+  var firstChar = relative.charAt(0);
+  if (firstChar === '/') {
+    return relative;
+  }
+
+  if (firstChar === '?' || firstChar === '#') {
+    return base + relative;
+  }
+
+  var stack = base.split('/');
+
+  // remove trailing segment if:
+  // - not appending
+  // - appending to trailing slash (last segment is empty)
+  if (!append || !stack[stack.length - 1]) {
+    stack.pop();
+  }
+
+  // resolve relative path
+  var segments = relative.replace(/^\//, '').split('/');
+  for (var i = 0; i < segments.length; i++) {
+    var segment = segments[i];
+    if (segment === '..') {
+      stack.pop();
+    } else if (segment !== '.') {
+      stack.push(segment);
+    }
+  }
+
+  // ensure leading slash
+  if (stack[0] !== '') {
+    stack.unshift('');
+  }
+
+  return stack.join('/');
+}
+
+function parsePath(path) {
+  var hash = '';
+  var query = '';
+
+  var hashIndex = path.indexOf('#');
+  if (hashIndex >= 0) {
+    hash = path.slice(hashIndex);
+    path = path.slice(0, hashIndex);
+  }
+
+  var queryIndex = path.indexOf('?');
+  if (queryIndex >= 0) {
+    query = path.slice(queryIndex + 1);
+    path = path.slice(0, queryIndex);
+  }
+
+  return {
+    path: path,
+    query: query,
+    hash: hash
+  };
+}
+
+function cleanPath(path) {
+  return path.replace(/\/\//g, '/');
+}
+
+var isarray = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+/**
+ * Expose `pathToRegexp`.
+ */
+var pathToRegexp_1 = pathToRegexp;
+var parse_1 = parse;
+var compile_1 = compile;
+var tokensToFunction_1 = tokensToFunction;
+var tokensToRegExp_1 = tokensToRegExp;
+
+/**
+ * The main path matching regexp utility.
+ *
+ * @type {RegExp}
+ */
+var PATH_REGEXP = new RegExp([
+// Match escaped characters that would otherwise appear in future matches.
+// This allows the user to escape special characters that won't transform.
+'(\\\\.)',
+// Match Express-style parameters and un-named parameters with a prefix
+// and optional suffixes. Matches appear as:
+//
+// "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+// "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+// "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+'([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'].join('|'), 'g');
+
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse(str, options) {
+  var tokens = [];
+  var key = 0;
+  var index = 0;
+  var path = '';
+  var defaultDelimiter = options && options.delimiter || '/';
+  var res;
+
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0];
+    var escaped = res[1];
+    var offset = res.index;
+    path += str.slice(index, offset);
+    index = offset + m.length;
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1];
+      continue;
+    }
+
+    var next = str[index];
+    var prefix = res[2];
+    var name = res[3];
+    var capture = res[4];
+    var group = res[5];
+    var modifier = res[6];
+    var asterisk = res[7];
+
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path);
+      path = '';
+    }
+
+    var partial = prefix != null && next != null && next !== prefix;
+    var repeat = modifier === '+' || modifier === '*';
+    var optional = modifier === '?' || modifier === '*';
+    var delimiter = res[2] || defaultDelimiter;
+    var pattern = capture || group;
+
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?'
+    });
+  }
+
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index);
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path);
+  }
+
+  return tokens;
+}
+
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile(str, options) {
+  return tokensToFunction(parse(str, options));
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty(str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+  });
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk(str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+  });
+}
+
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction(tokens) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length);
+
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (_typeof(tokens[i]) === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$');
+    }
+  }
+
+  return function (obj, opts) {
+    var path = '';
+    var data = obj || {};
+    var options = opts || {};
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent;
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i];
+
+      if (typeof token === 'string') {
+        path += token;
+
+        continue;
+      }
+
+      var value = data[token.name];
+      var segment;
+
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix;
+          }
+
+          continue;
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined');
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`');
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue;
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty');
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j]);
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`');
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment;
+        }
+
+        continue;
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value);
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"');
+      }
+
+      path += token.prefix + segment;
+    }
+
+    return path;
+  };
+}
+
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString(str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1');
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup(group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1');
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys(re, keys) {
+  re.keys = keys;
+  return re;
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags(options) {
+  return options.sensitive ? '' : 'i';
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp(path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g);
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
+        optional: false,
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      });
+    }
+  }
+
+  return attachKeys(path, keys);
+}
+
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp(path, keys, options) {
+  var parts = [];
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source);
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options));
+
+  return attachKeys(regexp, keys);
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp(path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options);
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp(tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */keys || options;
+    keys = [];
+  }
+
+  options = options || {};
+
+  var strict = options.strict;
+  var end = options.end !== false;
+  var route = '';
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i];
+
+    if (typeof token === 'string') {
+      route += escapeString(token);
+    } else {
+      var prefix = escapeString(token.prefix);
+      var capture = '(?:' + token.pattern + ')';
+
+      keys.push(token);
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*';
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?';
+        } else {
+          capture = prefix + '(' + capture + ')?';
+        }
+      } else {
+        capture = prefix + '(' + capture + ')';
+      }
+
+      route += capture;
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/');
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter;
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?';
+  }
+
+  if (end) {
+    route += '$';
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)';
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys);
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp(path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */keys || options;
+    keys = [];
+  }
+
+  options = options || {};
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */keys);
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp( /** @type {!Array} */path, /** @type {!Array} */keys, options);
+  }
+
+  return stringToRegexp( /** @type {string} */path, /** @type {!Array} */keys, options);
+}
+
+pathToRegexp_1.parse = parse_1;
+pathToRegexp_1.compile = compile_1;
+pathToRegexp_1.tokensToFunction = tokensToFunction_1;
+pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
+
+/*  */
+
+// $flow-disable-line
+var regexpCompileCache = Object.create(null);
+
+function fillParams(path, params, routeMsg) {
+  try {
+    var filler = regexpCompileCache[path] || (regexpCompileCache[path] = pathToRegexp_1.compile(path));
+    return filler(params || {}, { pretty: true });
+  } catch (e) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn(false, "missing param for " + routeMsg + ": " + e.message);
+    }
+    return '';
+  }
+}
+
+/*  */
+
+function createRouteMap(routes, oldPathList, oldPathMap, oldNameMap) {
+  // the path list is used to control path matching priority
+  var pathList = oldPathList || [];
+  // $flow-disable-line
+  var pathMap = oldPathMap || Object.create(null);
+  // $flow-disable-line
+  var nameMap = oldNameMap || Object.create(null);
+
+  routes.forEach(function (route) {
+    addRouteRecord(pathList, pathMap, nameMap, route);
+  });
+
+  // ensure wildcard routes are always at the end
+  for (var i = 0, l = pathList.length; i < l; i++) {
+    if (pathList[i] === '*') {
+      pathList.push(pathList.splice(i, 1)[0]);
+      l--;
+      i--;
+    }
+  }
+
+  return {
+    pathList: pathList,
+    pathMap: pathMap,
+    nameMap: nameMap
+  };
+}
+
+function addRouteRecord(pathList, pathMap, nameMap, route, parent, matchAs) {
+  var path = route.path;
+  var name = route.name;
+  if (process.env.NODE_ENV !== 'production') {
+    assert(path != null, "\"path\" is required in a route configuration.");
+    assert(typeof route.component !== 'string', "route config \"component\" for path: " + String(path || name) + " cannot be a " + "string id. Use an actual component instead.");
+  }
+
+  var pathToRegexpOptions = route.pathToRegexpOptions || {};
+  var normalizedPath = normalizePath(path, parent, pathToRegexpOptions.strict);
+
+  if (typeof route.caseSensitive === 'boolean') {
+    pathToRegexpOptions.sensitive = route.caseSensitive;
+  }
+
+  var record = {
+    path: normalizedPath,
+    regex: compileRouteRegex(normalizedPath, pathToRegexpOptions),
+    components: route.components || { default: route.component },
+    instances: {},
+    name: name,
+    parent: parent,
+    matchAs: matchAs,
+    redirect: route.redirect,
+    beforeEnter: route.beforeEnter,
+    meta: route.meta || {},
+    props: route.props == null ? {} : route.components ? route.props : { default: route.props }
+  };
+
+  if (route.children) {
+    // Warn if route is named, does not redirect and has a default child route.
+    // If users navigate to this route by name, the default child will
+    // not be rendered (GH Issue #629)
+    if (process.env.NODE_ENV !== 'production') {
+      if (route.name && !route.redirect && route.children.some(function (child) {
+        return (/^\/?$/.test(child.path)
+        );
+      })) {
+        warn(false, "Named Route '" + route.name + "' has a default child route. " + "When navigating to this named route (:to=\"{name: '" + route.name + "'\"), " + "the default child route will not be rendered. Remove the name from " + "this route and use the name of the default child route for named " + "links instead.");
+      }
+    }
+    route.children.forEach(function (child) {
+      var childMatchAs = matchAs ? cleanPath(matchAs + "/" + child.path) : undefined;
+      addRouteRecord(pathList, pathMap, nameMap, child, record, childMatchAs);
+    });
+  }
+
+  if (route.alias !== undefined) {
+    var aliases = Array.isArray(route.alias) ? route.alias : [route.alias];
+
+    aliases.forEach(function (alias) {
+      var aliasRoute = {
+        path: alias,
+        children: route.children
+      };
+      addRouteRecord(pathList, pathMap, nameMap, aliasRoute, parent, record.path || '/' // matchAs
+      );
+    });
+  }
+
+  if (!pathMap[record.path]) {
+    pathList.push(record.path);
+    pathMap[record.path] = record;
+  }
+
+  if (name) {
+    if (!nameMap[name]) {
+      nameMap[name] = record;
+    } else if (process.env.NODE_ENV !== 'production' && !matchAs) {
+      warn(false, "Duplicate named routes definition: " + "{ name: \"" + name + "\", path: \"" + record.path + "\" }");
+    }
+  }
+}
+
+function compileRouteRegex(path, pathToRegexpOptions) {
+  var regex = pathToRegexp_1(path, [], pathToRegexpOptions);
+  if (process.env.NODE_ENV !== 'production') {
+    var keys = Object.create(null);
+    regex.keys.forEach(function (key) {
+      warn(!keys[key.name], "Duplicate param keys in route with path: \"" + path + "\"");
+      keys[key.name] = true;
+    });
+  }
+  return regex;
+}
+
+function normalizePath(path, parent, strict) {
+  if (!strict) {
+    path = path.replace(/\/$/, '');
+  }
+  if (path[0] === '/') {
+    return path;
+  }
+  if (parent == null) {
+    return path;
+  }
+  return cleanPath(parent.path + "/" + path);
+}
+
+/*  */
+
+function normalizeLocation(raw, current, append, router) {
+  var next = typeof raw === 'string' ? { path: raw } : raw;
+  // named target
+  if (next.name || next._normalized) {
+    return next;
+  }
+
+  // relative params
+  if (!next.path && next.params && current) {
+    next = assign({}, next);
+    next._normalized = true;
+    var params = assign(assign({}, current.params), next.params);
+    if (current.name) {
+      next.name = current.name;
+      next.params = params;
+    } else if (current.matched.length) {
+      var rawPath = current.matched[current.matched.length - 1].path;
+      next.path = fillParams(rawPath, params, "path " + current.path);
+    } else if (process.env.NODE_ENV !== 'production') {
+      warn(false, "relative params navigation requires a current route.");
+    }
+    return next;
+  }
+
+  var parsedPath = parsePath(next.path || '');
+  var basePath = current && current.path || '/';
+  var path = parsedPath.path ? resolvePath(parsedPath.path, basePath, append || next.append) : basePath;
+
+  var query = resolveQuery(parsedPath.query, next.query, router && router.options.parseQuery);
+
+  var hash = next.hash || parsedPath.hash;
+  if (hash && hash.charAt(0) !== '#') {
+    hash = "#" + hash;
+  }
+
+  return {
+    _normalized: true,
+    path: path,
+    query: query,
+    hash: hash
+  };
+}
+
+function assign(a, b) {
+  for (var key in b) {
+    a[key] = b[key];
+  }
+  return a;
+}
+
+/*  */
+
+function createMatcher(routes, router) {
+  var ref = createRouteMap(routes);
+  var pathList = ref.pathList;
+  var pathMap = ref.pathMap;
+  var nameMap = ref.nameMap;
+
+  function addRoutes(routes) {
+    createRouteMap(routes, pathList, pathMap, nameMap);
+  }
+
+  function match(raw, currentRoute, redirectedFrom) {
+    var location = normalizeLocation(raw, currentRoute, false, router);
+    var name = location.name;
+
+    if (name) {
+      var record = nameMap[name];
+      if (process.env.NODE_ENV !== 'production') {
+        warn(record, "Route with name '" + name + "' does not exist");
+      }
+      if (!record) {
+        return _createRoute(null, location);
+      }
+      var paramNames = record.regex.keys.filter(function (key) {
+        return !key.optional;
+      }).map(function (key) {
+        return key.name;
+      });
+
+      if (_typeof(location.params) !== 'object') {
+        location.params = {};
+      }
+
+      if (currentRoute && _typeof(currentRoute.params) === 'object') {
+        for (var key in currentRoute.params) {
+          if (!(key in location.params) && paramNames.indexOf(key) > -1) {
+            location.params[key] = currentRoute.params[key];
+          }
+        }
+      }
+
+      if (record) {
+        location.path = fillParams(record.path, location.params, "named route \"" + name + "\"");
+        return _createRoute(record, location, redirectedFrom);
+      }
+    } else if (location.path) {
+      location.params = {};
+      for (var i = 0; i < pathList.length; i++) {
+        var path = pathList[i];
+        var record$1 = pathMap[path];
+        if (matchRoute(record$1.regex, location.path, location.params)) {
+          return _createRoute(record$1, location, redirectedFrom);
+        }
+      }
+    }
+    // no match
+    return _createRoute(null, location);
+  }
+
+  function redirect(record, location) {
+    var originalRedirect = record.redirect;
+    var redirect = typeof originalRedirect === 'function' ? originalRedirect(createRoute(record, location, null, router)) : originalRedirect;
+
+    if (typeof redirect === 'string') {
+      redirect = { path: redirect };
+    }
+
+    if (!redirect || (typeof redirect === 'undefined' ? 'undefined' : _typeof(redirect)) !== 'object') {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(false, "invalid redirect option: " + JSON.stringify(redirect));
+      }
+      return _createRoute(null, location);
+    }
+
+    var re = redirect;
+    var name = re.name;
+    var path = re.path;
+    var query = location.query;
+    var hash = location.hash;
+    var params = location.params;
+    query = re.hasOwnProperty('query') ? re.query : query;
+    hash = re.hasOwnProperty('hash') ? re.hash : hash;
+    params = re.hasOwnProperty('params') ? re.params : params;
+
+    if (name) {
+      // resolved named direct
+      var targetRecord = nameMap[name];
+      if (process.env.NODE_ENV !== 'production') {
+        assert(targetRecord, "redirect failed: named route \"" + name + "\" not found.");
+      }
+      return match({
+        _normalized: true,
+        name: name,
+        query: query,
+        hash: hash,
+        params: params
+      }, undefined, location);
+    } else if (path) {
+      // 1. resolve relative redirect
+      var rawPath = resolveRecordPath(path, record);
+      // 2. resolve params
+      var resolvedPath = fillParams(rawPath, params, "redirect route with path \"" + rawPath + "\"");
+      // 3. rematch with existing query and hash
+      return match({
+        _normalized: true,
+        path: resolvedPath,
+        query: query,
+        hash: hash
+      }, undefined, location);
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(false, "invalid redirect option: " + JSON.stringify(redirect));
+      }
+      return _createRoute(null, location);
+    }
+  }
+
+  function alias(record, location, matchAs) {
+    var aliasedPath = fillParams(matchAs, location.params, "aliased route with path \"" + matchAs + "\"");
+    var aliasedMatch = match({
+      _normalized: true,
+      path: aliasedPath
+    });
+    if (aliasedMatch) {
+      var matched = aliasedMatch.matched;
+      var aliasedRecord = matched[matched.length - 1];
+      location.params = aliasedMatch.params;
+      return _createRoute(aliasedRecord, location);
+    }
+    return _createRoute(null, location);
+  }
+
+  function _createRoute(record, location, redirectedFrom) {
+    if (record && record.redirect) {
+      return redirect(record, redirectedFrom || location);
+    }
+    if (record && record.matchAs) {
+      return alias(record, location, record.matchAs);
+    }
+    return createRoute(record, location, redirectedFrom, router);
+  }
+
+  return {
+    match: match,
+    addRoutes: addRoutes
+  };
+}
+
+function matchRoute(regex, path, params) {
+  var m = path.match(regex);
+
+  if (!m) {
+    return false;
+  } else if (!params) {
+    return true;
+  }
+
+  for (var i = 1, len = m.length; i < len; ++i) {
+    var key = regex.keys[i - 1];
+    var val = typeof m[i] === 'string' ? decodeURIComponent(m[i]) : m[i];
+    if (key) {
+      params[key.name] = val;
+    }
+  }
+
+  return true;
+}
+
+function resolveRecordPath(path, record) {
+  return resolvePath(path, record.parent ? record.parent.path : '/', true);
+}
+
+/*  */
+
+var positionStore = Object.create(null);
+
+function setupScroll() {
+  // Fix for #1585 for Firefox
+  window.history.replaceState({ key: getStateKey() }, '');
+  window.addEventListener('popstate', function (e) {
+    saveScrollPosition();
+    if (e.state && e.state.key) {
+      setStateKey(e.state.key);
+    }
+  });
+}
+
+function handleScroll(router, to, from, isPop) {
+  if (!router.app) {
+    return;
+  }
+
+  var behavior = router.options.scrollBehavior;
+  if (!behavior) {
+    return;
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    assert(typeof behavior === 'function', "scrollBehavior must be a function");
+  }
+
+  // wait until re-render finishes before scrolling
+  router.app.$nextTick(function () {
+    var position = getScrollPosition();
+    var shouldScroll = behavior(to, from, isPop ? position : null);
+
+    if (!shouldScroll) {
+      return;
+    }
+
+    if (typeof shouldScroll.then === 'function') {
+      shouldScroll.then(function (shouldScroll) {
+        scrollToPosition(shouldScroll, position);
+      }).catch(function (err) {
+        if (process.env.NODE_ENV !== 'production') {
+          assert(false, err.toString());
+        }
+      });
+    } else {
+      scrollToPosition(shouldScroll, position);
+    }
+  });
+}
+
+function saveScrollPosition() {
+  var key = getStateKey();
+  if (key) {
+    positionStore[key] = {
+      x: window.pageXOffset,
+      y: window.pageYOffset
+    };
+  }
+}
+
+function getScrollPosition() {
+  var key = getStateKey();
+  if (key) {
+    return positionStore[key];
+  }
+}
+
+function getElementPosition(el, offset) {
+  var docEl = document.documentElement;
+  var docRect = docEl.getBoundingClientRect();
+  var elRect = el.getBoundingClientRect();
+  return {
+    x: elRect.left - docRect.left - offset.x,
+    y: elRect.top - docRect.top - offset.y
+  };
+}
+
+function isValidPosition(obj) {
+  return isNumber(obj.x) || isNumber(obj.y);
+}
+
+function normalizePosition(obj) {
+  return {
+    x: isNumber(obj.x) ? obj.x : window.pageXOffset,
+    y: isNumber(obj.y) ? obj.y : window.pageYOffset
+  };
+}
+
+function normalizeOffset(obj) {
+  return {
+    x: isNumber(obj.x) ? obj.x : 0,
+    y: isNumber(obj.y) ? obj.y : 0
+  };
+}
+
+function isNumber(v) {
+  return typeof v === 'number';
+}
+
+function scrollToPosition(shouldScroll, position) {
+  var isObject = (typeof shouldScroll === 'undefined' ? 'undefined' : _typeof(shouldScroll)) === 'object';
+  if (isObject && typeof shouldScroll.selector === 'string') {
+    var el = document.querySelector(shouldScroll.selector);
+    if (el) {
+      var offset = shouldScroll.offset && _typeof(shouldScroll.offset) === 'object' ? shouldScroll.offset : {};
+      offset = normalizeOffset(offset);
+      position = getElementPosition(el, offset);
+    } else if (isValidPosition(shouldScroll)) {
+      position = normalizePosition(shouldScroll);
+    }
+  } else if (isObject && isValidPosition(shouldScroll)) {
+    position = normalizePosition(shouldScroll);
+  }
+
+  if (position) {
+    window.scrollTo(position.x, position.y);
+  }
+}
+
+/*  */
+
+var supportsPushState = inBrowser && function () {
+  var ua = window.navigator.userAgent;
+
+  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
+    return false;
+  }
+
+  return window.history && 'pushState' in window.history;
+}();
+
+// use User Timing api (if present) for more accurate key precision
+var Time = inBrowser && window.performance && window.performance.now ? window.performance : Date;
+
+var _key = genKey();
+
+function genKey() {
+  return Time.now().toFixed(3);
+}
+
+function getStateKey() {
+  return _key;
+}
+
+function setStateKey(key) {
+  _key = key;
+}
+
+function pushState(url, replace) {
+  saveScrollPosition();
+  // try...catch the pushState call to get around Safari
+  // DOM Exception 18 where it limits to 100 pushState calls
+  var history = window.history;
+  try {
+    if (replace) {
+      history.replaceState({ key: _key }, '', url);
+    } else {
+      _key = genKey();
+      history.pushState({ key: _key }, '', url);
+    }
+  } catch (e) {
+    window.location[replace ? 'replace' : 'assign'](url);
+  }
+}
+
+function replaceState(url) {
+  pushState(url, true);
+}
+
+/*  */
+
+function runQueue(queue, fn, cb) {
+  var step = function step(index) {
+    if (index >= queue.length) {
+      cb();
+    } else {
+      if (queue[index]) {
+        fn(queue[index], function () {
+          step(index + 1);
+        });
+      } else {
+        step(index + 1);
+      }
+    }
+  };
+  step(0);
+}
+
+/*  */
+
+function resolveAsyncComponents(matched) {
+  return function (to, from, next) {
+    var hasAsync = false;
+    var pending = 0;
+    var error = null;
+
+    flatMapComponents(matched, function (def, _, match, key) {
+      // if it's a function and doesn't have cid attached,
+      // assume it's an async component resolve function.
+      // we are not using Vue's default async resolving mechanism because
+      // we want to halt the navigation until the incoming component has been
+      // resolved.
+      if (typeof def === 'function' && def.cid === undefined) {
+        hasAsync = true;
+        pending++;
+
+        var resolve = once(function (resolvedDef) {
+          if (isESModule(resolvedDef)) {
+            resolvedDef = resolvedDef.default;
+          }
+          // save resolved on async factory in case it's used elsewhere
+          def.resolved = typeof resolvedDef === 'function' ? resolvedDef : _Vue.extend(resolvedDef);
+          match.components[key] = resolvedDef;
+          pending--;
+          if (pending <= 0) {
+            next();
+          }
+        });
+
+        var reject = once(function (reason) {
+          var msg = "Failed to resolve async component " + key + ": " + reason;
+          process.env.NODE_ENV !== 'production' && warn(false, msg);
+          if (!error) {
+            error = isError(reason) ? reason : new Error(msg);
+            next(error);
+          }
+        });
+
+        var res;
+        try {
+          res = def(resolve, reject);
+        } catch (e) {
+          reject(e);
+        }
+        if (res) {
+          if (typeof res.then === 'function') {
+            res.then(resolve, reject);
+          } else {
+            // new syntax in Vue 2.3
+            var comp = res.component;
+            if (comp && typeof comp.then === 'function') {
+              comp.then(resolve, reject);
+            }
+          }
+        }
+      }
+    });
+
+    if (!hasAsync) {
+      next();
+    }
+  };
+}
+
+function flatMapComponents(matched, fn) {
+  return flatten(matched.map(function (m) {
+    return Object.keys(m.components).map(function (key) {
+      return fn(m.components[key], m.instances[key], m, key);
+    });
+  }));
+}
+
+function flatten(arr) {
+  return Array.prototype.concat.apply([], arr);
+}
+
+var hasSymbol = typeof Symbol === 'function' && _typeof(Symbol.toStringTag) === 'symbol';
+
+function isESModule(obj) {
+  return obj.__esModule || hasSymbol && obj[Symbol.toStringTag] === 'Module';
+}
+
+// in Webpack 2, require.ensure now also returns a Promise
+// so the resolve/reject functions may get called an extra time
+// if the user uses an arrow function shorthand that happens to
+// return that Promise.
+function once(fn) {
+  var called = false;
+  return function () {
+    var args = [],
+        len = arguments.length;
+    while (len--) {
+      args[len] = arguments[len];
+    }if (called) {
+      return;
+    }
+    called = true;
+    return fn.apply(this, args);
+  };
+}
+
+/*  */
+
+var History = function History(router, base) {
+  this.router = router;
+  this.base = normalizeBase(base);
+  // start with a route object that stands for "nowhere"
+  this.current = START;
+  this.pending = null;
+  this.ready = false;
+  this.readyCbs = [];
+  this.readyErrorCbs = [];
+  this.errorCbs = [];
+};
+
+History.prototype.listen = function listen(cb) {
+  this.cb = cb;
+};
+
+History.prototype.onReady = function onReady(cb, errorCb) {
+  if (this.ready) {
+    cb();
+  } else {
+    this.readyCbs.push(cb);
+    if (errorCb) {
+      this.readyErrorCbs.push(errorCb);
+    }
+  }
+};
+
+History.prototype.onError = function onError(errorCb) {
+  this.errorCbs.push(errorCb);
+};
+
+History.prototype.transitionTo = function transitionTo(location, onComplete, onAbort) {
+  var this$1 = this;
+
+  var route = this.router.match(location, this.current);
+  this.confirmTransition(route, function () {
+    this$1.updateRoute(route);
+    onComplete && onComplete(route);
+    this$1.ensureURL();
+
+    // fire ready cbs once
+    if (!this$1.ready) {
+      this$1.ready = true;
+      this$1.readyCbs.forEach(function (cb) {
+        cb(route);
+      });
+    }
+  }, function (err) {
+    if (onAbort) {
+      onAbort(err);
+    }
+    if (err && !this$1.ready) {
+      this$1.ready = true;
+      this$1.readyErrorCbs.forEach(function (cb) {
+        cb(err);
+      });
+    }
+  });
+};
+
+History.prototype.confirmTransition = function confirmTransition(route, onComplete, onAbort) {
+  var this$1 = this;
+
+  var current = this.current;
+  var abort = function abort(err) {
+    if (isError(err)) {
+      if (this$1.errorCbs.length) {
+        this$1.errorCbs.forEach(function (cb) {
+          cb(err);
+        });
+      } else {
+        warn(false, 'uncaught error during route navigation:');
+        console.error(err);
+      }
+    }
+    onAbort && onAbort(err);
+  };
+  if (isSameRoute(route, current) &&
+  // in the case the route map has been dynamically appended to
+  route.matched.length === current.matched.length) {
+    this.ensureURL();
+    return abort();
+  }
+
+  var ref = resolveQueue(this.current.matched, route.matched);
+  var updated = ref.updated;
+  var deactivated = ref.deactivated;
+  var activated = ref.activated;
+
+  var queue = [].concat(
+  // in-component leave guards
+  extractLeaveGuards(deactivated),
+  // global before hooks
+  this.router.beforeHooks,
+  // in-component update hooks
+  extractUpdateHooks(updated),
+  // in-config enter guards
+  activated.map(function (m) {
+    return m.beforeEnter;
+  }),
+  // async components
+  resolveAsyncComponents(activated));
+
+  this.pending = route;
+  var iterator = function iterator(hook, next) {
+    if (this$1.pending !== route) {
+      return abort();
+    }
+    try {
+      hook(route, current, function (to) {
+        if (to === false || isError(to)) {
+          // next(false) -> abort navigation, ensure current URL
+          this$1.ensureURL(true);
+          abort(to);
+        } else if (typeof to === 'string' || (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' && (typeof to.path === 'string' || typeof to.name === 'string')) {
+          // next('/') or next({ path: '/' }) -> redirect
+          abort();
+          if ((typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' && to.replace) {
+            this$1.replace(to);
+          } else {
+            this$1.push(to);
+          }
+        } else {
+          // confirm transition and pass on the value
+          next(to);
+        }
+      });
+    } catch (e) {
+      abort(e);
+    }
+  };
+
+  runQueue(queue, iterator, function () {
+    var postEnterCbs = [];
+    var isValid = function isValid() {
+      return this$1.current === route;
+    };
+    // wait until async components are resolved before
+    // extracting in-component enter guards
+    var enterGuards = extractEnterGuards(activated, postEnterCbs, isValid);
+    var queue = enterGuards.concat(this$1.router.resolveHooks);
+    runQueue(queue, iterator, function () {
+      if (this$1.pending !== route) {
+        return abort();
+      }
+      this$1.pending = null;
+      onComplete(route);
+      if (this$1.router.app) {
+        this$1.router.app.$nextTick(function () {
+          postEnterCbs.forEach(function (cb) {
+            cb();
+          });
+        });
+      }
+    });
+  });
+};
+
+History.prototype.updateRoute = function updateRoute(route) {
+  var prev = this.current;
+  this.current = route;
+  this.cb && this.cb(route);
+  this.router.afterHooks.forEach(function (hook) {
+    hook && hook(route, prev);
+  });
+};
+
+function normalizeBase(base) {
+  if (!base) {
+    if (inBrowser) {
+      // respect <base> tag
+      var baseEl = document.querySelector('base');
+      base = baseEl && baseEl.getAttribute('href') || '/';
+      // strip full URL origin
+      base = base.replace(/^https?:\/\/[^\/]+/, '');
+    } else {
+      base = '/';
+    }
+  }
+  // make sure there's the starting slash
+  if (base.charAt(0) !== '/') {
+    base = '/' + base;
+  }
+  // remove trailing slash
+  return base.replace(/\/$/, '');
+}
+
+function resolveQueue(current, next) {
+  var i;
+  var max = Math.max(current.length, next.length);
+  for (i = 0; i < max; i++) {
+    if (current[i] !== next[i]) {
+      break;
+    }
+  }
+  return {
+    updated: next.slice(0, i),
+    activated: next.slice(i),
+    deactivated: current.slice(i)
+  };
+}
+
+function extractGuards(records, name, bind, reverse) {
+  var guards = flatMapComponents(records, function (def, instance, match, key) {
+    var guard = extractGuard(def, name);
+    if (guard) {
+      return Array.isArray(guard) ? guard.map(function (guard) {
+        return bind(guard, instance, match, key);
+      }) : bind(guard, instance, match, key);
+    }
+  });
+  return flatten(reverse ? guards.reverse() : guards);
+}
+
+function extractGuard(def, key) {
+  if (typeof def !== 'function') {
+    // extend now so that global mixins are applied.
+    def = _Vue.extend(def);
+  }
+  return def.options[key];
+}
+
+function extractLeaveGuards(deactivated) {
+  return extractGuards(deactivated, 'beforeRouteLeave', bindGuard, true);
+}
+
+function extractUpdateHooks(updated) {
+  return extractGuards(updated, 'beforeRouteUpdate', bindGuard);
+}
+
+function bindGuard(guard, instance) {
+  if (instance) {
+    return function boundRouteGuard() {
+      return guard.apply(instance, arguments);
+    };
+  }
+}
+
+function extractEnterGuards(activated, cbs, isValid) {
+  return extractGuards(activated, 'beforeRouteEnter', function (guard, _, match, key) {
+    return bindEnterGuard(guard, match, key, cbs, isValid);
+  });
+}
+
+function bindEnterGuard(guard, match, key, cbs, isValid) {
+  return function routeEnterGuard(to, from, next) {
+    return guard(to, from, function (cb) {
+      next(cb);
+      if (typeof cb === 'function') {
+        cbs.push(function () {
+          // #750
+          // if a router-view is wrapped with an out-in transition,
+          // the instance may not have been registered at this time.
+          // we will need to poll for registration until current route
+          // is no longer valid.
+          poll(cb, match.instances, key, isValid);
+        });
+      }
+    });
+  };
+}
+
+function poll(cb, // somehow flow cannot infer this is a function
+instances, key, isValid) {
+  if (instances[key]) {
+    cb(instances[key]);
+  } else if (isValid()) {
+    setTimeout(function () {
+      poll(cb, instances, key, isValid);
+    }, 16);
+  }
+}
+
+/*  */
+
+var HTML5History = function (History$$1) {
+  function HTML5History(router, base) {
+    var this$1 = this;
+
+    History$$1.call(this, router, base);
+
+    var expectScroll = router.options.scrollBehavior;
+
+    if (expectScroll) {
+      setupScroll();
+    }
+
+    var initLocation = getLocation(this.base);
+    window.addEventListener('popstate', function (e) {
+      var current = this$1.current;
+
+      // Avoiding first `popstate` event dispatched in some browsers but first
+      // history route not updated since async guard at the same time.
+      var location = getLocation(this$1.base);
+      if (this$1.current === START && location === initLocation) {
+        return;
+      }
+
+      this$1.transitionTo(location, function (route) {
+        if (expectScroll) {
+          handleScroll(router, route, current, true);
+        }
+      });
+    });
+  }
+
+  if (History$$1) HTML5History.__proto__ = History$$1;
+  HTML5History.prototype = Object.create(History$$1 && History$$1.prototype);
+  HTML5History.prototype.constructor = HTML5History;
+
+  HTML5History.prototype.go = function go(n) {
+    window.history.go(n);
+  };
+
+  HTML5History.prototype.push = function push(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    var ref = this;
+    var fromRoute = ref.current;
+    this.transitionTo(location, function (route) {
+      pushState(cleanPath(this$1.base + route.fullPath));
+      handleScroll(this$1.router, route, fromRoute, false);
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  HTML5History.prototype.replace = function replace(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    var ref = this;
+    var fromRoute = ref.current;
+    this.transitionTo(location, function (route) {
+      replaceState(cleanPath(this$1.base + route.fullPath));
+      handleScroll(this$1.router, route, fromRoute, false);
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  HTML5History.prototype.ensureURL = function ensureURL(push) {
+    if (getLocation(this.base) !== this.current.fullPath) {
+      var current = cleanPath(this.base + this.current.fullPath);
+      push ? pushState(current) : replaceState(current);
+    }
+  };
+
+  HTML5History.prototype.getCurrentLocation = function getCurrentLocation() {
+    return getLocation(this.base);
+  };
+
+  return HTML5History;
+}(History);
+
+function getLocation(base) {
+  var path = window.location.pathname;
+  if (base && path.indexOf(base) === 0) {
+    path = path.slice(base.length);
+  }
+  return (path || '/') + window.location.search + window.location.hash;
+}
+
+/*  */
+
+var HashHistory = function (History$$1) {
+  function HashHistory(router, base, fallback) {
+    History$$1.call(this, router, base);
+    // check history fallback deeplinking
+    if (fallback && checkFallback(this.base)) {
+      return;
+    }
+    ensureSlash();
+  }
+
+  if (History$$1) HashHistory.__proto__ = History$$1;
+  HashHistory.prototype = Object.create(History$$1 && History$$1.prototype);
+  HashHistory.prototype.constructor = HashHistory;
+
+  // this is delayed until the app mounts
+  // to avoid the hashchange listener being fired too early
+  HashHistory.prototype.setupListeners = function setupListeners() {
+    var this$1 = this;
+
+    var router = this.router;
+    var expectScroll = router.options.scrollBehavior;
+    var supportsScroll = supportsPushState && expectScroll;
+
+    if (supportsScroll) {
+      setupScroll();
+    }
+
+    window.addEventListener(supportsPushState ? 'popstate' : 'hashchange', function () {
+      var current = this$1.current;
+      if (!ensureSlash()) {
+        return;
+      }
+      this$1.transitionTo(getHash(), function (route) {
+        if (supportsScroll) {
+          handleScroll(this$1.router, route, current, true);
+        }
+        if (!supportsPushState) {
+          replaceHash(route.fullPath);
+        }
+      });
+    });
+  };
+
+  HashHistory.prototype.push = function push(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    var ref = this;
+    var fromRoute = ref.current;
+    this.transitionTo(location, function (route) {
+      pushHash(route.fullPath);
+      handleScroll(this$1.router, route, fromRoute, false);
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  HashHistory.prototype.replace = function replace(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    var ref = this;
+    var fromRoute = ref.current;
+    this.transitionTo(location, function (route) {
+      replaceHash(route.fullPath);
+      handleScroll(this$1.router, route, fromRoute, false);
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  HashHistory.prototype.go = function go(n) {
+    window.history.go(n);
+  };
+
+  HashHistory.prototype.ensureURL = function ensureURL(push) {
+    var current = this.current.fullPath;
+    if (getHash() !== current) {
+      push ? pushHash(current) : replaceHash(current);
+    }
+  };
+
+  HashHistory.prototype.getCurrentLocation = function getCurrentLocation() {
+    return getHash();
+  };
+
+  return HashHistory;
+}(History);
+
+function checkFallback(base) {
+  var location = getLocation(base);
+  if (!/^\/#/.test(location)) {
+    window.location.replace(cleanPath(base + '/#' + location));
+    return true;
+  }
+}
+
+function ensureSlash() {
+  var path = getHash();
+  if (path.charAt(0) === '/') {
+    return true;
+  }
+  replaceHash('/' + path);
+  return false;
+}
+
+function getHash() {
+  // We can't use window.location.hash here because it's not
+  // consistent across browsers - Firefox will pre-decode it!
+  var href = window.location.href;
+  var index = href.indexOf('#');
+  return index === -1 ? '' : href.slice(index + 1);
+}
+
+function getUrl(path) {
+  var href = window.location.href;
+  var i = href.indexOf('#');
+  var base = i >= 0 ? href.slice(0, i) : href;
+  return base + "#" + path;
+}
+
+function pushHash(path) {
+  if (supportsPushState) {
+    pushState(getUrl(path));
+  } else {
+    window.location.hash = path;
+  }
+}
+
+function replaceHash(path) {
+  if (supportsPushState) {
+    replaceState(getUrl(path));
+  } else {
+    window.location.replace(getUrl(path));
+  }
+}
+
+/*  */
+
+var AbstractHistory = function (History$$1) {
+  function AbstractHistory(router, base) {
+    History$$1.call(this, router, base);
+    this.stack = [];
+    this.index = -1;
+  }
+
+  if (History$$1) AbstractHistory.__proto__ = History$$1;
+  AbstractHistory.prototype = Object.create(History$$1 && History$$1.prototype);
+  AbstractHistory.prototype.constructor = AbstractHistory;
+
+  AbstractHistory.prototype.push = function push(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    this.transitionTo(location, function (route) {
+      this$1.stack = this$1.stack.slice(0, this$1.index + 1).concat(route);
+      this$1.index++;
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  AbstractHistory.prototype.replace = function replace(location, onComplete, onAbort) {
+    var this$1 = this;
+
+    this.transitionTo(location, function (route) {
+      this$1.stack = this$1.stack.slice(0, this$1.index).concat(route);
+      onComplete && onComplete(route);
+    }, onAbort);
+  };
+
+  AbstractHistory.prototype.go = function go(n) {
+    var this$1 = this;
+
+    var targetIndex = this.index + n;
+    if (targetIndex < 0 || targetIndex >= this.stack.length) {
+      return;
+    }
+    var route = this.stack[targetIndex];
+    this.confirmTransition(route, function () {
+      this$1.index = targetIndex;
+      this$1.updateRoute(route);
+    });
+  };
+
+  AbstractHistory.prototype.getCurrentLocation = function getCurrentLocation() {
+    var current = this.stack[this.stack.length - 1];
+    return current ? current.fullPath : '/';
+  };
+
+  AbstractHistory.prototype.ensureURL = function ensureURL() {
+    // noop
+  };
+
+  return AbstractHistory;
+}(History);
+
+/*  */
+
+var VueRouter = function VueRouter(options) {
+  if (options === void 0) options = {};
+
+  this.app = null;
+  this.apps = [];
+  this.options = options;
+  this.beforeHooks = [];
+  this.resolveHooks = [];
+  this.afterHooks = [];
+  this.matcher = createMatcher(options.routes || [], this);
+
+  var mode = options.mode || 'hash';
+  this.fallback = mode === 'history' && !supportsPushState && options.fallback !== false;
+  if (this.fallback) {
+    mode = 'hash';
+  }
+  if (!inBrowser) {
+    mode = 'abstract';
+  }
+  this.mode = mode;
+
+  switch (mode) {
+    case 'history':
+      this.history = new HTML5History(this, options.base);
+      break;
+    case 'hash':
+      this.history = new HashHistory(this, options.base, this.fallback);
+      break;
+    case 'abstract':
+      this.history = new AbstractHistory(this, options.base);
+      break;
+    default:
+      if (process.env.NODE_ENV !== 'production') {
+        assert(false, "invalid mode: " + mode);
+      }
+  }
+};
+
+var prototypeAccessors = { currentRoute: { configurable: true } };
+
+VueRouter.prototype.match = function match(raw, current, redirectedFrom) {
+  return this.matcher.match(raw, current, redirectedFrom);
+};
+
+prototypeAccessors.currentRoute.get = function () {
+  return this.history && this.history.current;
+};
+
+VueRouter.prototype.init = function init(app /* Vue component instance */) {
+  var this$1 = this;
+
+  process.env.NODE_ENV !== 'production' && assert(install.installed, "not installed. Make sure to call `Vue.use(VueRouter)` " + "before creating root instance.");
+
+  this.apps.push(app);
+
+  // main app already initialized.
+  if (this.app) {
+    return;
+  }
+
+  this.app = app;
+
+  var history = this.history;
+
+  if (history instanceof HTML5History) {
+    history.transitionTo(history.getCurrentLocation());
+  } else if (history instanceof HashHistory) {
+    var setupHashListener = function setupHashListener() {
+      history.setupListeners();
+    };
+    history.transitionTo(history.getCurrentLocation(), setupHashListener, setupHashListener);
+  }
+
+  history.listen(function (route) {
+    this$1.apps.forEach(function (app) {
+      app._route = route;
+    });
+  });
+};
+
+VueRouter.prototype.beforeEach = function beforeEach(fn) {
+  return registerHook(this.beforeHooks, fn);
+};
+
+VueRouter.prototype.beforeResolve = function beforeResolve(fn) {
+  return registerHook(this.resolveHooks, fn);
+};
+
+VueRouter.prototype.afterEach = function afterEach(fn) {
+  return registerHook(this.afterHooks, fn);
+};
+
+VueRouter.prototype.onReady = function onReady(cb, errorCb) {
+  this.history.onReady(cb, errorCb);
+};
+
+VueRouter.prototype.onError = function onError(errorCb) {
+  this.history.onError(errorCb);
+};
+
+VueRouter.prototype.push = function push(location, onComplete, onAbort) {
+  this.history.push(location, onComplete, onAbort);
+};
+
+VueRouter.prototype.replace = function replace(location, onComplete, onAbort) {
+  this.history.replace(location, onComplete, onAbort);
+};
+
+VueRouter.prototype.go = function go(n) {
+  this.history.go(n);
+};
+
+VueRouter.prototype.back = function back() {
+  this.go(-1);
+};
+
+VueRouter.prototype.forward = function forward() {
+  this.go(1);
+};
+
+VueRouter.prototype.getMatchedComponents = function getMatchedComponents(to) {
+  var route = to ? to.matched ? to : this.resolve(to).route : this.currentRoute;
+  if (!route) {
+    return [];
+  }
+  return [].concat.apply([], route.matched.map(function (m) {
+    return Object.keys(m.components).map(function (key) {
+      return m.components[key];
+    });
+  }));
+};
+
+VueRouter.prototype.resolve = function resolve(to, current, append) {
+  var location = normalizeLocation(to, current || this.history.current, append, this);
+  var route = this.match(location, current);
+  var fullPath = route.redirectedFrom || route.fullPath;
+  var base = this.history.base;
+  var href = createHref(base, fullPath, this.mode);
+  return {
+    location: location,
+    route: route,
+    href: href,
+    // for backwards compat
+    normalizedTo: location,
+    resolved: route
+  };
+};
+
+VueRouter.prototype.addRoutes = function addRoutes(routes) {
+  this.matcher.addRoutes(routes);
+  if (this.history.current !== START) {
+    this.history.transitionTo(this.history.getCurrentLocation());
+  }
+};
+
+Object.defineProperties(VueRouter.prototype, prototypeAccessors);
+
+function registerHook(list, fn) {
+  list.push(fn);
+  return function () {
+    var i = list.indexOf(fn);
+    if (i > -1) {
+      list.splice(i, 1);
+    }
+  };
+}
+
+function createHref(base, fullPath, mode) {
+  var path = mode === 'hash' ? '#' + fullPath : fullPath;
+  return base ? cleanPath(base + '/' + path) : path;
+}
+
+VueRouter.install = install;
+VueRouter.version = '3.0.1';
+
+if (inBrowser && window.Vue) {
+  window.Vue.use(VueRouter);
+}
+
+exports.default = VueRouter;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ })
 /******/ ]);

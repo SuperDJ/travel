@@ -44,6 +44,7 @@ $sharp-transition: cubic-bezier(0.4, 0.0, 0.6, 1) !default;
 $transition-small-duration: 300ms !default;
 $transition-medium-duration: 390ms !default;
 $transition-large-duration: 200ms !default;
+$body-background: if( $theme == light, $grey-50, #303030) !default;
 $background: if( $theme == light, $white, $grey-800 ) !default;
 $text-direction: ltr !default;
 $border-size: rem-calc(2px) !default;
@@ -52,10 +53,6 @@ $border-size: rem-calc(2px) !default;
  * Typography settings
  * Default font size under imports
  **************************************/
-// Font paths
-$roboto-font-path: '/stylesheets/fonts/Roboto/' !default;
-$noto-font-path: '/stylesheets/fonts/Noto/' !default;
-
 // Typographic Scale
 $font-size-display-4: 112 !default;
 $font-size-display-3: 56 !default;

@@ -6,9 +6,6 @@
  * https://www.google.com/fonts
  **************************************/
 
-// Load requested fonts
-@import '../../fonts/fonts';
-
 @if( in-array( 'display-4', $typography ) ) {
 	.display-4, h1 {
 		@include font($font-size-display-4, 0, $font-weight-display-4, $line-height-display-4, $font-color-display-4, $letter-spacing-display-4);

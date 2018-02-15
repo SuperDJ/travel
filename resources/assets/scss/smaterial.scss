@@ -13,14 +13,15 @@
 @import 'components/flex-grid'; // Grid functionality
 @import 'components/normalize'; // Remove browser default styles add Material default styles
 @import 'components/shadows'; // Shadow depths (Can be turned off)
+//@import 'components/fonts'; // All Fonts
 @import 'components/typography'; // Typography
-@import 'components/icons'; // Icons with their shadow (can be turned off)
+//@import 'components/icons'; // Icons with their shadow (can be turned off)
 
 // Components
-@import 'components/appbar'; // Top menu bar (can be turned off)
+//@import 'components/appbar'; // Top menu bar (can be turned off)
 @import 'components/bottom-navigation'; // Used to style the bottom navigation
 @import 'components/bottom-sheet'; // Used to style bottom sheet / modal (can be turned off)
-@import 'components/buttons'; // Used to style buttons (can be turned off)
+//@import 'components/buttons'; // Used to style buttons (can be turned off)
 @import 'components/cards'; // Used to style cards (can be turned off)
 @import 'components/chips'; // Used to style chips (can be turned off)
 @import 'components/data-tables'; // Used to style tables (can be turned off)
@@ -28,7 +29,7 @@
 @import 'components/expansion-panels'; // Used to style expansion panels (can be turned off)
 @import 'components/grid-lists'; // Used to style grid lists (can be turned off)
 @import 'components/menu'; // Used to style menus (can be turned off) is used for appbar, navigation drawer dropdown and select
-@import 'components/navigation-drawer'; // Used to style navigation drawer (can be turned off)
+//@import 'components/navigation-drawer'; // Used to style navigation drawer (can be turned off)
 @import 'components/lists'; // Used to style lists (can be turned off)
 @import 'components/notifications'; // Notifications style (can be turned off)
 @import 'components/pickers'; // Used to style date and time picker (can be turned off)

@@ -9,10 +9,12 @@ import Index from './pages/Index';
  * Import global components
  **************************************/
 import Icon from './components/Icon';
+import Button from './components/Button';
 
 Vue.component('Icon', Icon);
+Vue.component('Button', Button);
 
-import store from './store/store';
+import { store } from './store/store';
 
 new Vue({
 	el: '#app',

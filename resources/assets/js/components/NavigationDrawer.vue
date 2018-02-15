@@ -7,3 +7,8 @@
         <slot name="content"/>
     </nav>
 </template>
+
+<script>
+    export default {
+    }
+</script>

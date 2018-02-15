@@ -4,7 +4,8 @@ const path = require('path'),
 module.exports = env => {
 	return {
 		entry: {
-			'main': './resources/assets/js/main.js'
+			'main': './resources/assets/js/main.js',
+			'smaterial': './resources/assets/js/smaterial.js',
 		},
 		output: {
 			path: __dirname,

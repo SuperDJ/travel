@@ -1,6 +1,6 @@
 <template>
     <header class="appbar">
-        <Icon name="menu"/>
+        <Icon name="menu" @click="triggerDrawer()"/>
 
         <div class="appbar-title">
             <h1>{{title}}</h1>

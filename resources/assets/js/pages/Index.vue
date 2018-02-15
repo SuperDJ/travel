@@ -32,7 +32,4 @@
 
 <style lang="scss">
     @import '../../scss/smaterial.scss';
-
-    $main-color: $blue-900;
-    $secondary-color: $blue-a200;
 </style>

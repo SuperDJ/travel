@@ -22,21 +22,30 @@
             </div>
 
             <div slot="content">
-                Test
+
             </div>
         </NavigationDrawer>
 
         <main>
-
+            <slot name="content"/>
         </main>
     </div>
 </template>
 
 <script>
-    import Appbar from '../components/Appbar';
-    import NavigationDrawer from '../components/NavigationDrawer';
+    import Appbar from '@/components/Appbar';
+    import NavigationDrawer from '@/components/NavigationDrawer';
 
     export default {
+    	name: 'default',
+
+        metaInfo: {
+    	    title: 'Home',
+            link: [
+            	{rel: 'stylesheet', href: '/css/web.css'}
+            ]
+        },
+
 		components: {
 			'Appbar': Appbar,
             'NavigationDrawer': NavigationDrawer

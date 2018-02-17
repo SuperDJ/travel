@@ -11,6 +11,7 @@
         "dev1": "./node_modules/.bin/webpack --config webpack.config.js --env.dev -w"
     },
     "devDependencies": {
+        "axios": "^0.17.1",
         "babel-core": "^6.26.0",
         "babel-loader": "^7.1.2",
         "babel-preset-env": "^1.6.1",
@@ -31,6 +32,7 @@
         "style-loader": "^0.20.1",
         "uglifyjs-webpack-plugin": "^1.1.8",
         "vue": "^2.5.7",
+        "vue-extend-layout": "^1.0.1",
         "vue-meta": "^1.4.3",
         "vue-router": "^3.0.1",
         "vue-style-loader": "^3.1.2",

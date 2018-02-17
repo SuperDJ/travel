@@ -6,6 +6,7 @@ module.exports = env => {
 	return {
 		entry: {
 			'main': './resources/assets/js/main.js',
+			'web': './resources/assets/scss/web.scss',
 			'smaterial': './resources/assets/js/smaterial.js',
 		},
 		output: {
@@ -54,7 +55,10 @@ module.exports = env => {
 			]
 		},
 		resolve: {
-			extensions: ['.js', '.vue']
+			extensions: ['.js', '.vue'],
+			alias: {
+				'@': path.resolve(__dirname, './resources/assets/js')
+			}
 		},
 		plugins: [
 			new ExtractTextPlugin( 'public/css/[name].css' ),

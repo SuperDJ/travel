@@ -64,9 +64,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */
+/* 0 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -175,7 +173,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -368,37 +366,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ }),
-/* 5 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7604,7 +7572,127 @@ Vue$3.nextTick(function () {
 /*  */
 
 exports.default = Vue$3;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4), __webpack_require__(12).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(12).setImmediate))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(27);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\web\\Index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e725123a", Component.options)
+  } else {
+    hotAPI.reload("data-v-e725123a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Web = __webpack_require__(21);
+
+var _Web2 = _interopRequireDefault(_Web);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  components: {
+    'Web': _Web2.default
+  },
+
+  data: function data() {
+    return {
+      image: ''
+    };
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 6 */
@@ -7617,11 +7705,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Appbar = __webpack_require__(18);
+var _Appbar = __webpack_require__(22);
 
 var _Appbar2 = _interopRequireDefault(_Appbar);
 
-var _NavigationDrawer = __webpack_require__(22);
+var _NavigationDrawer = __webpack_require__(24);
 
 var _NavigationDrawer2 = _interopRequireDefault(_NavigationDrawer);
 
@@ -7663,6 +7751,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 exports.default = {
+    name: 'default',
+
+    metaInfo: {
+        title: 'Home',
+        link: [{ rel: 'stylesheet', href: '/css/web.css' }]
+    },
+
     components: {
         'Appbar': _Appbar2.default,
         'NavigationDrawer': _NavigationDrawer2.default
@@ -7814,15 +7909,25 @@ exports.default = {
 "use strict";
 
 
-var _vue = __webpack_require__(5);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _Index = __webpack_require__(14);
+var _store = __webpack_require__(14);
+
+var _router = __webpack_require__(19);
+
+var _router2 = _interopRequireDefault(_router);
+
+var _vueMeta = __webpack_require__(28);
+
+var _vueMeta2 = _interopRequireDefault(_vueMeta);
+
+var _Index = __webpack_require__(4);
 
 var _Index2 = _interopRequireDefault(_Index);
 
-var _Icon = __webpack_require__(27);
+var _Icon = __webpack_require__(29);
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
@@ -7830,29 +7935,25 @@ var _Button = __webpack_require__(31);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _store = __webpack_require__(35);
-
-var _webRoutes = __webpack_require__(46);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueMeta2.default);
 
 /**************************************
  * Import global components
  **************************************/
+
+
 _vue2.default.component('Icon', _Icon2.default);
-
-/**************************************
- * Import pages
- **************************************/
-
 _vue2.default.component('Button', _Button2.default);
 
 new _vue2.default({
-  el: '#app',
-  store: _store.store,
-  render: function render(h) {
-    return h(_Index2.default);
-  }
+	el: '#app',
+	router: _router2.default,
+	store: _store.store,
+	render: function render(h) {
+		return h(_Index2.default);
+	}
 });
 
 /***/ }),
@@ -7916,7 +8017,7 @@ __webpack_require__(13);
 // `setimmediate` library.
 exports.setImmediate = typeof self !== "undefined" && self.setImmediate || typeof global !== "undefined" && global.setImmediate || undefined && undefined.setImmediate;
 exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || typeof global !== "undefined" && global.clearImmediate || undefined && undefined.clearImmediate;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
 /* 13 */
@@ -8107,410 +8208,10 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
 })(typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(1)))
 
 /***/ }),
 /* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8ba542a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(26);
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b8ba542a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\pages\\Index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b8ba542a", Component.options)
-  } else {
-    hotAPI.reload("data-v-b8ba542a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__ = __webpack_require__(42);
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Appbar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7240db89", Component.options)
-  } else {
-    hotAPI.reload("data-v-7240db89", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__ = __webpack_require__(43);
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\NavigationDrawer.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-119c4d1c", Component.options)
-  } else {
-    hotAPI.reload("data-v-119c4d1c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "full-width" },
-    [
-      _c(
-        "Appbar",
-        { attrs: { title: "Home", "drawer-id": _vm.drawerId } },
-        [
-          _c("Icon", { attrs: { name: "search" } }),
-          _vm._v(" "),
-          _c("Icon", { attrs: { name: "person" } }),
-          _vm._v(" "),
-          _c("Icon", { attrs: { name: "more_vert" } })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "NavigationDrawer",
-        {
-          staticClass: "drawer-persistent",
-          attrs: { "drawer-id": _vm.drawerId }
-        },
-        [
-          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-            _c("img", {
-              staticClass: "drawer-profile-img",
-              attrs: {
-                src: "/images/profile-icon.jpg",
-                alt: "SMaterial profile example"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "drawer-profile-name" }, [_vm._v("John")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "drawer-profile-more",
-                attrs: { id: "drawer-profile-more" }
-              },
-              [
-                _c("Icon", {
-                  staticClass: "trigger",
-                  attrs: { name: "arrow_drop_down", trigger: "profile" }
-                }),
-                _vm._v(" "),
-                _c("nav", { staticClass: "menu", attrs: { id: "profile" } }, [
-                  _c(
-                    "a",
-                    { attrs: { href: "#" } },
-                    [
-                      _c("Icon", { attrs: { name: "power_settings_new" } }),
-                      _vm._v(" Aanmelden")
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { attrs: { href: "#" } },
-                    [
-                      _c("Icon", { attrs: { name: "person_add" } }),
-                      _vm._v(" Registeren")
-                    ],
-                    1
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", [
-              _c(
-                "i",
-                {
-                  staticClass: "material-icons arrow trigger",
-                  attrs: { "data-trigger": "drawer" }
-                },
-                [_vm._v("chevron_left")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { slot: "content" }, slot: "content" }, [
-            _vm._v("\n            Test\n        ")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("main")
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b8ba542a", esExports)
-  }
-}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__ = __webpack_require__(44);
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Icon.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a3f17420", Component.options)
-  } else {
-    hotAPI.reload("data-v-a3f17420", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__ = __webpack_require__(41);
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Button.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-897e5f2e", Component.options)
-  } else {
-    hotAPI.reload("data-v-897e5f2e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8521,23 +8222,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.store = undefined;
 
-var _vue = __webpack_require__(5);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(36);
+var _vuex = __webpack_require__(15);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _getters = __webpack_require__(37);
+var _getters = __webpack_require__(16);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _actions = __webpack_require__(38);
+var _actions = __webpack_require__(17);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(39);
+var _mutations = __webpack_require__(18);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
@@ -8553,7 +8254,7 @@ var store = exports.store = new _vuex2.default.Store({
 });
 
 /***/ }),
-/* 36 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9517,10 +9218,10 @@ exports.mapGetters = mapGetters;
 exports.mapActions = mapActions;
 exports.createNamespacedHelpers = createNamespacedHelpers;
 exports.default = index_esm;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 37 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9532,7 +9233,33 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 38 */
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	getRandomImage: function getRandomImage(context, q) {
+		var key = '8061014-3041347b399a40caf453735b5';
+		var url = 'https://pixabay.com/api/?key=' + key + '&q=' + q.replace(/ /g, '+') + '&image_type=photo&safesearch=true&orientation=horizontal&category=travel&per_page=200';
+		fetch(url).then(function (response) {
+			return response.json();
+		}).then(function (result) {
+			return result.hits[random(1, 200)].webformatURL;
+		});
+
+		function random(min, max) {
+			Math.floor(Math.random() * min + max);
+		}
+	}
+};
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9544,1282 +9271,41 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 39 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {};
-
-/***/ }),
-/* 40 */,
-/* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("router-link", { staticClass: "button-{type}" })
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-897e5f2e", esExports)
-  }
-}
-
-/***/ }),
-/* 42 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "header",
-    { staticClass: "appbar" },
-    [
-      _c("Icon", {
-        staticClass: "trigger",
-        attrs: { name: "menu", "data-trigger": _vm.drawerId }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "appbar-title" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.title))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "appbar-spacer" }),
-      _vm._v(" "),
-      _vm._t("default")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7240db89", esExports)
-  }
-}
-
-/***/ }),
-/* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "drawer", attrs: { id: _vm.drawerId } },
-    [
-      _c("div", { staticClass: "drawer-header" }, [_vm._t("header")], 2),
-      _vm._v(" "),
-      _vm._t("content")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-119c4d1c", esExports)
-  }
-}
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "i",
-    {
-      staticClass: "material-icons",
-      class: { trigger: _vm.trigger },
-      attrs: { "data-trigger": _vm.trigger }
-    },
-    [_vm._v(_vm._s(_vm.name))]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a3f17420", esExports)
-  }
-}
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * vue-meta v1.4.3
- * (c) 2018 Declan de Wet & Atinux
- * @license MIT
- */
-(function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.VueMeta = factory();
-})(undefined, function () {
-  'use strict';
-
-  /*
-  object-assign
-  (c) Sindre Sorhus
-  @license MIT
-  */
-
-  /* eslint-disable no-unused-vars */
-
-  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-  function toObject(val) {
-    if (val === null || val === undefined) {
-      throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-
-    return Object(val);
-  }
-
-  function shouldUseNative() {
-    try {
-      if (!Object.assign) {
-        return false;
-      }
-
-      // Detect buggy property enumeration order in older V8 versions.
-
-      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
-      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
-      test1[5] = 'de';
-      if (Object.getOwnPropertyNames(test1)[0] === '5') {
-        return false;
-      }
-
-      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-      var test2 = {};
-      for (var i = 0; i < 10; i++) {
-        test2['_' + String.fromCharCode(i)] = i;
-      }
-      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-        return test2[n];
-      });
-      if (order2.join('') !== '0123456789') {
-        return false;
-      }
-
-      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-      var test3 = {};
-      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-        test3[letter] = letter;
-      });
-      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
-        return false;
-      }
-
-      return true;
-    } catch (err) {
-      // We don't expect any of the above to throw, but better to be safe.
-      return false;
-    }
-  }
-
-  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-    var arguments$1 = arguments;
-
-    var from;
-    var to = toObject(target);
-    var symbols;
-
-    for (var s = 1; s < arguments.length; s++) {
-      from = Object(arguments$1[s]);
-
-      for (var key in from) {
-        if (hasOwnProperty.call(from, key)) {
-          to[key] = from[key];
-        }
-      }
-
-      if (getOwnPropertySymbols) {
-        symbols = getOwnPropertySymbols(from);
-        for (var i = 0; i < symbols.length; i++) {
-          if (propIsEnumerable.call(from, symbols[i])) {
-            to[symbols[i]] = from[symbols[i]];
-          }
-        }
-      }
-    }
-
-    return to;
-  };
-
-  var isMergeableObject = function isMergeableObject(value) {
-    return isNonNullObject(value) && !isSpecial(value);
-  };
-
-  function isNonNullObject(value) {
-    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object';
-  }
-
-  function isSpecial(value) {
-    var stringValue = Object.prototype.toString.call(value);
-
-    return stringValue === '[object RegExp]' || stringValue === '[object Date]' || isReactElement(value);
-  }
-
-  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
-  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
-  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
-
-  function isReactElement(value) {
-    return value.$$typeof === REACT_ELEMENT_TYPE;
-  }
-
-  function emptyTarget(val) {
-    return Array.isArray(val) ? [] : {};
-  }
-
-  function cloneUnlessOtherwiseSpecified(value, optionsArgument) {
-    var clone = !optionsArgument || optionsArgument.clone !== false;
-
-    return clone && isMergeableObject(value) ? deepmerge(emptyTarget(value), value, optionsArgument) : value;
-  }
-
-  function defaultArrayMerge(target, source, optionsArgument) {
-    return target.concat(source).map(function (element) {
-      return cloneUnlessOtherwiseSpecified(element, optionsArgument);
-    });
-  }
-
-  function mergeObject(target, source, optionsArgument) {
-    var destination = {};
-    if (isMergeableObject(target)) {
-      Object.keys(target).forEach(function (key) {
-        destination[key] = cloneUnlessOtherwiseSpecified(target[key], optionsArgument);
-      });
-    }
-    Object.keys(source).forEach(function (key) {
-      if (!isMergeableObject(source[key]) || !target[key]) {
-        destination[key] = cloneUnlessOtherwiseSpecified(source[key], optionsArgument);
-      } else {
-        destination[key] = deepmerge(target[key], source[key], optionsArgument);
-      }
-    });
-    return destination;
-  }
-
-  function deepmerge(target, source, optionsArgument) {
-    var sourceIsArray = Array.isArray(source);
-    var targetIsArray = Array.isArray(target);
-    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
-    var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
-
-    if (!sourceAndTargetTypesMatch) {
-      return cloneUnlessOtherwiseSpecified(source, optionsArgument);
-    } else if (sourceIsArray) {
-      var arrayMerge = options.arrayMerge || defaultArrayMerge;
-      return arrayMerge(target, source, optionsArgument);
-    } else {
-      return mergeObject(target, source, optionsArgument);
-    }
-  }
-
-  deepmerge.all = function deepmergeAll(array, optionsArgument) {
-    if (!Array.isArray(array)) {
-      throw new Error('first argument should be an array');
-    }
-
-    return array.reduce(function (prev, next) {
-      return deepmerge(prev, next, optionsArgument);
-    }, {});
-  };
-
-  var deepmerge_1 = deepmerge;
-
-  /**
-   * lodash (Custom Build) <https://lodash.com/>
-   * Build: `lodash modularize exports="npm" -o ./`
-   * Copyright jQuery Foundation and other contributors <https://jquery.org/>
-   * Released under MIT license <https://lodash.com/license>
-   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-   */
-
-  /** `Object#toString` result references. */
-  var objectTag = '[object Object]';
-
-  /**
-   * Checks if `value` is a host object in IE < 9.
-   *
-   * @private
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
-   */
-  function isHostObject(value) {
-    // Many host objects are `Object` objects that can coerce to strings
-    // despite having improperly defined `toString` methods.
-    var result = false;
-    if (value != null && typeof value.toString != 'function') {
-      try {
-        result = !!(value + '');
-      } catch (e) {}
-    }
-    return result;
-  }
-
-  /**
-   * Creates a unary function that invokes `func` with its argument transformed.
-   *
-   * @private
-   * @param {Function} func The function to wrap.
-   * @param {Function} transform The argument transform.
-   * @returns {Function} Returns the new function.
-   */
-  function overArg(func, transform) {
-    return function (arg) {
-      return func(transform(arg));
-    };
-  }
-
-  /** Used for built-in method references. */
-  var funcProto = Function.prototype;
-  var objectProto = Object.prototype;
-
-  /** Used to resolve the decompiled source of functions. */
-  var funcToString = funcProto.toString;
-
-  /** Used to check objects for own properties. */
-  var hasOwnProperty$1 = objectProto.hasOwnProperty;
-
-  /** Used to infer the `Object` constructor. */
-  var objectCtorString = funcToString.call(Object);
-
-  /**
-   * Used to resolve the
-   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-   * of values.
-   */
-  var objectToString = objectProto.toString;
-
-  /** Built-in value references. */
-  var getPrototype = overArg(Object.getPrototypeOf, Object);
-
-  /**
-   * Checks if `value` is object-like. A value is object-like if it's not `null`
-   * and has a `typeof` result of "object".
-   *
-   * @static
-   * @memberOf _
-   * @since 4.0.0
-   * @category Lang
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-   * @example
-   *
-   * _.isObjectLike({});
-   * // => true
-   *
-   * _.isObjectLike([1, 2, 3]);
-   * // => true
-   *
-   * _.isObjectLike(_.noop);
-   * // => false
-   *
-   * _.isObjectLike(null);
-   * // => false
-   */
-  function isObjectLike(value) {
-    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
-  }
-
-  /**
-   * Checks if `value` is a plain object, that is, an object created by the
-   * `Object` constructor or one with a `[[Prototype]]` of `null`.
-   *
-   * @static
-   * @memberOf _
-   * @since 0.8.0
-   * @category Lang
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
-   * @example
-   *
-   * function Foo() {
-   *   this.a = 1;
-   * }
-   *
-   * _.isPlainObject(new Foo);
-   * // => false
-   *
-   * _.isPlainObject([1, 2, 3]);
-   * // => false
-   *
-   * _.isPlainObject({ 'x': 0, 'y': 0 });
-   * // => true
-   *
-   * _.isPlainObject(Object.create(null));
-   * // => true
-   */
-  function isPlainObject(value) {
-    if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
-      return false;
-    }
-    var proto = getPrototype(value);
-    if (proto === null) {
-      return true;
-    }
-    var Ctor = hasOwnProperty$1.call(proto, 'constructor') && proto.constructor;
-    return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
-  }
-
-  var lodash_isplainobject = isPlainObject;
-
-  /**
-   * checks if passed argument is an array
-   * @param  {any}  arr - the object to check
-   * @return {Boolean} - true if `arr` is an array
-   */
-  function isArray(arr) {
-    return Array.isArray ? Array.isArray(arr) : Object.prototype.toString.call(arr) === '[object Array]';
-  }
-
-  /**
-   * Returns the `opts.option` $option value of the given `opts.component`.
-   * If methods are encountered, they will be bound to the component context.
-   * If `opts.deep` is true, will recursively merge all child component
-   * `opts.option` $option values into the returned result.
-   *
-   * @param  {Object} opts - options
-   * @param  {Object} opts.component - Vue component to fetch option data from
-   * @param  {String} opts.option - what option to look for
-   * @param  {Boolean} opts.deep - look for data in child components as well?
-   * @param  {Function} opts.arrayMerge - how should arrays be merged?
-   * @param  {Object} [result={}] - result so far
-   * @return {Object} result - final aggregated result
-   */
-  function getComponentOption(opts, result) {
-    if (result === void 0) result = {};
-
-    var component = opts.component;
-    var option = opts.option;
-    var deep = opts.deep;
-    var arrayMerge = opts.arrayMerge;
-    var $options = component.$options;
-
-    if (component._inactive) {
-      return result;
-    }
-
-    // only collect option data if it exists
-    if (typeof $options[option] !== 'undefined' && $options[option] !== null) {
-      var data = $options[option];
-
-      // if option is a function, replace it with it's result
-      if (typeof data === 'function') {
-        data = data.call(component);
-      }
-
-      if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
-        // merge with existing options
-        result = deepmerge_1(result, data, { arrayMerge: arrayMerge });
-      } else {
-        result = data;
-      }
-    }
-
-    // collect & aggregate child options if deep = true
-    if (deep && component.$children.length) {
-      component.$children.forEach(function (childComponent) {
-        result = getComponentOption({
-          component: childComponent,
-          option: option,
-          deep: deep,
-          arrayMerge: arrayMerge
-        }, result);
-      });
-    }
-
-    return result;
-  }
-
-  var escapeHTML = function escapeHTML(str) {
-    return typeof window === 'undefined'
-    // server-side escape sequence
-    ? String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;')
-    // client-side escape sequence
-    : String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, '\'');
-  };
-
-  function _getMetaInfo(options) {
-    if (options === void 0) options = {};
-
-    var keyName = options.keyName;
-    var tagIDKeyName = options.tagIDKeyName;
-    /**
-     * Returns the correct meta info for the given component
-     * (child components will overwrite parent meta info)
-     *
-     * @param  {Object} component - the Vue instance to get meta info from
-     * @return {Object} - returned meta info
-     */
-    return function getMetaInfo(component) {
-      // set some sane defaults
-      var defaultInfo = {
-        title: '',
-        titleChunk: '',
-        titleTemplate: '%s',
-        htmlAttrs: {},
-        bodyAttrs: {},
-        headAttrs: {},
-        meta: [],
-        base: [],
-        link: [],
-        style: [],
-        script: [],
-        noscript: [],
-        __dangerouslyDisableSanitizers: [],
-        __dangerouslyDisableSanitizersByTagID: {}
-      };
-
-      // collect & aggregate all metaInfo $options
-      var info = getComponentOption({
-        component: component,
-        option: keyName,
-        deep: true,
-        arrayMerge: function arrayMerge(target, source) {
-          // we concat the arrays without merging objects contained in,
-          // but we check for a `vmid` property on each object in the array
-          // using an O(1) lookup associative array exploit
-          // note the use of "for in" - we are looping through arrays here, not
-          // plain objects
-          var destination = [];
-          for (var targetIndex in target) {
-            var targetItem = target[targetIndex];
-            var shared = false;
-            for (var sourceIndex in source) {
-              var sourceItem = source[sourceIndex];
-              if (targetItem[tagIDKeyName] && targetItem[tagIDKeyName] === sourceItem[tagIDKeyName]) {
-                shared = true;
-                break;
-              }
-            }
-            if (!shared) {
-              destination.push(targetItem);
-            }
-          }
-
-          return destination.concat(source);
-        }
-      });
-
-      // backup the title chunk in case user wants access to it
-      if (info.title) {
-        info.titleChunk = info.title;
-      }
-
-      // replace title with populated template
-      if (info.titleTemplate) {
-        if (typeof info.titleTemplate === 'function') {
-          info.title = info.titleTemplate.call(component, info.titleChunk);
-        } else {
-          info.title = info.titleTemplate.replace(/%s/g, info.titleChunk);
-        }
-      }
-
-      // convert base tag to an array so it can be handled the same way
-      // as the other tags
-      if (info.base) {
-        info.base = Object.keys(info.base).length ? [info.base] : [];
-      }
-
-      var ref = info.__dangerouslyDisableSanitizers;
-      var refByTagID = info.__dangerouslyDisableSanitizersByTagID;
-
-      // sanitizes potentially dangerous characters
-      var escape = function escape(info) {
-        return Object.keys(info).reduce(function (escaped, key) {
-          var isDisabled = ref && ref.indexOf(key) > -1;
-          var tagID = info[tagIDKeyName];
-          if (!isDisabled && tagID) {
-            isDisabled = refByTagID && refByTagID[tagID] && refByTagID[tagID].indexOf(key) > -1;
-          }
-          var val = info[key];
-          escaped[key] = val;
-          if (key === '__dangerouslyDisableSanitizers' || key === '__dangerouslyDisableSanitizersByTagID') {
-            return escaped;
-          }
-          if (!isDisabled) {
-            if (typeof val === 'string') {
-              escaped[key] = escapeHTML(val);
-            } else if (lodash_isplainobject(val)) {
-              escaped[key] = escape(val);
-            } else if (isArray(val)) {
-              escaped[key] = val.map(escape);
-            } else {
-              escaped[key] = val;
-            }
-          } else {
-            escaped[key] = val;
-          }
-
-          return escaped;
-        }, {});
-      };
-
-      // merge with defaults
-      info = deepmerge_1(defaultInfo, info);
-
-      // begin sanitization
-      info = escape(info);
-
-      return info;
-    };
-  }
-
-  function _titleGenerator(options) {
-    if (options === void 0) options = {};
-
-    var attribute = options.attribute;
-
-    /**
-     * Generates title output for the server
-     *
-     * @param  {'title'} type - the string "title"
-     * @param  {String} data - the title text
-     * @return {Object} - the title generator
-     */
-    return function titleGenerator(type, data) {
-      return {
-        text: function text() {
-          return "<" + type + " " + attribute + "=\"true\">" + data + "</" + type + ">";
-        }
-      };
-    };
-  }
-
-  function _attrsGenerator(options) {
-    if (options === void 0) options = {};
-
-    var attribute = options.attribute;
-
-    /**
-     * Generates tag attributes for use on the server.
-     *
-     * @param  {('bodyAttrs'|'htmlAttrs'|'headAttrs')} type - the type of attributes to generate
-     * @param  {Object} data - the attributes to generate
-     * @return {Object} - the attribute generator
-     */
-    return function attrsGenerator(type, data) {
-      return {
-        text: function text() {
-          var attributeStr = '';
-          var watchedAttrs = [];
-          for (var attr in data) {
-            if (data.hasOwnProperty(attr)) {
-              watchedAttrs.push(attr);
-              attributeStr += (typeof data[attr] !== 'undefined' ? attr + "=\"" + data[attr] + "\"" : attr) + " ";
-            }
-          }
-          attributeStr += attribute + "=\"" + watchedAttrs.join(',') + "\"";
-          return attributeStr.trim();
-        }
-      };
-    };
-  }
-
-  function _tagGenerator(options) {
-    if (options === void 0) options = {};
-
-    var attribute = options.attribute;
-
-    /**
-     * Generates meta, base, link, style, script, noscript tags for use on the server
-     *
-     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} the name of the tag
-     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
-     * @return {Object} - the tag generator
-     */
-    return function tagGenerator(type, tags) {
-      return {
-        text: function text(ref) {
-          if (ref === void 0) ref = {};
-          var body = ref.body;if (body === void 0) body = false;
-
-          // build a string containing all tags of this type
-          return tags.reduce(function (tagsStr, tag) {
-            if (!!tag.body !== body) {
-              return tagsStr;
-            }
-            // build a string containing all attributes of this tag
-            var attrs = Object.keys(tag).reduce(function (attrsStr, attr) {
-              switch (attr) {
-                // these attributes are treated as children on the tag
-                case 'innerHTML':
-                case 'cssText':
-                case 'once':
-                  return attrsStr;
-                // these form the attribute list for this tag
-                default:
-                  if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
-                    return attrsStr + " data-" + attr + "=\"" + tag[attr] + "\"";
-                  }
-                  return typeof tag[attr] === 'undefined' ? attrsStr + " " + attr : attrsStr + " " + attr + "=\"" + tag[attr] + "\"";
-              }
-            }, '').trim();
-
-            // grab child content from one of these attributes, if possible
-            var content = tag.innerHTML || tag.cssText || '';
-
-            // these tag types will have content inserted
-            var closed = ['noscript', 'script', 'style'].indexOf(type) === -1;
-
-            // generate tag exactly without any other redundance attribute
-            var observeTag = tag.once ? '' : attribute + "=\"true\" ";
-
-            // the final string for this specific tag
-            return closed ? tagsStr + "<" + type + " " + observeTag + attrs + "/>" : tagsStr + "<" + type + " " + observeTag + attrs + ">" + content + "</" + type + ">";
-          }, '');
-        }
-      };
-    };
-  }
-
-  function _generateServerInjector(options) {
-    if (options === void 0) options = {};
-
-    /**
-     * Converts a meta info property to one that can be stringified on the server
-     *
-     * @param  {String} type - the type of data to convert
-     * @param  {(String|Object|Array<Object>)} data - the data value
-     * @return {Object} - the new injector
-     */
-    return function generateServerInjector(type, data) {
-      switch (type) {
-        case 'title':
-          return _titleGenerator(options)(type, data);
-        case 'htmlAttrs':
-        case 'bodyAttrs':
-        case 'headAttrs':
-          return _attrsGenerator(options)(type, data);
-        default:
-          return _tagGenerator(options)(type, data);
-      }
-    };
-  }
-
-  function _inject(options) {
-    if (options === void 0) options = {};
-
-    /**
-     * Converts the state of the meta info object such that each item
-     * can be compiled to a tag string on the server
-     *
-     * @this {Object} - Vue instance - ideally the root component
-     * @return {Object} - server meta info with `toString` methods
-     */
-    return function inject() {
-      // get meta info with sensible defaults
-      var info = _getMetaInfo(options)(this.$root);
-
-      // generate server injectors
-      for (var key in info) {
-        if (info.hasOwnProperty(key) && key !== 'titleTemplate' && key !== 'titleChunk') {
-          info[key] = _generateServerInjector(options)(key, info[key]);
-        }
-      }
-
-      return info;
-    };
-  }
-
-  function _updateTitle() {
-    /**
-     * updates the document title
-     *
-     * @param  {String} title - the new title of the document
-     */
-    return function updateTitle(title) {
-      if (title === void 0) title = document.title;
-
-      document.title = title;
-    };
-  }
-
-  function _updateTagAttributes(options) {
-    if (options === void 0) options = {};
-
-    var attribute = options.attribute;
-
-    /**
-     * updates the document's html tag attributes
-     *
-     * @param  {Object} attrs - the new document html attributes
-     * @param  {HTMLElement} tag - the HTMLElment tag to update with new attrs
-     */
-    return function updateTagAttributes(attrs, tag) {
-      var vueMetaAttrString = tag.getAttribute(attribute);
-      var vueMetaAttrs = vueMetaAttrString ? vueMetaAttrString.split(',') : [];
-      var toRemove = [].concat(vueMetaAttrs);
-      for (var attr in attrs) {
-        if (attrs.hasOwnProperty(attr)) {
-          var val = attrs[attr] || '';
-          tag.setAttribute(attr, val);
-          if (vueMetaAttrs.indexOf(attr) === -1) {
-            vueMetaAttrs.push(attr);
-          }
-          var saveIndex = toRemove.indexOf(attr);
-          if (saveIndex !== -1) {
-            toRemove.splice(saveIndex, 1);
-          }
-        }
-      }
-      var i = toRemove.length - 1;
-      for (; i >= 0; i--) {
-        tag.removeAttribute(toRemove[i]);
-      }
-      if (vueMetaAttrs.length === toRemove.length) {
-        tag.removeAttribute(attribute);
-      } else {
-        tag.setAttribute(attribute, vueMetaAttrs.join(','));
-      }
-    };
-  }
-
-  // borrow the slice method
-  var toArray = Function.prototype.call.bind(Array.prototype.slice);
-
-  function _updateTags(options) {
-    if (options === void 0) options = {};
-
-    var attribute = options.attribute;
-
-    /**
-     * Updates meta tags inside <head> and <body> on the client. Borrowed from `react-helmet`:
-     * https://github.com/nfl/react-helmet/blob/004d448f8de5f823d10f838b02317521180f34da/src/Helmet.js#L195-L245
-     *
-     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} type - the name of the tag
-     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
-     * @return {Object} - a representation of what tags changed
-     */
-    return function updateTags(type, tags, headTag, bodyTag) {
-      var oldHeadTags = toArray(headTag.querySelectorAll(type + "[" + attribute + "]"));
-      var oldBodyTags = toArray(bodyTag.querySelectorAll(type + "[" + attribute + "][data-body=\"true\"]"));
-      var newTags = [];
-      var indexToDelete;
-
-      if (tags.length > 1) {
-        // remove duplicates that could have been found by merging tags
-        // which include a mixin with metaInfo and that mixin is used
-        // by multiple components on the same page
-        var found = [];
-        tags = tags.map(function (x) {
-          var k = JSON.stringify(x);
-          if (found.indexOf(k) < 0) {
-            found.push(k);
-            return x;
-          }
-        }).filter(function (x) {
-          return x;
-        });
-      }
-
-      if (tags && tags.length) {
-        tags.forEach(function (tag) {
-          var newElement = document.createElement(type);
-          var oldTags = tag.body !== true ? oldHeadTags : oldBodyTags;
-
-          for (var attr in tag) {
-            if (tag.hasOwnProperty(attr)) {
-              if (attr === 'innerHTML') {
-                newElement.innerHTML = tag.innerHTML;
-              } else if (attr === 'cssText') {
-                if (newElement.styleSheet) {
-                  newElement.styleSheet.cssText = tag.cssText;
-                } else {
-                  newElement.appendChild(document.createTextNode(tag.cssText));
-                }
-              } else if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
-                var _attr = "data-" + attr;
-                var value = typeof tag[attr] === 'undefined' ? '' : tag[attr];
-                newElement.setAttribute(_attr, value);
-              } else {
-                var value$1 = typeof tag[attr] === 'undefined' ? '' : tag[attr];
-                newElement.setAttribute(attr, value$1);
-              }
-            }
-          }
-
-          newElement.setAttribute(attribute, 'true');
-
-          // Remove a duplicate tag from domTagstoRemove, so it isn't cleared.
-          if (oldTags.some(function (existingTag, index) {
-            indexToDelete = index;
-            return newElement.isEqualNode(existingTag);
-          })) {
-            oldTags.splice(indexToDelete, 1);
-          } else {
-            newTags.push(newElement);
-          }
-        });
-      }
-      var oldTags = oldHeadTags.concat(oldBodyTags);
-      oldTags.forEach(function (tag) {
-        return tag.parentNode.removeChild(tag);
-      });
-      newTags.forEach(function (tag) {
-        if (tag.getAttribute('data-body') === 'true') {
-          bodyTag.appendChild(tag);
-        } else {
-          headTag.appendChild(tag);
-        }
-      });
-
-      return { oldTags: oldTags, newTags: newTags };
-    };
-  }
-
-  function _updateClientMetaInfo(options) {
-    if (options === void 0) options = {};
-
-    var ssrAttribute = options.ssrAttribute;
-
-    /**
-     * Performs client-side updates when new meta info is received
-     *
-     * @param  {Object} newInfo - the meta info to update to
-     */
-    return function updateClientMetaInfo(newInfo) {
-      var htmlTag = document.getElementsByTagName('html')[0];
-      // if this is not a server render, then update
-      if (htmlTag.getAttribute(ssrAttribute) === null) {
-        // initialize tracked changes
-        var addedTags = {};
-        var removedTags = {};
-
-        Object.keys(newInfo).forEach(function (key) {
-          switch (key) {
-            // update the title
-            case 'title':
-              _updateTitle(options)(newInfo.title);
-              break;
-            // update attributes
-            case 'htmlAttrs':
-              _updateTagAttributes(options)(newInfo[key], htmlTag);
-              break;
-            case 'bodyAttrs':
-              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('body')[0]);
-              break;
-            case 'headAttrs':
-              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('head')[0]);
-              break;
-            // ignore these
-            case 'titleChunk':
-            case 'titleTemplate':
-            case 'changed':
-            case '__dangerouslyDisableSanitizers':
-              break;
-            // catch-all update tags
-            default:
-              var headTag = document.getElementsByTagName('head')[0];
-              var bodyTag = document.getElementsByTagName('body')[0];
-              var ref = _updateTags(options)(key, newInfo[key], headTag, bodyTag);
-              var oldTags = ref.oldTags;
-              var newTags = ref.newTags;
-              if (newTags.length) {
-                addedTags[key] = newTags;
-                removedTags[key] = oldTags;
-              }
-          }
-        });
-
-        // emit "event" with new info
-        if (typeof newInfo.changed === 'function') {
-          newInfo.changed.call(this, newInfo, addedTags, removedTags);
-        }
-      } else {
-        // remove the server render attribute so we can update on changes
-        htmlTag.removeAttribute(ssrAttribute);
-      }
-    };
-  }
-
-  function _refresh(options) {
-    if (options === void 0) options = {};
-
-    /**
-     * When called, will update the current meta info with new meta info.
-     * Useful when updating meta info as the result of an asynchronous
-     * action that resolves after the initial render takes place.
-     *
-     * Credit to [Sébastien Chopin](https://github.com/Atinux) for the suggestion
-     * to implement this method.
-     *
-     * @return {Object} - new meta info
-     */
-    return function refresh() {
-      var info = _getMetaInfo(options)(this.$root);
-      _updateClientMetaInfo(options).call(this, info);
-      return info;
-    };
-  }
-
-  function _$meta(options) {
-    if (options === void 0) options = {};
-
-    /**
-     * Returns an injector for server-side rendering.
-     * @this {Object} - the Vue instance (a root component)
-     * @return {Object} - injector
-     */
-    return function $meta() {
-      return {
-        inject: _inject(options).bind(this),
-        refresh: _refresh(options).bind(this)
-      };
-    };
-  }
-
-  // fallback to timers if rAF not present
-  var stopUpdate = (typeof window !== 'undefined' ? window.cancelAnimationFrame : null) || clearTimeout;
-  var startUpdate = (typeof window !== 'undefined' ? window.requestAnimationFrame : null) || function (cb) {
-    return setTimeout(cb, 0);
-  };
-
-  /**
-   * Performs a batched update. Uses requestAnimationFrame to prevent
-   * calling a function too many times in quick succession.
-   * You need to pass it an ID (which can initially be `null`),
-   * but be sure to overwrite that ID with the return value of batchUpdate.
-   *
-   * @param  {(null|Number)} id - the ID of this update
-   * @param  {Function} callback - the update to perform
-   * @return {Number} id - a new ID
-   */
-  function batchUpdate(id, callback) {
-    stopUpdate(id);
-    return startUpdate(function () {
-      id = null;
-      callback();
-    });
-  }
-
-  /**
-   * These are constant variables used throughout the application.
-   */
-
-  // This is the name of the component option that contains all the information that
-  // gets converted to the various meta tags & attributes for the page.
-  var VUE_META_KEY_NAME = 'metaInfo';
-
-  // This is the attribute vue-meta augments on elements to know which it should
-  // manage and which it should ignore.
-  var VUE_META_ATTRIBUTE = 'data-vue-meta';
-
-  // This is the attribute that goes on the `html` tag to inform `vue-meta`
-  // that the server has already generated the meta tags for the initial render.
-  var VUE_META_SERVER_RENDERED_ATTRIBUTE = 'data-vue-meta-server-rendered';
-
-  // This is the property that tells vue-meta to overwrite (instead of append)
-  // an item in a tag list. For example, if you have two `meta` tag list items
-  // that both have `vmid` of "description", then vue-meta will overwrite the
-  // shallowest one with the deepest one.
-  var VUE_META_TAG_LIST_ID_KEY_NAME = 'vmid';
-
-  // automatic install
-  if (typeof window !== 'undefined' && typeof window.Vue !== 'undefined') {
-    Vue.use(VueMeta);
-  }
-
-  /**
-   * Plugin install function.
-   * @param {Function} Vue - the Vue constructor.
-   */
-  function VueMeta(Vue, options) {
-    if (options === void 0) options = {};
-
-    // set some default options
-    var defaultOptions = {
-      keyName: VUE_META_KEY_NAME,
-      attribute: VUE_META_ATTRIBUTE,
-      ssrAttribute: VUE_META_SERVER_RENDERED_ATTRIBUTE,
-      tagIDKeyName: VUE_META_TAG_LIST_ID_KEY_NAME
-    };
-    // combine options
-    options = objectAssign(defaultOptions, options);
-
-    // bind the $meta method to this component instance
-    Vue.prototype.$meta = _$meta(options);
-
-    // store an id to keep track of DOM updates
-    var batchID = null;
-
-    // watch for client side component updates
-    Vue.mixin({
-      beforeCreate: function beforeCreate() {
-        // Add a marker to know if it uses metaInfo
-        if (typeof this.$options[options.keyName] !== 'undefined') {
-          this._hasMetaInfo = true;
-        }
-        // coerce function-style metaInfo to a computed prop so we can observe
-        // it on creation
-        if (typeof this.$options[options.keyName] === 'function') {
-          if (typeof this.$options.computed === 'undefined') {
-            this.$options.computed = {};
-          }
-          this.$options.computed.$metaInfo = this.$options[options.keyName];
-        }
-      },
-      created: function created() {
-        var this$1 = this;
-
-        // if computed $metaInfo exists, watch it for updates & trigger a refresh
-        // when it changes (i.e. automatically handle async actions that affect metaInfo)
-        // credit for this suggestion goes to [Sébastien Chopin](https://github.com/Atinux)
-        if (!this.$isServer && this.$metaInfo) {
-          this.$watch('$metaInfo', function () {
-            // batch potential DOM updates to prevent extraneous re-rendering
-            batchID = batchUpdate(batchID, function () {
-              return this$1.$meta().refresh();
-            });
-          });
-        }
-      },
-      activated: function activated() {
-        var this$1 = this;
-
-        if (this._hasMetaInfo) {
-          // batch potential DOM updates to prevent extraneous re-rendering
-          batchID = batchUpdate(batchID, function () {
-            return this$1.$meta().refresh();
-          });
-        }
-      },
-      deactivated: function deactivated() {
-        var this$1 = this;
-
-        if (this._hasMetaInfo) {
-          // batch potential DOM updates to prevent extraneous re-rendering
-          batchID = batchUpdate(batchID, function () {
-            return this$1.$meta().refresh();
-          });
-        }
-      },
-      beforeMount: function beforeMount() {
-        var this$1 = this;
-
-        // batch potential DOM updates to prevent extraneous re-rendering
-        if (this._hasMetaInfo) {
-          batchID = batchUpdate(batchID, function () {
-            return this$1.$meta().refresh();
-          });
-        }
-      },
-      destroyed: function destroyed() {
-        var this$1 = this;
-
-        // do not trigger refresh on the server side
-        if (this.$isServer) {
-          return;
-        }
-        // re-render meta data when returning from a child component to parent
-        if (this._hasMetaInfo) {
-          // Wait that element is hidden before refreshing meta tags (to support animations)
-          var interval = setInterval(function () {
-            if (this$1.$el.offsetParent !== null) {
-              return;
-            }
-            clearInterval(interval);
-            batchID = batchUpdate(batchID, function () {
-              return this$1.$meta().refresh();
-            });
-          }, 50);
-        }
-      }
-    });
-  }
-
-  var version = "1.4.3";
-
-  VueMeta.version = version;
-
-  return VueMeta;
+	value: true
 });
 
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WebRoutes = undefined;
-
-var _vue = __webpack_require__(5);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(47);
+var _vueRouter = __webpack_require__(20);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
-
-var _vueMeta = __webpack_require__(45);
-
-var _vueMeta2 = _interopRequireDefault(_vueMeta);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
-_vue2.default.use(_vueMeta2.default);
 
-var WebRoutes = exports.WebRoutes = new _vueRouter2.default({});
+exports.default = new _vueRouter2.default({
+	mode: 'history',
+	routes: [{
+		path: '/',
+		name: 'Index',
+		component: function component() {
+			return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 4));
+		}
+	}]
+});
 
 /***/ }),
-/* 47 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13278,7 +11764,1647 @@ if (inBrowser && window.Vue) {
 }
 
 exports.default = VueRouter;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(26);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\layouts\\Web.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98f3c19c", Component.options)
+  } else {
+    hotAPI.reload("data-v-98f3c19c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__ = __webpack_require__(23);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Appbar_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7240db89_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Appbar_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Appbar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7240db89", Component.options)
+  } else {
+    hotAPI.reload("data-v-7240db89", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "header",
+    { staticClass: "appbar" },
+    [
+      _c("Icon", {
+        staticClass: "trigger",
+        attrs: { name: "menu", "data-trigger": _vm.drawerId }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "appbar-title" }, [
+        _c("h1", [_vm._v(_vm._s(_vm.title))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "appbar-spacer" }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7240db89", esExports)
+  }
+}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__ = __webpack_require__(25);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_NavigationDrawer_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_119c4d1c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_NavigationDrawer_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\NavigationDrawer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-119c4d1c", Component.options)
+  } else {
+    hotAPI.reload("data-v-119c4d1c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "drawer", attrs: { id: _vm.drawerId } },
+    [
+      _c("div", { staticClass: "drawer-header" }, [_vm._t("header")], 2),
+      _vm._v(" "),
+      _vm._t("content")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-119c4d1c", esExports)
+  }
+}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "full-width" },
+    [
+      _c(
+        "Appbar",
+        { attrs: { title: "Home", "drawer-id": _vm.drawerId } },
+        [
+          _c("Icon", { attrs: { name: "search" } }),
+          _vm._v(" "),
+          _c("Icon", { attrs: { name: "person" } }),
+          _vm._v(" "),
+          _c("Icon", { attrs: { name: "more_vert" } })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "NavigationDrawer",
+        {
+          staticClass: "drawer-persistent",
+          attrs: { "drawer-id": _vm.drawerId }
+        },
+        [
+          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+            _c("img", {
+              staticClass: "drawer-profile-img",
+              attrs: {
+                src: "/images/profile-icon.jpg",
+                alt: "SMaterial profile example"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "drawer-profile-name" }, [_vm._v("John")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "drawer-profile-more",
+                attrs: { id: "drawer-profile-more" }
+              },
+              [
+                _c("Icon", {
+                  staticClass: "trigger",
+                  attrs: { name: "arrow_drop_down", trigger: "profile" }
+                }),
+                _vm._v(" "),
+                _c("nav", { staticClass: "menu", attrs: { id: "profile" } }, [
+                  _c(
+                    "a",
+                    { attrs: { href: "#" } },
+                    [
+                      _c("Icon", { attrs: { name: "power_settings_new" } }),
+                      _vm._v(" Aanmelden")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { attrs: { href: "#" } },
+                    [
+                      _c("Icon", { attrs: { name: "person_add" } }),
+                      _vm._v(" Registeren")
+                    ],
+                    1
+                  )
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "i",
+                {
+                  staticClass: "material-icons arrow trigger",
+                  attrs: { "data-trigger": "drawer" }
+                },
+                [_vm._v("chevron_left")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "content" }, slot: "content" })
+        ]
+      ),
+      _vm._v(" "),
+      _c("main", [_vm._t("content")], 2)
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-98f3c19c", esExports)
+  }
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("Web", [
+    _c("div", { attrs: { slot: "content" }, slot: "content" }, [
+      _vm._v("\n        Dit is een test\n    ")
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e725123a", esExports)
+  }
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * vue-meta v1.4.3
+ * (c) 2018 Declan de Wet & Atinux
+ * @license MIT
+ */
+(function (global, factory) {
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.VueMeta = factory();
+})(undefined, function () {
+  'use strict';
+
+  /*
+  object-assign
+  (c) Sindre Sorhus
+  @license MIT
+  */
+
+  /* eslint-disable no-unused-vars */
+
+  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+  function toObject(val) {
+    if (val === null || val === undefined) {
+      throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+
+    return Object(val);
+  }
+
+  function shouldUseNative() {
+    try {
+      if (!Object.assign) {
+        return false;
+      }
+
+      // Detect buggy property enumeration order in older V8 versions.
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
+      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
+      test1[5] = 'de';
+      if (Object.getOwnPropertyNames(test1)[0] === '5') {
+        return false;
+      }
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      var test2 = {};
+      for (var i = 0; i < 10; i++) {
+        test2['_' + String.fromCharCode(i)] = i;
+      }
+      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+        return test2[n];
+      });
+      if (order2.join('') !== '0123456789') {
+        return false;
+      }
+
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      var test3 = {};
+      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+        test3[letter] = letter;
+      });
+      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      // We don't expect any of the above to throw, but better to be safe.
+      return false;
+    }
+  }
+
+  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+    var arguments$1 = arguments;
+
+    var from;
+    var to = toObject(target);
+    var symbols;
+
+    for (var s = 1; s < arguments.length; s++) {
+      from = Object(arguments$1[s]);
+
+      for (var key in from) {
+        if (hasOwnProperty.call(from, key)) {
+          to[key] = from[key];
+        }
+      }
+
+      if (getOwnPropertySymbols) {
+        symbols = getOwnPropertySymbols(from);
+        for (var i = 0; i < symbols.length; i++) {
+          if (propIsEnumerable.call(from, symbols[i])) {
+            to[symbols[i]] = from[symbols[i]];
+          }
+        }
+      }
+    }
+
+    return to;
+  };
+
+  var isMergeableObject = function isMergeableObject(value) {
+    return isNonNullObject(value) && !isSpecial(value);
+  };
+
+  function isNonNullObject(value) {
+    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object';
+  }
+
+  function isSpecial(value) {
+    var stringValue = Object.prototype.toString.call(value);
+
+    return stringValue === '[object RegExp]' || stringValue === '[object Date]' || isReactElement(value);
+  }
+
+  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
+
+  function isReactElement(value) {
+    return value.$$typeof === REACT_ELEMENT_TYPE;
+  }
+
+  function emptyTarget(val) {
+    return Array.isArray(val) ? [] : {};
+  }
+
+  function cloneUnlessOtherwiseSpecified(value, optionsArgument) {
+    var clone = !optionsArgument || optionsArgument.clone !== false;
+
+    return clone && isMergeableObject(value) ? deepmerge(emptyTarget(value), value, optionsArgument) : value;
+  }
+
+  function defaultArrayMerge(target, source, optionsArgument) {
+    return target.concat(source).map(function (element) {
+      return cloneUnlessOtherwiseSpecified(element, optionsArgument);
+    });
+  }
+
+  function mergeObject(target, source, optionsArgument) {
+    var destination = {};
+    if (isMergeableObject(target)) {
+      Object.keys(target).forEach(function (key) {
+        destination[key] = cloneUnlessOtherwiseSpecified(target[key], optionsArgument);
+      });
+    }
+    Object.keys(source).forEach(function (key) {
+      if (!isMergeableObject(source[key]) || !target[key]) {
+        destination[key] = cloneUnlessOtherwiseSpecified(source[key], optionsArgument);
+      } else {
+        destination[key] = deepmerge(target[key], source[key], optionsArgument);
+      }
+    });
+    return destination;
+  }
+
+  function deepmerge(target, source, optionsArgument) {
+    var sourceIsArray = Array.isArray(source);
+    var targetIsArray = Array.isArray(target);
+    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
+    var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+    if (!sourceAndTargetTypesMatch) {
+      return cloneUnlessOtherwiseSpecified(source, optionsArgument);
+    } else if (sourceIsArray) {
+      var arrayMerge = options.arrayMerge || defaultArrayMerge;
+      return arrayMerge(target, source, optionsArgument);
+    } else {
+      return mergeObject(target, source, optionsArgument);
+    }
+  }
+
+  deepmerge.all = function deepmergeAll(array, optionsArgument) {
+    if (!Array.isArray(array)) {
+      throw new Error('first argument should be an array');
+    }
+
+    return array.reduce(function (prev, next) {
+      return deepmerge(prev, next, optionsArgument);
+    }, {});
+  };
+
+  var deepmerge_1 = deepmerge;
+
+  /**
+   * lodash (Custom Build) <https://lodash.com/>
+   * Build: `lodash modularize exports="npm" -o ./`
+   * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+   * Released under MIT license <https://lodash.com/license>
+   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+   */
+
+  /** `Object#toString` result references. */
+  var objectTag = '[object Object]';
+
+  /**
+   * Checks if `value` is a host object in IE < 9.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+   */
+  function isHostObject(value) {
+    // Many host objects are `Object` objects that can coerce to strings
+    // despite having improperly defined `toString` methods.
+    var result = false;
+    if (value != null && typeof value.toString != 'function') {
+      try {
+        result = !!(value + '');
+      } catch (e) {}
+    }
+    return result;
+  }
+
+  /**
+   * Creates a unary function that invokes `func` with its argument transformed.
+   *
+   * @private
+   * @param {Function} func The function to wrap.
+   * @param {Function} transform The argument transform.
+   * @returns {Function} Returns the new function.
+   */
+  function overArg(func, transform) {
+    return function (arg) {
+      return func(transform(arg));
+    };
+  }
+
+  /** Used for built-in method references. */
+  var funcProto = Function.prototype;
+  var objectProto = Object.prototype;
+
+  /** Used to resolve the decompiled source of functions. */
+  var funcToString = funcProto.toString;
+
+  /** Used to check objects for own properties. */
+  var hasOwnProperty$1 = objectProto.hasOwnProperty;
+
+  /** Used to infer the `Object` constructor. */
+  var objectCtorString = funcToString.call(Object);
+
+  /**
+   * Used to resolve the
+   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+   * of values.
+   */
+  var objectToString = objectProto.toString;
+
+  /** Built-in value references. */
+  var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+  /**
+   * Checks if `value` is object-like. A value is object-like if it's not `null`
+   * and has a `typeof` result of "object".
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+   * @example
+   *
+   * _.isObjectLike({});
+   * // => true
+   *
+   * _.isObjectLike([1, 2, 3]);
+   * // => true
+   *
+   * _.isObjectLike(_.noop);
+   * // => false
+   *
+   * _.isObjectLike(null);
+   * // => false
+   */
+  function isObjectLike(value) {
+    return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+  }
+
+  /**
+   * Checks if `value` is a plain object, that is, an object created by the
+   * `Object` constructor or one with a `[[Prototype]]` of `null`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.8.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   * }
+   *
+   * _.isPlainObject(new Foo);
+   * // => false
+   *
+   * _.isPlainObject([1, 2, 3]);
+   * // => false
+   *
+   * _.isPlainObject({ 'x': 0, 'y': 0 });
+   * // => true
+   *
+   * _.isPlainObject(Object.create(null));
+   * // => true
+   */
+  function isPlainObject(value) {
+    if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
+      return false;
+    }
+    var proto = getPrototype(value);
+    if (proto === null) {
+      return true;
+    }
+    var Ctor = hasOwnProperty$1.call(proto, 'constructor') && proto.constructor;
+    return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+  }
+
+  var lodash_isplainobject = isPlainObject;
+
+  /**
+   * checks if passed argument is an array
+   * @param  {any}  arr - the object to check
+   * @return {Boolean} - true if `arr` is an array
+   */
+  function isArray(arr) {
+    return Array.isArray ? Array.isArray(arr) : Object.prototype.toString.call(arr) === '[object Array]';
+  }
+
+  /**
+   * Returns the `opts.option` $option value of the given `opts.component`.
+   * If methods are encountered, they will be bound to the component context.
+   * If `opts.deep` is true, will recursively merge all child component
+   * `opts.option` $option values into the returned result.
+   *
+   * @param  {Object} opts - options
+   * @param  {Object} opts.component - Vue component to fetch option data from
+   * @param  {String} opts.option - what option to look for
+   * @param  {Boolean} opts.deep - look for data in child components as well?
+   * @param  {Function} opts.arrayMerge - how should arrays be merged?
+   * @param  {Object} [result={}] - result so far
+   * @return {Object} result - final aggregated result
+   */
+  function getComponentOption(opts, result) {
+    if (result === void 0) result = {};
+
+    var component = opts.component;
+    var option = opts.option;
+    var deep = opts.deep;
+    var arrayMerge = opts.arrayMerge;
+    var $options = component.$options;
+
+    if (component._inactive) {
+      return result;
+    }
+
+    // only collect option data if it exists
+    if (typeof $options[option] !== 'undefined' && $options[option] !== null) {
+      var data = $options[option];
+
+      // if option is a function, replace it with it's result
+      if (typeof data === 'function') {
+        data = data.call(component);
+      }
+
+      if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
+        // merge with existing options
+        result = deepmerge_1(result, data, { arrayMerge: arrayMerge });
+      } else {
+        result = data;
+      }
+    }
+
+    // collect & aggregate child options if deep = true
+    if (deep && component.$children.length) {
+      component.$children.forEach(function (childComponent) {
+        result = getComponentOption({
+          component: childComponent,
+          option: option,
+          deep: deep,
+          arrayMerge: arrayMerge
+        }, result);
+      });
+    }
+
+    return result;
+  }
+
+  var escapeHTML = function escapeHTML(str) {
+    return typeof window === 'undefined'
+    // server-side escape sequence
+    ? String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;')
+    // client-side escape sequence
+    : String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, '\'');
+  };
+
+  function _getMetaInfo(options) {
+    if (options === void 0) options = {};
+
+    var keyName = options.keyName;
+    var tagIDKeyName = options.tagIDKeyName;
+    /**
+     * Returns the correct meta info for the given component
+     * (child components will overwrite parent meta info)
+     *
+     * @param  {Object} component - the Vue instance to get meta info from
+     * @return {Object} - returned meta info
+     */
+    return function getMetaInfo(component) {
+      // set some sane defaults
+      var defaultInfo = {
+        title: '',
+        titleChunk: '',
+        titleTemplate: '%s',
+        htmlAttrs: {},
+        bodyAttrs: {},
+        headAttrs: {},
+        meta: [],
+        base: [],
+        link: [],
+        style: [],
+        script: [],
+        noscript: [],
+        __dangerouslyDisableSanitizers: [],
+        __dangerouslyDisableSanitizersByTagID: {}
+      };
+
+      // collect & aggregate all metaInfo $options
+      var info = getComponentOption({
+        component: component,
+        option: keyName,
+        deep: true,
+        arrayMerge: function arrayMerge(target, source) {
+          // we concat the arrays without merging objects contained in,
+          // but we check for a `vmid` property on each object in the array
+          // using an O(1) lookup associative array exploit
+          // note the use of "for in" - we are looping through arrays here, not
+          // plain objects
+          var destination = [];
+          for (var targetIndex in target) {
+            var targetItem = target[targetIndex];
+            var shared = false;
+            for (var sourceIndex in source) {
+              var sourceItem = source[sourceIndex];
+              if (targetItem[tagIDKeyName] && targetItem[tagIDKeyName] === sourceItem[tagIDKeyName]) {
+                shared = true;
+                break;
+              }
+            }
+            if (!shared) {
+              destination.push(targetItem);
+            }
+          }
+
+          return destination.concat(source);
+        }
+      });
+
+      // backup the title chunk in case user wants access to it
+      if (info.title) {
+        info.titleChunk = info.title;
+      }
+
+      // replace title with populated template
+      if (info.titleTemplate) {
+        if (typeof info.titleTemplate === 'function') {
+          info.title = info.titleTemplate.call(component, info.titleChunk);
+        } else {
+          info.title = info.titleTemplate.replace(/%s/g, info.titleChunk);
+        }
+      }
+
+      // convert base tag to an array so it can be handled the same way
+      // as the other tags
+      if (info.base) {
+        info.base = Object.keys(info.base).length ? [info.base] : [];
+      }
+
+      var ref = info.__dangerouslyDisableSanitizers;
+      var refByTagID = info.__dangerouslyDisableSanitizersByTagID;
+
+      // sanitizes potentially dangerous characters
+      var escape = function escape(info) {
+        return Object.keys(info).reduce(function (escaped, key) {
+          var isDisabled = ref && ref.indexOf(key) > -1;
+          var tagID = info[tagIDKeyName];
+          if (!isDisabled && tagID) {
+            isDisabled = refByTagID && refByTagID[tagID] && refByTagID[tagID].indexOf(key) > -1;
+          }
+          var val = info[key];
+          escaped[key] = val;
+          if (key === '__dangerouslyDisableSanitizers' || key === '__dangerouslyDisableSanitizersByTagID') {
+            return escaped;
+          }
+          if (!isDisabled) {
+            if (typeof val === 'string') {
+              escaped[key] = escapeHTML(val);
+            } else if (lodash_isplainobject(val)) {
+              escaped[key] = escape(val);
+            } else if (isArray(val)) {
+              escaped[key] = val.map(escape);
+            } else {
+              escaped[key] = val;
+            }
+          } else {
+            escaped[key] = val;
+          }
+
+          return escaped;
+        }, {});
+      };
+
+      // merge with defaults
+      info = deepmerge_1(defaultInfo, info);
+
+      // begin sanitization
+      info = escape(info);
+
+      return info;
+    };
+  }
+
+  function _titleGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates title output for the server
+     *
+     * @param  {'title'} type - the string "title"
+     * @param  {String} data - the title text
+     * @return {Object} - the title generator
+     */
+    return function titleGenerator(type, data) {
+      return {
+        text: function text() {
+          return "<" + type + " " + attribute + "=\"true\">" + data + "</" + type + ">";
+        }
+      };
+    };
+  }
+
+  function _attrsGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates tag attributes for use on the server.
+     *
+     * @param  {('bodyAttrs'|'htmlAttrs'|'headAttrs')} type - the type of attributes to generate
+     * @param  {Object} data - the attributes to generate
+     * @return {Object} - the attribute generator
+     */
+    return function attrsGenerator(type, data) {
+      return {
+        text: function text() {
+          var attributeStr = '';
+          var watchedAttrs = [];
+          for (var attr in data) {
+            if (data.hasOwnProperty(attr)) {
+              watchedAttrs.push(attr);
+              attributeStr += (typeof data[attr] !== 'undefined' ? attr + "=\"" + data[attr] + "\"" : attr) + " ";
+            }
+          }
+          attributeStr += attribute + "=\"" + watchedAttrs.join(',') + "\"";
+          return attributeStr.trim();
+        }
+      };
+    };
+  }
+
+  function _tagGenerator(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Generates meta, base, link, style, script, noscript tags for use on the server
+     *
+     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} the name of the tag
+     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
+     * @return {Object} - the tag generator
+     */
+    return function tagGenerator(type, tags) {
+      return {
+        text: function text(ref) {
+          if (ref === void 0) ref = {};
+          var body = ref.body;if (body === void 0) body = false;
+
+          // build a string containing all tags of this type
+          return tags.reduce(function (tagsStr, tag) {
+            if (!!tag.body !== body) {
+              return tagsStr;
+            }
+            // build a string containing all attributes of this tag
+            var attrs = Object.keys(tag).reduce(function (attrsStr, attr) {
+              switch (attr) {
+                // these attributes are treated as children on the tag
+                case 'innerHTML':
+                case 'cssText':
+                case 'once':
+                  return attrsStr;
+                // these form the attribute list for this tag
+                default:
+                  if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
+                    return attrsStr + " data-" + attr + "=\"" + tag[attr] + "\"";
+                  }
+                  return typeof tag[attr] === 'undefined' ? attrsStr + " " + attr : attrsStr + " " + attr + "=\"" + tag[attr] + "\"";
+              }
+            }, '').trim();
+
+            // grab child content from one of these attributes, if possible
+            var content = tag.innerHTML || tag.cssText || '';
+
+            // these tag types will have content inserted
+            var closed = ['noscript', 'script', 'style'].indexOf(type) === -1;
+
+            // generate tag exactly without any other redundance attribute
+            var observeTag = tag.once ? '' : attribute + "=\"true\" ";
+
+            // the final string for this specific tag
+            return closed ? tagsStr + "<" + type + " " + observeTag + attrs + "/>" : tagsStr + "<" + type + " " + observeTag + attrs + ">" + content + "</" + type + ">";
+          }, '');
+        }
+      };
+    };
+  }
+
+  function _generateServerInjector(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Converts a meta info property to one that can be stringified on the server
+     *
+     * @param  {String} type - the type of data to convert
+     * @param  {(String|Object|Array<Object>)} data - the data value
+     * @return {Object} - the new injector
+     */
+    return function generateServerInjector(type, data) {
+      switch (type) {
+        case 'title':
+          return _titleGenerator(options)(type, data);
+        case 'htmlAttrs':
+        case 'bodyAttrs':
+        case 'headAttrs':
+          return _attrsGenerator(options)(type, data);
+        default:
+          return _tagGenerator(options)(type, data);
+      }
+    };
+  }
+
+  function _inject(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Converts the state of the meta info object such that each item
+     * can be compiled to a tag string on the server
+     *
+     * @this {Object} - Vue instance - ideally the root component
+     * @return {Object} - server meta info with `toString` methods
+     */
+    return function inject() {
+      // get meta info with sensible defaults
+      var info = _getMetaInfo(options)(this.$root);
+
+      // generate server injectors
+      for (var key in info) {
+        if (info.hasOwnProperty(key) && key !== 'titleTemplate' && key !== 'titleChunk') {
+          info[key] = _generateServerInjector(options)(key, info[key]);
+        }
+      }
+
+      return info;
+    };
+  }
+
+  function _updateTitle() {
+    /**
+     * updates the document title
+     *
+     * @param  {String} title - the new title of the document
+     */
+    return function updateTitle(title) {
+      if (title === void 0) title = document.title;
+
+      document.title = title;
+    };
+  }
+
+  function _updateTagAttributes(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * updates the document's html tag attributes
+     *
+     * @param  {Object} attrs - the new document html attributes
+     * @param  {HTMLElement} tag - the HTMLElment tag to update with new attrs
+     */
+    return function updateTagAttributes(attrs, tag) {
+      var vueMetaAttrString = tag.getAttribute(attribute);
+      var vueMetaAttrs = vueMetaAttrString ? vueMetaAttrString.split(',') : [];
+      var toRemove = [].concat(vueMetaAttrs);
+      for (var attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          var val = attrs[attr] || '';
+          tag.setAttribute(attr, val);
+          if (vueMetaAttrs.indexOf(attr) === -1) {
+            vueMetaAttrs.push(attr);
+          }
+          var saveIndex = toRemove.indexOf(attr);
+          if (saveIndex !== -1) {
+            toRemove.splice(saveIndex, 1);
+          }
+        }
+      }
+      var i = toRemove.length - 1;
+      for (; i >= 0; i--) {
+        tag.removeAttribute(toRemove[i]);
+      }
+      if (vueMetaAttrs.length === toRemove.length) {
+        tag.removeAttribute(attribute);
+      } else {
+        tag.setAttribute(attribute, vueMetaAttrs.join(','));
+      }
+    };
+  }
+
+  // borrow the slice method
+  var toArray = Function.prototype.call.bind(Array.prototype.slice);
+
+  function _updateTags(options) {
+    if (options === void 0) options = {};
+
+    var attribute = options.attribute;
+
+    /**
+     * Updates meta tags inside <head> and <body> on the client. Borrowed from `react-helmet`:
+     * https://github.com/nfl/react-helmet/blob/004d448f8de5f823d10f838b02317521180f34da/src/Helmet.js#L195-L245
+     *
+     * @param  {('meta'|'base'|'link'|'style'|'script'|'noscript')} type - the name of the tag
+     * @param  {(Array<Object>|Object)} tags - an array of tag objects or a single object in case of base
+     * @return {Object} - a representation of what tags changed
+     */
+    return function updateTags(type, tags, headTag, bodyTag) {
+      var oldHeadTags = toArray(headTag.querySelectorAll(type + "[" + attribute + "]"));
+      var oldBodyTags = toArray(bodyTag.querySelectorAll(type + "[" + attribute + "][data-body=\"true\"]"));
+      var newTags = [];
+      var indexToDelete;
+
+      if (tags.length > 1) {
+        // remove duplicates that could have been found by merging tags
+        // which include a mixin with metaInfo and that mixin is used
+        // by multiple components on the same page
+        var found = [];
+        tags = tags.map(function (x) {
+          var k = JSON.stringify(x);
+          if (found.indexOf(k) < 0) {
+            found.push(k);
+            return x;
+          }
+        }).filter(function (x) {
+          return x;
+        });
+      }
+
+      if (tags && tags.length) {
+        tags.forEach(function (tag) {
+          var newElement = document.createElement(type);
+          var oldTags = tag.body !== true ? oldHeadTags : oldBodyTags;
+
+          for (var attr in tag) {
+            if (tag.hasOwnProperty(attr)) {
+              if (attr === 'innerHTML') {
+                newElement.innerHTML = tag.innerHTML;
+              } else if (attr === 'cssText') {
+                if (newElement.styleSheet) {
+                  newElement.styleSheet.cssText = tag.cssText;
+                } else {
+                  newElement.appendChild(document.createTextNode(tag.cssText));
+                }
+              } else if ([options.tagIDKeyName, 'body'].indexOf(attr) !== -1) {
+                var _attr = "data-" + attr;
+                var value = typeof tag[attr] === 'undefined' ? '' : tag[attr];
+                newElement.setAttribute(_attr, value);
+              } else {
+                var value$1 = typeof tag[attr] === 'undefined' ? '' : tag[attr];
+                newElement.setAttribute(attr, value$1);
+              }
+            }
+          }
+
+          newElement.setAttribute(attribute, 'true');
+
+          // Remove a duplicate tag from domTagstoRemove, so it isn't cleared.
+          if (oldTags.some(function (existingTag, index) {
+            indexToDelete = index;
+            return newElement.isEqualNode(existingTag);
+          })) {
+            oldTags.splice(indexToDelete, 1);
+          } else {
+            newTags.push(newElement);
+          }
+        });
+      }
+      var oldTags = oldHeadTags.concat(oldBodyTags);
+      oldTags.forEach(function (tag) {
+        return tag.parentNode.removeChild(tag);
+      });
+      newTags.forEach(function (tag) {
+        if (tag.getAttribute('data-body') === 'true') {
+          bodyTag.appendChild(tag);
+        } else {
+          headTag.appendChild(tag);
+        }
+      });
+
+      return { oldTags: oldTags, newTags: newTags };
+    };
+  }
+
+  function _updateClientMetaInfo(options) {
+    if (options === void 0) options = {};
+
+    var ssrAttribute = options.ssrAttribute;
+
+    /**
+     * Performs client-side updates when new meta info is received
+     *
+     * @param  {Object} newInfo - the meta info to update to
+     */
+    return function updateClientMetaInfo(newInfo) {
+      var htmlTag = document.getElementsByTagName('html')[0];
+      // if this is not a server render, then update
+      if (htmlTag.getAttribute(ssrAttribute) === null) {
+        // initialize tracked changes
+        var addedTags = {};
+        var removedTags = {};
+
+        Object.keys(newInfo).forEach(function (key) {
+          switch (key) {
+            // update the title
+            case 'title':
+              _updateTitle(options)(newInfo.title);
+              break;
+            // update attributes
+            case 'htmlAttrs':
+              _updateTagAttributes(options)(newInfo[key], htmlTag);
+              break;
+            case 'bodyAttrs':
+              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('body')[0]);
+              break;
+            case 'headAttrs':
+              _updateTagAttributes(options)(newInfo[key], document.getElementsByTagName('head')[0]);
+              break;
+            // ignore these
+            case 'titleChunk':
+            case 'titleTemplate':
+            case 'changed':
+            case '__dangerouslyDisableSanitizers':
+              break;
+            // catch-all update tags
+            default:
+              var headTag = document.getElementsByTagName('head')[0];
+              var bodyTag = document.getElementsByTagName('body')[0];
+              var ref = _updateTags(options)(key, newInfo[key], headTag, bodyTag);
+              var oldTags = ref.oldTags;
+              var newTags = ref.newTags;
+              if (newTags.length) {
+                addedTags[key] = newTags;
+                removedTags[key] = oldTags;
+              }
+          }
+        });
+
+        // emit "event" with new info
+        if (typeof newInfo.changed === 'function') {
+          newInfo.changed.call(this, newInfo, addedTags, removedTags);
+        }
+      } else {
+        // remove the server render attribute so we can update on changes
+        htmlTag.removeAttribute(ssrAttribute);
+      }
+    };
+  }
+
+  function _refresh(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * When called, will update the current meta info with new meta info.
+     * Useful when updating meta info as the result of an asynchronous
+     * action that resolves after the initial render takes place.
+     *
+     * Credit to [Sébastien Chopin](https://github.com/Atinux) for the suggestion
+     * to implement this method.
+     *
+     * @return {Object} - new meta info
+     */
+    return function refresh() {
+      var info = _getMetaInfo(options)(this.$root);
+      _updateClientMetaInfo(options).call(this, info);
+      return info;
+    };
+  }
+
+  function _$meta(options) {
+    if (options === void 0) options = {};
+
+    /**
+     * Returns an injector for server-side rendering.
+     * @this {Object} - the Vue instance (a root component)
+     * @return {Object} - injector
+     */
+    return function $meta() {
+      return {
+        inject: _inject(options).bind(this),
+        refresh: _refresh(options).bind(this)
+      };
+    };
+  }
+
+  // fallback to timers if rAF not present
+  var stopUpdate = (typeof window !== 'undefined' ? window.cancelAnimationFrame : null) || clearTimeout;
+  var startUpdate = (typeof window !== 'undefined' ? window.requestAnimationFrame : null) || function (cb) {
+    return setTimeout(cb, 0);
+  };
+
+  /**
+   * Performs a batched update. Uses requestAnimationFrame to prevent
+   * calling a function too many times in quick succession.
+   * You need to pass it an ID (which can initially be `null`),
+   * but be sure to overwrite that ID with the return value of batchUpdate.
+   *
+   * @param  {(null|Number)} id - the ID of this update
+   * @param  {Function} callback - the update to perform
+   * @return {Number} id - a new ID
+   */
+  function batchUpdate(id, callback) {
+    stopUpdate(id);
+    return startUpdate(function () {
+      id = null;
+      callback();
+    });
+  }
+
+  /**
+   * These are constant variables used throughout the application.
+   */
+
+  // This is the name of the component option that contains all the information that
+  // gets converted to the various meta tags & attributes for the page.
+  var VUE_META_KEY_NAME = 'metaInfo';
+
+  // This is the attribute vue-meta augments on elements to know which it should
+  // manage and which it should ignore.
+  var VUE_META_ATTRIBUTE = 'data-vue-meta';
+
+  // This is the attribute that goes on the `html` tag to inform `vue-meta`
+  // that the server has already generated the meta tags for the initial render.
+  var VUE_META_SERVER_RENDERED_ATTRIBUTE = 'data-vue-meta-server-rendered';
+
+  // This is the property that tells vue-meta to overwrite (instead of append)
+  // an item in a tag list. For example, if you have two `meta` tag list items
+  // that both have `vmid` of "description", then vue-meta will overwrite the
+  // shallowest one with the deepest one.
+  var VUE_META_TAG_LIST_ID_KEY_NAME = 'vmid';
+
+  // automatic install
+  if (typeof window !== 'undefined' && typeof window.Vue !== 'undefined') {
+    Vue.use(VueMeta);
+  }
+
+  /**
+   * Plugin install function.
+   * @param {Function} Vue - the Vue constructor.
+   */
+  function VueMeta(Vue, options) {
+    if (options === void 0) options = {};
+
+    // set some default options
+    var defaultOptions = {
+      keyName: VUE_META_KEY_NAME,
+      attribute: VUE_META_ATTRIBUTE,
+      ssrAttribute: VUE_META_SERVER_RENDERED_ATTRIBUTE,
+      tagIDKeyName: VUE_META_TAG_LIST_ID_KEY_NAME
+    };
+    // combine options
+    options = objectAssign(defaultOptions, options);
+
+    // bind the $meta method to this component instance
+    Vue.prototype.$meta = _$meta(options);
+
+    // store an id to keep track of DOM updates
+    var batchID = null;
+
+    // watch for client side component updates
+    Vue.mixin({
+      beforeCreate: function beforeCreate() {
+        // Add a marker to know if it uses metaInfo
+        if (typeof this.$options[options.keyName] !== 'undefined') {
+          this._hasMetaInfo = true;
+        }
+        // coerce function-style metaInfo to a computed prop so we can observe
+        // it on creation
+        if (typeof this.$options[options.keyName] === 'function') {
+          if (typeof this.$options.computed === 'undefined') {
+            this.$options.computed = {};
+          }
+          this.$options.computed.$metaInfo = this.$options[options.keyName];
+        }
+      },
+      created: function created() {
+        var this$1 = this;
+
+        // if computed $metaInfo exists, watch it for updates & trigger a refresh
+        // when it changes (i.e. automatically handle async actions that affect metaInfo)
+        // credit for this suggestion goes to [Sébastien Chopin](https://github.com/Atinux)
+        if (!this.$isServer && this.$metaInfo) {
+          this.$watch('$metaInfo', function () {
+            // batch potential DOM updates to prevent extraneous re-rendering
+            batchID = batchUpdate(batchID, function () {
+              return this$1.$meta().refresh();
+            });
+          });
+        }
+      },
+      activated: function activated() {
+        var this$1 = this;
+
+        if (this._hasMetaInfo) {
+          // batch potential DOM updates to prevent extraneous re-rendering
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      deactivated: function deactivated() {
+        var this$1 = this;
+
+        if (this._hasMetaInfo) {
+          // batch potential DOM updates to prevent extraneous re-rendering
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      beforeMount: function beforeMount() {
+        var this$1 = this;
+
+        // batch potential DOM updates to prevent extraneous re-rendering
+        if (this._hasMetaInfo) {
+          batchID = batchUpdate(batchID, function () {
+            return this$1.$meta().refresh();
+          });
+        }
+      },
+      destroyed: function destroyed() {
+        var this$1 = this;
+
+        // do not trigger refresh on the server side
+        if (this.$isServer) {
+          return;
+        }
+        // re-render meta data when returning from a child component to parent
+        if (this._hasMetaInfo) {
+          // Wait that element is hidden before refreshing meta tags (to support animations)
+          var interval = setInterval(function () {
+            if (this$1.$el.offsetParent !== null) {
+              return;
+            }
+            clearInterval(interval);
+            batchID = batchUpdate(batchID, function () {
+              return this$1.$meta().refresh();
+            });
+          }, 50);
+        }
+      }
+    });
+  }
+
+  var version = "1.4.3";
+
+  VueMeta.version = version;
+
+  return VueMeta;
+});
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__ = __webpack_require__(30);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Icon_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a3f17420_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Icon_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Icon.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a3f17420", Component.options)
+  } else {
+    hotAPI.reload("data-v-a3f17420", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "i",
+    {
+      staticClass: "material-icons",
+      class: { trigger: _vm.trigger },
+      attrs: { "data-trigger": _vm.trigger }
+    },
+    [_vm._v(_vm._s(_vm.name))]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a3f17420", esExports)
+  }
+}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__ = __webpack_require__(32);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Button_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_897e5f2e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Button_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Button.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-897e5f2e", Component.options)
+  } else {
+    hotAPI.reload("data-v-897e5f2e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("router-link", { staticClass: "button-{type}" })
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-897e5f2e", esExports)
+  }
+}
 
 /***/ })
 /******/ ]);

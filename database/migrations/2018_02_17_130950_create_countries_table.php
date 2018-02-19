@@ -15,8 +15,12 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-			$table->string('iso_code');
+            $table->string('name')->unique();
+			$table->string('iso_code', 2);
+			$table->string('latitude')->nullable();
+			$table->string('longitude')->nullable();
+			$table->integer('geonames_id')->unique();
+			$table->bigInteger('population')->nullable();
 
             $table->integer('languages_id')->nullable()->unsigned();
             $table->index('languages_id');
@@ -24,7 +28,7 @@ class CreateCountriesTable extends Migration
 
             $table->integer('continents_id')->unsigned();
 			$table->index('continents_id');
-			$table->foreign('continents_id')->references('id')->on('continents');
+			$table->foreign('continents_id')->references('id')->on('continents')->onDelete('cascade');
 
             $table->integer('timeszones_id')->nullable()->unsigned();
 			$table->index('timeszones_id');

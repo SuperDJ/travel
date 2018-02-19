@@ -19,7 +19,7 @@ class CreateCitiesTable extends Migration
 
             $table->integer('counties_id')->unsigned();
 			$table->index('counties_id');
-			$table->foreign('counties_id')->references('id')->on('counties');
+			$table->foreign('counties_id')->references('id')->on('counties')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -15,7 +15,10 @@ class CreateContinentsTable extends Migration
     {
         Schema::create('continents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->integer('geonames_id')->unique();
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }

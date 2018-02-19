@@ -131,7 +131,7 @@ if( drawer ) {
 		}
 
 		// Automatically open dropdown
-		drawer.querySelector('.active').parentNode.previousElementSibling.click();
+		//drawer.querySelector('.active').parentNode.previousElementSibling.click();
 	}
 }
 
@@ -535,7 +535,8 @@ if( triggers.length > 0 ) {
 	for( let i = 0; i < triggers.length; i++ ) {
 		let trigger = triggers[i];
 
-		trigger.addEventListener('click', function() {
+		trigger.addEventListener('click', function(e) {
+			console.log(e.pageX, e.pageY);
 			let element = document.querySelector('#'+trigger.dataset.trigger);
 
 			// Set the currently triggered element(s) in array
@@ -547,6 +548,15 @@ if( triggers.length > 0 ) {
 			} else {
 				element.classList.add('expanded');
 				document.dispatchEvent(expand);
+
+				// Open menu on clicked position
+				if( element.classList.contains('menu') ) {
+					let top = e.pageY,
+						left = e.pageX;
+
+					element.style.top = top+'px';
+					element.style.left = left+'px';
+				}
 			}
 		});
 	}

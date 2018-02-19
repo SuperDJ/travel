@@ -1,8 +1,6 @@
 <template>
-    <nav class="drawer" :id="drawerId">
-        <div class="drawer-header">
-            <slot name="header"/>
-        </div>
+    <nav class="drawer" :id="trigger">
+        <slot name="header"/>
 
         <slot name="content"/>
     </nav>
@@ -11,7 +9,7 @@
 <script>
     export default {
     	props: {
-    	    drawerId: {
+    	    trigger: {
     	    	type: String,
                 required: true,
                 default: ''

@@ -7713,46 +7713,13 @@ var _NavigationDrawer = __webpack_require__(24);
 
 var _NavigationDrawer2 = _interopRequireDefault(_NavigationDrawer);
 
+var _Menu = __webpack_require__(40);
+
+var _Menu2 = _interopRequireDefault(_Menu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 exports.default = {
-    name: 'default',
-
     metaInfo: {
         title: 'Home',
         link: [{ rel: 'stylesheet', href: '/css/web.css' }]
@@ -7760,15 +7727,96 @@ exports.default = {
 
     components: {
         'Appbar': _Appbar2.default,
-        'NavigationDrawer': _NavigationDrawer2.default
+        'NavigationDrawer': _NavigationDrawer2.default,
+        'Menu': _Menu2.default
     },
 
     data: function data() {
         return {
-            drawerId: 'drawer'
+            menuItems: [{
+                button: 'Home',
+                to: '/',
+                icon: 'home'
+            }, {
+                button: 'Accomodaties',
+                to: '/accomodations',
+                icon: 'hotel'
+            }, {
+                button: 'Vluchten',
+                to: '/flights',
+                icon: 'flight'
+            }, {
+                button: 'Autoverhuur',
+                to: '/car-rental',
+                icon: 'directions_car'
+            }, {
+                button: 'Bestemmingen',
+                items: [{ name: 'Europa', to: '/location/europe' }, { name: 'Azië', to: '/location/asia' }, { name: 'Amerika', to: '/location/america' }, { name: 'Afrika', to: '/location/africa' }, { name: 'Australië', to: '/location/australia' }]
+            }]
         };
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 7 */
@@ -7828,12 +7876,10 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
 
 exports.default = {
   props: {
-    drawerId: {
+    trigger: {
       type: String,
       required: true,
       default: ''
@@ -7881,7 +7927,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
 //
 //
 //
@@ -11979,12 +12024,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "drawer", attrs: { id: _vm.drawerId } },
-    [
-      _c("div", { staticClass: "drawer-header" }, [_vm._t("header")], 2),
-      _vm._v(" "),
-      _vm._t("content")
-    ],
+    { staticClass: "drawer", attrs: { id: _vm.trigger } },
+    [_vm._t("header"), _vm._v(" "), _vm._t("content")],
     2
   )
 }
@@ -12014,85 +12055,211 @@ var render = function() {
     [
       _c(
         "Appbar",
-        { attrs: { title: "Home", "drawer-id": _vm.drawerId } },
+        { attrs: { title: "Home", "drawer-id": "drawer" } },
         [
           _c("Icon", { attrs: { name: "search" } }),
           _vm._v(" "),
-          _c("Icon", { attrs: { name: "person" } }),
+          _c("Icon", {
+            staticClass: "trigger",
+            attrs: { name: "person", trigger: "profile-menu" }
+          }),
           _vm._v(" "),
-          _c("Icon", { attrs: { name: "more_vert" } })
+          _c(
+            "Menu",
+            { staticClass: "appbar-menu", attrs: { trigger: "profile-menu" } },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: "/login" } },
+                [
+                  _c("Icon", { attrs: { name: "power_settings_new" } }),
+                  _vm._v(" Aanmelden")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { attrs: { to: "/register" } },
+                [
+                  _c("Icon", { attrs: { name: "person_add" } }),
+                  _vm._v(" Aanmelden")
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("Icon", {
+            staticClass: "trigger",
+            attrs: { name: "more_vert", trigger: "settings-menu" }
+          }),
+          _vm._v(" "),
+          _c(
+            "Menu",
+            { staticClass: "appbar-menu", attrs: { trigger: "settings-menu" } },
+            [
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Taal")]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Valuta")])
+            ]
+          )
         ],
         1
       ),
       _vm._v(" "),
       _c(
         "NavigationDrawer",
-        {
-          staticClass: "drawer-persistent",
-          attrs: { "drawer-id": _vm.drawerId }
-        },
+        { staticClass: "drawer-persistent", attrs: { trigger: "drawer" } },
         [
-          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-            _c("img", {
-              staticClass: "drawer-profile-img",
-              attrs: {
-                src: "/images/profile-icon.jpg",
-                alt: "SMaterial profile example"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "drawer-profile-name" }, [_vm._v("John")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "drawer-profile-more",
-                attrs: { id: "drawer-profile-more" }
-              },
-              [
-                _c("Icon", {
-                  staticClass: "trigger",
-                  attrs: { name: "arrow_drop_down", trigger: "profile" }
-                }),
-                _vm._v(" "),
-                _c("nav", { staticClass: "menu", attrs: { id: "profile" } }, [
-                  _c(
-                    "a",
-                    { attrs: { href: "#" } },
-                    [
-                      _c("Icon", { attrs: { name: "power_settings_new" } }),
-                      _vm._v(" Aanmelden")
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { attrs: { href: "#" } },
-                    [
-                      _c("Icon", { attrs: { name: "person_add" } }),
-                      _vm._v(" Registeren")
-                    ],
-                    1
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "drawer-header",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("img", {
+                staticClass: "drawer-profile-img",
+                attrs: {
+                  src:
+                    "http://www.dierenafbeeldingen.com/data/media/32/aap.jpg",
+                  alt: "SMaterial profile example"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "drawer-profile-name" }, [
+                _vm._v("John")
+              ]),
+              _vm._v(" "),
               _c(
-                "i",
+                "div",
                 {
-                  staticClass: "material-icons arrow trigger",
-                  attrs: { "data-trigger": "drawer" }
+                  staticClass: "drawer-profile-more",
+                  attrs: { id: "drawer-profile-more" }
                 },
-                [_vm._v("chevron_left")]
-              )
-            ])
-          ]),
+                [
+                  _c("Icon", {
+                    staticClass: "trigger",
+                    attrs: { name: "arrow_drop_down", trigger: "profile" }
+                  }),
+                  _vm._v(" "),
+                  _c("Menu", { attrs: { trigger: "profile" } }, [
+                    _c(
+                      "a",
+                      { attrs: { href: "#" } },
+                      [
+                        _c("Icon", { attrs: { name: "power_settings_new" } }),
+                        _vm._v(" Aanmelden")
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      { attrs: { href: "#" } },
+                      [
+                        _c("Icon", { attrs: { name: "person_add" } }),
+                        _vm._v(" Registeren")
+                      ],
+                      1
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "i",
+                  {
+                    staticClass: "material-icons arrow trigger",
+                    attrs: { "data-trigger": "drawer" }
+                  },
+                  [_vm._v("chevron_left")]
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { attrs: { slot: "content" }, slot: "content" })
+          _c(
+            "div",
+            { attrs: { slot: "content" }, slot: "content" },
+            _vm._l(_vm.menuItems, function(item) {
+              return _c(
+                "div",
+                { key: item.button },
+                [
+                  item.to
+                    ? _c(
+                        "router-link",
+                        {
+                          class: { "drawer-dropdown": item.items },
+                          attrs: {
+                            to: item.to,
+                            "router-link-exact-active": "active"
+                          }
+                        },
+                        [
+                          item.icon
+                            ? _c("Icon", { attrs: { name: item.icon } })
+                            : _vm._e(),
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(item.button) +
+                              "\n                    "
+                          ),
+                          item.items
+                            ? _c("Icon", { attrs: { name: "expand_more" } })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    : _c(
+                        "a",
+                        { class: { "drawer-dropdown": item.items } },
+                        [
+                          item.icon
+                            ? _c("Icon", { attrs: { name: item.icon } })
+                            : _vm._e(),
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(item.button) +
+                              "\n                    "
+                          ),
+                          item.items
+                            ? _c("Icon", { attrs: { name: "expand_more" } })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                  _vm._v(" "),
+                  item.items
+                    ? _c(
+                        "div",
+                        { staticClass: "dropdown" },
+                        _vm._l(item.items, function(link) {
+                          return _c(
+                            "router-link",
+                            {
+                              key: link.name,
+                              attrs: {
+                                "router-link-exact-active": "active",
+                                to: link.to
+                              }
+                            },
+                            [_vm._v(_vm._s(link.name))]
+                          )
+                        })
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            })
+          )
         ]
       ),
       _vm._v(" "),
@@ -13393,7 +13560,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("router-link", { staticClass: "button-{type}" })
+  return _vm.to
+    ? _c("router-link", { class: _vm.button - { type: _vm.type } })
+    : _c("button", { class: _vm.button - { type: _vm.type } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13403,6 +13572,118 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-897e5f2e", esExports)
+  }
+}
+
+/***/ }),
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        trigger: {
+            type: String,
+            required: true,
+            default: ''
+        }
+    }
+};
+
+/***/ }),
+/* 40 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_93f38854_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Menu_vue__ = __webpack_require__(41);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Menu_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_93f38854_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Menu_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Menu.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-93f38854", Component.options)
+  } else {
+    hotAPI.reload("data-v-93f38854", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "menu", attrs: { id: _vm.trigger } },
+    [_vm._t("default")],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-93f38854", esExports)
   }
 }
 

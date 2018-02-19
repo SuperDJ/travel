@@ -1,8 +1,7 @@
-<template v-if="to">
-    <button class="button-{type}"/>
-</template>
-<template v-else>
-    <router-link class="button-{type}"/>
+<template>
+    <router-link v-if="to" :class="button-{type}"/>
+    <button v-else :class="button-{type}"/>
+
 </template>
 
 <script>

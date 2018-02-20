@@ -40,3 +40,20 @@ Route::get('/states/{state}', 'StateController@show');
 Route::get('/states/{state}/edit', 'StateController@edit');
 Route::put('/states/{state}', 'StateController@update');
 Route::delete('/states/{state}', 'StateController@destroy');
+
+Route::get('/timezones', 'TimezoneController@index');
+Route::get('/timezones/db', 'TimezoneController@fillDB');
+Route::post('/timezones', 'TimezoneController@store');
+Route::get('/timezones/{timezone}', 'TimezoneController@show');
+Route::get('/timezones/{timezone}/edit', 'TimezoneController@edit');
+Route::put('/timezones/{timezone}', 'TimezoneController@update');
+Route::delete('/timezones/{timezone}', 'TimezoneController@destroy');
+
+Route::get('/currencies', 'CurrencyController@index');
+Route::get('/currencies/db', 'CurrencyController@fillDB');
+Route::get('/currencies/connect', 'CurrencyController@connectCountries');
+Route::post('/currencies', 'CurrencyController@store');
+Route::get('/currencies/{currency}', 'CurrencyController@show');
+Route::get('/currencies/{currency}/edit', 'CurrencyController@edit');
+Route::put('/currencies/{currency}', 'CurrencyController@update');
+Route::delete('/currencies/{currency}', 'CurrencyController@destroy');

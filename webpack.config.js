@@ -11,7 +11,7 @@ module.exports = env => {
 		},
 		output: {
 			path: __dirname,
-			filename: './public/js/[name].js'
+			filename: './public/js/[name].js',
 		},
 		module: {
 			rules: [
@@ -51,6 +51,18 @@ module.exports = env => {
 							'sass-loader'
 						]
 					})
+				},
+				{
+					test: /\.(jpg|jpeg|gif|png|svg)$/,
+					exclude: ['/node_modules/', '/public/'],
+					use: {
+						loader: 'file-loader',
+						options: {
+							name: '[hash].[ext]',
+							outputPath: '/public/images',
+							publicPath: '/images'
+						},
+					}
 				}
 			]
 		},

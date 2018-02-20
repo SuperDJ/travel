@@ -75,8 +75,8 @@ class StateController extends Controller
 			}
 		}
 
-		State::create($data);
+		State::insert($data);
 
-		return response('States added');
+		return response()->json($data, 200);
 	}
 }

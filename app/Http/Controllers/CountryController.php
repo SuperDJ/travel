@@ -53,22 +53,26 @@ class CountryController extends Controller
 	public function fillDB() {
 		$continents = Continent::all();
 
+		$data = [];
+
 		foreach( $continents as $continent ) {
 			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$continent->geonames_id.'&style=long' ) );
 
 			foreach( $response->geonames as $country => $value ) {
-				Country::create([
+				$data[] = [
 					'name' => $value->name,
 					'continents_id' => $continent->id,
 					'latitude' => $value->lat,
 					'longitude' => $value->lng,
 					'population' => $value->population,
-					'iso_code' => $value->countryCode,
+					'iso' => $value->countryCode,
 					'geonames_id' => $value->geonameId
-				]);
+				];
 			}
 		}
 
-		return response('Countries added');
+		Country::create($data);
+
+		return response()->json($data, 200);
 	}
 }

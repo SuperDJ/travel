@@ -26,13 +26,13 @@ class CreateCountriesTable extends Migration
             $table->index('languages_id');
             $table->foreign('languages_id')->references('id')->on('languages');
 
+            $table->integer('currencies_id')->nullable()->unsigned();
+            $table->index('currencies_id');
+            $table->foreign('currencies_id')->references('id')->on('currencies');
+
             $table->integer('continents_id')->unsigned();
 			$table->index('continents_id');
 			$table->foreign('continents_id')->references('id')->on('continents')->onDelete('cascade');
-
-            $table->integer('timeszones_id')->nullable()->unsigned();
-			$table->index('timeszones_id');
-			$table->foreign('timeszones_id')->references('id')->on('timezones');
 
             $table->timestamps();
         });

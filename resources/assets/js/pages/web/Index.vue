@@ -1,7 +1,7 @@
 <template>
     <Web>
         <div slot="content">
-            Dit is een test
+            <img src="@/static/leonard-cotte-300248-unsplash.jpg">
         </div>
     </Web>
 </template>

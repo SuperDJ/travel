@@ -1,6 +1,6 @@
 <template>
-    <router-link v-if="to" :class="button-{type}"/>
-    <button v-else :class="button-{type}"/>
+    <router-link v-if="to" :class="button-{type}" />
+    <button v-else :class="button-{type}" />
 
 </template>
 

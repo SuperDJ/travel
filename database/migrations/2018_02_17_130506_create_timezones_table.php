@@ -16,8 +16,12 @@ class CreateTimezonesTable extends Migration
         Schema::create('timezones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('gmt', 6);
-            $table->string('dst', 6);
+            $table->string('gmt_offset');
+
+			$table->integer('countries_id')->unsigned();
+			$table->index('countries_id');
+			$table->foreign('countries_id')->references('id')->on('countries')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

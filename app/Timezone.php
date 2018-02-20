@@ -8,7 +8,7 @@ class Timezone extends Model
 {
 	protected $guarded = ['id'];
 
-    public function countries() {
-    	return $this->belongsToMany(Country::class);
+    public function country() {
+    	return $this->belongsTo(Country::class);
 	}
 }

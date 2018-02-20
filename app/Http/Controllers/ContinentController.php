@@ -52,15 +52,19 @@ class ContinentController extends Controller
 	public function fillDB() {
     	$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId=6295630&style=long' ) );
 
+    	$data = [];
+
     	foreach( $response->geonames as $key => $value ) {
-    		Continent::create([
+    		$data[] = [
     			'name' => $value->name,
 				'latitude' => $value->lat,
 				'longitude' => $value->lng,
 				'geonames_id' => $value->geonameId,
-			]);
+			];
 		}
 
-		return response('Continents added');
+		Continent::insert($data);
+
+		return response()->json($data, 200);
 	}
 }

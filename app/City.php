@@ -11,4 +11,8 @@ class City extends Model
     public function county() {
     	return $this->belongsTo(County::class);
 	}
+
+	public function airports() {
+    	return $this->hasMany(Airport::class);
+	}
 }

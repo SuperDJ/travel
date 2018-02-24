@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountiesTable extends Migration
+class CreateAirportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateCountiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('counties', function (Blueprint $table) {
+        Schema::create('airports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('latitude');
             $table->string('longitude');
-            $table->integer('geonames_id');
+            $table->string('id');
+            $table->string('iata');
 
-            $table->integer('states_id')->unsigned();
-			$table->index('states_id');
-			$table->foreign('states_id')->references('id')->on('states')->onDelete('cascade');
+            $table->integer('cities_id')->unsigned()->nullable();
+            $table->index('cities_id');
+            $table->foreign('cities_id')->references('id')->on('cities');
 
             $table->timestamps();
         });
@@ -35,6 +36,6 @@ class CreateCountiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('counties');
+        Schema::dropIfExists('airports');
     }
 }

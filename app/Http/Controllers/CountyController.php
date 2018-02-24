@@ -46,36 +46,73 @@ class CountyController extends Controller
 
 	public function fillDB() {
 		set_time_limit(0);
-		$states = State::all();
+		$states = State::all()->count();
+
 
 		$data = [];
+		//$i = 0;
 
-		$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$states[0]->geonames_id.'&style=long' ) );
+		for( $i = 3891; $i <= $states; $i++ ) {
+			$state = State::where('id', $i)->first();
+			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$state->geonames_id.'&style=long' ) );
+			if( !empty( $response->geonames ) ) {
+				foreach( $response->geonames as $county => $value ) {
+					$data[] = [
+						'name'        => $value->name,
+						'states_id'   => $state->id,
+						'latitude'    => $value->lat,
+						'longitude'   => $value->lng,
+						'geonames_id' => $value->geonameId,
+						'created_at'  => date( 'Y-m-d H:i:s' ),
+						'updated_at'  => date( 'Y-m-d H:i:s' )
+					];
 
-		print_r($response);
+					County::create([
+						'name'        => $value->name,
+						'states_id'   => $state->id,
+						'latitude'    => $value->lat,
+						'longitude'   => $value->lng,
+						'geonames_id' => $value->geonameId,
+						'created_at'  => date( 'Y-m-d H:i:s' ),
+						'updated_at'  => date( 'Y-m-d H:i:s' )
+					]);
+				}
+			}
+			echo '#'.$i.' / '.$states->count().'<br>';
+		}
 
 		/*
-		foreach( $states as $country ) {
-			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$country->geonames_id.'&style=long' ) );
+		foreach( $states as $state ) {
+			echo $state->geonames_id.'<br>';
+			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$state->geonames_id.'&style=long' ) );
 
 			if( !empty( $response->geonames ) ) {
 				foreach( $response->geonames as $county => $value ) {
 					$data[] = [
-						'name' => $value->name,
-						'countries_id' => $country->id,
-						'latitude' => $value->lat,
-						'longitude' => $value->lng,
-						'population' => $value->population,
+						'name'        => $value->name,
+						'states_id'   => $state->id,
+						'latitude'    => $value->lat,
+						'longitude'   => $value->lng,
 						'geonames_id' => $value->geonameId,
-						'created_at' => date('Y-m-d H:i:s'),
-						'updated_at' => date('Y-m-d H:i:s')
+						'created_at'  => date( 'Y-m-d H:i:s' ),
+						'updated_at'  => date( 'Y-m-d H:i:s' )
 					];
+
+					County::create([
+						'name'        => $value->name,
+						'states_id'   => $state->id,
+						'latitude'    => $value->lat,
+						'longitude'   => $value->lng,
+						'geonames_id' => $value->geonameId,
+						'created_at'  => date( 'Y-m-d H:i:s' ),
+						'updated_at'  => date( 'Y-m-d H:i:s' )
+					]);
 				}
 			}
-		}
+			echo '#'.$i.' / '.$states->count().'<br>';
+			$i++;
+		} */
 
-		County::insert($data);
-
-		return response()->json($data, 200);*/
+		return response()->json($data, 200);
 	}
 }

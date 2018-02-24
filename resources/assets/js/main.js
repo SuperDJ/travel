@@ -1,19 +1,13 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
 import { store } from './store/store';
 import router from './router';
 import Meta from 'vue-meta';
 
 Vue.use(Meta);
+Vue.use(Vuetify);
 
-/**************************************
- * Import global components
- **************************************/
-import Index from './pages/web/Index';
-import Icon from './components/Icon';
-import Button from './components/Button';
-
-Vue.component('Icon', Icon);
-Vue.component('Button', Button);
+import Index from '@/layouts/Web';
 
 new Vue({
 	el: '#app',

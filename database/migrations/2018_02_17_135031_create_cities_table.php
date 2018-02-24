@@ -17,6 +17,10 @@ class CreateCitiesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('capitol')->nullable()->default(0);
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->bigInteger('population');
+            $table->integer('geonames_id');
 
             $table->integer('counties_id')->unsigned();
 			$table->index('counties_id');

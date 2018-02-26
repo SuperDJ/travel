@@ -82,20 +82,10 @@
 </template>
 
 <script>
-    import Appbar from '@/components/Appbar';
-    import NavigationDrawer from '@/components/NavigationDrawer';
-    import Menu from '@/components/Menu';
-
     export default {
         metaInfo: {
     	    title: 'Home'
         },
-
-		components: {
-			'Appbar': Appbar,
-            'NavigationDrawer': NavigationDrawer,
-            'Menu': Menu,
-		},
 
         data() {
 			return {
@@ -107,33 +97,35 @@
                         icon: 'home'
                     },
                     {
-                    	title: 'Accomodaties',
+                    	title: 'Accommodations',
                         to: '/accomodations',
                         icon: 'hotel'
                     },
                     {
-                    	title: 'Vluchten',
+                    	title: 'Flights',
                         to: '/flights',
                         icon: 'flight'
                     },
                     {
-                    	title: 'Autoverhuur',
+                    	title: 'Car rental',
                         to: '/car-rental',
                         icon: 'directions_car'
                     },
                     {
-                    	title: 'Bestemmingen',
+                    	title: 'Destinations',
                         icon: 'expand_more',
                         children: [
-                            {title: 'Europa', to: '/location/europe'},
-                            {title: 'Azië', to: '/location/asia'},
-                            {title: 'Amerika', to: '/location/america'},
-                            {title: 'Afrika', to: '/location/africa'},
-                            {title: 'Australië', to: '/location/australia'}
+                            {title: 'Africa', to: '/location/africa'},
+                            {title: 'Antarctica', to: '/location/antarctica'},
+                            {title: 'Asia', to: '/location/asia'},
+                            {title: 'Europe', to: '/location/europe'},
+                            {title: 'North America', to: '/location/north-america'},
+                            {title: 'Oceania', to: '/location/oceania'},
+                            {title: 'South America', to: '/location/south-america'},
                         ]
                     }
                 ]
             }
-        }
+        },
     }
 </script>

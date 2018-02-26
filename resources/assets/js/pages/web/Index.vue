@@ -5,21 +5,21 @@
                 <v-card hover>
                     <v-tabs icons-and-text centered color="primary" slider-color="white" dark card>
                         <v-tab @click="changeForm('AccommodationForm')">
-                            Accomodatie
+                            Accommodations
                             <v-icon>hotel</v-icon>
                         </v-tab>
                         <v-tab @click="changeForm('FlightForm')">
-                            Vliegtickets
+                            Flights
                             <v-icon>flight</v-icon>
                         </v-tab>
                         <v-tab @click="changeForm('CarForm')">
-                            Huurauto
+                            Car rental
                             <v-icon>directions_car</v-icon>
                         </v-tab>
                     </v-tabs>
 
                     <v-card-text>
-                        <component :is="form"></component>
+                        <component :is="form"/>
                     </v-card-text>
 
                     <v-card-actions>
@@ -30,31 +30,58 @@
         </v-parallax>
 
         <v-layout row wrap tag="section" style="margin-top: 40px">
-                <v-flex xs6 style="margin-bottom: 20px">
-                    <h2 class="display-3">
+                <v-flex xs12 style="margin-bottom: 20px">
+                    <h2 class="display-3 text-xs-center">
                         <v-icon large>pin_drop</v-icon>
-                        Populaire bestemmingen
+                        Top destinations
                     </h2>
                 </v-flex>
 
-                <v-flex xs6 align-end>
-                    <v-btn flat v-for="continent in continents" :key="continent.latitude" color="primary" @click="topDestinations(continent.id)">
-                        {{continent.name}}
-                    </v-btn>
+
+                <v-flex xs12>
+                    <v-tabs centered>
+                        <v-tab v-for="continent in continents" :key="continent.name" @click="topDestinations(continent.id)">{{continent.name}}</v-tab>
+
+                        <v-tab-item>
+                            <Destination :destination="topDestination"/>
+                        </v-tab-item>
+                    </v-tabs>
+                    <Destination :destination="topDestination"/>
                 </v-flex>
+        </v-layout>
+
+        <v-layout row wrap tag="section" style="margin-top: 40px">
+            <v-flex xs12 style="margin-bottom: 20px">
+                <h2 class="display-3 text-xs-center">
+                    <v-icon large>pool</v-icon>
+                    Activities
+                </h2>
+            </v-flex>
+
 
             <v-flex xs12>
-                <Destination :destination="topDestination"/>
+                <v-tabs centered>
+                    <v-tab>Winter</v-tab>
+                    <v-tab>Summer</v-tab>
+                    <v-tab>Spring</v-tab>
+                    <v-tab>Autumn</v-tab>
+
+                    <v-tab-item>
+                        <Activity :activity="activity"/>
+                    </v-tab-item>
+                </v-tabs>
+                <Activity :activity="activity"/>
             </v-flex>
         </v-layout>
 
+
         <v-layout row wrap>
-            <v-flex xs12 s6>
-                <h2 class="display-2">Recente verhalen</h2>
+            <v-flex xs12 sm6 tag="section">
+                <h2 class="display-2 text-xs-center"><v-icon x-large>edit</v-icon> Recent stories</h2>
             </v-flex>
 
-            <v-flex xs12 s6>
-                <h2 class="display-2">Recente routes</h2>
+            <v-flex xs12 sm6 tag="section">
+                <h2 class="display-2 text-xs-center"><v-icon x-large>directions</v-icon> Recent routes</h2>
             </v-flex>
         </v-layout>
     </v-container>
@@ -65,14 +92,22 @@
     import AccommodationForm from '@/components/index/accommodation-form';
     import CarForm from '@/components/index/car-form';
     import Destination from '@/components/index/destination';
+    import Activity from '@/components/index/activity';
 
     export default {
     	data() {
     	    return {
-    	    	continents: {},
                 form: 'AccommodationForm',
-                image: 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
+                image:
+                    'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
                 topDestination: 1,
+                layout: Math.floor();
+            }
+        },
+
+        computed: {
+    	    continents() {
+    	    	return this.$store.getters.getContinents;
             }
         },
 
@@ -80,30 +115,29 @@
     		FlightForm,
             AccommodationForm,
             CarForm,
-            Destination
+            Destination,
+            Activity,
         },
 
         methods: {
     		getContinents() {
-                fetch('/api/continents')
-                    .then(response => {return response.json()})
-                    .then(response => {this.continents = response});
-            },
+				this.$store.dispatch('getContinents');
+			},
 
             changeForm( type ) {
                 this.form = type;
-                console.log(this.form);
 
                 let img = '';
                 switch(type) {
                     case 'FlightForm':
-                    	img = 'https://images.pexels.com/photos/723240/pexels-photo-723240.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb';
+                    	img =
+                            'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
                     case 'AccommodationForm':
                     	img = 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
                     case 'CarForm':
-                    	img = 'https://images.pexels.com/photos/708764/pexels-photo-708764.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
+                    	img = 'https://images.pexels.com/photos/21014/pexels-photo.jpg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
                 }
 

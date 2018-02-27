@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\County;
+use App\Country;
 use App\City;
 use Illuminate\Http\Request;
 
@@ -46,45 +46,38 @@ class CityController extends Controller
 
 	public function fillDB() {
 		set_time_limit(0);
-		$counties = County::count();
-		$cities = City::all()->last();
-		$start = !empty($cities->counties_id) ? $cities->counties_id : 1;
-		$limit = 2000;
-
 		$data = [];
 
-		for( $i = $start; $i <= ($start + $limit); $i++ ) {
-			$county = County::where('id', $i)->first();
-			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$county->geonames_id.'&style=long' ) );
+		$city = City::count();
 
-			if( !empty( $response->geonames ) ) {
-				foreach( $response->geonames as $city => $value ) {
-					$data[] = [
-						'name'        => $value->name,
-						'counties_id'   => $county->id,
-						'latitude'    => $value->lat,
-						'longitude'   => $value->lng,
-						'geonames_id' => $value->geonameId,
-						'population'  => $value->population,
-						'created_at'  => date( 'Y-m-d H:i:s' ),
-						'updated_at'  => date( 'Y-m-d H:i:s' )
-					];
+		$cities = json_decode( file_get_contents( 'https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json' ) );
+		$countries = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/countries.json' ) );
 
-					City::create([
-						'name'        => $value->name,
-						'counties_id'   => $county->id,
-						'latitude'    => $value->lat,
-						'longitude'   => $value->lng,
-						'geonames_id' => $value->geonameId,
-						'population'  => $value->population,
-						'created_at'  => date( 'Y-m-d H:i:s' ),
-						'updated_at'  => date( 'Y-m-d H:i:s' )
-					]);
-				}
-			}
+		for( $i = $city; $i < count($cities); $i++ ) {
+			$value = $cities[$i];
 
-			echo '#'.$i.' / '.$counties.'<br>';
+			$data[] = [
+				'name'        => $value->name,
+				'countries_id'   => Country::where('iso', $value->country)->first()->id,
+				'latitude' => $value->lat,
+				'longitude' => $value->lng,
+				'capital' => $countries->{$value->country}->capital === $value->name ? 1 : 0,
+				'created_at'  => date( 'Y-m-d H:i:s' ),
+				'updated_at'  => date( 'Y-m-d H:i:s' )
+			];
+
+			City::create([
+				'name'        => $value->name,
+				'countries_id'   => Country::where('iso', $value->country)->first()->id,
+				'latitude' => $value->lat,
+				'longitude' => $value->lng,
+				'capital' => $countries->{$value->country}->capital === $value->name ? 1 : 0,
+				'created_at'  => date( 'Y-m-d H:i:s' ),
+				'updated_at'  => date( 'Y-m-d H:i:s' )
+			]);
 		}
+
+		echo $city.' of '.count($cities).' created';
 
 		return response()->json($data, 200);
 	}

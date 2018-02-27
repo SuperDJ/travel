@@ -39,14 +39,14 @@
 
 
                 <v-flex xs12>
-                    <v-tabs centered>
+                    <v-tabs centered color="transparent">
                         <v-tab v-for="continent in continents" :key="continent.name" @click="topDestinations(continent.id)">{{continent.name}}</v-tab>
 
                         <v-tab-item>
                             <Destination :destination="topDestination"/>
                         </v-tab-item>
                     </v-tabs>
-                    <Destination :destination="topDestination"/>
+                    <Destination :destination="topDestination" :layout="layout"/>
                 </v-flex>
         </v-layout>
 
@@ -60,14 +60,14 @@
 
 
             <v-flex xs12>
-                <v-tabs centered>
+                <v-tabs centered color="transparent">
                     <v-tab>Winter</v-tab>
                     <v-tab>Summer</v-tab>
                     <v-tab>Spring</v-tab>
                     <v-tab>Autumn</v-tab>
 
                     <v-tab-item>
-                        <Activity :activity="activity"/>
+                        <Activity :activity="activity" :layout="layout"/>
                     </v-tab-item>
                 </v-tabs>
                 <Activity :activity="activity"/>
@@ -101,7 +101,6 @@
                 image:
                     'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
                 topDestination: 1,
-                layout: Math.floor();
             }
         },
 

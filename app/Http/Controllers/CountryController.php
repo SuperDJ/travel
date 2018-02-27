@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Continent;
+use App\Currency;
+use App\Language;
 use App\Country;
 use Illuminate\Http\Request;
 
@@ -51,27 +53,34 @@ class CountryController extends Controller
 	}
 
 	public function fillDB() {
-		$continents = Continent::all();
-
 		$data = [];
+		$response = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/countries.json' ) );
 
-		foreach( $continents as $continent ) {
-			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$continent->geonames_id.'&style=long' ) );
+		foreach( $response as $key => $value ) {
+			$currency = $value->currency;
+			if( strpos( $currency, ',' ) !== false ) {
+				$currencies = explode(',', $currency);
 
-			foreach( $response->geonames as $country => $value ) {
-				$data[] = [
-					'name' => $value->name,
-					'continents_id' => $continent->id,
-					'latitude' => $value->lat,
-					'longitude' => $value->lng,
-					'population' => $value->population,
-					'iso' => $value->countryCode,
-					'geonames_id' => $value->geonameId
-				];
+				$firstOccurrence = '';
+				foreach( $currencies as $int => $val ) {
+					if( empty( $firstOccurrence ) && Currency::where( 'iso', $val )->count() > 0 ) {
+						$currency = $val;
+					}
+				}
 			}
+
+			$data[] = [
+				'name' => $value->name,
+				'continents_id' => Continent::where( 'iso', $value->continent )->first()->id,
+				'currencies_id' => Currency::where( 'iso', $currency )->first()->id ?? null,
+				'languages_id' => !empty( $value->languages ) ? Language::where( 'iso', $value->languages[0] )->first()->id : null,
+				'iso' => $key,
+				'created_at' => date( 'Y-m-d H:i:s' ),
+				'updated_at' => date( 'Y-m-d H:i:s' )
+			];
 		}
 
-		Country::create($data);
+		Country::insert($data);
 
 		return response()->json($data, 200);
 	}

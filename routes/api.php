@@ -26,6 +26,24 @@ Route::get('/continents/{continent}/edit', 'ContinentController@edit');
 Route::put('/continents/{continent}', 'ContinentController@update');
 Route::delete('/continents/{continent}', 'ContinentController@destroy');
 
+// Currencies
+Route::get('/currencies', 'CurrencyController@index');
+Route::get('/currencies/db', 'CurrencyController@fillDB');
+Route::post('/currencies', 'CurrencyController@store');
+Route::get('/currencies/{currency}', 'CurrencyController@show');
+Route::get('/currencies/{currency}/edit', 'CurrencyController@edit');
+Route::put('/currencies/{currency}', 'CurrencyController@update');
+Route::delete('/currencies/{currency}', 'CurrencyController@destroy');
+
+// Languages
+Route::get('/languages', 'LanguageController@index');
+Route::get('/languages/db', 'LanguageController@fillDB');
+Route::post('/languages', 'LanguageController@store');
+Route::get('/languages/{language}', 'LanguageController@show');
+Route::get('/languages/{language}/edit', 'LanguageController@edit');
+Route::put('/languages/{language}', 'LanguageController@update');
+Route::delete('/languages/{language}', 'LanguageController@destroy');
+
 // Countries
 Route::get('/countries', 'CountryController@index');
 Route::get('/countries/db', 'CountryController@fillDB');
@@ -34,15 +52,6 @@ Route::get('/countries/{country}', 'CountryController@show');
 Route::get('/countries/{country}/edit', 'CountryController@edit');
 Route::put('/countries/{country}', 'CountryController@update');
 Route::delete('/countries/{country}', 'CountryController@destroy');
-
-// States
-Route::get('/states', 'StateController@index');
-Route::get('/states/db', 'StateController@fillDB');
-Route::post('/states', 'StateController@store');
-Route::get('/states/{state}', 'StateController@show');
-Route::get('/states/{state}/edit', 'StateController@edit');
-Route::put('/states/{state}', 'StateController@update');
-Route::delete('/states/{state}', 'StateController@destroy');
 
 // Timezones
 Route::get('/timezones', 'TimezoneController@index');
@@ -53,24 +62,6 @@ Route::get('/timezones/{timezone}/edit', 'TimezoneController@edit');
 Route::put('/timezones/{timezone}', 'TimezoneController@update');
 Route::delete('/timezones/{timezone}', 'TimezoneController@destroy');
 
-// Currencies
-Route::get('/currencies', 'CurrencyController@index');
-Route::get('/currencies/db', 'CurrencyController@fillDB');
-Route::get('/currencies/connect', 'CurrencyController@connectCountries');
-Route::post('/currencies', 'CurrencyController@store');
-Route::get('/currencies/{currency}', 'CurrencyController@show');
-Route::get('/currencies/{currency}/edit', 'CurrencyController@edit');
-Route::put('/currencies/{currency}', 'CurrencyController@update');
-Route::delete('/currencies/{currency}', 'CurrencyController@destroy');
-
-// Counties
-Route::get('/counties', 'CountyController@index');
-Route::get('/counties/db', 'CountyController@fillDB');
-Route::post('/counties', 'CountyController@store');
-Route::get('/counties/{county}', 'CountyController@show');
-Route::get('/counties/{county}/edit', 'CountyController@edit');
-Route::put('/counties/{county}', 'CountyController@update');
-Route::delete('/counties/{county}', 'CountyController@destroy');
 
 // Cities
 Route::get('/cities', 'CityController@index');

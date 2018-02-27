@@ -11,4 +11,8 @@ class Continent extends Model
     public function countries() {
     	return $this->hasMany(Country::class);
 	}
+
+	public function cities() {
+    	return $this->hasManyThrough(City::class, Country::class);
+	}
 }

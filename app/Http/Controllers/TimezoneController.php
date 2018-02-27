@@ -60,7 +60,7 @@ class TimezoneController extends Controller
 			$id = '';
 
 			if( $value->countryCode !== $id ) {
-				$country = Country::where('iso_code', $value->countryCode)->first();
+				$country = Country::where('iso', $value->countryCode)->first();
 			}
 
 			if( !empty( $country ) ) {

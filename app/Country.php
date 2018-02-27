@@ -12,8 +12,8 @@ class Country extends Model
     	return $this->belongsTo(Continent::class);
 	}
 
-	public function states() {
-    	return $this->hasMany(State::class);
+	public function cities() {
+    	return $this->hasMany(City::class);
 	}
 
 	public function currency() {

@@ -9,7 +9,7 @@ class City extends Model
 	protected $guarded = ['id'];
 
     public function county() {
-    	return $this->belongsTo(County::class);
+    	return $this->belongsTo(Country::class);
 	}
 
 	public function airports() {

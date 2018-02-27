@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -7572,7 +7572,7 @@ Vue$3.nextTick(function () {
 /*  */
 
 exports.default = Vue$3;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(11).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(9).setImmediate))
 
 /***/ }),
 /* 3 */
@@ -7606,13 +7606,555 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: C:/xampp/htdocs/travel/resources/assets/js/pages/web/Index.vue: Unexpected token, expected , (104:36)\n\n\u001b[0m \u001b[90m 102 | \u001b[39m                    \u001b[32m'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 103 | \u001b[39m                topDestination\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 | \u001b[39m                layout\u001b[33m:\u001b[39m \u001b[33mMath\u001b[39m\u001b[33m.\u001b[39mfloor()\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 | \u001b[39m            }\n \u001b[90m 106 | \u001b[39m        }\u001b[33m,\u001b[39m\n \u001b[90m 107 | \u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _flightForm = __webpack_require__(21);
+
+var _flightForm2 = _interopRequireDefault(_flightForm);
+
+var _accommodationForm = __webpack_require__(23);
+
+var _accommodationForm2 = _interopRequireDefault(_accommodationForm);
+
+var _carForm = __webpack_require__(25);
+
+var _carForm2 = _interopRequireDefault(_carForm);
+
+var _destination = __webpack_require__(27);
+
+var _destination2 = _interopRequireDefault(_destination);
+
+var _activity = __webpack_require__(29);
+
+var _activity2 = _interopRequireDefault(_activity);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    data: function data() {
+        return {
+            form: 'AccommodationForm',
+            image: 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
+            topDestination: 1
+        };
+    },
+
+
+    computed: {
+        continents: function continents() {
+            return this.$store.getters.getContinents;
+        }
+    },
+
+    components: {
+        FlightForm: _flightForm2.default,
+        AccommodationForm: _accommodationForm2.default,
+        CarForm: _carForm2.default,
+        Destination: _destination2.default,
+        Activity: _activity2.default
+    },
+
+    methods: {
+        getContinents: function getContinents() {
+            this.$store.dispatch('getContinents');
+        },
+        changeForm: function changeForm(type) {
+            this.form = type;
+
+            var img = '';
+            switch (type) {
+                case 'FlightForm':
+                    img = 'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
+                    break;
+                case 'AccommodationForm':
+                    img = 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
+                    break;
+                case 'CarForm':
+                    img = 'https://images.pexels.com/photos/21014/pexels-photo.jpg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
+                    break;
+            }
+
+            this.image = img;
+        },
+        topDestinations: function topDestinations(id) {}
+    },
+
+    mounted: function mounted() {
+        this.getContinents();
+    }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
-/* 5 */,
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  props: {
+    destination: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      data: {}
+    };
+  },
+
+
+  methods: {
+    getData: function getData() {
+      var _this = this;
+
+      fetch("/api/continent/" + this.destination + "/top-destinations").then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        _this.data = response;
+      });
+    }
+  },
+
+  mounted: function mounted() {
+    this.getData();
+  }
+};
+
+/***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+	props: {
+		activity: {
+			type: Number,
+			required: true
+		},
+		layout: {
+			type: Number,
+			required: true
+		}
+	},
+	data: function data() {
+		return {
+			data: {}
+		};
+	},
+
+
+	methods: {
+		getData: function getData() {
+			var _this = this;
+
+			fetch("/api/continent/" + this.activity + "/activities").then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this.data = response;
+			});
+		}
+	},
+
+	mounted: function mounted() {
+		this.getData();
+	}
+};
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7739,10 +8281,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7752,13 +8291,13 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuetify = __webpack_require__(13);
+var _vuetify = __webpack_require__(11);
 
 var _vuetify2 = _interopRequireDefault(_vuetify);
 
-var _store = __webpack_require__(15);
+var _store = __webpack_require__(13);
 
-var _router = __webpack_require__(20);
+var _router = __webpack_require__(18);
 
 var _router2 = _interopRequireDefault(_router);
 
@@ -7785,7 +8324,7 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7839,7 +8378,7 @@ exports._unrefActive = exports.active = function (item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(12);
+__webpack_require__(10);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -7848,7 +8387,7 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8039,7 +8578,7 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(1)))
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8886,10 +9425,10 @@ var range=type==='minute'?rangeMinutes:this.isAmPm?value<12?rangeHours12am:range
 this.updateDimensions();// Start the transition
 requestAnimationFrame(this.startTransition);}},mounted:function mounted(){this.value&&this.callActivate();},render:function render(h){var _addBackgroundColorCl,_this=this;var tooltip=h('div',{staticClass:'tooltip__content','class':this.addBackgroundColorClassChecks((_addBackgroundColorCl={},_defineProperty(_addBackgroundColorCl,this.contentClass,true),_defineProperty(_addBackgroundColorCl,'menuable__content__active',this.isActive),_addBackgroundColorCl)),style:this.styles,attrs:this.attrs,directives:[{name:'show',value:this.isContentActive}],ref:'content'},this.$slots.default);return h(this.tag,{staticClass:'tooltip','class':this.classes},[h('transition',{props:{name:this.computedTransition}},[tooltip]),h('span',{on:this.disabled?{}:{mouseenter:function mouseenter(){_this.runDelay('open',function(){return _this.isActive=true;});},mouseleave:function mouseleave(){_this.runDelay('close',function(){return _this.isActive=false;});}},ref:'activator'},this.$slots.activator)]);}};/***/},/* 257 *//***/function(module,exports){// removed by extract-text-webpack-plugin
 /***/},/* 258 *//***/function(module,__webpack_exports__,__webpack_require__){"use strict";Object.defineProperty(__webpack_exports__,"__esModule",{value:true});/* harmony export (immutable) */__webpack_exports__["default"]=install;/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__click_outside__=__webpack_require__(8);/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__resize__=__webpack_require__(11);/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__ripple__=__webpack_require__(17);/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__scroll__=__webpack_require__(68);/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__touch__=__webpack_require__(9);/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"ClickOutside",function(){return __WEBPACK_IMPORTED_MODULE_0__click_outside__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Ripple",function(){return __WEBPACK_IMPORTED_MODULE_2__ripple__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Resize",function(){return __WEBPACK_IMPORTED_MODULE_1__resize__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Scroll",function(){return __WEBPACK_IMPORTED_MODULE_3__scroll__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Touch",function(){return __WEBPACK_IMPORTED_MODULE_4__touch__["a"];});function install(Vue){Vue.directive('click-outside',__WEBPACK_IMPORTED_MODULE_0__click_outside__["a"/* default */]);Vue.directive('ripple',__WEBPACK_IMPORTED_MODULE_2__ripple__["a"/* default */]);Vue.directive('resize',__WEBPACK_IMPORTED_MODULE_1__resize__["a"/* default */]);Vue.directive('scroll',__WEBPACK_IMPORTED_MODULE_3__scroll__["a"/* default */]);Vue.directive('touch',__WEBPACK_IMPORTED_MODULE_4__touch__["a"/* default */]);}/***/}]/******/)["default"]);});//# sourceMappingURL=vuetify.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8919,7 +9458,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8934,19 +9473,19 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(16);
+var _vuex = __webpack_require__(14);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _getters = __webpack_require__(17);
+var _getters = __webpack_require__(15);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _actions = __webpack_require__(18);
+var _actions = __webpack_require__(16);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(19);
+var _mutations = __webpack_require__(17);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
@@ -8964,7 +9503,7 @@ var store = exports.store = new _vuex2.default.Store({
 });
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9931,7 +10470,7 @@ exports.default = index_esm;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9947,7 +10486,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9980,7 +10519,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9996,7 +10535,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10010,11 +10549,11 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(21);
+var _vueRouter = __webpack_require__(19);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _Index = __webpack_require__(22);
+var _Index = __webpack_require__(20);
 
 var _Index2 = _interopRequireDefault(_Index);
 
@@ -10032,7 +10571,7 @@ exports.default = new _vueRouter2.default({
 });
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12494,7 +13033,7 @@ exports.default = VueRouter;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12519,7 +13058,7 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__["default"],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default.a,
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
@@ -12548,14 +13087,1784 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(22);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\flight-form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c55e230", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c55e230", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Departure location", required: "" }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "Departure time", type: "date", required: "" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Destination", required: "" }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "Return date", type: "date" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  label: "Number of adults",
+                  type: "number",
+                  min: "1",
+                  required: ""
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "Number of children", type: "number", min: "0" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  items: [
+                    { text: "Economy", value: "economy" },
+                    { text: "Economy plus", value: "premiumeconomy" },
+                    { text: "Business", value: "business" },
+                    { text: "First", value: "first" }
+                  ],
+                  label: "Class",
+                  "single-line": "",
+                  bottom: ""
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7c55e230", esExports)
+  }
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__ = __webpack_require__(24);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\accommodation-form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2e7cdc80", Component.options)
+  } else {
+    hotAPI.reload("data-v-2e7cdc80", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Check in date", type: "date", required: "" }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "Check out date", type: "date", required: "" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  label: "Number of persons",
+                  type: "number",
+                  required: "",
+                  min: "1"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "Number of rooms",
+                  type: "number",
+                  required: "",
+                  min: "1"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2e7cdc80", esExports)
+  }
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(26);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\car-form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b9e41304", Component.options)
+  } else {
+    hotAPI.reload("data-v-b9e41304", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Pickup location", required: "" }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "Pickup date and time",
+                  type: "date-time",
+                  required: ""
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Return location", required: "", min: "1" }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "Return date and time",
+                  type: "date-time",
+                  required: "",
+                  min: "1"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b9e41304", esExports)
+  }
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__ = __webpack_require__(28);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\destination.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-94c13086", Component.options)
+  } else {
+    hotAPI.reload("data-v-94c13086", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-lg": "", fluid: "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs9: "", "d-flex": "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    height: "616px",
+                    to: "#",
+                    img:
+                      "https://images.pexels.com/photos/604444/pexels-photo-604444.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "display-1 white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    France\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "display-3 white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Paris\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          attrs: {
+                            hover: "",
+                            to: "#",
+                            height: "300px",
+                            img:
+                              "https://images.pexels.com/photos/347254/pexels-photo-347254.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "fill-height px-0 py-0" },
+                            [
+                              _c(
+                                "v-jumbotron",
+                                {
+                                  attrs: {
+                                    gradient:
+                                      "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                                    height: "100%"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-container",
+                                    { attrs: { fluid: "", "fill-height": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        {
+                                          attrs: {
+                                            row: "",
+                                            wrap: "",
+                                            "align-end": "",
+                                            "align-content-end": ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "white--text text-xs-right",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Netherlands\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "headline white--text text-xs-right",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Amsterdam\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          attrs: {
+                            hover: "",
+                            to: "#",
+                            height: "300px",
+                            img:
+                              "https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "fill-height px-0 py-0" },
+                            [
+                              _c(
+                                "v-jumbotron",
+                                {
+                                  attrs: {
+                                    gradient:
+                                      "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                                    height: "100%"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-container",
+                                    { attrs: { fluid: "", "fill-height": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        {
+                                          attrs: {
+                                            row: "",
+                                            wrap: "",
+                                            "align-end": "",
+                                            "align-content-end": ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "white--text text-xs-right",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            England\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "headline white--text text-xs-right",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            London\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/109630/pexels-photo-109630.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Germany\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Berlin\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/788352/pexels-photo-788352.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Poland\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Warsaw\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/126292/pexels-photo-126292.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Czech Republic\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Prague\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/6502/city-capital-italy-historical.jpg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Italy\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Rome\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-94c13086", esExports)
+  }
+}
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__ = __webpack_require__(30);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\activity.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aa5da520", Component.options)
+  } else {
+    hotAPI.reload("data-v-aa5da520", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-lg": "", fluid: "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          attrs: {
+                            hover: "",
+                            to: "#",
+                            height: "300px",
+                            img:
+                              "https://images.unsplash.com/photo-1516474087277-9fe7429a2908?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4f28d96496a5a914f585e51602c450a4&auto=format&fit=crop&w=1510&q=80"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "fill-height px-0 py-0" },
+                            [
+                              _c(
+                                "v-jumbotron",
+                                {
+                                  attrs: {
+                                    gradient:
+                                      "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                                    height: "100%"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-container",
+                                    { attrs: { fluid: "", "fill-height": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        {
+                                          attrs: {
+                                            row: "",
+                                            wrap: "",
+                                            "align-end": "",
+                                            "align-content-end": ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "headline white--text text-xs-right py-0",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Ice climbing\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          attrs: {
+                            hover: "",
+                            to: "#",
+                            height: "300px",
+                            img:
+                              "https://images.unsplash.com/photo-1484070062320-c03d0bac24fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=93578d3b27bf76dbe1f22fca4504a761&auto=format&fit=crop&w=5712&q=80"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "fill-height px-0 py-0" },
+                            [
+                              _c(
+                                "v-jumbotron",
+                                {
+                                  attrs: {
+                                    gradient:
+                                      "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                                    height: "100%"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-container",
+                                    { attrs: { fluid: "", "fill-height": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        {
+                                          attrs: {
+                                            row: "",
+                                            wrap: "",
+                                            "align-end": "",
+                                            "align-content-end": ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass:
+                                                "headline white--text text-xs-right py-0",
+                                              attrs: { xs12: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Ice skating\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs9: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    height: "616px",
+                    to: "#",
+                    img:
+                      "https://images.unsplash.com/photo-1517057011470-8f36d636e6ca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9dcecd9ec3b07624dedb0df0c7b3eeee&auto=format&fit=crop&w=6394&q=80"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "display-3 white--text text-xs-right",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Ski/ snowboard\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.unsplash.com/photo-1518775053278-5a569f0be353?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=62cd32cab1df9faa640fe5b2771e363f&auto=format&fit=crop&w=400&q=80"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right py-0",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Cross-country skiing\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/219772/pexels-photo-219772.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right py-0",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Sled\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/41004/alaska-wilderness-sky-aurora-borealis-41004.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right py-0",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Northern light\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    hover: "",
+                    to: "#",
+                    height: "300px",
+                    img:
+                      "https://images.pexels.com/photos/237346/pexels-photo-237346.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb"
+                  }
+                },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "fill-height px-0 py-0" },
+                    [
+                      _c(
+                        "v-jumbotron",
+                        {
+                          attrs: {
+                            gradient:
+                              "to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%",
+                            height: "100%"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "", "fill-height": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-end": "",
+                                    "align-content-end": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass:
+                                        "headline white--text text-xs-right py-0",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Snowmobile\n                                "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aa5da520", esExports)
+  }
+}
+
+/***/ }),
 /* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12705,7 +15014,7 @@ var render = function() {
             [
               _c(
                 "v-tabs",
-                { attrs: { centered: "" } },
+                { attrs: { centered: "", color: "transparent" } },
                 [
                   _vm._l(_vm.continents, function(continent) {
                     return _c(
@@ -12735,7 +15044,9 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _c("Destination", { attrs: { destination: _vm.topDestination } })
+              _c("Destination", {
+                attrs: { destination: _vm.topDestination, layout: _vm.layout }
+              })
             ],
             1
           )
@@ -12772,7 +15083,7 @@ var render = function() {
             [
               _c(
                 "v-tabs",
-                { attrs: { centered: "" } },
+                { attrs: { centered: "", color: "transparent" } },
                 [
                   _c("v-tab", [_vm._v("Winter")]),
                   _vm._v(" "),
@@ -12784,7 +15095,11 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-tab-item",
-                    [_c("Activity", { attrs: { activity: _vm.activity } })],
+                    [
+                      _c("Activity", {
+                        attrs: { activity: _vm.activity, layout: _vm.layout }
+                      })
+                    ],
                     1
                   )
                 ],
@@ -13960,10 +16275,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(34);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -14009,13 +16324,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

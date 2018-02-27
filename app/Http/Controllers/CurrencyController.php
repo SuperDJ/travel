@@ -67,18 +67,4 @@ class CurrencyController extends Controller
 
 		return response()->json($currenciesData, 200);
 	}
-
-	public function connectCountries() {
-		$response = json_decode( file_get_contents( 'http://country.io/currency.json' ) );
-
-		foreach( $response as $country => $currency ) {
-			$currency = Currency::where('iso', $currency)->first();
-
-			if( !empty( $currency ) ) {
-				Country::where('iso', $country)->update(['currencies_id' => $currency->id]);
-			}
-		}
-
-		return response('Currencies and countries connected');
-	}
 }

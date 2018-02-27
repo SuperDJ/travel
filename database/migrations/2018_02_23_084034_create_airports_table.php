@@ -18,7 +18,6 @@ class CreateAirportsTable extends Migration
             $table->string('name');
             $table->string('latitude');
             $table->string('longitude');
-            $table->string('id');
             $table->string('iata');
 
             $table->integer('cities_id')->unsigned()->nullable();

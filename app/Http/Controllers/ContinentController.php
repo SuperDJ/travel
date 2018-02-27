@@ -50,16 +50,16 @@ class ContinentController extends Controller
 	}
 
 	public function fillDB() {
-    	$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId=6295630&style=long' ) );
+    	$response = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/continents.json' ) );
 
     	$data = [];
 
-    	foreach( $response->geonames as $key => $value ) {
+    	foreach( $response as $key => $value ) {
     		$data[] = [
-    			'name' => $value->name,
-				'latitude' => $value->lat,
-				'longitude' => $value->lng,
-				'geonames_id' => $value->geonameId,
+    			'name' => $value,
+				'iso' => $key,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
 			];
 		}
 

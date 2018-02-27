@@ -15,12 +15,8 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-			$table->string('iso_code', 2);
-			$table->string('latitude')->nullable();
-			$table->string('longitude')->nullable();
-			$table->integer('geonames_id')->unique();
-			$table->bigInteger('population')->nullable();
+            $table->string('name');
+			$table->string('iso', 2);
 
             $table->integer('languages_id')->nullable()->unsigned();
             $table->index('languages_id');

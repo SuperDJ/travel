@@ -8,83 +8,122 @@ use Illuminate\Http\Request;
 
 class AirportController extends Controller
 {
+	/**
+	 * Display a listing of the resource.
+	 * @return \App\Airport[]|\Illuminate\Database\Eloquent\Collection
+	 */
 	public function index() {
 		return Airport::all();
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
 	public function store( Request $request ) {
 		$store = Airport::create($request->all());
 
 		if( $store ) {
+			return response('Airport created', 201);
+		} else {
 			return response('Airport not created', 400);
 		}
 	}
 
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param \App\Airport $airport
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit( Airport $airport ) {
 		return response()->json($airport, 200);
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param \App\Airport              $airport
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update( Request $request, Airport $airport ) {
 		$update = $airport->update($request->all());
 
 		if( $update ) {
+			return response('Airport updated', 200);
+		} else {
 			return response('Airport not updated', 400);
 		}
 	}
 
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param \App\Airport $airport
+	 *
+	 * @return \Illuminate\Http\Response
+	 * @throws \Exception
+	 */
 	public function destroy( Airport $airport ) {
 		$destroy = $airport->delete();
 
 		if( $destroy ) {
+			return response('Airport delete', 200);
+		} else {
 			return response('Airport not delete', 400);
 		}
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Airport $airport
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function show( Airport $airport ) {
 		return response()->json($airport, 200);
 	}
 
 	public function fillDB() {
 		set_time_limit(0);
-		$counties = City::all();
 
 		$data = [];
-		$i = 0;
 
-		$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$counties[0]->geonames_id.'&style=long' ) );
-		print_r($response);
+		$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env('SKYSCANNER_KEY') ) );
 
-		/*
-		foreach( $counties as $county ) {
-			echo $county->geonames_id.'<br>';
-			$response = json_decode( file_get_contents( 'http://www.geonames.org/childrenJSON?geonameId='.$county->geonames_id.'&style=long' ) );
+		foreach( $response as $array ) {
+			foreach( $array as $continents ) {
+				foreach( $continents->Countries as $countries ) {
+					foreach( $countries->Cities as $cities ) {
+						foreach( $cities->Airports as $airports ) {
+							print_r($airports);
 
-			if( !empty( $response->geonames ) ) {
-				foreach( $response->geonames as $airport => $value ) {
-					$data[] = [
-						'name'        => $value->name,
-						'county_id'   => $county->id,
-						'latitude'    => $value->lat,
-						'longitude'   => $value->lng,
-						'geonames_id' => $value->geonameId,
-						'created_at'  => date( 'Y-m-d H:i:s' ),
-						'updated_at'  => date( 'Y-m-d H:i:s' )
-					];
+							$location = explode( ', ', $airports->Location );
+							$latitude = $location[1];
+							$longitude = $location[0];
 
-					Airport::create([
-						'name'        => $value->name,
-						'county_id'   => $county->id,
-						'latitude'    => $value->lat,
-						'longitude'   => $value->lng,
-						'geonames_id' => $value->geonameId,
-						'created_at'  => date( 'Y-m-d H:i:s' ),
-						'updated_at'  => date( 'Y-m-d H:i:s' )
-					]);
+							$data[] = [
+								'name' => $airports->Name,
+								'cities_id' => City::where('iso', $airports->CityId)->value('id'),
+								'latitude' => $latitude,
+								'longitude' => $longitude,
+								'iata' => $airports->Id,
+								'created_at' => date( 'Y-m-d H:i:s' ),
+								'updated_at' => date( 'Y-m-d H:i:s' )
+							];
+						}
+					}
 				}
 			}
-			echo '#'.$i.' / '.$counties->count().'<br>';
-			$i++;
-		}*/
+		}
+
+		Airport::insert($data);
 
 		return response()->json($data, 200);
 	}

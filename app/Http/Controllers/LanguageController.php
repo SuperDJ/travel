@@ -7,10 +7,20 @@ use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
+	/**
+	 * Display a listing of the resource.
+	 * @return \App\Language[]|\Illuminate\Database\Eloquent\Collection
+	 */
 	public function index() {
 		return Language::all();
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
 	public function store( Request $request ) {
 		$store = Language::create($request->all());
 
@@ -21,10 +31,25 @@ class LanguageController extends Controller
 		}
 	}
 
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param \App\Language $language
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit( Language $language ) {
 		return response()->json($language, 200);
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param \App\Language             $language
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update( Request $request, Language $language ) {
 		$update = $language->update($request->all());
 
@@ -35,6 +60,14 @@ class LanguageController extends Controller
 		}
 	}
 
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param \App\Language $language
+	 *
+	 * @return \Illuminate\Http\Response
+	 * @throws \Exception
+	 */
 	public function destroy( Language $language ) {
 		$destroy = $language->delete();
 
@@ -45,6 +78,13 @@ class LanguageController extends Controller
 		}
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Language $language
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function show( Language $language ) {
 		return response()->json($language, 200);
 	}

@@ -62,7 +62,6 @@ Route::get('/timezones/{timezone}/edit', 'TimezoneController@edit');
 Route::put('/timezones/{timezone}', 'TimezoneController@update');
 Route::delete('/timezones/{timezone}', 'TimezoneController@destroy');
 
-
 // Cities
 Route::get('/cities', 'CityController@index');
 Route::get('/cities/db', 'CityController@fillDB');
@@ -71,3 +70,12 @@ Route::get('/cities/{city}', 'CityController@show');
 Route::get('/cities/{city}/edit', 'CityController@edit');
 Route::put('/cities/{city}', 'CityController@update');
 Route::delete('/cities/{city}', 'CityController@destroy');
+
+// Airports
+Route::get('/airports', 'AirportController@index');
+Route::get('/airports/db', 'AirportController@fillDB');
+Route::post('/airports', 'AirportController@store');
+Route::get('/airports/{airport}', 'AirportController@show');
+Route::get('/airports/{airport}/edit', 'AirportController@edit');
+Route::put('/airports/{airport}', 'AirportController@update');
+Route::delete('/airports/{airport}', 'AirportController@destroy');

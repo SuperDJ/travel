@@ -8,10 +8,20 @@ use Illuminate\Http\Request;
 
 class TimezoneController extends Controller
 {
+	/**
+	 * Display a listing of the resource.
+	 * @return \App\Timezone[]|\Illuminate\Database\Eloquent\Collection
+	 */
 	public function index() {
 		return Timezone::all();
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
 	public function store( Request $request ) {
 		$store = Timezone::create($request->all());
 
@@ -22,10 +32,25 @@ class TimezoneController extends Controller
 		}
 	}
 
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param \App\Timezone $timezone
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit( Timezone $timezone ) {
 		return response()->json($timezone, 200);
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param \App\Timezone             $timezone
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update( Request $request, Timezone $timezone ) {
 		$update = $timezone->update($request->all());
 
@@ -36,6 +61,14 @@ class TimezoneController extends Controller
 		}
 	}
 
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param \App\Timezone $timezone
+	 *
+	 * @return \Illuminate\Http\Response
+	 * @throws \Exception
+	 */
 	public function destroy( Timezone $timezone ) {
 		$destroy = $timezone->delete();
 
@@ -46,13 +79,20 @@ class TimezoneController extends Controller
 		}
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Timezone $timezone
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function show( Timezone $timezone ) {
 		return response()->json($timezone, 200);
 	}
 
 	public function fillDB() {
 		set_time_limit(0);
-		$response = json_decode( file_get_contents( 'http://api.timezonedb.com/v2/list-time-zone?key=FV8LB3C2ARKO&format=json' ) );
+		$response = json_decode( file_get_contents( 'http://api.timezonedb.com/v2/list-time-zone?key='.env('TIMEZONE_KEY').'&format=json' ) );
 
 		$data = [];
 

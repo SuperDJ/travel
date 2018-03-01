@@ -13,7 +13,8 @@
 
             <v-flex xs3>
                 <v-text-field label="Number of adults" type="number" min="1" required/>
-                <v-text-field label="Number of children" type="number" min="0"/>
+                <v-text-field label="Number of children <em>(1 - 16 years)</em>" type="number" min="0" max="8"/>
+                <v-text-field label="Number of infants <em>(under 12 months)</em>" type="number" min="0" max="8"/>
             </v-flex>
 
             <v-flex xs3>

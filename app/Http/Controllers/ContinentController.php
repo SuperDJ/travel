@@ -7,10 +7,20 @@ use Illuminate\Http\Request;
 
 class ContinentController extends Controller
 {
+	/**
+	 * Display a listing of the resource.
+	 * @return \App\Continent[]|\Illuminate\Database\Eloquent\Collection
+	 */
     public function index() {
     	return Continent::all();
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
 	public function store( Request $request ) {
     	$store = Continent::create($request->all());
 
@@ -21,10 +31,25 @@ class ContinentController extends Controller
 		}
 	}
 
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param \App\Continent $continent
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit( Continent $continent ) {
     	return response()->json($continent, 200);
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param \App\Continent            $continent
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update( Request $request, Continent $continent ) {
     	$update = $continent->update($request->all());
 
@@ -35,6 +60,14 @@ class ContinentController extends Controller
 		}
 	}
 
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param \App\Continent $continent
+	 *
+	 * @return \Illuminate\Http\Response
+	 * @throws \Exception
+	 */
 	public function destroy( Continent $continent ) {
     	$destroy = $continent->delete();
 
@@ -45,6 +78,13 @@ class ContinentController extends Controller
 		}
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Continent $continent
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function show( Continent $continent ) {
     	return response()->json($continent, 200);
 	}

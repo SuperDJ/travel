@@ -92,7 +92,7 @@ class AirportController extends Controller
 
 	public function fillDB() {
 		set_time_limit(0);
-
+		/*
 		$data = [];
 
 		$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env('SKYSCANNER_KEY') ) );
@@ -123,8 +123,22 @@ class AirportController extends Controller
 			}
 		}
 
-		Airport::insert($data);
+		Airport::insert($data);*/
 
-		return response()->json($data, 200);
+		$response = get_object_vars( json_decode( file_get_contents( 'https://raw.githubusercontent.com/mwgg/Airports/master/airports.json' ) ) );
+
+		foreach( Airport::all() as $airport ) {
+			if(!empty($airport->city)) {
+				print_r( $airport->city->name );
+			}
+			/*
+			if( !empty($airport->cities_id) ) {
+				print_r($airport->city);
+				//$key = array_search( $airport->city->name, array_column( $response, 'city' ) );
+				//echo $key.'<br>';
+			} else {
+				echo $airport->name.' no city found'.'<br>';
+			} */
+		}
 	}
 }

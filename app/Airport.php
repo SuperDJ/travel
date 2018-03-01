@@ -8,7 +8,10 @@ class Airport extends Model
 {
     protected $guarded = ['id'];
 
-    function city() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	function city() {
     	return $this->belongsTo(City::class);
 	}
 }

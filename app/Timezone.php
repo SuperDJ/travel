@@ -8,7 +8,10 @@ class Timezone extends Model
 {
 	protected $guarded = ['id'];
 
-    public function country() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function country() {
     	return $this->belongsTo(Country::class);
 	}
 }

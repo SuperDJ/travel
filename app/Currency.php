@@ -8,7 +8,10 @@ class Currency extends Model
 {
 	protected $guarded = ['id'];
 
-    public function countries() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function countries() {
     	return $this->belongsToMany(Country::class);
 	}
 }

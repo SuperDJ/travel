@@ -98,6 +98,10 @@ class AirportController extends Controller
 			->orWhereHas('city', function( $query ) use( $search ) {
 				$query->where('name', 'like', $search);
 			})
+			->with(['city' => function( $query ) use( $search ) {
+				$query->where('name', 'like', $search)
+				->with('country');
+			}])
 			->orderBy('name', 'asc')
 			->get();
 

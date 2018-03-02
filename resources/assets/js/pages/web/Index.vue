@@ -2,24 +2,32 @@
     <v-container fluid>
         <v-parallax :src="image" height="700">
             <v-layout column align-center justify-center>
-                <v-card hover>
-                    <v-tabs icons-and-text centered color="primary" slider-color="white" dark card>
-                        <v-tab @click="changeForm('AccommodationForm')">
-                            Accommodations
-                            <v-icon>hotel</v-icon>
-                        </v-tab>
-                        <v-tab @click="changeForm('FlightForm')">
-                            Flights
-                            <v-icon>flight</v-icon>
-                        </v-tab>
-                        <v-tab @click="changeForm('CarForm')">
-                            Car rental
-                            <v-icon>directions_car</v-icon>
-                        </v-tab>
-                    </v-tabs>
+                <v-tabs icons-and-text centered color="primary" slider-color="white" dark card>
+                    <v-tab href="#accommodation" @click="changeForm('accommodation')">
+                        Accommodations
+                        <v-icon>hotel</v-icon>
+                    </v-tab>
+                    <v-tab href="#flight" @click="changeForm('flight')">
+                        Flights
+                        <v-icon>flight</v-icon>
+                    </v-tab>
+                    <v-tab href="#car" @click="changeForm('car')">
+                        Car rental
+                        <v-icon>directions_car</v-icon>
+                    </v-tab>
 
-                    <component :is="form"/>
-                </v-card>
+                    <v-tabs-items>
+                        <v-tab-item id="accommodation">
+                            <AccommodationForm />
+                        </v-tab-item>
+                        <v-tab-item id="flight">
+                            <FlightForm />
+                        </v-tab-item>
+                        <v-tab-item id="car">
+                            <CarForm />
+                        </v-tab-item>
+                    </v-tabs-items>
+                </v-tabs>
             </v-layout>
         </v-parallax>
 
@@ -36,11 +44,12 @@
                     <v-tabs centered color="transparent">
                         <v-tab v-for="continent in continents" :key="continent.name" @click="topDestinations(continent.id)">{{continent.name}}</v-tab>
 
-                        <v-tab-item>
-                            <Destination :destination="topDestination"/>
-                        </v-tab-item>
+                        <v-tabs-items>
+                            <v-tab-item v-for="continent in continents" :key="continent.name">
+                                <Destination :destination="continent.id"/>
+                            </v-tab-item>
+                        </v-tabs-items>
                     </v-tabs>
-                    <Destination :destination="topDestination"/>
                 </v-flex>
         </v-layout>
 
@@ -94,7 +103,6 @@
                 form: 'AccommodationForm',
                 image:
                     'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
-                topDestination: 1,
                 activity: 1,
             }
         },
@@ -123,14 +131,14 @@
 
                 let img = '';
                 switch(type) {
-                    case 'FlightForm':
+                    case 'flight':
                     	img =
                             'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
-                    case 'AccommodationForm':
+                    case 'accommodation':
                     	img = 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
-                    case 'CarForm':
+                    case 'car':
                     	img = 'https://images.pexels.com/photos/21014/pexels-photo.jpg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
                 }

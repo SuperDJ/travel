@@ -142,10 +142,10 @@
 		},
 
 		methods: {
-			getData() {
+			getData() { /*
 				fetch(`/api/continent/${this.activity}/activities`)
 					.then(response => {return response.json()})
-					.then(response => {this.data = response});
+					.then(response => {this.data = response});*/
 			}
 		},
 

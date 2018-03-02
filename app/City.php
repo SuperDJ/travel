@@ -11,7 +11,7 @@ class City extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function county() {
+	public function country() {
     	return $this->belongsTo(Country::class);
 	}
 

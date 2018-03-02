@@ -171,7 +171,7 @@
 
         methods: {
     		getData() {
-    		    fetch(`/api/continent/${this.destination}/top-destinations`)
+    		    fetch(`/api/continents/${this.destination}/top-destinations`)
                     .then(response => {return response.json()})
                     .then(response => {this.data = response});
             }

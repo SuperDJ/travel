@@ -107,4 +107,16 @@ class ContinentController extends Controller
 
 		return response()->json($data, 200);
 	}
+
+	public function topDestinations( Continent $continent ) {
+		$cities = $continent->countries()
+			->inRandomOrder()
+			->take(7)
+			->with(['cities' => function( $query ) {
+				$query->where('capital', 1);
+			}])
+			->get();
+
+		return response()->json($cities, 200);
+	}
 }

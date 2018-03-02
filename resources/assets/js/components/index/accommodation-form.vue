@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-card hover>
         <v-card-text>
             <v-container grid-list-md>
                 <v-layout row wrap>
@@ -22,5 +22,5 @@
                 Search accommodations
             </v-btn>
         </v-card-actions>
-    </div>
+    </v-card>
 </template>

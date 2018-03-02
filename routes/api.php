@@ -23,6 +23,7 @@ Route::get('/continents/db', 'ContinentController@fillDB');
 Route::post('/continents', 'ContinentController@store');
 Route::get('/continents/{continent}', 'ContinentController@show');
 Route::get('/continents/{continent}/edit', 'ContinentController@edit');
+Route::get('/continents/{continent}/top-destinations', 'ContinentController@topDestinations');
 Route::put('/continents/{continent}', 'ContinentController@update');
 Route::delete('/continents/{continent}', 'ContinentController@destroy');
 

@@ -133,11 +133,7 @@
 			activity: {
 				type: Number,
 				required: true
-			},
-            layout: {
-				type: Number,
-                required: true,
-            }
+			}
 		},
 		data() {
 			return {

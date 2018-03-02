@@ -90,6 +90,20 @@ class AirportController extends Controller
 		return response()->json($airport, 200);
 	}
 
+	public function search( $search ) {
+		$search = '%'.$search.'%';
+	 	$found = Airport::where('name', 'like', $search)
+			->orWhere('iata', 'like', $search)
+			->orWhere('icao', 'like', $search)
+			->orWhereHas('city', function( $query ) use( $search ) {
+				$query->where('name', 'like', $search);
+			})
+			->orderBy('name', 'asc')
+			->get();
+
+	 	return response()->json($found, 200);
+	}
+
 	public function fillDB() {
 		set_time_limit(0);
 		/*
@@ -128,17 +142,21 @@ class AirportController extends Controller
 		$response = get_object_vars( json_decode( file_get_contents( 'https://raw.githubusercontent.com/mwgg/Airports/master/airports.json' ) ) );
 
 		foreach( Airport::all() as $airport ) {
-			if(!empty($airport->city)) {
-				print_r( $airport->city->name );
+			// Get all keys where airports are found based on iata
+			$key = array_search( $airport->iata, array_column( $response, 'iata', 'icao' ) );
+
+			// If the key is not found get the key based on city name
+			if( empty( $key ) && !empty( $airport->city ) ) {
+				$key = array_search( mb_strtolower( $airport->city->name ), array_map( 'mb_strtolower', array_column( $response, 'city', 'icao' ) ) );
 			}
-			/*
-			if( !empty($airport->cities_id) ) {
-				print_r($airport->city);
-				//$key = array_search( $airport->city->name, array_column( $response, 'city' ) );
-				//echo $key.'<br>';
-			} else {
-				echo $airport->name.' no city found'.'<br>';
-			} */
+
+			if( !empty( $key ) ) {
+				echo $key.'<br>';
+				$airport->update([
+					'icao' => $key,
+					'name' => $response[$key]->name
+				]);
+			}
 		}
 	}
 }

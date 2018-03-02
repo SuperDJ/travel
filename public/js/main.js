@@ -7642,14 +7642,15 @@ exports.default = {
         return {
             form: 'AccommodationForm',
             image: 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
-            topDestination: 1
+            topDestination: 1,
+            activity: 1
         };
     },
 
 
     computed: {
         continents: function continents() {
-            return this.$store.getters.getContinents;
+            return this.$store.getters.continentsGet;
         }
     },
 
@@ -7663,7 +7664,7 @@ exports.default = {
 
     methods: {
         getContinents: function getContinents() {
-            this.$store.dispatch('getContinents');
+            this.$store.dispatch('continentsGet');
         },
         changeForm: function changeForm(type) {
             this.form = type;
@@ -7690,12 +7691,6 @@ exports.default = {
         this.getContinents();
     }
 }; //
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8121,10 +8116,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	props: {
 		activity: {
-			type: Number,
-			required: true
-		},
-		layout: {
 			type: Number,
 			required: true
 		}
@@ -9495,7 +9486,9 @@ _vue2.default.use(_vuex2.default);
 
 var store = exports.store = new _vuex2.default.Store({
 	state: {
-		continents: {}
+		continents: {},
+		airports: {},
+		airportsSearch: {}
 	},
 	getters: _getters2.default,
 	mutations: _mutations2.default,
@@ -10480,8 +10473,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = {
-	getContinents: function getContinents(state) {
+	continentsGet: function continentsGet(state) {
 		return state.continents;
+	},
+	airportsGet: function airportsGet(state) {
+		return state.airports;
 	}
 };
 
@@ -10509,11 +10505,25 @@ exports.default = {
 			Math.floor(Math.random() * min + max);
 		}
 	},
-	getContinents: function getContinents(context) {
+	continentsGet: function continentsGet(context) {
 		fetch('/api/continents').then(function (response) {
 			return response.json();
 		}).then(function (response) {
-			context.commit('setContinents', response);
+			context.commit('continentsSet', response);
+		});
+	},
+	airportsGet: function airportsGet(context) {
+		fetch('/api/airports').then(function (response) {
+			return response.json();
+		}).then(function (response) {
+			context.commit('airportsSet', response);
+		});
+	},
+	airportsSearch: function airportsSearch(context, value) {
+		fetch('/api/airports/' + value + '/search').then(function (response) {
+			return response.json();
+		}).then(function (response) {
+			context.commit('airportsSearchSet', response);
 		});
 	}
 };
@@ -10529,8 +10539,14 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = {
-	setContinents: function setContinents(state, continents) {
+	continentsSet: function continentsSet(state, continents) {
 		state.continents = continents;
+	},
+	airportsSet: function airportsSet(state, airports) {
+		state.airports = airports;
+	},
+	airportsSearchSet: function airportsSearchSet(state, airports) {
+		state.airportsSearch = airports;
 	}
 };
 
@@ -13092,11 +13108,15 @@ if (false) {(function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(22);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = null
+
+
 /* template */
 
 /* template functional */
@@ -13108,8 +13128,8 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -13146,80 +13166,168 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { "grid-list-md": "" } },
+    "div",
     [
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        "v-card-text",
         [
           _c(
-            "v-flex",
-            { attrs: { xs3: "" } },
+            "v-container",
+            { attrs: { "grid-list-md": "" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Departure location", required: "" }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: { label: "Departure time", type: "date", required: "" }
-              })
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          label: "Departure",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.airports,
+                          "item-text": "name",
+                          "item-value": "id",
+                          "cache-items": "",
+                          "search-input": _vm.departureSearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.departureSearch = $event
+                          }
+                        },
+                        model: {
+                          value: _vm.departure,
+                          callback: function($$v) {
+                            _vm.departure = $$v
+                          },
+                          expression: "departure"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Departure time",
+                          type: "date",
+                          required: ""
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          label: "Destination",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.airports,
+                          "item-text": "name",
+                          "cache-items": "",
+                          "search-input": _vm.destinationSearch,
+                          "item-value": "id"
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.destinationSearch = $event
+                          }
+                        },
+                        model: {
+                          value: _vm.destination,
+                          callback: function($$v) {
+                            _vm.destination = $$v
+                          },
+                          expression: "destination"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: { label: "Return date", type: "date" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of adults",
+                          type: "number",
+                          min: "1",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of children <em>(1 - 16 years)</em>",
+                          type: "number",
+                          min: "0",
+                          max: "8"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of infants <em>(under 12 months)</em>",
+                          type: "number",
+                          min: "0",
+                          max: "8"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: [
+                            { text: "Economy", value: "economy" },
+                            { text: "Economy plus", value: "premiumeconomy" },
+                            { text: "Business", value: "business" },
+                            { text: "First", value: "first" }
+                          ],
+                          label: "Class",
+                          "single-line": "",
+                          bottom: ""
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
-          ),
-          _vm._v(" "),
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card-actions",
+        [
           _c(
-            "v-flex",
-            { attrs: { xs3: "" } },
+            "v-btn",
+            { attrs: { flat: "", color: "primary" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Destination", required: "" }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: { label: "Return date", type: "date" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs3: "" } },
-            [
-              _c("v-text-field", {
-                attrs: {
-                  label: "Number of adults",
-                  type: "number",
-                  min: "1",
-                  required: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: { label: "Number of children", type: "number", min: "0" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs3: "" } },
-            [
-              _c("v-select", {
-                attrs: {
-                  items: [
-                    { text: "Economy", value: "economy" },
-                    { text: "Economy plus", value: "premiumeconomy" },
-                    { text: "Business", value: "business" },
-                    { text: "First", value: "first" }
-                  ],
-                  label: "Class",
-                  "single-line": "",
-                  bottom: ""
-                }
-              })
+              _c("v-icon", [_vm._v("search")]),
+              _vm._v("\n            Search flights\n        ")
             ],
             1
           )
@@ -13301,49 +13409,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { "grid-list-md": "" } },
+    "div",
     [
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        "v-card-text",
         [
           _c(
-            "v-flex",
-            { attrs: { xs6: "" } },
+            "v-container",
+            { attrs: { "grid-list-md": "" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Check in date", type: "date", required: "" }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: { label: "Check out date", type: "date", required: "" }
-              })
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Check in date",
+                          type: "date",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Check out date",
+                          type: "date",
+                          required: ""
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of persons",
+                          type: "number",
+                          required: "",
+                          min: "1"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of rooms",
+                          type: "number",
+                          required: "",
+                          min: "1"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
-          ),
-          _vm._v(" "),
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card-actions",
+        [
           _c(
-            "v-flex",
-            { attrs: { xs6: "" } },
+            "v-btn",
+            { attrs: { flat: "", color: "primary" } },
             [
-              _c("v-text-field", {
-                attrs: {
-                  label: "Number of persons",
-                  type: "number",
-                  required: "",
-                  min: "1"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  label: "Number of rooms",
-                  type: "number",
-                  required: "",
-                  min: "1"
-                }
-              })
+              _c("v-icon", [_vm._v("search")]),
+              _vm._v("\n            Search accommodations\n        ")
             ],
             1
           )
@@ -13425,48 +13569,80 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { "grid-list-md": "" } },
+    "div",
     [
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        "v-card-text",
         [
           _c(
-            "v-flex",
-            { attrs: { xs6: "" } },
+            "v-container",
+            { attrs: { "grid-list-md": "" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Pickup location", required: "" }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  label: "Pickup date and time",
-                  type: "date-time",
-                  required: ""
-                }
-              })
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: "Pickup location", required: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Pickup date and time",
+                          type: "date-time",
+                          required: ""
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Return location",
+                          required: "",
+                          min: "1"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Return date and time",
+                          type: "date-time",
+                          required: "",
+                          min: "1"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
-          ),
-          _vm._v(" "),
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card-actions",
+        [
           _c(
-            "v-flex",
-            { attrs: { xs6: "" } },
+            "v-btn",
+            { attrs: { flat: "", color: "primary" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Return location", required: "", min: "1" }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  label: "Return date and time",
-                  type: "date-time",
-                  required: "",
-                  min: "1"
-                }
-              })
+              _c("v-icon", [_vm._v("search")]),
+              _vm._v("\n            Search car rentals\n        ")
             ],
             1
           )
@@ -14959,20 +15135,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-card-text", [_c(_vm.form, { tag: "component" })], 1),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c(
-                        "v-btn",
-                        { attrs: { flat: "", color: "primary" } },
-                        [_c("v-icon", [_vm._v("search")]), _vm._v("Search")],
-                        1
-                      )
-                    ],
-                    1
-                  )
+                  _c(_vm.form, { tag: "component" })
                 ],
                 1
               )
@@ -15044,9 +15207,7 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _c("Destination", {
-                attrs: { destination: _vm.topDestination, layout: _vm.layout }
-              })
+              _c("Destination", { attrs: { destination: _vm.topDestination } })
             ],
             1
           )
@@ -15095,11 +15256,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-tab-item",
-                    [
-                      _c("Activity", {
-                        attrs: { activity: _vm.activity, layout: _vm.layout }
-                      })
-                    ],
+                    [_c("Activity", { attrs: { activity: _vm.activity } })],
                     1
                   )
                 ],
@@ -16587,6 +16744,132 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-98f3c19c", esExports)
   }
 }
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            airports: [],
+            loading: false,
+            departure: 0,
+            departureSearch: null,
+            destination: 0,
+            destinationSearch: null
+        };
+    },
+
+
+    methods: {
+        getAirports: function getAirports(value) {
+            var _this = this;
+
+            console.log(value);
+            this.loading = true;
+            fetch("/api/airports/" + value + "/search").then(function (response) {
+                return response.json();
+            }).then(function (response) {
+                _this.airports = Object.values(response);
+            });
+            this.loading = false;
+        }
+    },
+
+    watch: {
+        departureSearch: function departureSearch(value) {
+            if (value && value.length > 2) {
+                this.getAirports(value);
+            }
+        },
+        destinationSearch: function destinationSearch(value) {
+            if (value && value.length > 2) {
+                this.getAirports(value);
+            }
+        }
+    }
+};
 
 /***/ })
 /******/ ]);

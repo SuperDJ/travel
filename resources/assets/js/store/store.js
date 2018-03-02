@@ -9,7 +9,9 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		continents: {}
+		continents: {},
+		airports: {},
+		airportsSearch: {},
 	},
 	getters,
 	mutations,

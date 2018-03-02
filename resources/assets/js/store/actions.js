@@ -13,13 +13,33 @@ export default {
 		}
 	},
 
-	getContinents( context ) {
+	continentsGet( context ) {
 		fetch('/api/continents')
 			.then(response => {
 				return response.json()
 			})
 			.then(response => {
-				context.commit('setContinents', response)
+				context.commit('continentsSet', response)
+			});
+	},
+
+	airportsGet( context ) {
+		fetch('/api/airports')
+			.then(response => {
+				return response.json()
+			})
+			.then(response => {
+				context.commit('airportsSet', response)
+			});
+	},
+
+	airportsSearch( context, value ) {
+		fetch(`/api/airports/${value}/search`)
+			.then(response => {
+				return response.json();
+			})
+			.then(response => {
+				context.commit('airportsSearchSet', response)
 			});
 	}
 }

@@ -75,6 +75,7 @@ Route::delete('/cities/{city}', 'CityController@destroy');
 Route::get('/airports', 'AirportController@index');
 Route::get('/airports/db', 'AirportController@fillDB');
 Route::post('/airports', 'AirportController@store');
+Route::get('/airports/{search}/search', 'AirportController@search');
 Route::get('/airports/{airport}', 'AirportController@show');
 Route::get('/airports/{airport}/edit', 'AirportController@edit');
 Route::put('/airports/{airport}', 'AirportController@update');

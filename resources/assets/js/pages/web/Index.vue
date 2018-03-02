@@ -18,13 +18,7 @@
                         </v-tab>
                     </v-tabs>
 
-                    <v-card-text>
-                        <component :is="form"/>
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-btn flat color="primary"><v-icon>search</v-icon>Search</v-btn>
-                    </v-card-actions>
+                    <component :is="form"/>
                 </v-card>
             </v-layout>
         </v-parallax>
@@ -46,7 +40,7 @@
                             <Destination :destination="topDestination"/>
                         </v-tab-item>
                     </v-tabs>
-                    <Destination :destination="topDestination" :layout="layout"/>
+                    <Destination :destination="topDestination"/>
                 </v-flex>
         </v-layout>
 
@@ -67,7 +61,7 @@
                     <v-tab>Autumn</v-tab>
 
                     <v-tab-item>
-                        <Activity :activity="activity" :layout="layout"/>
+                        <Activity :activity="activity"/>
                     </v-tab-item>
                 </v-tabs>
                 <Activity :activity="activity"/>
@@ -101,12 +95,13 @@
                 image:
                     'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
                 topDestination: 1,
+                activity: 1,
             }
         },
 
         computed: {
     	    continents() {
-    	    	return this.$store.getters.getContinents;
+    	    	return this.$store.getters.continentsGet;
             }
         },
 
@@ -120,7 +115,7 @@
 
         methods: {
     		getContinents() {
-				this.$store.dispatch('getContinents');
+				this.$store.dispatch('continentsGet');
 			},
 
             changeForm( type ) {

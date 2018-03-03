@@ -21,6 +21,7 @@ export default new Router({
 		},
 		{
 			path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants',
+			props: true,
 			name: 'FlightsSearch',
 			component: Flights
 		},

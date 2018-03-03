@@ -7638,6 +7638,10 @@ var _activity2 = _interopRequireDefault(_activity);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
+    metaInfo: {
+        title: 'Home'
+    },
+
     data: function data() {
         return {
             form: 'AccommodationForm',
@@ -7790,7 +7794,7 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+            value: true
 });
 //
 //
@@ -7859,86 +7863,170 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
+
+var cabinClasses = [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }];
 
 exports.default = {
-    data: function data() {
-        return {
-            airports: [],
-            loading: false,
-            departure: 0,
-            departureDate: '',
-            departureSearch: null,
-            destination: 0,
-            destinationDate: '',
-            destinationSearch: null,
-            adults: 0,
-            children: 0,
-            infants: 0,
-            cabinClass: ''
-        };
-    },
+            data: function data() {
+                        return {
+                                    airports: [],
+                                    errors: {},
+                                    loading: false,
+                                    departureSearch: null,
+                                    destinationSearch: null,
+                                    cabinClasses: cabinClasses
+                        };
+            },
 
 
-    methods: {
-        getAirports: function getAirports(value) {
-            var _this = this;
+            props: {
+                        departure: {
+                                    type: Number,
+                                    default: 0
+                        },
+                        departureDate: {
+                                    type: String,
+                                    default: '',
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            return (/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value)
+                                                            );
+                                                }
 
-            this.loading = true;
-            fetch('/api/airports/' + value + '/search').then(function (response) {
-                return response.json();
-            }).then(function (response) {
-                _this.airports = Object.values(response);
-            });
-            this.loading = false;
-        },
-        submit: function submit() {
-            var data = {
-                departure: this.departure,
-                departureDate: this.departureDate,
-                destination: this.destination,
-                destinationDate: this.destinationDate,
-                adults: this.adults,
-                children: this.children,
-                infants: this.infants
-            };
+                                                return true;
+                                    }
+                        },
+                        destination: {
+                                    type: Number,
+                                    default: 0
+                        },
+                        destinationDate: {
+                                    type: String,
+                                    default: '',
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            return (/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value)
+                                                            );
+                                                }
 
-            this.$router.push({ name: 'FlightsSearch', params: data });
-        },
-        setCurrentDate: function setCurrentDate() {
-            var date = new Date(),
-                dd = date.getDate(),
-                mm = date.getMonth() + 1,
-                yy = date.getFullYear();
+                                                return true;
+                                    }
+                        },
+                        adults: {
+                                    type: Number,
+                                    default: 0,
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            return value >= 1;
+                                                }
 
-            if (dd < 10) {
-                dd = '0' + dd;
+                                                return true;
+                                    }
+                        },
+                        children: {
+                                    type: Number,
+                                    default: 0,
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            return function (value) {
+                                                                        return 0 && value <= 8;
+                                                            };
+                                                }
+
+                                                return true;
+                                    }
+                        },
+                        infants: {
+                                    type: Number,
+                                    default: 0,
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            return function (value) {
+                                                                        return 0 && value <= 8;
+                                                            };
+                                                }
+
+                                                return true;
+                                    }
+                        },
+                        cabinClass: {
+                                    type: String,
+                                    default: '',
+                                    validator: function validator(value) {
+                                                if (value.length > 0) {
+                                                            var j = 0;
+                                                            for (var i = 0; i < cabinClasses.length; i++) {
+                                                                        var cClass = cabinClasses[i];
+
+                                                                        if (Object.values(cClass).indexOf(value) > -1) {
+                                                                                    j++;
+                                                                        }
+                                                            }
+
+                                                            return j > 0;
+                                                }
+
+                                                return true;
+                                    }
+                        }
+            },
+
+            methods: {
+                        getAirports: function getAirports(value) {
+                                    var _this = this;
+
+                                    this.loading = true;
+                                    fetch('/api/airports/' + value + '/search').then(function (response) {
+                                                return response.json();
+                                    }).then(function (response) {
+                                                _this.airports = Object.values(response);
+                                    });
+                                    this.loading = false;
+                        },
+                        submit: function submit() {
+                                    var data = {
+                                                departure: this.departure,
+                                                departureDate: this.departureDate,
+                                                destination: this.destination,
+                                                destinationDate: this.destinationDate,
+                                                adults: this.adults,
+                                                children: this.children,
+                                                infants: this.infants,
+                                                cabinClass: this.cabinClass
+                                    };
+
+                                    this.$router.push({ name: 'FlightsSearch', params: data });
+                        },
+                        setCurrentDate: function setCurrentDate() {
+                                    var date = new Date(),
+                                        dd = date.getDate(),
+                                        mm = date.getMonth() + 1,
+                                        yy = date.getFullYear();
+
+                                    if (dd < 10) {
+                                                dd = '0' + dd;
+                                    }
+
+                                    if (mm < 10) {
+                                                mm = '0' + mm;
+                                    }
+
+                                    return yy + '-' + mm + '-' + dd;
+                        }
+            },
+
+            watch: {
+                        departureSearch: function departureSearch(value) {
+                                    if (value && value.length > 2) {
+                                                this.getAirports(value);
+                                    }
+                        },
+                        destinationSearch: function destinationSearch(value) {
+                                    if (value && value.length > 2) {
+                                                this.getAirports(value);
+                                    }
+                        }
             }
-
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-
-            return yy + '-' + mm + '-' + dd;
-        }
-    },
-
-    watch: {
-        departureSearch: function departureSearch(value) {
-            if (value && value.length > 2) {
-                this.getAirports(value);
-            }
-        },
-        destinationSearch: function destinationSearch(value) {
-            if (value && value.length > 2) {
-                this.getAirports(value);
-            }
-        }
-    }
 };
 
 /***/ }),
@@ -8312,11 +8400,45 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+exports.default = {
+  metaInfo: {
+    title: 'Flights'
+  },
+
+  components: {
+    FlightsForm: function FlightsForm() {
+      return Promise.resolve().then(function () {
+        return __webpack_require__(23);
+      });
+    }
+  },
+
+  props: ['departure', 'departureDate', 'destination', 'destinationDate', 'adults', 'children', 'infants', 'cabinClass']
+};
 
 /***/ }),
 /* 9 */
@@ -8413,10 +8535,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    metaInfo: {
-        title: 'Home'
-    },
-
     data: function data() {
         return {
             drawer: false,
@@ -10774,6 +10892,7 @@ exports.default = new _vueRouter2.default({
 		component: Flights
 	}, {
 		path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants',
+		props: true,
 		name: 'FlightsSearch',
 		component: Flights
 	}]
@@ -13548,12 +13667,7 @@ var render = function() {
                       [
                         _c("v-select", {
                           attrs: {
-                            items: [
-                              { text: "Economy", value: "economy" },
-                              { text: "Economy plus", value: "premiumeconomy" },
-                              { text: "Business", value: "business" },
-                              { text: "First", value: "first" }
-                            ],
+                            items: _vm.cabinClasses,
                             label: "Cabin class",
                             "single-line": "",
                             bottom: ""
@@ -15672,7 +15786,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-parallax",
+        {
+          attrs: {
+            src:
+              "https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb",
+            height: "700"
+          }
+        },
+        [
+          _c(
+            "v-layout",
+            { attrs: { column: "", "align-center": "", "justify-center": "" } },
+            [
+              _c("FlightsForm", {
+                attrs: {
+                  departure: _vm.departure,
+                  departureDate: _vm.departureDate,
+                  destination: _vm.destination,
+                  destinationDate: _vm.destinationDate,
+                  adults: _vm.adults,
+                  children: _vm.children,
+                  infants: _vm.infants
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

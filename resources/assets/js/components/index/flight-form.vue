@@ -44,12 +44,7 @@
 
                         <v-flex xs3>
                             <v-select
-                                :items="[
-                                    {text: 'Economy', value: 'economy'},
-                                    {text: 'Economy plus', value: 'premiumeconomy'},
-                                    {text: 'Business', value: 'business'},
-                                    {text: 'First', value: 'first'}
-                                ]"
+                                :items="cabinClasses"
                                 label="Cabin class"
                                 single-line
                                 bottom
@@ -71,21 +66,108 @@
 </template>
 
 <script>
+	const cabinClasses = [
+		{text: 'Economy', value: 'economy'},
+		{text: 'Economy plus', value: 'premiumeconomy'},
+		{text: 'Business', value: 'business'},
+		{text: 'First', value: 'first'}
+	];
+
     export default {
     	data() {
     	    return {
     	    	airports: [],
+                errors: {},
     	    	loading: false,
-                departure: 0,
-                departureDate: '',
                 departureSearch: null,
-                destination: 0,
-				destinationDate: '',
                 destinationSearch: null,
-                adults: 0,
-                children: 0,
-                infants: 0,
-                cabinClass: '',
+                cabinClasses
+            }
+        },
+
+        props: {
+    	    departure: {
+    	    	type: Number,
+                default: 0
+            },
+            departureDate: {
+    	    	type: String,
+                default: '',
+                validator: ( value ) => {
+                	if( value.length > 0 ) {
+						return /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test( value );
+					}
+
+					return true;
+                }
+            },
+            destination: {
+    	    	type: Number,
+                default: 0
+            },
+            destinationDate: {
+    	    	type: String,
+                default: '',
+				validator: ( value ) => {
+                	if( value.length > 0 ) {
+						return /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test( value );
+					}
+
+					return true;
+				}
+            },
+            adults: {
+    	    	type: Number,
+                default: 0,
+                validator: ( value ) => {
+                	if( value.length > 0 ) {
+						return value >= 1
+					}
+
+					return true;
+                }
+            },
+            children: {
+    	    	type: Number,
+                default: 0,
+                validator: ( value ) => {
+                	if( value.length > 0 ) {
+						return value => 0 && value <= 8;
+					}
+
+					return true;
+                }
+            },
+            infants: {
+    	        type: Number,
+                default: 0,
+				validator: ( value ) => {
+                	if( value.length > 0 ) {
+						return value => 0 && value <= 8;
+					}
+
+					return true;
+				}
+            },
+            cabinClass: {
+    	    	type: String,
+                default: '',
+                validator: ( value ) => {
+                	if( value.length > 0 ) {
+						let j = 0;
+						for( let i = 0; i < cabinClasses.length; i++ ) {
+							let cClass = cabinClasses[i];
+
+							if( Object.values( cClass ).indexOf( value ) > -1 ) {
+								j++;
+							}
+						}
+
+						return j > 0;
+					}
+
+					return true;
+                }
             }
         },
 
@@ -107,6 +189,7 @@
                     adults: this.adults,
                     children: this.children,
                     infants: this.infants,
+                    cabinClass: this.cabinClass,
                 };
 
     			this.$router.push({name: 'FlightsSearch', params: data});

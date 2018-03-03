@@ -98,6 +98,10 @@
     import Activity from '@/components/index/activity';
 
     export default {
+		metaInfo: {
+			title: 'Home'
+		},
+
     	data() {
     	    return {
                 form: 'AccommodationForm',

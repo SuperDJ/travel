@@ -91,19 +91,29 @@ class AirportController extends Controller
 	}
 
 	public function search( $search ) {
-		$search = '%'.$search.'%';
-	 	$found = Airport::where('name', 'like', $search)
-			->orWhere('iata', 'like', $search)
-			->orWhere('icao', 'like', $search)
-			->orWhereHas('city', function( $query ) use( $search ) {
-				$query->where('name', 'like', $search);
-			})
-			->with(['city' => function( $query ) use( $search ) {
-				$query->where('name', 'like', $search)
-				->with('country');
+		if( ctype_digit($search) ) {
+			$found = Airport::where('id', (int)$search)
+			->with(['city', function( $query ) {
+				$query->with(['country']);
 			}])
-			->orderBy('name', 'asc')
+			->orderBy( 'name', 'asc' )
 			->get();
+		} else {
+			$search = '%'.$search.'%';
+			$found = Airport::where( 'name', 'like', $search )
+				->orWhere( 'iata', 'like', $search )
+				->orWhere( 'icao', 'like', $search )
+				->orWhereHas( 'city', function( $query ) use ( $search ) {
+					$query->where( 'name', 'like', $search );
+				} )
+				->with( [
+					'city' => function( $query ) use ( $search ) {
+						$query->with( 'country' );
+					}
+				] )
+				->orderBy( 'name', 'asc' )
+				->get();
+		}
 
 	 	return response()->json($found, 200);
 	}

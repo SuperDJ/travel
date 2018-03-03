@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Index from '@/pages/web/Index';
+const Index = () => import('@/pages/web/Index');
+const Flights = () => import('@/pages/web/Flights');
 
 Vue.use(Router);
 
@@ -12,6 +13,16 @@ export default new Router({
 			path: '/',
 			name: 'Index',
 			component: Index
-		}
+		},
+		{
+			path: '/flights',
+			name: 'Flights',
+			component: Flights
+		},
+		{
+			path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants',
+			name: 'FlightsSearch',
+			component: Flights
+		},
 	]
 });

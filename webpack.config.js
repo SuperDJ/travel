@@ -1,5 +1,6 @@
 const path = require('path'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	CleanWebpackPlugin = require('clean-webpack-plugin'),
 	GoogleFonts = require('google-fonts-webpack-plugin');
 
 module.exports = env => {
@@ -74,6 +75,7 @@ module.exports = env => {
 		},
 		plugins: [
 			new ExtractTextPlugin( 'public/css/[name].css' ),
+			new CleanWebpackPlugin(['./public/js', './public/fonts', './public/css']),
 			new GoogleFonts({
 				fonts: [
 					{

@@ -1,7 +1,7 @@
 <template>
     <v-card hover>
         <v-card-text>
-            <form @keyup.enter="submit" @submit.prevent="handleSubmit">
+            <form @keyup.enter="submit" @submit.prevent="submit">
                 <v-container grid-list-md>
                     <v-layout row wrap>
                         <v-flex xs3>
@@ -16,7 +16,7 @@
                                 :search-input.sync="departureSearch"
                                 v-model.number="departure"
                             />
-                            <v-text-field label="Departure time" type="date" v-model="departureDate" required />
+                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="setCurrentDate()" required />
                         </v-flex>
 
                         <v-flex xs3>
@@ -31,7 +31,7 @@
                                 item-value="id"
                                 v-model.number="destination"
                             />
-                            <v-text-field label="Return date" type="date" v-model="destinationDate" />
+                            <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
                         </v-flex>
 
                         <v-flex xs3>
@@ -62,7 +62,7 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn flat color="primary" @click.once="submit">
+            <v-btn flat color="primary" @click="submit">
                 <v-icon>search</v-icon>
                 Search flights
             </v-btn>
@@ -79,19 +79,18 @@
                 departure: 0,
                 departureDate: '',
                 departureSearch: null,
-                destinationDate: '',
                 destination: 0,
+				destinationDate: '',
                 destinationSearch: null,
                 adults: 0,
                 children: 0,
                 infants: 0,
-                cabinClass: ''
+                cabinClass: '',
             }
         },
 
         methods: {
     		getAirports( value ) {
-    			console.log(value);
     			this.loading = true;
     			fetch(`/api/airports/${value}/search`)
                     .then(response => {return response.json()})
@@ -99,8 +98,7 @@
     			this.loading = false;
             } ,
 
-            handleSubmit(e) {
-    			console.log(e);
+            submit() {
     			let data = {
     				departure: this.departure,
                     departureDate: this.departureDate,
@@ -111,7 +109,24 @@
                     infants: this.infants,
                 };
 
-                console.log(data);
+    			this.$router.push({name: 'FlightsSearch', params: data});
+            },
+
+            setCurrentDate() {
+    		    let date = new Date(),
+                    dd = date.getDate(),
+                    mm = date.getMonth() + 1,
+                    yy = date.getFullYear();
+
+    		    if( dd < 10 ) {
+    		    	dd = `0${dd}`;
+                }
+
+                if( mm < 10 ) {
+    		    	mm = `0${mm}`;
+                }
+
+                return `${yy}-${mm}-${dd}`;
             }
         },
 

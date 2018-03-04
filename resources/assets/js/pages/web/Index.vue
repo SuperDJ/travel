@@ -113,8 +113,8 @@
 
         computed: {
     	    continents() {
-    	    	return this.$store.getters.continentsGet;
-            }
+    	    	return this.$store.getters.indexContinent;
+            },
         },
 
         components: {
@@ -127,7 +127,7 @@
 
         methods: {
     		getContinents() {
-				this.$store.dispatch('continentsGet');
+				this.$store.dispatch('indexContinent');
 			},
 
             changeForm( type ) {

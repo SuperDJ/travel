@@ -7,9 +7,10 @@
                     :departureDate="departureDate"
                     :destination="destination"
                     :destinationDate="destinationDate"
-                    :adults="adults"
-                    :children="children"
-                    :infants="infants"
+                    :adults="parseInt(adults)"
+                    :children="parseInt(children)"
+                    :infants="parseInt(infants)"
+                    :cabinClass="cabinClass"
                 />
             </v-layout>
         </v-parallax>
@@ -26,14 +27,22 @@
         	FlightsForm: () => import('@/components/index/flight-form'),
         },
 
-        props:
-            ['departure',
+        props: [
+        	'departure',
             'departureDate',
             'destination',
             'destinationDate',
              'adults',
             'children',
             'infants',
-            'cabinClass']
+            'cabinClass'
+        ],
+
+        methods: {
+			searchFlights() {
+
+            }
+        }
+
     }
 </script>

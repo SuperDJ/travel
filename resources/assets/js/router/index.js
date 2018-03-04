@@ -20,7 +20,7 @@ export default new Router({
 			component: Flights
 		},
 		{
-			path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants',
+			path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
 			props: true,
 			name: 'FlightsSearch',
 			component: Flights

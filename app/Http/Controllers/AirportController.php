@@ -93,8 +93,8 @@ class AirportController extends Controller
 	public function search( $search ) {
 		if( ctype_digit($search) ) {
 			$found = Airport::where('id', (int)$search)
-			->with(['city', function( $query ) {
-				$query->with(['country']);
+			->with(['city' => function( $query ) {
+				$query->with('country');
 			}])
 			->orderBy( 'name', 'asc' )
 			->get();

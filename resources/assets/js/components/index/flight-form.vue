@@ -11,12 +11,29 @@
                                 autocomplete
                                 :items="airports"
                                 item-text="name"
-                                item-value="id"
+                                item-value="iata"
+                                no-data="No results found"
                                 cache-items
                                 :search-input.sync="departureSearch"
-                                v-model.number="departure"
-                            />
-                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="setCurrentDate()" required />
+                                v-model.number="mDeparture"
+                            >
+                                <template slot="selected" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                    </v-list-tile-content>
+                                </template>
+
+                                <template slot="item" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </template>
+                            </v-select>
+                            <v-text-field label="Departure date" type="date" v-model="mDepartureDate" :min="setCurrentDate()" required />
                         </v-flex>
 
                         <v-flex xs3>
@@ -26,20 +43,29 @@
                                 autocomplete
                                 :items="airports"
                                 item-text="name"
+                                item-value="iata"
+                                no-data="No results found"
                                 cache-items
                                 :search-input.sync="destinationSearch"
-                                item-value="id"
-                                v-model.number="destination"
-                            />
-                            <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
+                                v-model.number="mDestination"
+                            >
+                                <template slot="item" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </template>
+                            </v-select>
+                            <v-text-field label="Return date" type="date" v-model="mDestinationDate" :min="mDepartureDate" />
                         </v-flex>
 
                         <v-flex xs3>
-                            <v-text-field label="Number of adults" type="number" min="1" required v-model.number="adults" />
-                            <v-text-field label="Number of children <em>(1 - 16 years)</em>" type="number" min="0"
-                                          max="8" v-model.number="children" />
-                            <v-text-field label="Number of infants <em>(under 12 months)</em>" type="number" min="0"
-                                          max="8" v-model.number="infants"/>
+                            <v-text-field label="Number of adults" type="number" min="1" required v-model.number="mAdults" />
+                            <v-text-field label="Number of children <em>(1 - 16 years)</em>" type="number" min="0" max="8" v-model.number="mChildren" />
+                            <v-text-field label="Number of infants <em>(under 12 months)</em>" type="number" min="0" max="8" v-model.number="mInfants"/>
                         </v-flex>
 
                         <v-flex xs3>
@@ -48,7 +74,7 @@
                                 label="Cabin class"
                                 single-line
                                 bottom
-                                v-model="cabinClass"
+                                v-model="mCabinClass"
                             />
                         </v-flex>
                     </v-layout>
@@ -66,29 +92,28 @@
 </template>
 
 <script>
-	const cabinClasses = [
-		{text: 'Economy', value: 'economy'},
-		{text: 'Economy plus', value: 'premiumeconomy'},
-		{text: 'Business', value: 'business'},
-		{text: 'First', value: 'first'}
-	];
-
     export default {
     	data() {
     	    return {
-    	    	airports: [],
                 errors: {},
     	    	loading: false,
                 departureSearch: null,
                 destinationSearch: null,
-                cabinClasses
+                mDeparture: this.departure,
+                mDepartureDate: this.departureDate,
+                mDestination: this.destination,
+                mDestinationDate: this.destinationDate,
+                mAdults: this.adults,
+                mChildren: this.children,
+                mInfants: this.infants,
+                mCabinClass: this.cabinClass
             }
         },
 
         props: {
     	    departure: {
-    	    	type: Number,
-                default: 0
+    	    	type: String,
+                default: ''
             },
             departureDate: {
     	    	type: String,
@@ -102,8 +127,8 @@
                 }
             },
             destination: {
-    	    	type: Number,
-                default: 0
+    	    	type: String,
+                default: ''
             },
             destinationDate: {
     	    	type: String,
@@ -151,45 +176,37 @@
             },
             cabinClass: {
     	    	type: String,
-                default: '',
-                validator: ( value ) => {
-                	if( value.length > 0 ) {
-						let j = 0;
-						for( let i = 0; i < cabinClasses.length; i++ ) {
-							let cClass = cabinClasses[i];
-
-							if( Object.values( cClass ).indexOf( value ) > -1 ) {
-								j++;
-							}
-						}
-
-						return j > 0;
-					}
-
-					return true;
-                }
+                default: ''
             }
         },
 
+        computed: {
+    		airports() {
+    	        return Object.values(this.$store.getters.searchAirport);
+            },
+
+			cabinClasses() {
+				return this.$store.getters.cabinClasses;
+			}
+        },
+
         methods: {
-    		getAirports( value ) {
+    		searchAirports( value ) {
     			this.loading = true;
-    			fetch(`/api/airports/${value}/search`)
-                    .then(response => {return response.json()})
-                    .then(response => {this.airports = Object.values(response)});
+    			this.$store.dispatch('searchAirport', value);
     			this.loading = false;
-            } ,
+            },
 
             submit() {
     			let data = {
-    				departure: this.departure,
-                    departureDate: this.departureDate,
-                    destination: this.destination,
-                    destinationDate: this.destinationDate,
-                    adults: this.adults,
-                    children: this.children,
-                    infants: this.infants,
-                    cabinClass: this.cabinClass,
+    				departure: this.mDeparture,
+                    departureDate: this.mDepartureDate,
+                    destination: this.mDestination,
+                    destinationDate: this.mDestinationDate,
+                    adults: this.mAdults,
+                    children: this.mChildren,
+                    infants: this.mInfants,
+                    cabinClass: this.mCabinClass,
                 };
 
     			this.$router.push({name: 'FlightsSearch', params: data});
@@ -210,21 +227,33 @@
                 }
 
                 return `${yy}-${mm}-${dd}`;
+            },
+
+            setSearchedAirports() {
+    			let searched = [this.mDeparture, this.mDestination];
+
+    			for( let i = 0; i < searched.length; i++ ) {
+    				this.$store.dispatch('searchAirport', searched[i]);
+                }
             }
         },
 
         watch: {
 			departureSearch( value ) {
     			if( value && value.length > 2 ) {
-    			    this.getAirports( value )
+    			    this.searchAirports( value )
                 }
             },
 
             destinationSearch( value ) {
     			if( value && value.length > 2 ) {
-    			    this.getAirports( value )
+    			    this.searchAirports( value )
                 }
             }
+        },
+
+        created() {
+    		this.setSearchedAirports();
         }
     }
 </script>

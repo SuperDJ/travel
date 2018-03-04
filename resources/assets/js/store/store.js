@@ -5,15 +5,19 @@ import getters from './getters';
 import actions from './actions';
 import mutations from './mutations';
 
+import continent from './modules/continent';
+import airport from './modules/airport';
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-	state: {
-		continents: {},
-		airports: {},
-		airportsSearch: {},
-	},
+	state: {},
 	getters,
 	mutations,
-	actions
+	actions,
+
+	modules: {
+		continent,
+		airport,
+	}
 });

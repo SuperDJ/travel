@@ -81,3 +81,6 @@ Route::get('/airports/{airport}', 'AirportController@show');
 Route::get('/airports/{airport}/edit', 'AirportController@edit');
 Route::put('/airports/{airport}', 'AirportController@update');
 Route::delete('/airports/{airport}', 'AirportController@destroy');
+
+// Flights
+Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');

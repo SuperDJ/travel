@@ -230,10 +230,12 @@
             },
 
             setSearchedAirports() {
-    			let searched = [this.mDeparture, this.mDestination];
+    			if( this.mDeparture ) {
+					this.$store.dispatch('searchAirport', this.mDeparture);
+                }
 
-    			for( let i = 0; i < searched.length; i++ ) {
-    				this.$store.dispatch('searchAirport', searched[i]);
+                if( this.mDestination ) {
+					this.$store.dispatch('searchAirport', this.mDestination);
                 }
             }
         },

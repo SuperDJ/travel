@@ -15,8 +15,7 @@ export default {
 		{
 			fetch('/api/flights/browse-quotes', {
 				headers: {
-					'content-type': 'application/json',
-					'accept': 'application/json',
+					'content-type': 'application/json'
 				},
 				method: 'POST',
 				body: JSON.stringify(data)

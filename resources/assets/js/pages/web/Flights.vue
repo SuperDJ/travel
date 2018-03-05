@@ -51,21 +51,23 @@
         methods: {
 			searchFlight()
             {
-                let data = {
-                    departure: this.departure,
-                    departureDate: this.departureDate,
-                    destination: this.destination,
-                    destinationDate: this.destinationDate,
-                    adults: this.adults,
-                    children: this.children,
-                    infants: this.infants,
-                    cabinClass: this.cabinClass,
-                    country: 'NL',
-                    currency: 'EUR',
-                    language: 'NL'
-                }
+            	if(this.departure && this.destination && this.departureDate) {
+					let data = {
+						departure: this.departure,
+						departureDate: this.departureDate,
+						destination: this.destination,
+						destinationDate: this.destinationDate,
+						adults: this.adults,
+						children: this.children,
+						infants: this.infants,
+						cabinClass: this.cabinClass,
+						country: 'NL',
+						currency: 'EUR',
+						language: 'NL'
+					};
 
-                this.$store.dispatch( 'browseQuotes', data );
+					this.$store.dispatch( 'browseQuotes', data );
+				}
             }
         },
 

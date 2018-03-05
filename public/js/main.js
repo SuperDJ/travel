@@ -8506,6 +8506,10 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
 
 exports.default = {
     metaInfo: {
@@ -8520,12 +8524,39 @@ exports.default = {
         }
     },
 
+    computed: {
+        flights: function flights() {
+            return this.$store.getters.browseQuotes;
+        }
+    },
+
     props: ['departure', 'departureDate', 'destination', 'destinationDate', 'adults', 'children', 'infants', 'cabinClass'],
 
     methods: {
-        searchFlights: function searchFlights() {}
-    }
+        searchFlight: function searchFlight() {
+            var data = {
+                departure: this.departure,
+                departureDate: this.departureDate,
+                destination: this.destination,
+                destinationDate: this.destinationDate,
+                adults: this.adults,
+                children: this.children,
+                infants: this.infants,
+                cabinClass: this.cabinClass,
+                country: 'NL',
+                currency: 'EUR',
+                language: 'NL'
+            };
 
+            console.log(data);
+
+            this.$store.dispatch('browseQuotes', data);
+        }
+    },
+
+    created: function created() {
+        this.searchFlight();
+    }
 };
 
 /***/ }),
@@ -9872,6 +9903,10 @@ var _airport = __webpack_require__(22);
 
 var _airport2 = _interopRequireDefault(_airport);
 
+var _flight = __webpack_require__(47);
+
+var _flight2 = _interopRequireDefault(_flight);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vuex2.default);
@@ -9884,7 +9919,8 @@ var store = exports.store = new _vuex2.default.Store({
 
 	modules: {
 		continent: _continent2.default,
-		airport: _airport2.default
+		airport: _airport2.default,
+		flight: _flight2.default
 	}
 });
 
@@ -10978,6 +11014,8 @@ exports.default = {
 				return response.json();
 			}).then(function (response) {
 				context.commit('indexAirport', response);
+			}).catch(function (error) {
+				console.error(error);
 			});
 		},
 		searchAirport: function searchAirport(context, search) {
@@ -10985,6 +11023,8 @@ exports.default = {
 				return response.json();
 			}).then(function (response) {
 				context.commit('searchAirport', response);
+			}).catch(function (error) {
+				console.log(error);
 			});
 		}
 	},
@@ -16021,6 +16061,14 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        _vm._l(_vm.flights, function(flight) {
+          return _c("div", { key: _vm.i })
+        })
       )
     ],
     1
@@ -17463,6 +17511,60 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-98f3c19c", esExports)
   }
 }
+
+/***/ }),
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		results: {}
+	},
+
+	mutations: {
+		browseQuotes: function browseQuotes(state, flights) {
+			state.results = flights;
+		}
+	},
+
+	actions: {
+		browseQuotes: function browseQuotes(context, data) {
+			fetch('/api/flights/browse-quotes', {
+				headers: {
+					'content-type': 'application/json',
+					'accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				console.log(response);
+				context.commit('browseQuotes', response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	},
+
+	getters: {
+		browseQuotes: function browseQuotes(state) {
+			return state.results;
+		}
+	}
+};
 
 /***/ })
 /******/ ]);

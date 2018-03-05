@@ -107,7 +107,7 @@ class TimezoneController extends Controller
 				$id = $country->id;
 
 				$data[] = [
-					'countries_id' => $id,
+					'country_id' => $id,
 					'name'       => $value->zoneName,
 					'gmt_offset' => $value->gmtOffset,
 					'created_at' => date('Y-m-d H:i:s'),

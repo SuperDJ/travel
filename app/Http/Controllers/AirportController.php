@@ -119,57 +119,63 @@ class AirportController extends Controller
 	}
 
 	public function fillDB() {
-		set_time_limit(0);
-		/*
-		$data = [];
+		set_time_limit( 0 );
+		$airports = Airport::count();
 
-		$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env('SKYSCANNER_KEY') ) );
+ 		if( $aiports === 0 ) {
+			$data = [];
 
-		foreach( $response as $array ) {
-			foreach( $array as $continents ) {
-				foreach( $continents->Countries as $countries ) {
-					foreach( $countries->Cities as $cities ) {
-						foreach( $cities->Airports as $airports ) {
-							print_r($airports);
+			$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env('SKYSCANNER_KEY') ) );
 
-							$location = explode( ', ', $airports->Location );
-							$latitude = $location[1];
-							$longitude = $location[0];
+			foreach( $response as $array ) {
+				foreach( $array as $continents ) {
+					foreach( $continents->Countries as $countries ) {
+						foreach( $countries->Cities as $cities ) {
+							foreach( $cities->Airports as $airports ) {
+								$location = explode( ', ', $airports->Location );
+								$latitude = $location[1];
+								$longitude = $location[0];
 
-							$data[] = [
-								'name' => $airports->Name,
-								'cities_id' => City::where('iso', $airports->CityId)->value('id'),
-								'latitude' => $latitude,
-								'longitude' => $longitude,
-								'iata' => $airports->Id,
-								'created_at' => date( 'Y-m-d H:i:s' ),
-								'updated_at' => date( 'Y-m-d H:i:s' )
-							];
+								if( Airport::where( 'name', $airports->Name )->count() === 0 ) {
+									$data[] = [
+										'name'       => $airports->Name,
+										'city_id'    => City::where( 'iso', $airports->CityId )->value( 'id' ),
+										'latitude'   => $latitude,
+										'longitude'  => $longitude,
+										'iata'       => $airports->Id,
+										'created_at' => date( 'Y-m-d H:i:s' ),
+										'updated_at' => date( 'Y-m-d H:i:s' )
+									];
+								}
+							}
 						}
 					}
 				}
 			}
+
+			Airport::insert( $data );
 		}
 
-		Airport::insert($data);*/
 
-		$response = get_object_vars( json_decode( file_get_contents( 'https://raw.githubusercontent.com/mwgg/Airports/master/airports.json' ) ) );
+		if( $airports > 0 ) {
+			$response = get_object_vars( json_decode( file_get_contents( 'https://raw.githubusercontent.com/mwgg/Airports/master/airports.json' ) ) );
 
-		foreach( Airport::all() as $airport ) {
-			// Get all keys where airports are found based on iata
-			$key = array_search( $airport->iata, array_column( $response, 'iata', 'icao' ) );
+			foreach( Airport::all() as $airport ) {
+				// Get all keys where airports are found based on iata
+				$key = array_search( $airport->iata, array_column( $response, 'iata', 'icao' ) );
 
-			// If the key is not found get the key based on city name
-			if( empty( $key ) && !empty( $airport->city ) ) {
-				$key = array_search( mb_strtolower( $airport->city->name ), array_map( 'mb_strtolower', array_column( $response, 'city', 'icao' ) ) );
-			}
+				// If the key is not found get the key based on city name
+				if( empty( $key ) && !empty( $airport->city ) ) {
+					$key = array_search( mb_strtolower( $airport->city->name ), array_map( 'mb_strtolower', array_column( $response, 'city', 'icao' ) ) );
+				}
 
-			if( !empty( $key ) ) {
-				echo $key.'<br>';
-				$airport->update([
-					'icao' => $key,
-					'name' => $response[$key]->name
-				]);
+				if( !empty( $key ) ) {
+					echo $key.'<br>';
+					$airport->update( [
+						'icao' => $key,
+						'name' => $response[$key]->name
+					] );
+				}
 			}
 		}
 	}

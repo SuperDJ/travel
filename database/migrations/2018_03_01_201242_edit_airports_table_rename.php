@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditCitiesTable extends Migration
+class EditAirportsTableRename extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class EditCitiesTable extends Migration
      */
     public function up()
     {
-		Schema::table('cities', function (Blueprint $table) {
-			$table->renameColumn('countries_id', 'country_id');
+		Schema::table('airports', function (Blueprint $table) {
+			$table->renameColumn('cities_id', 'city_id');
 		});
     }
 
@@ -25,8 +25,8 @@ class EditCitiesTable extends Migration
      */
     public function down()
     {
-		Schema::table('cities', function (Blueprint $table) {
-			$table->renameColumn('country_id', 'countries_id');
+		Schema::table('airports', function (Blueprint $table) {
+			$table->renameColumn('city_id', 'cities_id');
 		});
     }
 }

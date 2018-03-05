@@ -11,31 +11,39 @@ export default {
 	},
 
 	mutations: {
-		indexAirport( state, airports ) {
+		indexAirport( state, airports )
+		{
 			state.all = airports;
 		},
 
-		searchAirport( state, airports ) {
+		searchAirport( state, airports )
+		{
 			state.search = airports;
 		},
 
-		cabinClass( state, cClass ) {
+		cabinClass( state, cClass )
+		{
 			state.cabinClasses.push(cClass);
 		}
 	},
 
 	actions: {
-		indexAirport( context ) {
+		indexAirport( context )
+		{
 			fetch('/api/airports')
 				.then(response => {
 					return response.json();
 				})
 				.then(response => {
 					context.commit('indexAirport', response);
+				})
+				.catch(error => {
+					console.error(error);
 				});
 		},
 
-		searchAirport( context, search ) {
+		searchAirport( context, search )
+		{
 			fetch(`/api/airports/${search}/search`)
 				.then(response => {
 					return response.json();
@@ -43,19 +51,25 @@ export default {
 				.then(response => {
 					context.commit('searchAirport', response);
 				})
+				.catch(error => {
+					console.log(error);
+				})
 		},
 	},
 
 	getters: {
-		indexAirport( state ) {
+		indexAirport( state )
+		{
 			return state.all;
 		},
 
-		searchAirport( state ) {
+		searchAirport( state )
+		{
 			return state.search;
 		},
 
-		cabinClasses ( state ) {
+		cabinClasses ( state )
+		{
 			return state.cabinClasses;
 		}
 	}

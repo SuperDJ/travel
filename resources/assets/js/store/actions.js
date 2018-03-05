@@ -1,5 +1,6 @@
 export default {
-	getRandomImage(  context, q ) {
+	getRandomImage(  context, q )
+	{
 		const key = '8061014-3041347b399a40caf453735b5';
 		const url = `https://pixabay.com/api/?key=${key}&q=${q.replace(/ /g, '+')}&image_type=photo&safesearch=true&orientation=horizontal&category=travel&per_page=200`;
 		fetch(url)

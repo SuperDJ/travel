@@ -99,13 +99,13 @@ class CityController extends Controller
 		$cities = json_decode( file_get_contents( 'https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json' ) );
 		$countries = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/countries.json' ) );
 
-		for( $i = $city; $i < count($cities); $i++ ) {
+		for( $i = $city; $i < count( $cities ); $i++ ) {
 			$value = $cities[$i];
 			$countryId = Country::where('iso', $value->country)->value('id');
 
 			$data[] = [
 				'name'        => $value->name,
-				'countries_id'   => $countryId,
+				'country_id'   => $countryId,
 				'latitude' => $value->lat,
 				'longitude' => $value->lng,
 				'capital' => $countries->{$value->country}->capital === $value->name ? 1 : 0,
@@ -115,7 +115,7 @@ class CityController extends Controller
 
 			City::create([
 				'name'        => $value->name,
-				'countries_id'   => $countryId,
+				'country_id'   => $countryId,
 				'latitude' => $value->lat,
 				'longitude' => $value->lng,
 				'capital' => $countries->{$value->country}->capital === $value->name ? 1 : 0,
@@ -147,10 +147,10 @@ class CityController extends Controller
 
 							$countryId = Country::where( 'iso', $countryId )->value( 'id' );
 
-							if( City::where([[ 'name', $cities->Name ],	[ 'countries_id', $countryId ] ] )->count() <= 1 ) {
+							if( City::where([[ 'name', $cities->Name ],	[ 'country_id', $countryId ] ] )->count() <= 1 ) {
 								$city = City::where( [
 									[ 'name', $cities->Name ],
-									[ 'countries_id', $countryId ]
+									[ 'country_id', $countryId ]
 								] )->first();
 
 								// Get cities location
@@ -164,7 +164,7 @@ class CityController extends Controller
 									print_r( $cities );
 									$data[] = [
 										'name'         => $cities->Name,
-										'countries_id' => $countryId,
+										'country_id' => $countryId,
 										'iso'          => $cities->Id,
 										'iata'         => $cities->IataCode,
 										'latitude'     => $latitude,
@@ -175,7 +175,7 @@ class CityController extends Controller
 
 									City::create( [
 										'name'         => $cities->Name,
-										'countries_id' => $countryId,
+										'country_id' => $countryId,
 										'iso'          => $cities->Id,
 										'iata'         => $cities->IataCode,
 										'latitude'     => $latitude,
@@ -196,7 +196,7 @@ class CityController extends Controller
 
 								$data = [
 									['name', $cities->Name],
-									['countries_id', $countryId],
+									['country_id', $countryId],
 									['latitude', 'like', $latitude.'%'],
 									['longitude', 'like', $longitude.'%']
 								];

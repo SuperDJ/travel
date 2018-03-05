@@ -14,6 +14,10 @@
                 />
             </v-layout>
         </v-parallax>
+
+        <v-layout row wrap>
+            <div v-for="flight in flights" :key="i"></div>
+        </v-layout>
     </v-container>
 </template>
 
@@ -27,22 +31,46 @@
         	FlightsForm: () => import('@/components/index/flight-form'),
         },
 
+        computed: {
+		    flights() {
+                return this.$store.getters.browseQuotes;
+            }
+        },
+
         props: [
         	'departure',
             'departureDate',
             'destination',
             'destinationDate',
-             'adults',
+            'adults',
             'children',
             'infants',
             'cabinClass'
         ],
 
         methods: {
-			searchFlights() {
+			searchFlight()
+            {
+                let data = {
+                    departure: this.departure,
+                    departureDate: this.departureDate,
+                    destination: this.destination,
+                    destinationDate: this.destinationDate,
+                    adults: this.adults,
+                    children: this.children,
+                    infants: this.infants,
+                    cabinClass: this.cabinClass,
+                    country: 'NL',
+                    currency: 'EUR',
+                    language: 'NL'
+                }
 
+                this.$store.dispatch( 'browseQuotes', data );
             }
-        }
+        },
 
+        created() {
+			this.searchFlight();
+        }
     }
 </script>

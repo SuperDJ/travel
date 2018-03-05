@@ -7,6 +7,7 @@ import mutations from './mutations';
 
 import continent from './modules/continent';
 import airport from './modules/airport';
+import flight from './modules/flight';
 
 Vue.use(Vuex);
 
@@ -19,5 +20,6 @@ export const store = new Vuex.Store({
 	modules: {
 		continent,
 		airport,
+		flight,
 	}
 });

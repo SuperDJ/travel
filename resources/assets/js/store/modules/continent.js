@@ -4,13 +4,15 @@ export default {
 	},
 
 	mutations: {
-		indexContinent( state, continents ) {
+		indexContinent( state, continents )
+		{
 			state.all = continents;
 		}
 	},
 
 	actions: {
-		indexContinent( context ) {
+		indexContinent( context )
+		{
 			fetch('/api/continents')
 				.then(response => {
 					return response.json()
@@ -22,7 +24,8 @@ export default {
 	},
 
 	getters: {
-		indexContinent( state ) {
+		indexContinent( state )
+		{
 			return state.all;
 		}
 	}

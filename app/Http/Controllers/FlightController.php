@@ -24,10 +24,15 @@ class FlightController extends Controller
 			'destinationDate' => 'date',
 		]);
 
-		$url = "{$this->_url}browsequotes/v1.0/{$request->input('country')}/{$request->input('currency')}/{$request->input('country')}/{$request->input('departure')}/{$request->input('destination')}/{$request->input('departureDate')}";
+		$url = $this->_url.'browsequotes/v1.0/'.$request->input('country').'/'.
+			$request->input('currency').'/'.
+			$request->input('country').'/'. // TODO change to language
+			$request->input('departure').'/'.
+			$request->input('destination').'/'.
+			$request->input('departureDate');
 
 		if( !empty( $request->input('destinationDate') ) ) {
-			$url = "{$url}/{$request->input('destinationDate')}";
+			$url = $url.'/'.$request->input('destinationDate');
 		}
 
 		$url = $url.'?apiKey='.env('SKYSCANNER_KEY');

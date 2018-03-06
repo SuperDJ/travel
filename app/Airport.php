@@ -11,7 +11,8 @@ class Airport extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	function city() {
+	function city()
+	{
     	return $this->belongsTo(City::class);
 	}
 }

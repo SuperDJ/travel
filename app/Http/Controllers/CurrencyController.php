@@ -12,7 +12,8 @@ class CurrencyController extends Controller
 	 * Display a listing of the resource.
 	 * @return \App\Currency[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index() {
+	public function index()
+	{
 		return Currency::all();
 	}
 
@@ -22,13 +23,15 @@ class CurrencyController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
-		$store = Currency::create($request->all());
+	public function store( Request $request )
+	{
+		$store = Currency::create( $request->all() );
 
-		if( $store ) {
-			return response('Currency created', 201);
+		if( $store )
+		{
+			return response( 'Currency created', 201 );
 		} else {
-			return response('Currency not created', 400);
+			return response( 'Currency not created', 400 );
 		}
 	}
 
@@ -39,8 +42,9 @@ class CurrencyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Currency $currency ) {
-		return response()->json($currency, 200);
+	public function edit( Currency $currency )
+	{
+		return response()->json( $currency, 200 );
 	}
 
 	/**
@@ -51,13 +55,15 @@ class CurrencyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Currency $currency ) {
-		$update = $currency->update($request->all());
+	public function update( Request $request, Currency $currency )
+	{
+		$update = $currency->update( $request->all() );
 
-		if( $update ) {
-			return response('Currency updated', 200);
+		if( $update )
+		{
+			return response( 'Currency updated', 200 );
 		} else {
-			return response('Currency not updated', 400);
+			return response( 'Currency not updated', 400 );
 		}
 	}
 
@@ -69,13 +75,15 @@ class CurrencyController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Currency $currency ) {
+	public function destroy( Currency $currency )
+	{
 		$destroy = $currency->delete();
 
-		if( $destroy ) {
-			return response('Currency deleted', 200);
+		if( $destroy )
+		{
+			return response( 'Currency deleted', 200 );
 		} else {
-			return response('Currency not delete', 400);
+			return response( 'Currency not delete', 400 );
 		}
 	}
 
@@ -86,25 +94,28 @@ class CurrencyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Currency $currency ) {
-		return response()->json($currency, 200);
+	public function show( Currency $currency )
+	{
+		return response()->json( $currency, 200 );
 	}
 
-	public function fillDB() {
+	public function fillDB()
+	{
 		$currencies = json_decode( file_get_contents( 'https://openexchangerates.org/api/currencies.json' ) );
 
 		$currenciesData = [];
-		foreach( $currencies as $key => $value ) {
+		foreach( $currencies as $key => $value )
+		{
 			$currenciesData[] = [
 				'name' => $value,
 				'iso' => $key,
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('Y-m-d H:i:s')
+				'created_at' => date( 'Y-m-d H:i:s' ),
+				'updated_at' => date( 'Y-m-d H:i:s' )
 			];
 		}
 
-		Currency::insert($currenciesData);
+		Currency::insert( $currenciesData );
 
-		return response()->json($currenciesData, 200);
+		return response()->json( $currenciesData, 200 );
 	}
 }

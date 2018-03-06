@@ -92,8 +92,10 @@
 </template>
 
 <script>
-    export default {
-    	data() {
+    export default
+    {
+    	data()
+        {
     	    return {
                 errors: {},
     	    	loading: false,
@@ -181,23 +183,27 @@
         },
 
         computed: {
-    		airports() {
+    		airports()
+            {
     	        return Object.values(this.$store.getters.searchAirport);
             },
 
-			cabinClasses() {
+			cabinClasses()
+            {
 				return this.$store.getters.cabinClasses;
 			}
         },
 
         methods: {
-    		searchAirports( value ) {
+    		searchAirports( value )
+            {
     			this.loading = true;
     			this.$store.dispatch('searchAirport', value);
     			this.loading = false;
             },
 
-            submit() {
+            submit()
+            {
     			let data = {
     				departure: this.mDeparture,
                     departureDate: this.mDepartureDate,
@@ -212,7 +218,8 @@
     			this.$router.push({name: 'FlightsSearch', params: data});
             },
 
-            setCurrentDate() {
+            setCurrentDate()
+            {
     		    let date = new Date(),
                     dd = date.getDate(),
                     mm = date.getMonth() + 1,
@@ -229,7 +236,8 @@
                 return `${yy}-${mm}-${dd}`;
             },
 
-            setSearchedAirports() {
+            setSearchedAirports()
+            {
     			if( this.mDeparture ) {
 					this.$store.dispatch('searchAirport', this.mDeparture);
                 }
@@ -241,20 +249,23 @@
         },
 
         watch: {
-			departureSearch( value ) {
+			departureSearch( value )
+            {
     			if( value && value.length > 2 ) {
     			    this.searchAirports( value )
                 }
             },
 
-            destinationSearch( value ) {
+            destinationSearch( value )
+            {
     			if( value && value.length > 2 ) {
     			    this.searchAirports( value )
                 }
             }
         },
 
-        created() {
+        created()
+        {
     		this.setSearchedAirports();
         }
     }

@@ -11,7 +11,8 @@ class ContinentController extends Controller
 	 * Display a listing of the resource.
 	 * @return \App\Continent[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index() {
+    public function index()
+	{
     	return Continent::all();
 	}
 
@@ -21,13 +22,15 @@ class ContinentController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
-    	$store = Continent::create($request->all());
+	public function store( Request $request )
+	{
+    	$store = Continent::create( $request->all() );
 
-    	if( $store ) {
-    		return response('Continent created', 201);
+    	if( $store )
+    	{
+    		return response( 'Continent created', 201 );
 		} else {
-    		return response('Continent not created', 400);
+    		return response( 'Continent not created', 400 );
 		}
 	}
 
@@ -38,8 +41,9 @@ class ContinentController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Continent $continent ) {
-    	return response()->json($continent, 200);
+	public function edit( Continent $continent )
+	{
+    	return response()->json( $continent, 200 );
 	}
 
 	/**
@@ -50,13 +54,15 @@ class ContinentController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Continent $continent ) {
-    	$update = $continent->update($request->all());
+	public function update( Request $request, Continent $continent )
+	{
+    	$update = $continent->update( $request->all() );
 
-    	if( $update ) {
-    		return response('Continent updated', 200);
+    	if( $update )
+    	{
+    		return response( 'Continent updated', 200 );
 		} else {
-    		return response('Continent not updated', 400);
+    		return response( 'Continent not updated', 400 );
 		}
 	}
 
@@ -68,13 +74,15 @@ class ContinentController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Continent $continent ) {
+	public function destroy( Continent $continent )
+	{
     	$destroy = $continent->delete();
 
-    	if( $destroy ) {
-    		return response('Continent deleted', 200);
+    	if( $destroy )
+    	{
+    		return response( 'Continent deleted', 200 );
 		} else {
-    		return response('Continent not delete', 400);
+    		return response( 'Continent not delete', 400 );
 		}
 	}
 
@@ -85,16 +93,19 @@ class ContinentController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Continent $continent ) {
-    	return response()->json($continent, 200);
+	public function show( Continent $continent )
+	{
+    	return response()->json( $continent, 200 );
 	}
 
-	public function fillDB() {
+	public function fillDB()
+	{
     	$response = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/continents.json' ) );
 
     	$data = [];
 
-    	foreach( $response as $key => $value ) {
+    	foreach( $response as $key => $value )
+    	{
     		$data[] = [
     			'name' => $value,
 				'iso' => $key,
@@ -103,20 +114,22 @@ class ContinentController extends Controller
 			];
 		}
 
-		Continent::insert($data);
+		Continent::insert( $data );
 
-		return response()->json($data, 200);
+		return response()->json( $data, 200 );
 	}
 
-	public function topDestinations( Continent $continent ) {
+	public function topDestinations( Continent $continent )
+	{
 		$cities = $continent->countries()
 			->inRandomOrder()
 			->take(7)
-			->with(['cities' => function( $query ) {
+			->with( ['cities' => function( $query )
+			{
 				$query->where('capital', 1);
-			}])
+			}] )
 			->get();
 
-		return response()->json($cities, 200);
+		return response()->json( $cities, 200 );
 	}
 }

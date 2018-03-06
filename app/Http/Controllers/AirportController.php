@@ -12,7 +12,8 @@ class AirportController extends Controller
 	 * Display a listing of the resource.
 	 * @return \App\Airport[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index() {
+	public function index()
+	{
 		return Airport::all();
 	}
 
@@ -22,13 +23,15 @@ class AirportController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
-		$store = Airport::create($request->all());
+	public function store( Request $request )
+	{
+		$store = Airport::create( $request->all() );
 
-		if( $store ) {
-			return response('Airport created', 201);
+		if( $store )
+		{
+			return response( 'Airport created', 201 );
 		} else {
-			return response('Airport not created', 400);
+			return response( 'Airport not created', 400 );
 		}
 	}
 
@@ -39,8 +42,9 @@ class AirportController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Airport $airport ) {
-		return response()->json($airport, 200);
+	public function edit( Airport $airport )
+	{
+		return response()->json( $airport, 200 );
 	}
 
 	/**
@@ -51,13 +55,15 @@ class AirportController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Airport $airport ) {
-		$update = $airport->update($request->all());
+	public function update( Request $request, Airport $airport )
+	{
+		$update = $airport->update( $request->all() );
 
-		if( $update ) {
-			return response('Airport updated', 200);
+		if( $update )
+		{
+			return response( 'Airport updated', 200 );
 		} else {
-			return response('Airport not updated', 400);
+			return response( 'Airport not updated', 400 );
 		}
 	}
 
@@ -69,13 +75,15 @@ class AirportController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Airport $airport ) {
+	public function destroy( Airport $airport )
+	{
 		$destroy = $airport->delete();
 
-		if( $destroy ) {
-			return response('Airport delete', 200);
+		if( $destroy )
+		{
+			return response( 'Airport delete', 200 );
 		} else {
-			return response('Airport not delete', 400);
+			return response( 'Airport not delete', 400 );
 		}
 	}
 
@@ -86,15 +94,19 @@ class AirportController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Airport $airport ) {
-		return response()->json($airport, 200);
+	public function show( Airport $airport )
+	{
+		return response()->json( $airport, 200 );
 	}
 
-	public function search( $search ) {
-		if( ctype_digit($search) ) {
-			$found = Airport::where('id', (int)$search)
-			->with(['city' => function( $query ) {
-				$query->with('country');
+	public function search( $search )
+	{
+		if( ctype_digit( $search ) )
+		{
+			$found = Airport::where( 'id', (int)$search )
+			->with(['city' => function( $query )
+			{
+				$query->with( 'country' );
 			}])
 			->orderBy( 'name', 'asc' )
 			->get();
@@ -103,11 +115,13 @@ class AirportController extends Controller
 			$found = Airport::where( 'name', 'like', $search )
 				->orWhere( 'iata', 'like', $search )
 				->orWhere( 'icao', 'like', $search )
-				->orWhereHas( 'city', function( $query ) use ( $search ) {
+				->orWhereHas( 'city', function( $query ) use ( $search )
+				{
 					$query->where( 'name', 'like', $search );
 				} )
 				->with( [
-					'city' => function( $query ) use ( $search ) {
+					'city' => function( $query ) use ( $search )
+					{
 						$query->with( 'country' );
 					}
 				] )
@@ -115,28 +129,35 @@ class AirportController extends Controller
 				->get();
 		}
 
-	 	return response()->json($found, 200);
+	 	return response()->json( $found, 200 );
 	}
 
-	public function fillDB() {
+	public function fillDB()
+	{
 		set_time_limit( 0 );
 		$airports = Airport::count();
 
- 		if( $aiports === 0 ) {
+ 		if( $airports === 0 ) {
 			$data = [];
 
-			$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env('SKYSCANNER_KEY') ) );
+			$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.config('app.skyscanner') ) );
 
-			foreach( $response as $array ) {
-				foreach( $array as $continents ) {
-					foreach( $continents->Countries as $countries ) {
-						foreach( $countries->Cities as $cities ) {
-							foreach( $cities->Airports as $airports ) {
+			foreach( $response as $array )
+			{
+				foreach( $array as $continents )
+				{
+					foreach( $continents->Countries as $countries )
+					{
+						foreach( $countries->Cities as $cities )
+						{
+							foreach( $cities->Airports as $airports )
+							{
 								$location = explode( ', ', $airports->Location );
 								$latitude = $location[1];
 								$longitude = $location[0];
 
-								if( Airport::where( 'name', $airports->Name )->count() === 0 ) {
+								if( Airport::where( 'name', $airports->Name )->count() === 0 )
+								{
 									$data[] = [
 										'name'       => $airports->Name,
 										'city_id'    => City::where( 'iso', $airports->CityId )->value( 'id' ),
@@ -157,19 +178,23 @@ class AirportController extends Controller
 		}
 
 
-		if( $airports > 0 ) {
+		if( $airports > 0 )
+		{
 			$response = get_object_vars( json_decode( file_get_contents( 'https://raw.githubusercontent.com/mwgg/Airports/master/airports.json' ) ) );
 
-			foreach( Airport::all() as $airport ) {
+			foreach( Airport::all() as $airport )
+			{
 				// Get all keys where airports are found based on iata
 				$key = array_search( $airport->iata, array_column( $response, 'iata', 'icao' ) );
 
 				// If the key is not found get the key based on city name
-				if( empty( $key ) && !empty( $airport->city ) ) {
+				if( empty( $key ) && !empty( $airport->city ) )
+				{
 					$key = array_search( mb_strtolower( $airport->city->name ), array_map( 'mb_strtolower', array_column( $response, 'city', 'icao' ) ) );
 				}
 
-				if( !empty( $key ) ) {
+				if( !empty( $key ) )
+				{
 					echo $key.'<br>';
 					$airport->update( [
 						'icao' => $key,

@@ -21,7 +21,8 @@ class User extends Authenticatable
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
-	public function language() {
+	public function language()
+	{
     	return $this->hasOne(Language::class);
 	}
 }

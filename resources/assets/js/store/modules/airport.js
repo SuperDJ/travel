@@ -1,4 +1,5 @@
-export default {
+export default
+{
 	state: {
 		all: {},
 		search: {},
@@ -23,7 +24,7 @@ export default {
 
 		cabinClass( state, cClass )
 		{
-			state.cabinClasses.push(cClass);
+			state.cabinClasses.push( cClass );
 		}
 	},
 

@@ -16,13 +16,16 @@
         </v-parallax>
 
         <v-layout row wrap>
-            <div v-for="flight in flights" :key="i"></div>
+            <div v-for="flight in flights" :key="flight.Quotes">
+
+            </div>
         </v-layout>
     </v-container>
 </template>
 
 <script>
-    export default {
+    export default
+    {
 		metaInfo: {
 			title: 'Flights'
 		},
@@ -32,7 +35,8 @@
         },
 
         computed: {
-		    flights() {
+		    flights()
+            {
                 return this.$store.getters.browseQuotes;
             }
         },
@@ -65,6 +69,8 @@
 						currency: 'EUR',
 						language: 'NL'
 					};
+
+					console.log(data);
 
 					this.$store.dispatch( 'browseQuotes', data );
 				}

@@ -11,28 +11,32 @@ class Country extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function continent() {
+	public function continent()
+	{
     	return $this->belongsTo(Continent::class);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function cities() {
+	public function cities()
+	{
     	return $this->hasMany(City::class);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
-	public function currency() {
+	public function currency()
+	{
     	return $this->hasOne(Currency::class);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function timezones() {
+	public function timezones()
+	{
     	return $this->hasMany(Timezone::class);
 	}
 }

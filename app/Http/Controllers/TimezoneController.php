@@ -12,7 +12,8 @@ class TimezoneController extends Controller
 	 * Display a listing of the resource.
 	 * @return \App\Timezone[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index() {
+	public function index()
+	{
 		return Timezone::all();
 	}
 
@@ -22,13 +23,15 @@ class TimezoneController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
-		$store = Timezone::create($request->all());
+	public function store( Request $request )
+	{
+		$store = Timezone::create( $request->all() );
 
-		if( $store ) {
-			return response('Timezone created', 201);
+		if( $store )
+		{
+			return response( 'Timezone created', 201 );
 		} else {
-			return response('Timezone not created', 400);
+			return response( 'Timezone not created', 400 );
 		}
 	}
 
@@ -39,8 +42,9 @@ class TimezoneController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Timezone $timezone ) {
-		return response()->json($timezone, 200);
+	public function edit( Timezone $timezone )
+	{
+		return response()->json( $timezone, 200 );
 	}
 
 	/**
@@ -51,13 +55,15 @@ class TimezoneController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Timezone $timezone ) {
-		$update = $timezone->update($request->all());
+	public function update( Request $request, Timezone $timezone )
+	{
+		$update = $timezone->update( $request->all() );
 
-		if( $update ) {
-			return response('Timezone updated', 200);
+		if( $update )
+		{
+			return response( 'Timezone updated', 200 );
 		} else {
-			return response('Timezone not updated', 400);
+			return response( 'Timezone not updated', 400 );
 		}
 	}
 
@@ -69,13 +75,15 @@ class TimezoneController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Timezone $timezone ) {
+	public function destroy( Timezone $timezone )
+	{
 		$destroy = $timezone->delete();
 
-		if( $destroy ) {
-			return response('Timezone deleted', 200);
+		if( $destroy )
+		{
+			return response( 'Timezone deleted', 200 );
 		} else {
-			return response('Timezone not delete', 400);
+			return response( 'Timezone not delete', 400 );
 		}
 	}
 
@@ -86,37 +94,42 @@ class TimezoneController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Timezone $timezone ) {
-		return response()->json($timezone, 200);
+	public function show( Timezone $timezone )
+	{
+		return response()->json( $timezone, 200 );
 	}
 
-	public function fillDB() {
+	public function fillDB()
+	{
 		set_time_limit(0);
-		$response = json_decode( file_get_contents( 'http://api.timezonedb.com/v2/list-time-zone?key='.env('TIMEZONE_KEY').'&format=json' ) );
+		$response = json_decode( file_get_contents( 'http://api.timezonedb.com/v2/list-time-zone?key='.config('app.timezonedb').'&format=json' ) );
 
 		$data = [];
 
-		foreach( $response->zones as $key => $value ) {
+		foreach( $response->zones as $key => $value )
+		{
 			$id = '';
 
-			if( $value->countryCode !== $id ) {
-				$country = Country::where('iso', $value->countryCode)->first();
+			if( $value->countryCode !== $id )
+			{
+				$country = Country::where( 'iso', $value->countryCode )->first();
 			}
 
-			if( !empty( $country ) ) {
+			if( !empty( $country ) )
+			{
 				$id = $country->id;
 
 				$data[] = [
 					'country_id' => $id,
 					'name'       => $value->zoneName,
 					'gmt_offset' => $value->gmtOffset,
-					'created_at' => date('Y-m-d H:i:s'),
-					'updated_at' => date('Y-m-d H:i:s')
+					'created_at' => date( 'Y-m-d H:i:s' ),
+					'updated_at' => date( 'Y-m-d H:i:s' )
 				];
 			}
 		}
-		Timezone::insert($data);
+		Timezone::insert( $data );
 
-		return response()->json($data, 200);
+		return response()->json( $data, 200 );
 	}
 }

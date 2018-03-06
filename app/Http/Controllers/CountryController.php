@@ -14,7 +14,8 @@ class CountryController extends Controller
 	 * Display a listing of the resource.
 	 * @return \App\Country[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index() {
+	public function index()
+	{
 		return Country::all();
 	}
 
@@ -24,13 +25,15 @@ class CountryController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
-		$store = Country::create($request->all());
+	public function store( Request $request )
+	{
+		$store = Country::create( $request->all() );
 
-		if( $store ) {
-			return response('Country created', 201);
+		if( $store )
+		{
+			return response( 'Country created', 201 );
 		} else {
-			return response('Country not created', 400);
+			return response( 'Country not created', 400 );
 		}
 	}
 
@@ -41,8 +44,9 @@ class CountryController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Country $country ) {
-		return response()->json($country, 200);
+	public function edit( Country $country )
+	{
+		return response()->json( $country, 200 );
 	}
 
 	/**
@@ -54,12 +58,13 @@ class CountryController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, Country $country ) {
-		$update = $country->update($request->all());
+		$update = $country->update( $request->all() );
 
-		if( $update ) {
-			return response('Country updated', 200);
+		if( $update )
+		{
+			return response( 'Country updated', 200 );
 		} else {
-			return response('Country not updated', 400);
+			return response( 'Country not updated', 400 );
 		}
 	}
 
@@ -74,10 +79,11 @@ class CountryController extends Controller
 	public function destroy( Country $country ) {
 		$destroy = $country->delete();
 
-		if( $destroy ) {
-			return response('Country deleted', 200);
+		if( $destroy )
+		{
+			return response( 'Country deleted', 200 );
 		} else {
-			return response('Country not delete', 400);
+			return response( 'Country not delete', 400 );
 		}
 	}
 
@@ -88,25 +94,32 @@ class CountryController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Country $country ) {
-		return response()->json($country, 200);
+	public function show( Country $country )
+	{
+		return response()->json( $country, 200 );
 	}
 
-	public function fillDB() {
+	public function fillDB()
+	{
 		$data = [];
 		$response = json_decode( file_get_contents( 'https://raw.githubusercontent.com/annexare/Countries/master/data/countries.json' ) );
 
 		$countries = Country::count();
 
-		if( $countries === 0 ) {
-			foreach( $response as $key => $value ) {
+		if( $countries === 0 )
+		{
+			foreach( $response as $key => $value )
+			{
 				$currency = $value->currency;
-				if( strpos( $currency, ',' ) !== false ) {
+				if( strpos( $currency, ',' ) !== false )
+				{
 					$currencies = explode( ',', $currency );
 
 					$firstOccurrence = '';
-					foreach( $currencies as $int => $val ) {
-						if( empty( $firstOccurrence ) && Currency::where( 'iso', $val )->count() > 0 ) {
+					foreach( $currencies as $int => $val )
+					{
+						if( empty( $firstOccurrence ) && Currency::where( 'iso', $val )->count() > 0 )
+						{
 							$currency = $val;
 						}
 					}
@@ -127,13 +140,17 @@ class CountryController extends Controller
 			Country::insert( $data );
 		}
 
-		if( $countries > 0 ) {
+		if( $countries > 0 )
+		{
 			// Add all additional countries
-			$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.env( 'SKYSCANNER_KEY' ) ) );
+			$response = json_decode( file_get_contents( 'http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey='.config( 'app.skyscanner' ) ) );
 
-			foreach( $response as $array ) {
-				foreach( $array as $continents ) {
-					foreach( $continents->Countries as $countries ) {
+			foreach( $response as $array )
+			{
+				foreach( $array as $continents )
+				{
+					foreach( $continents->Countries as $countries )
+					{
 						// Filter countries
 						$countryName = str_replace( 'St ', 'Sint ', $countries->Name );
 						$countryName = str_replace( 'St. ', 'Saint ', $countryName );
@@ -141,7 +158,8 @@ class CountryController extends Controller
 						$countryName = str_replace( '(', '[', $countryName );
 						$countryName = str_replace( ')', ']', $countryName );
 
-						switch( $countryName ) {
+						switch( $countryName )
+						{
 							case 'S. Georgia and S. Sandwich Isls.':
 								$countryName = 'South Georgia and the South Sandwich Islands';
 								break;
@@ -169,20 +187,24 @@ class CountryController extends Controller
 								break;
 							case 'Pitcairn':
 								$countryName = 'Pitcairn Islands';
+								break;
 						}
 
 						$country = Country::where( 'name', 'like', $countryName )->first();
 
 						// If country doesn't exists create it
-						if( empty( $country ) ) {
+						if( empty( $country ) )
+						{
 							$createCountries = [ 'Netherlands Antilles', 'Caribbean Netherlands', 'Crimea', 'Macau', 'Palestinian Territory' ];
 
-							if( !in_array( $countryName, $createCountries ) ) {
+							if( !in_array( $countryName, $createCountries ) )
+							{
 								die( 'New country found: "'.$countryName.'"' );
 							}
 
 							$continentId = '';
-							switch( $countryName ) {
+							switch( $countryName )
+							{
 								case 'Netherlands Antilles':
 								case 'Caribbean Netherlands':
 									$continentId = Continent::where( 'name', 'South America' )->value( 'id' );
@@ -224,6 +246,6 @@ class CountryController extends Controller
 			}
 		}
 
-		return response()->json($data, 200);
+		return response()->json( $data, 200 );
 	}
 }

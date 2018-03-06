@@ -128,28 +128,32 @@
 </template>
 
 <script>
-	export default {
+	export default
+    {
 		props: {
 			activity: {
 				type: Number,
 				required: true
 			}
 		},
-		data() {
+		data()
+        {
 			return {
 				data: {}
 			}
 		},
 
 		methods: {
-			getData() { /*
+			getData()
+            { /*
 				fetch(`/api/continent/${this.activity}/activities`)
 					.then(response => {return response.json()})
 					.then(response => {this.data = response});*/
 			}
 		},
 
-		mounted() {
+		mounted()
+        {
 			this.getData();
 		}
 	}

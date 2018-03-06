@@ -11,7 +11,8 @@ class Currency extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function countries() {
+	public function countries()
+	{
     	return $this->belongsToMany(Country::class);
 	}
 }

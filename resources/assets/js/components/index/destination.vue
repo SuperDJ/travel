@@ -156,28 +156,32 @@
 </template>
 
 <script>
-    export default {
+    export default
+    {
     	props: {
     		destination: {
     			type: Number,
                 required: true
             }
         },
-        data() {
+        data()
+        {
     		return {
     			data: {}
             }
         },
 
         methods: {
-    		getData() {
+    		getData()
+            {
     		    fetch(`/api/continents/${this.destination}/top-destinations`)
                     .then(response => {return response.json()})
                     .then(response => {this.data = response});
             }
         },
 
-        mounted() {
+        mounted()
+        {
     	    this.getData();
         }
     }

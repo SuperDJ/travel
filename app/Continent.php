@@ -11,14 +11,16 @@ class Continent extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function countries() {
+	public function countries()
+	{
     	return $this->hasMany(Country::class);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
 	 */
-	public function cities() {
+	public function cities()
+	{
     	return $this->hasManyThrough(City::class, Country::class);
 	}
 }

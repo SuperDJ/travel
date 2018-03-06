@@ -211,4 +211,19 @@ return [
 
     ],
 
+
+	/*
+    |--------------------------------------------------------------------------
+    | API settings
+    |--------------------------------------------------------------------------
+    |
+    | API keys
+    |
+    */
+
+	'skyscanner' => env('SKYSCANNER_KEY'),
+	'timezonedb' => env('TIMEZONE_KEY'),
+	'iatacodes' => env('IATACODE_KEY'),
+	'lufthansaKey' => env('LUFTHANSA_KEY'),
+	'lufthansaSecret' => env('LUFTHANSA_SECRET'),
 ];

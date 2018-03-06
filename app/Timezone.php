@@ -11,7 +11,8 @@ class Timezone extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function country() {
+	public function country()
+	{
     	return $this->belongsTo(Country::class);
 	}
 }

@@ -82,8 +82,10 @@
 </template>
 
 <script>
-    export default {
-        data() {
+    export default
+    {
+        data()
+        {
 			return {
 				drawer: false,
 				items: [

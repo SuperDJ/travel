@@ -97,12 +97,14 @@
     import Destination from '@/components/index/destination';
     import Activity from '@/components/index/activity';
 
-    export default {
+    export default
+    {
 		metaInfo: {
 			title: 'Home'
 		},
 
-    	data() {
+    	data()
+        {
     	    return {
                 form: 'AccommodationForm',
                 image:
@@ -112,7 +114,8 @@
         },
 
         computed: {
-    	    continents() {
+    	    continents()
+            {
     	    	return this.$store.getters.indexContinent;
             },
         },
@@ -126,15 +129,18 @@
         },
 
         methods: {
-    		getContinents() {
+    		getContinents()
+            {
 				this.$store.dispatch('indexContinent');
 			},
 
-            changeForm( type ) {
+            changeForm( type )
+            {
                 this.form = type;
 
                 let img = '';
-                switch(type) {
+                switch(type)
+                {
                     case 'flight':
                     	img =
                             'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
@@ -150,7 +156,8 @@
                 this.image = img;
             },
 
-            topDestinations( id ) {
+            topDestinations( id )
+            {
 
             }
         },

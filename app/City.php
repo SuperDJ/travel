@@ -11,14 +11,16 @@ class City extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function country() {
+	public function country()
+	{
     	return $this->belongsTo(Country::class);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function airports() {
+	public function airports()
+	{
     	return $this->hasMany(Airport::class);
 	}
 }

@@ -7,7 +7,8 @@
 </template>
 
 <script>
-    export default {
+    export default
+    {
     	props: {
     	    trigger: {
     	    	type: String,

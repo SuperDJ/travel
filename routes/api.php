@@ -65,6 +65,7 @@ Route::delete('/timezones/{timezone}', 'TimezoneController@destroy');
 
 // Cities
 Route::get('/cities', 'CityController@index');
+Route::get('/cities/{search}/search', 'CityController@search');
 Route::get('/cities/db', 'CityController@fillDB');
 Route::post('/cities', 'CityController@store');
 Route::get('/cities/{city}', 'CityController@show');

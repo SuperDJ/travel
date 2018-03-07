@@ -5,27 +5,27 @@ export default
 	},
 
 	mutations: {
-		indexContinent( state, continents )
+		continentIndex( state, continents )
 		{
 			state.all = continents;
 		}
 	},
 
 	actions: {
-		indexContinent( context )
+		continentIndex( context )
 		{
 			fetch('/api/continents')
 				.then(response => {
 					return response.json()
 				})
 				.then(response => {
-					context.commit('indexContinent', response)
+					context.commit('continentIndex', response)
 				});
 		}
 	},
 
 	getters: {
-		indexContinent( state )
+		continentIndex( state )
 		{
 			return state.all;
 		}

@@ -7653,7 +7653,7 @@ exports.default = {
 
     computed: {
         continents: function continents() {
-            return this.$store.getters.indexContinent;
+            return this.$store.getters.continentIndex;
         }
     },
 
@@ -7667,7 +7667,7 @@ exports.default = {
 
     methods: {
         getContinents: function getContinents() {
-            this.$store.dispatch('indexContinent');
+            this.$store.dispatch('continentIndex');
         },
         changeForm: function changeForm(type) {
             this.form = type;
@@ -7848,7 +7848,7 @@ if (false) {(function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+            value: true
 });
 //
 //
@@ -7945,172 +7945,148 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    data: function data() {
-        return {
-            errors: {},
-            loading: false,
-            departureSearch: null,
-            destinationSearch: null,
-            mDeparture: this.departure,
-            mDepartureDate: this.departureDate,
-            mDestination: this.destination,
-            mDestinationDate: this.destinationDate,
-            mAdults: this.adults,
-            mChildren: this.children,
-            mInfants: this.infants,
-            mCabinClass: this.cabinClass
-        };
-    },
+            data: function data() {
+                        return {
+                                    errors: {},
+                                    loading: false,
+                                    departureSearch: null,
+                                    destinationSearch: null
+                        };
+            },
 
 
-    props: {
-        departure: {
-            type: String,
-            default: ''
-        },
-        departureDate: {
-            type: String,
-            default: '',
-            validator: function validator(value) {
-                if (value.length > 0) {
-                    return (/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value)
-                    );
-                }
+            computed: {
+                        airports: function airports() {
+                                    return Object.values(this.$store.getters.airportSearch);
+                        },
+                        cabinClasses: function cabinClasses() {
+                                    return this.$store.getters.cabinClasses;
+                        },
 
-                return true;
+
+                        departure: {
+                                    get: function get() {
+                                                return this.$store.getters.flightDeparture;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightDeparture', value);
+                                    }
+                        },
+
+                        departureDate: {
+                                    get: function get() {
+                                                return this.$store.getters.flightDepartureDate;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightDepartureDate', value);
+                                    }
+                        },
+
+                        destination: {
+                                    get: function get() {
+                                                return this.$store.getters.flightDestination;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightDestination', value);
+                                    }
+                        },
+
+                        destinationDate: {
+                                    get: function get() {
+                                                return this.$store.getters.flightDestinationDate;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightDestinationDate', value);
+                                    }
+                        },
+
+                        adults: {
+                                    get: function get() {
+                                                return this.$store.getters.flightAdults;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightAdults', value);
+                                    }
+                        },
+
+                        children: {
+                                    get: function get() {
+                                                return this.$store.getters.flightChildren;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightChildren', value);
+                                    }
+                        },
+
+                        infants: {
+                                    get: function get() {
+                                                return this.$store.getters.flightInfants;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightInfants', value);
+                                    }
+                        },
+
+                        cabinClass: {
+                                    get: function get() {
+                                                return this.$store.getters.flightCabinClass;
+                                    },
+                                    set: function set(value) {
+                                                this.$store.commit('flightCabinClass', value);
+                                    }
+                        }
+            },
+
+            methods: {
+                        airportSearch: function airportSearch(value) {
+                                    if (value && value.length >= 3) {
+                                                this.loading = true;
+                                                this.$store.dispatch('airportSearch', value);
+                                                this.loading = false;
+                                    }
+                        },
+                        submit: function submit() {
+                                    this.$router.push({ name: 'Flights' });
+                        },
+                        setCurrentDate: function setCurrentDate() {
+                                    var date = new Date(),
+                                        dd = date.getDate(),
+                                        mm = date.getMonth() + 1,
+                                        yy = date.getFullYear();
+
+                                    if (dd < 10) {
+                                                dd = '0' + dd;
+                                    }
+
+                                    if (mm < 10) {
+                                                mm = '0' + mm;
+                                    }
+
+                                    return yy + '-' + mm + '-' + dd;
+                        },
+                        setSearchedAirports: function setSearchedAirports() {
+                                    if (this.departure) {
+                                                this.$store.dispatch('airportSearch', this.departure);
+                                    }
+
+                                    if (this.destination) {
+                                                this.$store.dispatch('airportSearch', this.destination);
+                                    }
+                        }
+            },
+
+            watch: {
+                        departureSearch: function departureSearch(value) {
+                                    this.airportSearch(value);
+                        },
+                        destinationSearch: function destinationSearch(value) {
+                                    this.airportSearch(value);
+                        }
+            },
+
+            created: function created() {
+                        this.setSearchedAirports();
             }
-        },
-        destination: {
-            type: String,
-            default: ''
-        },
-        destinationDate: {
-            type: String,
-            default: '',
-            validator: function validator(value) {
-                if (value.length > 0) {
-                    return (/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value)
-                    );
-                }
-
-                return true;
-            }
-        },
-        adults: {
-            type: Number,
-            default: 0,
-            validator: function validator(value) {
-                if (value.length > 0) {
-                    return value >= 1;
-                }
-
-                return true;
-            }
-        },
-        children: {
-            type: Number,
-            default: 0,
-            validator: function validator(value) {
-                if (value.length > 0) {
-                    return function (value) {
-                        return 0 && value <= 8;
-                    };
-                }
-
-                return true;
-            }
-        },
-        infants: {
-            type: Number,
-            default: 0,
-            validator: function validator(value) {
-                if (value.length > 0) {
-                    return function (value) {
-                        return 0 && value <= 8;
-                    };
-                }
-
-                return true;
-            }
-        },
-        cabinClass: {
-            type: String,
-            default: ''
-        }
-    },
-
-    computed: {
-        airports: function airports() {
-            return Object.values(this.$store.getters.searchAirport);
-        },
-        cabinClasses: function cabinClasses() {
-            return this.$store.getters.cabinClasses;
-        }
-    },
-
-    methods: {
-        searchAirports: function searchAirports(value) {
-            this.loading = true;
-            this.$store.dispatch('searchAirport', value);
-            this.loading = false;
-        },
-        submit: function submit() {
-            var data = {
-                departure: this.mDeparture,
-                departureDate: this.mDepartureDate,
-                destination: this.mDestination,
-                destinationDate: this.mDestinationDate,
-                adults: this.mAdults,
-                children: this.mChildren,
-                infants: this.mInfants,
-                cabinClass: this.mCabinClass
-            };
-
-            this.$router.push({ name: 'FlightsSearch', params: data });
-        },
-        setCurrentDate: function setCurrentDate() {
-            var date = new Date(),
-                dd = date.getDate(),
-                mm = date.getMonth() + 1,
-                yy = date.getFullYear();
-
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-
-            return yy + '-' + mm + '-' + dd;
-        },
-        setSearchedAirports: function setSearchedAirports() {
-            if (this.mDeparture) {
-                this.$store.dispatch('searchAirport', this.mDeparture);
-            }
-
-            if (this.mDestination) {
-                this.$store.dispatch('searchAirport', this.mDestination);
-            }
-        }
-    },
-
-    watch: {
-        departureSearch: function departureSearch(value) {
-            if (value && value.length > 2) {
-                this.searchAirports(value);
-            }
-        },
-        destinationSearch: function destinationSearch(value) {
-            if (value && value.length > 2) {
-                this.searchAirports(value);
-            }
-        }
-    },
-
-    created: function created() {
-        this.setSearchedAirports();
-    }
 };
 
 /***/ }),
@@ -9913,6 +9889,14 @@ var _flight = __webpack_require__(47);
 
 var _flight2 = _interopRequireDefault(_flight);
 
+var _car = __webpack_require__(48);
+
+var _car2 = _interopRequireDefault(_car);
+
+var _city = __webpack_require__(50);
+
+var _city2 = _interopRequireDefault(_city);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vuex2.default);
@@ -9926,7 +9910,9 @@ var store = exports.store = new _vuex2.default.Store({
 	modules: {
 		continent: _continent2.default,
 		airport: _airport2.default,
-		flight: _flight2.default
+		flight: _flight2.default,
+		car: _car2.default,
+		city: _city2.default
 	}
 });
 
@@ -10963,23 +10949,23 @@ exports.default = {
 	},
 
 	mutations: {
-		indexContinent: function indexContinent(state, continents) {
+		continentIndex: function continentIndex(state, continents) {
 			state.all = continents;
 		}
 	},
 
 	actions: {
-		indexContinent: function indexContinent(context) {
+		continentIndex: function continentIndex(context) {
 			fetch('/api/continents').then(function (response) {
 				return response.json();
 			}).then(function (response) {
-				context.commit('indexContinent', response);
+				context.commit('continentIndex', response);
 			});
 		}
 	},
 
 	getters: {
-		indexContinent: function indexContinent(state) {
+		continentIndex: function continentIndex(state) {
 			return state.all;
 		}
 	}
@@ -10998,37 +10984,47 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	state: {
 		all: {},
-		search: {},
-		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
+		search: {}
 	},
 
 	mutations: {
-		indexAirport: function indexAirport(state, airports) {
+		/**
+   * Get all airports
+   *
+   * @param state
+   * @param airports
+   */
+		airportIndex: function airportIndex(state, airports) {
 			state.all = airports;
 		},
-		searchAirport: function searchAirport(state, airports) {
+
+
+		/**
+   * Search airport
+   *
+   * @param state
+   * @param airports
+   */
+		airportSearch: function airportSearch(state, airports) {
 			state.search = airports;
-		},
-		cabinClass: function cabinClass(state, cClass) {
-			state.cabinClasses.push(cClass);
 		}
 	},
 
 	actions: {
-		indexAirport: function indexAirport(context) {
+		airportIndex: function airportIndex(context) {
 			fetch('/api/airports').then(function (response) {
 				return response.json();
 			}).then(function (response) {
-				context.commit('indexAirport', response);
+				context.commit('airportIndex', response);
 			}).catch(function (error) {
 				console.error(error);
 			});
 		},
-		searchAirport: function searchAirport(context, search) {
+		airportSearch: function airportSearch(context, search) {
 			fetch('/api/airports/' + search + '/search').then(function (response) {
 				return response.json();
 			}).then(function (response) {
-				context.commit('searchAirport', response);
+				context.commit('airportSearch', response);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -11036,14 +11032,11 @@ exports.default = {
 	},
 
 	getters: {
-		indexAirport: function indexAirport(state) {
+		airportIndex: function airportIndex(state) {
 			return state.all;
 		},
-		searchAirport: function searchAirport(state) {
+		airportSearch: function airportSearch(state) {
 			return state.search;
-		},
-		cabinClasses: function cabinClasses(state) {
-			return state.cabinClasses;
 		}
 	}
 };
@@ -13736,11 +13729,11 @@ var render = function() {
                             }
                           ]),
                           model: {
-                            value: _vm.mDeparture,
+                            value: _vm.departure,
                             callback: function($$v) {
-                              _vm.mDeparture = _vm._n($$v)
+                              _vm.departure = _vm._n($$v)
                             },
-                            expression: "mDeparture"
+                            expression: "departure"
                           }
                         }),
                         _vm._v(" "),
@@ -13752,11 +13745,11 @@ var render = function() {
                             required: ""
                           },
                           model: {
-                            value: _vm.mDepartureDate,
+                            value: _vm.departureDate,
                             callback: function($$v) {
-                              _vm.mDepartureDate = $$v
+                              _vm.departureDate = $$v
                             },
-                            expression: "mDepartureDate"
+                            expression: "departureDate"
                           }
                         })
                       ],
@@ -13825,11 +13818,11 @@ var render = function() {
                             }
                           ]),
                           model: {
-                            value: _vm.mDestination,
+                            value: _vm.destination,
                             callback: function($$v) {
-                              _vm.mDestination = _vm._n($$v)
+                              _vm.destination = _vm._n($$v)
                             },
-                            expression: "mDestination"
+                            expression: "destination"
                           }
                         }),
                         _vm._v(" "),
@@ -13837,14 +13830,14 @@ var render = function() {
                           attrs: {
                             label: "Return date",
                             type: "date",
-                            min: _vm.mDepartureDate
+                            min: _vm.departureDate
                           },
                           model: {
-                            value: _vm.mDestinationDate,
+                            value: _vm.destinationDate,
                             callback: function($$v) {
-                              _vm.mDestinationDate = $$v
+                              _vm.destinationDate = $$v
                             },
-                            expression: "mDestinationDate"
+                            expression: "destinationDate"
                           }
                         })
                       ],
@@ -13863,44 +13856,43 @@ var render = function() {
                             required: ""
                           },
                           model: {
-                            value: _vm.mAdults,
+                            value: _vm.adults,
                             callback: function($$v) {
-                              _vm.mAdults = _vm._n($$v)
+                              _vm.adults = _vm._n($$v)
                             },
-                            expression: "mAdults"
+                            expression: "adults"
                           }
                         }),
                         _vm._v(" "),
                         _c("v-text-field", {
                           attrs: {
-                            label: "Number of children <em>(1 - 16 years)</em>",
+                            label: "Number of children (1 - 16 years)",
                             type: "number",
                             min: "0",
                             max: "8"
                           },
                           model: {
-                            value: _vm.mChildren,
+                            value: _vm.children,
                             callback: function($$v) {
-                              _vm.mChildren = _vm._n($$v)
+                              _vm.children = _vm._n($$v)
                             },
-                            expression: "mChildren"
+                            expression: "children"
                           }
                         }),
                         _vm._v(" "),
                         _c("v-text-field", {
                           attrs: {
-                            label:
-                              "Number of infants <em>(under 12 months)</em>",
+                            label: "Number of infants (under 12 months)",
                             type: "number",
                             min: "0",
                             max: "8"
                           },
                           model: {
-                            value: _vm.mInfants,
+                            value: _vm.infants,
                             callback: function($$v) {
-                              _vm.mInfants = _vm._n($$v)
+                              _vm.infants = _vm._n($$v)
                             },
-                            expression: "mInfants"
+                            expression: "infants"
                           }
                         })
                       ],
@@ -13919,11 +13911,11 @@ var render = function() {
                             bottom: ""
                           },
                           model: {
-                            value: _vm.mCabinClass,
+                            value: _vm.cabinClass,
                             callback: function($$v) {
-                              _vm.mCabinClass = $$v
+                              _vm.cabinClass = $$v
                             },
-                            expression: "mCabinClass"
+                            expression: "cabinClass"
                           }
                         })
                       ],
@@ -14140,11 +14132,15 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(30);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = null
+
+
 /* template */
 
 /* template functional */
@@ -14156,8 +14152,8 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -14210,17 +14206,93 @@ var render = function() {
                 [
                   _c(
                     "v-flex",
-                    { attrs: { xs6: "" } },
+                    { attrs: { xs4: "" } },
                     [
-                      _c("v-text-field", {
-                        attrs: { label: "Pickup location", required: "" }
+                      _c("v-select", {
+                        attrs: {
+                          label: "Pickup place",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.cities,
+                          "item-text": "name",
+                          "item-value": "id",
+                          "no-data": "No results found",
+                          "cache-items": "",
+                          "search-input": _vm.pickupSearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.pickupSearch = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "selected",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-sub-title", [
+                                      data.item.city && data.item.city.country
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "Country: " +
+                                                _vm._s(
+                                                  data.item.city.country.name
+                                                )
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.pickupPlace,
+                          callback: function($$v) {
+                            _vm.pickupPlace = _vm._n($$v)
+                          },
+                          expression: "pickupPlace"
+                        }
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
                         attrs: {
                           label: "Pickup date and time",
-                          type: "date-time",
+                          type: "datetime-local",
                           required: ""
+                        },
+                        model: {
+                          value: _vm.pickupDateTime,
+                          callback: function($$v) {
+                            _vm.pickupDateTime = $$v
+                          },
+                          expression: "pickupDateTime"
                         }
                       })
                     ],
@@ -14229,22 +14301,117 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-flex",
-                    { attrs: { xs6: "" } },
+                    { attrs: { xs4: "" } },
                     [
-                      _c("v-text-field", {
+                      _c("v-select", {
                         attrs: {
-                          label: "Return location",
+                          label: "Dropoff place",
                           required: "",
-                          min: "1"
+                          autocomplete: "",
+                          items: _vm.cities,
+                          "item-text": "name",
+                          "item-value": "id",
+                          "no-data": "No results found",
+                          "cache-items": "",
+                          "search-input": _vm.dropoffSearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.dropoffSearch = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "selected",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-sub-title", [
+                                      data.item.city && data.item.city.country
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "Country: " +
+                                                _vm._s(
+                                                  data.item.city.country.name
+                                                )
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.dropoffPlace,
+                          callback: function($$v) {
+                            _vm.dropoffPlace = _vm._n($$v)
+                          },
+                          expression: "dropoffPlace"
                         }
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
                         attrs: {
                           label: "Return date and time",
-                          type: "date-time",
+                          type: "datetime-local",
                           required: "",
                           min: "1"
+                        },
+                        model: {
+                          value: _vm.dropoffDateTime,
+                          callback: function($$v) {
+                            _vm.dropoffDateTime = $$v
+                          },
+                          expression: "dropoffDateTime"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs4: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Driver age",
+                          type: "number",
+                          required: "",
+                          min: "18"
+                        },
+                        model: {
+                          value: _vm.driverAge,
+                          callback: function($$v) {
+                            _vm.driverAge = $$v
+                          },
+                          expression: "driverAge"
                         }
                       })
                     ],
@@ -17513,12 +17680,48 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 	state: {
-		results: {}
+		results: {},
+		departure: '',
+		departureDate: '',
+		destination: '',
+		destinationDate: '',
+		adults: 0,
+		children: 0,
+		infants: 0,
+		cabinClass: '',
+		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
 	},
 
 	mutations: {
 		browseQuotes: function browseQuotes(state, flights) {
 			state.results = flights;
+		},
+		cabinClasses: function cabinClasses(state, cClass) {
+			state.cabinClasses.push(cClass);
+		},
+		flightDeparture: function flightDeparture(state, departure) {
+			state.departure = departure;
+		},
+		flightDepartureDate: function flightDepartureDate(state, date) {
+			state.departureDate = date;
+		},
+		flightDestination: function flightDestination(state, destination) {
+			state.destination = destination;
+		},
+		flightDestinationDate: function flightDestinationDate(state, date) {
+			state.destinationDate = date;
+		},
+		flightAdults: function flightAdults(state, adults) {
+			state.adults = adults;
+		},
+		flightChildren: function flightChildren(state, children) {
+			state.children = children;
+		},
+		flightInfants: function flightInfants(state, infants) {
+			state.infants = infants;
+		},
+		flightCabinClass: function flightCabinClass(state, cabinClass) {
+			state.cabinClass = cabinClass;
 		}
 	},
 
@@ -17544,6 +17747,307 @@ exports.default = {
 	getters: {
 		browseQuotes: function browseQuotes(state) {
 			return state.results;
+		},
+		cabinClasses: function cabinClasses(state) {
+			return state.cabinClasses;
+		},
+		flightDeparture: function flightDeparture(state) {
+			return state.departure;
+		},
+		flightDepartureDate: function flightDepartureDate(state) {
+			return state.departureDate;
+		},
+		flightDestination: function flightDestination(state) {
+			return state.destination;
+		},
+		flightDestinationDate: function flightDestinationDate(state) {
+			return state.destinationDate;
+		},
+		flightAdults: function flightAdults(state) {
+			return state.adults;
+		},
+		flightChildren: function flightChildren(state) {
+			return state.children;
+		},
+		flightInfants: function flightInfants(state) {
+			return state.infants;
+		},
+		flightCabinClass: function flightCabinClass(state) {
+			return state.cabinClass;
+		}
+	}
+};
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		pickupPlace: '',
+		pickupDateTime: '',
+		dropoffPlace: '',
+		dropoffDateTime: '',
+		driverAge: ''
+	},
+
+	mutations: {
+		carPickupPlace: function carPickupPlace(state, place) {
+			state.pickupPlace = place;
+		},
+		carPickupDateTime: function carPickupDateTime(state, dateTime) {
+			state.pickupDateTime = dateTime;
+		},
+		carDropoffPlace: function carDropoffPlace(state, place) {
+			state.dropoffPlace = place;
+		},
+		carDropoffDateTime: function carDropoffDateTime(state, dateTime) {
+			state.dropoffDateTime = dateTime;
+		},
+		carDriverAge: function carDriverAge(state, age) {
+			state.driverAge = age;
+		}
+	},
+
+	actions: {},
+
+	getters: {
+		carPickupPlace: function carPickupPlace(state) {
+			return state.pickupPlace;
+		},
+		carPickupDateTime: function carPickupDateTime(state) {
+			return state.pickupDateTime;
+		},
+		carDropoffPlace: function carDropoffPlace(state) {
+			return state.dropoffPlace;
+		},
+		carDropoffDateTime: function carDropoffDateTime(state) {
+			return state.dropoffDateTime;
+		},
+		carDriverAge: function carDriverAge(state) {
+			return state.driverAge;
+		}
+	}
+};
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            pickupSearch: null,
+            dropoffSearch: null
+        };
+    },
+
+
+    computed: {
+        cities: function cities() {
+            return Object.values(this.$store.getters.citySearch);
+        },
+
+
+        pickupPlace: {
+            get: function get() {
+                return this.$store.getters.carPickupPlace;
+            },
+            set: function set(place) {
+                this.$store.commit('carPickupPlace', place);
+            }
+        },
+
+        pickupDateTime: {
+            get: function get() {
+                return this.$store.getters.carPickupDateTime;
+            },
+            set: function set(dateTime) {
+                this.$store.commit('carPickupDateTime', dateTime);
+            }
+        },
+
+        dropoffPlace: {
+            get: function get() {
+                return this.$store.getters.carDropoffPlace;
+            },
+            set: function set(place) {
+                this.$store.commit('carDropoffPlace', place);
+            }
+        },
+
+        dropoffDateTime: {
+            get: function get() {
+                return this.$store.getters.carDropoffDateTime;
+            },
+            set: function set(dateTime) {
+                this.$store.commit('carDropoffDateTime', dateTime);
+            }
+        },
+
+        driverAge: {
+            get: function get() {
+                return this.$store.getters.carDriverAge;
+            },
+            set: function set(age) {
+                this.$store.commit('carDriverAge', age);
+            }
+        }
+    },
+
+    methods: {
+        searchPlaces: function searchPlaces(value) {
+            if (value && value.length >= 3) {
+                this.$store.dispatch('citySearch', value);
+            }
+        }
+    },
+
+    watch: {
+        pickupSearch: function pickupSearch(value) {
+            this.searchPlaces(value);
+        },
+        dropoffSearch: function dropoffSearch(value) {
+            this.searchPlaces(value);
+        }
+    }
+};
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		search: {}
+	},
+
+	mutations: {
+		citySearch: function citySearch(state, cities) {
+			state.search = cities;
+		}
+	},
+
+	actions: {
+		citySearch: function citySearch(context, value) {
+			fetch('/api/cities/' + value + '/search').then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('citySearch', response);
+			}).catch(function (error) {
+				console.error('citySearch', error);
+			});
+		}
+	},
+
+	getters: {
+		citySearch: function citySearch(state) {
+			return state.search;
 		}
 	}
 };

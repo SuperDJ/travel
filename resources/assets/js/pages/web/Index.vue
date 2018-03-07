@@ -116,7 +116,7 @@
         computed: {
     	    continents()
             {
-    	    	return this.$store.getters.indexContinent;
+    	    	return this.$store.getters.continentIndex;
             },
         },
 
@@ -131,7 +131,7 @@
         methods: {
     		getContinents()
             {
-				this.$store.dispatch('indexContinent');
+				this.$store.dispatch('continentIndex');
 			},
 
             changeForm( type )

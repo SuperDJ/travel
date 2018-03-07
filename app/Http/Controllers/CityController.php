@@ -99,6 +99,15 @@ class CityController extends Controller
 		return response()->json( $city, 200 );
 	}
 
+	public function search( $search ) {
+		$result = City::where('name', 'like', '%'.$search.'%')
+			->with('country')
+			->orderBy('name', 'asc')
+			->get();
+
+		return response()->json( $result, 200 );
+	}
+
 	public function fillDB()
 	{
 		set_time_limit( 0 );

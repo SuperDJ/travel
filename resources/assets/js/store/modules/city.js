@@ -5,6 +5,12 @@ export default
 	},
 
 	mutations: {
+		/**
+		 * Set search results
+		 *
+		 * @param state
+		 * @param cities
+		 */
 		citySearch( state, cities )
 		{
 			state.search = cities;
@@ -12,6 +18,12 @@ export default
 	},
 
 	actions: {
+		/**
+		 * Get search results from API
+		 *
+		 * @param context
+		 * @param value
+		 */
 		citySearch( context, value )
 		{
 			fetch( `/api/cities/${value}/search` )
@@ -28,6 +40,12 @@ export default
 	},
 
 	getters: {
+		/**
+		 * Get search results
+		 *
+		 * @param state
+		 * @returns {{}|state.search|*}
+		 */
 		citySearch( state )
 		{
 			return state.search;

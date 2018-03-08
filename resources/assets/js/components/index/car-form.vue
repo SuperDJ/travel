@@ -26,13 +26,12 @@
                                 <v-list-tile-content>
                                     <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
                                     <v-list-tile-sub-title>
-                                        <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                        <div v-if="data.item.country">Country: {{data.item.country.name}}</div>
                                     </v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </template>
                         </v-select>
-                        <v-text-field label="Pickup date and time" type="datetime-local" v-model="pickupDateTime"
-                                      required />
+                        <v-text-field label="Pickup date and time" type="datetime-local" v-model="pickupDateTime" required />
                     </v-flex>
 
                     <v-flex xs4>
@@ -58,7 +57,7 @@
                                 <v-list-tile-content>
                                     <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
                                     <v-list-tile-sub-title>
-                                        <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                        <div v-if="data.item.country">Country: {{data.item.country.name}}</div>
                                     </v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </template>
@@ -156,7 +155,7 @@
         },
 
         methods: {
-    	    searchPlaces( value ) {
+    	    searchCity( value ) {
                 if( value && value.length >= 3 ) {
                 	this.$store.dispatch( 'citySearch', value );
                 }
@@ -166,12 +165,12 @@
         watch: {
     		pickupSearch( value )
             {
-    		    this.searchPlaces( value );
+    		    this.searchCity( value );
             },
 
             dropoffSearch( value )
             {
-            	this.searchPlaces( value );
+            	this.searchCity( value );
             }
         }
     }

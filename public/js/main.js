@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -7572,7 +7572,7 @@ Vue$3.nextTick(function () {
 /*  */
 
 exports.default = Vue$3;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(12).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(13).setImmediate))
 
 /***/ }),
 /* 3 */
@@ -7615,23 +7615,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _flightForm = __webpack_require__(5);
+var _flightForm = __webpack_require__(31);
 
 var _flightForm2 = _interopRequireDefault(_flightForm);
 
-var _accommodationForm = __webpack_require__(27);
+var _accommodationForm = __webpack_require__(33);
 
 var _accommodationForm2 = _interopRequireDefault(_accommodationForm);
 
-var _carForm = __webpack_require__(29);
+var _carForm = __webpack_require__(35);
 
 var _carForm2 = _interopRequireDefault(_carForm);
 
-var _destination = __webpack_require__(31);
+var _destination = __webpack_require__(37);
 
 var _destination2 = _interopRequireDefault(_destination);
 
-var _activity = __webpack_require__(33);
+var _activity = __webpack_require__(39);
 
 var _activity2 = _interopRequireDefault(_activity);
 
@@ -7788,60 +7788,6 @@ exports.default = {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(26);
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\index\\flight-form.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7c55e230", Component.options)
-  } else {
-    hotAPI.reload("data-v-7c55e230", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7850,6 +7796,7 @@ if (false) {(function () {
 Object.defineProperty(exports, "__esModule", {
             value: true
 });
+//
 //
 //
 //
@@ -7956,11 +7903,26 @@ exports.default = {
 
 
             computed: {
+                        /**
+                                  * Get all searched airports
+                                  *
+                         * @returns {any[]}
+                         */
                         airports: function airports() {
                                     return Object.values(this.$store.getters.airportSearch);
                         },
+
+
+                        /**
+                                  * Get all cabin classes
+                                  *
+                         * @returns {computed.cabinClasses|mutations.cabinClasses|getters.cabinClasses|cabinClasses|*[]}
+                         */
                         cabinClasses: function cabinClasses() {
                                     return this.$store.getters.cabinClasses;
+                        },
+                        currentDate: function currentDate() {
+                                    return this.$store.getters.currentDate;
                         },
 
 
@@ -8038,6 +8000,11 @@ exports.default = {
             },
 
             methods: {
+                        /**
+                                  * Search for an airport
+                                  *
+                         * @param value
+                         */
                         airportSearch: function airportSearch(value) {
                                     if (value && value.length >= 3) {
                                                 this.loading = true;
@@ -8045,33 +8012,13 @@ exports.default = {
                                                 this.loading = false;
                                     }
                         },
+
+
+                        /**
+                                  * Send the user to the flights page
+                         */
                         submit: function submit() {
                                     this.$router.push({ name: 'Flights' });
-                        },
-                        setCurrentDate: function setCurrentDate() {
-                                    var date = new Date(),
-                                        dd = date.getDate(),
-                                        mm = date.getMonth() + 1,
-                                        yy = date.getFullYear();
-
-                                    if (dd < 10) {
-                                                dd = '0' + dd;
-                                    }
-
-                                    if (mm < 10) {
-                                                mm = '0' + mm;
-                                    }
-
-                                    return yy + '-' + mm + '-' + dd;
-                        },
-                        setSearchedAirports: function setSearchedAirports() {
-                                    if (this.departure) {
-                                                this.$store.dispatch('airportSearch', this.departure);
-                                    }
-
-                                    if (this.destination) {
-                                                this.$store.dispatch('airportSearch', this.destination);
-                                    }
                         }
             },
 
@@ -8085,12 +8032,324 @@ exports.default = {
             },
 
             created: function created() {
-                        this.setSearchedAirports();
+                        this.$store.commit(' currentDate');
             }
 };
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            citySearch: null
+        };
+    },
+
+    computed: {
+        cities: function cities() {
+            return Object.values(this.$store.getters.citySearch);
+        },
+
+
+        city: {
+            get: function get() {
+                return this.$store.getters.accommodationCity;
+            },
+            set: function set(city) {
+                this.$store.commit('accommodationCity', city);
+            }
+        },
+
+        checkinDate: {
+            get: function get() {
+                return this.$store.getters.accommodationCheckinDate;
+            },
+            set: function set(date) {
+                this.$store.commit('acccommodationCheckinDate', date);
+            }
+        },
+
+        checkoutDate: {
+            get: function get() {
+                return this.$store.getters.accommodationCheckoutDate;
+            },
+            set: function set(date) {
+                this.$store.commit('accommodationCheckoutDate', date);
+            }
+        },
+
+        persons: _defineProperty({
+            get: function get() {
+                return this.$store.getters.accommodationPersons;
+            }
+        }, 'get', function get(persons) {
+            this.$store.commit('accommodationPersons', persons);
+        }),
+
+        rooms: {
+            get: function get() {
+                return this.$store.getters.accommodationRooms;
+            },
+            set: function set(rooms) {
+                this.$store.commit('accommodationRooms', rooms);
+            }
+        }
+    },
+
+    watch: {
+        citySearch: function citySearch(value) {
+            if (value && value.length >= 3) {
+                this.$store.dispatch('citySearch', value);
+            }
+        }
+    }
+};
+
+/***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            pickupSearch: null,
+            dropoffSearch: null
+        };
+    },
+
+
+    computed: {
+        cities: function cities() {
+            return Object.values(this.$store.getters.citySearch);
+        },
+
+
+        pickupPlace: {
+            get: function get() {
+                return this.$store.getters.carPickupPlace;
+            },
+            set: function set(place) {
+                this.$store.commit('carPickupPlace', place);
+            }
+        },
+
+        pickupDateTime: {
+            get: function get() {
+                return this.$store.getters.carPickupDateTime;
+            },
+            set: function set(dateTime) {
+                this.$store.commit('carPickupDateTime', dateTime);
+            }
+        },
+
+        dropoffPlace: {
+            get: function get() {
+                return this.$store.getters.carDropoffPlace;
+            },
+            set: function set(place) {
+                this.$store.commit('carDropoffPlace', place);
+            }
+        },
+
+        dropoffDateTime: {
+            get: function get() {
+                return this.$store.getters.carDropoffDateTime;
+            },
+            set: function set(dateTime) {
+                this.$store.commit('carDropoffDateTime', dateTime);
+            }
+        },
+
+        driverAge: {
+            get: function get() {
+                return this.$store.getters.carDriverAge;
+            },
+            set: function set(age) {
+                this.$store.commit('carDriverAge', age);
+            }
+        }
+    },
+
+    methods: {
+        searchCity: function searchCity(value) {
+            if (value && value.length >= 3) {
+                this.$store.dispatch('citySearch', value);
+            }
+        }
+    },
+
+    watch: {
+        pickupSearch: function pickupSearch(value) {
+            this.searchCity(value);
+        },
+        dropoffSearch: function dropoffSearch(value) {
+            this.searchCity(value);
+        }
+    }
+};
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8289,7 +8548,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8456,15 +8715,103 @@ exports.default = {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8492,57 +8839,177 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    metaInfo: {
-        title: 'Flights'
-    },
+	metaInfo: {
+		title: 'Flights'
+	},
 
-    components: {
-        FlightsForm: function FlightsForm() {
-            return Promise.resolve().then(function () {
-                return __webpack_require__(5);
-            });
-        }
-    },
+	data: function data() {
+		return {
+			departureSearch: null,
+			destinationSearch: null
+		};
+	},
 
-    computed: {
-        flights: function flights() {
-            return this.$store.getters.browseQuotes;
-        }
-    },
 
-    props: ['departure', 'departureDate', 'destination', 'destinationDate', 'adults', 'children', 'infants', 'cabinClass'],
+	computed: {
+		airports: function airports() {
+			return Object.values(this.$store.getters.airportSearch);
+		},
+		flights: function flights() {
+			return this.$store.getters.browseQuotes;
+		},
+		cabinClasses: function cabinClasses() {
+			return this.$store.getters.cabinClasses;
+		},
+		currentDate: function currentDate() {
+			return this.$store.getters.currentDate;
+		},
 
-    methods: {
-        searchFlight: function searchFlight() {
-            if (this.departure && this.destination && this.departureDate) {
-                var data = {
-                    departure: this.departure,
-                    departureDate: this.departureDate,
-                    destination: this.destination,
-                    destinationDate: this.destinationDate,
-                    adults: this.adults,
-                    children: this.children,
-                    infants: this.infants,
-                    cabinClass: this.cabinClass,
-                    country: 'NL',
-                    currency: 'EUR',
-                    language: 'NL'
-                };
 
-                console.log(data);
+		departure: {
+			get: function get() {
+				return this.$store.getters.flightDeparture;
+			},
+			set: function set(value) {
+				this.$store.commit('flightDeparture', value);
+			}
+		},
 
-                this.$store.dispatch('browseQuotes', data);
-            }
-        }
-    },
+		departureDate: {
+			get: function get() {
+				return this.$store.getters.flightDepartureDate;
+			},
+			set: function set(value) {
+				this.$store.commit('flightDepartureDate', value);
+			}
+		},
 
-    created: function created() {
-        this.searchFlight();
-    }
+		destination: {
+			get: function get() {
+				return this.$store.getters.flightDestination;
+			},
+			set: function set(value) {
+				this.$store.commit('flightDestination', value);
+			}
+		},
+
+		destinationDate: {
+			get: function get() {
+				return this.$store.getters.flightDestinationDate;
+			},
+			set: function set(value) {
+				this.$store.commit('flightDestinationDate', value);
+			}
+		},
+
+		adults: {
+			get: function get() {
+				return this.$store.getters.flightAdults;
+			},
+			set: function set(value) {
+				this.$store.commit('flightAdults', value);
+			}
+		},
+
+		children: {
+			get: function get() {
+				return this.$store.getters.flightChildren;
+			},
+			set: function set(value) {
+				this.$store.commit('flightChildren', value);
+			}
+		},
+
+		infants: {
+			get: function get() {
+				return this.$store.getters.flightInfants;
+			},
+			set: function set(value) {
+				this.$store.commit('flightInfants', value);
+			}
+		},
+
+		cabinClass: {
+			get: function get() {
+				return this.$store.getters.flightCabinClass;
+			},
+			set: function set(value) {
+				this.$store.commit('flightCabinClass', value);
+			}
+		}
+	},
+
+	methods: {
+		/**
+            * Search for a flight
+   */
+		searchFlight: function searchFlight() {
+			if (this.departure && this.destination && this.departureDate) {
+				var data = {
+					departure: this.departure,
+					departureDate: this.departureDate,
+					destination: this.destination,
+					destinationDate: this.destinationDate,
+					adults: this.adults,
+					children: this.children,
+					infants: this.infants,
+					cabinClass: this.cabinClass,
+					country: 'NL',
+					currency: 'EUR',
+					language: 'NL'
+				};
+
+				console.log(data);
+
+				this.$store.dispatch('browseQuotes', data);
+			}
+		},
+
+
+		/**
+            * If a location has been filled in get the corresponding details
+   */
+		setSearchedAirports: function setSearchedAirports() {
+			if (this.departure) {
+				this.$store.dispatch('airportSearch', this.departure);
+			}
+
+			if (this.destination) {
+				this.$store.dispatch('airportSearch', this.destination);
+			}
+		},
+
+
+		/**
+            * Search for an airport
+            *
+   * @param value
+   */
+		airportSearch: function airportSearch(value) {
+			if (value && value.length >= 3) {
+				this.$store.dispatch('airportSearch', value);
+			}
+		}
+	},
+
+	watch: {
+		departureSearch: function departureSearch(value) {
+			this.airportSearch(value);
+		},
+		destinationSearch: function destinationSearch(value) {
+			this.airportSearch(value);
+		}
+	},
+
+	created: function created() {
+		this.setSearchedAirports();
+		this.searchFlight();
+		this.$store.commit('currentDate');
+	}
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8665,7 +9132,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8675,21 +9142,21 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuetify = __webpack_require__(14);
+var _vuetify = __webpack_require__(15);
 
 var _vuetify2 = _interopRequireDefault(_vuetify);
 
-var _store = __webpack_require__(16);
+var _store = __webpack_require__(17);
 
-var _router = __webpack_require__(23);
+var _router = __webpack_require__(28);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _vueMeta = __webpack_require__(38);
+var _vueMeta = __webpack_require__(44);
 
 var _vueMeta2 = _interopRequireDefault(_vueMeta);
 
-var _Web = __webpack_require__(39);
+var _Web = __webpack_require__(45);
 
 var _Web2 = _interopRequireDefault(_Web);
 
@@ -8708,7 +9175,7 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8762,7 +9229,7 @@ exports._unrefActive = exports.active = function (item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(13);
+__webpack_require__(14);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -8771,7 +9238,7 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8962,7 +9429,7 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(1)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9813,10 +10280,10 @@ var range=type==='minute'?rangeMinutes:this.isAmPm?value<12?rangeHours12am:range
 this.updateDimensions();// Start the transition
 requestAnimationFrame(this.startTransition);}},mounted:function mounted(){this.value&&this.callActivate();},render:function render(h){var _addBackgroundColorCl,_this=this;var tooltip=h('div',{staticClass:'tooltip__content','class':this.addBackgroundColorClassChecks((_addBackgroundColorCl={},_defineProperty(_addBackgroundColorCl,this.contentClass,true),_defineProperty(_addBackgroundColorCl,'menuable__content__active',this.isActive),_addBackgroundColorCl)),style:this.styles,attrs:this.attrs,directives:[{name:'show',value:this.isContentActive}],ref:'content'},this.$slots.default);return h(this.tag,{staticClass:'tooltip','class':this.classes},[h('transition',{props:{name:this.computedTransition}},[tooltip]),h('span',{on:this.disabled?{}:{mouseenter:function mouseenter(){_this.runDelay('open',function(){return _this.isActive=true;});},mouseleave:function mouseleave(){_this.runDelay('close',function(){return _this.isActive=false;});}},ref:'activator'},this.$slots.activator)]);}};/***/},/* 257 *//***/function(module,exports){// removed by extract-text-webpack-plugin
 /***/},/* 258 *//***/function(module,__webpack_exports__,__webpack_require__){"use strict";Object.defineProperty(__webpack_exports__,"__esModule",{value:true});/* harmony export (immutable) */__webpack_exports__["default"]=install;/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__click_outside__=__webpack_require__(8);/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__resize__=__webpack_require__(11);/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__ripple__=__webpack_require__(17);/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__scroll__=__webpack_require__(69);/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__touch__=__webpack_require__(9);/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"ClickOutside",function(){return __WEBPACK_IMPORTED_MODULE_0__click_outside__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Ripple",function(){return __WEBPACK_IMPORTED_MODULE_2__ripple__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Resize",function(){return __WEBPACK_IMPORTED_MODULE_1__resize__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Scroll",function(){return __WEBPACK_IMPORTED_MODULE_3__scroll__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Touch",function(){return __WEBPACK_IMPORTED_MODULE_4__touch__["a"];});function install(Vue){Vue.directive('click-outside',__WEBPACK_IMPORTED_MODULE_0__click_outside__["a"/* default */]);Vue.directive('ripple',__WEBPACK_IMPORTED_MODULE_2__ripple__["a"/* default */]);Vue.directive('resize',__WEBPACK_IMPORTED_MODULE_1__resize__["a"/* default */]);Vue.directive('scroll',__WEBPACK_IMPORTED_MODULE_3__scroll__["a"/* default */]);Vue.directive('touch',__WEBPACK_IMPORTED_MODULE_4__touch__["a"/* default */]);}/***/}]/******/)["default"]);});//# sourceMappingURL=vuetify.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9846,7 +10313,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9861,48 +10328,54 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(17);
+var _vuex = __webpack_require__(18);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _getters = __webpack_require__(18);
+var _getters = __webpack_require__(19);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _actions = __webpack_require__(19);
+var _actions = __webpack_require__(20);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(20);
+var _mutations = __webpack_require__(21);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
-var _continent = __webpack_require__(21);
+var _continent = __webpack_require__(22);
 
 var _continent2 = _interopRequireDefault(_continent);
 
-var _airport = __webpack_require__(22);
+var _airport = __webpack_require__(23);
 
 var _airport2 = _interopRequireDefault(_airport);
 
-var _flight = __webpack_require__(47);
+var _flight = __webpack_require__(24);
 
 var _flight2 = _interopRequireDefault(_flight);
 
-var _car = __webpack_require__(48);
+var _car = __webpack_require__(25);
 
 var _car2 = _interopRequireDefault(_car);
 
-var _city = __webpack_require__(50);
+var _city = __webpack_require__(26);
 
 var _city2 = _interopRequireDefault(_city);
+
+var _accommodation = __webpack_require__(27);
+
+var _accommodation2 = _interopRequireDefault(_accommodation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vuex2.default);
 
 var store = exports.store = new _vuex2.default.Store({
-	state: {},
+	state: {
+		currentDate: ''
+	},
 	getters: _getters2.default,
 	mutations: _mutations2.default,
 	actions: _actions2.default,
@@ -9912,12 +10385,13 @@ var store = exports.store = new _vuex2.default.Store({
 		airport: _airport2.default,
 		flight: _flight2.default,
 		car: _car2.default,
-		city: _city2.default
+		city: _city2.default,
+		accommodation: _accommodation2.default
 	}
 });
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10884,19 +11358,23 @@ exports.default = index_esm;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
-exports.default = {};
+exports.default = {
+	currentDate: function currentDate(state) {
+		return state.currentDate;
+	}
+};
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10922,19 +11400,41 @@ exports.default = {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
-exports.default = {};
+exports.default = {
+	/**
+  * Set the current date
+  * This makes sure a user can't search before this date
+  * @param state
+  */
+	currentDate: function currentDate(state) {
+		var date = new Date(),
+		    dd = date.getDate(),
+		    mm = date.getMonth() + 1,
+		    yy = date.getFullYear();
+
+		if (dd < 10) {
+			dd = "0" + dd;
+		}
+
+		if (mm < 10) {
+			mm = "0" + mm;
+		}
+
+		state.currentDate = yy + "-" + mm + "-" + dd;
+	}
+};
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10949,12 +11449,23 @@ exports.default = {
 	},
 
 	mutations: {
+		/**
+   * Set all continents
+   *
+   * @param state
+   * @param continents
+   */
 		continentIndex: function continentIndex(state, continents) {
 			state.all = continents;
 		}
 	},
 
 	actions: {
+		/**
+   * Get all continents from API
+   *
+   * @param context
+   */
 		continentIndex: function continentIndex(context) {
 			fetch('/api/continents').then(function (response) {
 				return response.json();
@@ -10965,6 +11476,12 @@ exports.default = {
 	},
 
 	getters: {
+		/**
+   * Get all continents
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
 		continentIndex: function continentIndex(state) {
 			return state.all;
 		}
@@ -10972,7 +11489,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11011,6 +11528,11 @@ exports.default = {
 	},
 
 	actions: {
+		/**
+   * Get all airports
+   *
+   * @param context
+   */
 		airportIndex: function airportIndex(context) {
 			fetch('/api/airports').then(function (response) {
 				return response.json();
@@ -11020,6 +11542,14 @@ exports.default = {
 				console.error(error);
 			});
 		},
+
+
+		/**
+   * Search for an airport
+   *
+   * @param context
+   * @param search
+   */
 		airportSearch: function airportSearch(context, search) {
 			fetch('/api/airports/' + search + '/search').then(function (response) {
 				return response.json();
@@ -11032,9 +11562,23 @@ exports.default = {
 	},
 
 	getters: {
+		/**
+   * Get all airports
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
 		airportIndex: function airportIndex(state) {
 			return state.all;
 		},
+
+
+		/**
+   * Get search results
+   *
+   * @param state
+   * @returns {{}|state.search|*}
+   */
 		airportSearch: function airportSearch(state) {
 			return state.search;
 		}
@@ -11042,7 +11586,785 @@ exports.default = {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		results: {},
+		departure: '',
+		departureDate: '',
+		destination: '',
+		destinationDate: '',
+		adults: 1,
+		children: 0,
+		infants: 0,
+		cabinClass: '',
+		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
+	},
+
+	mutations: {
+		/**
+   * Set results
+   *
+   * @param state
+   * @param flights
+   */
+		browseQuotes: function browseQuotes(state, flights) {
+			state.results = flights;
+		},
+
+
+		/**
+   * Add cabin class
+   *
+   * @param state
+   * @param cClass
+   */
+		cabinClasses: function cabinClasses(state, cClass) {
+			state.cabinClasses.push(cClass);
+		},
+
+
+		/**
+   * Set departure location
+   *
+   * @param state
+   * @param departure
+   */
+		flightDeparture: function flightDeparture(state, departure) {
+			state.departure = departure;
+		},
+
+
+		/**
+   * Set departure date
+   *
+   * @param state
+   * @param date
+   */
+		flightDepartureDate: function flightDepartureDate(state, date) {
+			state.departureDate = date;
+		},
+
+
+		/**
+   * Set destination location
+   *
+   * @param state
+   * @param destination
+   */
+		flightDestination: function flightDestination(state, destination) {
+			state.destination = destination;
+		},
+
+
+		/**
+   * Set destination/ return date
+   *
+   * @param state
+   * @param date
+   */
+		flightDestinationDate: function flightDestinationDate(state, date) {
+			state.destinationDate = date;
+		},
+
+
+		/**
+   * Set amount of adults
+   *
+   * @param state
+   * @param adults
+   */
+		flightAdults: function flightAdults(state, adults) {
+			state.adults = adults;
+		},
+
+
+		/**
+   * Set amount of children
+   *
+   * @param state
+   * @param children
+   */
+		flightChildren: function flightChildren(state, children) {
+			state.children = children;
+		},
+
+
+		/**
+   * Set amount of infants
+   *
+   * @param state
+   * @param infants
+   */
+		flightInfants: function flightInfants(state, infants) {
+			state.infants = infants;
+		},
+
+
+		/**
+   * Set cabin class
+   * @param state
+   * @param cabinClass
+   */
+		flightCabinClass: function flightCabinClass(state, cabinClass) {
+			state.cabinClass = cabinClass;
+		}
+	},
+
+	actions: {
+		/**
+   * Get browse quotes results from API
+   *
+   * @param context
+   * @param data
+   */
+		browseQuotes: function browseQuotes(context, data) {
+			fetch('/api/flights/browse-quotes', {
+				headers: {
+					'content-type': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				console.log(response);
+				context.commit('browseQuotes', response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get browse quotes results
+   *
+   * @param state
+   * @returns {{}|state.results|*}
+   */
+		browseQuotes: function browseQuotes(state) {
+			return state.results;
+		},
+
+
+		/**
+   * Get cabin classes
+   *
+   * @param state
+   * @returns {*[]}
+   */
+		cabinClasses: function cabinClasses(state) {
+			return state.cabinClasses;
+		},
+
+
+		/**
+   * Get departure location
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDeparture: function flightDeparture(state) {
+			return state.departure;
+		},
+
+
+		/**
+   * Get departure date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDepartureDate: function flightDepartureDate(state) {
+			return state.departureDate;
+		},
+
+
+		/**
+   * Get destination
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDestination: function flightDestination(state) {
+			return state.destination;
+		},
+
+
+		/**
+   * Get destination/ return date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDestinationDate: function flightDestinationDate(state) {
+			return state.destinationDate;
+		},
+
+
+		/**
+   * Get amount of adults
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightAdults: function flightAdults(state) {
+			return state.adults;
+		},
+
+
+		/**
+   * Get amount of children
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightChildren: function flightChildren(state) {
+			return state.children;
+		},
+
+
+		/**
+   * Get amount of infants
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightInfants: function flightInfants(state) {
+			return state.infants;
+		},
+
+
+		/**
+   * Get cabin class
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightCabinClass: function flightCabinClass(state) {
+			return state.cabinClass;
+		}
+	}
+};
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		pickupPlace: '',
+		pickupDateTime: '',
+		dropoffPlace: '',
+		dropoffDateTime: '',
+		driverAge: ''
+	},
+
+	mutations: {
+		/**
+   * Set pickup place
+   *
+   * @param state
+   * @param place
+   */
+		carPickupPlace: function carPickupPlace(state, place) {
+			state.pickupPlace = place;
+		},
+
+
+		/**
+   * Set pickup date and time
+   *
+   * @param state
+   * @param dateTime
+   */
+		carPickupDateTime: function carPickupDateTime(state, dateTime) {
+			state.pickupDateTime = dateTime;
+		},
+
+
+		/**
+   * Set dropoff place
+   *
+   * @param state
+   * @param place
+   */
+		carDropoffPlace: function carDropoffPlace(state, place) {
+			state.dropoffPlace = place;
+		},
+
+
+		/**
+   * Set dropoff date and time
+   * @param state
+   * @param dateTime
+   */
+		carDropoffDateTime: function carDropoffDateTime(state, dateTime) {
+			state.dropoffDateTime = dateTime;
+		},
+
+
+		/**
+   * Set driver age
+   *
+   * @param state
+   * @param age
+   */
+		carDriverAge: function carDriverAge(state, age) {
+			state.driverAge = age;
+		}
+	},
+
+	actions: {},
+
+	getters: {
+		/**
+   * Get pickup place
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carPickupPlace: function carPickupPlace(state) {
+			return state.pickupPlace;
+		},
+
+
+		/**
+   * Get pickup date time
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carPickupDateTime: function carPickupDateTime(state) {
+			return state.pickupDateTime;
+		},
+
+
+		/**
+   * Get dropoff place
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carDropoffPlace: function carDropoffPlace(state) {
+			return state.dropoffPlace;
+		},
+
+
+		/**
+   * Get dropoff date and time
+   * @param state
+   * @returns {string|*}
+   */
+		carDropoffDateTime: function carDropoffDateTime(state) {
+			return state.dropoffDateTime;
+		},
+
+
+		/**
+   * Get driver age
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carDriverAge: function carDriverAge(state) {
+			return state.driverAge;
+		}
+	}
+};
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		search: {}
+	},
+
+	mutations: {
+		/**
+   * Set search results
+   *
+   * @param state
+   * @param cities
+   */
+		citySearch: function citySearch(state, cities) {
+			state.search = cities;
+		}
+	},
+
+	actions: {
+		/**
+   * Get search results from API
+   *
+   * @param context
+   * @param value
+   */
+		citySearch: function citySearch(context, value) {
+			fetch('/api/cities/' + value + '/search').then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('citySearch', response);
+			}).catch(function (error) {
+				console.error('citySearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get search results
+   *
+   * @param state
+   * @returns {{}|state.search|*}
+   */
+		citySearch: function citySearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		result: {},
+		city: '',
+		checkinDate: '',
+		checkoutDate: '',
+		rooms: 0,
+		persons: 1,
+		sort: '',
+		minPrice: '',
+		maxPrice: '',
+		cancellation: '',
+		meals: '',
+		propertyType: '',
+		limit: 10,
+		offset: 0
+	},
+
+	mutations: {
+		/**
+   * Set city
+   *
+   * @param state
+   * @param city
+   */
+		accommodationCity: function accommodationCity(state, city) {
+			state.city = city;
+		},
+
+
+		/**
+   * Set checkin date
+   *
+   * @param state
+   * @param date
+   */
+		accommodationCheckinDate: function accommodationCheckinDate(state, date) {
+			state.checkinDate = date;
+		},
+
+
+		/**
+   * Set checkout date
+   *
+   * @param state
+   * @param date
+   */
+		accommodationCheckoutDate: function accommodationCheckoutDate(state, date) {
+			state.checkoutDate = date;
+		},
+
+
+		/**
+   * Set number of rooms
+   *
+   * @param state
+   * @param rooms
+   */
+		accommodationRooms: function accommodationRooms(state, rooms) {
+			state.rooms = rooms;
+		},
+
+
+		/**
+   * Set amount of persons
+   * @param state
+   * @param persons
+   */
+		accommodationPersons: function accommodationPersons(state, persons) {
+			state.persons = persons;
+		},
+
+
+		/**
+   * Set sort
+   *
+   * @param state
+   * @param sort
+   */
+		accommodationSort: function accommodationSort(state, sort) {
+			state.sort = sort;
+		},
+
+
+		/**
+   * Set min price
+   * @param state
+   * @param price
+   */
+		accommodationMinPrice: function accommodationMinPrice(state, price) {
+			state.minPrice = price;
+		},
+
+
+		/**
+   * Set max price
+   *
+   * @param state
+   * @param price
+   */
+		accommodationMaxPrice: function accommodationMaxPrice(state, price) {
+			state.maxPrice = price;
+		},
+
+
+		/**
+   * Set cancellation options
+   *
+   * @param state
+   * @param value
+   */
+		accommodationCancellation: function accommodationCancellation(state, value) {
+			state.cancellation = value;
+		},
+
+
+		/**
+   * Set meal options
+   * @param state
+   * @param value
+   */
+		accommodationMeals: function accommodationMeals(state, value) {
+			state.meals = value;
+		},
+
+
+		/**
+   * Set property types
+   *
+   * @param state
+   * @param value
+   */
+		accommodationPropertyType: function accommodationPropertyType(state, value) {
+			state.propertyType = value;
+		},
+
+
+		/**
+   * Set limit results
+   *
+   * @param state
+   * @param value
+   */
+		accommodationLimit: function accommodationLimit(state, value) {
+			state.limit = value;
+		},
+
+
+		/**
+   * Set offset for pagination
+   *
+   * @param state
+   * @param value
+   */
+		accommodationOffset: function accommodationOffset(state, value) {
+			state.offset = value;
+		}
+	},
+
+	actions: {},
+
+	getters: {
+		/**
+   * Get city
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationCity: function accommodationCity(state) {
+			return state.city;
+		},
+
+
+		/**
+   * Get checkin date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationCheckinDate: function accommodationCheckinDate(state) {
+			return state.checkinDate;
+		},
+
+
+		/**
+   * Get checkout date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationCheckoutDate: function accommodationCheckoutDate(state) {
+			return state.checkoutDate;
+		},
+
+
+		/**
+   * Get amount of rooms
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		accommodationRooms: function accommodationRooms(state) {
+			return state.rooms;
+		},
+
+
+		/**
+   * Get amount of persons
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		accommodationPersons: function accommodationPersons(state) {
+			return state.persons;
+		},
+
+
+		/**
+   * Get sort
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationSort: function accommodationSort(state) {
+			return state.sort;
+		},
+
+
+		/**
+   * get min price
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationMinPrice: function accommodationMinPrice(state) {
+			return state.minPrice;
+		},
+
+
+		/**
+   * Get max price
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationMaxPrice: function accommodationMaxPrice(state) {
+			return state.maxPrice;
+		},
+
+
+		/**
+   * Get cancellation option
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationCancellation: function accommodationCancellation(state) {
+			return state.cancellation;
+		},
+
+
+		/**
+   * Get meal options
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationMeals: function accommodationMeals(state) {
+			return state.meals;
+		},
+
+
+		/**
+   * Get property types
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		accommodationPropertyType: function accommodationPropertyType(state) {
+			return state.propertyType;
+		},
+
+
+		/**
+   * Get results limit
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		accommodationLimit: function accommodationLimit(state) {
+			return state.limit;
+		},
+
+
+		/**
+   * Get page offset
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		accommodationOffset: function accommodationOffset(state) {
+			return state.offset;
+		}
+	}
+};
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11056,7 +12378,7 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(24);
+var _vueRouter = __webpack_require__(29);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -11064,12 +12386,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Index = function Index() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(25);
+		return __webpack_require__(30);
 	});
 };
 var Flights = function Flights() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(36);
+		return __webpack_require__(42);
 	});
 };
 
@@ -11094,7 +12416,7 @@ exports.default = new _vueRouter2.default({
 });
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13556,7 +14878,7 @@ exports.default = VueRouter;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13564,7 +14886,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(41);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -13610,7 +14932,61 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 26 */
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(32);
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\index\\flight-form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c55e230", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c55e230", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13741,7 +15117,7 @@ var render = function() {
                           attrs: {
                             label: "Departure date",
                             type: "date",
-                            min: _vm.setCurrentDate(),
+                            min: _vm.currentDate,
                             required: ""
                           },
                           model: {
@@ -13908,7 +15284,8 @@ var render = function() {
                             items: _vm.cabinClasses,
                             label: "Cabin class",
                             "single-line": "",
-                            bottom: ""
+                            bottom: "",
+                            required: ""
                           },
                           model: {
                             value: _vm.cabinClass,
@@ -13966,16 +15343,20 @@ if (false) {
 }
 
 /***/ }),
-/* 27 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__ = __webpack_require__(34);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = null
+
+
 /* template */
 
 /* template functional */
@@ -13987,8 +15368,8 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -14016,7 +15397,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 28 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14041,21 +15422,76 @@ var render = function() {
                 [
                   _c(
                     "v-flex",
-                    { attrs: { xs6: "" } },
+                    { attrs: { xs4: "" } },
                     [
-                      _c("v-text-field", {
+                      _c("v-select", {
                         attrs: {
-                          label: "Check in date",
-                          type: "date",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Check out date",
-                          type: "date",
-                          required: ""
+                          label: "Destination",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.cities,
+                          "item-text": "name",
+                          "item-value": "id",
+                          "no-data": "No results found",
+                          "cache-items": "",
+                          "search-input": _vm.citySearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.citySearch = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "selected",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-sub-title", [
+                                      data.item.country
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "Country: " +
+                                                _vm._s(data.item.country.name)
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.city,
+                          callback: function($$v) {
+                            _vm.city = $$v
+                          },
+                          expression: "city"
                         }
                       })
                     ],
@@ -14064,7 +15500,44 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-flex",
-                    { attrs: { xs6: "" } },
+                    { attrs: { xs4: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Check in date",
+                          type: "date",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.checkinDate,
+                          callback: function($$v) {
+                            _vm.checkinDate = $$v
+                          },
+                          expression: "checkinDate"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Check out date",
+                          type: "date",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.checkoutDate,
+                          callback: function($$v) {
+                            _vm.checkoutDate = $$v
+                          },
+                          expression: "checkoutDate"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs4: "" } },
                     [
                       _c("v-text-field", {
                         attrs: {
@@ -14072,6 +15545,13 @@ var render = function() {
                           type: "number",
                           required: "",
                           min: "1"
+                        },
+                        model: {
+                          value: _vm.persons,
+                          callback: function($$v) {
+                            _vm.persons = $$v
+                          },
+                          expression: "persons"
                         }
                       }),
                       _vm._v(" "),
@@ -14081,6 +15561,13 @@ var render = function() {
                           type: "number",
                           required: "",
                           min: "1"
+                        },
+                        model: {
+                          value: _vm.rooms,
+                          callback: function($$v) {
+                            _vm.rooms = $$v
+                          },
+                          expression: "rooms"
                         }
                       })
                     ],
@@ -14127,15 +15614,15 @@ if (false) {
 }
 
 /***/ }),
-/* 29 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(36);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -14181,7 +15668,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 30 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14254,13 +15741,11 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("v-list-tile-sub-title", [
-                                      data.item.city && data.item.city.country
+                                      data.item.country
                                         ? _c("div", [
                                             _vm._v(
                                               "Country: " +
-                                                _vm._s(
-                                                  data.item.city.country.name
-                                                )
+                                                _vm._s(data.item.country.name)
                                             )
                                           ])
                                         : _vm._e()
@@ -14349,13 +15834,11 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("v-list-tile-sub-title", [
-                                      data.item.city && data.item.city.country
+                                      data.item.country
                                         ? _c("div", [
                                             _vm._v(
                                               "Country: " +
-                                                _vm._s(
-                                                  data.item.city.country.name
-                                                )
+                                                _vm._s(data.item.country.name)
                                             )
                                           ])
                                         : _vm._e()
@@ -14458,15 +15941,15 @@ if (false) {
 }
 
 /***/ }),
-/* 31 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__ = __webpack_require__(38);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -14512,7 +15995,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 32 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15170,15 +16653,15 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__ = __webpack_require__(40);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -15224,7 +16707,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 34 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15811,7 +17294,7 @@ if (false) {
 }
 
 /***/ }),
-/* 35 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16114,15 +17597,15 @@ if (false) {
 }
 
 /***/ }),
-/* 36 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d881d54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flights_vue__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d881d54_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flights_vue__ = __webpack_require__(43);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -16168,7 +17651,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 37 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16178,47 +17661,363 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
-    { attrs: { fluid: "" } },
+    { attrs: { fluid: "", "grid-list-lg": "" } },
     [
-      _c(
-        "v-parallax",
-        {
-          attrs: {
-            src:
-              "https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb",
-            height: "700"
-          }
-        },
-        [
-          _c(
-            "v-layout",
-            { attrs: { column: "", "align-center": "", "justify-center": "" } },
-            [
-              _c("FlightsForm", {
-                attrs: {
-                  departure: _vm.departure,
-                  departureDate: _vm.departureDate,
-                  destination: _vm.destination,
-                  destinationDate: _vm.destinationDate,
-                  adults: parseInt(_vm.adults),
-                  children: parseInt(_vm.children),
-                  infants: parseInt(_vm.infants),
-                  cabinClass: _vm.cabinClass
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
+      _vm.departure && _vm.destination
+        ? _c("div", [_vm._v("\n        Google maps\n    ")])
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "", wrap: "" } },
-        _vm._l(_vm.flights, function(flight) {
-          return _c("div", { key: flight.Quotes })
-        })
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs3: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          label: "Departure",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.airports,
+                          "item-text": "name",
+                          "item-value": "iata",
+                          "no-data": "No results found",
+                          "cache-items": "",
+                          "search-input": _vm.departureSearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.departureSearch = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "selected",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-sub-title", [
+                                      data.item.city && data.item.city.country
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "Country: " +
+                                                _vm._s(
+                                                  data.item.city.country.name
+                                                )
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      data.item.city
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "City: " +
+                                                _vm._s(data.item.city.name)
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.departure,
+                          callback: function($$v) {
+                            _vm.departure = _vm._n($$v)
+                          },
+                          expression: "departure"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Departure date",
+                          type: "date",
+                          min: _vm.currentDate,
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.departureDate,
+                          callback: function($$v) {
+                            _vm.departureDate = $$v
+                          },
+                          expression: "departureDate"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          label: "Destination",
+                          required: "",
+                          autocomplete: "",
+                          items: _vm.airports,
+                          "item-text": "name",
+                          "item-value": "iata",
+                          "no-data": "No results found",
+                          "cache-items": "",
+                          "search-input": _vm.destinationSearch
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.destinationSearch = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "item",
+                            fn: function(data) {
+                              return [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(_vm._s(data.item.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-sub-title", [
+                                      data.item.city && data.item.city.country
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "Country: " +
+                                                _vm._s(
+                                                  data.item.city.country.name
+                                                )
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      data.item.city
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "City: " +
+                                                _vm._s(data.item.city.name)
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.destination,
+                          callback: function($$v) {
+                            _vm.destination = _vm._n($$v)
+                          },
+                          expression: "destination"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Return date",
+                          type: "date",
+                          min: _vm.departureDate
+                        },
+                        model: {
+                          value: _vm.destinationDate,
+                          callback: function($$v) {
+                            _vm.destinationDate = $$v
+                          },
+                          expression: "destinationDate"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of adults",
+                          type: "number",
+                          min: "1",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.adults,
+                          callback: function($$v) {
+                            _vm.adults = _vm._n($$v)
+                          },
+                          expression: "adults"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of children (1 - 16 years)",
+                          type: "number",
+                          min: "0",
+                          max: "8"
+                        },
+                        model: {
+                          value: _vm.children,
+                          callback: function($$v) {
+                            _vm.children = _vm._n($$v)
+                          },
+                          expression: "children"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Number of infants (under 12 months)",
+                          type: "number",
+                          min: "0",
+                          max: "8"
+                        },
+                        model: {
+                          value: _vm.infants,
+                          callback: function($$v) {
+                            _vm.infants = _vm._n($$v)
+                          },
+                          expression: "infants"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.cabinClasses,
+                          label: "Cabin class",
+                          "single-line": "",
+                          bottom: "",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.cabinClass,
+                          callback: function($$v) {
+                            _vm.cabinClass = $$v
+                          },
+                          expression: "cabinClass"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { flat: "", color: "primary" },
+                          on: { click: _vm.searchFlight }
+                        },
+                        [
+                          _c("v-icon", [_vm._v("search")]),
+                          _vm._v(
+                            "\n                        Search\n                    "
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs9: "" } },
+            [
+              _vm._v("\n            Results\n            "),
+              _vm._l(_vm.flights, function(flight, i) {
+                return _c(
+                  "div",
+                  { key: i },
+                  [
+                    _c(
+                      "v-card",
+                      { attrs: { hover: "" } },
+                      [
+                        _c(
+                          "v-card-text",
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(flight.to.origin.city.name) +
+                                " " +
+                                _vm._s(flight.to.origin.city.country.name) +
+                                "\n                        naar\n                        " +
+                                _vm._s(flight.to.destination.city.name) +
+                                " " +
+                                _vm._s(
+                                  flight.to.destination.city.country.name
+                                ) +
+                                "\n                        met\n                        " +
+                                _vm._s(flight.to.carrier) +
+                                "\n\n                        "
+                            ),
+                            _c("v-divider", { attrs: { inset: "" } }),
+                            _vm._v(
+                              "\n\n                        " +
+                                _vm._s(flight.return.origin.city.name) +
+                                " " +
+                                _vm._s(flight.return.origin.city.country.name) +
+                                "\n                        naar\n                        " +
+                                _vm._s(flight.return.destination.city.name) +
+                                " " +
+                                _vm._s(
+                                  flight.return.destination.city.country.name
+                                ) +
+                                "\n                        met\n                        " +
+                                _vm._s(flight.return.carrier) +
+                                "\n                    "
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        ],
+        1
       )
     ],
     1
@@ -16236,7 +18035,7 @@ if (false) {
 }
 
 /***/ }),
-/* 38 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17344,15 +19143,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 39 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(46);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -17398,7 +19197,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 40 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17661,396 +19460,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-98f3c19c", esExports)
   }
 }
-
-/***/ }),
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		results: {},
-		departure: '',
-		departureDate: '',
-		destination: '',
-		destinationDate: '',
-		adults: 0,
-		children: 0,
-		infants: 0,
-		cabinClass: '',
-		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
-	},
-
-	mutations: {
-		browseQuotes: function browseQuotes(state, flights) {
-			state.results = flights;
-		},
-		cabinClasses: function cabinClasses(state, cClass) {
-			state.cabinClasses.push(cClass);
-		},
-		flightDeparture: function flightDeparture(state, departure) {
-			state.departure = departure;
-		},
-		flightDepartureDate: function flightDepartureDate(state, date) {
-			state.departureDate = date;
-		},
-		flightDestination: function flightDestination(state, destination) {
-			state.destination = destination;
-		},
-		flightDestinationDate: function flightDestinationDate(state, date) {
-			state.destinationDate = date;
-		},
-		flightAdults: function flightAdults(state, adults) {
-			state.adults = adults;
-		},
-		flightChildren: function flightChildren(state, children) {
-			state.children = children;
-		},
-		flightInfants: function flightInfants(state, infants) {
-			state.infants = infants;
-		},
-		flightCabinClass: function flightCabinClass(state, cabinClass) {
-			state.cabinClass = cabinClass;
-		}
-	},
-
-	actions: {
-		browseQuotes: function browseQuotes(context, data) {
-			fetch('/api/flights/browse-quotes', {
-				headers: {
-					'content-type': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify(data)
-			}).then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				console.log(response);
-				context.commit('browseQuotes', response);
-			}).catch(function (error) {
-				console.log(error);
-			});
-		}
-	},
-
-	getters: {
-		browseQuotes: function browseQuotes(state) {
-			return state.results;
-		},
-		cabinClasses: function cabinClasses(state) {
-			return state.cabinClasses;
-		},
-		flightDeparture: function flightDeparture(state) {
-			return state.departure;
-		},
-		flightDepartureDate: function flightDepartureDate(state) {
-			return state.departureDate;
-		},
-		flightDestination: function flightDestination(state) {
-			return state.destination;
-		},
-		flightDestinationDate: function flightDestinationDate(state) {
-			return state.destinationDate;
-		},
-		flightAdults: function flightAdults(state) {
-			return state.adults;
-		},
-		flightChildren: function flightChildren(state) {
-			return state.children;
-		},
-		flightInfants: function flightInfants(state) {
-			return state.infants;
-		},
-		flightCabinClass: function flightCabinClass(state) {
-			return state.cabinClass;
-		}
-	}
-};
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		all: {},
-		pickupPlace: '',
-		pickupDateTime: '',
-		dropoffPlace: '',
-		dropoffDateTime: '',
-		driverAge: ''
-	},
-
-	mutations: {
-		carPickupPlace: function carPickupPlace(state, place) {
-			state.pickupPlace = place;
-		},
-		carPickupDateTime: function carPickupDateTime(state, dateTime) {
-			state.pickupDateTime = dateTime;
-		},
-		carDropoffPlace: function carDropoffPlace(state, place) {
-			state.dropoffPlace = place;
-		},
-		carDropoffDateTime: function carDropoffDateTime(state, dateTime) {
-			state.dropoffDateTime = dateTime;
-		},
-		carDriverAge: function carDriverAge(state, age) {
-			state.driverAge = age;
-		}
-	},
-
-	actions: {},
-
-	getters: {
-		carPickupPlace: function carPickupPlace(state) {
-			return state.pickupPlace;
-		},
-		carPickupDateTime: function carPickupDateTime(state) {
-			return state.pickupDateTime;
-		},
-		carDropoffPlace: function carDropoffPlace(state) {
-			return state.dropoffPlace;
-		},
-		carDropoffDateTime: function carDropoffDateTime(state) {
-			return state.dropoffDateTime;
-		},
-		carDriverAge: function carDriverAge(state) {
-			return state.driverAge;
-		}
-	}
-};
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-    data: function data() {
-        return {
-            pickupSearch: null,
-            dropoffSearch: null
-        };
-    },
-
-
-    computed: {
-        cities: function cities() {
-            return Object.values(this.$store.getters.citySearch);
-        },
-
-
-        pickupPlace: {
-            get: function get() {
-                return this.$store.getters.carPickupPlace;
-            },
-            set: function set(place) {
-                this.$store.commit('carPickupPlace', place);
-            }
-        },
-
-        pickupDateTime: {
-            get: function get() {
-                return this.$store.getters.carPickupDateTime;
-            },
-            set: function set(dateTime) {
-                this.$store.commit('carPickupDateTime', dateTime);
-            }
-        },
-
-        dropoffPlace: {
-            get: function get() {
-                return this.$store.getters.carDropoffPlace;
-            },
-            set: function set(place) {
-                this.$store.commit('carDropoffPlace', place);
-            }
-        },
-
-        dropoffDateTime: {
-            get: function get() {
-                return this.$store.getters.carDropoffDateTime;
-            },
-            set: function set(dateTime) {
-                this.$store.commit('carDropoffDateTime', dateTime);
-            }
-        },
-
-        driverAge: {
-            get: function get() {
-                return this.$store.getters.carDriverAge;
-            },
-            set: function set(age) {
-                this.$store.commit('carDriverAge', age);
-            }
-        }
-    },
-
-    methods: {
-        searchPlaces: function searchPlaces(value) {
-            if (value && value.length >= 3) {
-                this.$store.dispatch('citySearch', value);
-            }
-        }
-    },
-
-    watch: {
-        pickupSearch: function pickupSearch(value) {
-            this.searchPlaces(value);
-        },
-        dropoffSearch: function dropoffSearch(value) {
-            this.searchPlaces(value);
-        }
-    }
-};
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		search: {}
-	},
-
-	mutations: {
-		citySearch: function citySearch(state, cities) {
-			state.search = cities;
-		}
-	},
-
-	actions: {
-		citySearch: function citySearch(context, value) {
-			fetch('/api/cities/' + value + '/search').then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				context.commit('citySearch', response);
-			}).catch(function (error) {
-				console.error('citySearch', error);
-			});
-		}
-	},
-
-	getters: {
-		citySearch: function citySearch(state) {
-			return state.search;
-		}
-	}
-};
 
 /***/ })
 /******/ ]);

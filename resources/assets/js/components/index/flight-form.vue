@@ -33,7 +33,7 @@
                                     </v-list-tile-content>
                                 </template>
                             </v-select>
-                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="setCurrentDate()" required />
+                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="currentDate" required />
                         </v-flex>
 
                         <v-flex xs3>
@@ -74,6 +74,7 @@
                                 label="Cabin class"
                                 single-line
                                 bottom
+                                required
                                 v-model="cabinClass"
                             />
                         </v-flex>
@@ -105,18 +106,33 @@
         },
 
         computed: {
-    		airports()
+			/**
+             * Get all searched airports
+             *
+			 * @returns {any[]}
+			 */
+			airports()
             {
     	        return Object.values( this.$store.getters.airportSearch );
             },
 
+			/**
+             * Get all cabin classes
+             *
+			 * @returns {computed.cabinClasses|mutations.cabinClasses|getters.cabinClasses|cabinClasses|*[]}
+			 */
 			cabinClasses()
-            {
+			{
                 return this.$store.getters.cabinClasses;
 			},
 
+			currentDate()
+            {
+			    return this.$store.getters.currentDate;
+			},
+
 			departure: {
-    			get()
+				get()
                 {
 					return this.$store.getters.flightDeparture;
 				},
@@ -205,7 +221,12 @@
         },
 
         methods: {
-    		airportSearch( value )
+			/**
+             * Search for an airport
+             *
+			 * @param value
+			 */
+			airportSearch( value )
             {
             	if( value && value.length >= 3 )
             	{
@@ -215,39 +236,13 @@
 				}
             },
 
-            submit()
-            {
+			/**
+             * Send the user to the flights page
+			 */
+			submit()
+			{
     			this.$router.push({name: 'Flights'});
             },
-
-            setCurrentDate()
-            {
-    		    let date = new Date(),
-                    dd = date.getDate(),
-                    mm = date.getMonth() + 1,
-                    yy = date.getFullYear();
-
-    		    if( dd < 10 ) {
-    		    	dd = `0${dd}`;
-                }
-
-                if( mm < 10 ) {
-    		    	mm = `0${mm}`;
-                }
-
-                return `${yy}-${mm}-${dd}`;
-            },
-
-            setSearchedAirports()
-            {
-    			if( this.departure ) {
-					this.$store.dispatch('airportSearch', this.departure);
-                }
-
-                if( this.destination ) {
-					this.$store.dispatch('airportSearch', this.destination);
-                }
-            }
         },
 
         watch: {
@@ -262,9 +257,8 @@
             }
         },
 
-        created()
-        {
-    		this.setSearchedAirports();
+        created() {
+    		this.$store.commit(' currentDate' );
         }
     }
 </script>

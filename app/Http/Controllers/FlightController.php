@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Airport;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -21,7 +22,63 @@ class FlightController extends Controller
 	 */
 	public function browseQuotes( Request $request )
 	{
-		return $this->browse( 'browsequotes', $request );
+		$response = $this->browse( 'browsequotes', $request );
+
+
+		$data = [];
+		foreach( $response->Quotes as $key => $value )
+		{
+			if( !empty( $value->OutboundLeg->CarrierIds ) && !empty( $value->InboundLeg->CarrierIds ) )
+			{
+				$currency = $response->Currencies[ 0 ];
+				$price = $currency->Symbol.( $currency->SpaceBetweenAmountAndSymbol ? ' ' : '' ).number_format( $value->MinPrice, $currency->DecimalDigits, $currency->DecimalSeparator, $currency->ThousandsSeparator );
+				$toCarrier = $response->Carriers[ array_search( $value->OutboundLeg->CarrierIds[ 0 ], array_column( $response->Carriers, 'CarrierId' ) ) ]->Name;
+				$returnCarrier = $response->Carriers[ array_search( $value->InboundLeg->CarrierIds[ 0 ], array_column( $response->Carriers, 'CarrierId' ) ) ]->Name;
+				$toOrigin = $response->Places[ array_search( $value->OutboundLeg->OriginId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
+				$toDestination = $response->Places[ array_search( $value->OutboundLeg->DestinationId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
+				$returnOrigin = $response->Places[ array_search( $value->InboundLeg->OriginId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
+				$returnDestination = $response->Places[ array_search( $value->InboundLeg->DestinationId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
+
+				$data[] = [
+					'direct' => $value->Direct,
+					'price'  => $price,
+					'to'     => [
+						'carrier'     => $toCarrier,
+						'date'        => str_replace( 'T', '', $value->OutboundLeg->DepartureDate ),
+						'origin'      => Airport::where( 'iata', $toOrigin )->with( [
+																						'city' => function( $query )
+																						{
+																							$query->with( 'country' );
+																						}
+																					] )->first(),
+						'destination' => Airport::where( 'iata', $toDestination )->with( [
+																							 'city' => function( $query )
+																							 {
+																								 $query->with( 'country' );
+																							 }
+																						 ] )->first()
+					],
+					'return' => [
+						'carrier'     => $returnCarrier,
+						'date'        => str_replace( 'T', ' ', $value->InboundLeg->DepartureDate ),
+						'origin'      => Airport::where( 'iata', $returnOrigin )->with( [
+																							'city' => function( $query )
+																							{
+																								$query->with( 'country' );
+																							}
+																						] )->first(),
+						'destination' => Airport::where( 'iata', $returnDestination )->with( [
+																								 'city' => function( $query )
+																								 {
+																									 $query->with( 'country' );
+																								 }
+																							 ] )->first()
+					]
+				];
+			}
+		}
+
+		return response()->json( $data, 200 );
 	}
 
 	/**
@@ -88,7 +145,7 @@ class FlightController extends Controller
 
 		$response = json_decode( file_get_contents( $url ) );
 
-		return response()->json( $response, 200 );
+		return $response;
 	}
 
 	/**

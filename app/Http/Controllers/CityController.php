@@ -101,6 +101,7 @@ class CityController extends Controller
 
 	public function search( $search ) {
 		$result = City::where('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
 			->with('country')
 			->orderBy('name', 'asc')
 			->get();

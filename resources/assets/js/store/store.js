@@ -10,11 +10,14 @@ import airport from './modules/airport';
 import flight from './modules/flight';
 import car from './modules/car';
 import city from './modules/city';
+import accommodation from './modules/accommodation';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-	state: {},
+	state: {
+		currentDate: '',
+	},
 	getters,
 	mutations,
 	actions,
@@ -25,5 +28,6 @@ export const store = new Vuex.Store({
 		flight,
 		car,
 		city,
+		accommodation
 	}
 });

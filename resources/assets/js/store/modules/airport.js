@@ -30,6 +30,11 @@ export default
 	},
 
 	actions: {
+		/**
+		 * Get all airports
+		 *
+		 * @param context
+		 */
 		airportIndex( context )
 		{
 			fetch('/api/airports')
@@ -44,6 +49,12 @@ export default
 				});
 		},
 
+		/**
+		 * Search for an airport
+		 *
+		 * @param context
+		 * @param search
+		 */
 		airportSearch( context, search )
 		{
 			fetch(`/api/airports/${search}/search`)
@@ -60,11 +71,23 @@ export default
 	},
 
 	getters: {
+		/**
+		 * Get all airports
+		 *
+		 * @param state
+		 * @returns {{}|state.all|*}
+		 */
 		airportIndex( state )
 		{
 			return state.all;
 		},
 
+		/**
+		 * Get search results
+		 *
+		 * @param state
+		 * @returns {{}|state.search|*}
+		 */
 		airportSearch( state )
 		{
 			return state.search;

@@ -5,6 +5,12 @@ export default
 	},
 
 	mutations: {
+		/**
+		 * Set all continents
+		 *
+		 * @param state
+		 * @param continents
+		 */
 		continentIndex( state, continents )
 		{
 			state.all = continents;
@@ -12,6 +18,11 @@ export default
 	},
 
 	actions: {
+		/**
+		 * Get all continents from API
+		 *
+		 * @param context
+		 */
 		continentIndex( context )
 		{
 			fetch('/api/continents')
@@ -25,6 +36,12 @@ export default
 	},
 
 	getters: {
+		/**
+		 * Get all continents
+		 *
+		 * @param state
+		 * @returns {{}|state.all|*}
+		 */
 		continentIndex( state )
 		{
 			return state.all;

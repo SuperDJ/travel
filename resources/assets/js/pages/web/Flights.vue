@@ -86,25 +86,35 @@
             </v-flex>
 
             <v-flex xs9>
-                Results
-                <div v-for="(flight, i) in flights" :key="i">
-                    <v-card hover>
-                        <v-card-text>
-                            {{flight.to.origin.city.name}} {{flight.to.origin.city.country.name}}
-                            naar
-                            {{flight.to.destination.city.name}} {{ flight.to.destination.city.country.name}}
-                            met
-                            {{flight.to.carrier}}
+                <div v-if="flights.length > 1">
+                    <div v-for="(flight, i) in flights" :key="i">
+                        <v-card hover>
+                            <v-card-text>
+                                <img :src="airlineImage(flight.to.carrier.iso)" :alt="flight.to.carrier.name">
+                                {{flight.to.origin.city.name}} {{flight.to.origin.city.country.name}}
+                                <v-icon>chevron_right</v-icon>
+                                {{flight.to.destination.city.name}} {{ flight.to.destination.city.country.name}}
+                                met
+                                {{flight.to.carrier}}
 
-                            <v-divider inset />
+                                <v-divider />
 
-                            {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
-                            naar
-                            {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
-                            met
-                            {{flight.return.carrier}}
-                        </v-card-text>
-                    </v-card>
+                                <img :src="airlineImage(flight.return.carrier.iso)" :alt="flight.return.carrier.name">
+                                {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
+                                <v-icon>chevron_left</v-icon>
+                                {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
+                                met
+                                {{flight.return.carrier}}
+
+                            </v-card-text>
+                            <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
+                                {{flight.price}}
+                            </v-flex>
+                        </v-card>
+                    </div>
+                </div>
+                <div v-else>
+                    <img src="/flight-error.png" alt="error loading flights">
                 </div>
             </v-flex>
         </v-layout>
@@ -287,6 +297,15 @@
                 	this.$store.dispatch( 'airportSearch', value );
                 }
             },
+
+			/**
+             * Return
+			 * @param airline
+			 * @returns {string}
+			 */
+			airlineImage( airline ) {
+				return `https://content.airhex.com/content/logos/airlines_${airline}_175_50_h.png?proportions=keep`;
+            }
         },
 
 		watch: {

@@ -61,7 +61,8 @@ module.exports = env => {
 						options: {
 							name: '[hash].[ext]',
 							outputPath: '/public/images',
-							publicPath: '/images'
+							publicPath: '/images',
+							useRelativePath: true,
 						},
 					}
 				}

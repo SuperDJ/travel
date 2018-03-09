@@ -8837,6 +8837,16 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
 	metaInfo: {
@@ -8989,6 +8999,16 @@ exports.default = {
 			if (value && value.length >= 3) {
 				this.$store.dispatch('airportSearch', value);
 			}
+		},
+
+
+		/**
+            * Return
+   * @param airline
+   * @returns {string}
+   */
+		airlineImage: function airlineImage(airline) {
+			return 'https://content.airhex.com/content/logos/airlines_' + airline + '_175_50_h.png?proportions=keep';
 		}
 	},
 
@@ -17955,53 +17975,101 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs9: "" } },
-            [
-              _vm._v("\n            Results\n            "),
-              _vm._l(_vm.flights, function(flight, i) {
-                return _c(
+          _c("v-flex", { attrs: { xs9: "" } }, [
+            _vm.flights.length > 1
+              ? _c(
                   "div",
-                  { key: i },
-                  [
-                    _c(
-                      "v-card",
-                      { attrs: { hover: "" } },
+                  _vm._l(_vm.flights, function(flight, i) {
+                    return _c(
+                      "div",
+                      { key: i },
                       [
                         _c(
-                          "v-card-text",
+                          "v-card",
+                          { attrs: { hover: "" } },
                           [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(flight.to.origin.city.name) +
-                                " " +
-                                _vm._s(flight.to.origin.city.country.name) +
-                                "\n                        naar\n                        " +
-                                _vm._s(flight.to.destination.city.name) +
-                                " " +
-                                _vm._s(
-                                  flight.to.destination.city.country.name
-                                ) +
-                                "\n                        met\n                        " +
-                                _vm._s(flight.to.carrier) +
-                                "\n\n                        "
+                            _c(
+                              "v-card-text",
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.airlineImage(
+                                      flight.to.carrier.iso
+                                    ),
+                                    alt: flight.to.carrier.name
+                                  }
+                                }),
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(flight.to.origin.city.name) +
+                                    " " +
+                                    _vm._s(flight.to.origin.city.country.name) +
+                                    "\n                            "
+                                ),
+                                _c("v-icon", [_vm._v("chevron_right")]),
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(flight.to.destination.city.name) +
+                                    " " +
+                                    _vm._s(
+                                      flight.to.destination.city.country.name
+                                    ) +
+                                    "\n                            met\n                            " +
+                                    _vm._s(flight.to.carrier) +
+                                    "\n\n                            "
+                                ),
+                                _c("v-divider"),
+                                _vm._v(" "),
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.airlineImage(
+                                      flight.return.carrier.iso
+                                    ),
+                                    alt: flight.return.carrier.name
+                                  }
+                                }),
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(flight.return.origin.city.name) +
+                                    " " +
+                                    _vm._s(
+                                      flight.return.origin.city.country.name
+                                    ) +
+                                    "\n                            "
+                                ),
+                                _c("v-icon", [_vm._v("chevron_left")]),
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      flight.return.destination.city.name
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      flight.return.destination.city.country
+                                        .name
+                                    ) +
+                                    "\n                            met\n                            " +
+                                    _vm._s(flight.return.carrier) +
+                                    "\n\n                        "
+                                )
+                              ],
+                              1
                             ),
-                            _c("v-divider", { attrs: { inset: "" } }),
-                            _vm._v(
-                              "\n\n                        " +
-                                _vm._s(flight.return.origin.city.name) +
-                                " " +
-                                _vm._s(flight.return.origin.city.country.name) +
-                                "\n                        naar\n                        " +
-                                _vm._s(flight.return.destination.city.name) +
-                                " " +
-                                _vm._s(
-                                  flight.return.destination.city.country.name
-                                ) +
-                                "\n                        met\n                        " +
-                                _vm._s(flight.return.carrier) +
-                                "\n                    "
+                            _vm._v(" "),
+                            _c(
+                              "v-flex",
+                              {
+                                staticClass:
+                                  "blue darken-4 white--text text-xs-right headline",
+                                attrs: { xs12: "" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(flight.price) +
+                                    "\n                        "
+                                )
+                              ]
                             )
                           ],
                           1
@@ -18009,13 +18077,17 @@ var render = function() {
                       ],
                       1
                     )
-                  ],
-                  1
+                  })
                 )
-              })
-            ],
-            2
-          )
+              : _c("div", [
+                  _c("img", {
+                    attrs: {
+                      src: "/flight-error.png",
+                      alt: "error loading flights"
+                    }
+                  })
+                ])
+          ])
         ],
         1
       )

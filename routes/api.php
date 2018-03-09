@@ -85,7 +85,7 @@ Route::delete('/airports/{airport}', 'AirportController@destroy');
 
 // Flights
 Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
-Route::post('/flights/browse-routes', 'FlightController@browseRuotes');
+Route::post('/flights/browse-routes', 'FlightController@browseRoutes');
 Route::post('/flights/browse-dates', 'FlightController@browseDates');
 Route::post('/flights/browse-dates-grid', 'FlightController@browseDatesGrid');
 

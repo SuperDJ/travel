@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Airport;
+use App\Airline;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -23,9 +24,10 @@ class FlightController extends Controller
 	public function browseQuotes( Request $request )
 	{
 		$response = $this->browse( 'browsequotes', $request );
-
+		//return response()->json( $response, 200 );
 
 		$data = [];
+		$i = 0;
 		foreach( $response->Quotes as $key => $value )
 		{
 			if( !empty( $value->OutboundLeg->CarrierIds ) && !empty( $value->InboundLeg->CarrierIds ) )
@@ -39,11 +41,11 @@ class FlightController extends Controller
 				$returnOrigin = $response->Places[ array_search( $value->InboundLeg->OriginId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
 				$returnDestination = $response->Places[ array_search( $value->InboundLeg->DestinationId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
 
-				$data[] = [
+				$data[$i] = [
 					'direct' => $value->Direct,
 					'price'  => $price,
 					'to'     => [
-						'carrier'     => $toCarrier,
+						'carrier'     => Airline::where('name', 'like', '%'.$toCarrier.'%')->orWhere('callsign', 'like', '%'.$toCarrier.'%')->first() ?? $toCarrier,
 						'date'        => str_replace( 'T', '', $value->OutboundLeg->DepartureDate ),
 						'origin'      => Airport::where( 'iata', $toOrigin )->with( [
 							'city' => function( $query )
@@ -56,25 +58,31 @@ class FlightController extends Controller
 							 {
 								 $query->with( 'country' );
 							 }
-						 ] )->first()
-					],
-					'return' => [
-						'carrier'     => $returnCarrier,
-						'date'        => str_replace( 'T', ' ', $value->InboundLeg->DepartureDate ),
-						'origin'      => Airport::where( 'iata', $returnOrigin )->with( [
-							'city' => function( $query )
-							{
-								$query->with( 'country' );
-							}
-						] )->first(),
-						'destination' => Airport::where( 'iata', $returnDestination )->with( [
-							 'city' => function( $query )
-							 {
-								 $query->with( 'country' );
-							 }
-						 ] )->first()
+						] )->first()
 					]
 				];
+
+				if( !empty( $request->input( 'destinationDate' ) ) )
+				{
+					$data[ $i ] = [
+						'return' => [
+							'carrier'     => Airline::where( 'name', 'like', '%'.$returnCarrier.'%' )->orWhere( 'callsign', 'like', '%'.$returnCarrier.'%' )->first() ?? $returnCarrier,
+							'date'        => str_replace( 'T', ' ', $value->InboundLeg->DepartureDate ),
+							'origin'      => Airport::where( 'iata', $returnOrigin )->with( [
+								'city' => function( $query )
+								{
+									$query->with( 'country' );
+								}
+							] )->first(),
+							'destination' => Airport::where( 'iata', $returnDestination )->with( [
+								'city' => function( $query )
+								{
+									$query->with( 'country' );
+								}
+							] )->first()
+						]
+					];
+				}
 			}
 		}
 
@@ -161,7 +169,7 @@ class FlightController extends Controller
 			'departure' => 'required',
 			'departureDate' => 'required|date',
 			'destination' => 'required',
-			'destinationDate' => 'date',
+			'destinationDate' => 'date|nullable',
 		]);
 	}
 }

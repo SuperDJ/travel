@@ -85,7 +85,16 @@ Route::delete('/airports/{airport}', 'AirportController@destroy');
 
 // Flights
 Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
-Route::post('/flights/browse-routes', 'FlightController@browseQuotes');
-Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
-Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
-Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
+Route::post('/flights/browse-routes', 'FlightController@browseRuotes');
+Route::post('/flights/browse-dates', 'FlightController@browseDates');
+Route::post('/flights/browse-dates-grid', 'FlightController@browseDatesGrid');
+
+// Airlines
+Route::get('/airlines', 'AirlineController@index');
+Route::get('/airlines/db', 'AirlineController@fillDB');
+Route::post('/airlines', 'AirlineController@store');
+Route::get('/airlines/{search}/search', 'AirlineController@search');
+Route::get('/airlines/{airline}', 'AirlineController@show');
+Route::get('/airlines/{airline}/edit', 'AirlineController@edit');
+Route::put('/airlines/{airline}', 'AirlineController@update');
+Route::delete('/airlines/{airline}', 'AirlineController@destroy');

@@ -94,4 +94,89 @@ class AirlineController extends Controller
 			return response( 'Airport not delete', 400 );
 		}
     }
+
+    public function fillDB()
+	{
+		set_time_limit( 0 );
+		$host = 'https://api.lufthansa.com';
+		$max = 100;
+		/**
+		 * Get the auth key
+		 */
+		$ch = curl_init( $host.'/v1/oauth/token' );
+		$postFields = 'client_id='.config( 'app.lufthansaKey' ).'&client_secret='.config( 'app.lufthansaSecret' ).'&grant_type=client_credentials';
+
+		curl_setopt_array( $ch, [
+			CURLOPT_POST > true,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HTTPHEADER     => [
+				'Content-Type: application/x-www-form-urlencoded',
+				'Host: api.lufthansa.com'
+			],
+			CURLOPT_POSTFIELDS     => $postFields
+		] );
+
+		$response = json_decode( curl_exec( $ch ) );
+		curl_close( $ch );
+
+		$token = $response->access_token;
+
+		/**
+		 * Fill the database
+		 */
+
+		// Make a first request to know how many there are
+		$context = stream_context_create([
+			'http' => [
+				'header'=> [
+					'Accept: application/json',
+					'Authorization:Bearer '.$token
+				]
+			]
+		]);
+
+		$response = json_decode( file_get_contents( $host.'/v1/references/airlines/?limit='.$max, false, $context ) );
+		//return response()->json( $response, 200 );
+
+		$total = (int)$response->AirlineResource->Meta->TotalCount;
+		$totalRuns = ceil( $total / $max );
+		$data = [];
+
+		for( $runs = 1; $runs <= $totalRuns; $runs++ )
+		{
+			if( $runs === $totalRuns )
+			{
+				$max = ( ( $runs - 1 ) * 100) - $total;
+			}
+
+			$url = $host.'/v1/references/airlines/?limit='.$max.'&offset='.( ($runs - 1) * $max);
+			$response = json_decode( file_get_contents( $url, false, $context ) );
+
+			foreach( $response->AirlineResource->Airlines->Airline as $key => $value )
+			{
+				if( !is_numeric( $value->AirlineID ) && !empty( $value->AirlineID_ICAO ) &&  $value->AirlineID_ICAO !== "\\N" )
+				{
+					$data[] = [
+						'name'       => $value->Names->Name->{'$'},
+						'callsign'   => !empty( $value->OtherIDs ) ? $value->OtherIDs->OtherID->{'$'} : '',
+						'iso'        => $value->AirlineID,
+						'icao'       => $value->AirlineID_ICAO,
+						'created_at' => date( 'Y-m-d H:i:s' ),
+						'updated_at' => date( 'Y-m-d H:i:s' )
+					];
+				}
+			}
+
+			echo $url.'<br>';
+			echo $runs.'<br>';
+
+			sleep(2);
+		}
+
+		Airline::insert($data);
+
+		echo count($data);
+
+		return response()->json($data, 200);
+	}
 }

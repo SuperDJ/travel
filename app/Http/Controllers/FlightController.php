@@ -46,33 +46,33 @@ class FlightController extends Controller
 						'carrier'     => $toCarrier,
 						'date'        => str_replace( 'T', '', $value->OutboundLeg->DepartureDate ),
 						'origin'      => Airport::where( 'iata', $toOrigin )->with( [
-																						'city' => function( $query )
-																						{
-																							$query->with( 'country' );
-																						}
-																					] )->first(),
+							'city' => function( $query )
+							{
+								$query->with( 'country' );
+							}
+						] )->first(),
 						'destination' => Airport::where( 'iata', $toDestination )->with( [
-																							 'city' => function( $query )
-																							 {
-																								 $query->with( 'country' );
-																							 }
-																						 ] )->first()
+							 'city' => function( $query )
+							 {
+								 $query->with( 'country' );
+							 }
+						 ] )->first()
 					],
 					'return' => [
 						'carrier'     => $returnCarrier,
 						'date'        => str_replace( 'T', ' ', $value->InboundLeg->DepartureDate ),
 						'origin'      => Airport::where( 'iata', $returnOrigin )->with( [
-																							'city' => function( $query )
-																							{
-																								$query->with( 'country' );
-																							}
-																						] )->first(),
+							'city' => function( $query )
+							{
+								$query->with( 'country' );
+							}
+						] )->first(),
 						'destination' => Airport::where( 'iata', $returnDestination )->with( [
-																								 'city' => function( $query )
-																								 {
-																									 $query->with( 'country' );
-																								 }
-																							 ] )->first()
+							 'city' => function( $query )
+							 {
+								 $query->with( 'country' );
+							 }
+						 ] )->first()
 					]
 				];
 			}

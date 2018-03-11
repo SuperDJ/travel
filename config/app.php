@@ -226,4 +226,5 @@ return [
 	'iatacodes' => env('IATACODE_KEY'),
 	'lufthansaKey' => env('LUFTHANSA_KEY'),
 	'lufthansaSecret' => env('LUFTHANSA_SECRET'),
+	'googleApi' => env('GOOGLE_API'),
 ];

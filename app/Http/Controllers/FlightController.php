@@ -41,7 +41,7 @@ class FlightController extends Controller
 				$returnOrigin = $response->Places[ array_search( $value->InboundLeg->OriginId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
 				$returnDestination = $response->Places[ array_search( $value->InboundLeg->DestinationId, array_column( $response->Places, 'PlaceId' ) ) ]->IataCode;
 
-				$data[$i] = [
+				$data[ $i ] = [
 					'direct' => $value->Direct,
 					'price'  => $price,
 					'to'     => [
@@ -64,8 +64,8 @@ class FlightController extends Controller
 
 				if( !empty( $request->input( 'destinationDate' ) ) )
 				{
-					$data[ $i ] = [
-						'return' => [
+					$data[ $i ]
+						['return'] = [
 							'carrier'     => Airline::where( 'name', 'like', '%'.$returnCarrier.'%' )->orWhere( 'callsign', 'like', '%'.$returnCarrier.'%' )->first() ?? $returnCarrier,
 							'date'        => str_replace( 'T', ' ', $value->InboundLeg->DepartureDate ),
 							'origin'      => Airport::where( 'iata', $returnOrigin )->with( [
@@ -80,9 +80,9 @@ class FlightController extends Controller
 									$query->with( 'country' );
 								}
 							] )->first()
-						]
-					];
+						];
 				}
+				$i++;
 			}
 		}
 

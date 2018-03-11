@@ -1,7 +1,11 @@
 <template>
-    <v-container fluid grid-list-lg>
+    <v-container fluid grid-list-lg style="margin-top:60px">
         <div v-if="departure && destination">
-            Google maps
+            <gmap-map style="width: 100%; height: 600px;" :zoom="1" :center="{lat: 0, lng: 0}">
+                <gmap-marker :position="departureCoords" />
+                <gmap-marker :position="destinationCoords" />
+                <gmap-polyline :path="[{departureCoords}, {destinationCoords}]" />
+            </gmap-map>
         </div>
 
         <v-layout row wrap>
@@ -87,34 +91,37 @@
 
             <v-flex xs9>
                 <div v-if="flights.length > 1">
-                    <div v-for="(flight, i) in flights" :key="i">
-                        <v-card hover>
-                            <v-card-text>
-                                <img :src="airlineImage(flight.to.carrier.iso)" :alt="flight.to.carrier.name">
-                                {{flight.to.origin.city.name}} {{flight.to.origin.city.country.name}}
-                                <v-icon>chevron_right</v-icon>
-                                {{flight.to.destination.city.name}} {{ flight.to.destination.city.country.name}}
-                                met
-                                {{flight.to.carrier}}
+                    <v-card hover v-for="( flight, i ) in flights" :key="i"
+                            @click="setCoords({lat: flight.to.origin.latitude, lng: flight.to.origin.longitude},
+                            {lat: flight.to.destination.latitude, lng: flight.to.origin.longitude})">
+                        <v-card-text>
+                            <img :src="airlineImage(flight.to.carrier.icao)" :alt="flight.to.carrier.name">
+                            {{flight.to.origin.city.name}} {{flight.to.origin.city.country.name}}
+                            <v-icon>chevron_right</v-icon>
+                            {{flight.to.destination.city.name}} {{ flight.to.destination.city.country.name}}
+                            met
+                            {{flight.to.carrier}}
 
-                                <v-divider />
+                            <v-divider />
 
-                                <img :src="airlineImage(flight.return.carrier.iso)" :alt="flight.return.carrier.name">
-                                {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
-                                <v-icon>chevron_left</v-icon>
-                                {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
-                                met
-                                {{flight.return.carrier}}
+                            <img :src="airlineImage(flight.return.carrier.icao)" :alt="flight.return.carrier.name">
+                            {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
+                            <v-icon>chevron_left</v-icon>
+                            {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
+                            met
+                            {{flight.return.carrier}}
 
-                            </v-card-text>
-                            <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
-                                {{flight.price}}
-                            </v-flex>
-                        </v-card>
-                    </div>
+                        </v-card-text>
+                        <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
+                            {{flight.price}}
+                        </v-flex>
+                    </v-card>
                 </div>
-                <div v-else>
-                    <img src="/flight-error.png" alt="error loading flights">
+
+                <div v-else-if="flights.length === 0 && departure.length >= 1 && destination.length >= 1 &&
+                departureDate.length >= 1">
+                    <v-alert type="error" value="true">No flight results found</v-alert>
+                    <c-image src="/flight-error.png" alt="Flights error"/>
                 </div>
             </v-flex>
         </v-layout>
@@ -133,6 +140,8 @@
 			return {
 				departureSearch: null,
 				destinationSearch: null,
+                departureCoords: {},
+                destinationCoords: {},
 			}
 		},
 
@@ -303,8 +312,14 @@
 			 * @param airline
 			 * @returns {string}
 			 */
-			airlineImage( airline ) {
+			airlineImage( airline )
+            {
 				return `https://content.airhex.com/content/logos/airlines_${airline}_175_50_h.png?proportions=keep`;
+            },
+
+            setCoords( departureCoords, destinationCoords ) {
+                this.departureCoords = departureCoords;
+                this.destinationCoords = destinationCoords;
             }
         },
 

@@ -56,15 +56,27 @@ module.exports = env => {
 				{
 					test: /\.(jpg|jpeg|gif|png|svg)$/,
 					exclude: ['/node_modules/', '/public/'],
-					use: {
-						loader: 'file-loader',
-						options: {
-							name: '[hash].[ext]',
-							outputPath: '/public/images',
-							publicPath: '/images',
-							useRelativePath: true,
+					use: [
+						{
+							loader: 'responsive-loader',
+							options: {
+								adapter: require('responsive-loader/sharp'),
+								sizes: [600, 960, 1280, 1920],
+								placeholder: true,
+								placeholderSize: 50,
+								name: '/images/[hash]-[width].[ext]',
+							}
 						},
-					}
+						{
+							loader: 'file-loader',
+							options: {
+								name: '[hash].[ext]',
+								outputPath: '/public/images',
+								publicPath: '/images',
+							}
+						}
+					],
+
 				}
 			]
 		},

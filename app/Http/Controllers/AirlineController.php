@@ -146,37 +146,60 @@ class AirlineController extends Controller
 		{
 			if( $runs === $totalRuns )
 			{
-				$max = ( ( $runs - 1 ) * 100) - $total;
+				$max = ( ( $runs - 1 ) * 100 ) - $total;
 			}
 
-			$url = $host.'/v1/references/airlines/?limit='.$max.'&offset='.( ($runs - 1) * $max);
+			$url = $host.'/v1/references/airlines/?limit='.$max.'&offset='.( ( $runs - 1 ) * $max );
 			$response = json_decode( file_get_contents( $url, false, $context ) );
 
 			foreach( $response->AirlineResource->Airlines->Airline as $key => $value )
 			{
-				if( !is_numeric( $value->AirlineID ) && !empty( $value->AirlineID_ICAO ) &&  $value->AirlineID_ICAO !== "\\N" )
+				if( !is_numeric( $value->AirlineID ) && !empty( $value->AirlineID_ICAO ) && $value->AirlineID_ICAO !== "\\N" )
 				{
-					$data[] = [
-						'name'       => $value->Names->Name->{'$'},
-						'callsign'   => !empty( $value->OtherIDs ) ? $value->OtherIDs->OtherID->{'$'} : '',
-						'iso'        => $value->AirlineID,
-						'icao'       => $value->AirlineID_ICAO,
-						'created_at' => date( 'Y-m-d H:i:s' ),
-						'updated_at' => date( 'Y-m-d H:i:s' )
-					];
+					if( Airline::where('name', $value->Names->Name->{'$'})->count() === 0 )
+					{
+						$data[] = [
+							'name'       => $value->Names->Name->{'$'},
+							'callsign'   => !empty( $value->OtherIDs ) ? $value->OtherIDs->OtherID->{'$'} : '',
+							'iso'        => $value->AirlineID,
+							'icao'       => $value->AirlineID_ICAO,
+							'created_at' => date( 'Y-m-d H:i:s' ),
+							'updated_at' => date( 'Y-m-d H:i:s' )
+						];
+
+						Airline::create([
+							'name'       => $value->Names->Name->{'$'},
+							'callsign'   => !empty( $value->OtherIDs ) ? $value->OtherIDs->OtherID->{'$'} : '',
+							'iso'        => $value->AirlineID,
+							'icao'       => $value->AirlineID_ICAO,
+							'created_at' => date( 'Y-m-d H:i:s' ),
+							'updated_at' => date( 'Y-m-d H:i:s' )
+						]);
+					}
 				}
 			}
 
 			echo $url.'<br>';
 			echo $runs.'<br>';
 
-			sleep(2);
+			sleep( 2 );
 		}
 
-		Airline::insert($data);
+		$response = json_decode( file_get_contents( 'https://api.skypicker.com/airlines' ) );
 
-		echo count($data);
+		$notUpdated = [];
+		foreach( Airline::get() as $airline )
+		{
+			$key = array_search( $airline->name, array_column( $response,'name' ) );
 
+			if( !empty( $key ) ) {
+				$airline->update( [ 'iso' => $response[$key]->id ] );
+			} else {
+				$notUpdated[] = $airline->name;
+			}
+		}
+
+		print_r( $notUpdated );
 		return response()->json($data, 200);
 	}
 }

@@ -1,16 +1,22 @@
 <template>
     <v-container fluid grid-list-lg style="margin-top:60px">
-        <div v-if="departure && destination">
-            <gmap-map style="width: 100%; height: 600px;" :zoom="1" :center="{lat: 0, lng: 0}">
-                <gmap-marker :position="departureCoords" />
-                <gmap-marker :position="destinationCoords" />
-                <gmap-polyline :path="[{departureCoords}, {destinationCoords}]" />
-            </gmap-map>
+        <div v-if="Object.keys(departureCoords).length > 1 && Object.keys(destinationCoords).length > 1">
+            <google-map
+                name="flight"
+                :center="{lat: 0, lng: 0}"
+                :markers="[{lat: parseFloat(departureCoords.lat), lng: parseFloat(departureCoords.lng)}, {lat:
+                parseFloat(destinationCoords.lat), lng:
+                parseFloat(destinationCoords.lng)}]"
+            />
+        </div>
+        <div v-else>
+            <v-parallax
+                src="https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb" alt="Flight logo" height="700" />
         </div>
 
         <v-layout row wrap>
             <v-flex xs3>
-                <v-card>
+                <v-card flat>
                     <v-card-text>
                         <v-select
                             label="Departure"
@@ -91,26 +97,21 @@
 
             <v-flex xs9>
                 <div v-if="flights.length > 1">
-                    <v-card hover v-for="( flight, i ) in flights" :key="i"
-                            @click="setCoords({lat: flight.to.origin.latitude, lng: flight.to.origin.longitude},
-                            {lat: flight.to.destination.latitude, lng: flight.to.origin.longitude})">
+                    <v-card hover v-for="( flight, i ) in flights" :key="i" style="margin-bottom:16px">
                         <v-card-text>
-                            <img :src="airlineImage(flight.to.carrier.icao)" :alt="flight.to.carrier.name">
+                            <img :src="airlineImage(flight.to.carrier.iso)" :alt="flight.to.carrier.name" width="300">
                             {{flight.to.origin.city.name}} {{flight.to.origin.city.country.name}}
                             <v-icon>chevron_right</v-icon>
                             {{flight.to.destination.city.name}} {{ flight.to.destination.city.country.name}}
-                            met
-                            {{flight.to.carrier}}
 
-                            <v-divider />
+                            <div v-if="flight.return">
+                                <v-divider />
 
-                            <img :src="airlineImage(flight.return.carrier.icao)" :alt="flight.return.carrier.name">
-                            {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
-                            <v-icon>chevron_left</v-icon>
-                            {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
-                            met
-                            {{flight.return.carrier}}
-
+                                <img :src="airlineImage(flight.return.carrier.iso)" :alt="flight.return.carrier.name" width="300">
+                                {{flight.return.origin.city.name}} {{flight.return.origin.city.country.name}}
+                                <v-icon>chevron_left</v-icon>
+                                {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
+                            </div>
                         </v-card-text>
                         <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
                             {{flight.price}}
@@ -129,11 +130,17 @@
 </template>
 
 <script>
+    import GoogleMap from '@/components/Map';
+
     export default
     {
 		metaInfo: {
 			title: 'Flights'
 		},
+
+        components: {
+	        'google-map': GoogleMap,
+        },
 
 		data()
 		{
@@ -275,6 +282,16 @@
 						language: 'NL'
 					};
 
+					fetch(`/api/airports/${this.departure}/search`)
+                        .then(response => {return response.json()})
+                        .then(response => {this.departureCoords = {lat: response[0].latitude,
+                            lng: response[0].longitude}});
+
+					fetch(`/api/airports/${this.destination}/search`)
+                        .then(response => {return response.json()})
+                        .then(response => {this.destinationCoords = {lat: response[0].latitude,
+                            lng: response[0].longitude}});
+
 					console.log(data);
 
 					this.$store.dispatch( 'browseQuotes', data );
@@ -314,7 +331,7 @@
 			 */
 			airlineImage( airline )
             {
-				return `https://content.airhex.com/content/logos/airlines_${airline}_175_50_h.png?proportions=keep`;
+				return `https://daisycon.io/images/airline/?width=300&height=150&iata=${ airline }`;
             },
 
             setCoords( departureCoords, destinationCoords ) {

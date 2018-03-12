@@ -15,9 +15,7 @@
     <body>
         <div id="app"></div>
 
-        <script>
-            window.google = '{{config('app.googleApi')}}';
-        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{config('app.googleApi')}}"></script>
         <script src="{{asset('/js/main.js')}}"></script>
         <!--<script src="{{asset('js/smaterial.js')}}"></script>-->
     </body>

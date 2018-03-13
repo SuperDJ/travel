@@ -22,6 +22,21 @@
             },
             markers: {
     			type: Array,
+            },
+            polylineCoords: {
+    			type: Array,
+            },
+            polylineWidth: {
+    			type: Number,
+                default: 2,
+            },
+            polylineColor: {
+    			type: String,
+                default: 'red',
+            },
+            polylineFollowEarth: {
+    			type: Boolean,
+                default: true,
             }
         },
 
@@ -51,13 +66,23 @@
 			{
 				for( let i = 0; i < this.markers.length; i++ )
 				{
-					const position = new google.maps.LatLng( this.markers[0].lat, this.markers[0].lng );
+					const position = this.markers[i];
 					const marker = new google.maps.Marker( { position, map: this.map } );
 
-					this.boundsCoords.push(marker => {
-						this.map.fitBounds(this.bounds.extend(position));
-                    });
+					this.boundsCoords.push( marker );
+                    this.map.fitBounds( this.bounds.extend( position ) );
                 }
+            }
+
+            if(this.polylineCoords.length > 1 ) {
+				const polyline = new google.maps.Polyline({
+                    path: this.polylineCoords,
+                    strokeWidth: this.polylineWidth,
+                    strokeColor: this.polylineColor,
+                    geodesic: this.polylineFollowEarth
+                });
+
+				polyline.setMap( this.map );
             }
 		}
     }

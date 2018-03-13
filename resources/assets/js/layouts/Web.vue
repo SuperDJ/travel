@@ -1,33 +1,26 @@
 <template>
     <v-app>
-        <v-toolbar fixed color="primary">
+        <v-toolbar dark fixed color="primary">
             <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
 
             <v-toolbar-title>Home</v-toolbar-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-btn icon><v-icon>search</v-icon></v-btn>
 
-            <v-btn icon><v-icon>more_vert</v-icon></v-btn>
+            <v-menu offset-y fixed>
+                <v-btn icon slot="activator"><v-icon>more_vert</v-icon></v-btn>
+
+                <v-list>
+                    <v-list-tile :to="{name: 'Login'}">Login</v-list-tile>
+
+                    <v-list-tile :to="{name: 'Register'}">Register</v-list-tile>
+                </v-list>
+            </v-menu>
         </v-toolbar>
 
         <v-navigation-drawer fixed temporary v-model="drawer">
-            <!-- Header -->
-            <v-toolbar flat class="transparent">
-                <v-list>
-                    <v-list-tile avatar>
-                        <v-list-tile-avatar>
-                            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
-                        </v-list-tile-avatar>
-                        <v-list-tile-content>
-                            <v-list-tile-title>John Leider</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </v-list>
-            </v-toolbar>
-            <!-- End header -->
-
             <!-- Menu -->
             <v-list class="pt-0" dense>
                 <template v-for="item in items">

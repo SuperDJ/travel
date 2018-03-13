@@ -10778,8 +10778,7 @@ exports.default = {
 		return {
 			departureSearch: null,
 			destinationSearch: null,
-			departureCoords: {},
-			destinationCoords: {}
+			coords: []
 		};
 	},
 
@@ -10897,15 +10896,13 @@ exports.default = {
 				fetch('/api/airports/' + this.departure + '/search').then(function (response) {
 					return response.json();
 				}).then(function (response) {
-					_this.departureCoords = { lat: response[0].latitude,
-						lng: response[0].longitude };
+					_this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
 				});
 
 				fetch('/api/airports/' + this.destination + '/search').then(function (response) {
 					return response.json();
 				}).then(function (response) {
-					_this.destinationCoords = { lat: response[0].latitude,
-						lng: response[0].longitude };
+					_this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
 				});
 
 				console.log(data);
@@ -13155,13 +13152,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -16569,6 +16559,11 @@ var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Web = function Web() {
+	return Promise.resolve().then(function () {
+		return __webpack_require__(263);
+	});
+};
 var Index = function Index() {
 	return Promise.resolve().then(function () {
 		return __webpack_require__(114);
@@ -16580,23 +16575,55 @@ var Flights = function Flights() {
 	});
 };
 
+var Account = function Account() {
+	return Promise.resolve().then(function () {
+		return __webpack_require__(278);
+	});
+};
+var Register = function Register() {
+	return Promise.resolve().then(function () {
+		return __webpack_require__(279);
+	});
+};
+var Login = function Login() {
+	return Promise.resolve().then(function () {
+		return __webpack_require__(280);
+	});
+};
+
 _vue2.default.use(_vueRouter2.default);
 
 exports.default = new _vueRouter2.default({
 	mode: 'history',
 	routes: [{
 		path: '/',
-		name: 'Index',
-		component: Index
+		component: Web,
+		children: [{
+			path: '',
+			name: 'Index',
+			component: Index
+		}, {
+			path: '/flights',
+			name: 'Flights',
+			component: Flights
+		}, {
+			path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
+			props: true,
+			name: 'FlightsSearch',
+			component: Flights
+		}]
 	}, {
-		path: '/flights',
-		name: 'Flights',
-		component: Flights
-	}, {
-		path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
-		props: true,
-		name: 'FlightsSearch',
-		component: Flights
+		path: '/account',
+		component: Account,
+		children: [{
+			path: 'register',
+			name: 'Register',
+			component: Register
+		}, {
+			path: 'login',
+			name: 'Login',
+			component: Login
+		}]
 	}]
 });
 
@@ -21851,8 +21878,7 @@ var render = function() {
       attrs: { fluid: "", "grid-list-lg": "" }
     },
     [
-      Object.keys(_vm.departureCoords).length > 1 &&
-      Object.keys(_vm.destinationCoords).length > 1
+      _vm.coords.length > 1
         ? _c(
             "div",
             [
@@ -21860,16 +21886,10 @@ var render = function() {
                 attrs: {
                   name: "flight",
                   center: { lat: 0, lng: 0 },
-                  markers: [
-                    {
-                      lat: parseFloat(_vm.departureCoords.lat),
-                      lng: parseFloat(_vm.departureCoords.lng)
-                    },
-                    {
-                      lat: parseFloat(_vm.destinationCoords.lat),
-                      lng: parseFloat(_vm.destinationCoords.lng)
-                    }
-                  ]
+                  markers: _vm.coords,
+                  polylineCoords: _vm.coords,
+                  polylineWidth: 5,
+                  polylinColor: "blue"
                 }
               })
             ],
@@ -30611,7 +30631,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { fixed: "", color: "primary" } },
+        { attrs: { dark: "", fixed: "", color: "primary" } },
         [
           _c("v-toolbar-side-icon", {
             on: {
@@ -30634,9 +30654,30 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("more_vert")])],
+            "v-menu",
+            { attrs: { "offset-y": "", fixed: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { slot: "activator", icon: "" }, slot: "activator" },
+                [_c("v-icon", [_vm._v("more_vert")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list",
+                [
+                  _c("v-list-tile", { attrs: { to: { name: "Login" } } }, [
+                    _vm._v("Login")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-list-tile", { attrs: { to: { name: "Register" } } }, [
+                    _vm._v("Register")
+                  ])
+                ],
+                1
+              )
+            ],
             1
           )
         ],
@@ -30656,41 +30697,6 @@ var render = function() {
           }
         },
         [
-          _c(
-            "v-toolbar",
-            { staticClass: "transparent", attrs: { flat: "" } },
-            [
-              _c(
-                "v-list",
-                [
-                  _c(
-                    "v-list-tile",
-                    { attrs: { avatar: "" } },
-                    [
-                      _c("v-list-tile-avatar", [
-                        _c("img", {
-                          attrs: {
-                            src:
-                              "https://randomuser.me/api/portraits/men/85.jpg"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "v-list-tile-content",
-                        [_c("v-list-tile-title", [_vm._v("John Leider")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
           _c(
             "v-list",
             { staticClass: "pt-0", attrs: { dense: "" } },
@@ -30988,6 +30994,21 @@ exports.default = {
         },
         markers: {
             type: Array
+        },
+        polylineCoords: {
+            type: Array
+        },
+        polylineWidth: {
+            type: Number,
+            default: 2
+        },
+        polylineColor: {
+            type: String,
+            default: 'red'
+        },
+        polylineFollowEarth: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -31000,8 +31021,6 @@ exports.default = {
         };
     },
     mounted: function mounted() {
-        var _this = this;
-
         this.bounds = new google.maps.LatLngBounds();
 
         var element = document.getElementById(this.mapName);
@@ -31014,18 +31033,24 @@ exports.default = {
         this.map = new google.maps.Map(element, options);
 
         if (this.markers.length > 1) {
-            var _loop = function _loop(i) {
-                var position = new google.maps.LatLng(_this.markers[0].lat, _this.markers[0].lng);
-                var marker = new google.maps.Marker({ position: position, map: _this.map });
-
-                _this.boundsCoords.push(function (marker) {
-                    _this.map.fitBounds(_this.bounds.extend(position));
-                });
-            };
-
             for (var i = 0; i < this.markers.length; i++) {
-                _loop(i);
+                var position = this.markers[i];
+                var marker = new google.maps.Marker({ position: position, map: this.map });
+
+                this.boundsCoords.push(marker);
+                this.map.fitBounds(this.bounds.extend(position));
             }
+        }
+
+        if (this.polylineCoords.length > 1) {
+            var polyline = new google.maps.Polyline({
+                path: this.polylineCoords,
+                strokeWidth: this.polylineWidth,
+                strokeColor: this.polylineColor,
+                geodesic: this.polylineFollowEarth
+            });
+
+            polyline.setMap(this.map);
         }
     }
 };
@@ -31149,6 +31174,102 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-72a5a6b5", esExports)
   }
 }
+
+/***/ }),
+/* 278 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\layouts\\LoginRegister.vue"
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 279 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\dashboard\\Register.vue"
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 280 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\dashboard\\Login.vue"
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
 
 /***/ })
 /******/ ]);

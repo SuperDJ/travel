@@ -1,12 +1,13 @@
 <template>
     <v-container fluid grid-list-lg style="margin-top:60px">
-        <div v-if="Object.keys(departureCoords).length > 1 && Object.keys(destinationCoords).length > 1">
+        <div v-if="coords.length > 1">
             <google-map
                 name="flight"
                 :center="{lat: 0, lng: 0}"
-                :markers="[{lat: parseFloat(departureCoords.lat), lng: parseFloat(departureCoords.lng)}, {lat:
-                parseFloat(destinationCoords.lat), lng:
-                parseFloat(destinationCoords.lng)}]"
+                :markers="coords"
+                :polylineCoords="coords"
+                :polylineWidth="5"
+                polylinColor="blue"
             />
         </div>
         <div v-else>
@@ -119,8 +120,7 @@
                     </v-card>
                 </div>
 
-                <div v-else-if="flights.length === 0 && departure.length >= 1 && destination.length >= 1 &&
-                departureDate.length >= 1">
+                <div v-else-if="flights.length === 0 && departure.length >= 1 && destination.length >= 1 && departureDate.length >= 1">
                     <v-alert type="error" value="true">No flight results found</v-alert>
                     <c-image src="/flight-error.png" alt="Flights error"/>
                 </div>
@@ -147,8 +147,7 @@
 			return {
 				departureSearch: null,
 				destinationSearch: null,
-                departureCoords: {},
-                destinationCoords: {},
+                coords: [],
 			}
 		},
 
@@ -283,14 +282,12 @@
 					};
 
 					fetch(`/api/airports/${this.departure}/search`)
-                        .then(response => {return response.json()})
-                        .then(response => {this.departureCoords = {lat: response[0].latitude,
-                            lng: response[0].longitude}});
+                        .then( response => { return response.json() } )
+                        .then( response => { this.coords.push( { lat: parseFloat( response[0].latitude ), lng: parseFloat( response[0].longitude ) } ) } );
 
 					fetch(`/api/airports/${this.destination}/search`)
-                        .then(response => {return response.json()})
-                        .then(response => {this.destinationCoords = {lat: response[0].latitude,
-                            lng: response[0].longitude}});
+                        .then( response => { return response.json() } )
+                        .then( response => { this.coords.push( { lat: parseFloat( response[0].latitude ), lng: parseFloat( response[0].longitude ) } ) } );
 
 					console.log(data);
 

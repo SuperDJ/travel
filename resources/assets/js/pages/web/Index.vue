@@ -139,7 +139,7 @@
                 this.form = type;
 
                 let img = '';
-                switch(type)
+                switch( type )
                 {
                     case 'flight':
                     	img =

@@ -26,13 +26,17 @@
             polylineCoords: {
     			type: Array,
             },
+            polylineColor: {
+    			type: String,
+                default: 'red'
+            },
             polylineWidth: {
     			type: Number,
                 default: 2,
             },
-            polylineColor: {
-    			type: String,
-                default: 'red',
+            polylineOpacity: {
+    			type: Number,
+                default: 1,
             },
             polylineFollowEarth: {
     			type: Boolean,
@@ -62,6 +66,9 @@
 
 			this.map = new google.maps.Map( element, options );
 
+			/**
+             * Add markers
+			 */
 			if( this.markers.length > 1 )
 			{
 				for( let i = 0; i < this.markers.length; i++ )
@@ -69,20 +76,25 @@
 					const position = this.markers[i];
 					const marker = new google.maps.Marker( { position, map: this.map } );
 
-					this.boundsCoords.push( marker );
-                    this.map.fitBounds( this.bounds.extend( position ) );
+					this.boundsCoords.push(marker);
+                    this.map.fitBounds(this.bounds.extend(position));
                 }
             }
 
-            if(this.polylineCoords.length > 1 ) {
-				const polyline = new google.maps.Polyline({
+			/**
+             * Add polyline
+			 */
+			if( this.polylineCoords.length > 1 )
+			{
+				let polyline = new google.maps.Polyline({
                     path: this.polylineCoords,
-                    strokeWidth: this.polylineWidth,
+                    geodesic: this.polylineFollowEarth,
                     strokeColor: this.polylineColor,
-                    geodesic: this.polylineFollowEarth
+                    strokeOpacity: this.polylineOpacity,
+                    strokeWeight: this.polylineWidth,
                 });
 
-				polyline.setMap( this.map );
+				polyline.setMap(this.map);
             }
 		}
     }

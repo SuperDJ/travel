@@ -88,6 +88,7 @@ Route::post('/flights/browse-quotes', 'FlightController@browseQuotes');
 Route::post('/flights/browse-routes', 'FlightController@browseRoutes');
 Route::post('/flights/browse-dates', 'FlightController@browseDates');
 Route::post('/flights/browse-dates-grid', 'FlightController@browseDatesGrid');
+Route::post('/flights/session', 'FlightController@createSession');
 
 // Airlines
 Route::get('/airlines', 'AirlineController@index');

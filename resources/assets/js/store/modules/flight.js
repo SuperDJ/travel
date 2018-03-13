@@ -31,6 +31,17 @@ export default
 		},
 
 		/**
+		 * Set results
+		 *
+		 * @param state
+		 * @param flights
+		 */
+		browseRoutes( state, flights )
+		{
+			state.results = flights;
+		},
+
+		/**
 		 * Add cabin class
 		 *
 		 * @param state
@@ -145,16 +156,38 @@ export default
 				method: 'POST',
 				body: JSON.stringify(data)
 			})
-				.then(response => {
-					return response.json()
-				})
-				.then(response => {
+				.then( response => { return response.json() } )
+				.then( response => {
 					console.log(response);
-					context.commit('browseQuotes', response);
+					context.commit( 'browseQuotes', response );
 				})
-				.catch(error => {
-					console.log(error);
+				.catch( error => {
+					console.error( error );
+				} );
+		},
+
+		/**
+		 * Get browse routes results from API
+		 * @param context
+		 * @param data
+		 */
+		browseRoutes( context, data )
+		{
+			fetch('/api/flights/browse-routes', {
+				headers: {
+					'content-type': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			})
+				.then( response => { return response.json() } )
+				.then( response => {
+					console.log(response);
+					context.commit( 'browseRoutes', response );
 				})
+				.catch( error => {
+					console.error( error );
+				} );
 		}
 	},
 
@@ -166,6 +199,17 @@ export default
 		 * @returns {{}|state.results|*}
 		 */
 		browseQuotes( state )
+		{
+			return state.results;
+		},
+
+		/**
+		 * Get browse routes results
+		 *
+		 * @param state
+		 * @returns {{}|state.results|*}
+		 */
+		browseRoutes( state )
 		{
 			return state.results;
 		},

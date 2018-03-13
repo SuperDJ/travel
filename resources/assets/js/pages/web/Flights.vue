@@ -5,9 +5,9 @@
                 name="flight"
                 :center="{lat: 0, lng: 0}"
                 :markers="coords"
-                :polylineCoords="coords"
-                :polylineWidth="5"
-                polylinColor="blue"
+                :polyline-coords="coords"
+                polyline-color="#1976d2"
+                :polyline-width="5"
             />
         </div>
         <div v-else>
@@ -114,8 +114,9 @@
                                 {{flight.return.destination.city.name}} {{ flight.return.destination.city.country.name}}
                             </div>
                         </v-card-text>
+
                         <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
-                            {{flight.price}}
+                            {{flight.price}} per person
                         </v-flex>
                     </v-card>
                 </div>
@@ -330,11 +331,6 @@
             {
 				return `https://daisycon.io/images/airline/?width=300&height=150&iata=${ airline }`;
             },
-
-            setCoords( departureCoords, destinationCoords ) {
-                this.departureCoords = departureCoords;
-                this.destinationCoords = destinationCoords;
-            }
         },
 
 		watch: {

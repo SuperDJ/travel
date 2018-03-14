@@ -16,11 +16,11 @@ Vue.use(VueGoogleMaps, {
 
 Vue.component('c-image', () => import('@/components/Image'));
 
-import Index from '@/layouts/Web';
+import App from '@/pages/App';
 
 new Vue({
 	el: '#app',
 	router,
 	store,
-	render: h => h(Index)
+	render: h => h(App)
 });

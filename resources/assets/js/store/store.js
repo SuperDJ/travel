@@ -11,6 +11,7 @@ import flight from './modules/flight';
 import car from './modules/car';
 import city from './modules/city';
 import accommodation from './modules/accommodation';
+import user from './modules/user';
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ export const store = new Vuex.Store({
 		flight,
 		car,
 		city,
-		accommodation
+		accommodation,
+		user,
 	}
 });

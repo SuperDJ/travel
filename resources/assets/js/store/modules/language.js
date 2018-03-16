@@ -21,7 +21,16 @@ export default {
 		 * @param context
 		 */
 		languageIndex( context ) {
-			fetch( '/api/languages' )
+			fetch( '/api/languages', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify( data )
+			})
 				.then( response => {
 					return response.json()
 				} )
@@ -40,16 +49,22 @@ export default {
 		 * @param language
 		 */
 		languageSearch( context, language ) {
-			fetch( `/api/languages/${language}/search` )
+			fetch( `/api/languages/${language}/search`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
 				.then( response => {
 					return response.json();
-				} )
+				})
 				.then( response => {
 					this.commit( 'languageSearch', response );
-				} )
+				})
 				.catch( error => {
-					console.error( error );
-				} );
+					console.error( 'languageSearch', error );
+				});
 		}
 	},
 

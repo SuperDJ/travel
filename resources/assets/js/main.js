@@ -4,15 +4,10 @@ import { store } from './store/store';
 import router from './router';
 import Meta from 'vue-meta';
 import VueProgressiveImage from 'vue-progressive-image';
-import * as VueGoogleMaps from 'vue2-google-maps';
 
 Vue.use(Meta);
 Vue.use(Vuetify);
 Vue.use(VueProgressiveImage);
-Vue.use(VueGoogleMaps, {
-	key: window.google,
-	libraries: ''
-});
 
 Vue.component('c-image', () => import('@/components/Image'));
 
@@ -24,3 +19,12 @@ new Vue({
 	store,
 	render: h => h(App)
 });
+
+let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+if( token )
+{
+	window.token = token;
+} else {
+	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}

@@ -1,7 +1,7 @@
 <template>
     <v-card hover>
-        <v-card-text>
-            <form @keyup.enter="submit" @submit.prevent="submit">
+        <form @keyup.enter="submit()" @submit.prevent="submit()">
+            <v-card-text>
                 <v-container grid-list-md>
                     <v-layout row wrap>
                         <v-flex xs3>
@@ -80,15 +80,15 @@
                         </v-flex>
                     </v-layout>
                 </v-container>
-            </form>
-        </v-card-text>
+            </v-card-text>
 
-        <v-card-actions>
-            <v-btn flat color="primary" @click="submit">
-                <v-icon>search</v-icon>
-                Search flights
-            </v-btn>
-        </v-card-actions>
+            <v-card-actions>
+                <v-btn flat color="primary" type="submit">
+                    <v-icon>search</v-icon>
+                    Search flights
+                </v-btn>
+            </v-card-actions>
+        </form>
     </v-card>
 </template>
 

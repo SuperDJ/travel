@@ -24,13 +24,13 @@ class LanguageController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = Language::create( $request->all() );
+		$stored = Language::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'Language created', 201 );
+			return response()->json( ['success' => true, 'message' => 'Language created'], 201 );
 		} else {
-			return response( 'Language not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'Language not created'], 400 );
 		}
 	}
 
@@ -56,13 +56,13 @@ class LanguageController extends Controller
 	 */
 	public function update( Request $request, Language $language )
 	{
-		$update = $language->update( $request->all() );
+		$updated = $language->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Language updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Language updated'], 200 );
 		} else {
-			return response( 'Language not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Language not updated'], 400 );
 		}
 	}
 
@@ -76,13 +76,13 @@ class LanguageController extends Controller
 	 */
 	public function destroy( Language $language )
 	{
-		$destroy = $language->delete();
+		$destroyed = $language->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Language deleted', 200 );
+			return response()->json( ['success' => true, 'message' => 'Language deleted'], 200 );
 		} else {
-			return response( 'Language not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'Language not deleted'], 400 );
 		}
 	}
 
@@ -96,6 +96,23 @@ class LanguageController extends Controller
 	public function show( Language $language )
 	{
 		return response()->json( $language, 200 );
+	}
+
+	/**
+	 * Search language
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function search( $search )
+	{
+		$result = Language::where('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
+			->orderBy('name', 'asc')
+			->get();
+
+		return response()->json( $result, 200 );
 	}
 
 	public function fillDB()

@@ -28,9 +28,9 @@ class AirlineController extends Controller
 
     	if( $stored )
     	{
-    		return response( 'Airline created', 201 );
+    		return response()->json( ['success' => true, 'message' => 'Airline created'], 201 );
 		} else {
-    		return response(' Airline not created', 400 );
+    		return response()->json( ['success' => false, 'message' => 'Airline not created'], 400 );
 		}
     }
 
@@ -65,13 +65,13 @@ class AirlineController extends Controller
      */
     public function update( Request $request, Airline $airline )
     {
-		$update = $airline->update( $request->all() );
+		$updated = $airline->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Airport updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Airline updated'], 200 );
 		} else {
-			return response( 'Airport not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Airline not updated'], 400 );
 		}
     }
 
@@ -85,13 +85,13 @@ class AirlineController extends Controller
 	 */
     public function destroy( Airline $airline )
     {
-		$destroy = $airline->delete();
+		$destroyed = $airline->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Airport delete', 200 );
+			return response()->json( ['success' => true, 'message' => 'Airline deleted'], 200 );
 		} else {
-			return response( 'Airport not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'Airline not deleted'], 400 );
 		}
     }
 

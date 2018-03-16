@@ -151,18 +151,21 @@ export default
 		{
 			fetch('/api/flights/browse-quotes', {
 				headers: {
-					'content-type': 'application/json'
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
 				},
 				method: 'POST',
 				body: JSON.stringify(data)
 			})
 				.then( response => { return response.json() } )
 				.then( response => {
-					console.log(response);
+					//console.log(response);
 					context.commit( 'browseQuotes', response );
 				})
 				.catch( error => {
-					console.error( error );
+					console.error( 'browseQuotes', error );
 				} );
 		},
 
@@ -175,18 +178,23 @@ export default
 		{
 			fetch('/api/flights/browse-routes', {
 				headers: {
-					'content-type': 'application/json'
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
 				},
 				method: 'POST',
-				body: JSON.stringify(data)
+				body: JSON.stringify( data )
 			})
-				.then( response => { return response.json() } )
+				.then( response => {
+					return response.json()
+				})
 				.then( response => {
 					console.log(response);
 					context.commit( 'browseRoutes', response );
 				})
 				.catch( error => {
-					console.error( error );
+					console.error( 'browseRoutes', error );
 				} );
 		}
 	},

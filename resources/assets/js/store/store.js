@@ -5,12 +5,16 @@ import getters from './getters';
 import actions from './actions';
 import mutations from './mutations';
 
-import continent from './modules/continent';
+
+import accommodation from './modules/accommodation';
 import airport from './modules/airport';
-import flight from './modules/flight';
 import car from './modules/car';
 import city from './modules/city';
-import accommodation from './modules/accommodation';
+import continent from './modules/continent';
+import country from './modules/country';
+import currency from './modules/currency';
+import flight from './modules/flight';
+import language from './modules/language';
 import user from './modules/user';
 
 Vue.use(Vuex);
@@ -24,12 +28,15 @@ export const store = new Vuex.Store({
 	actions,
 
 	modules: {
-		continent,
+		accommodation,
 		airport,
-		flight,
 		car,
 		city,
-		accommodation,
+		continent,
+		country,
+		currency,
+		flight,
+		language,
 		user,
 	}
 });

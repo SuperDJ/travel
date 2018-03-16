@@ -13,11 +13,11 @@ class Language extends Model
 	 */
 	public function countries()
 	{
-		return $this->belongsToMany(Country::class);
+		return $this->belongsToMany( Country::class );
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany(User::class);
+		return $this->belongsToMany( User::class );
 	}
 }

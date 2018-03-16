@@ -25,13 +25,13 @@ class CurrencyController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = Currency::create( $request->all() );
+		$stored = Currency::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'Currency created', 201 );
+			return response()->json( ['success' => true, 'message' => 'Currency created'], 201 );
 		} else {
-			return response( 'Currency not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'Currency not created'], 400 );
 		}
 	}
 
@@ -57,13 +57,13 @@ class CurrencyController extends Controller
 	 */
 	public function update( Request $request, Currency $currency )
 	{
-		$update = $currency->update( $request->all() );
+		$updated = $currency->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Currency updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Currency updated'], 200 );
 		} else {
-			return response( 'Currency not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Currency not updated'], 400 );
 		}
 	}
 
@@ -77,13 +77,13 @@ class CurrencyController extends Controller
 	 */
 	public function destroy( Currency $currency )
 	{
-		$destroy = $currency->delete();
+		$destroyed = $currency->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Currency deleted', 200 );
+			return response()->json( ['success' => true, 'message' => 'Currency deleted'], 200 );
 		} else {
-			return response( 'Currency not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'Currency not deleted'], 400 );
 		}
 	}
 
@@ -97,6 +97,22 @@ class CurrencyController extends Controller
 	public function show( Currency $currency )
 	{
 		return response()->json( $currency, 200 );
+	}
+
+	/**
+	 * Search currency
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function search( $search )
+	{
+		$result = Currency::where('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
+			->orderBy('name', 'asc')
+			->get();
+
+		return response()->json( $result, 200 );
 	}
 
 	public function fillDB()

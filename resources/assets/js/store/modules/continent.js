@@ -25,12 +25,21 @@ export default
 		 */
 		continentIndex( context )
 		{
-			fetch('/api/continents')
-				.then(response => {
-					return response.json()
+			fetch( '/api/continents', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
+				.then( response => {
+					return response.json();
 				})
-				.then(response => {
-					context.commit('continentIndex', response)
+				.then( response => {
+					context.commit( 'continentIndex', response );
+				})
+				.catch( error => {
+					console.error( 'continentIndex', error );
 				});
 		}
 	},

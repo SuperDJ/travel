@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     protected $guarded = ['id'];
 
@@ -23,6 +24,16 @@ class User extends Authenticatable
 	 */
 	public function language()
 	{
-    	return $this->hasOne(Language::class);
+    	return $this->hasOne( Language::class );
+	}
+
+	public function country()
+	{
+		return $this->hasOne( Country::class );
+	}
+
+	public function currency()
+	{
+		return $this->hasOne( Currency::class );
 	}
 }

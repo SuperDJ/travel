@@ -18,81 +18,83 @@
         <v-layout row wrap>
             <v-flex xs3>
                 <v-card flat>
-                    <v-card-text>
-                        <v-select
-                            label="Departure"
-                            required
-                            autocomplete
-                            :items="airports"
-                            item-text="name"
-                            item-value="iata"
-                            no-data="No results found"
-                            cache-items
-                            :search-input.sync="departureSearch"
-                            v-model.number="departure"
-                        >
-                            <template slot="selected" slot-scope="data">
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
-                                </v-list-tile-content>
-                            </template>
+                    <form @keyup.enter="searchFlight()" @submit.prevent="searchFlight()">
+                        <v-card-text>
+                            <v-select
+                                label="Departure"
+                                required
+                                autocomplete
+                                :items="airports"
+                                item-text="name"
+                                item-value="iata"
+                                no-data="No results found"
+                                cache-items
+                                :search-input.sync="departureSearch"
+                                v-model.number="departure"
+                            >
+                                <template slot="selected" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                    </v-list-tile-content>
+                                </template>
 
-                            <template slot="item" slot-scope="data">
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>
-                                        <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
-                                        <div v-if="data.item.city">City: {{data.item.city.name}}</div>
-                                    </v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </template>
-                        </v-select>
-                        <v-text-field label="Departure date" type="date" v-model="departureDate" :min="currentDate" required />
+                                <template slot="item" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </template>
+                            </v-select>
+                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="currentDate" required />
 
-                        <v-select
-                            label="Destination"
-                            required
-                            autocomplete
-                            :items="airports"
-                            item-text="name"
-                            item-value="iata"
-                            no-data="No results found"
-                            cache-items
-                            :search-input.sync="destinationSearch"
-                            v-model.number="destination"
-                        >
-                            <template slot="item" slot-scope="data">
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>
-                                        <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
-                                        <div v-if="data.item.city">City: {{data.item.city.name}}</div>
-                                    </v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </template>
-                        </v-select>
-                        <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
+                            <v-select
+                                label="Destination"
+                                required
+                                autocomplete
+                                :items="airports"
+                                item-text="name"
+                                item-value="iata"
+                                no-data="No results found"
+                                cache-items
+                                :search-input.sync="destinationSearch"
+                                v-model.number="destination"
+                            >
+                                <template slot="item" slot-scope="data">
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </template>
+                            </v-select>
+                            <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
 
-                        <v-text-field label="Number of adults" type="number" min="1" required v-model.number="adults" />
-                        <v-text-field label="Number of children (1 - 16 years)" type="number" min="0" max="8" v-model.number="children" />
-                        <v-text-field label="Number of infants (under 12 months)" type="number" min="0" max="8" v-model.number="infants" />
+                            <v-text-field label="Number of adults" type="number" min="1" required v-model.number="adults" />
+                            <v-text-field label="Number of children (1 - 16 years)" type="number" min="0" max="8" v-model.number="children" />
+                            <v-text-field label="Number of infants (under 12 months)" type="number" min="0" max="8" v-model.number="infants" />
 
-                        <v-select
-                            :items="cabinClasses"
-                            label="Cabin class"
-                            single-line
-                            bottom
-                            required
-                            v-model="cabinClass"
-                        />
-                    </v-card-text>
+                            <v-select
+                                :items="cabinClasses"
+                                label="Cabin class"
+                                single-line
+                                bottom
+                                required
+                                v-model="cabinClass"
+                            />
+                        </v-card-text>
 
-                    <v-card-actions>
-                        <v-btn flat color="primary" @click="searchFlight">
-                            <v-icon>search</v-icon>
-                            Search
-                        </v-btn>
-                    </v-card-actions>
+                        <v-card-actions>
+                            <v-btn flat color="primary" type="submit">
+                                <v-icon>search</v-icon>
+                                Search
+                            </v-btn>
+                        </v-card-actions>
+                    </form>
                 </v-card>
             </v-flex>
 
@@ -172,93 +174,93 @@
                 return this.$store.getters.currentDate;
             },
 
-			departure: {
-				get()
-				{
-					return this.$store.getters.flightDeparture;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightDeparture', value );
-				}
-			},
+            departure: {
+                get()
+                {
+                    return this.$store.getters.flightDeparture;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightDeparture', value );
+                }
+            },
 
-			departureDate: {
-				get()
-				{
-					return this.$store.getters.flightDepartureDate;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightDepartureDate', value );
-				}
-			},
+            departureDate: {
+                get()
+                {
+                    return this.$store.getters.flightDepartureDate;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightDepartureDate', value );
+                }
+            },
 
-			destination: {
-				get()
-				{
-					return this.$store.getters.flightDestination;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightDestination', value );
-				}
-			},
+            destination: {
+                get()
+                {
+                    return this.$store.getters.flightDestination;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightDestination', value );
+                }
+            },
 
-			destinationDate: {
-				get()
-				{
-					return this.$store.getters.flightDestinationDate;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightDestinationDate', value );
-				}
-			},
+            destinationDate: {
+                get()
+                {
+                    return this.$store.getters.flightDestinationDate;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightDestinationDate', value );
+                }
+            },
 
-			adults: {
-				get()
-				{
-					return this.$store.getters.flightAdults;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightAdults', value );
-				}
-			},
+            adults: {
+                get()
+                {
+                    return this.$store.getters.flightAdults;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightAdults', value );
+                }
+            },
 
-			children: {
-				get()
-				{
-					return this.$store.getters.flightChildren;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightChildren', value );
-				}
-			},
+            children: {
+                get()
+                {
+                    return this.$store.getters.flightChildren;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightChildren', value );
+                }
+            },
 
-			infants: {
-				get()
-				{
-					return this.$store.getters.flightInfants;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightInfants', value );
-				}
-			},
+            infants: {
+                get()
+                {
+                    return this.$store.getters.flightInfants;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightInfants', value );
+                }
+            },
 
-			cabinClass: {
-				get()
-				{
-					return this.$store.getters.flightCabinClass;
-				},
-				set( value )
-				{
-					this.$store.commit( 'flightCabinClass', value );
-				}
-			},
+            cabinClass: {
+                get()
+                {
+                    return this.$store.getters.flightCabinClass;
+                },
+                set( value )
+                {
+                    this.$store.commit( 'flightCabinClass', value );
+                }
+            },
         },
 
         methods: {

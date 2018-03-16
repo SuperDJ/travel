@@ -25,13 +25,13 @@ class TimezoneController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = Timezone::create( $request->all() );
+		$stored = Timezone::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'Timezone created', 201 );
+			return response()->json( ['success' => true, 'message' => 'Timezone created'], 201 );
 		} else {
-			return response( 'Timezone not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'Timezone not created'], 400 );
 		}
 	}
 
@@ -57,13 +57,13 @@ class TimezoneController extends Controller
 	 */
 	public function update( Request $request, Timezone $timezone )
 	{
-		$update = $timezone->update( $request->all() );
+		$updated = $timezone->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Timezone updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Timezone updated'], 200 );
 		} else {
-			return response( 'Timezone not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Timezone not updated'], 400 );
 		}
 	}
 
@@ -77,13 +77,13 @@ class TimezoneController extends Controller
 	 */
 	public function destroy( Timezone $timezone )
 	{
-		$destroy = $timezone->delete();
+		$destroyed = $timezone->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Timezone deleted', 200 );
+			return response()->json( ['success' => true, 'message' => 'Timezone deleted'], 200 );
 		} else {
-			return response( 'Timezone not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'Timezone not deleted'], 400 );
 		}
 	}
 
@@ -97,6 +97,23 @@ class TimezoneController extends Controller
 	public function show( Timezone $timezone )
 	{
 		return response()->json( $timezone, 200 );
+	}
+
+	/**
+	 * Search timezone
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function search( $search )
+	{
+		$result = Timezone::where('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
+			->orderBy('name', 'asc')
+			->get();
+
+		return response()->json( $result, 200 );
 	}
 
 	public function fillDB()

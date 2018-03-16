@@ -27,13 +27,13 @@ class CountryController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = Country::create( $request->all() );
+		$stored = Country::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'Country created', 201 );
+			return response()->json( ['success' => true, 'message' => 'Country created'], 201 );
 		} else {
-			return response( 'Country not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'Country not created'], 400 );
 		}
 	}
 
@@ -58,13 +58,13 @@ class CountryController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, Country $country ) {
-		$update = $country->update( $request->all() );
+		$updated = $country->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Country updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Country updated'], 200 );
 		} else {
-			return response( 'Country not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Country not updated'], 400 );
 		}
 	}
 
@@ -77,13 +77,13 @@ class CountryController extends Controller
 	 * @throws \Exception
 	 */
 	public function destroy( Country $country ) {
-		$destroy = $country->delete();
+		$destroyed = $country->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Country deleted', 200 );
+			return response()->json( ['success' => true, 'message' => 'Country deleted'], 200 );
 		} else {
-			return response( 'Country not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'Country not deleted'], 400 );
 		}
 	}
 
@@ -97,6 +97,25 @@ class CountryController extends Controller
 	public function show( Country $country )
 	{
 		return response()->json( $country, 200 );
+	}
+
+	/**
+	 * Search country
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function search( $search )
+	{
+		$result = Country::where('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
+			->with('language')
+			->with('currency')
+			->orderBy('name', 'asc')
+			->get();
+
+		return response()->json( $result, 200 );
 	}
 
 	public function fillDB()

@@ -13,7 +13,7 @@ class Continent extends Model
 	 */
 	public function countries()
 	{
-    	return $this->hasMany(Country::class);
+    	return $this->hasMany( Country::class );
 	}
 
 	/**
@@ -21,6 +21,6 @@ class Continent extends Model
 	 */
 	public function cities()
 	{
-    	return $this->hasManyThrough(City::class, Country::class);
+    	return $this->hasManyThrough( City::class, Country::class );
 	}
 }

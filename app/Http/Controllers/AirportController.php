@@ -25,13 +25,13 @@ class AirportController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = Airport::create( $request->all() );
+		$stored = Airport::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'Airport created', 201 );
+			return response()->json( ['success' => true, 'message' => 'Airport created'], 201 );
 		} else {
-			return response( 'Airport not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'Airport not created'], 400 );
 		}
 	}
 
@@ -57,13 +57,13 @@ class AirportController extends Controller
 	 */
 	public function update( Request $request, Airport $airport )
 	{
-		$update = $airport->update( $request->all() );
+		$updated = $airport->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'Airport updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'Airport updated'], 200 );
 		} else {
-			return response( 'Airport not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'Airport not updated'], 400 );
 		}
 	}
 
@@ -77,13 +77,13 @@ class AirportController extends Controller
 	 */
 	public function destroy( Airport $airport )
 	{
-		$destroy = $airport->delete();
+		$destroyed = $airport->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
-			return response( 'Airport delete', 200 );
+			return response()->json( ['success' => true, 'message' => 'City deleted'], 200 );
 		} else {
-			return response( 'Airport not delete', 400 );
+			return response()->json( ['success' => false, 'message' => 'City not deleted'], 400 );
 		}
 	}
 
@@ -99,6 +99,13 @@ class AirportController extends Controller
 		return response()->json( $airport, 200 );
 	}
 
+	/**
+	 * Search airports
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function search( $search )
 	{
 		if( ctype_digit( $search ) )

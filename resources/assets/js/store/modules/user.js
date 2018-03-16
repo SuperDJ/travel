@@ -2,34 +2,11 @@ export default
 {
 	state: {
 		all: {},
-		email: '',
-		password: '',
 		data: {},
 		loggedIn: false,
 	},
 
 	mutations: {
-		/**
-		 * Set user email
-		 *
-		 * @param state
-		 * @param email
-		 */
-		userEmail( state, email )
-		{
-			state.email = email;
-		},
-
-		/**
-		 * Set password and encode in base64
-		 *
-		 * @param state
-		 * @param password
-		 */
-		userPassword( state, password )
-		{
-			state.password = window.btoa( password );
-		},
 
 		/**
 		 * Set user to logged in
@@ -70,32 +47,29 @@ export default
 		 */
 		userRegister( context, data )
 		{
+		 	fetch( '/api/user/register', {
+		 		headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify( data )
+			})
+				.then( response => {
+					return response.json();
+				})
+				.then( response => {
 
+				})
+				.catch( error => {
+					console.error( 'userRegister', error );
+				});
 		}
 	},
 
 	getters: {
-		/**
-		 * Get email
-		 *
-		 * @param state
-		 * @returns {string|*}
-		 */
-		userEmail( state )
-		{
-			return state.email;
-		},
-
-		/**
-		 * Get password and decode from base64
-		 * @param state
-		 * @returns {string}
-		 */
-		userPassword( state )
-		{
-			return window.atob( state.password );
-		},
-
 		/**
 		 * Check if the user is logged in
 		 * @param state

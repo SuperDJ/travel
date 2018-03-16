@@ -13,7 +13,7 @@ class City extends Model
 	 */
 	public function country()
 	{
-    	return $this->belongsTo(Country::class);
+    	return $this->belongsTo( Country::class );
 	}
 
 	/**
@@ -21,6 +21,6 @@ class City extends Model
 	 */
 	public function airports()
 	{
-    	return $this->hasMany(Airport::class);
+    	return $this->hasMany( Airport::class );
 	}
 }

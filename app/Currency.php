@@ -13,6 +13,6 @@ class Currency extends Model
 	 */
 	public function countries()
 	{
-    	return $this->belongsToMany(Country::class);
+    	return $this->belongsToMany( Country::class );
 	}
 }

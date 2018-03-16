@@ -22,19 +22,25 @@ export default
 		 * Get search results from API
 		 *
 		 * @param context
-		 * @param value
+		 * @param city
 		 */
-		citySearch( context, value )
+		citySearch( context, city )
 		{
-			fetch( `/api/cities/${value}/search` )
-				.then(response => {
+			fetch( `/api/cities/${city}/search`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
+				.then( response => {
 					return response.json();
 				})
-				.then(response => {
+				.then( response => {
 					context.commit( 'citySearch', response );
 				})
-				.catch(error => {
-					console.error('citySearch', error);
+				.catch( error => {
+					console.error( 'citySearch', error );
 				});
 		}
 	},

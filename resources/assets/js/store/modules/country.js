@@ -25,7 +25,13 @@ export default
 		 */
 		countryIndex( context )
 		{
-			fetch( '/api/countries' )
+			fetch( '/api/countries', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
 				.then( response => {
 					return response.json()
 				})
@@ -33,7 +39,7 @@ export default
 					this.commit( 'countryIndex', response );
 				})
 				.catch( error => {
-					console.error( error );
+					console.error( 'countryIndex', error );
 				});
 		},
 
@@ -45,7 +51,13 @@ export default
 		 */
 		countrySearch( context, country )
 		{
-			fetch( `/api/countries/${country}/search` )
+			fetch( `/api/countries/${country}/search`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
 				.then( response => {
 					return response.json();
 				})
@@ -53,7 +65,7 @@ export default
 					this.commit( 'countrySearch', response );
 				})
 				.catch( error => {
-					console.error( error );
+					console.error( 'countrySearch', error );
 				});
 		}
 	},

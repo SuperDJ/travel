@@ -37,15 +37,21 @@ export default
 		 */
 		airportIndex( context )
 		{
-			fetch('/api/airports')
-				.then(response => {
+			fetch( '/api/airports', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
+				.then( response => {
 					return response.json();
 				})
-				.then(response => {
-					context.commit('airportIndex', response);
+				.then( response => {
+					context.commit( 'airportIndex', response );
 				})
-				.catch(error => {
-					console.error(error);
+				.catch( error => {
+					console.error( 'airportIndex', error );
 				});
 		},
 
@@ -53,20 +59,26 @@ export default
 		 * Search for an airport
 		 *
 		 * @param context
-		 * @param search
+		 * @param airport
 		 */
-		airportSearch( context, search )
+		airportSearch( context, airport )
 		{
-			fetch(`/api/airports/${search}/search`)
-				.then(response => {
+			fetch( `/api/airports/${airport}/search` , {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			})
+				.then( response => {
 					return response.json();
 				})
-				.then(response => {
-					context.commit('airportSearch', response);
+				.then( response => {
+					context.commit( 'airportSearch', response );
 				})
-				.catch(error => {
-					console.log(error);
-				})
+				.catch( error => {
+					console.error( 'airportSearch', error );
+				});
 		},
 	},
 

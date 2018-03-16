@@ -13,7 +13,7 @@ class Country extends Model
 	 */
 	public function continent()
 	{
-    	return $this->belongsTo(Continent::class);
+    	return $this->belongsTo( Continent::class );
 	}
 
 	/**
@@ -21,22 +21,22 @@ class Country extends Model
 	 */
 	public function cities()
 	{
-    	return $this->hasMany(City::class);
+    	return $this->hasMany( City::class );
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function currency()
 	{
-    	return $this->hasOne(Currency::class);
+    	return $this->belongsTo( Currency::class );
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function timezones()
+	public function language()
 	{
-    	return $this->hasMany(Timezone::class);
+		return $this->belongsTo( Language::class );
 	}
 }

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 100);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,857 +174,6 @@ function normalizeComponent (
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(document.body.children);
- * // => false
- *
- * _.isArray('abc');
- * // => false
- *
- * _.isArray(_.noop);
- * // => false
- */
-var isArray = Array.isArray;
-
-module.exports = isArray;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _forIn = __webpack_require__(220);
-
-var _forIn2 = _interopRequireDefault(_forIn);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-} /* vim: set softtabstop=2 shiftwidth=2 expandtab : */
-
-exports.default = function (vueElement, googleMapsElement, props, options) {
-  options = options || {};
-  var _options = options,
-      afterModelChanged = _options.afterModelChanged;
-
-  (0, _forIn2.default)(props, function (_ref, attribute) {
-    var twoWay = _ref.twoWay,
-        type = _ref.type,
-        trackProperties = _ref.trackProperties;
-
-    var setMethodName = 'set' + capitalizeFirstLetter(attribute);
-    var getMethodName = 'get' + capitalizeFirstLetter(attribute);
-    var eventName = attribute.toLowerCase() + '_changed';
-    var initialValue = vueElement[attribute];
-
-    if (typeof googleMapsElement[setMethodName] === 'undefined') {
-      throw new Error(setMethodName + ' is not a method of (the Maps object corresponding to) ' + vueElement.$options._componentTag);
-    }
-
-    // We need to avoid an endless
-    // propChanged -> event emitted -> propChanged -> event emitted loop
-    // although this may really be the user's responsibility
-    var timesSet = 0;
-    if (type !== Object || !trackProperties) {
-      // Track the object deeply
-      vueElement.$watch(attribute, function () {
-        var attributeValue = vueElement[attribute];
-
-        timesSet++;
-        googleMapsElement[setMethodName](attributeValue);
-        if (afterModelChanged) {
-          afterModelChanged(attribute, attributeValue);
-        }
-      }, {
-        immediate: typeof initialValue !== 'undefined',
-        deep: type === Object
-      });
-    } else {
-      // I can watch multiple properties, but the danger is that each of
-      // them triggers the event handler multiple times
-      // This ensures that the event handler will only be fired once
-      var tick = 0;
-      var expectedTick = 0;
-
-      var raiseExpectation = function raiseExpectation() {
-        expectedTick += 1;
-      };
-
-      var updateTick = function updateTick() {
-        tick = Math.max(expectedTick, tick + 1);
-      };
-
-      var respondToChange = function respondToChange() {
-        if (tick < expectedTick) {
-          googleMapsElement[setMethodName](vueElement[attribute]);
-
-          if (afterModelChanged) {
-            afterModelChanged(attribute, vueElement[attribute]);
-          }
-
-          updateTick();
-        }
-      };
-
-      trackProperties.forEach(function (propName) {
-        // When any props change -- assume they change on the same tick
-        vueElement.$watch(attribute + '.' + propName, function () {
-          raiseExpectation();
-          vueElement.$nextTick(respondToChange);
-        }, {
-          immediate: typeof initialValue !== 'undefined'
-        });
-      });
-    }
-
-    if (twoWay) {
-      googleMapsElement.addListener(eventName, function (ev) {
-        // eslint-disable-line no-unused-vars
-        /* Check for type === Object because we're quite happy
-          when primitive types change -- the change detection is cheap
-        */
-        if (type === Object && timesSet > 0) {
-          timesSet--;
-        } else {
-          vueElement.$emit(eventName, googleMapsElement[getMethodName]());
-        }
-      });
-    }
-  });
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var freeGlobal = __webpack_require__(71);
-
-/** Detect free variable `self`. */
-var freeSelf = (typeof self === 'undefined' ? 'undefined' : _typeof(self)) == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-module.exports = root;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _mapValues = __webpack_require__(68);
-
-var _mapValues2 = _interopRequireDefault(_mapValues);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-exports.default = {
-  methods: {
-    getPropsValues: function getPropsValues() {
-      var _this = this;
-
-      return (0, _mapValues2.default)(this.$options.props, function (v, k) {
-        return _this[k];
-      });
-    }
-  }
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _forEach = __webpack_require__(217);
-
-var _forEach2 = _interopRequireDefault(_forEach);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-exports.default = function (vueElement, googleMapObject, events) {
-  (0, _forEach2.default)(events, function (eventName) {
-    var exposedName = eventName;
-    googleMapObject.addListener(eventName, function (ev) {
-      vueElement.$emit(exposedName, ev);
-    });
-  });
-}; /* vim: set softtabstop=2 shiftwidth=2 expandtab : */
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseClone = __webpack_require__(89);
-
-/** Used to compose bitmasks for cloning. */
-var CLONE_SYMBOLS_FLAG = 4;
-
-/**
- * Creates a shallow clone of `value`.
- *
- * **Note:** This method is loosely based on the
- * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
- * and supports cloning arrays, array buffers, booleans, date objects, maps,
- * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
- * arrays. The own enumerable properties of `arguments` objects are cloned
- * as plain objects. An empty object is returned for uncloneable values such
- * as error objects, functions, DOM nodes, and WeakMaps.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to clone.
- * @returns {*} Returns the cloned value.
- * @see _.cloneDeep
- * @example
- *
- * var objects = [{ 'a': 1 }, { 'b': 2 }];
- *
- * var shallow = _.clone(objects);
- * console.log(shallow[0] === objects[0]);
- * // => true
- */
-function clone(value) {
-  return baseClone(value, CLONE_SYMBOLS_FLAG);
-}
-
-module.exports = clone;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
-}
-
-module.exports = isObjectLike;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _deferredReady = __webpack_require__(30);
-
-/**
- * @class MapElementMixin @mixins DeferredReadyMixin
- *
- * Extends components to include the following fields:
- *
- * @property $map        The Google map (valid only after the promise returns)
- *
- *
- * */
-exports.default = {
-
-  mixins: [_deferredReady.DeferredReadyMixin],
-
-  created: function created() {
-    var _this = this;
-
-    /* Search for the Map component in the parent */
-    var search = this.$findAncestor(function (ans) {
-      return ans.$mapCreated;
-    });
-
-    if (!search) {
-      throw new Error(this.constructor.name + ' component must be used within a <Map>');
-    }
-
-    this.$mapPromise = search.$mapCreated.then(function (map) {
-      _this.$map = map;
-    });
-    // FIXME: This is a hack to ensure correct loading
-    // when the map has already be instantiated.
-    if (search.$mapObject) {
-      this.$map = search.$mapObject;
-    }
-    this.$MapElementMixin = search;
-    this.$map = null;
-  },
-  beforeDeferredReady: function beforeDeferredReady() {
-    return this.$mapPromise;
-  },
-
-  methods: {
-    $findAncestor: function $findAncestor(condition) {
-      var search = this.$parent;
-
-      while (search) {
-        if (condition(search)) {
-          return search;
-        }
-        search = search.$parent;
-      }
-      return null;
-    }
-  }
-
-}; /* vim: set softtabstop=2 shiftwidth=2 expandtab : */
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsNative = __webpack_require__(151),
-    getValue = __webpack_require__(156);
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
-}
-
-module.exports = getNative;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  return value != null && (type == 'object' || type == 'function');
-}
-
-module.exports = isObject;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayMap = __webpack_require__(49),
-    baseClone = __webpack_require__(89),
-    baseUnset = __webpack_require__(244),
-    castPath = __webpack_require__(14),
-    copyObject = __webpack_require__(19),
-    customOmitClone = __webpack_require__(248),
-    flatRest = __webpack_require__(250),
-    getAllKeysIn = __webpack_require__(54);
-
-/** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG = 1,
-    CLONE_FLAT_FLAG = 2,
-    CLONE_SYMBOLS_FLAG = 4;
-
-/**
- * The opposite of `_.pick`; this method creates an object composed of the
- * own and inherited enumerable property paths of `object` that are not omitted.
- *
- * **Note:** This method is considerably slower than `_.pick`.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The source object.
- * @param {...(string|string[])} [paths] The property paths to omit.
- * @returns {Object} Returns the new object.
- * @example
- *
- * var object = { 'a': 1, 'b': '2', 'c': 3 };
- *
- * _.omit(object, ['a', 'c']);
- * // => { 'b': '2' }
- */
-var omit = flatRest(function (object, paths) {
-  var result = {};
-  if (object == null) {
-    return result;
-  }
-  var isDeep = false;
-  paths = arrayMap(paths, function (path) {
-    path = castPath(path, object);
-    isDeep || (isDeep = path.length > 1);
-    return path;
-  });
-  copyObject(object, getAllKeysIn(object), result);
-  if (isDeep) {
-    result = baseClone(result, CLONE_DEEP_FLAG | CLONE_FLAT_FLAG | CLONE_SYMBOLS_FLAG, customOmitClone);
-  }
-  var length = paths.length;
-  while (length--) {
-    baseUnset(result, paths[length]);
-  }
-  return result;
-});
-
-module.exports = omit;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13),
-    getRawTag = __webpack_require__(152),
-    objectToString = __webpack_require__(153);
-
-/** `Object#toString` result references. */
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
-
-/** Built-in value references. */
-var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
-
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-function baseGetTag(value) {
-    if (value == null) {
-        return value === undefined ? undefinedTag : nullTag;
-    }
-    return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-
-module.exports = baseGetTag;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var root = __webpack_require__(3);
-
-/** Built-in value references. */
-var _Symbol = root.Symbol;
-
-module.exports = _Symbol;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isArray = __webpack_require__(1),
-    isKey = __webpack_require__(47),
-    stringToPath = __webpack_require__(206),
-    toString = __webpack_require__(209);
-
-/**
- * Casts `value` to a path array if it's not one.
- *
- * @private
- * @param {*} value The value to inspect.
- * @param {Object} [object] The object to query keys on.
- * @returns {Array} Returns the cast property path array.
- */
-function castPath(value, object) {
-  if (isArray(value)) {
-    return value;
-  }
-  return isKey(value, object) ? [value] : stringToPath(toString(value));
-}
-
-module.exports = castPath;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isSymbol = __webpack_require__(48);
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/**
- * Converts `value` to a string key if it's not a string or symbol.
- *
- * @private
- * @param {*} value The value to inspect.
- * @returns {string|symbol} Returns the key.
- */
-function toKey(value) {
-  if (typeof value == 'string' || isSymbol(value)) {
-    return value;
-  }
-  var result = value + '';
-  return result == '0' && 1 / value == -INFINITY ? '-0' : result;
-}
-
-module.exports = toKey;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-/* vim: set softtabstop=2 shiftwidth=2 expandtab : */
-
-var setUp = false;
-
-var loaded = exports.loaded = new Promise(function (resolve, reject) {
-  // eslint-disable-line no-unused-vars
-  if (typeof window === 'undefined') {
-    // Do nothing if run from server-side
-    return;
-  }
-  window['vueGoogleMapsInit'] = resolve;
-});
-
-/**
- * @param apiKey    API Key, or object with the URL parameters. For example
- *                  to use Google Maps Premium API, pass
- *                    `{ client: <YOUR-CLIENT-ID> }`.
- *                  You may pass the libraries and/or version (as `v`) parameter into
- *                  this parameter and skip the next two parameters
- * @param version   Google for Maps version
- * @param libraries Libraries to load (@see
- *                  https://developers.google.com/maps/documentation/javascript/libraries)
- * @param loadCn    Boolean. If set to true, the map will be loaded form goole maps China
- *                  (@see https://developers.google.com/maps/documentation/javascript/basics#GoogleMapsChina)
- *
- * Example:
- * ```
- *      import {load} from 'vue-google-maps'
- *
- *      load(<YOUR-API-KEY>)
- *
- *      load({
- *              key: <YOUR-API-KEY>,
- *      })
- *
- *      load({
- *              client: <YOUR-CLIENT-ID>,
- *              channel: <YOUR CHANNEL>
- *      })
- * ```
- */
-var load = exports.load = function load(apiKey, version, libraries, loadCn) {
-  if (typeof document === 'undefined') {
-    // Do nothing if run from server-side
-    return;
-  }
-  if (!setUp) {
-    var googleMapScript = document.createElement('SCRIPT');
-
-    // Allow apiKey to be an object.
-    // This is to support more esoteric means of loading Google Maps,
-    // such as Google for business
-    // https://developers.google.com/maps/documentation/javascript/get-api-key#premium-auth
-    var options = {};
-    if (typeof apiKey === 'string') {
-      options.key = apiKey;
-    } else if ((typeof apiKey === 'undefined' ? 'undefined' : _typeof(apiKey)) === 'object') {
-      for (var k in apiKey) {
-        // transfer values in apiKey to options
-        options[k] = apiKey[k];
-      }
-    } else {
-      throw new Error('apiKey should either be a string or an object');
-    }
-
-    // libraries
-    var librariesPath = '';
-    if (libraries && libraries.length > 0) {
-      librariesPath = libraries.join(',');
-      options['libraries'] = librariesPath;
-    } else if (Array.prototype.isPrototypeOf(options.libraries)) {
-      options.libraries = options.libraries.join(',');
-    }
-    options['callback'] = 'vueGoogleMapsInit';
-
-    var baseUrl = 'https://maps.googleapis.com/';
-
-    if (typeof loadCn === 'boolean' && loadCn === true) {
-      baseUrl = 'http://maps.google.cn/';
-    }
-
-    var url = baseUrl + 'maps/api/js?' + Object.keys(options).map(function (key) {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(options[key]);
-    }).join('&');
-
-    if (version) {
-      url = url + '&v=' + version;
-    }
-
-    googleMapScript.setAttribute('src', url);
-    googleMapScript.setAttribute('async', '');
-    googleMapScript.setAttribute('defer', '');
-    document.head.appendChild(googleMapScript);
-  } else {
-    throw new Error('You already started the loading of google maps');
-  }
-};
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayLikeKeys = __webpack_require__(75),
-    baseKeys = __webpack_require__(162),
-    isArrayLike = __webpack_require__(40);
-
-/**
- * Creates an array of the own enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects. See the
- * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * for more details.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keys(new Foo);
- * // => ['a', 'b'] (iteration order is not guaranteed)
- *
- * _.keys('hi');
- * // => ['0', '1']
- */
-function keys(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-
-module.exports = keys;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assignValue = __webpack_require__(52),
-    baseAssignValue = __webpack_require__(32);
-
-/**
- * Copies properties of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy properties from.
- * @param {Array} props The property identifiers to copy.
- * @param {Object} [object={}] The object to copy properties to.
- * @param {Function} [customizer] The function to customize copied values.
- * @returns {Object} Returns `object`.
- */
-function copyObject(source, props, object, customizer) {
-  var isNew = !object;
-  object || (object = {});
-
-  var index = -1,
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-
-    var newValue = customizer ? customizer(object[key], source[key], key, object, source) : undefined;
-
-    if (newValue === undefined) {
-      newValue = source[key];
-    }
-    if (isNew) {
-      baseAssignValue(object, key, newValue);
-    } else {
-      assignValue(object, key, newValue);
-    }
-  }
-  return object;
-}
-
-module.exports = copyObject;
-
-/***/ }),
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1217,670 +366,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["default"] = addStylesClient;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__listToStyles__);
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-function addStylesClient (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = __WEBPACK_IMPORTED_MODULE_0__listToStyles___default()(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = __WEBPACK_IMPORTED_MODULE_0__listToStyles___default()(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var listCacheClear = __webpack_require__(166),
-    listCacheDelete = __webpack_require__(167),
-    listCacheGet = __webpack_require__(168),
-    listCacheHas = __webpack_require__(169),
-    listCacheSet = __webpack_require__(170);
-
-/**
- * Creates an list cache object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function ListCache(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
-
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
-}
-
-// Add methods to `ListCache`.
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype['delete'] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-
-module.exports = ListCache;
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var eq = __webpack_require__(42);
-
-/**
- * Gets the index at which the `key` is found in `array` of key-value pairs.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} key The key to search for.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function assocIndexOf(array, key) {
-  var length = array.length;
-  while (length--) {
-    if (eq(array[length][0], key)) {
-      return length;
-    }
-  }
-  return -1;
-}
-
-module.exports = assocIndexOf;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9);
-
-/* Built-in method references that are verified to be native. */
-var nativeCreate = getNative(Object, 'create');
-
-module.exports = nativeCreate;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isKeyable = __webpack_require__(184);
-
-/**
- * Gets the data for `map`.
- *
- * @private
- * @param {Object} map The map to query.
- * @param {string} key The reference key.
- * @returns {*} Returns the map data.
- */
-function getMapData(map, key) {
-  var data = map.__data__;
-  return isKeyable(key) ? data[typeof key == 'string' ? 'string' : 'hash'] : data.map;
-}
-
-module.exports = getMapData;
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var DataView = __webpack_require__(199),
-    Map = __webpack_require__(43),
-    Promise = __webpack_require__(200),
-    Set = __webpack_require__(201),
-    WeakMap = __webpack_require__(202),
-    baseGetTag = __webpack_require__(12),
-    toSource = __webpack_require__(72);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    objectTag = '[object Object]',
-    promiseTag = '[object Promise]',
-    setTag = '[object Set]',
-    weakMapTag = '[object WeakMap]';
-
-var dataViewTag = '[object DataView]';
-
-/** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView),
-    mapCtorString = toSource(Map),
-    promiseCtorString = toSource(Promise),
-    setCtorString = toSource(Set),
-    weakMapCtorString = toSource(WeakMap);
-
-/**
- * Gets the `toStringTag` of `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-var getTag = baseGetTag;
-
-// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map && getTag(new Map()) != mapTag || Promise && getTag(Promise.resolve()) != promiseTag || Set && getTag(new Set()) != setTag || WeakMap && getTag(new WeakMap()) != weakMapTag) {
-    getTag = function getTag(value) {
-        var result = baseGetTag(value),
-            Ctor = result == objectTag ? value.constructor : undefined,
-            ctorString = Ctor ? toSource(Ctor) : '';
-
-        if (ctorString) {
-            switch (ctorString) {
-                case dataViewCtorString:
-                    return dataViewTag;
-                case mapCtorString:
-                    return mapTag;
-                case promiseCtorString:
-                    return promiseTag;
-                case setCtorString:
-                    return setTag;
-                case weakMapCtorString:
-                    return weakMapTag;
-            }
-        }
-        return result;
-    };
-}
-
-module.exports = getTag;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var castPath = __webpack_require__(14),
-    toKey = __webpack_require__(15);
-
-/**
- * The base implementation of `_.get` without support for default values.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array|string} path The path of the property to get.
- * @returns {*} Returns the resolved value.
- */
-function baseGet(object, path) {
-  path = castPath(path, object);
-
-  var index = 0,
-      length = path.length;
-
-  while (object != null && index < length) {
-    object = object[toKey(path[index++])];
-  }
-  return index && index == length ? object : undefined;
-}
-
-module.exports = baseGet;
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * 1. Create a DeferredReady plugin.
- *
- * a. Updates options.configMergeStrategies to handle our new hook correctly (using Promise.all!)
- *
- * 2. VueGoogleMaps uses a DeferredReady mixin.
- *
- *     a. Each component checks for ancestors that are also DeferredReady (via dispatch/emit)
- *     b. If no, then run DeferredReady after ready.
- *     c. If yes, then run DeferredReady after parent's deferredReady.
- *
- *
- * Say we have the following inheritance:
- *
- * --> == 'child of'
- *
- * A --> B --> C
- *
- * ready is called in the following order:
- *
- * A.ready, B.ready, C.ready
- *
- * C.ready -- no further ancestors supporting mixin, so in ready() we run+
- *
-   **/
-
-var DeferredReady = exports.DeferredReady = {
-  install: function install(Vue, options) {
-    // eslint-disable-line no-unused-vars
-    // Use the same merge strategy as regular hooks
-    Vue.config.optionMergeStrategies.deferredReady = Vue.config.optionMergeStrategies.created;
-    Vue.config.optionMergeStrategies.beforeDeferredReady = Vue.config.optionMergeStrategies.beforeDeferredReady;
-  }
-};
-
-function runHooks(vm) {
-  var hooks = vm.$options.deferredReady || [];
-
-  // Run the beforeDeferredReady methods first
-  var beforePromise = vm.beforeDeferredReady ? typeof vm.beforeDeferredReady.then === 'function' ? vm.beforeDeferredReady : Promise.all(vm.beforeDeferredReady) : Promise.resolve(null);
-
-  beforePromise.then(function () {
-    if (vm._isDestroyed) return;
-    if (typeof hooks === 'function') {
-      hooks = [hooks];
-    }
-    return Promise.all(hooks.map(function (x) {
-      try {
-        return x.apply(vm);
-      } catch (err) {
-        console.error(err.stack); // eslint-disable-line no-console
-      }
-    }));
-    // execute all handlers, expecting them to return promises
-    // wait for the promises to complete, before allowing child to execute
-  }).then(function () {
-    vm.$deferredReadyPromiseResolve();
-  });
-}
-
-var DeferredReadyMixin = exports.DeferredReadyMixin = {
-  /* Resolved after the deferredReady has been called
-    and the (optional) promise it returns has been
-    resolved */
-  $deferredReadyPromise: false,
-  $deferredReadyPromiseResolve: false,
-  $deferredReadyAncestor: false,
-
-  created: function created() {
-    var _this = this;
-
-    this.$deferredReadyPromise = new Promise(function (resolve, reject) {
-      // eslint-disable-line no-unused-vars
-      _this.$deferredReadyPromiseResolve = resolve;
-    });
-
-    var search = this.$parent;
-    while (search) {
-      if (search.$deferredReadyPromise) {
-        this.$deferredReadyAncestor = search;
-        break;
-      }
-      search = search.$parent;
-    }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    // Execute the hooks only if this is the first
-    // ancestor that is a DeferredReady
-    // this.$deferredReadyMountedPromiseResolve();
-
-    if (!this.$deferredReadyAncestor) {
-      runHooks(this);
-    } else {
-      this.$deferredReadyAncestor.$deferredReadyPromise.then(function () {
-        runHooks(_this2);
-      });
-    }
-  }
-};
-
-/***/ }),
-/* 31 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9169,137 +7655,10 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20), __webpack_require__(21), __webpack_require__(101).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(21).setImmediate))
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var defineProperty = __webpack_require__(69);
-
-/**
- * The base implementation of `assignValue` and `assignMergeValue` without
- * value checks.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function baseAssignValue(object, key, value) {
-  if (key == '__proto__' && defineProperty) {
-    defineProperty(object, key, {
-      'configurable': true,
-      'enumerable': true,
-      'value': value,
-      'writable': true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-
-module.exports = baseAssignValue;
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsArguments = __webpack_require__(159),
-    isObjectLike = __webpack_require__(7);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- *  else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-var isArguments = baseIsArguments(function () {
-    return arguments;
-}()) ? baseIsArguments : function (value) {
-    return isObjectLike(value) && hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
-};
-
-module.exports = isArguments;
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var root = __webpack_require__(3),
-    stubFalse = __webpack_require__(160);
-
-/** Detect free variable `exports`. */
-var freeExports = ( false ? 'undefined' : _typeof(exports)) == 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-var freeModule = freeExports && ( false ? 'undefined' : _typeof(module)) == 'object' && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports`. */
-var moduleExports = freeModule && freeModule.exports === freeExports;
-
-/** Built-in value references. */
-var Buffer = moduleExports ? root.Buffer : undefined;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
-
-/**
- * Checks if `value` is a buffer.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
- * @example
- *
- * _.isBuffer(new Buffer(2));
- * // => true
- *
- * _.isBuffer(new Uint8Array(2));
- * // => false
- */
-var isBuffer = nativeIsBuffer || stubFalse;
-
-module.exports = isBuffer;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
-
-/***/ }),
-/* 35 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9307,737 +7666,59 @@ module.exports = isBuffer;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
+var g;
 
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  length = length == null ? MAX_SAFE_INTEGER : length;
-
-  return !!length && (type == 'number' || type != 'symbol' && reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
-}
-
-module.exports = isIndex;
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- * @example
- *
- * _.isLength(3);
- * // => true
- *
- * _.isLength(Number.MIN_VALUE);
- * // => false
- *
- * _.isLength(Infinity);
- * // => false
- *
- * _.isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-module.exports = isLength;
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * The base implementation of `_.unary` without support for storing metadata.
- *
- * @private
- * @param {Function} func The function to cap arguments for.
- * @returns {Function} Returns the new capped function.
- */
-function baseUnary(func) {
-  return function (value) {
-    return func(value);
-  };
-}
-
-module.exports = baseUnary;
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var freeGlobal = __webpack_require__(71);
-
-/** Detect free variable `exports`. */
-var freeExports = ( false ? 'undefined' : _typeof(exports)) == 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-var freeModule = freeExports && ( false ? 'undefined' : _typeof(module)) == 'object' && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports`. */
-var moduleExports = freeModule && freeModule.exports === freeExports;
-
-/** Detect free variable `process` from Node.js. */
-var freeProcess = moduleExports && freeGlobal.process;
-
-/** Used to access faster Node.js helpers. */
-var nodeUtil = function () {
-  try {
-    return freeProcess && freeProcess.binding && freeProcess.binding('util');
-  } catch (e) {}
+// This works in non-strict mode
+g = function () {
+	return this;
 }();
 
-module.exports = nodeUtil;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Checks if `value` is likely a prototype object.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = typeof Ctor == 'function' && Ctor.prototype || objectProto;
-
-  return value === proto;
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
 }
 
-module.exports = isPrototype;
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 /***/ }),
-/* 40 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isFunction = __webpack_require__(70),
-    isLength = __webpack_require__(36);
-
-/**
- * Checks if `value` is array-like. A value is considered array-like if it's
- * not a function and has a `value.length` that's an integer greater than or
- * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
- * @example
- *
- * _.isArrayLike([1, 2, 3]);
- * // => true
- *
- * _.isArrayLike(document.body.children);
- * // => true
- *
- * _.isArrayLike('abc');
- * // => true
- *
- * _.isArrayLike(_.noop);
- * // => false
- */
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-
-module.exports = isArrayLike;
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var ListCache = __webpack_require__(24),
-    stackClear = __webpack_require__(171),
-    stackDelete = __webpack_require__(172),
-    stackGet = __webpack_require__(173),
-    stackHas = __webpack_require__(174),
-    stackSet = __webpack_require__(175);
-
-/**
- * Creates a stack cache object to store key-value pairs.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function Stack(entries) {
-  var data = this.__data__ = new ListCache(entries);
-  this.size = data.size;
-}
-
-// Add methods to `Stack`.
-Stack.prototype.clear = stackClear;
-Stack.prototype['delete'] = stackDelete;
-Stack.prototype.get = stackGet;
-Stack.prototype.has = stackHas;
-Stack.prototype.set = stackSet;
-
-module.exports = Stack;
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Performs a
- * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * comparison between two values to determine if they are equivalent.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.eq(object, object);
- * // => true
- *
- * _.eq(object, other);
- * // => false
- *
- * _.eq('a', 'a');
- * // => true
- *
- * _.eq('a', Object('a'));
- * // => false
- *
- * _.eq(NaN, NaN);
- * // => true
- */
-function eq(value, other) {
-  return value === other || value !== value && other !== other;
-}
-
-module.exports = eq;
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9),
-    root = __webpack_require__(3);
-
-/* Built-in method references that are verified to be native. */
-var Map = getNative(root, 'Map');
-
-module.exports = Map;
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var mapCacheClear = __webpack_require__(176),
-    mapCacheDelete = __webpack_require__(183),
-    mapCacheGet = __webpack_require__(185),
-    mapCacheHas = __webpack_require__(186),
-    mapCacheSet = __webpack_require__(187);
-
-/**
- * Creates a map cache object to store key-value pairs.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function MapCache(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
-
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
-}
-
-// Add methods to `MapCache`.
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype['delete'] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-
-module.exports = MapCache;
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Appends the elements of `values` to `array`.
- *
- * @private
- * @param {Array} array The array to modify.
- * @param {Array} values The values to append.
- * @returns {Array} Returns `array`.
- */
-function arrayPush(array, values) {
-  var index = -1,
-      length = values.length,
-      offset = array.length;
-
-  while (++index < length) {
-    array[offset + index] = values[index];
-  }
-  return array;
-}
-
-module.exports = arrayPush;
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayFilter = __webpack_require__(198),
-    stubArray = __webpack_require__(84);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-
-/**
- * Creates an array of the own enumerable symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbols = !nativeGetSymbols ? stubArray : function (object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter(nativeGetSymbols(object), function (symbol) {
-    return propertyIsEnumerable.call(object, symbol);
-  });
-};
-
-module.exports = getSymbols;
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var isArray = __webpack_require__(1),
-    isSymbol = __webpack_require__(48);
-
-/** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
-    reIsPlainProp = /^\w*$/;
-
-/**
- * Checks if `value` is a property name and not a property path.
- *
- * @private
- * @param {*} value The value to check.
- * @param {Object} [object] The object to query keys on.
- * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
- */
-function isKey(value, object) {
-  if (isArray(value)) {
-    return false;
-  }
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  if (type == 'number' || type == 'symbol' || type == 'boolean' || value == null || isSymbol(value)) {
-    return true;
-  }
-  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
-}
-
-module.exports = isKey;
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var baseGetTag = __webpack_require__(12),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-    return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'symbol' || isObjectLike(value) && baseGetTag(value) == symbolTag;
-}
-
-module.exports = isSymbol;
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A specialized version of `_.map` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the new mapped array.
- */
-function arrayMap(array, iteratee) {
-  var index = -1,
-      length = array == null ? 0 : array.length,
-      result = Array(length);
-
-  while (++index < length) {
-    result[index] = iteratee(array[index], index, array);
-  }
-  return result;
-}
-
-module.exports = arrayMap;
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * This method returns the first argument it receives.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Util
- * @param {*} value Any value.
- * @returns {*} Returns `value`.
- * @example
- *
- * var object = { 'a': 1 };
- *
- * console.log(_.identity(object) === object);
- * // => true
- */
-function identity(value) {
-  return value;
-}
-
-module.exports = identity;
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayLikeKeys = __webpack_require__(75),
-    baseKeysIn = __webpack_require__(221),
-    isArrayLike = __webpack_require__(40);
-
-/**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keysIn(new Foo);
- * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
- */
-function keysIn(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-
-module.exports = keysIn;
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseAssignValue = __webpack_require__(32),
-    eq = __webpack_require__(42);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Assigns `value` to `key` of `object` if the existing value is not equivalent
- * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * for equality comparisons.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function assignValue(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === undefined && !(key in object)) {
-    baseAssignValue(object, key, value);
-  }
-}
-
-module.exports = assignValue;
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var overArg = __webpack_require__(77);
-
-/** Built-in value references. */
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-
-module.exports = getPrototype;
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetAllKeys = __webpack_require__(83),
-    getSymbolsIn = __webpack_require__(90),
-    keysIn = __webpack_require__(51);
-
-/**
- * Creates an array of own and inherited enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function getAllKeysIn(object) {
-  return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-
-module.exports = getAllKeysIn;
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Uint8Array = __webpack_require__(81);
-
-/**
- * Creates a clone of `arrayBuffer`.
- *
- * @private
- * @param {ArrayBuffer} arrayBuffer The array buffer to clone.
- * @returns {ArrayBuffer} Returns the cloned array buffer.
- */
-function cloneArrayBuffer(arrayBuffer) {
-  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
-  return result;
-}
-
-module.exports = cloneArrayBuffer;
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/*
-Mixin for objects that are mounted by Google Maps
-Javascript API.
-
-These are objects that are sensitive to element resize
-operations so it exposes a property which accepts a bus
-
-*/
-
-exports.default = {
-  props: ['resizeBus'],
-
-  data: function data() {
-    return {
-      _actualResizeBus: null
-    };
-  },
-  created: function created() {
-    if (typeof this.resizeBus === 'undefined') {
-      this.$data._actualResizeBus = this.$gmapDefaultResizeBus;
-    } else {
-      this.$data._actualResizeBus = this.resizeBus;
-    }
-  },
-
-  methods: {
-    _resizeCallback: function _resizeCallback() {
-      this.resize();
-    },
-    _delayedResizeCallback: function _delayedResizeCallback() {
-      var _this = this;
-
-      this.$nextTick(function () {
-        return _this._resizeCallback();
-      });
-    }
-  },
-
-  watch: {
-    resizeBus: function resizeBus(newVal, oldVal) {
-      // eslint-disable-line no-unused-vars
-      this.$data._actualResizeBus = newVal;
-    },
-    '$data._actualResizeBus': function $data_actualResizeBus(newVal, oldVal) {
-      if (oldVal) {
-        oldVal.$off('resize', this._delayedResizeCallback);
-      }
-      if (newVal) {
-        newVal.$on('resize', this._delayedResizeCallback);
-      }
-    }
-  },
-
-  destroyed: function destroyed() {
-    if (this.$data._actualResizeBus) {
-      this.$data._actualResizeBus.$off('resize', this._delayedResizeCallback);
-    }
-  }
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
 };
 
 /***/ }),
-/* 57 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10153,7 +7834,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 58 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10163,23 +7844,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _flightForm = __webpack_require__(121);
+var _flightForm = __webpack_require__(44);
 
 var _flightForm2 = _interopRequireDefault(_flightForm);
 
-var _accommodationForm = __webpack_require__(123);
+var _accommodationForm = __webpack_require__(46);
 
 var _accommodationForm2 = _interopRequireDefault(_accommodationForm);
 
-var _carForm = __webpack_require__(125);
+var _carForm = __webpack_require__(48);
 
 var _carForm2 = _interopRequireDefault(_carForm);
 
-var _destination = __webpack_require__(127);
+var _destination = __webpack_require__(50);
 
 var _destination2 = _interopRequireDefault(_destination);
 
-var _activity = __webpack_require__(129);
+var _activity = __webpack_require__(52);
 
 var _activity2 = _interopRequireDefault(_activity);
 
@@ -10335,7 +8016,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 59 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10585,7 +8266,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 60 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10723,7 +8404,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 61 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10897,7 +8578,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 62 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11096,7 +8777,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 63 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11263,219 +8944,219 @@ exports.default = {
 };
 
 /***/ }),
-/* 64 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
-var _Map = __webpack_require__(133);
+var _Map = __webpack_require__(56);
 
 var _Map2 = _interopRequireDefault(_Map);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	metaInfo: {
-		title: 'Flights'
-	},
+    metaInfo: {
+        title: 'Flights'
+    },
 
-	components: {
-		'google-map': _Map2.default
-	},
+    components: {
+        'google-map': _Map2.default
+    },
 
-	data: function data() {
-		return {
-			departureSearch: null,
-			destinationSearch: null,
-			coords: []
-		};
-	},
-
-
-	computed: {
-		airports: function airports() {
-			return Object.values(this.$store.getters.airportSearch);
-		},
-		flights: function flights() {
-			return this.$store.getters.browseQuotes;
-		},
-		cabinClasses: function cabinClasses() {
-			return this.$store.getters.cabinClasses;
-		},
-		currentDate: function currentDate() {
-			return this.$store.getters.currentDate;
-		},
+    data: function data() {
+        return {
+            departureSearch: null,
+            destinationSearch: null,
+            coords: []
+        };
+    },
 
 
-		departure: {
-			get: function get() {
-				return this.$store.getters.flightDeparture;
-			},
-			set: function set(value) {
-				this.$store.commit('flightDeparture', value);
-			}
-		},
-
-		departureDate: {
-			get: function get() {
-				return this.$store.getters.flightDepartureDate;
-			},
-			set: function set(value) {
-				this.$store.commit('flightDepartureDate', value);
-			}
-		},
-
-		destination: {
-			get: function get() {
-				return this.$store.getters.flightDestination;
-			},
-			set: function set(value) {
-				this.$store.commit('flightDestination', value);
-			}
-		},
-
-		destinationDate: {
-			get: function get() {
-				return this.$store.getters.flightDestinationDate;
-			},
-			set: function set(value) {
-				this.$store.commit('flightDestinationDate', value);
-			}
-		},
-
-		adults: {
-			get: function get() {
-				return this.$store.getters.flightAdults;
-			},
-			set: function set(value) {
-				this.$store.commit('flightAdults', value);
-			}
-		},
-
-		children: {
-			get: function get() {
-				return this.$store.getters.flightChildren;
-			},
-			set: function set(value) {
-				this.$store.commit('flightChildren', value);
-			}
-		},
-
-		infants: {
-			get: function get() {
-				return this.$store.getters.flightInfants;
-			},
-			set: function set(value) {
-				this.$store.commit('flightInfants', value);
-			}
-		},
-
-		cabinClass: {
-			get: function get() {
-				return this.$store.getters.flightCabinClass;
-			},
-			set: function set(value) {
-				this.$store.commit('flightCabinClass', value);
-			}
-		}
-	},
-
-	methods: {
-		/**
-            * Search for a flight
-   */
-		searchFlight: function searchFlight() {
-			var _this = this;
-
-			if (this.departure && this.destination && this.departureDate) {
-				var data = {
-					departure: this.departure,
-					departureDate: this.departureDate,
-					destination: this.destination,
-					destinationDate: this.destinationDate,
-					adults: this.adults,
-					children: this.children,
-					infants: this.infants,
-					cabinClass: this.cabinClass,
-					country: 'NL',
-					currency: 'EUR',
-					language: 'NL'
-				};
-
-				fetch('/api/airports/' + this.departure + '/search').then(function (response) {
-					return response.json();
-				}).then(function (response) {
-					_this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
-				});
-
-				fetch('/api/airports/' + this.destination + '/search').then(function (response) {
-					return response.json();
-				}).then(function (response) {
-					_this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
-				});
-
-				console.log(data);
-
-				this.$store.dispatch('browseQuotes', data);
-			}
-		},
+    computed: {
+        airports: function airports() {
+            return Object.values(this.$store.getters.airportSearch);
+        },
+        flights: function flights() {
+            return this.$store.getters.browseQuotes;
+        },
+        cabinClasses: function cabinClasses() {
+            return this.$store.getters.cabinClasses;
+        },
+        currentDate: function currentDate() {
+            return this.$store.getters.currentDate;
+        },
 
 
-		/**
-            * If a location has been filled in get the corresponding details
-   */
-		setSearchedAirports: function setSearchedAirports() {
-			if (this.departure) {
-				this.$store.dispatch('airportSearch', this.departure);
-			}
+        departure: {
+            get: function get() {
+                return this.$store.getters.flightDeparture;
+            },
+            set: function set(value) {
+                this.$store.commit('flightDeparture', value);
+            }
+        },
 
-			if (this.destination) {
-				this.$store.dispatch('airportSearch', this.destination);
-			}
-		},
+        departureDate: {
+            get: function get() {
+                return this.$store.getters.flightDepartureDate;
+            },
+            set: function set(value) {
+                this.$store.commit('flightDepartureDate', value);
+            }
+        },
+
+        destination: {
+            get: function get() {
+                return this.$store.getters.flightDestination;
+            },
+            set: function set(value) {
+                this.$store.commit('flightDestination', value);
+            }
+        },
+
+        destinationDate: {
+            get: function get() {
+                return this.$store.getters.flightDestinationDate;
+            },
+            set: function set(value) {
+                this.$store.commit('flightDestinationDate', value);
+            }
+        },
+
+        adults: {
+            get: function get() {
+                return this.$store.getters.flightAdults;
+            },
+            set: function set(value) {
+                this.$store.commit('flightAdults', value);
+            }
+        },
+
+        children: {
+            get: function get() {
+                return this.$store.getters.flightChildren;
+            },
+            set: function set(value) {
+                this.$store.commit('flightChildren', value);
+            }
+        },
+
+        infants: {
+            get: function get() {
+                return this.$store.getters.flightInfants;
+            },
+            set: function set(value) {
+                this.$store.commit('flightInfants', value);
+            }
+        },
+
+        cabinClass: {
+            get: function get() {
+                return this.$store.getters.flightCabinClass;
+            },
+            set: function set(value) {
+                this.$store.commit('flightCabinClass', value);
+            }
+        }
+    },
+
+    methods: {
+        /**
+                  * Search for a flight
+         */
+        searchFlight: function searchFlight() {
+            var _this = this;
+
+            if (this.departure && this.destination && this.departureDate) {
+                var data = {
+                    departure: this.departure,
+                    departureDate: this.departureDate,
+                    destination: this.destination,
+                    destinationDate: this.destinationDate,
+                    adults: this.adults,
+                    children: this.children,
+                    infants: this.infants,
+                    cabinClass: this.cabinClass,
+                    country: 'NL',
+                    currency: 'EUR',
+                    language: 'NL'
+                };
+
+                fetch('/api/airports/' + this.departure + '/search').then(function (response) {
+                    return response.json();
+                }).then(function (response) {
+                    _this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
+                });
+
+                fetch('/api/airports/' + this.destination + '/search').then(function (response) {
+                    return response.json();
+                }).then(function (response) {
+                    _this.coords.push({ lat: parseFloat(response[0].latitude), lng: parseFloat(response[0].longitude) });
+                });
+
+                console.log(data);
+
+                this.$store.dispatch('browseQuotes', data);
+            }
+        },
 
 
-		/**
-            * Search for an airport
-            *
-   * @param value
-   */
-		airportSearch: function airportSearch(value) {
-			if (value && value.length >= 3) {
-				this.$store.dispatch('airportSearch', value);
-			}
-		},
+        /**
+                  * If a location has been filled in get the corresponding details
+         */
+        setSearchedAirports: function setSearchedAirports() {
+            if (this.departure) {
+                this.$store.dispatch('airportSearch', this.departure);
+            }
+
+            if (this.destination) {
+                this.$store.dispatch('airportSearch', this.destination);
+            }
+        },
 
 
-		/**
-            * Return
-   * @param airline
-   * @returns {string}
-   */
-		airlineImage: function airlineImage(airline) {
-			return 'https://daisycon.io/images/airline/?width=300&height=150&iata=' + airline;
-		}
-	},
+        /**
+                  * Search for an airport
+                  *
+         * @param value
+         */
+        airportSearch: function airportSearch(value) {
+            if (value && value.length >= 3) {
+                this.$store.dispatch('airportSearch', value);
+            }
+        },
 
-	watch: {
-		departureSearch: function departureSearch(value) {
-			this.airportSearch(value);
-		},
-		destinationSearch: function destinationSearch(value) {
-			this.airportSearch(value);
-		}
-	},
 
-	created: function created() {
-		this.setSearchedAirports();
-		this.searchFlight();
-		this.$store.commit('currentDate');
-	}
+        /**
+                  * Return
+         * @param airline
+         * @returns {string}
+         */
+        airlineImage: function airlineImage(airline) {
+            return 'https://daisycon.io/images/airline/?width=300&height=150&iata=' + airline;
+        }
+    },
+
+    watch: {
+        departureSearch: function departureSearch(value) {
+            this.airportSearch(value);
+        },
+        destinationSearch: function destinationSearch(value) {
+            this.airportSearch(value);
+        }
+    },
+
+    created: function created() {
+        this.setSearchedAirports();
+        this.searchFlight();
+        this.$store.commit('currentDate');
+    }
 }; //
 //
 //
@@ -11608,9 +9289,326 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
-/* 65 */
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function (useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if (item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function (modules, mediaQuery) {
+		if (typeof modules === "string") modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for (var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if (typeof id === "number") alreadyImportedModules[id] = true;
+		}
+		for (i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if (mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if (mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["default"] = addStylesClient;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__listToStyles__);
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+function addStylesClient (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = __WEBPACK_IMPORTED_MODULE_0__listToStyles___default()(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = __WEBPACK_IMPORTED_MODULE_0__listToStyles___default()(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11715,15 +9713,55 @@ exports.default = {
 };
 
 /***/ }),
-/* 66 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11771,61 +9809,96 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    metaInfo: {
-        title: 'Register'
+  metaInfo: {
+    title: 'Register'
+  },
+
+  data: function data() {
+    return {
+      form: {
+        first_name: '',
+        last_name: '',
+        passwordRepeat: '',
+        currency: 0,
+        country: 0,
+        language: 0,
+        password: '',
+        email: ''
+      },
+      passwordVisible: false,
+      passwordRepeatVisible: false,
+      currencySearch: null,
+      countrySearch: null,
+      languageSearch: null
+    };
+  },
+
+
+  computed: {
+    countries: function countries() {
+      return Object.values(this.$store.getters.countrySearch);
     },
-
-    data: function data() {
-        return {
-            first_name: '',
-            last_name: '',
-            passwordRepeat: '',
-            passwordVisible: false,
-            passwordRepeatVisible: false,
-            currency: null,
-            country: null,
-            language: null
-        };
+    languages: function languages() {
+      return Object.values(this.$store.getters.languageSearch);
     },
-
-
-    computed: {
-        email: {
-            get: function get() {
-                return this.$store.getters.userEmail;
-            },
-            set: function set(email) {
-                this.$store.commit('userEmail', email);
-            }
-        },
-        password: {
-            get: function get() {
-                return this.$store.getters.userPassword;
-            },
-            set: function set(password) {
-                this.$store.commit('userPassword', password);
-            }
-        }
-    },
-
-    methods: {
-        submit: function submit() {
-            var data = {
-                email: this.email,
-                password: this.password,
-                passwordRepeat: this.passwordRepeat,
-                country: this.country,
-                currency: this.currency,
-                language: this.language
-            };
-
-            this.$store.commit('userRegister', data);
-        }
+    currencies: function currencies() {
+      return Object.values(this.$store.getters.currencySearch);
     }
+  },
+
+  methods: {
+    /**
+              * Submit the form
+              */
+    submit: function submit(data) {
+      // Base64 encode password
+      data.password = btoa(data.password);
+      data.passwordRepeat = btoa(data.passwordRepeat);
+
+      this.$store.dispatch('userRegister', data);
+    }
+  },
+
+  watch: {
+    /**
+              * Search countries
+              *
+     * @param country
+     */
+    countrySearch: function countrySearch(country) {
+      if (country && country.length > 2) {
+        this.$store.dispatch('countrySearch', country);
+      }
+    },
+
+
+    /**
+              * Search languages
+              *
+     * @param language
+     */
+    languageSearch: function languageSearch(language) {
+      if (language && language.length > 2) {
+        this.$store.dispatch('languageSearch', language);
+      }
+    },
+
+
+    /**
+              * Search currencies
+              *
+     * @param currency
+     */
+    currencySearch: function currencySearch(currency) {
+      if (currency && currency.length > 2) {
+        this.$store.dispatch('currencySearch', currency);
+      }
+    }
+  }
 };
 
 /***/ }),
-/* 67 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11895,1741 +9968,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseAssignValue = __webpack_require__(32),
-    baseForOwn = __webpack_require__(73),
-    baseIteratee = __webpack_require__(78);
-
-/**
- * Creates an object with the same keys as `object` and values generated
- * by running each own enumerable string keyed property of `object` thru
- * `iteratee`. The iteratee is invoked with three arguments:
- * (value, key, object).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Object
- * @param {Object} object The object to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Object} Returns the new mapped object.
- * @see _.mapKeys
- * @example
- *
- * var users = {
- *   'fred':    { 'user': 'fred',    'age': 40 },
- *   'pebbles': { 'user': 'pebbles', 'age': 1 }
- * };
- *
- * _.mapValues(users, function(o) { return o.age; });
- * // => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
- *
- * // The `_.property` iteratee shorthand.
- * _.mapValues(users, 'age');
- * // => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
- */
-function mapValues(object, iteratee) {
-  var result = {};
-  iteratee = baseIteratee(iteratee, 3);
-
-  baseForOwn(object, function (value, key, object) {
-    baseAssignValue(result, key, iteratee(value, key, object));
-  });
-  return result;
-}
-
-module.exports = mapValues;
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9);
-
-var defineProperty = function () {
-  try {
-    var func = getNative(Object, 'defineProperty');
-    func({}, '', {});
-    return func;
-  } catch (e) {}
-}();
-
-module.exports = defineProperty;
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetTag = __webpack_require__(12),
-    isObject = __webpack_require__(10);
-
-/** `Object#toString` result references. */
-var asyncTag = '[object AsyncFunction]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]',
-    proxyTag = '[object Proxy]';
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction(value) {
-    if (!isObject(value)) {
-        return false;
-    }
-    // The use of `Object#toString` avoids issues with the `typeof` operator
-    // in Safari 9 which returns 'object' for typed arrays and other constructors.
-    var tag = baseGetTag(value);
-    return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
-}
-
-module.exports = isFunction;
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = (typeof global === 'undefined' ? 'undefined' : _typeof(global)) == 'object' && global && global.Object === Object && global;
-
-module.exports = freeGlobal;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/**
- * Converts `func` to its source code.
- *
- * @private
- * @param {Function} func The function to convert.
- * @returns {string} Returns the source code.
- */
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString.call(func);
-    } catch (e) {}
-    try {
-      return func + '';
-    } catch (e) {}
-  }
-  return '';
-}
-
-module.exports = toSource;
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseFor = __webpack_require__(74),
-    keys = __webpack_require__(18);
-
-/**
- * The base implementation of `_.forOwn` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Object} Returns `object`.
- */
-function baseForOwn(object, iteratee) {
-  return object && baseFor(object, iteratee, keys);
-}
-
-module.exports = baseForOwn;
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var createBaseFor = __webpack_require__(157);
-
-/**
- * The base implementation of `baseForOwn` which iterates over `object`
- * properties returned by `keysFunc` and invokes `iteratee` for each property.
- * Iteratee functions may exit iteration early by explicitly returning `false`.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @returns {Object} Returns `object`.
- */
-var baseFor = createBaseFor();
-
-module.exports = baseFor;
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseTimes = __webpack_require__(158),
-    isArguments = __webpack_require__(33),
-    isArray = __webpack_require__(1),
-    isBuffer = __webpack_require__(34),
-    isIndex = __webpack_require__(35),
-    isTypedArray = __webpack_require__(76);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Creates an array of the enumerable property names of the array-like `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @param {boolean} inherited Specify returning inherited property names.
- * @returns {Array} Returns the array of property names.
- */
-function arrayLikeKeys(value, inherited) {
-  var isArr = isArray(value),
-      isArg = !isArr && isArguments(value),
-      isBuff = !isArr && !isArg && isBuffer(value),
-      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
-      skipIndexes = isArr || isArg || isBuff || isType,
-      result = skipIndexes ? baseTimes(value.length, String) : [],
-      length = result.length;
-
-  for (var key in value) {
-    if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (
-    // Safari 9 has enumerable `arguments.length` in strict mode.
-    key == 'length' ||
-    // Node.js 0.10 has enumerable non-index properties on buffers.
-    isBuff && (key == 'offset' || key == 'parent') ||
-    // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset') ||
-    // Skip index properties.
-    isIndex(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = arrayLikeKeys;
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsTypedArray = __webpack_require__(161),
-    baseUnary = __webpack_require__(37),
-    nodeUtil = __webpack_require__(38);
-
-/* Node.js helper references. */
-var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
-
-/**
- * Checks if `value` is classified as a typed array.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
- * @example
- *
- * _.isTypedArray(new Uint8Array);
- * // => true
- *
- * _.isTypedArray([]);
- * // => false
- */
-var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-
-module.exports = isTypedArray;
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Creates a unary function that invokes `func` with its argument transformed.
- *
- * @private
- * @param {Function} func The function to wrap.
- * @param {Function} transform The argument transform.
- * @returns {Function} Returns the new function.
- */
-function overArg(func, transform) {
-  return function (arg) {
-    return func(transform(arg));
-  };
-}
-
-module.exports = overArg;
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var baseMatches = __webpack_require__(164),
-    baseMatchesProperty = __webpack_require__(204),
-    identity = __webpack_require__(50),
-    isArray = __webpack_require__(1),
-    property = __webpack_require__(214);
-
-/**
- * The base implementation of `_.iteratee`.
- *
- * @private
- * @param {*} [value=_.identity] The value to convert to an iteratee.
- * @returns {Function} Returns the iteratee.
- */
-function baseIteratee(value) {
-  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
-  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
-  if (typeof value == 'function') {
-    return value;
-  }
-  if (value == null) {
-    return identity;
-  }
-  if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') {
-    return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
-  }
-  return property(value);
-}
-
-module.exports = baseIteratee;
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsEqualDeep = __webpack_require__(188),
-    isObjectLike = __webpack_require__(7);
-
-/**
- * The base implementation of `_.isEqual` which supports partial comparisons
- * and tracks traversed objects.
- *
- * @private
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Unordered comparison
- *  2 - Partial comparison
- * @param {Function} [customizer] The function to customize comparisons.
- * @param {Object} [stack] Tracks traversed `value` and `other` objects.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- */
-function baseIsEqual(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || !isObjectLike(value) && !isObjectLike(other)) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
-}
-
-module.exports = baseIsEqual;
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var SetCache = __webpack_require__(189),
-    arraySome = __webpack_require__(192),
-    cacheHas = __webpack_require__(193);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * A specialized version of `baseIsEqualDeep` for arrays with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Array} array The array to compare.
- * @param {Array} other The other array to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `array` and `other` objects.
- * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
- */
-function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-      arrLength = array.length,
-      othLength = other.length;
-
-  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
-    return false;
-  }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(array);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
-  }
-  var index = -1,
-      result = true,
-      seen = bitmask & COMPARE_UNORDERED_FLAG ? new SetCache() : undefined;
-
-  stack.set(array, other);
-  stack.set(other, array);
-
-  // Ignore non-index properties.
-  while (++index < arrLength) {
-    var arrValue = array[index],
-        othValue = other[index];
-
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, arrValue, index, other, array, stack) : customizer(arrValue, othValue, index, array, other, stack);
-    }
-    if (compared !== undefined) {
-      if (compared) {
-        continue;
-      }
-      result = false;
-      break;
-    }
-    // Recursively compare arrays (susceptible to call stack limits).
-    if (seen) {
-      if (!arraySome(other, function (othValue, othIndex) {
-        if (!cacheHas(seen, othIndex) && (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-          return seen.push(othIndex);
-        }
-      })) {
-        result = false;
-        break;
-      }
-    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-      result = false;
-      break;
-    }
-  }
-  stack['delete'](array);
-  stack['delete'](other);
-  return result;
-}
-
-module.exports = equalArrays;
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var root = __webpack_require__(3);
-
-/** Built-in value references. */
-var Uint8Array = root.Uint8Array;
-
-module.exports = Uint8Array;
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetAllKeys = __webpack_require__(83),
-    getSymbols = __webpack_require__(46),
-    keys = __webpack_require__(18);
-
-/**
- * Creates an array of own enumerable property names and symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function getAllKeys(object) {
-  return baseGetAllKeys(object, keys, getSymbols);
-}
-
-module.exports = getAllKeys;
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayPush = __webpack_require__(45),
-    isArray = __webpack_require__(1);
-
-/**
- * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
- * `keysFunc` and `symbolsFunc` to get the enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @param {Function} symbolsFunc The function to get the symbols of `object`.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-
-module.exports = baseGetAllKeys;
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * This method returns a new empty array.
- *
- * @static
- * @memberOf _
- * @since 4.13.0
- * @category Util
- * @returns {Array} Returns the new empty array.
- * @example
- *
- * var arrays = _.times(2, _.stubArray);
- *
- * console.log(arrays);
- * // => [[], []]
- *
- * console.log(arrays[0] === arrays[1]);
- * // => false
- */
-function stubArray() {
-  return [];
-}
-
-module.exports = stubArray;
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isObject = __webpack_require__(10);
-
-/**
- * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` if suitable for strict
- *  equality comparisons, else `false`.
- */
-function isStrictComparable(value) {
-  return value === value && !isObject(value);
-}
-
-module.exports = isStrictComparable;
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A specialized version of `matchesProperty` for source values suitable
- * for strict equality comparisons, i.e. `===`.
- *
- * @private
- * @param {string} key The key of the property to get.
- * @param {*} srcValue The value to match.
- * @returns {Function} Returns the new spec function.
- */
-function matchesStrictComparable(key, srcValue) {
-  return function (object) {
-    if (object == null) {
-      return false;
-    }
-    return object[key] === srcValue && (srcValue !== undefined || key in Object(object));
-  };
-}
-
-module.exports = matchesStrictComparable;
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A specialized version of `_.forEach` for arrays without support for
- * iteratee shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns `array`.
- */
-function arrayEach(array, iteratee) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    if (iteratee(array[index], index, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-
-module.exports = arrayEach;
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var identity = __webpack_require__(50);
-
-/**
- * Casts `value` to `identity` if it's not a function.
- *
- * @private
- * @param {*} value The value to inspect.
- * @returns {Function} Returns cast function.
- */
-function castFunction(value) {
-  return typeof value == 'function' ? value : identity;
-}
-
-module.exports = castFunction;
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Stack = __webpack_require__(41),
-    arrayEach = __webpack_require__(87),
-    assignValue = __webpack_require__(52),
-    baseAssign = __webpack_require__(224),
-    baseAssignIn = __webpack_require__(225),
-    cloneBuffer = __webpack_require__(226),
-    copyArray = __webpack_require__(227),
-    copySymbols = __webpack_require__(228),
-    copySymbolsIn = __webpack_require__(229),
-    getAllKeys = __webpack_require__(82),
-    getAllKeysIn = __webpack_require__(54),
-    getTag = __webpack_require__(28),
-    initCloneArray = __webpack_require__(230),
-    initCloneByTag = __webpack_require__(231),
-    initCloneObject = __webpack_require__(236),
-    isArray = __webpack_require__(1),
-    isBuffer = __webpack_require__(34),
-    isMap = __webpack_require__(238),
-    isObject = __webpack_require__(10),
-    isSet = __webpack_require__(240),
-    keys = __webpack_require__(18);
-
-/** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG = 1,
-    CLONE_FLAT_FLAG = 2,
-    CLONE_SYMBOLS_FLAG = 4;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    objectTag = '[object Object]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    symbolTag = '[object Symbol]',
-    weakMapTag = '[object WeakMap]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-/** Used to identify `toStringTag` values supported by `_.clone`. */
-var cloneableTags = {};
-cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-
-/**
- * The base implementation of `_.clone` and `_.cloneDeep` which tracks
- * traversed objects.
- *
- * @private
- * @param {*} value The value to clone.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Deep clone
- *  2 - Flatten inherited properties
- *  4 - Clone symbols
- * @param {Function} [customizer] The function to customize cloning.
- * @param {string} [key] The key of `value`.
- * @param {Object} [object] The parent object of `value`.
- * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
- * @returns {*} Returns the cloned value.
- */
-function baseClone(value, bitmask, customizer, key, object, stack) {
-  var result,
-      isDeep = bitmask & CLONE_DEEP_FLAG,
-      isFlat = bitmask & CLONE_FLAT_FLAG,
-      isFull = bitmask & CLONE_SYMBOLS_FLAG;
-
-  if (customizer) {
-    result = object ? customizer(value, key, object, stack) : customizer(value);
-  }
-  if (result !== undefined) {
-    return result;
-  }
-  if (!isObject(value)) {
-    return value;
-  }
-  var isArr = isArray(value);
-  if (isArr) {
-    result = initCloneArray(value);
-    if (!isDeep) {
-      return copyArray(value, result);
-    }
-  } else {
-    var tag = getTag(value),
-        isFunc = tag == funcTag || tag == genTag;
-
-    if (isBuffer(value)) {
-      return cloneBuffer(value, isDeep);
-    }
-    if (tag == objectTag || tag == argsTag || isFunc && !object) {
-      result = isFlat || isFunc ? {} : initCloneObject(value);
-      if (!isDeep) {
-        return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
-      }
-    } else {
-      if (!cloneableTags[tag]) {
-        return object ? value : {};
-      }
-      result = initCloneByTag(value, tag, isDeep);
-    }
-  }
-  // Check for circular references and return its corresponding clone.
-  stack || (stack = new Stack());
-  var stacked = stack.get(value);
-  if (stacked) {
-    return stacked;
-  }
-  stack.set(value, result);
-
-  if (isSet(value)) {
-    value.forEach(function (subValue) {
-      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
-    });
-
-    return result;
-  }
-
-  if (isMap(value)) {
-    value.forEach(function (subValue, key) {
-      result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
-    });
-
-    return result;
-  }
-
-  var keysFunc = isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys;
-
-  var props = isArr ? undefined : keysFunc(value);
-  arrayEach(props || value, function (subValue, key) {
-    if (props) {
-      key = subValue;
-      subValue = value[key];
-    }
-    // Recursively populate clone (susceptible to call stack limits).
-    assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
-  });
-  return result;
-}
-
-module.exports = baseClone;
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayPush = __webpack_require__(45),
-    getPrototype = __webpack_require__(53),
-    getSymbols = __webpack_require__(46),
-    stubArray = __webpack_require__(84);
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-
-/**
- * Creates an array of the own and inherited enumerable symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbolsIn = !nativeGetSymbols ? stubArray : function (object) {
-  var result = [];
-  while (object) {
-    arrayPush(result, getSymbols(object));
-    object = getPrototype(object);
-  }
-  return result;
-};
-
-module.exports = getSymbolsIn;
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  options: {
-    type: Object,
-    required: false,
-    default: function _default() {
-      return {};
-    }
-  },
-  opened: {
-    type: Boolean,
-    default: true
-  },
-  position: {
-    type: Object,
-    twoWay: true
-  },
-  zIndex: {
-    type: Number,
-    twoWay: true
-  }
-};
-
-var events = ['domready', 'closeclick', 'content_changed'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default],
-  replace: false,
-  props: props,
-
-  mounted: function mounted() {
-    var el = this.$refs.flyaway;
-    el.parentNode.removeChild(el);
-  },
-  deferredReady: function deferredReady() {
-    this.$markerObject = null;
-    this.$markerComponent = this.$findAncestor(function (ans) {
-      return ans.$markerObject;
-    });
-
-    if (this.$markerComponent) {
-      this.$markerObject = this.$markerComponent.$markerObject;
-    }
-    this.createInfoWindow();
-  },
-  destroyed: function destroyed() {
-    if (this.disconnect) {
-      this.disconnect();
-    }
-    if (this.$infoWindow) {
-      this.$infoWindow.setMap(null);
-    }
-  },
-
-  methods: {
-    openInfoWindow: function openInfoWindow() {
-      if (this.opened) {
-        if (this.$markerObject !== null) {
-          this.$infoWindow.open(this.$map, this.$markerObject);
-        } else {
-          this.$infoWindow.open(this.$map);
-        }
-      } else {
-        this.$infoWindow.close();
-      }
-    },
-    createInfoWindow: function createInfoWindow() {
-      var _this = this;
-
-      // setting options
-      var options = (0, _clone2.default)(this.options);
-      options.content = this.$refs.flyaway;
-
-      // only set the position if the info window is not bound to a marker
-      if (this.$markerComponent === null) {
-        options.position = this.position;
-      }
-
-      this.$infoWindow = new google.maps.InfoWindow(options);
-
-      // Binding
-      (0, _propsBinder2.default)(this, this.$infoWindow, (0, _omit2.default)(props, ['opened']));
-      (0, _eventsBinder2.default)(this, this.$infoWindow, events);
-
-      this.openInfoWindow();
-      this.$watch('opened', function () {
-        _this.openInfoWindow();
-      });
-    }
-  }
-};
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _manager = __webpack_require__(17);
-
-var _deferredReady = __webpack_require__(30);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _mountableMixin = __webpack_require__(56);
-
-var _mountableMixin2 = _interopRequireDefault(_mountableMixin);
-
-var _TwoWayBindingWrapper = __webpack_require__(93);
-
-var _TwoWayBindingWrapper2 = _interopRequireDefault(_TwoWayBindingWrapper);
-
-var _WatchPrimitiveProperties = __webpack_require__(268);
-
-var _WatchPrimitiveProperties2 = _interopRequireDefault(_WatchPrimitiveProperties);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  center: {
-    required: true,
-    twoWay: true,
-    type: Object
-  },
-  zoom: {
-    required: false,
-    twoWay: true,
-    type: Number
-  },
-  heading: {
-    type: Number,
-    twoWay: true
-  },
-  mapTypeId: {
-    twoWay: true,
-    type: String
-  },
-  bounds: {
-    twoWay: true,
-    type: Object
-  },
-  tilt: {
-    twoWay: true,
-    type: Number
-  },
-  options: {
-    type: Object,
-    default: function _default() {
-      return {};
-    }
-  }
-};
-
-var events = ['click', 'dblclick', 'drag', 'dragend', 'dragstart', 'idle', 'mousemove', 'mouseout', 'mouseover', 'resize', 'rightclick', 'tilesloaded'];
-
-// Plain Google Maps methods exposed here for convenience
-var linkedMethods = ['panBy', 'panTo', 'panToBounds', 'fitBounds'].reduce(function (all, methodName) {
-  all[methodName] = function () {
-    if (this.$mapObject) {
-      this.$mapObject[methodName].apply(this.$mapObject, arguments);
-    }
-  };
-  return all;
-}, {});
-
-// Other convenience methods exposed by Vue Google Maps
-var customMethods = {
-  resize: function resize() {
-    if (this.$mapObject) {
-      google.maps.event.trigger(this.$mapObject, 'resize');
-    }
-  },
-  resizePreserveCenter: function resizePreserveCenter() {
-    if (!this.$mapObject) {
-      return;
-    }
-
-    var oldCenter = this.$mapObject.getCenter();
-    google.maps.event.trigger(this.$mapObject, 'resize');
-    this.$mapObject.setCenter(oldCenter);
-  },
-
-  /// Override mountableMixin::_resizeCallback
-  /// because resizePreserveCenter is usually the
-  /// expected behaviour
-  _resizeCallback: function _resizeCallback() {
-    this.resizePreserveCenter();
-  }
-};
-
-// Methods is a combination of customMethods and linkedMethods
-var methods = Object.assign({}, customMethods, linkedMethods);
-
-exports.default = {
-  mixins: [_getPropsValuesMixin2.default, _deferredReady.DeferredReadyMixin, _mountableMixin2.default],
-  props: props,
-  replace: false, // necessary for css styles
-
-  created: function created() {
-    var _this = this;
-
-    this.$mapCreated = new Promise(function (resolve, reject) {
-      _this.$mapCreatedDeferred = { resolve: resolve, reject: reject };
-    });
-  },
-
-  computed: {
-    finalLat: function finalLat() {
-      return this.center && typeof this.center.lat === 'function' ? this.center.lat() : this.center.lat;
-    },
-    finalLng: function finalLng() {
-      return this.center && typeof this.center.lng === 'function' ? this.center.lng() : this.center.lng;
-    },
-    finalLatLng: function finalLatLng() {
-      return { lat: this.finalLat, lng: this.finalLng };
-    }
-  },
-
-  watch: {
-    zoom: function zoom(_zoom) {
-      if (this.$mapObject) {
-        this.$mapObject.setZoom(_zoom);
-      }
-    }
-  },
-
-  deferredReady: function deferredReady() {
-    var _this2 = this;
-
-    return _manager.loaded.then(function () {
-      // getting the DOM element where to create the map
-      var element = _this2.$refs['vue-map'];
-
-      // creating the map
-      var copiedData = (0, _clone2.default)(_this2.getPropsValues());
-      delete copiedData.options;
-      var options = (0, _clone2.default)(_this2.options);
-      Object.assign(options, copiedData);
-      _this2.$mapObject = new google.maps.Map(element, options);
-
-      // binding properties (two and one way)
-      (0, _propsBinder2.default)(_this2, _this2.$mapObject, (0, _omit2.default)(props, ['center', 'zoom', 'bounds']));
-
-      // manually trigger center and zoom
-      (0, _TwoWayBindingWrapper2.default)(function (increment, decrement, shouldUpdate) {
-        _this2.$mapObject.addListener('center_changed', function () {
-          if (shouldUpdate()) {
-            _this2.$emit('center_changed', _this2.$mapObject.getCenter());
-          }
-          decrement();
-        });
-
-        var updateCenter = function updateCenter() {
-          increment();
-          _this2.$mapObject.setCenter(_this2.finalLatLng);
-        };
-
-        (0, _WatchPrimitiveProperties2.default)(_this2, ['finalLat', 'finalLng'], updateCenter);
-      });
-      _this2.$mapObject.addListener('zoom_changed', function () {
-        _this2.$emit('zoom_changed', _this2.$mapObject.getZoom());
-      });
-      _this2.$mapObject.addListener('bounds_changed', function () {
-        _this2.$emit('bounds_changed', _this2.$mapObject.getBounds());
-      });
-
-      // binding events
-      (0, _eventsBinder2.default)(_this2, _this2.$mapObject, events);
-
-      _this2.$mapCreatedDeferred.resolve(_this2.$mapObject);
-
-      return _this2.$mapCreated;
-    }).catch(function (error) {
-      throw error;
-    });
-  },
-
-  methods: methods
-};
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = TwoWayBindingWrapper;
-/**
- * When you have two-way bindings, but the actual bound value will not equal
- * the value you initially passed in, then to avoid an infinite loop you
- * need to increment a counter every time you pass in a value, decrement the
- * same counter every time the bound value changed, but only bubble up
- * the event when the counter is zero.
- *
-Example:
-
-Let's say DrawingRecognitionCanvas is a deep-learning backed canvas
-that, when given the name of an object (e.g. 'dog'), draws a dog.
-But whenever the drawing on it changes, it also sends back its interpretation
-of the image by way of the @newObjectRecognized event.
-
-<input
-  type="text"
-  placeholder="an object, e.g. Dog, Cat, Frog"
-  v-model="identifiedObject" />
-<DrawingRecognitionCanvas
-  :object="identifiedObject"
-  @newObjectRecognized="identifiedObject = $event"
-  />
-
-new TwoWayBindingWrapper((increment, decrement, shouldUpdate) => {
-  this.$watch('identifiedObject', () => {
-    // new object passed in
-    increment()
-  })
-  this.$deepLearningBackend.on('drawingChanged', () => {
-    recognizeObject(this.$deepLearningBackend)
-      .then((object) => {
-        decrement()
-        if (shouldUpdate()) {
-          this.$emit('newObjectRecognized', object.name)
-        }
-      })
-  })
-})
- */
-function TwoWayBindingWrapper(fn) {
-  var counter = 0;
-
-  fn(function () {
-    counter += 1;
-  }, function () {
-    counter = Math.max(0, counter - 1);
-  }, function () {
-    return counter === 0;
-  });
-}
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _manager = __webpack_require__(17);
-
-var _deferredReady = __webpack_require__(30);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _mountableMixin = __webpack_require__(56);
-
-var _mountableMixin2 = _interopRequireDefault(_mountableMixin);
-
-var _TwoWayBindingWrapper = __webpack_require__(93);
-
-var _TwoWayBindingWrapper2 = _interopRequireDefault(_TwoWayBindingWrapper);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  zoom: {
-    twoWay: true,
-    type: Number
-  },
-  pov: {
-    twoWay: true,
-    type: Object,
-    trackProperties: ['pitch', 'heading']
-  },
-  position: {
-    twoWay: true,
-    type: Object
-  },
-  pano: {
-    twoWay: true,
-    type: String
-  },
-  motionTracking: {
-    twoWay: false,
-    type: Boolean
-  },
-  visible: {
-    twoWay: true,
-    type: Boolean,
-    default: true
-  },
-  options: {
-    twoWay: false,
-    type: Object,
-    default: function _default() {
-      return {};
-    }
-  }
-};
-
-var events = ['closeclick', 'status_changed'];
-
-// Other convenience methods exposed by Vue Google Maps
-var customMethods = {
-  resize: function resize() {
-    if (this.$panoObject) {
-      google.maps.event.trigger(this.$panoObject, 'resize');
-    }
-  }
-};
-
-// Methods is a combination of customMethods and linkedMethods
-var methods = Object.assign({}, customMethods);
-
-exports.default = {
-  mixins: [_getPropsValuesMixin2.default, _deferredReady.DeferredReadyMixin, _mountableMixin2.default],
-  props: props,
-  replace: false, // necessary for css styles
-  methods: methods,
-
-  created: function created() {
-    var _this = this;
-
-    this.$panoCreated = new Promise(function (resolve, reject) {
-      _this.$panoCreatedDeferred = { resolve: resolve, reject: reject };
-    });
-
-    var updateCenter = function updateCenter() {
-      if (!_this.panoObject) return;
-
-      _this.$panoObject.setPosition({
-        lat: _this.finalLat,
-        lng: _this.finalLng
-      });
-    };
-    this.$watch('finalLat', updateCenter);
-    this.$watch('finalLng', updateCenter);
-  },
-
-  computed: {
-    finalLat: function finalLat() {
-      return this.position && typeof this.position.lat === 'function' ? this.position.lat() : this.position.lat;
-    },
-    finalLng: function finalLng() {
-      return this.position && typeof this.position.lng === 'function' ? this.position.lng() : this.position.lng;
-    },
-    finalLatLng: function finalLatLng() {
-      return {
-        lat: this.finalLat,
-        lng: this.finalLng
-      };
-    }
-  },
-
-  watch: {
-    zoom: function zoom(_zoom) {
-      if (this.$panoObject) {
-        this.$panoObject.setZoom(_zoom);
-      }
-    }
-  },
-
-  deferredReady: function deferredReady() {
-    var _this2 = this;
-
-    return _manager.loaded.then(function () {
-      // getting the DOM element where to create the map
-      var element = _this2.$refs['vue-street-view-pano'];
-
-      // creating the map
-      var options = Object.assign({}, _this2.options, (0, _omit2.default)(_this2.getPropsValues(), ['options']));
-
-      _this2.$panoObject = new google.maps.StreetViewPanorama(element, options);
-
-      // binding properties (two and one way)
-      (0, _propsBinder2.default)(_this2, _this2.$panoObject, (0, _omit2.default)(props, ['position']));
-
-      // manually trigger position
-      (0, _TwoWayBindingWrapper2.default)(function (increment, decrement, shouldUpdate) {
-        // Panos take a while to load
-        increment();
-
-        _this2.$panoObject.addListener('position_changed', function () {
-          if (shouldUpdate()) {
-            _this2.$emit('position_changed', _this2.$panoObject.getPosition());
-          }
-          decrement();
-        });
-
-        _this2.$watch('finalLatLng', function () {
-          increment();
-          _this2.$panoObject.setPosition(_this2.finalLatLng);
-        });
-      });
-
-      // binding events
-      (0, _eventsBinder2.default)(_this2, _this2.$panoObject, events);
-
-      _this2.$panoCreatedDeferred.resolve(_this2.$panoObject);
-
-      return _this2.$panoCreated;
-    }).catch(function (error) {
-      throw error;
-    });
-  }
-};
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _simulateArrowDown = __webpack_require__(96);
-
-var _simulateArrowDown2 = _interopRequireDefault(_simulateArrowDown);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _manager = __webpack_require__(17);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  bounds: {
-    type: Object
-  },
-  defaultPlace: {
-    type: String,
-    default: ''
-  },
-  componentRestrictions: {
-    type: Object,
-    default: null
-  },
-  types: {
-    type: Array,
-    default: function _default() {
-      return [];
-    }
-  },
-  placeholder: {
-    required: false,
-    type: String
-  },
-  className: {
-    required: false,
-    type: String
-  },
-  label: {
-    required: false,
-    type: String,
-    default: null
-  },
-  selectFirstOnEnter: {
-    require: false,
-    type: Boolean,
-    default: false
-  }
-};
-
-exports.default = {
-  mixins: [_getPropsValuesMixin2.default],
-
-  mounted: function mounted() {
-    var _this = this;
-
-    var input = this.$refs.input;
-
-    // Allow default place to be set
-    input.value = this.defaultPlace;
-    this.$watch('defaultPlace', function () {
-      input.value = _this.defaultPlace;
-    });
-
-    _manager.loaded.then(function () {
-      var options = (0, _clone2.default)(_this.getPropsValues());
-      if (_this.selectFirstOnEnter) {
-        (0, _simulateArrowDown2.default)(_this.$refs.input);
-      }
-
-      if (typeof google.maps.places.Autocomplete !== 'function') {
-        throw new Error('google.maps.places.Autocomplete is undefined. Did you add \'places\' to libraries when loading Google Maps?');
-      }
-
-      _this.autoCompleter = new google.maps.places.Autocomplete(_this.$refs.input, options);
-      (0, _propsBinder2.default)(_this, _this.autoCompleter, (0, _omit2.default)(props, ['placeholder', 'place', 'selectFirstOnEnter', 'defaultPlace', 'className', 'label']));
-
-      _this.autoCompleter.addListener('place_changed', function () {
-        _this.$emit('place_changed', _this.autoCompleter.getPlace());
-      });
-    });
-  },
-  created: function created() {
-    console.warn('The PlaceInput class is deprecated! Please consider using the Autocomplete input instead'); // eslint-disable-line no-console
-  },
-
-  props: props
-};
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-// This piece of code was orignally written by amirnissim and can be seen here
-// http://stackoverflow.com/a/11703018/2694653
-// This has been ported to Vanilla.js by GuillaumeLeclerc
-exports.default = function (input) {
-  var _addEventListener = input.addEventListener ? input.addEventListener : input.attachEvent;
-
-  function addEventListenerWrapper(type, listener) {
-    // Simulate a 'down arrow' keypress on hitting 'return' when no pac suggestion is selected,
-    // and then trigger the original listener.
-    if (type === 'keydown') {
-      var origListener = listener;
-      listener = function listener(event) {
-        var suggestionSelected = document.getElementsByClassName('pac-item-selected').length > 0;
-        if (event.which === 13 && !suggestionSelected) {
-          var simulatedEvent = document.createEvent('Event');
-          simulatedEvent.keyCode = 40;
-          simulatedEvent.which = 40;
-          origListener.apply(input, [simulatedEvent]);
-        }
-        origListener.apply(input, [event]);
-      };
-    }
-    _addEventListener.apply(input, [type, listener]);
-  }
-
-  input.addEventListener = addEventListenerWrapper;
-  input.attachEvent = addEventListenerWrapper;
-};
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _pickBy = __webpack_require__(277);
-
-var _pickBy2 = _interopRequireDefault(_pickBy);
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _simulateArrowDown = __webpack_require__(96);
-
-var _simulateArrowDown2 = _interopRequireDefault(_simulateArrowDown);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _manager = __webpack_require__(17);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  bounds: {
-    type: Object
-  },
-  componentRestrictions: {
-    type: Object
-  },
-  types: {
-    type: Array,
-    default: function _default() {
-      return [];
-    }
-  },
-  placeholder: {
-    required: false,
-    type: String
-  },
-  selectFirstOnEnter: {
-    require: false,
-    type: Boolean,
-    default: false
-  },
-  value: {
-    type: String,
-    default: ''
-  },
-  options: {
-    type: Object
-  }
-};
-
-exports.default = {
-  mixins: [_getPropsValuesMixin2.default],
-
-  mounted: function mounted() {
-    var _this = this;
-
-    _manager.loaded.then(function () {
-      var options = (0, _clone2.default)(_this.getPropsValues());
-      if (_this.selectFirstOnEnter) {
-        (0, _simulateArrowDown2.default)(_this.$refs.input);
-      }
-
-      if (typeof google.maps.places.Autocomplete !== 'function') {
-        throw new Error('google.maps.places.Autocomplete is undefined. Did you add \'places\' to libraries when loading Google Maps?');
-      }
-
-      /* eslint-disable no-unused-vars */
-      var finalOptions = (0, _pickBy2.default)(Object.assign({}, (0, _omit2.default)(options, ['options', 'selectFirstOnEnter', 'value', 'place', 'placeholder']), options.options), function (v, k) {
-        return v !== undefined;
-      });
-
-      // Component restrictions is rather particular. Undefined not allowed
-      _this.$watch('componentRestrictions', function (v) {
-        if (v !== undefined) {
-          _this.$autocomplete.setComponentRestrictions(v);
-        }
-      });
-
-      _this.$autocomplete = new google.maps.places.Autocomplete(_this.$refs.input, finalOptions);
-      (0, _propsBinder2.default)(_this, _this.$autocomplete, (0, _omit2.default)(props, ['placeholder', 'place', 'selectFirstOnEnter', 'value', 'componentRestrictions']));
-
-      _this.$autocomplete.addListener('place_changed', function () {
-        _this.$emit('place_changed', _this.$autocomplete.getPlace());
-      });
-    });
-  },
-
-  props: props
-};
-
-/***/ }),
-/* 98 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13663,11 +10002,11 @@ exports.default = {
 };
 
 /***/ }),
-/* 99 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./static/flight-error.png": 285
+	"./static/flight-error.png": 76
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -13683,60 +10022,50 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 99;
+webpackContext.id = 19;
 
 /***/ }),
-/* 100 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _vue = __webpack_require__(31);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuetify = __webpack_require__(103);
+var _vuetify = __webpack_require__(23);
 
 var _vuetify2 = _interopRequireDefault(_vuetify);
 
-var _store = __webpack_require__(104);
+var _store = __webpack_require__(24);
 
-var _router = __webpack_require__(116);
+var _router = __webpack_require__(39);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _vueMeta = __webpack_require__(147);
+var _vueMeta = __webpack_require__(70);
 
 var _vueMeta2 = _interopRequireDefault(_vueMeta);
 
-var _vueProgressiveImage = __webpack_require__(148);
+var _vueProgressiveImage = __webpack_require__(71);
 
 var _vueProgressiveImage2 = _interopRequireDefault(_vueProgressiveImage);
 
-var _vue2GoogleMaps = __webpack_require__(149);
-
-var VueGoogleMaps = _interopRequireWildcard(_vue2GoogleMaps);
-
-var _App = __webpack_require__(281);
+var _App = __webpack_require__(72);
 
 var _App2 = _interopRequireDefault(_App);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueMeta2.default);
 _vue2.default.use(_vuetify2.default);
 _vue2.default.use(_vueProgressiveImage2.default);
-_vue2.default.use(VueGoogleMaps, {
-	key: window.google,
-	libraries: ''
-});
 
 _vue2.default.component('c-image', function () {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(283);
+		return __webpack_require__(74);
 	});
 });
 
@@ -13749,8 +10078,16 @@ new _vue2.default({
 	}
 });
 
+var token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+if (token) {
+	window.token = token;
+} else {
+	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
 /***/ }),
-/* 101 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13804,16 +10141,16 @@ exports._unrefActive = exports.active = function (item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(102);
+__webpack_require__(22);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
 exports.setImmediate = typeof self !== "undefined" && self.setImmediate || typeof global !== "undefined" && global.setImmediate || undefined && undefined.setImmediate;
 exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || typeof global !== "undefined" && global.clearImmediate || undefined && undefined.clearImmediate;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 102 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14001,10 +10338,10 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
 })(typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(1)))
 
 /***/ }),
-/* 103 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14858,10 +11195,10 @@ var range=type==='minute'?rangeMinutes:this.isAmPm?value<12?rangeHours12am:range
 this.updateDimensions();// Start the transition
 requestAnimationFrame(this.startTransition);}},mounted:function mounted(){this.value&&this.callActivate();},render:function render(h){var _addBackgroundColorCl,_this=this;var tooltip=h('div',{staticClass:'tooltip__content','class':this.addBackgroundColorClassChecks((_addBackgroundColorCl={},_defineProperty(_addBackgroundColorCl,this.contentClass,true),_defineProperty(_addBackgroundColorCl,'menuable__content__active',this.isActive),_addBackgroundColorCl)),style:this.styles,attrs:this.attrs,directives:[{name:'show',value:this.isContentActive}],ref:'content'},this.$slots.default);return h(this.tag,{staticClass:'tooltip','class':this.classes},[h('transition',{props:{name:this.computedTransition}},[tooltip]),h('span',{on:this.disabled?{}:{mouseenter:function mouseenter(){_this.runDelay('open',function(){return _this.isActive=true;});},mouseleave:function mouseleave(){_this.runDelay('close',function(){return _this.isActive=false;});}},ref:'activator'},this.$slots.activator)]);}};/***/},/* 257 *//***/function(module,exports){// removed by extract-text-webpack-plugin
 /***/},/* 258 *//***/function(module,__webpack_exports__,__webpack_require__){"use strict";Object.defineProperty(__webpack_exports__,"__esModule",{value:true});/* harmony export (immutable) */__webpack_exports__["default"]=install;/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__click_outside__=__webpack_require__(8);/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__resize__=__webpack_require__(11);/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__ripple__=__webpack_require__(17);/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__scroll__=__webpack_require__(71);/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__touch__=__webpack_require__(9);/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"ClickOutside",function(){return __WEBPACK_IMPORTED_MODULE_0__click_outside__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Ripple",function(){return __WEBPACK_IMPORTED_MODULE_2__ripple__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Resize",function(){return __WEBPACK_IMPORTED_MODULE_1__resize__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Scroll",function(){return __WEBPACK_IMPORTED_MODULE_3__scroll__["a"];});/* harmony reexport (binding) */__webpack_require__.d(__webpack_exports__,"Touch",function(){return __WEBPACK_IMPORTED_MODULE_4__touch__["a"];});function install(Vue){Vue.directive('click-outside',__WEBPACK_IMPORTED_MODULE_0__click_outside__["a"/* default */]);Vue.directive('ripple',__WEBPACK_IMPORTED_MODULE_2__ripple__["a"/* default */]);Vue.directive('resize',__WEBPACK_IMPORTED_MODULE_1__resize__["a"/* default */]);Vue.directive('scroll',__WEBPACK_IMPORTED_MODULE_3__scroll__["a"/* default */]);Vue.directive('touch',__WEBPACK_IMPORTED_MODULE_4__touch__["a"/* default */]);}/***/}]/******/)["default"]);});//# sourceMappingURL=vuetify.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 104 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14872,51 +11209,63 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.store = undefined;
 
-var _vue = __webpack_require__(31);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(105);
+var _vuex = __webpack_require__(25);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _getters = __webpack_require__(106);
+var _getters = __webpack_require__(26);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _actions = __webpack_require__(107);
+var _actions = __webpack_require__(27);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(108);
+var _mutations = __webpack_require__(28);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
-var _continent = __webpack_require__(109);
-
-var _continent2 = _interopRequireDefault(_continent);
-
-var _airport = __webpack_require__(110);
-
-var _airport2 = _interopRequireDefault(_airport);
-
-var _flight = __webpack_require__(111);
-
-var _flight2 = _interopRequireDefault(_flight);
-
-var _car = __webpack_require__(112);
-
-var _car2 = _interopRequireDefault(_car);
-
-var _city = __webpack_require__(113);
-
-var _city2 = _interopRequireDefault(_city);
-
-var _accommodation = __webpack_require__(114);
+var _accommodation = __webpack_require__(29);
 
 var _accommodation2 = _interopRequireDefault(_accommodation);
 
-var _user = __webpack_require__(115);
+var _airport = __webpack_require__(30);
+
+var _airport2 = _interopRequireDefault(_airport);
+
+var _car = __webpack_require__(31);
+
+var _car2 = _interopRequireDefault(_car);
+
+var _city = __webpack_require__(32);
+
+var _city2 = _interopRequireDefault(_city);
+
+var _continent = __webpack_require__(33);
+
+var _continent2 = _interopRequireDefault(_continent);
+
+var _country = __webpack_require__(34);
+
+var _country2 = _interopRequireDefault(_country);
+
+var _currency = __webpack_require__(35);
+
+var _currency2 = _interopRequireDefault(_currency);
+
+var _flight = __webpack_require__(36);
+
+var _flight2 = _interopRequireDefault(_flight);
+
+var _language = __webpack_require__(37);
+
+var _language2 = _interopRequireDefault(_language);
+
+var _user = __webpack_require__(38);
 
 var _user2 = _interopRequireDefault(_user);
 
@@ -14933,18 +11282,21 @@ var store = exports.store = new _vuex2.default.Store({
 	actions: _actions2.default,
 
 	modules: {
-		continent: _continent2.default,
+		accommodation: _accommodation2.default,
 		airport: _airport2.default,
-		flight: _flight2.default,
 		car: _car2.default,
 		city: _city2.default,
-		accommodation: _accommodation2.default,
+		continent: _continent2.default,
+		country: _country2.default,
+		currency: _currency2.default,
+		flight: _flight2.default,
+		language: _language2.default,
 		user: _user2.default
 	}
 });
 
 /***/ }),
-/* 105 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15908,10 +12260,10 @@ exports.mapGetters = mapGetters;
 exports.mapActions = mapActions;
 exports.createNamespacedHelpers = createNamespacedHelpers;
 exports.default = index_esm;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 106 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15927,7 +12279,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 107 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15953,7 +12305,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 108 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15987,666 +12339,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		all: {}
-	},
-
-	mutations: {
-		/**
-   * Set all continents
-   *
-   * @param state
-   * @param continents
-   */
-		continentIndex: function continentIndex(state, continents) {
-			state.all = continents;
-		}
-	},
-
-	actions: {
-		/**
-   * Get all continents from API
-   *
-   * @param context
-   */
-		continentIndex: function continentIndex(context) {
-			fetch('/api/continents').then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				context.commit('continentIndex', response);
-			});
-		}
-	},
-
-	getters: {
-		/**
-   * Get all continents
-   *
-   * @param state
-   * @returns {{}|state.all|*}
-   */
-		continentIndex: function continentIndex(state) {
-			return state.all;
-		}
-	}
-};
-
-/***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		all: {},
-		search: {}
-	},
-
-	mutations: {
-		/**
-   * Get all airports
-   *
-   * @param state
-   * @param airports
-   */
-		airportIndex: function airportIndex(state, airports) {
-			state.all = airports;
-		},
-
-
-		/**
-   * Search airport
-   *
-   * @param state
-   * @param airports
-   */
-		airportSearch: function airportSearch(state, airports) {
-			state.search = airports;
-		}
-	},
-
-	actions: {
-		/**
-   * Get all airports
-   *
-   * @param context
-   */
-		airportIndex: function airportIndex(context) {
-			fetch('/api/airports').then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				context.commit('airportIndex', response);
-			}).catch(function (error) {
-				console.error(error);
-			});
-		},
-
-
-		/**
-   * Search for an airport
-   *
-   * @param context
-   * @param search
-   */
-		airportSearch: function airportSearch(context, search) {
-			fetch('/api/airports/' + search + '/search').then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				context.commit('airportSearch', response);
-			}).catch(function (error) {
-				console.log(error);
-			});
-		}
-	},
-
-	getters: {
-		/**
-   * Get all airports
-   *
-   * @param state
-   * @returns {{}|state.all|*}
-   */
-		airportIndex: function airportIndex(state) {
-			return state.all;
-		},
-
-
-		/**
-   * Get search results
-   *
-   * @param state
-   * @returns {{}|state.search|*}
-   */
-		airportSearch: function airportSearch(state) {
-			return state.search;
-		}
-	}
-};
-
-/***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		results: {},
-		departure: '',
-		departureDate: '',
-		destination: '',
-		destinationDate: '',
-		adults: 1,
-		children: 0,
-		infants: 0,
-		cabinClass: '',
-		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
-	},
-
-	mutations: {
-		/**
-   * Set results
-   *
-   * @param state
-   * @param flights
-   */
-		browseQuotes: function browseQuotes(state, flights) {
-			state.results = flights;
-		},
-
-
-		/**
-   * Set results
-   *
-   * @param state
-   * @param flights
-   */
-		browseRoutes: function browseRoutes(state, flights) {
-			state.results = flights;
-		},
-
-
-		/**
-   * Add cabin class
-   *
-   * @param state
-   * @param cClass
-   */
-		cabinClasses: function cabinClasses(state, cClass) {
-			state.cabinClasses.push(cClass);
-		},
-
-
-		/**
-   * Set departure location
-   *
-   * @param state
-   * @param departure
-   */
-		flightDeparture: function flightDeparture(state, departure) {
-			state.departure = departure;
-		},
-
-
-		/**
-   * Set departure date
-   *
-   * @param state
-   * @param date
-   */
-		flightDepartureDate: function flightDepartureDate(state, date) {
-			state.departureDate = date;
-		},
-
-
-		/**
-   * Set destination location
-   *
-   * @param state
-   * @param destination
-   */
-		flightDestination: function flightDestination(state, destination) {
-			state.destination = destination;
-		},
-
-
-		/**
-   * Set destination/ return date
-   *
-   * @param state
-   * @param date
-   */
-		flightDestinationDate: function flightDestinationDate(state, date) {
-			state.destinationDate = date;
-		},
-
-
-		/**
-   * Set amount of adults
-   *
-   * @param state
-   * @param adults
-   */
-		flightAdults: function flightAdults(state, adults) {
-			state.adults = adults;
-		},
-
-
-		/**
-   * Set amount of children
-   *
-   * @param state
-   * @param children
-   */
-		flightChildren: function flightChildren(state, children) {
-			state.children = children;
-		},
-
-
-		/**
-   * Set amount of infants
-   *
-   * @param state
-   * @param infants
-   */
-		flightInfants: function flightInfants(state, infants) {
-			state.infants = infants;
-		},
-
-
-		/**
-   * Set cabin class
-   * @param state
-   * @param cabinClass
-   */
-		flightCabinClass: function flightCabinClass(state, cabinClass) {
-			state.cabinClass = cabinClass;
-		}
-	},
-
-	actions: {
-		/**
-   * Get browse quotes results from API
-   *
-   * @param context
-   * @param data
-   */
-		browseQuotes: function browseQuotes(context, data) {
-			fetch('/api/flights/browse-quotes', {
-				headers: {
-					'content-type': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify(data)
-			}).then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				console.log(response);
-				context.commit('browseQuotes', response);
-			}).catch(function (error) {
-				console.error(error);
-			});
-		},
-
-
-		/**
-   * Get browse routes results from API
-   * @param context
-   * @param data
-   */
-		browseRoutes: function browseRoutes(context, data) {
-			fetch('/api/flights/browse-routes', {
-				headers: {
-					'content-type': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify(data)
-			}).then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				console.log(response);
-				context.commit('browseRoutes', response);
-			}).catch(function (error) {
-				console.error(error);
-			});
-		}
-	},
-
-	getters: {
-		/**
-   * Get browse quotes results
-   *
-   * @param state
-   * @returns {{}|state.results|*}
-   */
-		browseQuotes: function browseQuotes(state) {
-			return state.results;
-		},
-
-
-		/**
-   * Get browse routes results
-   *
-   * @param state
-   * @returns {{}|state.results|*}
-   */
-		browseRoutes: function browseRoutes(state) {
-			return state.results;
-		},
-
-
-		/**
-   * Get cabin classes
-   *
-   * @param state
-   * @returns {*[]}
-   */
-		cabinClasses: function cabinClasses(state) {
-			return state.cabinClasses;
-		},
-
-
-		/**
-   * Get departure location
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		flightDeparture: function flightDeparture(state) {
-			return state.departure;
-		},
-
-
-		/**
-   * Get departure date
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		flightDepartureDate: function flightDepartureDate(state) {
-			return state.departureDate;
-		},
-
-
-		/**
-   * Get destination
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		flightDestination: function flightDestination(state) {
-			return state.destination;
-		},
-
-
-		/**
-   * Get destination/ return date
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		flightDestinationDate: function flightDestinationDate(state) {
-			return state.destinationDate;
-		},
-
-
-		/**
-   * Get amount of adults
-   *
-   * @param state
-   * @returns {number|*}
-   */
-		flightAdults: function flightAdults(state) {
-			return state.adults;
-		},
-
-
-		/**
-   * Get amount of children
-   *
-   * @param state
-   * @returns {number|*}
-   */
-		flightChildren: function flightChildren(state) {
-			return state.children;
-		},
-
-
-		/**
-   * Get amount of infants
-   *
-   * @param state
-   * @returns {number|*}
-   */
-		flightInfants: function flightInfants(state) {
-			return state.infants;
-		},
-
-
-		/**
-   * Get cabin class
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		flightCabinClass: function flightCabinClass(state) {
-			return state.cabinClass;
-		}
-	}
-};
-
-/***/ }),
-/* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		all: {},
-		pickupPlace: '',
-		pickupDateTime: '',
-		dropoffPlace: '',
-		dropoffDateTime: '',
-		driverAge: ''
-	},
-
-	mutations: {
-		/**
-   * Set pickup place
-   *
-   * @param state
-   * @param place
-   */
-		carPickupPlace: function carPickupPlace(state, place) {
-			state.pickupPlace = place;
-		},
-
-
-		/**
-   * Set pickup date and time
-   *
-   * @param state
-   * @param dateTime
-   */
-		carPickupDateTime: function carPickupDateTime(state, dateTime) {
-			state.pickupDateTime = dateTime;
-		},
-
-
-		/**
-   * Set dropoff place
-   *
-   * @param state
-   * @param place
-   */
-		carDropoffPlace: function carDropoffPlace(state, place) {
-			state.dropoffPlace = place;
-		},
-
-
-		/**
-   * Set dropoff date and time
-   * @param state
-   * @param dateTime
-   */
-		carDropoffDateTime: function carDropoffDateTime(state, dateTime) {
-			state.dropoffDateTime = dateTime;
-		},
-
-
-		/**
-   * Set driver age
-   *
-   * @param state
-   * @param age
-   */
-		carDriverAge: function carDriverAge(state, age) {
-			state.driverAge = age;
-		}
-	},
-
-	actions: {},
-
-	getters: {
-		/**
-   * Get pickup place
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		carPickupPlace: function carPickupPlace(state) {
-			return state.pickupPlace;
-		},
-
-
-		/**
-   * Get pickup date time
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		carPickupDateTime: function carPickupDateTime(state) {
-			return state.pickupDateTime;
-		},
-
-
-		/**
-   * Get dropoff place
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		carDropoffPlace: function carDropoffPlace(state) {
-			return state.dropoffPlace;
-		},
-
-
-		/**
-   * Get dropoff date and time
-   * @param state
-   * @returns {string|*}
-   */
-		carDropoffDateTime: function carDropoffDateTime(state) {
-			return state.dropoffDateTime;
-		},
-
-
-		/**
-   * Get driver age
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		carDriverAge: function carDriverAge(state) {
-			return state.driverAge;
-		}
-	}
-};
-
-/***/ }),
-/* 113 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	state: {
-		search: {}
-	},
-
-	mutations: {
-		/**
-   * Set search results
-   *
-   * @param state
-   * @param cities
-   */
-		citySearch: function citySearch(state, cities) {
-			state.search = cities;
-		}
-	},
-
-	actions: {
-		/**
-   * Get search results from API
-   *
-   * @param context
-   * @param value
-   */
-		citySearch: function citySearch(context, value) {
-			fetch('/api/cities/' + value + '/search').then(function (response) {
-				return response.json();
-			}).then(function (response) {
-				context.commit('citySearch', response);
-			}).catch(function (error) {
-				console.error('citySearch', error);
-			});
-		}
-	},
-
-	getters: {
-		/**
-   * Get search results
-   *
-   * @param state
-   * @returns {{}|state.search|*}
-   */
-		citySearch: function citySearch(state) {
-			return state.search;
-		}
-	}
-};
-
-/***/ }),
-/* 114 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16962,7 +12655,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 115 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16974,34 +12667,1008 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	state: {
 		all: {},
-		email: '',
-		password: '',
+		search: {}
+	},
+
+	mutations: {
+		/**
+   * Get all airports
+   *
+   * @param state
+   * @param airports
+   */
+		airportIndex: function airportIndex(state, airports) {
+			state.all = airports;
+		},
+
+
+		/**
+   * Search airport
+   *
+   * @param state
+   * @param airports
+   */
+		airportSearch: function airportSearch(state, airports) {
+			state.search = airports;
+		}
+	},
+
+	actions: {
+		/**
+   * Get all airports
+   *
+   * @param context
+   */
+		airportIndex: function airportIndex(context) {
+			fetch('/api/airports', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('airportIndex', response);
+			}).catch(function (error) {
+				console.error('airportIndex', error);
+			});
+		},
+
+
+		/**
+   * Search for an airport
+   *
+   * @param context
+   * @param airport
+   */
+		airportSearch: function airportSearch(context, airport) {
+			fetch('/api/airports/' + airport + '/search', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('airportSearch', response);
+			}).catch(function (error) {
+				console.error('airportSearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get all airports
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
+		airportIndex: function airportIndex(state) {
+			return state.all;
+		},
+
+
+		/**
+   * Get search results
+   *
+   * @param state
+   * @returns {{}|state.search|*}
+   */
+		airportSearch: function airportSearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		pickupPlace: '',
+		pickupDateTime: '',
+		dropoffPlace: '',
+		dropoffDateTime: '',
+		driverAge: ''
+	},
+
+	mutations: {
+		/**
+   * Set pickup place
+   *
+   * @param state
+   * @param place
+   */
+		carPickupPlace: function carPickupPlace(state, place) {
+			state.pickupPlace = place;
+		},
+
+
+		/**
+   * Set pickup date and time
+   *
+   * @param state
+   * @param dateTime
+   */
+		carPickupDateTime: function carPickupDateTime(state, dateTime) {
+			state.pickupDateTime = dateTime;
+		},
+
+
+		/**
+   * Set dropoff place
+   *
+   * @param state
+   * @param place
+   */
+		carDropoffPlace: function carDropoffPlace(state, place) {
+			state.dropoffPlace = place;
+		},
+
+
+		/**
+   * Set dropoff date and time
+   * @param state
+   * @param dateTime
+   */
+		carDropoffDateTime: function carDropoffDateTime(state, dateTime) {
+			state.dropoffDateTime = dateTime;
+		},
+
+
+		/**
+   * Set driver age
+   *
+   * @param state
+   * @param age
+   */
+		carDriverAge: function carDriverAge(state, age) {
+			state.driverAge = age;
+		}
+	},
+
+	actions: {},
+
+	getters: {
+		/**
+   * Get pickup place
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carPickupPlace: function carPickupPlace(state) {
+			return state.pickupPlace;
+		},
+
+
+		/**
+   * Get pickup date time
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carPickupDateTime: function carPickupDateTime(state) {
+			return state.pickupDateTime;
+		},
+
+
+		/**
+   * Get dropoff place
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carDropoffPlace: function carDropoffPlace(state) {
+			return state.dropoffPlace;
+		},
+
+
+		/**
+   * Get dropoff date and time
+   * @param state
+   * @returns {string|*}
+   */
+		carDropoffDateTime: function carDropoffDateTime(state) {
+			return state.dropoffDateTime;
+		},
+
+
+		/**
+   * Get driver age
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		carDriverAge: function carDriverAge(state) {
+			return state.driverAge;
+		}
+	}
+};
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		search: {}
+	},
+
+	mutations: {
+		/**
+   * Set search results
+   *
+   * @param state
+   * @param cities
+   */
+		citySearch: function citySearch(state, cities) {
+			state.search = cities;
+		}
+	},
+
+	actions: {
+		/**
+   * Get search results from API
+   *
+   * @param context
+   * @param city
+   */
+		citySearch: function citySearch(context, city) {
+			fetch('/api/cities/' + city + '/search', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('citySearch', response);
+			}).catch(function (error) {
+				console.error('citySearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get search results
+   *
+   * @param state
+   * @returns {{}|state.search|*}
+   */
+		citySearch: function citySearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {}
+	},
+
+	mutations: {
+		/**
+   * Set all continents
+   *
+   * @param state
+   * @param continents
+   */
+		continentIndex: function continentIndex(state, continents) {
+			state.all = continents;
+		}
+	},
+
+	actions: {
+		/**
+   * Get all continents from API
+   *
+   * @param context
+   */
+		continentIndex: function continentIndex(context) {
+			fetch('/api/continents', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				context.commit('continentIndex', response);
+			}).catch(function (error) {
+				console.error('continentIndex', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get all continents
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
+		continentIndex: function continentIndex(state) {
+			return state.all;
+		}
+	}
+};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		search: {}
+	},
+
+	mutations: {
+		countryIndex: function countryIndex(state, countries) {
+			state.all = countries;
+		},
+		countrySearch: function countrySearch(state, countries) {
+			state.search = countries;
+		}
+	},
+
+	actions: {
+		/**
+   * Get all countries from API
+   *
+   * @param context
+   */
+		countryIndex: function countryIndex(context) {
+			var _this = this;
+
+			fetch('/api/countries', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this.commit('countryIndex', response);
+			}).catch(function (error) {
+				console.error('countryIndex', error);
+			});
+		},
+
+
+		/**
+   * Get search results from API
+   *
+   * @param context
+   * @param country
+   */
+		countrySearch: function countrySearch(context, country) {
+			var _this2 = this;
+
+			fetch('/api/countries/' + country + '/search', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this2.commit('countrySearch', response);
+			}).catch(function (error) {
+				console.error('countrySearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get all countries
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
+		countryIndex: function countryIndex(state) {
+			return state.all;
+		},
+
+
+		/**
+   * Get search results
+   * @param state
+   */
+		countrySearch: function countrySearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		search: {}
+	},
+
+	mutations: {
+		/**
+   * Set all currencies
+   * @param state
+   * @param currencies
+   */
+		currencyIndex: function currencyIndex(state, currencies) {
+			state.all = currencies;
+		},
+
+
+		/**
+   * Set search results
+   * @param state
+   * @param currencies
+   */
+		currencySearch: function currencySearch(state, currencies) {
+			state.search = currencies;
+		}
+	},
+
+	actions: {
+		/**
+   * Get all currencies from API
+   *
+   * @param context
+   */
+		currencyIndex: function currencyIndex(context) {
+			var _this = this;
+
+			fetch('/api/currencies', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this.commit('currencyIndex', response);
+			}).catch(function (error) {
+				console.error('currencyIndex', error);
+			});
+		},
+
+
+		/**
+   * Get search results from API
+   *
+   * @param context
+   * @param currency
+   */
+		currencySearch: function currencySearch(context, currency) {
+			var _this2 = this;
+
+			fetch('/api/currencies/' + currency + '/search', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this2.commit('currencySearch', response);
+			}).catch(function (error) {
+				console.error('currencySearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get all currencies
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
+		currencyIndex: function currencyIndex(state) {
+			return state.all;
+		},
+
+
+		/**
+   * Get search results
+   * @param state
+   */
+		currencySearch: function currencySearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		results: {},
+		departure: '',
+		departureDate: '',
+		destination: '',
+		destinationDate: '',
+		adults: 1,
+		children: 0,
+		infants: 0,
+		cabinClass: '',
+		cabinClasses: [{ text: 'Economy', value: 'economy' }, { text: 'Economy plus', value: 'premiumeconomy' }, { text: 'Business', value: 'business' }, { text: 'First', value: 'first' }]
+	},
+
+	mutations: {
+		/**
+   * Set results
+   *
+   * @param state
+   * @param flights
+   */
+		browseQuotes: function browseQuotes(state, flights) {
+			state.results = flights;
+		},
+
+
+		/**
+   * Set results
+   *
+   * @param state
+   * @param flights
+   */
+		browseRoutes: function browseRoutes(state, flights) {
+			state.results = flights;
+		},
+
+
+		/**
+   * Add cabin class
+   *
+   * @param state
+   * @param cClass
+   */
+		cabinClasses: function cabinClasses(state, cClass) {
+			state.cabinClasses.push(cClass);
+		},
+
+
+		/**
+   * Set departure location
+   *
+   * @param state
+   * @param departure
+   */
+		flightDeparture: function flightDeparture(state, departure) {
+			state.departure = departure;
+		},
+
+
+		/**
+   * Set departure date
+   *
+   * @param state
+   * @param date
+   */
+		flightDepartureDate: function flightDepartureDate(state, date) {
+			state.departureDate = date;
+		},
+
+
+		/**
+   * Set destination location
+   *
+   * @param state
+   * @param destination
+   */
+		flightDestination: function flightDestination(state, destination) {
+			state.destination = destination;
+		},
+
+
+		/**
+   * Set destination/ return date
+   *
+   * @param state
+   * @param date
+   */
+		flightDestinationDate: function flightDestinationDate(state, date) {
+			state.destinationDate = date;
+		},
+
+
+		/**
+   * Set amount of adults
+   *
+   * @param state
+   * @param adults
+   */
+		flightAdults: function flightAdults(state, adults) {
+			state.adults = adults;
+		},
+
+
+		/**
+   * Set amount of children
+   *
+   * @param state
+   * @param children
+   */
+		flightChildren: function flightChildren(state, children) {
+			state.children = children;
+		},
+
+
+		/**
+   * Set amount of infants
+   *
+   * @param state
+   * @param infants
+   */
+		flightInfants: function flightInfants(state, infants) {
+			state.infants = infants;
+		},
+
+
+		/**
+   * Set cabin class
+   * @param state
+   * @param cabinClass
+   */
+		flightCabinClass: function flightCabinClass(state, cabinClass) {
+			state.cabinClass = cabinClass;
+		}
+	},
+
+	actions: {
+		/**
+   * Get browse quotes results from API
+   *
+   * @param context
+   * @param data
+   */
+		browseQuotes: function browseQuotes(context, data) {
+			fetch('/api/flights/browse-quotes', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				//console.log(response);
+				context.commit('browseQuotes', response);
+			}).catch(function (error) {
+				console.error('browseQuotes', error);
+			});
+		},
+
+
+		/**
+   * Get browse routes results from API
+   * @param context
+   * @param data
+   */
+		browseRoutes: function browseRoutes(context, data) {
+			fetch('/api/flights/browse-routes', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				console.log(response);
+				context.commit('browseRoutes', response);
+			}).catch(function (error) {
+				console.error('browseRoutes', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get browse quotes results
+   *
+   * @param state
+   * @returns {{}|state.results|*}
+   */
+		browseQuotes: function browseQuotes(state) {
+			return state.results;
+		},
+
+
+		/**
+   * Get browse routes results
+   *
+   * @param state
+   * @returns {{}|state.results|*}
+   */
+		browseRoutes: function browseRoutes(state) {
+			return state.results;
+		},
+
+
+		/**
+   * Get cabin classes
+   *
+   * @param state
+   * @returns {*[]}
+   */
+		cabinClasses: function cabinClasses(state) {
+			return state.cabinClasses;
+		},
+
+
+		/**
+   * Get departure location
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDeparture: function flightDeparture(state) {
+			return state.departure;
+		},
+
+
+		/**
+   * Get departure date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDepartureDate: function flightDepartureDate(state) {
+			return state.departureDate;
+		},
+
+
+		/**
+   * Get destination
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDestination: function flightDestination(state) {
+			return state.destination;
+		},
+
+
+		/**
+   * Get destination/ return date
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightDestinationDate: function flightDestinationDate(state) {
+			return state.destinationDate;
+		},
+
+
+		/**
+   * Get amount of adults
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightAdults: function flightAdults(state) {
+			return state.adults;
+		},
+
+
+		/**
+   * Get amount of children
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightChildren: function flightChildren(state) {
+			return state.children;
+		},
+
+
+		/**
+   * Get amount of infants
+   *
+   * @param state
+   * @returns {number|*}
+   */
+		flightInfants: function flightInfants(state) {
+			return state.infants;
+		},
+
+
+		/**
+   * Get cabin class
+   *
+   * @param state
+   * @returns {string|*}
+   */
+		flightCabinClass: function flightCabinClass(state) {
+			return state.cabinClass;
+		}
+	}
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
+		search: {}
+	},
+
+	mutations: {
+		languageIndex: function languageIndex(state, languages) {
+			state.all = languages;
+		},
+		languageSearch: function languageSearch(state, languages) {
+			state.search = languages;
+		}
+	},
+
+	actions: {
+		/**
+   * Get all languages from API
+   *
+   * @param context
+   */
+		languageIndex: function languageIndex(context) {
+			var _this = this;
+
+			fetch('/api/languages', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this.commit('languageIndex', response);
+			}).catch(function (error) {
+				console.error(error);
+			});
+		},
+
+
+		/**
+   * Get search results from API
+   *
+   * @param context
+   * @param language
+   */
+		languageSearch: function languageSearch(context, language) {
+			var _this2 = this;
+
+			fetch('/api/languages/' + language + '/search', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Accept': 'application/json'
+				}
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				_this2.commit('languageSearch', response);
+			}).catch(function (error) {
+				console.error('languageSearch', error);
+			});
+		}
+	},
+
+	getters: {
+		/**
+   * Get all languages
+   *
+   * @param state
+   * @returns {{}|state.all|*}
+   */
+		languageIndex: function languageIndex(state) {
+			return state.all;
+		},
+
+
+		/**
+   * Get search results
+   * @param state
+   */
+		languageSearch: function languageSearch(state) {
+			return state.search;
+		}
+	}
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	state: {
+		all: {},
 		data: {},
 		loggedIn: false
 	},
 
 	mutations: {
-		/**
-   * Set user email
-   *
-   * @param state
-   * @param email
-   */
-		userEmail: function userEmail(state, email) {
-			state.email = email;
-		},
-
-
-		/**
-   * Set password and encode in base64
-   *
-   * @param state
-   * @param password
-   */
-		userPassword: function userPassword(state, password) {
-			state.password = window.btoa(password);
-		},
-
 
 		/**
    * Set user to logged in
@@ -17038,31 +13705,25 @@ exports.default = {
    * @param context
    * @param data
    */
-		userRegister: function userRegister(context, data) {}
+		userRegister: function userRegister(context, data) {
+			fetch('/api/user/register', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(data)
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {}).catch(function (error) {
+				console.error('userRegister', error);
+			});
+		}
 	},
 
 	getters: {
-		/**
-   * Get email
-   *
-   * @param state
-   * @returns {string|*}
-   */
-		userEmail: function userEmail(state) {
-			return state.email;
-		},
-
-
-		/**
-   * Get password and decode from base64
-   * @param state
-   * @returns {string}
-   */
-		userPassword: function userPassword(state) {
-			return window.atob(state.password);
-		},
-
-
 		/**
    * Check if the user is logged in
    * @param state
@@ -17093,7 +13754,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 116 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17103,11 +13764,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _vue = __webpack_require__(31);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(117);
+var _vueRouter = __webpack_require__(40);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -17115,33 +13776,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Web = function Web() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(118);
+		return __webpack_require__(41);
 	});
 };
 var Index = function Index() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(120);
+		return __webpack_require__(43);
 	});
 };
 var Flights = function Flights() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(132);
+		return __webpack_require__(55);
 	});
 };
 
 var Account = function Account() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(139);
+		return __webpack_require__(62);
 	});
 };
 var Register = function Register() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(143);
+		return __webpack_require__(66);
 	});
 };
 var Login = function Login() {
 	return Promise.resolve().then(function () {
-		return __webpack_require__(145);
+		return __webpack_require__(68);
 	});
 };
 
@@ -17182,7 +13843,7 @@ exports.default = new _vueRouter2.default({
 });
 
 /***/ }),
-/* 117 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19641,18 +16302,18 @@ if (inBrowser && window.Vue) {
 }
 
 exports.default = VueRouter;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 118 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Web_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_98f3c19c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Web_vue__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -19700,7 +16361,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 119 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19952,15 +16613,15 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e725123a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -20008,15 +16669,15 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 121 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_flight_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c55e230_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_flight_form_vue__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -20064,7 +16725,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 122 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20074,30 +16735,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-card",
-    { attrs: { hover: "" } },
-    [
-      _c("v-card-text", [
-        _c(
-          "form",
-          {
-            on: {
-              keyup: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.submit($event)
-              },
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.submit($event)
-              }
+  return _c("v-card", { attrs: { hover: "" } }, [
+    _c(
+      "form",
+      {
+        on: {
+          keyup: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
             }
+            _vm.submit()
           },
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.submit()
+          }
+        }
+      },
+      [
+        _c(
+          "v-card-text",
           [
             _c(
               "v-container",
@@ -20386,30 +17046,27 @@ var render = function() {
             )
           ],
           1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-card-actions",
+          [
+            _c(
+              "v-btn",
+              { attrs: { flat: "", color: "primary", type: "submit" } },
+              [
+                _c("v-icon", [_vm._v("search")]),
+                _vm._v("\n                Search flights\n            ")
+              ],
+              1
+            )
+          ],
+          1
         )
-      ]),
-      _vm._v(" "),
-      _c(
-        "v-card-actions",
-        [
-          _c(
-            "v-btn",
-            {
-              attrs: { flat: "", color: "primary" },
-              on: { click: _vm.submit }
-            },
-            [
-              _c("v-icon", [_vm._v("search")]),
-              _vm._v("\n            Search flights\n        ")
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20422,15 +17079,15 @@ if (false) {
 }
 
 /***/ }),
-/* 123 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_accommodation_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e7cdc80_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_accommodation_form_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -20478,7 +17135,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 124 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20696,15 +17353,15 @@ if (false) {
 }
 
 /***/ }),
-/* 125 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_car_form_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_b9e41304_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_car_form_vue__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -20752,7 +17409,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 126 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21026,15 +17683,15 @@ if (false) {
 }
 
 /***/ }),
-/* 127 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_destination_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_94c13086_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_destination_vue__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -21082,7 +17739,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 128 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21741,15 +18398,15 @@ if (false) {
 }
 
 /***/ }),
-/* 129 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_activity_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_aa5da520_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_activity_vue__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -21797,7 +18454,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 130 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22385,7 +19042,7 @@ if (false) {
 }
 
 /***/ }),
-/* 131 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22689,15 +19346,15 @@ if (false) {
 }
 
 /***/ }),
-/* 132 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Flights_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d881d54_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flights_vue__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d881d54_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flights_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -22745,20 +19402,20 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 133 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Map_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_72a5a6b5_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_72a5a6b5_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 function injectStyle (context) {
   if (disposed) return
-  __webpack_require__(134)
+  __webpack_require__(57)
 }
 /* script */
 
@@ -22805,17 +19462,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 134 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(135);
+var content = __webpack_require__(58);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(23).default
+var add = __webpack_require__(14).default
 var update = add("5a972ea1", content, false, {});
 // Hot Module Replacement
 if(false) {
@@ -22832,10 +19489,10 @@ if(false) {
 }
 
 /***/ }),
-/* 135 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(13)(false);
 // imports
 
 
@@ -22846,7 +19503,7 @@ exports.push([module.i, "\n.google-maps[data-v-72a5a6b5] {\n    width: 100%;\n  
 
 
 /***/ }),
-/* 136 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22885,7 +19542,7 @@ function listToStyles(parentId, list) {
 }
 
 /***/ }),
-/* 137 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22908,7 +19565,7 @@ if (false) {
 }
 
 /***/ }),
-/* 138 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22965,283 +19622,310 @@ var render = function() {
             "v-flex",
             { attrs: { xs3: "" } },
             [
-              _c(
-                "v-card",
-                { attrs: { flat: "" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          label: "Departure",
-                          required: "",
-                          autocomplete: "",
-                          items: _vm.airports,
-                          "item-text": "name",
-                          "item-value": "iata",
-                          "no-data": "No results found",
-                          "cache-items": "",
-                          "search-input": _vm.departureSearch
-                        },
-                        on: {
-                          "update:searchInput": function($event) {
-                            _vm.departureSearch = $event
-                          }
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "selected",
-                            fn: function(data) {
-                              return [
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v(_vm._s(data.item.name))
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            }
-                          },
-                          {
-                            key: "item",
-                            fn: function(data) {
-                              return [
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v(_vm._s(data.item.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-tile-sub-title", [
-                                      data.item.city && data.item.city.country
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "Country: " +
-                                                _vm._s(
-                                                  data.item.city.country.name
-                                                )
-                                            )
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.item.city
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "City: " +
-                                                _vm._s(data.item.city.name)
-                                            )
-                                          ])
-                                        : _vm._e()
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            }
-                          }
-                        ]),
-                        model: {
-                          value: _vm.departure,
-                          callback: function($$v) {
-                            _vm.departure = _vm._n($$v)
-                          },
-                          expression: "departure"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Departure date",
-                          type: "date",
-                          min: _vm.currentDate,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.departureDate,
-                          callback: function($$v) {
-                            _vm.departureDate = $$v
-                          },
-                          expression: "departureDate"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-select", {
-                        attrs: {
-                          label: "Destination",
-                          required: "",
-                          autocomplete: "",
-                          items: _vm.airports,
-                          "item-text": "name",
-                          "item-value": "iata",
-                          "no-data": "No results found",
-                          "cache-items": "",
-                          "search-input": _vm.destinationSearch
-                        },
-                        on: {
-                          "update:searchInput": function($event) {
-                            _vm.destinationSearch = $event
-                          }
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "item",
-                            fn: function(data) {
-                              return [
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v(_vm._s(data.item.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-tile-sub-title", [
-                                      data.item.city && data.item.city.country
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "Country: " +
-                                                _vm._s(
-                                                  data.item.city.country.name
-                                                )
-                                            )
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.item.city
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "City: " +
-                                                _vm._s(data.item.city.name)
-                                            )
-                                          ])
-                                        : _vm._e()
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            }
-                          }
-                        ]),
-                        model: {
-                          value: _vm.destination,
-                          callback: function($$v) {
-                            _vm.destination = _vm._n($$v)
-                          },
-                          expression: "destination"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Return date",
-                          type: "date",
-                          min: _vm.departureDate
-                        },
-                        model: {
-                          value: _vm.destinationDate,
-                          callback: function($$v) {
-                            _vm.destinationDate = $$v
-                          },
-                          expression: "destinationDate"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Number of adults",
-                          type: "number",
-                          min: "1",
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.adults,
-                          callback: function($$v) {
-                            _vm.adults = _vm._n($$v)
-                          },
-                          expression: "adults"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Number of children (1 - 16 years)",
-                          type: "number",
-                          min: "0",
-                          max: "8"
-                        },
-                        model: {
-                          value: _vm.children,
-                          callback: function($$v) {
-                            _vm.children = _vm._n($$v)
-                          },
-                          expression: "children"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Number of infants (under 12 months)",
-                          type: "number",
-                          min: "0",
-                          max: "8"
-                        },
-                        model: {
-                          value: _vm.infants,
-                          callback: function($$v) {
-                            _vm.infants = _vm._n($$v)
-                          },
-                          expression: "infants"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-select", {
-                        attrs: {
-                          items: _vm.cabinClasses,
-                          label: "Cabin class",
-                          "single-line": "",
-                          bottom: "",
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.cabinClass,
-                          callback: function($$v) {
-                            _vm.cabinClass = $$v
-                          },
-                          expression: "cabinClass"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { flat: "", color: "primary" },
-                          on: { click: _vm.searchFlight }
-                        },
-                        [
-                          _c("v-icon", [_vm._v("search")]),
-                          _vm._v(
-                            "\n                        Search\n                    "
+              _c("v-card", { attrs: { flat: "" } }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
                           )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+                        ) {
+                          return null
+                        }
+                        _vm.searchFlight()
+                      },
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.searchFlight()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "v-card-text",
+                      [
+                        _c("v-select", {
+                          attrs: {
+                            label: "Departure",
+                            required: "",
+                            autocomplete: "",
+                            items: _vm.airports,
+                            "item-text": "name",
+                            "item-value": "iata",
+                            "no-data": "No results found",
+                            "cache-items": "",
+                            "search-input": _vm.departureSearch
+                          },
+                          on: {
+                            "update:searchInput": function($event) {
+                              _vm.departureSearch = $event
+                            }
+                          },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "selected",
+                              fn: function(data) {
+                                return [
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v(_vm._s(data.item.name))
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              }
+                            },
+                            {
+                              key: "item",
+                              fn: function(data) {
+                                return [
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v(_vm._s(data.item.name))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-sub-title", [
+                                        data.item.city && data.item.city.country
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "Country: " +
+                                                  _vm._s(
+                                                    data.item.city.country.name
+                                                  )
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        data.item.city
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "City: " +
+                                                  _vm._s(data.item.city.name)
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              }
+                            }
+                          ]),
+                          model: {
+                            value: _vm.departure,
+                            callback: function($$v) {
+                              _vm.departure = _vm._n($$v)
+                            },
+                            expression: "departure"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Departure date",
+                            type: "date",
+                            min: _vm.currentDate,
+                            required: ""
+                          },
+                          model: {
+                            value: _vm.departureDate,
+                            callback: function($$v) {
+                              _vm.departureDate = $$v
+                            },
+                            expression: "departureDate"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          attrs: {
+                            label: "Destination",
+                            required: "",
+                            autocomplete: "",
+                            items: _vm.airports,
+                            "item-text": "name",
+                            "item-value": "iata",
+                            "no-data": "No results found",
+                            "cache-items": "",
+                            "search-input": _vm.destinationSearch
+                          },
+                          on: {
+                            "update:searchInput": function($event) {
+                              _vm.destinationSearch = $event
+                            }
+                          },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "item",
+                              fn: function(data) {
+                                return [
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v(_vm._s(data.item.name))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-sub-title", [
+                                        data.item.city && data.item.city.country
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "Country: " +
+                                                  _vm._s(
+                                                    data.item.city.country.name
+                                                  )
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        data.item.city
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "City: " +
+                                                  _vm._s(data.item.city.name)
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              }
+                            }
+                          ]),
+                          model: {
+                            value: _vm.destination,
+                            callback: function($$v) {
+                              _vm.destination = _vm._n($$v)
+                            },
+                            expression: "destination"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Return date",
+                            type: "date",
+                            min: _vm.departureDate
+                          },
+                          model: {
+                            value: _vm.destinationDate,
+                            callback: function($$v) {
+                              _vm.destinationDate = $$v
+                            },
+                            expression: "destinationDate"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Number of adults",
+                            type: "number",
+                            min: "1",
+                            required: ""
+                          },
+                          model: {
+                            value: _vm.adults,
+                            callback: function($$v) {
+                              _vm.adults = _vm._n($$v)
+                            },
+                            expression: "adults"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Number of children (1 - 16 years)",
+                            type: "number",
+                            min: "0",
+                            max: "8"
+                          },
+                          model: {
+                            value: _vm.children,
+                            callback: function($$v) {
+                              _vm.children = _vm._n($$v)
+                            },
+                            expression: "children"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Number of infants (under 12 months)",
+                            type: "number",
+                            min: "0",
+                            max: "8"
+                          },
+                          model: {
+                            value: _vm.infants,
+                            callback: function($$v) {
+                              _vm.infants = _vm._n($$v)
+                            },
+                            expression: "infants"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          attrs: {
+                            items: _vm.cabinClasses,
+                            label: "Cabin class",
+                            "single-line": "",
+                            bottom: "",
+                            required: ""
+                          },
+                          model: {
+                            value: _vm.cabinClass,
+                            callback: function($$v) {
+                              _vm.cabinClass = $$v
+                            },
+                            expression: "cabinClass"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: {
+                              flat: "",
+                              color: "primary",
+                              type: "submit"
+                            }
+                          },
+                          [
+                            _c("v-icon", [_vm._v("search")]),
+                            _vm._v(
+                              "\n                            Search\n                        "
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
             ],
             1
           ),
@@ -23393,17 +20077,17 @@ if (false) {
 }
 
 /***/ }),
-/* 139 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f8fd18a_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_LoginRegister_vue__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5f8fd18a_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_LoginRegister_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 function injectStyle (context) {
   if (disposed) return
-  __webpack_require__(140)
+  __webpack_require__(63)
 }
 /* script */
 var __vue_script__ = null
@@ -23449,17 +20133,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 140 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(141);
+var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(23).default
+var add = __webpack_require__(14).default
 var update = add("77e6fae0", content, false, {});
 // Hot Module Replacement
 if(false) {
@@ -23476,10 +20160,10 @@ if(false) {
 }
 
 /***/ }),
-/* 141 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(13)(false);
 // imports
 
 
@@ -23490,7 +20174,7 @@ exports.push([module.i, "\n.container[data-v-5f8fd18a] {\n    background: url(ht
 
 
 /***/ }),
-/* 142 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23538,15 +20222,15 @@ if (false) {
 }
 
 /***/ }),
-/* 143 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Register_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8800fbbc_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Register_vue__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8800fbbc_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Register_vue__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -23594,7 +20278,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 144 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23616,7 +20300,11 @@ var render = function() {
             ) {
               return null
             }
-            return _vm.submit($event)
+            _vm.submit(_vm.form)
+          },
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.submit(_vm.form)
           }
         }
       },
@@ -23627,35 +20315,123 @@ var render = function() {
             _c("h1", { staticClass: "display-4" }, [_vm._v("Register")]),
             _vm._v(" "),
             _c("v-text-field", {
-              attrs: { label: "Email address", required: "" },
+              attrs: {
+                label: "Email address",
+                type: "email",
+                autocomplete: "email",
+                required: ""
+              },
               model: {
-                value: _vm.email,
+                value: _vm.form.email,
                 callback: function($$v) {
-                  _vm.email = $$v
+                  _vm.$set(_vm.form, "email", $$v)
                 },
-                expression: "email"
+                expression: "form.email"
               }
             }),
             _vm._v(" "),
             _c("v-text-field", {
-              attrs: { label: "First name", required: "" },
+              attrs: {
+                label: "First name",
+                autocomplete: "given-name",
+                required: ""
+              },
               model: {
-                value: _vm.first_name,
+                value: _vm.form.first_name,
                 callback: function($$v) {
-                  _vm.first_name = $$v
+                  _vm.$set(_vm.form, "first_name", $$v)
                 },
-                expression: "first_name"
+                expression: "form.first_name"
               }
             }),
             _vm._v(" "),
             _c("v-text-field", {
-              attrs: { label: "Last name", required: "" },
+              attrs: {
+                label: "Last name",
+                autocomplete: "family-name",
+                required: ""
+              },
               model: {
-                value: _vm.last_name,
+                value: _vm.form.last_name,
                 callback: function($$v) {
-                  _vm.last_name = $$v
+                  _vm.$set(_vm.form, "last_name", $$v)
                 },
-                expression: "last_name"
+                expression: "form.last_name"
+              }
+            }),
+            _vm._v(" "),
+            _c("v-select", {
+              attrs: {
+                label: "Country",
+                autocomplete: "",
+                items: _vm.countries,
+                "item-text": "name",
+                "item-value": "id",
+                "no-data": "No countries found",
+                "cache-items": "",
+                "search-input": _vm.countrySearch
+              },
+              on: {
+                "update:searchInput": function($event) {
+                  _vm.countrySearch = $event
+                }
+              },
+              model: {
+                value: _vm.form.country,
+                callback: function($$v) {
+                  _vm.$set(_vm.form, "country", _vm._n($$v))
+                },
+                expression: "form.country"
+              }
+            }),
+            _vm._v(" "),
+            _c("v-select", {
+              attrs: {
+                label: "Language",
+                autocomplete: "",
+                items: _vm.languages,
+                "item-text": "name",
+                "item-value": "id",
+                "no-data": "No languages found",
+                "cache-items": "",
+                "search-input": _vm.languageSearch
+              },
+              on: {
+                "update:searchInput": function($event) {
+                  _vm.languageSearch = $event
+                }
+              },
+              model: {
+                value: _vm.form.language,
+                callback: function($$v) {
+                  _vm.$set(_vm.form, "language", _vm._n($$v))
+                },
+                expression: "form.language"
+              }
+            }),
+            _vm._v(" "),
+            _c("v-select", {
+              attrs: {
+                label: "Currency",
+                autocomplete: "",
+                items: _vm.currencies,
+                "item-text": "name",
+                "item-value": "id",
+                "no-data": "No currency found",
+                "cache-items": "",
+                "search-input": _vm.currencySearch
+              },
+              on: {
+                "update:searchInput": function($event) {
+                  _vm.currencySearch = $event
+                }
+              },
+              model: {
+                value: _vm.form.currency,
+                callback: function($$v) {
+                  _vm.$set(_vm.form, "currency", _vm._n($$v))
+                },
+                expression: "form.currency"
               }
             }),
             _vm._v(" "),
@@ -23663,7 +20439,7 @@ var render = function() {
               attrs: {
                 label: "Password",
                 hint: "At least 8 characters",
-                min: "8",
+                minlength: "8",
                 "append-icon": _vm.passwordVisible
                   ? "visibility_off"
                   : "visibility",
@@ -23671,14 +20447,15 @@ var render = function() {
                   return (_vm.passwordVisible = !_vm.passwordVisible)
                 },
                 type: _vm.passwordVisible ? "text" : "password",
-                required: ""
+                required: "",
+                counter: ""
               },
               model: {
-                value: _vm.password,
+                value: _vm.form.password,
                 callback: function($$v) {
-                  _vm.password = $$v
+                  _vm.$set(_vm.form, "password", $$v)
                 },
-                expression: "password"
+                expression: "form.password"
               }
             }),
             _vm._v(" "),
@@ -23686,7 +20463,7 @@ var render = function() {
               attrs: {
                 label: "Password repeat",
                 hint: "At least 8 characters and must match password",
-                min: "8",
+                minlength: "8",
                 "append-icon": _vm.passwordRepeatVisible
                   ? "visibility_off"
                   : "visibility",
@@ -23694,14 +20471,15 @@ var render = function() {
                   return (_vm.passwordRepeatVisible = !_vm.passwordRepeatVisible)
                 },
                 type: _vm.passwordRepeatVisible ? "text" : "password",
-                required: ""
+                required: "",
+                counter: ""
               },
               model: {
-                value: _vm.passwordRepeat,
+                value: _vm.form.passwordRepeat,
                 callback: function($$v) {
-                  _vm.passwordRepeat = $$v
+                  _vm.$set(_vm.form, "passwordRepeat", $$v)
                 },
-                expression: "passwordRepeat"
+                expression: "form.passwordRepeat"
               }
             })
           ],
@@ -23711,21 +20489,33 @@ var render = function() {
         _c(
           "v-card-actions",
           [
-            _c(
-              "v-btn",
-              { attrs: { color: "primary" }, on: { click: _vm.submit } },
-              [_vm._v("Register")]
-            ),
+            _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
+              _vm._v("Register")
+            ]),
             _vm._v(" "),
             _c(
               "v-btn",
-              { attrs: { flat: "", color: "primary", to: { name: "Login" } } },
+              {
+                attrs: {
+                  flat: "",
+                  color: "primary",
+                  to: { name: "Login" },
+                  type: "button"
+                }
+              },
               [_vm._v("Login")]
             ),
             _vm._v(" "),
             _c(
               "v-btn",
-              { attrs: { flat: "", color: "primary", to: { name: "Index" } } },
+              {
+                attrs: {
+                  flat: "",
+                  color: "primary",
+                  to: { name: "Index" },
+                  type: "button"
+                }
+              },
               [_vm._v("Back to website")]
             )
           ],
@@ -23747,15 +20537,15 @@ if (false) {
 }
 
 /***/ }),
-/* 145 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4b0d8c7a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Login_vue__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4b0d8c7a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Login_vue__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -23803,7 +20593,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 146 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23901,7 +20691,7 @@ if (false) {
 }
 
 /***/ }),
-/* 147 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25009,7 +21799,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 148 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25297,6815 +22087,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }, staticRenderFns: [] };
   }]);
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 149 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MountableMixin = exports.Autocomplete = exports.MapElementMixin = exports.PlaceInput = exports.Map = exports.InfoWindow = exports.Rectangle = exports.Circle = exports.Polygon = exports.Polyline = exports.Cluster = exports.Marker = exports.loaded = exports.load = undefined;
-exports.install = install;
-
-var _manager = __webpack_require__(17);
-
-var _marker = __webpack_require__(150);
-
-var _marker2 = _interopRequireDefault(_marker);
-
-var _cluster = __webpack_require__(223);
-
-var _cluster2 = _interopRequireDefault(_cluster);
-
-var _polyline = __webpack_require__(243);
-
-var _polyline2 = _interopRequireDefault(_polyline);
-
-var _polygon = __webpack_require__(260);
-
-var _polygon2 = _interopRequireDefault(_polygon);
-
-var _circle = __webpack_require__(261);
-
-var _circle2 = _interopRequireDefault(_circle);
-
-var _rectangle = __webpack_require__(262);
-
-var _rectangle2 = _interopRequireDefault(_rectangle);
-
-var _infoWindow = __webpack_require__(263);
-
-var _infoWindow2 = _interopRequireDefault(_infoWindow);
-
-var _map = __webpack_require__(265);
-
-var _map2 = _interopRequireDefault(_map);
-
-var _streetViewPanorama = __webpack_require__(270);
-
-var _streetViewPanorama2 = _interopRequireDefault(_streetViewPanorama);
-
-var _placeInput = __webpack_require__(274);
-
-var _placeInput2 = _interopRequireDefault(_placeInput);
-
-var _autocomplete = __webpack_require__(276);
-
-var _autocomplete2 = _interopRequireDefault(_autocomplete);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _mountableMixin = __webpack_require__(56);
-
-var _mountableMixin2 = _interopRequireDefault(_mountableMixin);
-
-var _deferredReady = __webpack_require__(30);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-// export everything
-
-
-// Vue component imports
-exports.load = _manager.load;
-exports.loaded = _manager.loaded;
-exports.Marker = _marker2.default;
-exports.Cluster = _cluster2.default;
-exports.Polyline = _polyline2.default;
-exports.Polygon = _polygon2.default;
-exports.Circle = _circle2.default;
-exports.Rectangle = _rectangle2.default;
-exports.InfoWindow = _infoWindow2.default;
-exports.Map = _map2.default;
-exports.PlaceInput = _placeInput2.default;
-exports.MapElementMixin = _mapElementMixin2.default;
-exports.Autocomplete = _autocomplete2.default;
-exports.MountableMixin = _mountableMixin2.default;
-function install(Vue, options) {
-  options = Object.assign({}, {
-    installComponents: true
-  }, options);
-
-  Vue.use(_deferredReady.DeferredReady);
-
-  var defaultResizeBus = new Vue();
-  Vue.$gmapDefaultResizeBus = defaultResizeBus;
-  Vue.mixin({
-    created: function created() {
-      this.$gmapDefaultResizeBus = defaultResizeBus;
-    }
-  });
-
-  if (options.load) {
-    (0, _manager.load)(options.load);
-  }
-
-  if (options.installComponents) {
-    Vue.component('GmapMap', _map2.default);
-    Vue.component('GmapMarker', _marker2.default);
-    Vue.component('GmapCluster', _cluster2.default);
-    Vue.component('GmapInfoWindow', _infoWindow2.default);
-    Vue.component('GmapPolyline', _polyline2.default);
-    Vue.component('GmapPolygon', _polygon2.default);
-    Vue.component('GmapCircle', _circle2.default);
-    Vue.component('GmapRectangle', _rectangle2.default);
-    Vue.component('GmapAutocomplete', _autocomplete2.default);
-    Vue.component('GmapPlaceInput', _placeInput2.default);
-    Vue.component('GmapStreetViewPanorama', _streetViewPanorama2.default);
-  }
-}
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _mapValues = __webpack_require__(68);
-
-var _mapValues2 = _interopRequireDefault(_mapValues);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  animation: {
-    twoWay: true,
-    type: Number
-  },
-  attribution: {
-    type: Object
-  },
-  clickable: {
-    type: Boolean,
-    twoWay: true,
-    default: true
-  },
-  cursor: {
-    type: String,
-    twoWay: true
-  },
-  draggable: {
-    type: Boolean,
-    twoWay: true,
-    default: false
-  },
-  icon: {
-    twoWay: true
-  },
-  label: {},
-  opacity: {
-    type: Number,
-    default: 1
-  },
-  options: {
-    type: Object
-  },
-  place: {
-    type: Object
-  },
-  position: {
-    type: Object,
-    twoWay: true
-  },
-  shape: {
-    type: Object,
-    twoWay: true
-  },
-  title: {
-    type: String,
-    twoWay: true
-  },
-  zIndex: {
-    type: Number,
-    twoWay: true
-  },
-  visible: {
-    twoWay: true,
-    default: true
-  }
-};
-
-var events = ['click', 'rightclick', 'dblclick', 'drag', 'dragstart', 'dragend', 'mouseup', 'mousedown', 'mouseover', 'mouseout'];
-
-/**
- * @class Marker
- *
- * Marker class with extra support for
- *
- * - Embedded info windows
- * - Clustered markers
- *
- * Support for clustered markers is for backward-compatability
- * reasons. Otherwise we should use a cluster-marker mixin or
- * subclass.
- */
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-
-  render: function render(h) {
-    if (!this.$slots.default || this.$slots.default.length === 0) {
-      return '';
-    } else if (this.$slots.default.length === 1) {
-      // So that infowindows can have a marker parent
-      return this.$slots.default[0];
-    } else {
-      return h('div', this.$slots.default);
-    }
-  },
-  destroyed: function destroyed() {
-    if (!this.$markerObject) {
-      return;
-    }
-
-    if (this.$clusterObject) {
-      this.$clusterObject.removeMarker(this.$markerObject);
-    } else {
-      this.$markerObject.setMap(null);
-    }
-  },
-  deferredReady: function deferredReady() {
-    var _this = this;
-
-    var options = (0, _mapValues2.default)(props, function (value, prop) {
-      return _this[prop];
-    });
-    options.map = this.$map;
-    delete options.options;
-    Object.assign(options, this.options);
-
-    // search ancestors for cluster object
-    var search = this.$findAncestor(function (ans) {
-      return ans.$clusterObject;
-    });
-
-    this.$clusterObject = search ? search.$clusterObject : null;
-    this.createMarker(options);
-  },
-
-  methods: {
-    createMarker: function createMarker(options) {
-      this.$markerObject = new google.maps.Marker(options);
-      (0, _propsBinder2.default)(this, this.$markerObject, props);
-      (0, _eventsBinder2.default)(this, this.$markerObject, events);
-
-      if (this.$clusterObject) {
-        this.$clusterObject.addMarker(this.$markerObject);
-      }
-    }
-  }
-};
-
-/***/ }),
-/* 151 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isFunction = __webpack_require__(70),
-    isMasked = __webpack_require__(154),
-    isObject = __webpack_require__(10),
-    toSource = __webpack_require__(72);
-
-/**
- * Used to match `RegExp`
- * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
- */
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
-
-/**
- * The base implementation of `_.isNative` without bad shim checks.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function,
- *  else `false`.
- */
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-
-module.exports = baseIsNative;
-
-/***/ }),
-/* 152 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/** Built-in value references. */
-var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
-
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the raw `toStringTag`.
- */
-function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag),
-      tag = value[symToStringTag];
-
-  try {
-    value[symToStringTag] = undefined;
-    var unmasked = true;
-  } catch (e) {}
-
-  var result = nativeObjectToString.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag] = tag;
-    } else {
-      delete value[symToStringTag];
-    }
-  }
-  return result;
-}
-
-module.exports = getRawTag;
-
-/***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/**
- * Converts `value` to a string using `Object.prototype.toString`.
- *
- * @private
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- */
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-
-module.exports = objectToString;
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var coreJsData = __webpack_require__(155);
-
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = function () {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-  return uid ? 'Symbol(src)_1.' + uid : '';
-}();
-
-/**
- * Checks if `func` has its source masked.
- *
- * @private
- * @param {Function} func The function to check.
- * @returns {boolean} Returns `true` if `func` is masked, else `false`.
- */
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
-}
-
-module.exports = isMasked;
-
-/***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var root = __webpack_require__(3);
-
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root['__core-js_shared__'];
-
-module.exports = coreJsData;
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Gets the value at `key` of `object`.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function getValue(object, key) {
-  return object == null ? undefined : object[key];
-}
-
-module.exports = getValue;
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Creates a base function for methods like `_.forIn` and `_.forOwn`.
- *
- * @private
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseFor(fromRight) {
-  return function (object, iteratee, keysFunc) {
-    var index = -1,
-        iterable = Object(object),
-        props = keysFunc(object),
-        length = props.length;
-
-    while (length--) {
-      var key = props[fromRight ? length : ++index];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-
-module.exports = createBaseFor;
-
-/***/ }),
-/* 158 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * The base implementation of `_.times` without support for iteratee shorthands
- * or max array length checks.
- *
- * @private
- * @param {number} n The number of times to invoke `iteratee`.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the array of results.
- */
-function baseTimes(n, iteratee) {
-  var index = -1,
-      result = Array(n);
-
-  while (++index < n) {
-    result[index] = iteratee(index);
-  }
-  return result;
-}
-
-module.exports = baseTimes;
-
-/***/ }),
-/* 159 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetTag = __webpack_require__(12),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]';
-
-/**
- * The base implementation of `_.isArguments`.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- */
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag;
-}
-
-module.exports = baseIsArguments;
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * This method returns `false`.
- *
- * @static
- * @memberOf _
- * @since 4.13.0
- * @category Util
- * @returns {boolean} Returns `false`.
- * @example
- *
- * _.times(2, _.stubFalse);
- * // => [false, false]
- */
-function stubFalse() {
-  return false;
-}
-
-module.exports = stubFalse;
-
-/***/ }),
-/* 161 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetTag = __webpack_require__(12),
-    isLength = __webpack_require__(36),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    funcTag = '[object Function]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    objectTag = '[object Object]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    weakMapTag = '[object WeakMap]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-/** Used to identify `toStringTag` values of typed arrays. */
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[regexpTag] = typedArrayTags[setTag] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
-
-/**
- * The base implementation of `_.isTypedArray` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
- */
-function baseIsTypedArray(value) {
-    return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
-}
-
-module.exports = baseIsTypedArray;
-
-/***/ }),
-/* 162 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isPrototype = __webpack_require__(39),
-    nativeKeys = __webpack_require__(163);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty.call(object, key) && key != 'constructor') {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = baseKeys;
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var overArg = __webpack_require__(77);
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeKeys = overArg(Object.keys, Object);
-
-module.exports = nativeKeys;
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsMatch = __webpack_require__(165),
-    getMatchData = __webpack_require__(203),
-    matchesStrictComparable = __webpack_require__(86);
-
-/**
- * The base implementation of `_.matches` which doesn't clone `source`.
- *
- * @private
- * @param {Object} source The object of property values to match.
- * @returns {Function} Returns the new spec function.
- */
-function baseMatches(source) {
-  var matchData = getMatchData(source);
-  if (matchData.length == 1 && matchData[0][2]) {
-    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
-  }
-  return function (object) {
-    return object === source || baseIsMatch(object, source, matchData);
-  };
-}
-
-module.exports = baseMatches;
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Stack = __webpack_require__(41),
-    baseIsEqual = __webpack_require__(79);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * The base implementation of `_.isMatch` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The object to inspect.
- * @param {Object} source The object of property values to match.
- * @param {Array} matchData The property names, values, and compare flags to match.
- * @param {Function} [customizer] The function to customize comparisons.
- * @returns {boolean} Returns `true` if `object` is a match, else `false`.
- */
-function baseIsMatch(object, source, matchData, customizer) {
-  var index = matchData.length,
-      length = index,
-      noCustomizer = !customizer;
-
-  if (object == null) {
-    return !length;
-  }
-  object = Object(object);
-  while (index--) {
-    var data = matchData[index];
-    if (noCustomizer && data[2] ? data[1] !== object[data[0]] : !(data[0] in object)) {
-      return false;
-    }
-  }
-  while (++index < length) {
-    data = matchData[index];
-    var key = data[0],
-        objValue = object[key],
-        srcValue = data[1];
-
-    if (noCustomizer && data[2]) {
-      if (objValue === undefined && !(key in object)) {
-        return false;
-      }
-    } else {
-      var stack = new Stack();
-      if (customizer) {
-        var result = customizer(objValue, srcValue, key, object, source, stack);
-      }
-      if (!(result === undefined ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG, customizer, stack) : result)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-module.exports = baseIsMatch;
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Removes all key-value entries from the list cache.
- *
- * @private
- * @name clear
- * @memberOf ListCache
- */
-function listCacheClear() {
-  this.__data__ = [];
-  this.size = 0;
-}
-
-module.exports = listCacheClear;
-
-/***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assocIndexOf = __webpack_require__(25);
-
-/** Used for built-in method references. */
-var arrayProto = Array.prototype;
-
-/** Built-in value references. */
-var splice = arrayProto.splice;
-
-/**
- * Removes `key` and its value from the list cache.
- *
- * @private
- * @name delete
- * @memberOf ListCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function listCacheDelete(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    return false;
-  }
-  var lastIndex = data.length - 1;
-  if (index == lastIndex) {
-    data.pop();
-  } else {
-    splice.call(data, index, 1);
-  }
-  --this.size;
-  return true;
-}
-
-module.exports = listCacheDelete;
-
-/***/ }),
-/* 168 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assocIndexOf = __webpack_require__(25);
-
-/**
- * Gets the list cache value for `key`.
- *
- * @private
- * @name get
- * @memberOf ListCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function listCacheGet(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  return index < 0 ? undefined : data[index][1];
-}
-
-module.exports = listCacheGet;
-
-/***/ }),
-/* 169 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assocIndexOf = __webpack_require__(25);
-
-/**
- * Checks if a list cache value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf ListCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function listCacheHas(key) {
-  return assocIndexOf(this.__data__, key) > -1;
-}
-
-module.exports = listCacheHas;
-
-/***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assocIndexOf = __webpack_require__(25);
-
-/**
- * Sets the list cache `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf ListCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the list cache instance.
- */
-function listCacheSet(key, value) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    ++this.size;
-    data.push([key, value]);
-  } else {
-    data[index][1] = value;
-  }
-  return this;
-}
-
-module.exports = listCacheSet;
-
-/***/ }),
-/* 171 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var ListCache = __webpack_require__(24);
-
-/**
- * Removes all key-value entries from the stack.
- *
- * @private
- * @name clear
- * @memberOf Stack
- */
-function stackClear() {
-  this.__data__ = new ListCache();
-  this.size = 0;
-}
-
-module.exports = stackClear;
-
-/***/ }),
-/* 172 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Removes `key` and its value from the stack.
- *
- * @private
- * @name delete
- * @memberOf Stack
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function stackDelete(key) {
-  var data = this.__data__,
-      result = data['delete'](key);
-
-  this.size = data.size;
-  return result;
-}
-
-module.exports = stackDelete;
-
-/***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Gets the stack value for `key`.
- *
- * @private
- * @name get
- * @memberOf Stack
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function stackGet(key) {
-  return this.__data__.get(key);
-}
-
-module.exports = stackGet;
-
-/***/ }),
-/* 174 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Checks if a stack value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf Stack
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function stackHas(key) {
-  return this.__data__.has(key);
-}
-
-module.exports = stackHas;
-
-/***/ }),
-/* 175 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var ListCache = __webpack_require__(24),
-    Map = __webpack_require__(43),
-    MapCache = __webpack_require__(44);
-
-/** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE = 200;
-
-/**
- * Sets the stack `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf Stack
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the stack cache instance.
- */
-function stackSet(key, value) {
-  var data = this.__data__;
-  if (data instanceof ListCache) {
-    var pairs = data.__data__;
-    if (!Map || pairs.length < LARGE_ARRAY_SIZE - 1) {
-      pairs.push([key, value]);
-      this.size = ++data.size;
-      return this;
-    }
-    data = this.__data__ = new MapCache(pairs);
-  }
-  data.set(key, value);
-  this.size = data.size;
-  return this;
-}
-
-module.exports = stackSet;
-
-/***/ }),
-/* 176 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Hash = __webpack_require__(177),
-    ListCache = __webpack_require__(24),
-    Map = __webpack_require__(43);
-
-/**
- * Removes all key-value entries from the map.
- *
- * @private
- * @name clear
- * @memberOf MapCache
- */
-function mapCacheClear() {
-  this.size = 0;
-  this.__data__ = {
-    'hash': new Hash(),
-    'map': new (Map || ListCache)(),
-    'string': new Hash()
-  };
-}
-
-module.exports = mapCacheClear;
-
-/***/ }),
-/* 177 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var hashClear = __webpack_require__(178),
-    hashDelete = __webpack_require__(179),
-    hashGet = __webpack_require__(180),
-    hashHas = __webpack_require__(181),
-    hashSet = __webpack_require__(182);
-
-/**
- * Creates a hash object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function Hash(entries) {
-    var index = -1,
-        length = entries == null ? 0 : entries.length;
-
-    this.clear();
-    while (++index < length) {
-        var entry = entries[index];
-        this.set(entry[0], entry[1]);
-    }
-}
-
-// Add methods to `Hash`.
-Hash.prototype.clear = hashClear;
-Hash.prototype['delete'] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-
-module.exports = Hash;
-
-/***/ }),
-/* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var nativeCreate = __webpack_require__(26);
-
-/**
- * Removes all key-value entries from the hash.
- *
- * @private
- * @name clear
- * @memberOf Hash
- */
-function hashClear() {
-  this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  this.size = 0;
-}
-
-module.exports = hashClear;
-
-/***/ }),
-/* 179 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Removes `key` and its value from the hash.
- *
- * @private
- * @name delete
- * @memberOf Hash
- * @param {Object} hash The hash to modify.
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function hashDelete(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-
-module.exports = hashDelete;
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var nativeCreate = __webpack_require__(26);
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Gets the hash value for `key`.
- *
- * @private
- * @name get
- * @memberOf Hash
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function hashGet(key) {
-  var data = this.__data__;
-  if (nativeCreate) {
-    var result = data[key];
-    return result === HASH_UNDEFINED ? undefined : result;
-  }
-  return hasOwnProperty.call(data, key) ? data[key] : undefined;
-}
-
-module.exports = hashGet;
-
-/***/ }),
-/* 181 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var nativeCreate = __webpack_require__(26);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Checks if a hash value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf Hash
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function hashHas(key) {
-  var data = this.__data__;
-  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
-}
-
-module.exports = hashHas;
-
-/***/ }),
-/* 182 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var nativeCreate = __webpack_require__(26);
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Sets the hash `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf Hash
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the hash instance.
- */
-function hashSet(key, value) {
-  var data = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED : value;
-  return this;
-}
-
-module.exports = hashSet;
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getMapData = __webpack_require__(27);
-
-/**
- * Removes `key` and its value from the map.
- *
- * @private
- * @name delete
- * @memberOf MapCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function mapCacheDelete(key) {
-  var result = getMapData(this, key)['delete'](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-
-module.exports = mapCacheDelete;
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * Checks if `value` is suitable for use as unique object key.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
- */
-function isKeyable(value) {
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  return type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean' ? value !== '__proto__' : value === null;
-}
-
-module.exports = isKeyable;
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getMapData = __webpack_require__(27);
-
-/**
- * Gets the map value for `key`.
- *
- * @private
- * @name get
- * @memberOf MapCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function mapCacheGet(key) {
-  return getMapData(this, key).get(key);
-}
-
-module.exports = mapCacheGet;
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getMapData = __webpack_require__(27);
-
-/**
- * Checks if a map value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf MapCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function mapCacheHas(key) {
-  return getMapData(this, key).has(key);
-}
-
-module.exports = mapCacheHas;
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getMapData = __webpack_require__(27);
-
-/**
- * Sets the map `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf MapCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the map cache instance.
- */
-function mapCacheSet(key, value) {
-  var data = getMapData(this, key),
-      size = data.size;
-
-  data.set(key, value);
-  this.size += data.size == size ? 0 : 1;
-  return this;
-}
-
-module.exports = mapCacheSet;
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Stack = __webpack_require__(41),
-    equalArrays = __webpack_require__(80),
-    equalByTag = __webpack_require__(194),
-    equalObjects = __webpack_require__(197),
-    getTag = __webpack_require__(28),
-    isArray = __webpack_require__(1),
-    isBuffer = __webpack_require__(34),
-    isTypedArray = __webpack_require__(76);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqual` for arrays and objects which performs
- * deep comparisons and tracks traversed objects enabling objects with circular
- * references to be compared.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} [stack] Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray(object),
-      othIsArr = isArray(other),
-      objTag = objIsArr ? arrayTag : getTag(object),
-      othTag = othIsArr ? arrayTag : getTag(other);
-
-  objTag = objTag == argsTag ? objectTag : objTag;
-  othTag = othTag == argsTag ? objectTag : othTag;
-
-  var objIsObj = objTag == objectTag,
-      othIsObj = othTag == objectTag,
-      isSameTag = objTag == othTag;
-
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack());
-    return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object,
-          othUnwrapped = othIsWrapped ? other.value() : other;
-
-      stack || (stack = new Stack());
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack());
-  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
-}
-
-module.exports = baseIsEqualDeep;
-
-/***/ }),
-/* 189 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var MapCache = __webpack_require__(44),
-    setCacheAdd = __webpack_require__(190),
-    setCacheHas = __webpack_require__(191);
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-    var index = -1,
-        length = values == null ? 0 : values.length;
-
-    this.__data__ = new MapCache();
-    while (++index < length) {
-        this.add(values[index]);
-    }
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-module.exports = SetCache;
-
-/***/ }),
-/* 190 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-module.exports = setCacheAdd;
-
-/***/ }),
-/* 191 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-module.exports = setCacheHas;
-
-/***/ }),
-/* 192 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A specialized version of `_.some` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- */
-function arraySome(array, predicate) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    if (predicate(array[index], index, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-module.exports = arraySome;
-
-/***/ }),
-/* 193 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Checks if a `cache` value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
-}
-
-module.exports = cacheHas;
-
-/***/ }),
-/* 194 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13),
-    Uint8Array = __webpack_require__(81),
-    eq = __webpack_require__(42),
-    equalArrays = __webpack_require__(80),
-    mapToArray = __webpack_require__(195),
-    setToArray = __webpack_require__(196);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/** `Object#toString` result references. */
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    symbolTag = '[object Symbol]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]';
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = _Symbol ? _Symbol.prototype : undefined,
-    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
-
-/**
- * A specialized version of `baseIsEqualDeep` for comparing objects of
- * the same `toStringTag`.
- *
- * **Note:** This function only supports comparing values with tags of
- * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {string} tag The `toStringTag` of the objects to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag:
-      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-
-    case arrayBufferTag:
-      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
-        return false;
-      }
-      return true;
-
-    case boolTag:
-    case dateTag:
-    case numberTag:
-      // Coerce booleans to `1` or `0` and dates to milliseconds.
-      // Invalid dates are coerced to `NaN`.
-      return eq(+object, +other);
-
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-
-    case regexpTag:
-    case stringTag:
-      // Coerce regexes to strings and treat strings, primitives and objects,
-      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
-      // for more details.
-      return object == other + '';
-
-    case mapTag:
-      var convert = mapToArray;
-
-    case setTag:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
-      convert || (convert = setToArray);
-
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG;
-
-      // Recursively compare objects (susceptible to call stack limits).
-      stack.set(object, other);
-      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
-      stack['delete'](object);
-      return result;
-
-    case symbolTag:
-      if (symbolValueOf) {
-        return symbolValueOf.call(object) == symbolValueOf.call(other);
-      }
-  }
-  return false;
-}
-
-module.exports = equalByTag;
-
-/***/ }),
-/* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Converts `map` to its key-value pairs.
- *
- * @private
- * @param {Object} map The map to convert.
- * @returns {Array} Returns the key-value pairs.
- */
-function mapToArray(map) {
-  var index = -1,
-      result = Array(map.size);
-
-  map.forEach(function (value, key) {
-    result[++index] = [key, value];
-  });
-  return result;
-}
-
-module.exports = mapToArray;
-
-/***/ }),
-/* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Converts `set` to an array of its values.
- *
- * @private
- * @param {Object} set The set to convert.
- * @returns {Array} Returns the values.
- */
-function setToArray(set) {
-  var index = -1,
-      result = Array(set.size);
-
-  set.forEach(function (value) {
-    result[++index] = value;
-  });
-  return result;
-}
-
-module.exports = setToArray;
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getAllKeys = __webpack_require__(82);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqualDeep` for objects with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-      objProps = getAllKeys(object),
-      objLength = objProps.length,
-      othProps = getAllKeys(other),
-      othLength = othProps.length;
-
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index = objLength;
-  while (index--) {
-    var key = objProps[index];
-    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
-      return false;
-    }
-  }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(object);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-
-  var skipCtor = isPartial;
-  while (++index < objLength) {
-    key = objProps[index];
-    var objValue = object[key],
-        othValue = other[key];
-
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
-    }
-    // Recursively compare objects (susceptible to call stack limits).
-    if (!(compared === undefined ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == 'constructor');
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor,
-        othCtor = other.constructor;
-
-    // Non `Object` object instances with different constructors are not equal.
-    if (objCtor != othCtor && 'constructor' in object && 'constructor' in other && !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack['delete'](object);
-  stack['delete'](other);
-  return result;
-}
-
-module.exports = equalObjects;
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A specialized version of `_.filter` for arrays without support for
- * iteratee shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {Array} Returns the new filtered array.
- */
-function arrayFilter(array, predicate) {
-  var index = -1,
-      length = array == null ? 0 : array.length,
-      resIndex = 0,
-      result = [];
-
-  while (++index < length) {
-    var value = array[index];
-    if (predicate(value, index, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-
-module.exports = arrayFilter;
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9),
-    root = __webpack_require__(3);
-
-/* Built-in method references that are verified to be native. */
-var DataView = getNative(root, 'DataView');
-
-module.exports = DataView;
-
-/***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9),
-    root = __webpack_require__(3);
-
-/* Built-in method references that are verified to be native. */
-var Promise = getNative(root, 'Promise');
-
-module.exports = Promise;
-
-/***/ }),
-/* 201 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9),
-    root = __webpack_require__(3);
-
-/* Built-in method references that are verified to be native. */
-var Set = getNative(root, 'Set');
-
-module.exports = Set;
-
-/***/ }),
-/* 202 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getNative = __webpack_require__(9),
-    root = __webpack_require__(3);
-
-/* Built-in method references that are verified to be native. */
-var WeakMap = getNative(root, 'WeakMap');
-
-module.exports = WeakMap;
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isStrictComparable = __webpack_require__(85),
-    keys = __webpack_require__(18);
-
-/**
- * Gets the property names, values, and compare flags of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the match data of `object`.
- */
-function getMatchData(object) {
-    var result = keys(object),
-        length = result.length;
-
-    while (length--) {
-        var key = result[length],
-            value = object[key];
-
-        result[length] = [key, value, isStrictComparable(value)];
-    }
-    return result;
-}
-
-module.exports = getMatchData;
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsEqual = __webpack_require__(79),
-    get = __webpack_require__(205),
-    hasIn = __webpack_require__(211),
-    isKey = __webpack_require__(47),
-    isStrictComparable = __webpack_require__(85),
-    matchesStrictComparable = __webpack_require__(86),
-    toKey = __webpack_require__(15);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
- *
- * @private
- * @param {string} path The path of the property to get.
- * @param {*} srcValue The value to match.
- * @returns {Function} Returns the new spec function.
- */
-function baseMatchesProperty(path, srcValue) {
-  if (isKey(path) && isStrictComparable(srcValue)) {
-    return matchesStrictComparable(toKey(path), srcValue);
-  }
-  return function (object) {
-    var objValue = get(object, path);
-    return objValue === undefined && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
-  };
-}
-
-module.exports = baseMatchesProperty;
-
-/***/ }),
-/* 205 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGet = __webpack_require__(29);
-
-/**
- * Gets the value at `path` of `object`. If the resolved value is
- * `undefined`, the `defaultValue` is returned in its place.
- *
- * @static
- * @memberOf _
- * @since 3.7.0
- * @category Object
- * @param {Object} object The object to query.
- * @param {Array|string} path The path of the property to get.
- * @param {*} [defaultValue] The value returned for `undefined` resolved values.
- * @returns {*} Returns the resolved value.
- * @example
- *
- * var object = { 'a': [{ 'b': { 'c': 3 } }] };
- *
- * _.get(object, 'a[0].b.c');
- * // => 3
- *
- * _.get(object, ['a', '0', 'b', 'c']);
- * // => 3
- *
- * _.get(object, 'a.b.c', 'default');
- * // => 'default'
- */
-function get(object, path, defaultValue) {
-  var result = object == null ? undefined : baseGet(object, path);
-  return result === undefined ? defaultValue : result;
-}
-
-module.exports = get;
-
-/***/ }),
-/* 206 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var memoizeCapped = __webpack_require__(207);
-
-/** Used to match property names within property paths. */
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-
-/** Used to match backslashes in property paths. */
-var reEscapeChar = /\\(\\)?/g;
-
-/**
- * Converts `string` to a property path array.
- *
- * @private
- * @param {string} string The string to convert.
- * @returns {Array} Returns the property path array.
- */
-var stringToPath = memoizeCapped(function (string) {
-  var result = [];
-  if (string.charCodeAt(0) === 46 /* . */) {
-      result.push('');
-    }
-  string.replace(rePropName, function (match, number, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar, '$1') : number || match);
-  });
-  return result;
-});
-
-module.exports = stringToPath;
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var memoize = __webpack_require__(208);
-
-/** Used as the maximum memoize cache size. */
-var MAX_MEMOIZE_SIZE = 500;
-
-/**
- * A specialized version of `_.memoize` which clears the memoized function's
- * cache when it exceeds `MAX_MEMOIZE_SIZE`.
- *
- * @private
- * @param {Function} func The function to have its output memoized.
- * @returns {Function} Returns the new memoized function.
- */
-function memoizeCapped(func) {
-  var result = memoize(func, function (key) {
-    if (cache.size === MAX_MEMOIZE_SIZE) {
-      cache.clear();
-    }
-    return key;
-  });
-
-  var cache = result.cache;
-  return result;
-}
-
-module.exports = memoizeCapped;
-
-/***/ }),
-/* 208 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var MapCache = __webpack_require__(44);
-
-/** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/**
- * Creates a function that memoizes the result of `func`. If `resolver` is
- * provided, it determines the cache key for storing the result based on the
- * arguments provided to the memoized function. By default, the first argument
- * provided to the memoized function is used as the map cache key. The `func`
- * is invoked with the `this` binding of the memoized function.
- *
- * **Note:** The cache is exposed as the `cache` property on the memoized
- * function. Its creation may be customized by replacing the `_.memoize.Cache`
- * constructor with one whose instances implement the
- * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
- * method interface of `clear`, `delete`, `get`, `has`, and `set`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to have its output memoized.
- * @param {Function} [resolver] The function to resolve the cache key.
- * @returns {Function} Returns the new memoized function.
- * @example
- *
- * var object = { 'a': 1, 'b': 2 };
- * var other = { 'c': 3, 'd': 4 };
- *
- * var values = _.memoize(_.values);
- * values(object);
- * // => [1, 2]
- *
- * values(other);
- * // => [3, 4]
- *
- * object.a = 2;
- * values(object);
- * // => [1, 2]
- *
- * // Modify the result cache.
- * values.cache.set(object, ['a', 'b']);
- * values(object);
- * // => ['a', 'b']
- *
- * // Replace `_.memoize.Cache`.
- * _.memoize.Cache = WeakMap;
- */
-function memoize(func, resolver) {
-  if (typeof func != 'function' || resolver != null && typeof resolver != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  var memoized = function memoized() {
-    var args = arguments,
-        key = resolver ? resolver.apply(this, args) : args[0],
-        cache = memoized.cache;
-
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache.set(key, result) || cache;
-    return result;
-  };
-  memoized.cache = new (memoize.Cache || MapCache)();
-  return memoized;
-}
-
-// Expose `MapCache`.
-memoize.Cache = MapCache;
-
-module.exports = memoize;
-
-/***/ }),
-/* 209 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseToString = __webpack_require__(210);
-
-/**
- * Converts `value` to a string. An empty string is returned for `null`
- * and `undefined` values. The sign of `-0` is preserved.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- * @example
- *
- * _.toString(null);
- * // => ''
- *
- * _.toString(-0);
- * // => '-0'
- *
- * _.toString([1, 2, 3]);
- * // => '1,2,3'
- */
-function toString(value) {
-  return value == null ? '' : baseToString(value);
-}
-
-module.exports = toString;
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13),
-    arrayMap = __webpack_require__(49),
-    isArray = __webpack_require__(1),
-    isSymbol = __webpack_require__(48);
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = _Symbol ? _Symbol.prototype : undefined,
-    symbolToString = symbolProto ? symbolProto.toString : undefined;
-
-/**
- * The base implementation of `_.toString` which doesn't convert nullish
- * values to empty strings.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {string} Returns the string.
- */
-function baseToString(value) {
-  // Exit early for strings to avoid a performance hit in some environments.
-  if (typeof value == 'string') {
-    return value;
-  }
-  if (isArray(value)) {
-    // Recursively convert values (susceptible to call stack limits).
-    return arrayMap(value, baseToString) + '';
-  }
-  if (isSymbol(value)) {
-    return symbolToString ? symbolToString.call(value) : '';
-  }
-  var result = value + '';
-  return result == '0' && 1 / value == -INFINITY ? '-0' : result;
-}
-
-module.exports = baseToString;
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseHasIn = __webpack_require__(212),
-    hasPath = __webpack_require__(213);
-
-/**
- * Checks if `path` is a direct or inherited property of `object`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @param {Array|string} path The path to check.
- * @returns {boolean} Returns `true` if `path` exists, else `false`.
- * @example
- *
- * var object = _.create({ 'a': _.create({ 'b': 2 }) });
- *
- * _.hasIn(object, 'a');
- * // => true
- *
- * _.hasIn(object, 'a.b');
- * // => true
- *
- * _.hasIn(object, ['a', 'b']);
- * // => true
- *
- * _.hasIn(object, 'b');
- * // => false
- */
-function hasIn(object, path) {
-  return object != null && hasPath(object, path, baseHasIn);
-}
-
-module.exports = hasIn;
-
-/***/ }),
-/* 212 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * The base implementation of `_.hasIn` without support for deep paths.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {Array|string} key The key to check.
- * @returns {boolean} Returns `true` if `key` exists, else `false`.
- */
-function baseHasIn(object, key) {
-  return object != null && key in Object(object);
-}
-
-module.exports = baseHasIn;
-
-/***/ }),
-/* 213 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var castPath = __webpack_require__(14),
-    isArguments = __webpack_require__(33),
-    isArray = __webpack_require__(1),
-    isIndex = __webpack_require__(35),
-    isLength = __webpack_require__(36),
-    toKey = __webpack_require__(15);
-
-/**
- * Checks if `path` exists on `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array|string} path The path to check.
- * @param {Function} hasFunc The function to check properties.
- * @returns {boolean} Returns `true` if `path` exists, else `false`.
- */
-function hasPath(object, path, hasFunc) {
-  path = castPath(path, object);
-
-  var index = -1,
-      length = path.length,
-      result = false;
-
-  while (++index < length) {
-    var key = toKey(path[index]);
-    if (!(result = object != null && hasFunc(object, key))) {
-      break;
-    }
-    object = object[key];
-  }
-  if (result || ++index != length) {
-    return result;
-  }
-  length = object == null ? 0 : object.length;
-  return !!length && isLength(length) && isIndex(key, length) && (isArray(object) || isArguments(object));
-}
-
-module.exports = hasPath;
-
-/***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseProperty = __webpack_require__(215),
-    basePropertyDeep = __webpack_require__(216),
-    isKey = __webpack_require__(47),
-    toKey = __webpack_require__(15);
-
-/**
- * Creates a function that returns the value at `path` of a given object.
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Util
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new accessor function.
- * @example
- *
- * var objects = [
- *   { 'a': { 'b': 2 } },
- *   { 'a': { 'b': 1 } }
- * ];
- *
- * _.map(objects, _.property('a.b'));
- * // => [2, 1]
- *
- * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
- * // => [1, 2]
- */
-function property(path) {
-  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
-}
-
-module.exports = property;
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * The base implementation of `_.property` without support for deep paths.
- *
- * @private
- * @param {string} key The key of the property to get.
- * @returns {Function} Returns the new accessor function.
- */
-function baseProperty(key) {
-  return function (object) {
-    return object == null ? undefined : object[key];
-  };
-}
-
-module.exports = baseProperty;
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGet = __webpack_require__(29);
-
-/**
- * A specialized version of `baseProperty` which supports deep paths.
- *
- * @private
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new accessor function.
- */
-function basePropertyDeep(path) {
-  return function (object) {
-    return baseGet(object, path);
-  };
-}
-
-module.exports = basePropertyDeep;
-
-/***/ }),
-/* 217 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayEach = __webpack_require__(87),
-    baseEach = __webpack_require__(218),
-    castFunction = __webpack_require__(88),
-    isArray = __webpack_require__(1);
-
-/**
- * Iterates over elements of `collection` and invokes `iteratee` for each element.
- * The iteratee is invoked with three arguments: (value, index|key, collection).
- * Iteratee functions may exit iteration early by explicitly returning `false`.
- *
- * **Note:** As with other "Collections" methods, objects with a "length"
- * property are iterated like arrays. To avoid this behavior use `_.forIn`
- * or `_.forOwn` for object iteration.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @alias each
- * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Array|Object} Returns `collection`.
- * @see _.forEachRight
- * @example
- *
- * _.forEach([1, 2], function(value) {
- *   console.log(value);
- * });
- * // => Logs `1` then `2`.
- *
- * _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
- *   console.log(key);
- * });
- * // => Logs 'a' then 'b' (iteration order is not guaranteed).
- */
-function forEach(collection, iteratee) {
-  var func = isArray(collection) ? arrayEach : baseEach;
-  return func(collection, castFunction(iteratee));
-}
-
-module.exports = forEach;
-
-/***/ }),
-/* 218 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseForOwn = __webpack_require__(73),
-    createBaseEach = __webpack_require__(219);
-
-/**
- * The base implementation of `_.forEach` without support for iteratee shorthands.
- *
- * @private
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array|Object} Returns `collection`.
- */
-var baseEach = createBaseEach(baseForOwn);
-
-module.exports = baseEach;
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isArrayLike = __webpack_require__(40);
-
-/**
- * Creates a `baseEach` or `baseEachRight` function.
- *
- * @private
- * @param {Function} eachFunc The function to iterate over a collection.
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseEach(eachFunc, fromRight) {
-  return function (collection, iteratee) {
-    if (collection == null) {
-      return collection;
-    }
-    if (!isArrayLike(collection)) {
-      return eachFunc(collection, iteratee);
-    }
-    var length = collection.length,
-        index = fromRight ? length : -1,
-        iterable = Object(collection);
-
-    while (fromRight ? index-- : ++index < length) {
-      if (iteratee(iterable[index], index, iterable) === false) {
-        break;
-      }
-    }
-    return collection;
-  };
-}
-
-module.exports = createBaseEach;
-
-/***/ }),
-/* 220 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseFor = __webpack_require__(74),
-    castFunction = __webpack_require__(88),
-    keysIn = __webpack_require__(51);
-
-/**
- * Iterates over own and inherited enumerable string keyed properties of an
- * object and invokes `iteratee` for each property. The iteratee is invoked
- * with three arguments: (value, key, object). Iteratee functions may exit
- * iteration early by explicitly returning `false`.
- *
- * @static
- * @memberOf _
- * @since 0.3.0
- * @category Object
- * @param {Object} object The object to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Object} Returns `object`.
- * @see _.forInRight
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.forIn(new Foo, function(value, key) {
- *   console.log(key);
- * });
- * // => Logs 'a', 'b', then 'c' (iteration order is not guaranteed).
- */
-function forIn(object, iteratee) {
-    return object == null ? object : baseFor(object, castFunction(iteratee), keysIn);
-}
-
-module.exports = forIn;
-
-/***/ }),
-/* 221 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isObject = __webpack_require__(10),
-    isPrototype = __webpack_require__(39),
-    nativeKeysIn = __webpack_require__(222);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeysIn(object) {
-  if (!isObject(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object),
-      result = [];
-
-  for (var key in object) {
-    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = baseKeysIn;
-
-/***/ }),
-/* 222 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * This function is like
- * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * except that it includes inherited enumerable properties.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function nativeKeysIn(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = nativeKeysIn;
-
-/***/ }),
-/* 223 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-var _markerClustererPlus = __webpack_require__(242);
-
-var _markerClustererPlus2 = _interopRequireDefault(_markerClustererPlus);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-/* vim: set softtabstop=2 shiftwidth=2 expandtab : */
-
-/**
-  * @class Cluster
-  * @prop $clusterObject -- Exposes the marker clusterer to
-        descendent Marker classes. Override this if you area
-        extending the class
-**/
-
-var props = {
-  maxZoom: {
-    type: Number,
-    twoWay: false
-  },
-  calculator: {
-    type: Function,
-    twoWay: false
-  },
-  gridSize: {
-    type: Number,
-    twoWay: false
-  },
-  minimumClusterSize: {
-    type: Number,
-    twoWay: false
-  },
-  styles: {
-    type: Array,
-    twoWay: false
-  }
-};
-
-var events = ['click', 'rightclick', 'dblclick', 'drag', 'dragstart', 'dragend', 'mouseup', 'mousedown', 'mouseover', 'mouseout'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-
-  render: function render(h) {
-    // <div><slot></slot></div>
-    return h('div', this.$slots.default);
-  },
-  deferredReady: function deferredReady() {
-    var _this = this;
-
-    var options = (0, _clone2.default)(this.getPropsValues());
-
-    if (typeof _markerClustererPlus2.default === 'undefined') {
-      /* eslint-disable no-console */
-      console.error('MarkerClusterer is not installed! require() it or include it from https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js');
-      throw new Error('MarkerClusterer is not installed! require() it or include it from https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js');
-    }
-
-    this.$clusterObject = new _markerClustererPlus2.default(this.$map, [], options);
-
-    (0, _propsBinder2.default)(this, this.$clusterObject, props, {
-      afterModelChanged: function afterModelChanged(a, v) {
-        // eslint-disable-line no-unused-vars
-        var oldMarkers = _this.$clusterObject.getMarkers();
-        _this.$clusterObject.clearMarkers();
-        _this.$clusterObject.addMarkers(oldMarkers);
-      }
-    });
-    (0, _eventsBinder2.default)(this, this.$clusterObject, events);
-  },
-  beforeDestroy: function beforeDestroy() {
-    var _this2 = this;
-
-    /* Performance optimization when destroying a large number of markers */
-    this.$children.forEach(function (marker) {
-      if (marker.$clusterObject === _this2.$clusterObject) {
-        marker.$clusterObject = null;
-      }
-    });
-    if (this.$clusterObject) {
-      this.$clusterObject.clearMarkers();
-    }
-  }
-};
-
-/***/ }),
-/* 224 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var copyObject = __webpack_require__(19),
-    keys = __webpack_require__(18);
-
-/**
- * The base implementation of `_.assign` without support for multiple sources
- * or `customizer` functions.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @returns {Object} Returns `object`.
- */
-function baseAssign(object, source) {
-  return object && copyObject(source, keys(source), object);
-}
-
-module.exports = baseAssign;
-
-/***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var copyObject = __webpack_require__(19),
-    keysIn = __webpack_require__(51);
-
-/**
- * The base implementation of `_.assignIn` without support for multiple sources
- * or `customizer` functions.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @returns {Object} Returns `object`.
- */
-function baseAssignIn(object, source) {
-  return object && copyObject(source, keysIn(source), object);
-}
-
-module.exports = baseAssignIn;
-
-/***/ }),
-/* 226 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var root = __webpack_require__(3);
-
-/** Detect free variable `exports`. */
-var freeExports = ( false ? 'undefined' : _typeof(exports)) == 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-var freeModule = freeExports && ( false ? 'undefined' : _typeof(module)) == 'object' && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports`. */
-var moduleExports = freeModule && freeModule.exports === freeExports;
-
-/** Built-in value references. */
-var Buffer = moduleExports ? root.Buffer : undefined,
-    allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined;
-
-/**
- * Creates a clone of  `buffer`.
- *
- * @private
- * @param {Buffer} buffer The buffer to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Buffer} Returns the cloned buffer.
- */
-function cloneBuffer(buffer, isDeep) {
-  if (isDeep) {
-    return buffer.slice();
-  }
-  var length = buffer.length,
-      result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
-
-  buffer.copy(result);
-  return result;
-}
-
-module.exports = cloneBuffer;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
-
-/***/ }),
-/* 227 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copies the values of `source` to `array`.
- *
- * @private
- * @param {Array} source The array to copy values from.
- * @param {Array} [array=[]] The array to copy values to.
- * @returns {Array} Returns `array`.
- */
-function copyArray(source, array) {
-  var index = -1,
-      length = source.length;
-
-  array || (array = Array(length));
-  while (++index < length) {
-    array[index] = source[index];
-  }
-  return array;
-}
-
-module.exports = copyArray;
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var copyObject = __webpack_require__(19),
-    getSymbols = __webpack_require__(46);
-
-/**
- * Copies own symbols of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy symbols from.
- * @param {Object} [object={}] The object to copy symbols to.
- * @returns {Object} Returns `object`.
- */
-function copySymbols(source, object) {
-  return copyObject(source, getSymbols(source), object);
-}
-
-module.exports = copySymbols;
-
-/***/ }),
-/* 229 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var copyObject = __webpack_require__(19),
-    getSymbolsIn = __webpack_require__(90);
-
-/**
- * Copies own and inherited symbols of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy symbols from.
- * @param {Object} [object={}] The object to copy symbols to.
- * @returns {Object} Returns `object`.
- */
-function copySymbolsIn(source, object) {
-  return copyObject(source, getSymbolsIn(source), object);
-}
-
-module.exports = copySymbolsIn;
-
-/***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Initializes an array clone.
- *
- * @private
- * @param {Array} array The array to clone.
- * @returns {Array} Returns the initialized clone.
- */
-function initCloneArray(array) {
-  var length = array.length,
-      result = new array.constructor(length);
-
-  // Add properties assigned by `RegExp#exec`.
-  if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
-    result.index = array.index;
-    result.input = array.input;
-  }
-  return result;
-}
-
-module.exports = initCloneArray;
-
-/***/ }),
-/* 231 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var cloneArrayBuffer = __webpack_require__(55),
-    cloneDataView = __webpack_require__(232),
-    cloneRegExp = __webpack_require__(233),
-    cloneSymbol = __webpack_require__(234),
-    cloneTypedArray = __webpack_require__(235);
-
-/** `Object#toString` result references. */
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    symbolTag = '[object Symbol]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-/**
- * Initializes an object clone based on its `toStringTag`.
- *
- * **Note:** This function only supports cloning values with tags of
- * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
- *
- * @private
- * @param {Object} object The object to clone.
- * @param {string} tag The `toStringTag` of the object to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the initialized clone.
- */
-function initCloneByTag(object, tag, isDeep) {
-  var Ctor = object.constructor;
-  switch (tag) {
-    case arrayBufferTag:
-      return cloneArrayBuffer(object);
-
-    case boolTag:
-    case dateTag:
-      return new Ctor(+object);
-
-    case dataViewTag:
-      return cloneDataView(object, isDeep);
-
-    case float32Tag:case float64Tag:
-    case int8Tag:case int16Tag:case int32Tag:
-    case uint8Tag:case uint8ClampedTag:case uint16Tag:case uint32Tag:
-      return cloneTypedArray(object, isDeep);
-
-    case mapTag:
-      return new Ctor();
-
-    case numberTag:
-    case stringTag:
-      return new Ctor(object);
-
-    case regexpTag:
-      return cloneRegExp(object);
-
-    case setTag:
-      return new Ctor();
-
-    case symbolTag:
-      return cloneSymbol(object);
-  }
-}
-
-module.exports = initCloneByTag;
-
-/***/ }),
-/* 232 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var cloneArrayBuffer = __webpack_require__(55);
-
-/**
- * Creates a clone of `dataView`.
- *
- * @private
- * @param {Object} dataView The data view to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned data view.
- */
-function cloneDataView(dataView, isDeep) {
-  var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-}
-
-module.exports = cloneDataView;
-
-/***/ }),
-/* 233 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used to match `RegExp` flags from their coerced string values. */
-var reFlags = /\w*$/;
-
-/**
- * Creates a clone of `regexp`.
- *
- * @private
- * @param {Object} regexp The regexp to clone.
- * @returns {Object} Returns the cloned regexp.
- */
-function cloneRegExp(regexp) {
-  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-  result.lastIndex = regexp.lastIndex;
-  return result;
-}
-
-module.exports = cloneRegExp;
-
-/***/ }),
-/* 234 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13);
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = _Symbol ? _Symbol.prototype : undefined,
-    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
-
-/**
- * Creates a clone of the `symbol` object.
- *
- * @private
- * @param {Object} symbol The symbol object to clone.
- * @returns {Object} Returns the cloned symbol object.
- */
-function cloneSymbol(symbol) {
-  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-}
-
-module.exports = cloneSymbol;
-
-/***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var cloneArrayBuffer = __webpack_require__(55);
-
-/**
- * Creates a clone of `typedArray`.
- *
- * @private
- * @param {Object} typedArray The typed array to clone.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned typed array.
- */
-function cloneTypedArray(typedArray, isDeep) {
-  var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-}
-
-module.exports = cloneTypedArray;
-
-/***/ }),
-/* 236 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseCreate = __webpack_require__(237),
-    getPrototype = __webpack_require__(53),
-    isPrototype = __webpack_require__(39);
-
-/**
- * Initializes an object clone.
- *
- * @private
- * @param {Object} object The object to clone.
- * @returns {Object} Returns the initialized clone.
- */
-function initCloneObject(object) {
-    return typeof object.constructor == 'function' && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-}
-
-module.exports = initCloneObject;
-
-/***/ }),
-/* 237 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isObject = __webpack_require__(10);
-
-/** Built-in value references. */
-var objectCreate = Object.create;
-
-/**
- * The base implementation of `_.create` without support for assigning
- * properties to the created object.
- *
- * @private
- * @param {Object} proto The object to inherit from.
- * @returns {Object} Returns the new object.
- */
-var baseCreate = function () {
-  function object() {}
-  return function (proto) {
-    if (!isObject(proto)) {
-      return {};
-    }
-    if (objectCreate) {
-      return objectCreate(proto);
-    }
-    object.prototype = proto;
-    var result = new object();
-    object.prototype = undefined;
-    return result;
-  };
-}();
-
-module.exports = baseCreate;
-
-/***/ }),
-/* 238 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsMap = __webpack_require__(239),
-    baseUnary = __webpack_require__(37),
-    nodeUtil = __webpack_require__(38);
-
-/* Node.js helper references. */
-var nodeIsMap = nodeUtil && nodeUtil.isMap;
-
-/**
- * Checks if `value` is classified as a `Map` object.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a map, else `false`.
- * @example
- *
- * _.isMap(new Map);
- * // => true
- *
- * _.isMap(new WeakMap);
- * // => false
- */
-var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
-
-module.exports = isMap;
-
-/***/ }),
-/* 239 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getTag = __webpack_require__(28),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]';
-
-/**
- * The base implementation of `_.isMap` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a map, else `false`.
- */
-function baseIsMap(value) {
-  return isObjectLike(value) && getTag(value) == mapTag;
-}
-
-module.exports = baseIsMap;
-
-/***/ }),
-/* 240 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseIsSet = __webpack_require__(241),
-    baseUnary = __webpack_require__(37),
-    nodeUtil = __webpack_require__(38);
-
-/* Node.js helper references. */
-var nodeIsSet = nodeUtil && nodeUtil.isSet;
-
-/**
- * Checks if `value` is classified as a `Set` object.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a set, else `false`.
- * @example
- *
- * _.isSet(new Set);
- * // => true
- *
- * _.isSet(new WeakSet);
- * // => false
- */
-var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
-
-module.exports = isSet;
-
-/***/ }),
-/* 241 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getTag = __webpack_require__(28),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var setTag = '[object Set]';
-
-/**
- * The base implementation of `_.isSet` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a set, else `false`.
- */
-function baseIsSet(value) {
-  return isObjectLike(value) && getTag(value) == setTag;
-}
-
-module.exports = baseIsSet;
-
-/***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.2 [May 28, 2014]
- * @author Gary Little
- * @fileoverview
- * The library creates and manages per-zoom-level clusters for large amounts of markers.
- * <p>
- * This is an enhanced V3 implementation of the
- * <a href="http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/"
- * >V2 MarkerClusterer</a> by Xiaoxi Wu. It is based on the
- * <a href="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/"
- * >V3 MarkerClusterer</a> port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
- * <p>
- * v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
- *  adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>batchSizeIE</code>,
- *  and <code>calculator</code> properties as well as support for four more events. It also allows
- *  greater control over the styling of the text that appears on the cluster marker. The
- *  documentation has been significantly improved and the overall code has been simplified and
- *  polished. Very large numbers of markers can now be managed without causing Javascript timeout
- *  errors on Internet Explorer. Note that the name of the <code>clusterclick</code> event has been
- *  deprecated. The new name is <code>click</code>, so please change your application code now.
- */
-
-/**
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @name ClusterIconStyle
- * @class This class represents the object for values in the <code>styles</code> array passed
- *  to the {@link MarkerClusterer} constructor. The element in this array that is used to
- *  style the cluster icon is determined by calling the <code>calculator</code> function.
- *
- * @property {string} url The URL of the cluster icon image file. Required.
- * @property {number} height The display height (in pixels) of the cluster icon. Required.
- * @property {number} width The display width (in pixels) of the cluster icon. Required.
- * @property {Array} [anchorText] The position (in pixels) from the center of the cluster icon to
- *  where the text label is to be centered and drawn. The format is <code>[yoffset, xoffset]</code>
- *  where <code>yoffset</code> increases as you go down from center and <code>xoffset</code>
- *  increases to the right of center. The default is <code>[0, 0]</code>.
- * @property {Array} [anchorIcon] The anchor position (in pixels) of the cluster icon. This is the
- *  spot on the cluster icon that is to be aligned with the cluster position. The format is
- *  <code>[yoffset, xoffset]</code> where <code>yoffset</code> increases as you go down and
- *  <code>xoffset</code> increases to the right of the top-left corner of the icon. The default
- *  anchor position is the center of the cluster icon.
- * @property {string} [textColor="black"] The color of the label text shown on the
- *  cluster icon.
- * @property {number} [textSize=11] The size (in pixels) of the label text shown on the
- *  cluster icon.
- * @property {string} [textDecoration="none"] The value of the CSS <code>text-decoration</code>
- *  property for the label text shown on the cluster icon.
- * @property {string} [fontWeight="bold"] The value of the CSS <code>font-weight</code>
- *  property for the label text shown on the cluster icon.
- * @property {string} [fontStyle="normal"] The value of the CSS <code>font-style</code>
- *  property for the label text shown on the cluster icon.
- * @property {string} [fontFamily="Arial,sans-serif"] The value of the CSS <code>font-family</code>
- *  property for the label text shown on the cluster icon.
- * @property {string} [backgroundPosition="0 0"] The position of the cluster icon image
- *  within the image defined by <code>url</code>. The format is <code>"xpos ypos"</code>
- *  (the same format as for the CSS <code>background-position</code> property). You must set
- *  this property appropriately when the image defined by <code>url</code> represents a sprite
- *  containing multiple images. Note that the position <i>must</i> be specified in px units.
- */
-/**
- * @name ClusterIconInfo
- * @class This class is an object containing general information about a cluster icon. This is
- *  the object that a <code>calculator</code> function returns.
- *
- * @property {string} text The text of the label to be shown on the cluster icon.
- * @property {number} index The index plus 1 of the element in the <code>styles</code>
- *  array to be used to style the cluster icon.
- * @property {string} title The tooltip to display when the mouse moves over the cluster icon.
- *  If this value is <code>undefined</code> or <code>""</code>, <code>title</code> is set to the
- *  value of the <code>title</code> property passed to the MarkerClusterer.
- */
-/**
- * A cluster icon.
- *
- * @constructor
- * @extends google.maps.OverlayView
- * @param {Cluster} cluster The cluster with which the icon is to be associated.
- * @param {Array} [styles] An array of {@link ClusterIconStyle} defining the cluster icons
- *  to use for various cluster sizes.
- * @private
- */
-function ClusterIcon(cluster, styles) {
-  cluster.getMarkerClusterer().extend(ClusterIcon, google.maps.OverlayView);
-
-  this.cluster_ = cluster;
-  this.className_ = cluster.getMarkerClusterer().getClusterClass();
-  this.styles_ = styles;
-  this.center_ = null;
-  this.div_ = null;
-  this.sums_ = null;
-  this.visible_ = false;
-
-  this.setMap(cluster.getMap()); // Note: this causes onAdd to be called
-}
-
-/**
- * Adds the icon to the DOM.
- */
-ClusterIcon.prototype.onAdd = function () {
-  var cClusterIcon = this;
-  var cMouseDownInCluster;
-  var cDraggingMapByCluster;
-
-  this.div_ = document.createElement("div");
-  this.div_.className = this.className_;
-  if (this.visible_) {
-    this.show();
-  }
-
-  this.getPanes().overlayMouseTarget.appendChild(this.div_);
-
-  // Fix for Issue 157
-  this.boundsChangedListener_ = google.maps.event.addListener(this.getMap(), "bounds_changed", function () {
-    cDraggingMapByCluster = cMouseDownInCluster;
-  });
-
-  google.maps.event.addDomListener(this.div_, "mousedown", function () {
-    cMouseDownInCluster = true;
-    cDraggingMapByCluster = false;
-  });
-
-  google.maps.event.addDomListener(this.div_, "click", function (e) {
-    cMouseDownInCluster = false;
-    if (!cDraggingMapByCluster) {
-      var theBounds;
-      var mz;
-      var mc = cClusterIcon.cluster_.getMarkerClusterer();
-      /**
-       * This event is fired when a cluster marker is clicked.
-       * @name MarkerClusterer#click
-       * @param {Cluster} c The cluster that was clicked.
-       * @event
-       */
-      google.maps.event.trigger(mc, "click", cClusterIcon.cluster_);
-      google.maps.event.trigger(mc, "clusterclick", cClusterIcon.cluster_); // deprecated name
-
-      // The default click handler follows. Disable it by setting
-      // the zoomOnClick property to false.
-      if (mc.getZoomOnClick()) {
-        // Zoom into the cluster.
-        mz = mc.getMaxZoom();
-        theBounds = cClusterIcon.cluster_.getBounds();
-        mc.getMap().fitBounds(theBounds);
-        // There is a fix for Issue 170 here:
-        setTimeout(function () {
-          mc.getMap().fitBounds(theBounds);
-          // Don't zoom beyond the max zoom level
-          if (mz !== null && mc.getMap().getZoom() > mz) {
-            mc.getMap().setZoom(mz + 1);
-          }
-        }, 100);
-      }
-
-      // Prevent event propagation to the map:
-      e.cancelBubble = true;
-      if (e.stopPropagation) {
-        e.stopPropagation();
-      }
-    }
-  });
-
-  google.maps.event.addDomListener(this.div_, "mouseover", function () {
-    var mc = cClusterIcon.cluster_.getMarkerClusterer();
-    /**
-     * This event is fired when the mouse moves over a cluster marker.
-     * @name MarkerClusterer#mouseover
-     * @param {Cluster} c The cluster that the mouse moved over.
-     * @event
-     */
-    google.maps.event.trigger(mc, "mouseover", cClusterIcon.cluster_);
-  });
-
-  google.maps.event.addDomListener(this.div_, "mouseout", function () {
-    var mc = cClusterIcon.cluster_.getMarkerClusterer();
-    /**
-     * This event is fired when the mouse moves out of a cluster marker.
-     * @name MarkerClusterer#mouseout
-     * @param {Cluster} c The cluster that the mouse moved out of.
-     * @event
-     */
-    google.maps.event.trigger(mc, "mouseout", cClusterIcon.cluster_);
-  });
-};
-
-/**
- * Removes the icon from the DOM.
- */
-ClusterIcon.prototype.onRemove = function () {
-  if (this.div_ && this.div_.parentNode) {
-    this.hide();
-    google.maps.event.removeListener(this.boundsChangedListener_);
-    google.maps.event.clearInstanceListeners(this.div_);
-    this.div_.parentNode.removeChild(this.div_);
-    this.div_ = null;
-  }
-};
-
-/**
- * Draws the icon.
- */
-ClusterIcon.prototype.draw = function () {
-  if (this.visible_) {
-    var pos = this.getPosFromLatLng_(this.center_);
-    this.div_.style.top = pos.y + "px";
-    this.div_.style.left = pos.x + "px";
-  }
-};
-
-/**
- * Hides the icon.
- */
-ClusterIcon.prototype.hide = function () {
-  if (this.div_) {
-    this.div_.style.display = "none";
-  }
-  this.visible_ = false;
-};
-
-/**
- * Positions and shows the icon.
- */
-ClusterIcon.prototype.show = function () {
-  if (this.div_) {
-    var img = "";
-    // NOTE: values must be specified in px units
-    var bp = this.backgroundPosition_.split(" ");
-    var spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
-    var spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
-    var pos = this.getPosFromLatLng_(this.center_);
-    this.div_.style.cssText = this.createCss(pos);
-    img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
-    if (!this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
-      img += "clip: rect(" + -1 * spriteV + "px, " + (-1 * spriteH + this.width_) + "px, " + (-1 * spriteV + this.height_) + "px, " + -1 * spriteH + "px);";
-    }
-    img += "'>";
-    this.div_.innerHTML = img + "<div style='" + "position: absolute;" + "top: " + this.anchorText_[0] + "px;" + "left: " + this.anchorText_[1] + "px;" + "color: " + this.textColor_ + ";" + "font-size: " + this.textSize_ + "px;" + "font-family: " + this.fontFamily_ + ";" + "font-weight: " + this.fontWeight_ + ";" + "font-style: " + this.fontStyle_ + ";" + "text-decoration: " + this.textDecoration_ + ";" + "text-align: center;" + "width: " + this.width_ + "px;" + "line-height:" + this.height_ + "px;" + "'>" + this.sums_.text + "</div>";
-    if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
-      this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
-    } else {
-      this.div_.title = this.sums_.title;
-    }
-    this.div_.style.display = "";
-  }
-  this.visible_ = true;
-};
-
-/**
- * Sets the icon styles to the appropriate element in the styles array.
- *
- * @param {ClusterIconInfo} sums The icon label text and styles index.
- */
-ClusterIcon.prototype.useStyle = function (sums) {
-  this.sums_ = sums;
-  var index = Math.max(0, sums.index - 1);
-  index = Math.min(this.styles_.length - 1, index);
-  var style = this.styles_[index];
-  this.url_ = style.url;
-  this.height_ = style.height;
-  this.width_ = style.width;
-  this.anchorText_ = style.anchorText || [0, 0];
-  this.anchorIcon_ = style.anchorIcon || [parseInt(this.height_ / 2, 10), parseInt(this.width_ / 2, 10)];
-  this.textColor_ = style.textColor || "black";
-  this.textSize_ = style.textSize || 11;
-  this.textDecoration_ = style.textDecoration || "none";
-  this.fontWeight_ = style.fontWeight || "bold";
-  this.fontStyle_ = style.fontStyle || "normal";
-  this.fontFamily_ = style.fontFamily || "Arial,sans-serif";
-  this.backgroundPosition_ = style.backgroundPosition || "0 0";
-};
-
-/**
- * Sets the position at which to center the icon.
- *
- * @param {google.maps.LatLng} center The latlng to set as the center.
- */
-ClusterIcon.prototype.setCenter = function (center) {
-  this.center_ = center;
-};
-
-/**
- * Creates the cssText style parameter based on the position of the icon.
- *
- * @param {google.maps.Point} pos The position of the icon.
- * @return {string} The CSS style text.
- */
-ClusterIcon.prototype.createCss = function (pos) {
-  var style = [];
-  style.push("cursor: pointer;");
-  style.push("position: absolute; top: " + pos.y + "px; left: " + pos.x + "px;");
-  style.push("width: " + this.width_ + "px; height: " + this.height_ + "px;");
-  return style.join("");
-};
-
-/**
- * Returns the position at which to place the DIV depending on the latlng.
- *
- * @param {google.maps.LatLng} latlng The position in latlng.
- * @return {google.maps.Point} The position in pixels.
- */
-ClusterIcon.prototype.getPosFromLatLng_ = function (latlng) {
-  var pos = this.getProjection().fromLatLngToDivPixel(latlng);
-  pos.x -= this.anchorIcon_[1];
-  pos.y -= this.anchorIcon_[0];
-  pos.x = parseInt(pos.x, 10);
-  pos.y = parseInt(pos.y, 10);
-  return pos;
-};
-
-/**
- * Creates a single cluster that manages a group of proximate markers.
- *  Used internally, do not call this constructor directly.
- * @constructor
- * @param {MarkerClusterer} mc The <code>MarkerClusterer</code> object with which this
- *  cluster is associated.
- */
-function Cluster(mc) {
-  this.markerClusterer_ = mc;
-  this.map_ = mc.getMap();
-  this.gridSize_ = mc.getGridSize();
-  this.minClusterSize_ = mc.getMinimumClusterSize();
-  this.averageCenter_ = mc.getAverageCenter();
-  this.markers_ = [];
-  this.center_ = null;
-  this.bounds_ = null;
-  this.clusterIcon_ = new ClusterIcon(this, mc.getStyles());
-}
-
-/**
- * Returns the number of markers managed by the cluster. You can call this from
- * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
- * for the <code>MarkerClusterer</code> object.
- *
- * @return {number} The number of markers in the cluster.
- */
-Cluster.prototype.getSize = function () {
-  return this.markers_.length;
-};
-
-/**
- * Returns the array of markers managed by the cluster. You can call this from
- * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
- * for the <code>MarkerClusterer</code> object.
- *
- * @return {Array} The array of markers in the cluster.
- */
-Cluster.prototype.getMarkers = function () {
-  return this.markers_;
-};
-
-/**
- * Returns the center of the cluster. You can call this from
- * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
- * for the <code>MarkerClusterer</code> object.
- *
- * @return {google.maps.LatLng} The center of the cluster.
- */
-Cluster.prototype.getCenter = function () {
-  return this.center_;
-};
-
-/**
- * Returns the map with which the cluster is associated.
- *
- * @return {google.maps.Map} The map.
- * @ignore
- */
-Cluster.prototype.getMap = function () {
-  return this.map_;
-};
-
-/**
- * Returns the <code>MarkerClusterer</code> object with which the cluster is associated.
- *
- * @return {MarkerClusterer} The associated marker clusterer.
- * @ignore
- */
-Cluster.prototype.getMarkerClusterer = function () {
-  return this.markerClusterer_;
-};
-
-/**
- * Returns the bounds of the cluster.
- *
- * @return {google.maps.LatLngBounds} the cluster bounds.
- * @ignore
- */
-Cluster.prototype.getBounds = function () {
-  var i;
-  var bounds = new google.maps.LatLngBounds(this.center_, this.center_);
-  var markers = this.getMarkers();
-  for (i = 0; i < markers.length; i++) {
-    bounds.extend(markers[i].getPosition());
-  }
-  return bounds;
-};
-
-/**
- * Removes the cluster from the map.
- *
- * @ignore
- */
-Cluster.prototype.remove = function () {
-  this.clusterIcon_.setMap(null);
-  this.markers_ = [];
-  delete this.markers_;
-};
-
-/**
- * Adds a marker to the cluster.
- *
- * @param {google.maps.Marker} marker The marker to be added.
- * @return {boolean} True if the marker was added.
- * @ignore
- */
-Cluster.prototype.addMarker = function (marker) {
-  var i;
-  var mCount;
-  var mz;
-
-  if (this.isMarkerAlreadyAdded_(marker)) {
-    return false;
-  }
-
-  if (!this.center_) {
-    this.center_ = marker.getPosition();
-    this.calculateBounds_();
-  } else {
-    if (this.averageCenter_) {
-      var l = this.markers_.length + 1;
-      var lat = (this.center_.lat() * (l - 1) + marker.getPosition().lat()) / l;
-      var lng = (this.center_.lng() * (l - 1) + marker.getPosition().lng()) / l;
-      this.center_ = new google.maps.LatLng(lat, lng);
-      this.calculateBounds_();
-    }
-  }
-
-  marker.isAdded = true;
-  this.markers_.push(marker);
-
-  mCount = this.markers_.length;
-  mz = this.markerClusterer_.getMaxZoom();
-  if (mz !== null && this.map_.getZoom() > mz) {
-    // Zoomed in past max zoom, so show the marker.
-    if (marker.getMap() !== this.map_) {
-      marker.setMap(this.map_);
-    }
-  } else if (mCount < this.minClusterSize_) {
-    // Min cluster size not reached so show the marker.
-    if (marker.getMap() !== this.map_) {
-      marker.setMap(this.map_);
-    }
-  } else if (mCount === this.minClusterSize_) {
-    // Hide the markers that were showing.
-    for (i = 0; i < mCount; i++) {
-      this.markers_[i].setMap(null);
-    }
-  } else {
-    marker.setMap(null);
-  }
-
-  this.updateIcon_();
-  return true;
-};
-
-/**
- * Determines if a marker lies within the cluster's bounds.
- *
- * @param {google.maps.Marker} marker The marker to check.
- * @return {boolean} True if the marker lies in the bounds.
- * @ignore
- */
-Cluster.prototype.isMarkerInClusterBounds = function (marker) {
-  return this.bounds_.contains(marker.getPosition());
-};
-
-/**
- * Calculates the extended bounds of the cluster with the grid.
- */
-Cluster.prototype.calculateBounds_ = function () {
-  var bounds = new google.maps.LatLngBounds(this.center_, this.center_);
-  this.bounds_ = this.markerClusterer_.getExtendedBounds(bounds);
-};
-
-/**
- * Updates the cluster icon.
- */
-Cluster.prototype.updateIcon_ = function () {
-  var mCount = this.markers_.length;
-  var mz = this.markerClusterer_.getMaxZoom();
-
-  if (mz !== null && this.map_.getZoom() > mz) {
-    this.clusterIcon_.hide();
-    return;
-  }
-
-  if (mCount < this.minClusterSize_) {
-    // Min cluster size not yet reached.
-    this.clusterIcon_.hide();
-    return;
-  }
-
-  var numStyles = this.markerClusterer_.getStyles().length;
-  var sums = this.markerClusterer_.getCalculator()(this.markers_, numStyles);
-  this.clusterIcon_.setCenter(this.center_);
-  this.clusterIcon_.useStyle(sums);
-  this.clusterIcon_.show();
-};
-
-/**
- * Determines if a marker has already been added to the cluster.
- *
- * @param {google.maps.Marker} marker The marker to check.
- * @return {boolean} True if the marker has already been added.
- */
-Cluster.prototype.isMarkerAlreadyAdded_ = function (marker) {
-  var i;
-  if (this.markers_.indexOf) {
-    return this.markers_.indexOf(marker) !== -1;
-  } else {
-    for (i = 0; i < this.markers_.length; i++) {
-      if (marker === this.markers_[i]) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-
-/**
- * @name MarkerClustererOptions
- * @class This class represents the optional parameter passed to
- *  the {@link MarkerClusterer} constructor.
- * @property {number} [gridSize=60] The grid size of a cluster in pixels. The grid is a square.
- * @property {number} [maxZoom=null] The maximum zoom level at which clustering is enabled or
- *  <code>null</code> if clustering is to be enabled at all zoom levels.
- * @property {boolean} [zoomOnClick=true] Whether to zoom the map when a cluster marker is
- *  clicked. You may want to set this to <code>false</code> if you have installed a handler
- *  for the <code>click</code> event and it deals with zooming on its own.
- * @property {boolean} [averageCenter=false] Whether the position of a cluster marker should be
- *  the average position of all markers in the cluster. If set to <code>false</code>, the
- *  cluster marker is positioned at the location of the first marker added to the cluster.
- * @property {number} [minimumClusterSize=2] The minimum number of markers needed in a cluster
- *  before the markers are hidden and a cluster marker appears.
- * @property {boolean} [ignoreHidden=false] Whether to ignore hidden markers in clusters. You
- *  may want to set this to <code>true</code> to ensure that hidden markers are not included
- *  in the marker count that appears on a cluster marker (this count is the value of the
- *  <code>text</code> property of the result returned by the default <code>calculator</code>).
- *  If set to <code>true</code> and you change the visibility of a marker being clustered, be
- *  sure to also call <code>MarkerClusterer.repaint()</code>.
- * @property {string} [title=""] The tooltip to display when the mouse moves over a cluster
- *  marker. (Alternatively, you can use a custom <code>calculator</code> function to specify a
- *  different tooltip for each cluster marker.)
- * @property {function} [calculator=MarkerClusterer.CALCULATOR] The function used to determine
- *  the text to be displayed on a cluster marker and the index indicating which style to use
- *  for the cluster marker. The input parameters for the function are (1) the array of markers
- *  represented by a cluster marker and (2) the number of cluster icon styles. It returns a
- *  {@link ClusterIconInfo} object. The default <code>calculator</code> returns a
- *  <code>text</code> property which is the number of markers in the cluster and an
- *  <code>index</code> property which is one higher than the lowest integer such that
- *  <code>10^i</code> exceeds the number of markers in the cluster, or the size of the styles
- *  array, whichever is less. The <code>styles</code> array element used has an index of
- *  <code>index</code> minus 1. For example, the default <code>calculator</code> returns a
- *  <code>text</code> value of <code>"125"</code> and an <code>index</code> of <code>3</code>
- *  for a cluster icon representing 125 markers so the element used in the <code>styles</code>
- *  array is <code>2</code>. A <code>calculator</code> may also return a <code>title</code>
- *  property that contains the text of the tooltip to be used for the cluster marker. If
- *   <code>title</code> is not defined, the tooltip is set to the value of the <code>title</code>
- *   property for the MarkerClusterer.
- * @property {string} [clusterClass="cluster"] The name of the CSS class defining general styles
- *  for the cluster markers. Use this class to define CSS styles that are not set up by the code
- *  that processes the <code>styles</code> array.
- * @property {Array} [styles] An array of {@link ClusterIconStyle} elements defining the styles
- *  of the cluster markers to be used. The element to be used to style a given cluster marker
- *  is determined by the function defined by the <code>calculator</code> property.
- *  The default is an array of {@link ClusterIconStyle} elements whose properties are derived
- *  from the values for <code>imagePath</code>, <code>imageExtension</code>, and
- *  <code>imageSizes</code>.
- * @property {boolean} [enableRetinaIcons=false] Whether to allow the use of cluster icons that
- * have sizes that are some multiple (typically double) of their actual display size. Icons such
- * as these look better when viewed on high-resolution monitors such as Apple's Retina displays.
- * Note: if this property is <code>true</code>, sprites cannot be used as cluster icons.
- * @property {number} [batchSize=MarkerClusterer.BATCH_SIZE] Set this property to the
- *  number of markers to be processed in a single batch when using a browser other than
- *  Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).
- * @property {number} [batchSizeIE=MarkerClusterer.BATCH_SIZE_IE] When Internet Explorer is
- *  being used, markers are processed in several batches with a small delay inserted between
- *  each batch in an attempt to avoid Javascript timeout errors. Set this property to the
- *  number of markers to be processed in a single batch; select as high a number as you can
- *  without causing a timeout error in the browser. This number might need to be as low as 100
- *  if 15,000 markers are being managed, for example.
- * @property {string} [imagePath=MarkerClusterer.IMAGE_PATH]
- *  The full URL of the root name of the group of image files to use for cluster icons.
- *  The complete file name is of the form <code>imagePath</code>n.<code>imageExtension</code>
- *  where n is the image file number (1, 2, etc.).
- * @property {string} [imageExtension=MarkerClusterer.IMAGE_EXTENSION]
- *  The extension name for the cluster icon image files (e.g., <code>"png"</code> or
- *  <code>"jpg"</code>).
- * @property {Array} [imageSizes=MarkerClusterer.IMAGE_SIZES]
- *  An array of numbers containing the widths of the group of
- *  <code>imagePath</code>n.<code>imageExtension</code> image files.
- *  (The images are assumed to be square.)
- */
-/**
- * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
- * @constructor
- * @extends google.maps.OverlayView
- * @param {google.maps.Map} map The Google map to attach to.
- * @param {Array.<google.maps.Marker>} [opt_markers] The markers to be added to the cluster.
- * @param {MarkerClustererOptions} [opt_options] The optional parameters.
- */
-function MarkerClusterer(map, opt_markers, opt_options) {
-  // MarkerClusterer implements google.maps.OverlayView interface. We use the
-  // extend function to extend MarkerClusterer with google.maps.OverlayView
-  // because it might not always be available when the code is defined so we
-  // look for it at the last possible moment. If it doesn't exist now then
-  // there is no point going ahead :)
-  this.extend(MarkerClusterer, google.maps.OverlayView);
-
-  opt_markers = opt_markers || [];
-  opt_options = opt_options || {};
-
-  this.markers_ = [];
-  this.clusters_ = [];
-  this.listeners_ = [];
-  this.activeMap_ = null;
-  this.ready_ = false;
-
-  this.gridSize_ = opt_options.gridSize || 60;
-  this.minClusterSize_ = opt_options.minimumClusterSize || 2;
-  this.maxZoom_ = opt_options.maxZoom || null;
-  this.styles_ = opt_options.styles || [];
-  this.title_ = opt_options.title || "";
-  this.zoomOnClick_ = true;
-  if (opt_options.zoomOnClick !== undefined) {
-    this.zoomOnClick_ = opt_options.zoomOnClick;
-  }
-  this.averageCenter_ = false;
-  if (opt_options.averageCenter !== undefined) {
-    this.averageCenter_ = opt_options.averageCenter;
-  }
-  this.ignoreHidden_ = false;
-  if (opt_options.ignoreHidden !== undefined) {
-    this.ignoreHidden_ = opt_options.ignoreHidden;
-  }
-  this.enableRetinaIcons_ = false;
-  if (opt_options.enableRetinaIcons !== undefined) {
-    this.enableRetinaIcons_ = opt_options.enableRetinaIcons;
-  }
-  this.imagePath_ = opt_options.imagePath || MarkerClusterer.IMAGE_PATH;
-  this.imageExtension_ = opt_options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
-  this.imageSizes_ = opt_options.imageSizes || MarkerClusterer.IMAGE_SIZES;
-  this.calculator_ = opt_options.calculator || MarkerClusterer.CALCULATOR;
-  this.batchSize_ = opt_options.batchSize || MarkerClusterer.BATCH_SIZE;
-  this.batchSizeIE_ = opt_options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
-  this.clusterClass_ = opt_options.clusterClass || "cluster";
-
-  if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
-    // Try to avoid IE timeout when processing a huge number of markers:
-    this.batchSize_ = this.batchSizeIE_;
-  }
-
-  this.setupStyles_();
-
-  this.addMarkers(opt_markers, true);
-  this.setMap(map); // Note: this causes onAdd to be called
-}
-
-/**
- * Implementation of the onAdd interface method.
- * @ignore
- */
-MarkerClusterer.prototype.onAdd = function () {
-  var cMarkerClusterer = this;
-
-  this.activeMap_ = this.getMap();
-  this.ready_ = true;
-
-  this.repaint();
-
-  // Add the map event listeners
-  this.listeners_ = [google.maps.event.addListener(this.getMap(), "zoom_changed", function () {
-    cMarkerClusterer.resetViewport_(false);
-    // Workaround for this Google bug: when map is at level 0 and "-" of
-    // zoom slider is clicked, a "zoom_changed" event is fired even though
-    // the map doesn't zoom out any further. In this situation, no "idle"
-    // event is triggered so the cluster markers that have been removed
-    // do not get redrawn. Same goes for a zoom in at maxZoom.
-    if (this.getZoom() === (this.get("minZoom") || 0) || this.getZoom() === this.get("maxZoom")) {
-      google.maps.event.trigger(this, "idle");
-    }
-  }), google.maps.event.addListener(this.getMap(), "idle", function () {
-    cMarkerClusterer.redraw_();
-  })];
-};
-
-/**
- * Implementation of the onRemove interface method.
- * Removes map event listeners and all cluster icons from the DOM.
- * All managed markers are also put back on the map.
- * @ignore
- */
-MarkerClusterer.prototype.onRemove = function () {
-  var i;
-
-  // Put all the managed markers back on the map:
-  for (i = 0; i < this.markers_.length; i++) {
-    if (this.markers_[i].getMap() !== this.activeMap_) {
-      this.markers_[i].setMap(this.activeMap_);
-    }
-  }
-
-  // Remove all clusters:
-  for (i = 0; i < this.clusters_.length; i++) {
-    this.clusters_[i].remove();
-  }
-  this.clusters_ = [];
-
-  // Remove map event listeners:
-  for (i = 0; i < this.listeners_.length; i++) {
-    google.maps.event.removeListener(this.listeners_[i]);
-  }
-  this.listeners_ = [];
-
-  this.activeMap_ = null;
-  this.ready_ = false;
-};
-
-/**
- * Implementation of the draw interface method.
- * @ignore
- */
-MarkerClusterer.prototype.draw = function () {};
-
-/**
- * Sets up the styles object.
- */
-MarkerClusterer.prototype.setupStyles_ = function () {
-  var i, size;
-  if (this.styles_.length > 0) {
-    return;
-  }
-
-  for (i = 0; i < this.imageSizes_.length; i++) {
-    size = this.imageSizes_[i];
-    this.styles_.push({
-      url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
-      height: size,
-      width: size
-    });
-  }
-};
-
-/**
- *  Fits the map to the bounds of the markers managed by the clusterer.
- */
-MarkerClusterer.prototype.fitMapToMarkers = function () {
-  var i;
-  var markers = this.getMarkers();
-  var bounds = new google.maps.LatLngBounds();
-  for (i = 0; i < markers.length; i++) {
-    bounds.extend(markers[i].getPosition());
-  }
-
-  this.getMap().fitBounds(bounds);
-};
-
-/**
- * Returns the value of the <code>gridSize</code> property.
- *
- * @return {number} The grid size.
- */
-MarkerClusterer.prototype.getGridSize = function () {
-  return this.gridSize_;
-};
-
-/**
- * Sets the value of the <code>gridSize</code> property.
- *
- * @param {number} gridSize The grid size.
- */
-MarkerClusterer.prototype.setGridSize = function (gridSize) {
-  this.gridSize_ = gridSize;
-};
-
-/**
- * Returns the value of the <code>minimumClusterSize</code> property.
- *
- * @return {number} The minimum cluster size.
- */
-MarkerClusterer.prototype.getMinimumClusterSize = function () {
-  return this.minClusterSize_;
-};
-
-/**
- * Sets the value of the <code>minimumClusterSize</code> property.
- *
- * @param {number} minimumClusterSize The minimum cluster size.
- */
-MarkerClusterer.prototype.setMinimumClusterSize = function (minimumClusterSize) {
-  this.minClusterSize_ = minimumClusterSize;
-};
-
-/**
- *  Returns the value of the <code>maxZoom</code> property.
- *
- *  @return {number} The maximum zoom level.
- */
-MarkerClusterer.prototype.getMaxZoom = function () {
-  return this.maxZoom_;
-};
-
-/**
- *  Sets the value of the <code>maxZoom</code> property.
- *
- *  @param {number} maxZoom The maximum zoom level.
- */
-MarkerClusterer.prototype.setMaxZoom = function (maxZoom) {
-  this.maxZoom_ = maxZoom;
-};
-
-/**
- *  Returns the value of the <code>styles</code> property.
- *
- *  @return {Array} The array of styles defining the cluster markers to be used.
- */
-MarkerClusterer.prototype.getStyles = function () {
-  return this.styles_;
-};
-
-/**
- *  Sets the value of the <code>styles</code> property.
- *
- *  @param {Array.<ClusterIconStyle>} styles The array of styles to use.
- */
-MarkerClusterer.prototype.setStyles = function (styles) {
-  this.styles_ = styles;
-};
-
-/**
- * Returns the value of the <code>title</code> property.
- *
- * @return {string} The content of the title text.
- */
-MarkerClusterer.prototype.getTitle = function () {
-  return this.title_;
-};
-
-/**
- *  Sets the value of the <code>title</code> property.
- *
- *  @param {string} title The value of the title property.
- */
-MarkerClusterer.prototype.setTitle = function (title) {
-  this.title_ = title;
-};
-
-/**
- * Returns the value of the <code>zoomOnClick</code> property.
- *
- * @return {boolean} True if zoomOnClick property is set.
- */
-MarkerClusterer.prototype.getZoomOnClick = function () {
-  return this.zoomOnClick_;
-};
-
-/**
- *  Sets the value of the <code>zoomOnClick</code> property.
- *
- *  @param {boolean} zoomOnClick The value of the zoomOnClick property.
- */
-MarkerClusterer.prototype.setZoomOnClick = function (zoomOnClick) {
-  this.zoomOnClick_ = zoomOnClick;
-};
-
-/**
- * Returns the value of the <code>averageCenter</code> property.
- *
- * @return {boolean} True if averageCenter property is set.
- */
-MarkerClusterer.prototype.getAverageCenter = function () {
-  return this.averageCenter_;
-};
-
-/**
- *  Sets the value of the <code>averageCenter</code> property.
- *
- *  @param {boolean} averageCenter The value of the averageCenter property.
- */
-MarkerClusterer.prototype.setAverageCenter = function (averageCenter) {
-  this.averageCenter_ = averageCenter;
-};
-
-/**
- * Returns the value of the <code>ignoreHidden</code> property.
- *
- * @return {boolean} True if ignoreHidden property is set.
- */
-MarkerClusterer.prototype.getIgnoreHidden = function () {
-  return this.ignoreHidden_;
-};
-
-/**
- *  Sets the value of the <code>ignoreHidden</code> property.
- *
- *  @param {boolean} ignoreHidden The value of the ignoreHidden property.
- */
-MarkerClusterer.prototype.setIgnoreHidden = function (ignoreHidden) {
-  this.ignoreHidden_ = ignoreHidden;
-};
-
-/**
- * Returns the value of the <code>enableRetinaIcons</code> property.
- *
- * @return {boolean} True if enableRetinaIcons property is set.
- */
-MarkerClusterer.prototype.getEnableRetinaIcons = function () {
-  return this.enableRetinaIcons_;
-};
-
-/**
- *  Sets the value of the <code>enableRetinaIcons</code> property.
- *
- *  @param {boolean} enableRetinaIcons The value of the enableRetinaIcons property.
- */
-MarkerClusterer.prototype.setEnableRetinaIcons = function (enableRetinaIcons) {
-  this.enableRetinaIcons_ = enableRetinaIcons;
-};
-
-/**
- * Returns the value of the <code>imageExtension</code> property.
- *
- * @return {string} The value of the imageExtension property.
- */
-MarkerClusterer.prototype.getImageExtension = function () {
-  return this.imageExtension_;
-};
-
-/**
- *  Sets the value of the <code>imageExtension</code> property.
- *
- *  @param {string} imageExtension The value of the imageExtension property.
- */
-MarkerClusterer.prototype.setImageExtension = function (imageExtension) {
-  this.imageExtension_ = imageExtension;
-};
-
-/**
- * Returns the value of the <code>imagePath</code> property.
- *
- * @return {string} The value of the imagePath property.
- */
-MarkerClusterer.prototype.getImagePath = function () {
-  return this.imagePath_;
-};
-
-/**
- *  Sets the value of the <code>imagePath</code> property.
- *
- *  @param {string} imagePath The value of the imagePath property.
- */
-MarkerClusterer.prototype.setImagePath = function (imagePath) {
-  this.imagePath_ = imagePath;
-};
-
-/**
- * Returns the value of the <code>imageSizes</code> property.
- *
- * @return {Array} The value of the imageSizes property.
- */
-MarkerClusterer.prototype.getImageSizes = function () {
-  return this.imageSizes_;
-};
-
-/**
- *  Sets the value of the <code>imageSizes</code> property.
- *
- *  @param {Array} imageSizes The value of the imageSizes property.
- */
-MarkerClusterer.prototype.setImageSizes = function (imageSizes) {
-  this.imageSizes_ = imageSizes;
-};
-
-/**
- * Returns the value of the <code>calculator</code> property.
- *
- * @return {function} the value of the calculator property.
- */
-MarkerClusterer.prototype.getCalculator = function () {
-  return this.calculator_;
-};
-
-/**
- * Sets the value of the <code>calculator</code> property.
- *
- * @param {function(Array.<google.maps.Marker>, number)} calculator The value
- *  of the calculator property.
- */
-MarkerClusterer.prototype.setCalculator = function (calculator) {
-  this.calculator_ = calculator;
-};
-
-/**
- * Returns the value of the <code>batchSizeIE</code> property.
- *
- * @return {number} the value of the batchSizeIE property.
- */
-MarkerClusterer.prototype.getBatchSizeIE = function () {
-  return this.batchSizeIE_;
-};
-
-/**
- * Sets the value of the <code>batchSizeIE</code> property.
- *
- *  @param {number} batchSizeIE The value of the batchSizeIE property.
- */
-MarkerClusterer.prototype.setBatchSizeIE = function (batchSizeIE) {
-  this.batchSizeIE_ = batchSizeIE;
-};
-
-/**
- * Returns the value of the <code>clusterClass</code> property.
- *
- * @return {string} the value of the clusterClass property.
- */
-MarkerClusterer.prototype.getClusterClass = function () {
-  return this.clusterClass_;
-};
-
-/**
- * Sets the value of the <code>clusterClass</code> property.
- *
- *  @param {string} clusterClass The value of the clusterClass property.
- */
-MarkerClusterer.prototype.setClusterClass = function (clusterClass) {
-  this.clusterClass_ = clusterClass;
-};
-
-/**
- *  Returns the array of markers managed by the clusterer.
- *
- *  @return {Array} The array of markers managed by the clusterer.
- */
-MarkerClusterer.prototype.getMarkers = function () {
-  return this.markers_;
-};
-
-/**
- *  Returns the number of markers managed by the clusterer.
- *
- *  @return {number} The number of markers.
- */
-MarkerClusterer.prototype.getTotalMarkers = function () {
-  return this.markers_.length;
-};
-
-/**
- * Returns the current array of clusters formed by the clusterer.
- *
- * @return {Array} The array of clusters formed by the clusterer.
- */
-MarkerClusterer.prototype.getClusters = function () {
-  return this.clusters_;
-};
-
-/**
- * Returns the number of clusters formed by the clusterer.
- *
- * @return {number} The number of clusters formed by the clusterer.
- */
-MarkerClusterer.prototype.getTotalClusters = function () {
-  return this.clusters_.length;
-};
-
-/**
- * Adds a marker to the clusterer. The clusters are redrawn unless
- *  <code>opt_nodraw</code> is set to <code>true</code>.
- *
- * @param {google.maps.Marker} marker The marker to add.
- * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
- */
-MarkerClusterer.prototype.addMarker = function (marker, opt_nodraw) {
-  this.pushMarkerTo_(marker);
-  if (!opt_nodraw) {
-    this.redraw_();
-  }
-};
-
-/**
- * Adds an array of markers to the clusterer. The clusters are redrawn unless
- *  <code>opt_nodraw</code> is set to <code>true</code>.
- *
- * @param {Array.<google.maps.Marker>} markers The markers to add.
- * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
- */
-MarkerClusterer.prototype.addMarkers = function (markers, opt_nodraw) {
-  var key;
-  for (key in markers) {
-    if (markers.hasOwnProperty(key)) {
-      this.pushMarkerTo_(markers[key]);
-    }
-  }
-  if (!opt_nodraw) {
-    this.redraw_();
-  }
-};
-
-/**
- * Pushes a marker to the clusterer.
- *
- * @param {google.maps.Marker} marker The marker to add.
- */
-MarkerClusterer.prototype.pushMarkerTo_ = function (marker) {
-  // If the marker is draggable add a listener so we can update the clusters on the dragend:
-  if (marker.getDraggable()) {
-    var cMarkerClusterer = this;
-    google.maps.event.addListener(marker, "dragend", function () {
-      if (cMarkerClusterer.ready_) {
-        this.isAdded = false;
-        cMarkerClusterer.repaint();
-      }
-    });
-  }
-  marker.isAdded = false;
-  this.markers_.push(marker);
-};
-
-/**
- * Removes a marker from the cluster.  The clusters are redrawn unless
- *  <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
- *  marker was removed from the clusterer.
- *
- * @param {google.maps.Marker} marker The marker to remove.
- * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
- * @return {boolean} True if the marker was removed from the clusterer.
- */
-MarkerClusterer.prototype.removeMarker = function (marker, opt_nodraw) {
-  var removed = this.removeMarker_(marker);
-
-  if (!opt_nodraw && removed) {
-    this.repaint();
-  }
-
-  return removed;
-};
-
-/**
- * Removes an array of markers from the cluster. The clusters are redrawn unless
- *  <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
- *  were removed from the clusterer.
- *
- * @param {Array.<google.maps.Marker>} markers The markers to remove.
- * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
- * @return {boolean} True if markers were removed from the clusterer.
- */
-MarkerClusterer.prototype.removeMarkers = function (markers, opt_nodraw) {
-  var i, r;
-  var removed = false;
-
-  for (i = 0; i < markers.length; i++) {
-    r = this.removeMarker_(markers[i]);
-    removed = removed || r;
-  }
-
-  if (!opt_nodraw && removed) {
-    this.repaint();
-  }
-
-  return removed;
-};
-
-/**
- * Removes a marker and returns true if removed, false if not.
- *
- * @param {google.maps.Marker} marker The marker to remove
- * @return {boolean} Whether the marker was removed or not
- */
-MarkerClusterer.prototype.removeMarker_ = function (marker) {
-  var i;
-  var index = -1;
-  if (this.markers_.indexOf) {
-    index = this.markers_.indexOf(marker);
-  } else {
-    for (i = 0; i < this.markers_.length; i++) {
-      if (marker === this.markers_[i]) {
-        index = i;
-        break;
-      }
-    }
-  }
-
-  if (index === -1) {
-    // Marker is not in our list of markers, so do nothing:
-    return false;
-  }
-
-  marker.setMap(null);
-  this.markers_.splice(index, 1); // Remove the marker from the list of managed markers
-  return true;
-};
-
-/**
- * Removes all clusters and markers from the map and also removes all markers
- *  managed by the clusterer.
- */
-MarkerClusterer.prototype.clearMarkers = function () {
-  this.resetViewport_(true);
-  this.markers_ = [];
-};
-
-/**
- * Recalculates and redraws all the marker clusters from scratch.
- *  Call this after changing any properties.
- */
-MarkerClusterer.prototype.repaint = function () {
-  var oldClusters = this.clusters_.slice();
-  this.clusters_ = [];
-  this.resetViewport_(false);
-  this.redraw_();
-
-  // Remove the old clusters.
-  // Do it in a timeout to prevent blinking effect.
-  setTimeout(function () {
-    var i;
-    for (i = 0; i < oldClusters.length; i++) {
-      oldClusters[i].remove();
-    }
-  }, 0);
-};
-
-/**
- * Returns the current bounds extended by the grid size.
- *
- * @param {google.maps.LatLngBounds} bounds The bounds to extend.
- * @return {google.maps.LatLngBounds} The extended bounds.
- * @ignore
- */
-MarkerClusterer.prototype.getExtendedBounds = function (bounds) {
-  var projection = this.getProjection();
-
-  // Turn the bounds into latlng.
-  var tr = new google.maps.LatLng(bounds.getNorthEast().lat(), bounds.getNorthEast().lng());
-  var bl = new google.maps.LatLng(bounds.getSouthWest().lat(), bounds.getSouthWest().lng());
-
-  // Convert the points to pixels and the extend out by the grid size.
-  var trPix = projection.fromLatLngToDivPixel(tr);
-  trPix.x += this.gridSize_;
-  trPix.y -= this.gridSize_;
-
-  var blPix = projection.fromLatLngToDivPixel(bl);
-  blPix.x -= this.gridSize_;
-  blPix.y += this.gridSize_;
-
-  // Convert the pixel points back to LatLng
-  var ne = projection.fromDivPixelToLatLng(trPix);
-  var sw = projection.fromDivPixelToLatLng(blPix);
-
-  // Extend the bounds to contain the new bounds.
-  bounds.extend(ne);
-  bounds.extend(sw);
-
-  return bounds;
-};
-
-/**
- * Redraws all the clusters.
- */
-MarkerClusterer.prototype.redraw_ = function () {
-  this.createClusters_(0);
-};
-
-/**
- * Removes all clusters from the map. The markers are also removed from the map
- *  if <code>opt_hide</code> is set to <code>true</code>.
- *
- * @param {boolean} [opt_hide] Set to <code>true</code> to also remove the markers
- *  from the map.
- */
-MarkerClusterer.prototype.resetViewport_ = function (opt_hide) {
-  var i, marker;
-  // Remove all the clusters
-  for (i = 0; i < this.clusters_.length; i++) {
-    this.clusters_[i].remove();
-  }
-  this.clusters_ = [];
-
-  // Reset the markers to not be added and to be removed from the map.
-  for (i = 0; i < this.markers_.length; i++) {
-    marker = this.markers_[i];
-    marker.isAdded = false;
-    if (opt_hide) {
-      marker.setMap(null);
-    }
-  }
-};
-
-/**
- * Calculates the distance between two latlng locations in km.
- *
- * @param {google.maps.LatLng} p1 The first lat lng point.
- * @param {google.maps.LatLng} p2 The second lat lng point.
- * @return {number} The distance between the two points in km.
- * @see http://www.movable-type.co.uk/scripts/latlong.html
-*/
-MarkerClusterer.prototype.distanceBetweenPoints_ = function (p1, p2) {
-  var R = 6371; // Radius of the Earth in km
-  var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
-  var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
-  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c;
-  return d;
-};
-
-/**
- * Determines if a marker is contained in a bounds.
- *
- * @param {google.maps.Marker} marker The marker to check.
- * @param {google.maps.LatLngBounds} bounds The bounds to check against.
- * @return {boolean} True if the marker is in the bounds.
- */
-MarkerClusterer.prototype.isMarkerInBounds_ = function (marker, bounds) {
-  return bounds.contains(marker.getPosition());
-};
-
-/**
- * Adds a marker to a cluster, or creates a new cluster.
- *
- * @param {google.maps.Marker} marker The marker to add.
- */
-MarkerClusterer.prototype.addToClosestCluster_ = function (marker) {
-  var i, d, cluster, center;
-  var distance = 40000; // Some large number
-  var clusterToAddTo = null;
-  for (i = 0; i < this.clusters_.length; i++) {
-    cluster = this.clusters_[i];
-    center = cluster.getCenter();
-    if (center) {
-      d = this.distanceBetweenPoints_(center, marker.getPosition());
-      if (d < distance) {
-        distance = d;
-        clusterToAddTo = cluster;
-      }
-    }
-  }
-
-  if (clusterToAddTo && clusterToAddTo.isMarkerInClusterBounds(marker)) {
-    clusterToAddTo.addMarker(marker);
-  } else {
-    cluster = new Cluster(this);
-    cluster.addMarker(marker);
-    this.clusters_.push(cluster);
-  }
-};
-
-/**
- * Creates the clusters. This is done in batches to avoid timeout errors
- *  in some browsers when there is a huge number of markers.
- *
- * @param {number} iFirst The index of the first marker in the batch of
- *  markers to be added to clusters.
- */
-MarkerClusterer.prototype.createClusters_ = function (iFirst) {
-  var i, marker;
-  var mapBounds;
-  var cMarkerClusterer = this;
-  if (!this.ready_) {
-    return;
-  }
-
-  // Cancel previous batch processing if we're working on the first batch:
-  if (iFirst === 0) {
-    /**
-     * This event is fired when the <code>MarkerClusterer</code> begins
-     *  clustering markers.
-     * @name MarkerClusterer#clusteringbegin
-     * @param {MarkerClusterer} mc The MarkerClusterer whose markers are being clustered.
-     * @event
-     */
-    google.maps.event.trigger(this, "clusteringbegin", this);
-
-    if (typeof this.timerRefStatic !== "undefined") {
-      clearTimeout(this.timerRefStatic);
-      delete this.timerRefStatic;
-    }
-  }
-
-  // Get our current map view bounds.
-  // Create a new bounds object so we don't affect the map.
-  //
-  // See Comments 9 & 11 on Issue 3651 relating to this workaround for a Google Maps bug:
-  if (this.getMap().getZoom() > 3) {
-    mapBounds = new google.maps.LatLngBounds(this.getMap().getBounds().getSouthWest(), this.getMap().getBounds().getNorthEast());
-  } else {
-    mapBounds = new google.maps.LatLngBounds(new google.maps.LatLng(85.02070771743472, -178.48388434375), new google.maps.LatLng(-85.08136444384544, 178.00048865625));
-  }
-  var bounds = this.getExtendedBounds(mapBounds);
-
-  var iLast = Math.min(iFirst + this.batchSize_, this.markers_.length);
-
-  for (i = iFirst; i < iLast; i++) {
-    marker = this.markers_[i];
-    if (!marker.isAdded && this.isMarkerInBounds_(marker, bounds)) {
-      if (!this.ignoreHidden_ || this.ignoreHidden_ && marker.getVisible()) {
-        this.addToClosestCluster_(marker);
-      }
-    }
-  }
-
-  if (iLast < this.markers_.length) {
-    this.timerRefStatic = setTimeout(function () {
-      cMarkerClusterer.createClusters_(iLast);
-    }, 0);
-  } else {
-    delete this.timerRefStatic;
-
-    /**
-     * This event is fired when the <code>MarkerClusterer</code> stops
-     *  clustering markers.
-     * @name MarkerClusterer#clusteringend
-     * @param {MarkerClusterer} mc The MarkerClusterer whose markers are being clustered.
-     * @event
-     */
-    google.maps.event.trigger(this, "clusteringend", this);
-  }
-};
-
-/**
- * Extends an object's prototype by another's.
- *
- * @param {Object} obj1 The object to be extended.
- * @param {Object} obj2 The object to extend with.
- * @return {Object} The new extended object.
- * @ignore
- */
-MarkerClusterer.prototype.extend = function (obj1, obj2) {
-  return function (object) {
-    var property;
-    for (property in object.prototype) {
-      this.prototype[property] = object.prototype[property];
-    }
-    return this;
-  }.apply(obj1, [obj2]);
-};
-
-/**
- * The default function for determining the label text and style
- * for a cluster icon.
- *
- * @param {Array.<google.maps.Marker>} markers The array of markers represented by the cluster.
- * @param {number} numStyles The number of marker styles available.
- * @return {ClusterIconInfo} The information resource for the cluster.
- * @constant
- * @ignore
- */
-MarkerClusterer.CALCULATOR = function (markers, numStyles) {
-  var index = 0;
-  var title = "";
-  var count = markers.length.toString();
-
-  var dv = count;
-  while (dv !== 0) {
-    dv = parseInt(dv / 10, 10);
-    index++;
-  }
-
-  index = Math.min(index, numStyles);
-  return {
-    text: count,
-    index: index,
-    title: title
-  };
-};
-
-/**
- * The number of markers to process in one batch.
- *
- * @type {number}
- * @constant
- */
-MarkerClusterer.BATCH_SIZE = 2000;
-
-/**
- * The number of markers to process in one batch (IE only).
- *
- * @type {number}
- * @constant
- */
-MarkerClusterer.BATCH_SIZE_IE = 500;
-
-/**
- * The default root name for the marker cluster images.
- *
- * @type {string}
- * @constant
- */
-MarkerClusterer.IMAGE_PATH = "https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m";
-
-/**
- * The default extension name for the marker cluster images.
- *
- * @type {string}
- * @constant
- */
-MarkerClusterer.IMAGE_EXTENSION = "png";
-
-/**
- * The default array of sizes for the marker cluster images.
- *
- * @type {Array.<number>}
- * @constant
- */
-MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
-
-module.exports = MarkerClusterer;
-
-/***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;_e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }return _arr;
-  }return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  draggable: {
-    type: Boolean
-  },
-  editable: {
-    type: Boolean
-  },
-  options: {
-    twoWay: false,
-    type: Object
-  },
-  path: {
-    type: Array,
-    twoWay: true
-  },
-  deepWatch: {
-    type: Boolean,
-    default: false
-  }
-};
-
-var events = ['click', 'dblclick', 'drag', 'dragend', 'dragstart', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup', 'rightclick'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-
-  render: function render() {
-    return '';
-  },
-  destroyed: function destroyed() {
-    if (this.$polylineObject) {
-      this.$polylineObject.setMap(null);
-    }
-  },
-  deferredReady: function deferredReady() {
-    var _this = this;
-
-    var options = (0, _clone2.default)(this.getPropsValues());
-    delete options.options;
-    Object.assign(options, this.options);
-    this.$polylineObject = new google.maps.Polyline(options);
-    this.$polylineObject.setMap(this.$map);
-
-    (0, _propsBinder2.default)(this, this.$polylineObject, (0, _omit2.default)(props, ['deepWatch', 'path']));
-    (0, _eventsBinder2.default)(this, this.$polylineObject, events);
-
-    var clearEvents = function clearEvents() {};
-
-    this.$watch('path', function (path) {
-      if (path) {
-        clearEvents();
-
-        _this.$polylineObject.setPath(path);
-
-        var mvcPath = _this.$polylineObject.getPath();
-        var eventListeners = [];
-
-        var updatePaths = function updatePaths() {
-          _this.$emit('path_changed', _this.$polylineObject.getPath());
-        };
-
-        eventListeners.push([mvcPath, mvcPath.addListener('insert_at', updatePaths)]);
-        eventListeners.push([mvcPath, mvcPath.addListener('remove_at', updatePaths)]);
-        eventListeners.push([mvcPath, mvcPath.addListener('set_at', updatePaths)]);
-
-        clearEvents = function clearEvents() {
-          eventListeners.map(function (_ref) {
-            var _ref2 = _slicedToArray(_ref, 2),
-                obj = _ref2[0],
-                listenerHandle = _ref2[1];
-
-            return (// eslint-disable-line no-unused-vars
-              google.maps.event.removeListener(listenerHandle)
-            );
-          });
-        };
-      }
-    }, {
-      deep: this.deepWatch
-    });
-
-    // Display the map
-    this.$polylineObject.setMap(this.$map);
-  }
-};
-
-/***/ }),
-/* 244 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var castPath = __webpack_require__(14),
-    last = __webpack_require__(245),
-    parent = __webpack_require__(246),
-    toKey = __webpack_require__(15);
-
-/**
- * The base implementation of `_.unset`.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {Array|string} path The property path to unset.
- * @returns {boolean} Returns `true` if the property is deleted, else `false`.
- */
-function baseUnset(object, path) {
-  path = castPath(path, object);
-  object = parent(object, path);
-  return object == null || delete object[toKey(last(path))];
-}
-
-module.exports = baseUnset;
-
-/***/ }),
-/* 245 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Gets the last element of `array`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Array
- * @param {Array} array The array to query.
- * @returns {*} Returns the last element of `array`.
- * @example
- *
- * _.last([1, 2, 3]);
- * // => 3
- */
-function last(array) {
-  var length = array == null ? 0 : array.length;
-  return length ? array[length - 1] : undefined;
-}
-
-module.exports = last;
-
-/***/ }),
-/* 246 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGet = __webpack_require__(29),
-    baseSlice = __webpack_require__(247);
-
-/**
- * Gets the parent value at `path` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array} path The path to get the parent value of.
- * @returns {*} Returns the parent value.
- */
-function parent(object, path) {
-  return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
-}
-
-module.exports = parent;
-
-/***/ }),
-/* 247 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * The base implementation of `_.slice` without an iteratee call guard.
- *
- * @private
- * @param {Array} array The array to slice.
- * @param {number} [start=0] The start position.
- * @param {number} [end=array.length] The end position.
- * @returns {Array} Returns the slice of `array`.
- */
-function baseSlice(array, start, end) {
-  var index = -1,
-      length = array.length;
-
-  if (start < 0) {
-    start = -start > length ? 0 : length + start;
-  }
-  end = end > length ? length : end;
-  if (end < 0) {
-    end += length;
-  }
-  length = start > end ? 0 : end - start >>> 0;
-  start >>>= 0;
-
-  var result = Array(length);
-  while (++index < length) {
-    result[index] = array[index + start];
-  }
-  return result;
-}
-
-module.exports = baseSlice;
-
-/***/ }),
-/* 248 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isPlainObject = __webpack_require__(249);
-
-/**
- * Used by `_.omit` to customize its `_.cloneDeep` use to only clone plain
- * objects.
- *
- * @private
- * @param {*} value The value to inspect.
- * @param {string} key The key of the property to inspect.
- * @returns {*} Returns the uncloned value or `undefined` to defer cloning to `_.cloneDeep`.
- */
-function customOmitClone(value) {
-  return isPlainObject(value) ? undefined : value;
-}
-
-module.exports = customOmitClone;
-
-/***/ }),
-/* 249 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGetTag = __webpack_require__(12),
-    getPrototype = __webpack_require__(53),
-    isObjectLike = __webpack_require__(7);
-
-/** `Object#toString` result references. */
-var objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to infer the `Object` constructor. */
-var objectCtorString = funcToString.call(Object);
-
-/**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- *
- * @static
- * @memberOf _
- * @since 0.8.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * _.isPlainObject(new Foo);
- * // => false
- *
- * _.isPlainObject([1, 2, 3]);
- * // => false
- *
- * _.isPlainObject({ 'x': 0, 'y': 0 });
- * // => true
- *
- * _.isPlainObject(Object.create(null));
- * // => true
- */
-function isPlainObject(value) {
-  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-    return false;
-  }
-  var proto = getPrototype(value);
-  if (proto === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
-}
-
-module.exports = isPlainObject;
-
-/***/ }),
-/* 250 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var flatten = __webpack_require__(251),
-    overRest = __webpack_require__(254),
-    setToString = __webpack_require__(256);
-
-/**
- * A specialized version of `baseRest` which flattens the rest array.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @returns {Function} Returns the new function.
- */
-function flatRest(func) {
-  return setToString(overRest(func, undefined, flatten), func + '');
-}
-
-module.exports = flatRest;
-
-/***/ }),
-/* 251 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseFlatten = __webpack_require__(252);
-
-/**
- * Flattens `array` a single level deep.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Array
- * @param {Array} array The array to flatten.
- * @returns {Array} Returns the new flattened array.
- * @example
- *
- * _.flatten([1, [2, [3, [4]], 5]]);
- * // => [1, 2, [3, [4]], 5]
- */
-function flatten(array) {
-  var length = array == null ? 0 : array.length;
-  return length ? baseFlatten(array, 1) : [];
-}
-
-module.exports = flatten;
-
-/***/ }),
-/* 252 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayPush = __webpack_require__(45),
-    isFlattenable = __webpack_require__(253);
-
-/**
- * The base implementation of `_.flatten` with support for restricting flattening.
- *
- * @private
- * @param {Array} array The array to flatten.
- * @param {number} depth The maximum recursion depth.
- * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
- * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
- * @param {Array} [result=[]] The initial result value.
- * @returns {Array} Returns the new flattened array.
- */
-function baseFlatten(array, depth, predicate, isStrict, result) {
-  var index = -1,
-      length = array.length;
-
-  predicate || (predicate = isFlattenable);
-  result || (result = []);
-
-  while (++index < length) {
-    var value = array[index];
-    if (depth > 0 && predicate(value)) {
-      if (depth > 1) {
-        // Recursively flatten arrays (susceptible to call stack limits).
-        baseFlatten(value, depth - 1, predicate, isStrict, result);
-      } else {
-        arrayPush(result, value);
-      }
-    } else if (!isStrict) {
-      result[result.length] = value;
-    }
-  }
-  return result;
-}
-
-module.exports = baseFlatten;
-
-/***/ }),
-/* 253 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(13),
-    isArguments = __webpack_require__(33),
-    isArray = __webpack_require__(1);
-
-/** Built-in value references. */
-var spreadableSymbol = _Symbol ? _Symbol.isConcatSpreadable : undefined;
-
-/**
- * Checks if `value` is a flattenable `arguments` object or array.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
- */
-function isFlattenable(value) {
-    return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
-}
-
-module.exports = isFlattenable;
-
-/***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var apply = __webpack_require__(255);
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax = Math.max;
-
-/**
- * A specialized version of `baseRest` which transforms the rest array.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @param {Function} transform The rest array transform.
- * @returns {Function} Returns the new function.
- */
-function overRest(func, start, transform) {
-  start = nativeMax(start === undefined ? func.length - 1 : start, 0);
-  return function () {
-    var args = arguments,
-        index = -1,
-        length = nativeMax(args.length - start, 0),
-        array = Array(length);
-
-    while (++index < length) {
-      array[index] = args[start + index];
-    }
-    index = -1;
-    var otherArgs = Array(start + 1);
-    while (++index < start) {
-      otherArgs[index] = args[index];
-    }
-    otherArgs[start] = transform(array);
-    return apply(func, this, otherArgs);
-  };
-}
-
-module.exports = overRest;
-
-/***/ }),
-/* 255 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A faster alternative to `Function#apply`, this function invokes `func`
- * with the `this` binding of `thisArg` and the arguments of `args`.
- *
- * @private
- * @param {Function} func The function to invoke.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {Array} args The arguments to invoke `func` with.
- * @returns {*} Returns the result of `func`.
- */
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0:
-      return func.call(thisArg);
-    case 1:
-      return func.call(thisArg, args[0]);
-    case 2:
-      return func.call(thisArg, args[0], args[1]);
-    case 3:
-      return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-
-module.exports = apply;
-
-/***/ }),
-/* 256 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseSetToString = __webpack_require__(257),
-    shortOut = __webpack_require__(259);
-
-/**
- * Sets the `toString` method of `func` to return `string`.
- *
- * @private
- * @param {Function} func The function to modify.
- * @param {Function} string The `toString` result.
- * @returns {Function} Returns `func`.
- */
-var setToString = shortOut(baseSetToString);
-
-module.exports = setToString;
-
-/***/ }),
-/* 257 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var constant = __webpack_require__(258),
-    defineProperty = __webpack_require__(69),
-    identity = __webpack_require__(50);
-
-/**
- * The base implementation of `setToString` without support for hot loop shorting.
- *
- * @private
- * @param {Function} func The function to modify.
- * @param {Function} string The `toString` result.
- * @returns {Function} Returns `func`.
- */
-var baseSetToString = !defineProperty ? identity : function (func, string) {
-  return defineProperty(func, 'toString', {
-    'configurable': true,
-    'enumerable': false,
-    'value': constant(string),
-    'writable': true
-  });
-};
-
-module.exports = baseSetToString;
-
-/***/ }),
-/* 258 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Creates a function that returns `value`.
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Util
- * @param {*} value The value to return from the new function.
- * @returns {Function} Returns the new constant function.
- * @example
- *
- * var objects = _.times(2, _.constant({ 'a': 1 }));
- *
- * console.log(objects);
- * // => [{ 'a': 1 }, { 'a': 1 }]
- *
- * console.log(objects[0] === objects[1]);
- * // => true
- */
-function constant(value) {
-  return function () {
-    return value;
-  };
-}
-
-module.exports = constant;
-
-/***/ }),
-/* 259 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/** Used to detect hot functions by number of calls within a span of milliseconds. */
-var HOT_COUNT = 800,
-    HOT_SPAN = 16;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeNow = Date.now;
-
-/**
- * Creates a function that'll short out and invoke `identity` instead
- * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
- * milliseconds.
- *
- * @private
- * @param {Function} func The function to restrict.
- * @returns {Function} Returns the new shortable function.
- */
-function shortOut(func) {
-  var count = 0,
-      lastCalled = 0;
-
-  return function () {
-    var stamp = nativeNow(),
-        remaining = HOT_SPAN - (stamp - lastCalled);
-
-    lastCalled = stamp;
-    if (remaining > 0) {
-      if (++count >= HOT_COUNT) {
-        return arguments[0];
-      }
-    } else {
-      count = 0;
-    }
-    return func.apply(undefined, arguments);
-  };
-}
-
-module.exports = shortOut;
-
-/***/ }),
-/* 260 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;_e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }return _arr;
-  }return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
-var _omit = __webpack_require__(11);
-
-var _omit2 = _interopRequireDefault(_omit);
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  draggable: {
-    type: Boolean
-  },
-  editable: {
-    type: Boolean
-  },
-  options: {
-    type: Object
-  },
-  path: {
-    type: Array,
-    twoWay: true
-  },
-  paths: {
-    type: Array,
-    twoWay: true
-  },
-  deepWatch: {
-    type: Boolean,
-    default: false
-  }
-};
-
-var events = ['click', 'dblclick', 'drag', 'dragend', 'dragstart', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup', 'rightclick'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-
-  render: function render() {
-    return '';
-  },
-  destroyed: function destroyed() {
-    if (this.$polygonObject) {
-      this.$polygonObject.setMap(null);
-    }
-  },
-  deferredReady: function deferredReady() {
-    var _this = this;
-
-    var options = (0, _clone2.default)(this.getPropsValues());
-    delete options.options;
-    Object.assign(options, this.options);
-    if (!options.path) {
-      delete options.path;
-    }
-    if (!options.paths) {
-      delete options.paths;
-    }
-    this.$polygonObject = new google.maps.Polygon(options);
-
-    (0, _propsBinder2.default)(this, this.$polygonObject, (0, _omit2.default)(props, ['path', 'paths', 'deepWatch']));
-    (0, _eventsBinder2.default)(this, this.$polygonObject, events);
-
-    var clearEvents = function clearEvents() {};
-
-    // Watch paths, on our own, because we do not want to set either when it is
-    // empty
-    this.$watch('paths', function (paths) {
-      if (paths) {
-        clearEvents();
-
-        _this.$polygonObject.setPaths(paths);
-
-        var updatePaths = function updatePaths() {
-          _this.$emit('paths_changed', _this.$polygonObject.getPaths());
-        };
-        var eventListeners = [];
-
-        var mvcArray = _this.$polygonObject.getPaths();
-        for (var i = 0; i < mvcArray.getLength(); i++) {
-          var mvcPath = mvcArray.getAt(i);
-          eventListeners.push([mvcPath, mvcPath.addListener('insert_at', updatePaths)]);
-          eventListeners.push([mvcPath, mvcPath.addListener('remove_at', updatePaths)]);
-          eventListeners.push([mvcPath, mvcPath.addListener('set_at', updatePaths)]);
-        }
-        eventListeners.push([mvcArray, mvcArray.addListener('insert_at', updatePaths)]);
-        eventListeners.push([mvcArray, mvcArray.addListener('remove_at', updatePaths)]);
-        eventListeners.push([mvcArray, mvcArray.addListener('set_at', updatePaths)]);
-
-        clearEvents = function clearEvents() {
-          eventListeners.map(function (_ref) {
-            var _ref2 = _slicedToArray(_ref, 2),
-                obj = _ref2[0],
-                listenerHandle = _ref2[1];
-
-            return (// eslint-disable-line no-unused-vars
-              google.maps.event.removeListener(listenerHandle)
-            );
-          });
-        };
-      }
-    }, {
-      deep: this.deepWatch,
-      immediate: true
-    });
-
-    this.$watch('path', function (path) {
-      if (path) {
-        clearEvents();
-
-        _this.$polygonObject.setPaths(path);
-
-        var mvcPath = _this.$polygonObject.getPath();
-        var eventListeners = [];
-
-        var updatePaths = function updatePaths() {
-          _this.$emit('path_changed', _this.$polygonObject.getPath());
-        };
-
-        eventListeners.push([mvcPath, mvcPath.addListener('insert_at', updatePaths)]);
-        eventListeners.push([mvcPath, mvcPath.addListener('remove_at', updatePaths)]);
-        eventListeners.push([mvcPath, mvcPath.addListener('set_at', updatePaths)]);
-
-        clearEvents = function clearEvents() {
-          eventListeners.map(function (_ref3) {
-            var _ref4 = _slicedToArray(_ref3, 2),
-                obj = _ref4[0],
-                listenerHandle = _ref4[1];
-
-            return (// eslint-disable-line no-unused-vars
-              google.maps.event.removeListener(listenerHandle)
-            );
-          });
-        };
-      }
-    }, {
-      deep: this.deepWatch,
-      immediate: true
-    });
-
-    // Display the map
-    this.$polygonObject.setMap(this.$map);
-  }
-};
-
-/***/ }),
-/* 261 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  center: {
-    type: Object,
-    twoWay: true,
-    required: true
-  },
-  radius: {
-    type: Number,
-    default: 1000,
-    twoWay: true
-  },
-  draggable: {
-    type: Boolean,
-    default: false
-  },
-  editable: {
-    type: Boolean,
-    default: false
-  },
-  options: {
-    type: Object,
-    twoWay: false
-  }
-};
-
-var events = ['click', 'dblclick', 'drag', 'dragend', 'dragstart', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup', 'rightclick'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-  version: 2,
-
-  render: function render() {
-    return '';
-  },
-  deferredReady: function deferredReady() {
-    var options = (0, _clone2.default)(this.getPropsValues());
-    options.map = this.$map;
-    delete options.bounds;
-    this.createCircle(options);
-  },
-
-  methods: {
-    createCircle: function createCircle(options) {
-      var _this = this;
-
-      this.$circleObject = new google.maps.Circle(options);
-      // we cant bind bounds because there is no `setBounds` method
-      // on the Circle object
-      var boundProps = (0, _clone2.default)(props);
-      delete boundProps.bounds;
-      (0, _propsBinder2.default)(this, this.$circleObject, boundProps);
-      (0, _eventsBinder2.default)(this, this.$circleObject, events);
-
-      var updateBounds = function updateBounds() {
-        _this.$emit('bounds_changed', _this.$circleObject.getBounds());
-      };
-
-      this.$on('radius_changed', updateBounds);
-      this.$on('center_changed', updateBounds);
-    }
-  },
-
-  destroyed: function destroyed() {
-    if (this.$circleObject) {
-      this.$circleObject.setMap(null);
-    }
-  }
-};
-
-/***/ }),
-/* 262 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _clone = __webpack_require__(6);
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _eventsBinder = __webpack_require__(5);
-
-var _eventsBinder2 = _interopRequireDefault(_eventsBinder);
-
-var _propsBinder = __webpack_require__(2);
-
-var _propsBinder2 = _interopRequireDefault(_propsBinder);
-
-var _mapElementMixin = __webpack_require__(8);
-
-var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
-
-var _getPropsValuesMixin = __webpack_require__(4);
-
-var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var props = {
-  bounds: {
-    type: Object,
-    twoWay: true
-  },
-  draggable: {
-    type: Boolean,
-    default: false
-  },
-  editable: {
-    type: Boolean,
-    default: false
-  },
-  options: {
-    type: Object,
-    twoWay: false
-  }
-};
-
-var events = ['click', 'dblclick', 'drag', 'dragend', 'dragstart', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup', 'rightclick'];
-
-exports.default = {
-  mixins: [_mapElementMixin2.default, _getPropsValuesMixin2.default],
-  props: props,
-
-  render: function render() {
-    return '';
-  },
-  deferredReady: function deferredReady() {
-    var options = (0, _clone2.default)(this.getPropsValues());
-    options.map = this.$map;
-    this.createRectangle(options);
-  },
-
-  methods: {
-    createRectangle: function createRectangle(options) {
-      this.$rectangleObject = new google.maps.Rectangle(options);
-      (0, _propsBinder2.default)(this, this.$rectangleObject, props);
-      (0, _eventsBinder2.default)(this, this.$rectangleObject, events);
-    }
-  },
-
-  destroyed: function destroyed() {
-    if (this.$rectangleObject) {
-      this.$rectangleObject.setMap(null);
-    }
-  }
-};
-
-/***/ }),
-/* 263 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_0c4b6f5c_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_infoWindow_vue__ = __webpack_require__(264);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_infoWindowImpl_js___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_0c4b6f5c_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_infoWindow_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_0c4b6f5c_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_infoWindow_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue2-google-maps\\dist\\components\\infoWindow.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0c4b6f5c", Component.options)
-  } else {
-    hotAPI.reload("data-v-0c4b6f5c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 264 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [_c("div", { ref: "flyaway" }, [_vm._t("default")], 2)])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0c4b6f5c", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
-/* 265 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_2b10bb2e_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_map_vue__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
-function injectStyle (context) {
-  if (disposed) return
-  __webpack_require__(266)
-}
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_mapImpl_js___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_2b10bb2e_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_map_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_2b10bb2e_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_map_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue2-google-maps\\dist\\components\\map.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2b10bb2e", Component.options)
-  } else {
-    hotAPI.reload("data-v-2b10bb2e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 266 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(267);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(23).default
-var update = add("4f93736f", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../vue-loader/lib/selector.js?type=styles&index=0!./map.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../vue-loader/lib/selector.js?type=styles&index=0!./map.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 267 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.vue-map-container {\n  position: relative;\n}\n.vue-map-container .vue-map {\n  left: 0; right: 0; top: 0; bottom: 0;\n  position: absolute;\n}\n.vue-map-hidden {\n  display: none;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = WatchPrimitiveProperties;
-/**
- * Watch the individual properties of a PoD object, instead of the object
- * per se. This is different from a deep watch where both the reference
- * and the individual values are watched.
- *
- * In effect, it throttles the multiple $watch to execute at most once per tick.
- */
-function WatchPrimitiveProperties(vueInst, propertiesToTrack, handler) {
-  var immediate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-  var isHandled = false;
-
-  function requestHandle() {
-    if (!isHandled) {
-      isHandled = true;
-      vueInst.$nextTick(function () {
-        isHandled = false;
-        handler();
-      });
-    }
-  }
-
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = propertiesToTrack[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var prop = _step.value;
-
-      vueInst.$watch(prop, requestHandle, { immediate: immediate });
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-}
-
-/***/ }),
-/* 269 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "vue-map-container" },
-    [
-      _c("div", { ref: "vue-map", staticClass: "vue-map" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "vue-map-hidden" }, [_vm._t("default")], 2),
-      _vm._v(" "),
-      _vm._t("visible")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2b10bb2e", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
-/* 270 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_432a910a_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_streetViewPanorama_vue__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
-function injectStyle (context) {
-  if (disposed) return
-  __webpack_require__(271)
-}
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_streetViewPanoramaImpl_js___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_432a910a_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_streetViewPanorama_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_432a910a_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_streetViewPanorama_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue2-google-maps\\dist\\components\\streetViewPanorama.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-432a910a", Component.options)
-  } else {
-    hotAPI.reload("data-v-432a910a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(272);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(23).default
-var update = add("7e4b4737", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../vue-loader/lib/selector.js?type=styles&index=0!./streetViewPanorama.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../vue-loader/lib/selector.js?type=styles&index=0!./streetViewPanorama.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.vue-street-view-pano-container {\n  position: relative;\n}\n.vue-street-view-pano-container .vue-street-view-pano {\n  left: 0; right: 0; top: 0; bottom: 0;\n  position: absolute;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 273 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "vue-street-view-pano-container" },
-    [
-      _c("div", {
-        ref: "vue-street-view-pano",
-        staticClass: "vue-street-view-pano"
-      }),
-      _vm._v(" "),
-      _vm._t("default")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-432a910a", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
-/* 274 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_d90da4be_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_placeInput_vue__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_placeInputImpl_js___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_d90da4be_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_placeInput_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_d90da4be_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_placeInput_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue2-google-maps\\dist\\components\\placeInput.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d90da4be", Component.options)
-  } else {
-    hotAPI.reload("data-v-d90da4be", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 275 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("label", [
-    _c("span", { domProps: { textContent: _vm._s(_vm.label) } }),
-    _vm._v(" "),
-    _c("input", {
-      ref: "input",
-      class: _vm.className,
-      attrs: { type: "text", placeholder: _vm.placeholder }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d90da4be", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
-/* 276 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js__);
-/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_48eabe86_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_autocomplete_vue__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_autocompleteImpl_js___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_48eabe86_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_autocomplete_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_48eabe86_hasScoped_false_optionsId_0_buble_transforms_vue_loader_lib_selector_type_template_index_0_autocomplete_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue2-google-maps\\dist\\components\\autocomplete.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48eabe86", Component.options)
-  } else {
-    hotAPI.reload("data-v-48eabe86", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 277 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var arrayMap = __webpack_require__(49),
-    baseIteratee = __webpack_require__(78),
-    basePickBy = __webpack_require__(278),
-    getAllKeysIn = __webpack_require__(54);
-
-/**
- * Creates an object composed of the `object` properties `predicate` returns
- * truthy for. The predicate is invoked with two arguments: (value, key).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The source object.
- * @param {Function} [predicate=_.identity] The function invoked per property.
- * @returns {Object} Returns the new object.
- * @example
- *
- * var object = { 'a': 1, 'b': '2', 'c': 3 };
- *
- * _.pickBy(object, _.isNumber);
- * // => { 'a': 1, 'c': 3 }
- */
-function pickBy(object, predicate) {
-  if (object == null) {
-    return {};
-  }
-  var props = arrayMap(getAllKeysIn(object), function (prop) {
-    return [prop];
-  });
-  predicate = baseIteratee(predicate);
-  return basePickBy(object, props, function (value, path) {
-    return predicate(value, path[0]);
-  });
-}
-
-module.exports = pickBy;
-
-/***/ }),
-/* 278 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var baseGet = __webpack_require__(29),
-    baseSet = __webpack_require__(279),
-    castPath = __webpack_require__(14);
-
-/**
- * The base implementation of  `_.pickBy` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The source object.
- * @param {string[]} paths The property paths to pick.
- * @param {Function} predicate The function invoked per property.
- * @returns {Object} Returns the new object.
- */
-function basePickBy(object, paths, predicate) {
-    var index = -1,
-        length = paths.length,
-        result = {};
-
-    while (++index < length) {
-        var path = paths[index],
-            value = baseGet(object, path);
-
-        if (predicate(value, path)) {
-            baseSet(result, castPath(path, object), value);
-        }
-    }
-    return result;
-}
-
-module.exports = basePickBy;
-
-/***/ }),
-/* 279 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var assignValue = __webpack_require__(52),
-    castPath = __webpack_require__(14),
-    isIndex = __webpack_require__(35),
-    isObject = __webpack_require__(10),
-    toKey = __webpack_require__(15);
-
-/**
- * The base implementation of `_.set`.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {Array|string} path The path of the property to set.
- * @param {*} value The value to set.
- * @param {Function} [customizer] The function to customize path creation.
- * @returns {Object} Returns `object`.
- */
-function baseSet(object, path, value, customizer) {
-  if (!isObject(object)) {
-    return object;
-  }
-  path = castPath(path, object);
-
-  var index = -1,
-      length = path.length,
-      lastIndex = length - 1,
-      nested = object;
-
-  while (nested != null && ++index < length) {
-    var key = toKey(path[index]),
-        newValue = value;
-
-    if (index != lastIndex) {
-      var objValue = nested[key];
-      newValue = customizer ? customizer(objValue, key, nested) : undefined;
-      if (newValue === undefined) {
-        newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {};
-      }
-    }
-    assignValue(nested, key, newValue);
-    nested = nested[key];
-  }
-  return object;
-}
-
-module.exports = baseSet;
-
-/***/ }),
-/* 280 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("input", {
-    ref: "input",
-    attrs: { type: "text", placeholder: _vm.placeholder },
-    domProps: { value: _vm.value }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-48eabe86", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
-/* 281 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2cca580c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2cca580c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -32152,7 +22142,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 282 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32175,15 +22165,15 @@ if (false) {
 }
 
 /***/ }),
-/* 283 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Image_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_340a66f4_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Image_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_340a66f4_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Image_vue__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 var disposed = false
 /* script */
@@ -32231,7 +22221,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 284 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32243,8 +22233,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("progressive-img", {
     attrs: {
-      src: __webpack_require__(99)("./static" + _vm.src).src,
-      placeholder: __webpack_require__(99)("./static" + _vm.src).placeholder,
+      src: __webpack_require__(19)("./static" + _vm.src).src,
+      placeholder: __webpack_require__(19)("./static" + _vm.src).placeholder,
       alt: _vm.alt
     }
   })
@@ -32260,7 +22250,7 @@ if (false) {
 }
 
 /***/ }),
-/* 285 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {srcSet:__webpack_require__.p + "/images/9969f96fcddc7f89e353a75093ea2647-600.png 600w"+","+__webpack_require__.p + "/images/91c957658be51733beb99ab9c435d6f7-800.png 800w",images:[{path:__webpack_require__.p + "/images/9969f96fcddc7f89e353a75093ea2647-600.png",width:600,height:450},{path:__webpack_require__.p + "/images/91c957658be51733beb99ab9c435d6f7-800.png",width:800,height:600}],src:__webpack_require__.p + "/images/9969f96fcddc7f89e353a75093ea2647-600.png",toString:function(){return __webpack_require__.p + "/images/9969f96fcddc7f89e353a75093ea2647-600.png"},placeholder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAmCAIAAAAJGl9rAAAACXBIWXMAAAsSAAALEgHS3X78AAAGkklEQVRYw+1Y208UVxjn7+lzkz70waaPfWjSh9qkVWpb0yamJdYQbVKfTONdohQvxVJFLhakxloBuYiA3AVZlmXZBfY6O5ednevuzuzs7MzQ38yBDYq0ij7wwMnJyZmzM9/5fb/v+37nQMXqjmwVu7B2Ye1cWCXLKhbNHQTLsm3LsgsFI5vN7SBYeb3ApYW8pheM4o6AZVmWJKu8IKWYdJoXMd8RsARRSVIsleJohscIcOBs2yAcx3kjWI7X3PDldVXNKWoWE0XJKmquaJqv8PmqbTub11ExpZK1fVimWTK8NDKKRV0vaFqhaJgY0W3bfjHz8jqfEQVB5jOSpKjEK9THRg+Jk4AFy68Hy3YcfAN3HG8Cu6g+PObyWjaXz4G2bB6wXggEWMELsoLf3BcwKXkWiFcoEsSdZnmKTrNpAVS94FXFVhlNHMLbcAUZDbueHECiisRETtPSvJAGH6KCRWdDw69ZhBfxVbNAgBADHEZ8iEWaSQMTRXMpOo1CzggSXC0UCmTTLWHBUbACE/AM3ZWlHIjRCohYsQjP3O7ppyRnBUnBfh6RJkkRjNgALAIelANkkxF28DXGPMjVdODDgq4VcjkNaeplao6Y2gqW65Ouw4pJOnwlhnK5vAHCRbm1/eTZuUZZVtwE4oVQcN6V+5IFmyRLCobhZpJRLI+GYcIyiQBGxJRkFRIAe3manGdYnkS5YnOtwSJYR0aX1puXTxZBbHvexJcm3rn54WV/62ppFelDjx1RuWnbfcEiNWV4YcWu5RF0Ekww5T56r3nmPfpLJa+eDOJVxcbqJRGEcy5R+M5yTaCR+Rosy0ZyrRbN+uHWo00XHRMVp/GP9t65XinmHMIZqdl1/hyCAxY2Jt/myt0q5cGetRFlubY8L92HjChHYlQ0nopRbDTCBOZXoolUMBStOV9161aNKGsMx5LolN3At3GKWVyKRuNURpBxJJDO8yKVYpMUU36EjpSP/DVYmm7EYmFJypimZXrkuN0jlpDsTUoo5pUYFUvSMSBL0skUG0vQkPuGjt6ahrZIaPnU0aOpNL9ReGVF7e4f7uwbHhmfCS6u+PyLpPsDoUdD472PR+fWVxaCy8b62VpB4s2meZ8/xHGCLMmiIEH+oN2YiKIsr8+xiKMmmqBBGOkrUY+5BM0wXEdn3+DD3scH96vJGEVnuMzanSISp4bGnk7N+LFrNEYxUAeao72xf2isZ2AkBYZZHuvser6vscWwaZCZolkUAk1z8USKoTmW41Mp1p0zHMfxFMUkQQ/FwLQoK1AyyBXUAdpDkEUSdHh6mj3wmTQ1dqY91N4TIqGElgZDEWwB4zO+AMjzTgX37Jr2BaZn5xFKOA+Zgdtl6aogmosLkygpmKCralbN5oiIQw8V7wEDDEFjtOePZPiXoBjENEpx8cWllePVvs7O6rqRkfElN7e8DJM8PTWKpiBKmq67gqDrKFlIKBKGzwjYQC+4MvFGNwhSRM9m/Tcabw8/mVhYXCGExSguGFoa7O7af/j44SPH8A4vSYwgrNWNhXR27GLJNkxUemgpTpb/qxI31t2rXEIkSf7+x58+2VvZ2NzuD4T9C+F4kgE4jPP+wMHqn/dVfqMrcvzyhd9+OKR4x3N7U+vM4FAos1A/1qDltdoT+4yC8tJbzWuzhQLGlQ9KOzg8duLk+dPnax909QPW5FPfYjhCkNFspqPrUdtffzPLYflQZabqK7LtpdbJvgdjNXPX3733aUxN2jNfCNEBD5a9fVjEJ6Tn9LP5ufmQby4YCC7NzgXRUdtYmZ7xu5KWcLVjOZJgOKFvaKzm/ffiVy9ASuVs/srpW/GwcG2q6aPaA2mB72yuCvp6o3EaKvQWYA2PTjXcvF3/R8vQyGQoHJuZDUxMzd5oartS39jTPwQ0yRQXXolj0nCz5buq6pY/O1pb287VXT2z5wPG5+voG97z8ecoyWMXrs0vLn/59bej4xObRf/1gohiiUYTtzvuX21oedg3UFv3WzC0jOK/c6/ryu/Nw0/Gr12/MTo+ibsBLkKRRCqeoO5393b39J27VNd88Vc6FusfnWi6+09gaaVz4AnLC7+cOtvecfdNYRHOoBEZQUR5zwcWVFVFkeNuRVE0znh/IEDTNE5c/OpeHU1TzWZdOVazrChBYRiWg9ZAj3hBhGxArkzTfAt/YpRPFTK6N1X3lmWROwK5zUIV7Q3Neb7ZjvO/VV+xrT9U1tTEeUVReamR3X+N7MLahbXjYf0LTCJS9SVXKHcAAAAASUVORK5CYII=",width:600,height:450};

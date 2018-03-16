@@ -25,13 +25,13 @@ class CityController extends Controller
 	 */
 	public function store( Request $request )
 	{
-		$store = City::create( $request->all() );
+		$stored = City::create( $request->all() );
 
-		if( $store )
+		if( $stored )
 		{
-			return response( 'City created', 201 );
+			return response()->json( ['success' => true, 'message' => 'City created'], 201 );
 		} else {
-			return response( 'City not created', 400 );
+			return response()->json( ['success' => false, 'message' => 'City not created'], 400 );
 		}
 	}
 
@@ -57,13 +57,13 @@ class CityController extends Controller
 	 */
 	public function update( Request $request, City $city )
 	{
-		$update = $city->update( $request->all() );
+		$updated = $city->update( $request->all() );
 
-		if( $update )
+		if( $updated )
 		{
-			return response( 'City updated', 200 );
+			return response()->json( ['success' => true, 'message' => 'City updated'], 200 );
 		} else {
-			return response( 'City not updated', 400 );
+			return response()->json( ['success' => false, 'message' => 'City not updated'], 400 );
 		}
 	}
 
@@ -77,9 +77,9 @@ class CityController extends Controller
 	 */
 	public function destroy( City $city )
 	{
-		$destroy = $city->delete();
+		$destroyed = $city->delete();
 
-		if( $destroy )
+		if( $destroyed )
 		{
 			return response( 'City delete', 200 );
 		} else {
@@ -99,6 +99,13 @@ class CityController extends Controller
 		return response()->json( $city, 200 );
 	}
 
+	/**
+	 * Search city
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function search( $search ) {
 		$result = City::where('name', 'like', '%'.$search.'%')
 			->orWhere('id', $search)

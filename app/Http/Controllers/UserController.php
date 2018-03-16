@@ -34,7 +34,7 @@ class UserController extends Controller
 		if( $attempt )
 		{
 			$user = Auth::user();
-			$token = $user->createToken( config('app.name') )->accessToken;
+			$token = $user->createToken( config( 'app.name' ) )->accessToken;
 			$user->update( [ 'api_token' => $token ] );
 
 			return response()->json( [ 'success' => true, 'token' => $token ], 200 );

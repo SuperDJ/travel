@@ -17,6 +17,7 @@ class EditUsersTableAddedCountries extends Migration
 			$table->integer('country_id')->unsigned()->nullable()->after('language_id');
 			$table->index('country_id');
 			$table->foreign('country_id')->references('id')->on('countries');
+			$table->text('api_key')->nullable()->after('country_id');
 		});
     }
 

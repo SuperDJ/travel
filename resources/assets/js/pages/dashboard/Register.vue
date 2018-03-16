@@ -1,15 +1,37 @@
 <template>
     <v-card>
-        <form  @keyup.enter="submit(form)" @submit.prevent="submit(form)">
+        <form  @keyup.enter="submit( form )" @submit.prevent="submit( form )">
             <v-card-text>
-                <h1 class="display-4">Register</h1>
+                <h1 class="display-4 mb-4">Register</h1>
 
-                <v-text-field label="Email address" type="email" autocomplete="email" required
-                              v-model="form.email" />
+                <v-alert :type="success ? 'success' : 'error'" v-model="message.length > 1">
+                    {{ message }}
+                </v-alert>
 
-                <v-text-field label="First name" autocomplete="given-name" required v-model="form.first_name" />
+                <v-text-field
+                    label="Email address"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    :error-messages="errors['email']"
+                    v-model="form.email"
+                />
 
-                <v-text-field label="Last name" autocomplete="family-name" required v-model="form.last_name" />
+                <v-text-field
+                    label="First name"
+                    autocomplete="given-name"
+                    required
+                    :error-messages="errors['first_name']"
+                    v-model="form.first_name"
+                />
+
+                <v-text-field
+                    label="Last name"
+                    autocomplete="family-name"
+                    required
+                    :error-messages="errors['last_name']"
+                    v-model="form.last_name"
+                />
 
                 <v-select
                     label="Country"
@@ -20,6 +42,7 @@
                     item-value="id"
                     no-data="No countries found"
                     cache-items
+                    :error-messages="errors['country_id']"
                     :search-input.sync="countrySearch"
                 />
 
@@ -32,6 +55,7 @@
                     item-value="id"
                     no-data="No languages found"
                     cache-items
+                    :error-messages="errors['language_id']"
                     :search-input.sync="languageSearch"
                 />
 
@@ -44,6 +68,7 @@
                     item-value="id"
                     no-data="No currency found"
                     cache-items
+                    :error-messages="errors['currency_id']"
                     :search-input.sync="currencySearch"
                 />
 
@@ -56,6 +81,7 @@
                     :type="passwordVisible ? 'text' : 'password'"
                     required
                     counter
+                    :error-messages="errors['password']"
                     v-model="form.password"
                 />
 
@@ -68,6 +94,7 @@
                     :type="passwordRepeatVisible ? 'text' : 'password'"
                     required
                     counter
+                    :error-messages="errors['passwordRepeat']"
                     v-model="form.passwordRepeat"
                 />
             </v-card-text>
@@ -75,9 +102,9 @@
             <v-card-actions>
                 <v-btn color="primary" type="submit">Register</v-btn>
 
-                <v-btn flat color="primary" :to="{name: 'Login'}" type="button">Login</v-btn>
+                <v-btn flat color="primary" :to="{name: 'Login'}">Login</v-btn>
 
-                <v-btn flat color="primary" :to="{name: 'Index'}" type="button">Back to website</v-btn>
+                <v-btn flat color="primary" :to="{name: 'Index'}">Back to website</v-btn>
             </v-card-actions>
         </form>
     </v-card>
@@ -126,6 +153,21 @@
             {
 				return Object.values( this.$store.getters.currencySearch );
 			},
+
+            message()
+            {
+            	return this.$store.getters.message;
+            },
+
+            success()
+            {
+            	return this.$store.getters.success;
+            },
+
+            errors()
+            {
+            	return this.$store.getters.errors;
+            }
         },
 
         methods: {
@@ -134,11 +176,10 @@
              */
 			submit( data )
             {
-            	// Base64 encode password
-            	data.password = btoa( data.password );
-            	data.passwordRepeat = btoa( data.passwordRepeat );
-
             	this.$store.dispatch( 'userRegister', data );
+
+            	this.form.password = '';
+            	this.form.passwordRepeat = '';
             },
         },
 

@@ -1,15 +1,19 @@
 import Vue from 'vue';
+import { store } from '@/store/store';
 import Router from 'vue-router';
 
-const Web = () => import('@/layouts/Web');
-const Index = () => import('@/pages/web/Index');
-const Flights = () => import('@/pages/web/Flights');
+const Web = () => import( '@/layouts/Web' );
+const Index = () => import( '@/pages/web/Index' );
+const Flights = () => import( '@/pages/web/Flights' );
 
-const Account = () => import('@/layouts/LoginRegister');
-const Register = () => import('@/pages/dashboard/Register');
-const Login = () => import('@/pages/dashboard/Login');
+const Account = () => import( '@/layouts/LoginRegister' );
+const Register = () => import( '@/pages/dashboard/Register' );
+const Login = () => import( '@/pages/dashboard/Login' );
 
-Vue.use(Router);
+const Dashboard = () => import( '@/layouts/Dashboard' );
+const Overview = () => import( '@/pages/dashboard/Overview' );
+
+Vue.use( Router );
 
 export default new Router({
 	mode: 'history',
@@ -49,6 +53,25 @@ export default new Router({
 					path: 'login',
 					name: 'Login',
 					component: Login
+				}
+			]
+		},
+		{
+			path: '/dashboard',
+			component: Dashboard,
+			beforeEnter: ( to, from, next ) => {
+				if( store.getters.userLoggedIn )
+				{
+					next();
+				} else {
+					next( false );
+				}
+			},
+			children: [
+				{
+					path: 'overview',
+					name: 'Overview',
+					component: Overview
 				}
 			]
 		}

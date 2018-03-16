@@ -15,8 +15,8 @@ import App from '@/pages/App';
 
 new Vue({
 	el: '#app',
-	router,
 	store,
+	router,
 	render: h => h(App)
 });
 

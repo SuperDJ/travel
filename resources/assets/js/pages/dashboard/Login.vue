@@ -1,16 +1,36 @@
 <template>
     <v-card>
-        <form @keyup.enter="submit">
+        <form @keyup.enter="submit( form )" @submit.prevent="submit( form )">
             <v-card-text>
-                <h1 class="display-4">Login</h1>
+                <h1 class="display-4 mb-4">Login</h1>
 
-                <v-text-field label="Email address" required v-model="email" />
+                <v-alert :type="success ? 'success' : 'error'" v-model="message.length > 1">
+                    {{ message }}
+                </v-alert>
 
-                <v-text-field label="Password" type="password" required v-model="password" />
+                <v-text-field
+                    label="Email address"
+                    required
+                    :error-messages="errors['email']"
+                    v-model="form.email"
+                />
+
+                <v-text-field
+                    label="Password"
+                    hint="At least 8 characters"
+                    minlength="8"
+                    :append-icon="passwordVisible ? 'visibility_off' : 'visibility'"
+                    :append-icon-cb="() => (passwordVisible = !passwordVisible)"
+                    :type="passwordVisible ? 'text' : 'password'"
+                    required
+                    counter
+                    :error-messages="errors['password']"
+                    v-model="form.password"
+                />
             </v-card-text>
 
             <v-card-actions>
-                <v-btn @click="submit" color="primary">Login</v-btn>
+                <v-btn type="submit" color="primary">Login</v-btn>
 
                 <v-btn flat color="primary" :to="{name: 'Register'}">Register</v-btn>
 
@@ -27,38 +47,50 @@
 			title: 'Login'
 		},
 
-        computed: {
-        	email: {
-        		get()
-                {
-        			return this.$store.getters.userEmail;
+        data()
+        {
+        	return {
+        	    form: {
+        	    	email: '',
+                    password: '',
                 },
-                set( email )
-                {
-                    this.$store.commit( 'userEmail', email );
-                }
+                passwordVisible: false,
+            }
+        },
+
+        computed: {
+			success()
+            {
+                return this.$store.getters.success;
             },
 
-            password: {
-        		get()
-                {
-                	return this.$store.getters.userPassword;
-                },
-                set( password )
-                {
-                	this.$store.commit( 'userPassword', password );
-                }
+            message()
+            {
+            	return this.$store.getters.message;
+            },
+
+            errors()
+            {
+            	return this.$store.getters.errors;
             }
         },
 
         methods: {
-        	submit() {
-        		let data = {
-        			email: this.email,
-                    password: this.password
-                };
+        	submit( data )
+            {
+                this.$store.dispatch( 'userLogin', data );
 
-                this.$store.dispatch( 'userLogin', data);
+                this.form.password = '';
+
+                //this.$router.push( { name: 'Overview' } );
+            }
+        },
+
+        beforeCreate()
+        {
+        	if( this.$store.getters.userLoggedIn )
+        	{
+        		//this.$router.push( { name: 'Overview ' } );
             }
         }
     }

@@ -4,16 +4,19 @@ export default
 		all: {},
 		data: {},
 		loggedIn: false,
+		token: '',
 	},
 
 	mutations: {
-
 		/**
 		 * Set user to logged in
+		 *
 		 * @param state
+		 * @param token
 		 */
-		userLogin( state ) {
+		userLogin( state, token ) {
 			state.loggedIn = true;
+			state.token = token;
 		},
 
 		/**
@@ -24,7 +27,8 @@ export default
 		userLogout( state )
 		{
 			state.loggedIn = false;
-		}
+			state.token = '';
+		},
 	},
 
 	actions: {
@@ -36,7 +40,40 @@ export default
 		 */
 		userLogin( context, data )
 		{
+			// Base64 encode password
+			data.password = btoa( data.password );
 
+			fetch( '/api/users/login', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify( data )
+			})
+				.then( response => {
+					return response.json();
+				})
+				.then( response => {
+					// If there are any errors
+					if( response.errors )
+					{
+						context.commit( 'errors', response.errors );
+					}
+
+					context.commit( 'message', response.message );
+					context.commit( 'success', response.success ? response.success : false );
+
+					if( response.token )
+					{
+						context.commit( 'userLogin', response.token );
+					}
+				})
+				.catch( error => {
+					console.error( 'userLogin', error );
+				});
 		},
 
 		/**
@@ -47,7 +84,11 @@ export default
 		 */
 		userRegister( context, data )
 		{
-		 	fetch( '/api/user/register', {
+			// Base64 encode password
+			data.password = btoa( data.password );
+			data.passwordRepeat = btoa( data.passwordRepeat );
+
+		 	fetch( '/api/users/register', {
 		 		headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -61,7 +102,14 @@ export default
 					return response.json();
 				})
 				.then( response => {
+					// If there are any errors
+					if( response.errors )
+					{
+						context.commit( 'errors', response.errors );
+					}
 
+					context.commit( 'message', response.message );
+					context.commit( 'success', response.success ? response.success : false );
 				})
 				.catch( error => {
 					console.error( 'userRegister', error );
@@ -77,7 +125,7 @@ export default
 		 */
 		userLoggedIn( state )
 		{
-			return state.loggedIn;
+			return state.token.length > 1 && state.loggedIn === true;
 		},
 
 		/**

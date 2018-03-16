@@ -17,11 +17,14 @@ import flight from './modules/flight';
 import language from './modules/language';
 import user from './modules/user';
 
-Vue.use(Vuex);
+Vue.use( Vuex );
 
 export const store = new Vuex.Store({
 	state: {
 		currentDate: '',
+		success: '',
+		message: '',
+		errors: []
 	},
 	getters,
 	mutations,

@@ -1,5 +1,20 @@
 export default
 {
+	message( state, message )
+	{
+		state.message = message;
+	},
+
+	success( state, success )
+	{
+		state.success = success;
+	},
+
+	errors( state, errors )
+	{
+		state.errors = errors;
+	},
+
 	/**
 	 * Set the current date
 	 * This makes sure a user can't search before this date

@@ -13,7 +13,7 @@
 
                 <v-select
                     label="Country"
-                    v-model.number="form.country"
+                    v-model.number="form.country_id"
                     autocomplete
                     :items="countries"
                     item-text="name"
@@ -25,7 +25,7 @@
 
                 <v-select
                     label="Language"
-                    v-model.number="form.language"
+                    v-model.number="form.language_id"
                     autocomplete
                     :items="languages"
                     item-text="name"
@@ -37,7 +37,7 @@
 
                 <v-select
                     label="Currency"
-                    v-model.number="form.currency"
+                    v-model.number="form.currency_id"
                     autocomplete
                     :items="currencies"
                     item-text="name"
@@ -97,9 +97,9 @@
 					first_name: '',
 					last_name: '',
 					passwordRepeat: '',
-					currency: 0,
-					country: 0,
-					language: 0,
+					currency_id: 0,
+					country_id: 0,
+					language_id: 0,
                     password: '',
                     email: ''
                 },

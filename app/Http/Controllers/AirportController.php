@@ -10,6 +10,7 @@ class AirportController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\Airport[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index()
@@ -29,9 +30,9 @@ class AirportController extends Controller
 
 		if( $stored )
 		{
-			return response()->json( ['success' => true, 'message' => 'Airport created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'Airport created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Airport not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Airport not created' ], 400 );
 		}
 	}
 
@@ -61,9 +62,9 @@ class AirportController extends Controller
 
 		if( $updated )
 		{
-			return response()->json( ['success' => true, 'message' => 'Airport updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Airport updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Airport not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Airport not updated' ], 400 );
 		}
 	}
 
@@ -81,9 +82,9 @@ class AirportController extends Controller
 
 		if( $destroyed )
 		{
-			return response()->json( ['success' => true, 'message' => 'City deleted'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'City deleted' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'City not deleted'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'City not deleted' ], 400 );
 		}
 	}
 
@@ -111,7 +112,7 @@ class AirportController extends Controller
 		if( ctype_digit( $search ) )
 		{
 			$found = Airport::where( 'id', (int)$search )
-			->with(['city' => function( $query )
+			->with([ 'city' => function( $query )
 			{
 				$query->with( 'country' );
 			}])

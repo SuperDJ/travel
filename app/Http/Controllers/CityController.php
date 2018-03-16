@@ -10,6 +10,7 @@ class CityController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\City[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index()
@@ -29,9 +30,9 @@ class CityController extends Controller
 
 		if( $stored )
 		{
-			return response()->json( ['success' => true, 'message' => 'City created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'City created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'City not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'City not created' ], 400 );
 		}
 	}
 
@@ -61,9 +62,9 @@ class CityController extends Controller
 
 		if( $updated )
 		{
-			return response()->json( ['success' => true, 'message' => 'City updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'City updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'City not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'City not updated' ], 400 );
 		}
 	}
 
@@ -231,10 +232,10 @@ class CityController extends Controller
 								$longitude = explode('.', $location[0] )[0];
 
 								$data = [
-									['name', $cities->Name],
-									['country_id', $countryId],
-									['latitude', 'like', $latitude.'%'],
-									['longitude', 'like', $longitude.'%']
+									[ 'name', $cities->Name ],
+									[ 'country_id', $countryId ],
+									[ 'latitude', 'like', $latitude.'%' ],
+									[ 'longitude', 'like', $longitude.'%' ]
 								];
 
 								$duplicate = City::where( $data )->count();
@@ -244,10 +245,10 @@ class CityController extends Controller
 								switch($duplicate)
 								{
 									case 1:
-										City::where( $data )->first()->update( ['iso'  => $cities->Id, 'iata' => $cities->IataCode] );
+										City::where( $data )->first()->update( [ 'iso'  => $cities->Id, 'iata' => $cities->IataCode] );
 										break;
 									case 2:
-										City::where( $data )->first()->update( ['iso'  => $cities->Id, 'iata' => $cities->IataCode] );
+										City::where( $data )->first()->update( [ 'iso'  => $cities->Id, 'iata' => $cities->IataCode] );
 										City::where( $data )->orderBy( 'id', 'desc' )->first()->delete();
 										break;
 								}

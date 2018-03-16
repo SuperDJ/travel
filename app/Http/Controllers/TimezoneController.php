@@ -10,6 +10,7 @@ class TimezoneController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\Timezone[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index()
@@ -29,9 +30,9 @@ class TimezoneController extends Controller
 
 		if( $stored )
 		{
-			return response()->json( ['success' => true, 'message' => 'Timezone created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'Timezone created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Timezone not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Timezone not created' ], 400 );
 		}
 	}
 
@@ -61,9 +62,9 @@ class TimezoneController extends Controller
 
 		if( $updated )
 		{
-			return response()->json( ['success' => true, 'message' => 'Timezone updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Timezone updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Timezone not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Timezone not updated' ], 400 );
 		}
 	}
 
@@ -81,9 +82,9 @@ class TimezoneController extends Controller
 
 		if( $destroyed )
 		{
-			return response()->json( ['success' => true, 'message' => 'Timezone deleted'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Timezone deleted' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Timezone not deleted'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Timezone not deleted' ], 400 );
 		}
 	}
 

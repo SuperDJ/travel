@@ -9,6 +9,7 @@ class LanguageController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\Language[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index()
@@ -28,9 +29,9 @@ class LanguageController extends Controller
 
 		if( $stored )
 		{
-			return response()->json( ['success' => true, 'message' => 'Language created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'Language created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Language not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Language not created' ], 400 );
 		}
 	}
 
@@ -60,9 +61,9 @@ class LanguageController extends Controller
 
 		if( $updated )
 		{
-			return response()->json( ['success' => true, 'message' => 'Language updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Language updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Language not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Language not updated' ], 400 );
 		}
 	}
 
@@ -80,9 +81,9 @@ class LanguageController extends Controller
 
 		if( $destroyed )
 		{
-			return response()->json( ['success' => true, 'message' => 'Language deleted'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Language deleted' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Language not deleted'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Language not deleted' ], 400 );
 		}
 	}
 

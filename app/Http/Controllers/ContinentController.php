@@ -9,6 +9,7 @@ class ContinentController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\Continent[]|\Illuminate\Database\Eloquent\Collection
 	 */
     public function index()
@@ -28,9 +29,9 @@ class ContinentController extends Controller
 
     	if( $stored )
     	{
-			return response()->json( ['success' => true, 'message' => 'Continent created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'Continent created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Continent not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Continent not created' ], 400 );
 		}
 	}
 
@@ -60,9 +61,9 @@ class ContinentController extends Controller
 
     	if( $updated )
     	{
-			return response()->json( ['success' => true, 'message' => 'Continent updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Continent updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Continent not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Continent not updated' ], 400 );
 		}
 	}
 
@@ -80,9 +81,9 @@ class ContinentController extends Controller
 
     	if( $destroyed )
     	{
-			return response()->json( ['success' => true, 'message' => 'Continent deleted'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Continent deleted' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Continent not deleted'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Continent not deleted' ], 400 );
 		}
 	}
 
@@ -107,9 +108,9 @@ class ContinentController extends Controller
 	 */
 	public function search( $search )
 	{
-		$result = Continent::where('name', 'like', '%'.$search.'%')
-		->orWhere('id', $search)
-		->orderBy('name', 'asc')
+		$result = Continent::where( 'name', 'like', '%'.$search.'%' )
+		->orWhere( 'id', $search )
+		->orderBy( 'name', 'asc' )
 		->get();
 
 		return response()->json( $result, 200 );
@@ -126,8 +127,8 @@ class ContinentController extends Controller
     		$data[] = [
     			'name' => $value,
 				'iso' => $key,
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('Y-m-d H:i:s')
+				'created_at' => date( 'Y-m-d H:i:s' ),
+				'updated_at' => date( 'Y-m-d H:i:s' )
 			];
 		}
 
@@ -141,7 +142,7 @@ class ContinentController extends Controller
 		$cities = $continent->countries()
 			->inRandomOrder()
 			->take(7)
-			->with( ['cities' => function( $query )
+			->with( [ 'cities' => function( $query )
 			{
 				$query->where('capital', 1);
 			}] )

@@ -12,6 +12,7 @@ class CountryController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
+	 *
 	 * @return \App\Country[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index()
@@ -31,9 +32,9 @@ class CountryController extends Controller
 
 		if( $stored )
 		{
-			return response()->json( ['success' => true, 'message' => 'Country created'], 201 );
+			return response()->json( [ 'success' => true, 'message' => 'Country created' ], 201 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Country not created'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Country not created' ], 400 );
 		}
 	}
 
@@ -62,9 +63,9 @@ class CountryController extends Controller
 
 		if( $updated )
 		{
-			return response()->json( ['success' => true, 'message' => 'Country updated'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Country updated' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Country not updated'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Country not updated' ], 400 );
 		}
 	}
 
@@ -81,9 +82,9 @@ class CountryController extends Controller
 
 		if( $destroyed )
 		{
-			return response()->json( ['success' => true, 'message' => 'Country deleted'], 200 );
+			return response()->json( [ 'success' => true, 'message' => 'Country deleted' ], 200 );
 		} else {
-			return response()->json( ['success' => false, 'message' => 'Country not deleted'], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'Country not deleted' ], 400 );
 		}
 	}
 

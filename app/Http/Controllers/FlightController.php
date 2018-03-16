@@ -17,6 +17,7 @@ class FlightController extends Controller
 
 	/**
 	 * Retrieve the cheapest quotes from cache prices
+	 *
 	 * @param \Illuminate\Http\Request $request
 	 *
 	 * @return \Illuminate\Http\JsonResponse
@@ -24,7 +25,6 @@ class FlightController extends Controller
 	public function browseQuotes( Request $request )
 	{
 		$response = $this->browse( 'browsequotes', $request );
-		//return response()->json( $response, 200 );
 
 		$data = [];
 		$i = 0;

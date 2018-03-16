@@ -9819,9 +9819,9 @@ exports.default = {
         first_name: '',
         last_name: '',
         passwordRepeat: '',
-        currency: 0,
-        country: 0,
-        language: 0,
+        currency_id: 0,
+        country_id: 0,
+        language_id: 0,
         password: '',
         email: ''
       },
@@ -20377,11 +20377,11 @@ var render = function() {
                 }
               },
               model: {
-                value: _vm.form.country,
+                value: _vm.form.country_id,
                 callback: function($$v) {
-                  _vm.$set(_vm.form, "country", _vm._n($$v))
+                  _vm.$set(_vm.form, "country_id", _vm._n($$v))
                 },
-                expression: "form.country"
+                expression: "form.country_id"
               }
             }),
             _vm._v(" "),
@@ -20402,11 +20402,11 @@ var render = function() {
                 }
               },
               model: {
-                value: _vm.form.language,
+                value: _vm.form.language_id,
                 callback: function($$v) {
-                  _vm.$set(_vm.form, "language", _vm._n($$v))
+                  _vm.$set(_vm.form, "language_id", _vm._n($$v))
                 },
-                expression: "form.language"
+                expression: "form.language_id"
               }
             }),
             _vm._v(" "),
@@ -20427,11 +20427,11 @@ var render = function() {
                 }
               },
               model: {
-                value: _vm.form.currency,
+                value: _vm.form.currency_id,
                 callback: function($$v) {
-                  _vm.$set(_vm.form, "currency", _vm._n($$v))
+                  _vm.$set(_vm.form, "currency_id", _vm._n($$v))
                 },
-                expression: "form.currency"
+                expression: "form.currency_id"
               }
             }),
             _vm._v(" "),

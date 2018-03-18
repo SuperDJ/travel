@@ -1,10 +1,9 @@
 <template>
     <v-card>
+        <v-card-title primary-title class="headline white--text primary">Login</v-card-title>
         <form @keyup.enter="submit( form )" @submit.prevent="submit( form )">
             <v-card-text>
-                <h1 class="display-4 mb-4">Login</h1>
-
-                <v-alert :type="success ? 'success' : 'error'" v-model="message.length > 1">
+                <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1">
                     {{ message }}
                 </v-alert>
 
@@ -41,6 +40,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default
     {
 		metaInfo: {
@@ -59,20 +59,11 @@
         },
 
         computed: {
-			success()
-            {
-                return this.$store.getters.success;
-            },
-
-            message()
-            {
-            	return this.$store.getters.message;
-            },
-
-            errors()
-            {
-            	return this.$store.getters.errors;
-            }
+            ...mapGetters([
+                'success',
+                'message',
+                'errors'
+            ])
         },
 
         methods: {
@@ -80,18 +71,8 @@
             {
                 this.$store.dispatch( 'userLogin', data );
 
-                this.form.password = '';
-
-                //this.$router.push( { name: 'Overview' } );
+                this.$router.push( { name: 'Dashboard' } );
             }
         },
-
-        beforeCreate()
-        {
-        	if( this.$store.getters.userLoggedIn )
-        	{
-        		//this.$router.push( { name: 'Overview ' } );
-            }
-        }
     }
 </script>

@@ -1,0 +1,12 @@
+{
+	"name": "Travel",
+	"short_name": "Travel",
+	"description": "You can easily book a hotel, flight or rent a car. Don't know where you want to go on you next holiday checkout some of the activities",
+	"start_url": ".",
+	"display": "standalone",
+	"orientation": "portrait",
+	"dir": "ltr",
+	"lang": "en-US",
+	"background_color": "#1976d2",
+	"theme_color": "#1976d2"
+}

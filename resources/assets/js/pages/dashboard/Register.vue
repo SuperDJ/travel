@@ -1,10 +1,9 @@
 <template>
     <v-card>
+        <v-card-title primary-title class="headline white--text primary">Register</v-card-title>
         <form  @keyup.enter="submit( form )" @submit.prevent="submit( form )">
             <v-card-text>
-                <h1 class="display-4 mb-4">Register</h1>
-
-                <v-alert :type="success ? 'success' : 'error'" v-model="message.length > 1">
+                <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1">
                     {{ message }}
                 </v-alert>
 
@@ -102,15 +101,16 @@
             <v-card-actions>
                 <v-btn color="primary" type="submit">Register</v-btn>
 
-                <v-btn flat color="primary" :to="{name: 'Login'}">Login</v-btn>
+                <v-btn flat color="primary" :to="{ name: 'Login' }">Login</v-btn>
 
-                <v-btn flat color="primary" :to="{name: 'Index'}">Back to website</v-btn>
+                <v-btn flat color="primary" :to="{ name: 'Index' }">Back to website</v-btn>
             </v-card-actions>
         </form>
     </v-card>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default
     {
 		metaInfo: {
@@ -153,21 +153,11 @@
             {
 				return Object.values( this.$store.getters.currencySearch );
 			},
-
-            message()
-            {
-            	return this.$store.getters.message;
-            },
-
-            success()
-            {
-            	return this.$store.getters.success;
-            },
-
-            errors()
-            {
-            	return this.$store.getters.errors;
-            }
+            ...mapGetters([
+                'message',
+                'success',
+                'errors'
+            ]),
         },
 
         methods: {
@@ -222,6 +212,6 @@
 					this.$store.dispatch( 'currencySearch', currency );
 				}
 			}
-        }
+        },
     }
 </script>

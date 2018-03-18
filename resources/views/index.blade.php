@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="https://unpkg.com/vuetify/dist/vuetify.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
+        <meta name="theme-color" content="#1976d2">
+        <meta name="msapplication-navbutton-color" content="#1976d2">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#1976d2">
+        <link rel="manifest" href="/manifest.json">
+
         <title>Laravel</title>
     </head>
     <body>

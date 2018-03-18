@@ -48,11 +48,27 @@ export default new Router({
 					path: 'register',
 					name: 'Register',
 					component: Register,
+					beforeEnter: ( to, form, next ) => {
+						if( store.getters.userLoggedIn )
+						{
+							next( { name: 'Dashboard' } )
+						} else {
+							next();
+						}
+					}
 				},
 				{
 					path: 'login',
 					name: 'Login',
-					component: Login
+					component: Login,
+					beforeEnter: ( to, form, next ) => {
+						if( store.getters.userLoggedIn )
+						{
+							next( { name: 'Dashboard' } )
+						} else {
+							next();
+						}
+					}
 				}
 			]
 		},
@@ -70,7 +86,7 @@ export default new Router({
 			children: [
 				{
 					path: 'overview',
-					name: 'Overview',
+					name: 'Dashboard',
 					component: Overview
 				}
 			]

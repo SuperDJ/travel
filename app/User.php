@@ -20,20 +20,10 @@ class User extends Authenticatable
     protected $hidden = ['password', 'remember_token', 'api_token'];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function language()
+	public function profile()
 	{
-    	return $this->hasOne( Language::class );
-	}
-
-	public function country()
-	{
-		return $this->hasOne( Country::class );
-	}
-
-	public function currency()
-	{
-		return $this->hasOne( Currency::class );
+		return $this->belongsTo( Profile::class );
 	}
 }

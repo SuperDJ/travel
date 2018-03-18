@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title primary-title class="headline white--text primary">Login</v-card-title>
-        <form @keyup.enter="submit( form )" @submit.prevent="submit( form )">
+        <form @submit.prevent="submit( form )">
             <v-card-text>
                 <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1">
                     {{ message }}
@@ -70,6 +70,8 @@
         	submit( data )
             {
                 this.$store.dispatch( 'userLogin', data );
+
+                this.form.password = '';
 
                 this.$router.push( { name: 'Dashboard' } );
             }

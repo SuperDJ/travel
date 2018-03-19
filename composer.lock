@@ -1234,16 +1234,16 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v5.0.2",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "4afb597b1eba0cbb8ced30c8c940029d622cb445"
+                "reference": "9dbcc3d6f8f20f1a83cbef73bbb563ce59e43ded"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/4afb597b1eba0cbb8ced30c8c940029d622cb445",
-                "reference": "4afb597b1eba0cbb8ced30c8c940029d622cb445",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/9dbcc3d6f8f20f1a83cbef73bbb563ce59e43ded",
+                "reference": "9dbcc3d6f8f20f1a83cbef73bbb563ce59e43ded",
                 "shasum": ""
             },
             "require": {
@@ -1299,7 +1299,7 @@
                 "oauth",
                 "passport"
             ],
-            "time": "2018-03-14T12:28:42+00:00"
+            "time": "2018-03-15T12:39:02+00:00"
         },
         {
             "name": "laravel/tinker",

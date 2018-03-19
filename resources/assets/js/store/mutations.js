@@ -1,15 +1,45 @@
 export default
 {
+	/**
+	 * Set the intial store
+	 */
+	initial( state )
+	{
+		if( sessionStorage.getItem( 'loggedIn' ) && sessionStorage.getItem( 'token' ) )
+		{
+			state.user.token = sessionStorage.getItem( 'token' );
+			state.user.loggedIn = sessionStorage.getItem( 'loggedIn' );
+		}
+	},
+
+	/**
+	 * Set a custom message
+	 *
+	 * @param state
+	 * @param message
+	 */
 	message( state, message )
 	{
 		state.message = message;
 	},
 
+	/**
+	 * Store request success
+	 *
+	 * @param state
+	 * @param success
+	 */
 	success( state, success )
 	{
 		state.success = success;
 	},
 
+	/**
+	 * Store request errors
+	 *
+	 * @param state
+	 * @param errors
+	 */
 	errors( state, errors )
 	{
 		state.errors = errors;

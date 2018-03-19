@@ -258,7 +258,7 @@
         },
 
         created() {
-    		this.$store.commit(' currentDate' );
+    		this.$store.commit( 'currentDate' );
         }
     }
 </script>

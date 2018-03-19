@@ -3,7 +3,7 @@
         <v-card-title primary-title class="headline white--text primary">Login</v-card-title>
         <form @submit.prevent="submit( form )">
             <v-card-text>
-                <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1">
+                <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1" transition="scale-transition">
                     {{ message }}
                 </v-alert>
 
@@ -69,11 +69,10 @@
         methods: {
         	submit( data )
             {
-                this.$store.dispatch( 'userLogin', data );
-
-                this.form.password = '';
-
-                this.$router.push( { name: 'Dashboard' } );
+                this.$store.dispatch( 'userLogin', data ).then(() => {
+					this.form.password = '';
+					this.$router.push( { name: 'Dashboard' } );
+                });
             }
         },
     }

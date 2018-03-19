@@ -8,6 +8,8 @@ class Profile extends Model
 {
 	protected $guarded = ['id'];
 
+	public $timestamps = false; // Remove the timestamps from create
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */

@@ -21,7 +21,6 @@
         </v-toolbar>
 
         <v-navigation-drawer fixed temporary v-model="drawer">
-            <!-- Menu -->
             <v-list class="pt-0" dense>
                 <template v-for="item in items">
                     <v-layout row v-if="item.heading" align-center :key="item.heading">
@@ -65,12 +64,9 @@
                     </v-list-tile>
                 </template>
             </v-list>
-            <!-- End menu -->
         </v-navigation-drawer>
 
-        <!-- Content -->
         <router-view></router-view>
-        <!-- End content -->
     </v-app>
 </template>
 
@@ -106,13 +102,13 @@
                     	title: 'Destinations',
                         icon: 'expand_more',
                         children: [
-                            {title: 'Africa', to: '/location/africa'},
-                            {title: 'Antarctica', to: '/location/antarctica'},
-                            {title: 'Asia', to: '/location/asia'},
-                            {title: 'Europe', to: '/location/europe'},
-                            {title: 'North America', to: '/location/north-america'},
-                            {title: 'Oceania', to: '/location/oceania'},
-                            {title: 'South America', to: '/location/south-america'},
+                            { title: 'Africa', to: '/location/africa' },
+                            { title: 'Antarctica', to: '/location/antarctica' },
+                            { title: 'Asia', to: '/location/asia' },
+                            { title: 'Europe', to: '/location/europe' },
+                            { title: 'North America', to: '/location/north-america' },
+                            { title: 'Oceania', to: '/location/oceania' },
+                            { title: 'South America', to: '/location/south-america' },
                         ]
                     }
                 ]

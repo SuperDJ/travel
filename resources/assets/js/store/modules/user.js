@@ -3,8 +3,7 @@ export default
 	state: {
 		all: {},
 		data: {},
-		loggedIn: false,
-		token: '',
+		loggedIn: !!sessionStorage.getItem( 'token' )
 	},
 
 	mutations: {
@@ -14,9 +13,8 @@ export default
 		 * @param state
 		 * @param token
 		 */
-		userLogin( state, token ) {
+		userLogin( state ) {
 			state.loggedIn = true;
-			state.token = token;
 		},
 
 		/**
@@ -27,7 +25,7 @@ export default
 		userLogout( state )
 		{
 			state.loggedIn = false;
-			state.token = '';
+			sessionStorage.removeItem( 'token' );
 		},
 	},
 
@@ -40,42 +38,46 @@ export default
 		 */
 		userLogin( context, data )
 		{
-			let details = {
-				email: data.email,
-				password: btoa( data.password ) // Base64 encode password
-			};
+			return new Promise( resolve => {
+				let details = {
+					email: data.email,
+					password: btoa( data.password ) // Base64 encode password
+				};
 
-			fetch( '/api/users/login', {
-				headers: {
-					'X-Requested-With': 'XMLHttpRequest',
-					'X-CSRF-token': window.token,
-					'Content-Type': 'application/json',
-					'Accept': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify( details )
-			})
-				.then( response => {
-					return response.json();
+				fetch( '/api/users/login', {
+					headers: {
+						'X-Requested-With': 'XMLHttpRequest',
+						'X-CSRF-token': window.token,
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					},
+					method: 'POST',
+					body: JSON.stringify( details )
 				})
-				.then( response => {
-					// If there are any errors
-					if( response.errors )
-					{
-						context.commit( 'errors', response.errors );
-					}
+					.then( response => {
+						return response.json();
+					})
+					.then( response => {
+						// If there are any errors
+						if( response.errors )
+						{
+							context.commit( 'errors', response.errors );
+						}
 
-					context.commit( 'message', response.message );
-					context.commit( 'success', response.success ? response.success : false );
+						context.commit( 'message', response.message );
+						context.commit( 'success', response.success ? response.success : false );
 
-					if( response.token )
-					{
-						context.commit( 'userLogin', response.token );
-					}
-				})
-				.catch( error => {
-					console.error( 'userLogin', error );
-				});
+						if( response.token )
+						{
+							sessionStorage.setItem( 'token', response.token ); // Makes sure the user is logged in even after page refresh
+							context.commit( 'userLogin' );
+							resolve();
+						}
+					})
+					.catch( error => {
+						console.error( 'userLogin', error );
+					});
+			});
 		},
 
 		/**
@@ -134,7 +136,7 @@ export default
 		 */
 		userLoggedIn( state )
 		{
-			return state.token.length > 1 && state.loggedIn === true;
+			return state.loggedIn === true;
 		},
 
 		/**

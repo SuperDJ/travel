@@ -75,11 +75,14 @@ class UserController extends Controller
 		$user = User::create([
 			'first_name' => $request->input( 'first_name' ),
 			'last_name' => $request->input( 'last_name' ),
+			'email' => $request->input( 'email' ),
+			'password' => $request->input( 'password' ),
+		]);
+
+		$user->profile()->create([
 			'country_id' => $request->input( 'country_id' ),
 			'language_id' => $request->input( 'language_id' ),
 			'currency_id' => $request->input( 'currency_id' ),
-			'email' => $request->input( 'email' ),
-			'password' => $request->input( 'password' ),
 		]);
 
 		if( $user )

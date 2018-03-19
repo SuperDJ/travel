@@ -14,14 +14,13 @@ class EditUsersTableMinimize extends Migration
     public function up()
     {
 		Schema::table('users', function (Blueprint $table) {
+			$table->dropForeign('users_languages_id_foreign');
+			$table->dropForeign('users_country_id_foreign');
+			$table->dropForeign('users_currencies_id_foreign');
 
-			$table->dropForeign(['country_id']);
-			$table->dropForeign(['currency_id']);
-			//$table->dropIndex('users_languages_id_index');
+			$table->dropIndex('users_languages_id_index');
 			$table->dropIndex('users_country_id_index');
 			$table->dropIndex('users_currencies_id_index');
-
-			//$table->dropForeign(['language_id']);
 
 			$table->dropColumn('language_id');
 			$table->dropColumn('country_id');

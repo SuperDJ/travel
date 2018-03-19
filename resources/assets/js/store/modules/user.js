@@ -38,46 +38,43 @@ export default
 		 */
 		userLogin( context, data )
 		{
-			return new Promise( resolve => {
-				let details = {
-					email: data.email,
-					password: btoa( data.password ) // Base64 encode password
-				};
+			let details = {
+				email: data.email,
+				password: btoa( data.password ) // Base64 encode password
+			};
 
-				fetch( '/api/users/login', {
-					headers: {
-						'X-Requested-With': 'XMLHttpRequest',
-						'X-CSRF-token': window.token,
-						'Content-Type': 'application/json',
-						'Accept': 'application/json'
-					},
-					method: 'POST',
-					body: JSON.stringify( details )
+			return fetch( '/api/users/login', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify( details )
+			})
+				.then( response => {
+					return response.json();
 				})
-					.then( response => {
-						return response.json();
-					})
-					.then( response => {
-						// If there are any errors
-						if( response.errors )
-						{
-							context.commit( 'errors', response.errors );
-						}
+				.then( response => {
+					// If there are any errors
+					if( response.errors )
+					{
+						context.commit( 'errors', response.errors );
+					}
 
-						context.commit( 'message', response.message );
-						context.commit( 'success', response.success ? response.success : false );
+					context.commit( 'message', response.message );
+					context.commit( 'success', response.success ? response.success : false );
 
-						if( response.token )
-						{
-							sessionStorage.setItem( 'token', response.token ); // Makes sure the user is logged in even after page refresh
-							context.commit( 'userLogin' );
-							resolve();
-						}
-					})
-					.catch( error => {
-						console.error( 'userLogin', error );
-					});
-			});
+					if( response.token )
+					{
+						sessionStorage.setItem( 'token', response.token ); // Makes sure the user is logged in even after page refresh
+						context.commit( 'userLogin' );
+					}
+				})
+				.catch( error => {
+					console.error( 'userLogin', error );
+				});
 		},
 
 		/**

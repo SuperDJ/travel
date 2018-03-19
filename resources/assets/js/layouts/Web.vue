@@ -3,7 +3,7 @@
         <v-toolbar dark fixed color="primary">
             <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
 
-            <v-toolbar-title>Home</v-toolbar-title>
+            <v-toolbar-title>{{ this.$route.meta.title }}</v-toolbar-title>
 
             <v-spacer />
 
@@ -13,9 +13,9 @@
                 <v-btn icon slot="activator"><v-icon>more_vert</v-icon></v-btn>
 
                 <v-list>
-                    <v-list-tile :to="{name: 'Login'}">Login</v-list-tile>
+                    <v-list-tile :to=" { name: 'login' }">Login</v-list-tile>
 
-                    <v-list-tile :to="{name: 'Register'}">Register</v-list-tile>
+                    <v-list-tile :to="{ name: 'register' }">Register</v-list-tile>
                 </v-list>
             </v-menu>
         </v-toolbar>
@@ -42,7 +42,7 @@
                             </v-list-tile-content>
                         </v-list-tile>
 
-                        <v-list-tile v-for="(child, i) in item.children" :key="i" :to="child.to">
+                        <v-list-tile v-for="(child, i) in item.children" :key="i" :to="{ name: child.to, params: child.params }">
                             <v-list-tile-action v-if="child.icon">
                                 <v-icon>{{ child.icon }}</v-icon>
                             </v-list-tile-action>
@@ -53,7 +53,7 @@
                         </v-list-tile>
                     </v-list-group>
 
-                    <v-list-tile v-else :key="item.title" :to="item.to">
+                    <v-list-tile v-else :key="item.title" :to="{ name: item.to }">
                         <v-list-tile-action>
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-tile-action>
@@ -80,22 +80,22 @@
 				items: [
                     {
                     	title: 'Home',
-                        to: '/',
+                        to: 'index',
                         icon: 'home'
                     },
                     {
                     	title: 'Accommodations',
-                        to: '/accomodations',
+                        to: 'accomodations',
                         icon: 'hotel'
                     },
                     {
                     	title: 'Flights',
-                        to: '/flights',
+                        to: 'flights',
                         icon: 'flight'
                     },
                     {
                     	title: 'Car rental',
-                        to: '/car-rental',
+                        to: 'car-rental',
                         icon: 'directions_car'
                     },
                     {

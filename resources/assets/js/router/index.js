@@ -2,16 +2,17 @@ import Vue from 'vue';
 import { store } from '@/store/store';
 import Router from 'vue-router';
 
-const Web = () => import( '@/layouts/Web' );
-const Index = () => import( '@/pages/web/Index' );
-const Flights = () => import( '@/pages/web/Flights' );
+const web = () => import( '@/layouts/Web' );
+const index = () => import( '@/pages/web/Index' );
+const flights = () => import( '@/pages/web/Flights' );
 
-const Account = () => import( '@/layouts/LoginRegister' );
-const Register = () => import( '@/pages/dashboard/Register' );
-const Login = () => import( '@/pages/dashboard/Login' );
+const account = () => import( '@/layouts/LoginRegister' );
+const register = () => import( '@/pages/dashboard/Register' );
+const login = () => import( '@/pages/dashboard/Login' );
 
-const Dashboard = () => import( '@/layouts/Dashboard' );
-const Overview = () => import( '@/pages/dashboard/Overview' );
+const dashboard = () => import( '@/layouts/Dashboard' );
+const overview = () => import( '@/pages/dashboard/Overview' );
+const dashboardUsers = () => import( '@/pages/dashboard/users' );
 
 Vue.use( Router );
 
@@ -20,38 +21,72 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			component: Web,
+			component: web,
 			children: [
 				{
 					path: '',
-					name: 'Index',
-					component: Index
+					name: 'index',
+					meta: {
+						title: 'Home'
+					},
+					component: index
 				},
 				{
-					path: '/flights',
-					name: 'Flights',
-					component: Flights
+					path: 'flights',
+					name: 'flights',
+					meta: {
+						title: 'Flights'
+					},
+					component: flights
 				},
 				{
-					path: '/flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
+					path: 'accommodations',
+					name: 'accommodations',
+					meta: {
+						title: 'Flights'
+					},
+				},
+				{
+					path: 'car-rental',
+					name: 'carRental',
+					meta: {
+						title: 'Car rental'
+					},
+				},
+				{
+					path: 'flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
 					props: true,
-					name: 'FlightsSearch',
-					component: Flights
+					name: 'flightsSearch',
+					meta: {
+						title: 'Flight form :departure to :destination'
+					},
+					component: flights
+				},
+				{
+					path: 'continent/:continent',
+					props: true,
+					name: 'continentShow',
+					meta: {
+						title: 'Continent :continent'
+					},
 				},
 			]
 		},
 		{
 			path: '/account',
-			component: Account,
+			component: account,
 			children: [
 				{
 					path: 'register',
-					name: 'Register',
-					component: Register,
+					name: 'register',
+					meta: {
+						title: 'Register'
+					},
+					component: register,
 					beforeEnter: ( to, form, next ) => {
 						if( store.getters.userLoggedIn )
 						{
-							next( { name: 'Dashboard' } )
+							next( { name: 'dashboard' } )
 						} else {
 							next();
 						}
@@ -59,12 +94,15 @@ export default new Router({
 				},
 				{
 					path: 'login',
-					name: 'Login',
-					component: Login,
+					name: 'login',
+					meta: {
+						title: 'Login'
+					},
+					component: login,
 					beforeEnter: ( to, form, next ) => {
 						if( store.getters.userLoggedIn )
 						{
-							next( { name: 'Dashboard' } )
+							next( { name: 'dashboard' } )
 						} else {
 							next();
 						}
@@ -74,20 +112,31 @@ export default new Router({
 		},
 		{
 			path: '/dashboard',
-			component: Dashboard,
+			component: dashboard,
 			beforeEnter: ( to, from, next ) => {
 				if( store.getters.userLoggedIn )
 				{
 					next();
 				} else {
-					next( false );
+					next( { name: 'login' } );
 				}
 			},
 			children: [
 				{
-					path: 'overview',
-					name: 'Dashboard',
-					component: Overview
+					path: '',
+					name: 'dashboard',
+					meta: {
+						title: 'Overview'
+					},
+					component: overview
+				},
+				{
+					path: 'users',
+					name: 'dashboardUsers',
+					meta: {
+						title: 'Users'
+					},
+					component: dashboardUsers
 				}
 			]
 		}

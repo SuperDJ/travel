@@ -94,11 +94,24 @@ class UserController extends Controller
 	}
 
 	/**
+	 * @param \Illuminate\Http\Request $request
 	 *
 	 * @return \Illuminate\Database\Eloquent\Collection|static[]
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return User::all();
+		if( !empty( $request ) )
+		{
+			return User::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with(['profile' => function( $query ) {
+					$query->with('country');
+					$query->with('currency');
+					$query->with('timezone');
+					$query->with('language');
+				}])
+				->paginate( $request->rowsPerPage );
+		} else {
+			return User::all();
+		}
 	}
 }

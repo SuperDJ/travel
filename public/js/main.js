@@ -11290,6 +11290,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     metaInfo: {
@@ -11298,7 +11299,6 @@ exports.default = {
 
     data: function data() {
         return {
-            items: [],
             pagination: {},
             loading: false,
             headers: [{
@@ -11323,6 +11323,36 @@ exports.default = {
                 value: 'profile.language.name'
             }]
         };
+    },
+
+
+    computed: {
+        items: function items() {
+            return this.$store.getters.userIndex;
+        },
+        totalItems: function totalItems() {
+            return this.$store.getters.userTotal;
+        }
+    },
+
+    methods: {
+        data: function data() {
+            var _this = this;
+
+            this.loading = true;
+
+            this.$store.dispatch('userIndex', this.pagination).then(function () {
+                _this.loading = false;
+            });
+        }
+    },
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                this.data();
+            }
+        }
     }
 };
 
@@ -14010,12 +14040,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 	state: {
-		all: {},
+		all: [],
 		data: {},
 		loggedIn: !!sessionStorage.getItem('token')
 	},
 
 	mutations: {
+		/**
+   * Set all users
+   *
+   * @param state
+   * @param users
+   */
+		userIndex: function userIndex(state, users) {
+			state.all = users;
+		},
+
+
 		/**
    * Set user to logged in
    *
@@ -14039,6 +14080,34 @@ exports.default = {
 	},
 
 	actions: {
+		/**
+   * Get all users
+   *
+   * @param context
+   * @param pagination
+   */
+		userIndex: function userIndex(context, pagination) {
+			return fetch('/api/users?' + Object.keys(pagination).map(function (key) {
+				return key + '=' + pagination[key];
+			}).join('&'), {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+				},
+				method: 'GET'
+			}).then(function (response) {
+				return response.json();
+			}).then(function (response) {
+				return context.commit('userIndex', response);
+			}).catch(function (error) {
+				return console.error('userIndex', error);
+			});
+		},
+
+
 		/**
    * Login user
    *
@@ -14125,6 +14194,27 @@ exports.default = {
 	},
 
 	getters: {
+		/**
+   * Get all users
+   *
+   * @param state
+   */
+		userIndex: function userIndex(state) {
+			return state.all.data;
+		},
+
+
+		/**
+   * Get total amount of users
+   *
+   * @param state
+   * @returns {number|totalItems|{type, default}|*|exports.default.props.totalItems|props.totalItems}
+   */
+		userTotal: function userTotal(state) {
+			return state.all.total;
+		},
+
+
 		/**
    * Check if the user is logged in
    * @param state
@@ -21593,6 +21683,7 @@ var render = function() {
       attrs: {
         headers: _vm.headers,
         items: _vm.items,
+        totalItems: _vm.totalItems,
         "item-key": "id",
         loading: _vm.loading,
         pagination: _vm.pagination
@@ -21640,7 +21731,7 @@ var render = function() {
                   return _c("td", [
                     _vm._v(
                       "\n                " +
-                        _vm._s(props.items[header.value]) +
+                        _vm._s(props.item[header.value]) +
                         "\n            "
                     )
                   ])

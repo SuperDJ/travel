@@ -2,6 +2,7 @@
     <v-data-table
         :headers="headers"
         :items="items"
+        :totalItems="totalItems"
         item-key="id"
         :loading="loading"
         :pagination.sync="pagination"
@@ -22,7 +23,7 @@
         <template slot="items" slot-scope="props">
             <tr>
                 <td v-for="header in headers">
-                    {{ props.items[header.value] }}
+                    {{ props.item[header.value] }}
                 </td>
             </tr>
         </template>
@@ -39,7 +40,6 @@
         data()
         {
         	return {
-        		items: [],
                 pagination: {},
                 loading: false,
         		headers: [
@@ -69,6 +69,37 @@
 						value: 'profile.language.name'
 					}
                 ]
+            }
+        },
+
+        computed: {
+            items()
+            {
+            	return this.$store.getters.userIndex;
+            },
+
+            totalItems()
+            {
+            	return this.$store.getters.userTotal;
+            }
+        },
+
+        methods: {
+    		data()
+            {
+            	this.loading = true;
+
+            	this.$store.dispatch( 'userIndex', this.pagination ).then( () => {
+				    this.loading = false;
+			    });
+            }
+        },
+
+        watch: {
+    		pagination: {
+    			handler() {
+                    this.data();
+                }
             }
         }
     }

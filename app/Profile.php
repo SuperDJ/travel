@@ -15,7 +15,7 @@ class Profile extends Model
 	 */
 	public function user()
 	{
-		return $this->hasOne(User::class);
+		return $this->belongsTo(User::class);
 	}
 
 	/**
@@ -23,7 +23,7 @@ class Profile extends Model
 	 */
 	public function language()
 	{
-		return $this->hasOne( Language::class );
+		return $this->belongsTo( Language::class );
 	}
 
 	/**
@@ -31,7 +31,7 @@ class Profile extends Model
 	 */
 	public function country()
 	{
-		return $this->hasOne( Country::class );
+		return $this->belongsTo( Country::class );
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Profile extends Model
 	 */
 	public function currency()
 	{
-		return $this->hasOne( Currency::class );
+		return $this->belongsTo( Currency::class );
 	}
 
 	/**
@@ -47,6 +47,6 @@ class Profile extends Model
 	 */
 	public function timezone()
 	{
-		return $this->hasOne( Timezone::class );
+		return $this->belongsTo( Timezone::class );
 	}
 }

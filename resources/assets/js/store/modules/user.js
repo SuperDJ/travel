@@ -1,12 +1,23 @@
 export default
 {
 	state: {
-		all: {},
+		all: [],
 		data: {},
 		loggedIn: !!sessionStorage.getItem( 'token' )
 	},
 
 	mutations: {
+		/**
+		 * Set all users
+		 *
+		 * @param state
+		 * @param users
+		 */
+		userIndex( state, users )
+		{
+			state.all = users;
+		},
+
 		/**
 		 * Set user to logged in
 		 *
@@ -31,6 +42,29 @@ export default
 
 	actions: {
 		/**
+		 * Get all users
+		 *
+		 * @param context
+		 * @param pagination
+		 */
+		userIndex( context, pagination )
+		{
+			return fetch( `/api/users?${Object.keys(pagination).map(key => key + '=' + pagination[key]).join('&')}`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+				},
+				method: 'GET'
+			})
+				.then( response => response.json() )
+				.then( response => context.commit( 'userIndex', response ) )
+				.catch( error => console.error( 'userIndex', error ) );
+		},
+
+		/**
 		 * Login user
 		 *
 		 * @param context
@@ -48,7 +82,7 @@ export default
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
 					'Content-Type': 'application/json',
-					'Accept': 'application/json'
+					'Accept': 'application/json',
 				},
 				method: 'POST',
 				body: JSON.stringify( details )
@@ -126,6 +160,27 @@ export default
 	},
 
 	getters: {
+		/**
+		 * Get all users
+		 *
+		 * @param state
+		 */
+		userIndex( state )
+		{
+			return state.all.data;
+		},
+
+		/**
+		 * Get total amount of users
+		 *
+		 * @param state
+		 * @returns {number|totalItems|{type, default}|*|exports.default.props.totalItems|props.totalItems}
+		 */
+		userTotal( state )
+		{
+			return state.all.total;
+		},
+
 		/**
 		 * Check if the user is logged in
 		 * @param state

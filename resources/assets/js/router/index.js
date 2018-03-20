@@ -12,7 +12,9 @@ const login = () => import( '@/pages/dashboard/Login' );
 
 const dashboard = () => import( '@/layouts/Dashboard' );
 const overview = () => import( '@/pages/dashboard/Overview' );
-const dashboardUsers = () => import( '@/pages/dashboard/users' );
+const dashboardUser = () => import( '@/pages/dashboard/users' );
+
+const dashboardContinent = () => import( '@/pages/dashboard/continent' );
 
 Vue.use( Router );
 
@@ -132,11 +134,19 @@ export default new Router({
 				},
 				{
 					path: 'users',
-					name: 'dashboardUsers',
+					name: 'dashboardUser',
 					meta: {
 						title: 'Users'
 					},
-					component: dashboardUsers
+					component: dashboardUser
+				},
+				{
+					path: 'continents',
+					name: 'dashboardContinent',
+					meta: {
+						title: 'Continents'
+					},
+					component: dashboardContinent
 				}
 			]
 		}

@@ -22,9 +22,11 @@
 
         <template slot="items" slot-scope="props">
             <tr>
-                <td v-for="header in headers">
-                    {{ props.item[header.value] }}
-                </td>
+                <td>{{ props.item.first_name }}</td>
+                <td>{{ props.item.last_name }}</td>
+                <td v-if="props.item.profile">{{ props.item.profile.birthday }}</td>
+                <td v-if="props.item.profile && props.item.profile.language">{{ props.item.profile.language.name }}</td>
+                <td v-if="props.item.profile && props.item.profile.country">{{ props.item.profile.country.name }}</td>
             </tr>
         </template>
     </v-data-table>

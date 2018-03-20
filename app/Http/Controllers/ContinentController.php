@@ -10,11 +10,21 @@ class ContinentController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Continent[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index()
+    public function index( Request $request )
 	{
-    	return Continent::all();
+		if( !empty( $request ) )
+		{
+			return Continent::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->withCount( 'countries' )
+				->paginate( $request->rowsPerPage );
+		} else
+		{
+			return Continent::all();
+		}
 	}
 
 	/**

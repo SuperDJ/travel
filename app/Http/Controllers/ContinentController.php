@@ -10,11 +10,20 @@ class ContinentController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Continent[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index()
+    public function index( Request $request )
 	{
-    	return Continent::all();
+		if( !empty( $request ) && count($request->all())>0 )
+		{
+			return Continent::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->withCount( 'countries' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return Continent::all();
+		}
 	}
 
 	/**
@@ -25,6 +34,8 @@ class ContinentController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
     	$stored = Continent::create( $request->all() );
 
     	if( $stored )
@@ -145,9 +156,17 @@ class ContinentController extends Controller
 			->with( [ 'cities' => function( $query )
 			{
 				$query->where('capital', 1);
-			}] )
+			}])
 			->get();
 
 		return response()->json( $cities, 200 );
+	}
+
+	public function validation( Request $request )
+	{
+		$request->validate([
+			'name' => 'required',
+			'iso' => 'required'
+		]);
 	}
 }

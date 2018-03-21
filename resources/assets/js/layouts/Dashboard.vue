@@ -57,14 +57,27 @@
         </v-navigation-drawer>
 
         <v-container fluid>
+            <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1" transition="scale-transition">
+                {{ message }}
+            </v-alert>
+
             <router-view></router-view>
         </v-container>
     </v-app>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default
     {
+    	computed: {
+            ...mapGetters([
+            	'message',
+                'success',
+                'errors'
+            ])
+        },
+
     	data()
         {
         	return {
@@ -77,57 +90,57 @@
                     },
                     {
                     	title: 'Users',
-                        to: 'dashboardUsers',
+                        to: 'dashboardUser',
                         icon: 'person'
                     },
                     {
                     	title: 'Groups',
-                        to: 'dashboardGroups',
+                        to: 'dashboardGroup',
                         icon: 'group'
                     },
                     {
                     	title: 'Languages',
-                        to: 'dashboardLanguages',
+                        to: 'dashboardLanguage',
                         icon: 'translate'
                     },
                     {
                         title: 'Timezones',
-                        to: 'dashboardTimezones',
+                        to: 'dashboardTimezone',
                         icon: 'access_time'
                     },
                     {
                     	title: 'Currencies',
-                        to: 'dashboardCurrencies',
+                        to: 'dashboardCurrency',
                         icon: 'attach_money'
                     },
                     {
                     	title: 'Continents',
-                        to: 'dashboardContinents',
+                        to: 'dashboardContinent',
                         icon: 'public'
                     },
                     {
                     	title: 'Countries',
-                        to: 'dashboardCountries',
+                        to: 'dashboardCountry',
                         icon: 'pin_drop'
                     },
                     {
                     	title: 'Cities',
-                        to: 'dashboardCities',
+                        to: 'dashboardCity',
                         icon: 'place'
 					},
                     {
                     	title: 'Airports',
-                        to: 'dashboardAirports',
+                        to: 'dashboardAirport',
                         icon: 'local_airport'
                     },
                     {
                     	title: 'Airlines',
-                        to: 'dashboardAirlines',
+                        to: 'dashboardAirline',
                         icon: 'flight_takeoff'
                     },
 					{
 						title: 'Contacts',
-						to: 'dashboardContacts',
+						to: 'dashboardContact',
 						icon: 'contacts'
 					},
                 ]

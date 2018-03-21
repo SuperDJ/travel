@@ -8,12 +8,12 @@
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                             <v-container fluid fill-height class="white--text text-xs-right">
                                 <v-layout row wrap align-end align-content-end>
-                                    <v-flex class="display-1" xs12>
-                                        France
+                                    <v-flex class="display-1" xs12 v-if="this.data[0]">
+                                        {{ this.data[0].name }}
                                     </v-flex>
 
-                                    <v-flex class="display-3" xs12>
-                                        Paris
+                                    <v-flex class="display-3" xs12 v-if="this.data[0] && this.data[0].cities[0]">
+                                        {{ this.data[0].cities[0].name }}
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -31,12 +31,12 @@
                                 <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                                     <v-container fluid fill-height class="white--text text-xs-right">
                                         <v-layout row wrap align-end align-content-end>
-                                            <v-flex xs12>
-                                                Netherlands
+                                            <v-flex xs12 v-if="this.data[1]">
+                                                {{ this.data[1].name }}
                                             </v-flex>
 
-                                            <v-flex class="headline" xs12>
-                                                Amsterdam
+                                            <v-flex class="headline" xs12 v-if="this.data[1] && this.data[1].cities[0]">
+                                                {{ this.data[1].cities[0].name }}
                                             </v-flex>
                                         </v-layout>
                                     </v-container>
@@ -52,12 +52,12 @@
                                 <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                                     <v-container fluid fill-height class="white--text text-xs-right">
                                         <v-layout row wrap align-end align-content-end>
-                                            <v-flex xs12>
-                                                England
+                                            <v-flex xs12 v-if="this.data[2]">
+                                                {{ this.data[2].name }}
                                             </v-flex>
 
-                                            <v-flex class="headline" xs12>
-                                                London
+                                            <v-flex class="headline" xs12 v-if="this.data[2] && this.data[2].cities[0]">
+                                                {{ this.data[2].cities[0].name }}
                                             </v-flex>
                                         </v-layout>
                                     </v-container>
@@ -75,12 +75,12 @@
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                             <v-container fluid fill-height class="white--text text-xs-right">
                                 <v-layout row wrap align-end align-content-end>
-                                    <v-flex xs12>
-                                        Germany
+                                    <v-flex xs12 v-if="this.data[3]">
+                                        {{ this.data[3].name }}
                                     </v-flex>
 
-                                    <v-flex class="headline" xs12>
-                                        Berlin
+                                    <v-flex class="headline" xs12 v-if="this.data[3] && this.data[3].cities[0]">
+                                        {{ this.data[3].cities[0].name }}
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -96,12 +96,12 @@
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                             <v-container fluid fill-height class="white--text text-xs-right">
                                 <v-layout row wrap align-end align-content-end>
-                                    <v-flex xs12>
-                                        Poland
+                                    <v-flex xs12 v-if="this.data[4]">
+                                        {{ this.data[4].name }}
                                     </v-flex>
 
-                                    <v-flex class="headline" xs12>
-                                        Warsaw
+                                    <v-flex class="headline" xs12 v-if="this.data[4] && this.data[4].cities[0]">
+                                        {{ this.data[4].cities[0].name }}
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -117,12 +117,12 @@
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                             <v-container fluid fill-height class="white--text text-xs-right">
                                 <v-layout row wrap align-end align-content-end>
-                                    <v-flex xs12>
-                                        Czech Republic
+                                    <v-flex xs12 v-if="this.data[5]">
+                                        {{ this.data[5].name }}
                                     </v-flex>
 
-                                    <v-flex class="headline" xs12>
-                                        Prague
+                                    <v-flex class="headline" xs12 v-if="this.data[5] && this.data[5].cities[0]">
+                                        {{ this.data[5].cities[0].name }}
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -138,12 +138,12 @@
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
                             <v-container fluid fill-height class="white--text text-xs-right">
                                 <v-layout row wrap align-end align-content-end>
-                                    <v-flex xs12>
-                                        Italy
+                                    <v-flex xs12 v-if="this.data[6]">
+                                        {{ this.data[6].name }}
                                     </v-flex>
 
-                                    <v-flex class="headline" xs12>
-                                        Rome
+                                    <v-flex class="headline" xs12 v-if="this.data[6] && this.data[6].cities[0]">
+                                        {{ this.data[6].cities[0].name }}
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -174,9 +174,10 @@
         methods: {
     		getData()
             {
-    		    fetch(`/api/continents/${this.destination}/top-destinations`)
-                    .then(response => {return response.json()})
-                    .then(response => {this.data = response});
+                return fetch( `/api/continents/${this.destination}/top-destinations` )
+                    .then( response => response.json() )
+                    .then( response => this.data = response )
+                    .catch( error => console.error( error ) );
             }
         },
 

@@ -12,7 +12,11 @@ const login = () => import( '@/pages/dashboard/Login' );
 
 const dashboard = () => import( '@/layouts/Dashboard' );
 const overview = () => import( '@/pages/dashboard/Overview' );
-const dashboardUsers = () => import( '@/pages/dashboard/users' );
+const dashboardUser = () => import( '@/pages/dashboard/users' );
+
+const dashboardContinent = () => import( '@/pages/dashboard/continent' );
+const continentEdit = () => import( '@/pages/dashboard/continent/edit' );
+const continentCreate = () => import( '@/pages/dashboard/continent/create' );
 
 Vue.use( Router );
 
@@ -132,11 +136,35 @@ export default new Router({
 				},
 				{
 					path: 'users',
-					name: 'dashboardUsers',
+					name: 'dashboardUser',
 					meta: {
 						title: 'Users'
 					},
-					component: dashboardUsers
+					component: dashboardUser
+				},
+				{
+					path: 'continents',
+					name: 'dashboardContinent',
+					meta: {
+						title: 'Continents'
+					},
+					component: dashboardContinent,
+				},
+				{
+					path: 'continents/create',
+					name: 'continentCreate',
+					meta: {
+						title: 'Create continent'
+					},
+					component: continentCreate
+				},
+				{
+					path: 'continents/:continent/edit',
+					name: 'continentEdit',
+					meta: {
+						title: 'Edit continent'
+					},
+					component: continentEdit
 				}
 			]
 		}

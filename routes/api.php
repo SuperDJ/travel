@@ -11,18 +11,20 @@ Route::post( '/users/register', 'UserController@register' );
 
 Route::group( ['middleware' => 'auth:api'], function() {
 	Route::get( 'users', 'UserController@index' );
+
+	// Continents
+	Route::post( '/continents', 'ContinentController@store' );
+	Route::get( '/continents/{continent}/edit', 'ContinentController@edit' );
+	Route::put( '/continents/{continent}', 'ContinentController@update' );
+	Route::delete( '/continents/{continent}', 'ContinentController@destroy' );
 });
 
 // Continents
 Route::get( '/continents', 'ContinentController@index' );
 Route::get( '/continents/db', 'ContinentController@fillDB' );
 Route::get( '/continents/{search}/search', 'ContinentController@search' );
-Route::post( '/continents', 'ContinentController@store' );
 Route::get( '/continents/{continent}', 'ContinentController@show' );
-Route::get( '/continents/{continent}/edit', 'ContinentController@edit' );
 Route::get( '/continents/{continent}/top-destinations', 'ContinentController@topDestinations' );
-Route::put( '/continents/{continent}', 'ContinentController@update' );
-Route::delete( '/continents/{continent}', 'ContinentController@destroy' );
 
 // Currencies
 Route::get( '/currencies', 'CurrencyController@index' );

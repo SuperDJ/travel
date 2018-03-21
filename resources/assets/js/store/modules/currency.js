@@ -31,22 +31,16 @@ export default {
 		 * @param context
 		 */
 		currencyIndex( context ) {
-			fetch( '/api/currencies', {
+			return fetch( '/api/currencies', {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
 					'Accept': 'application/json'
 				}
 			})
-				.then( response => {
-					return response.json()
-				} )
-				.then( response => {
-					this.commit( 'currencyIndex', response );
-				} )
-				.catch( error => {
-					console.error( 'currencyIndex', error );
-				} );
+				.then( response => response.json() )
+				.then( response => context.commit( 'currencyIndex', response ) )
+				.catch( error => console.error( 'currencyIndex', error ) );
 		},
 
 		/**
@@ -56,22 +50,16 @@ export default {
 		 * @param currency
 		 */
 		currencySearch( context, currency ) {
-			fetch( `/api/currencies/${currency}/search`, {
+			return fetch( `/api/currencies/${currency}/search`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
 					'Accept': 'application/json'
 				}
 			})
-				.then( response => {
-					return response.json();
-				} )
-				.then( response => {
-					this.commit( 'currencySearch', response );
-				} )
-				.catch( error => {
-					console.error( 'currencySearch', error );
-				} );
+				.then( response => response.json() )
+				.then( response => context.commit( 'currencySearch', response ) )
+				.catch( error => console.error( 'currencySearch', error ) );
 		}
 	},
 

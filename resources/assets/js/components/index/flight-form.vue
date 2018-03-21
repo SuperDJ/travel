@@ -241,7 +241,7 @@
 			 */
 			submit()
 			{
-    			this.$router.push({name: 'Flights'});
+    			this.$router.push({name: 'flights'});
             },
         },
 

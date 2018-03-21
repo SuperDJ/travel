@@ -42,11 +42,12 @@
 
                 <v-flex xs12>
                     <v-tabs centered color="transparent">
-                        <v-tab v-for="continent in continents" :key="continent.name" @click="topDestinations(continent.id)">{{continent.name}}</v-tab>
+                        <v-tab v-for="continent in continents" :key="continent.id" :href="`#${continent.name}`">
+                            {{continent.name}}</v-tab>
 
                         <v-tabs-items>
-                            <v-tab-item v-for="continent in continents" :key="continent.name">
-                                <Destination :destination="continent.id"/>
+                            <v-tab-item v-for="continent in continents" :key="continent.name" :id="`#${continent.name}`">
+                                <Destination :destination="continent.id" />
                             </v-tab-item>
                         </v-tabs-items>
                     </v-tabs>
@@ -155,14 +156,9 @@
 
                 this.image = img;
             },
-
-            topDestinations( id )
-            {
-
-            }
         },
 
-        mounted() {
+        created() {
     		this.getContinents();
         }
     }

@@ -85,7 +85,7 @@
                     },
                     {
                     	title: 'Accommodations',
-                        to: 'accomodations',
+                        to: 'accommodations',
                         icon: 'hotel'
                     },
                     {

@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $hidden = ['password', 'remember_token', 'api_token'];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
 	public function profile()
 	{

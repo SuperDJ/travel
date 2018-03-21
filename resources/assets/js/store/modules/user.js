@@ -87,9 +87,7 @@ export default
 				method: 'POST',
 				body: JSON.stringify( details )
 			})
-				.then( response => {
-					return response.json();
-				})
+				.then( response => response.json() )
 				.then( response => {
 					// If there are any errors
 					if( response.errors )
@@ -106,9 +104,7 @@ export default
 						context.commit( 'userLogin' );
 					}
 				})
-				.catch( error => {
-					console.error( 'userLogin', error );
-				});
+				.catch( error => console.error( 'userLogin', error ) );
 		},
 
 		/**
@@ -140,9 +136,7 @@ export default
 				method: 'POST',
 				body: JSON.stringify( details )
 			})
-				.then( response => {
-					return response.json();
-				})
+				.then( response => response.json() )
 				.then( response => {
 					// If there are any errors
 					if( response.errors )
@@ -153,9 +147,7 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success ? response.success : false );
 				})
-				.catch( error => {
-					console.error( 'userRegister', error );
-				});
+				.catch( error => console.error( 'userRegister', error ) );
 		}
 	},
 

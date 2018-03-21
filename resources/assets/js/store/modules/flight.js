@@ -149,34 +149,7 @@ export default
 		 */
 		browseQuotes( context, data )
 		{
-			fetch('/api/flights/browse-quotes', {
-				headers: {
-					'X-Requested-With': 'XMLHttpRequest',
-					'X-CSRF-token': window.token,
-					'Content-Type': 'application/json',
-					'Accept': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify(data)
-			})
-				.then( response => { return response.json() } )
-				.then( response => {
-					//console.log(response);
-					context.commit( 'browseQuotes', response );
-				})
-				.catch( error => {
-					console.error( 'browseQuotes', error );
-				} );
-		},
-
-		/**
-		 * Get browse routes results from API
-		 * @param context
-		 * @param data
-		 */
-		browseRoutes( context, data )
-		{
-			fetch('/api/flights/browse-routes', {
+			return fetch('/api/flights/browse-quotes', {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -186,16 +159,31 @@ export default
 				method: 'POST',
 				body: JSON.stringify( data )
 			})
-				.then( response => {
-					return response.json()
-				})
-				.then( response => {
-					console.log(response);
-					context.commit( 'browseRoutes', response );
-				})
-				.catch( error => {
-					console.error( 'browseRoutes', error );
-				} );
+				.then( response => response.json() )
+				.then( response => context.commit( 'browseQuotes', response ) )
+				.catch( error => console.error( 'browseQuotes', error ) );
+		},
+
+		/**
+		 * Get browse routes results from API
+		 * @param context
+		 * @param data
+		 */
+		browseRoutes( context, data )
+		{
+			return fetch('/api/flights/browse-routes', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify( data )
+			})
+				.then( response => response.json() )
+				.then( response => context.commit( 'browseRoutes', response ) )
+				.catch( error => console.error( 'browseRoutes', error ) );
 		}
 	},
 

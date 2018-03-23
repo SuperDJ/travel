@@ -228,4 +228,5 @@ return [
 	'lufthansaKey' => env('LUFTHANSA_KEY'),
 	'lufthansaSecret' => env('LUFTHANSA_SECRET'),
 	'googleApi' => env('GOOGLE_API'),
+	'pixabay' => env('PIXABAY_KEY'),
 ];

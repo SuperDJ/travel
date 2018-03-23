@@ -15,9 +15,20 @@ class CountryController extends Controller
 	 *
 	 * @return \App\Country[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return Country::all();
+		if( !empty( $request ) && count( $request->all() ) > 1 )
+		{
+			return Country::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with( 'continent' )
+				->with( 'currency' )
+				->with( 'language' )
+				->withCount( 'cities' )
+				->withCount( 'profile' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return Country::all();
+		}
 	}
 
 	/**
@@ -28,6 +39,8 @@ class CountryController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
 		$stored = Country::create( $request->all() );
 
 		if( $stored )
@@ -36,6 +49,18 @@ class CountryController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Country not created' ], 400 );
 		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Country $country
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Country $country )
+	{
+		return response()->json( $country, 200 );
 	}
 
 	/**
@@ -58,7 +83,10 @@ class CountryController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Country $country ) {
+	public function update( Request $request, Country $country )
+	{
+		$this->validation( $request );
+
 		$updated = $country->update( $request->all() );
 
 		if( $updated )
@@ -77,7 +105,8 @@ class CountryController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Country $country ) {
+	public function destroy( Country $country )
+	{
 		$destroyed = $country->delete();
 
 		if( $destroyed )
@@ -86,18 +115,6 @@ class CountryController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Country not deleted' ], 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Country $country
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Country $country )
-	{
-		return response()->json( $country, 200 );
 	}
 
 	/**
@@ -117,6 +134,20 @@ class CountryController extends Controller
 			->get();
 
 		return response()->json( $result, 200 );
+	}
+
+	/**
+	 * @param \Illuminate\Http\Request $request
+	 */
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'name' => 'required',
+			'iso' => $request->input('id') ? [ 'required', Rule::unique( 'country' )->ignore($request->input( 'id' ) ) ] : 'required|unique:countries',
+			'continent_id' => 'required|integer|exists:continents,id',
+			'currency_id' => 'required|integer|exists:currencies,id',
+			'language_id' => 'required|integer|exists:languages,id'
+		]);
 	}
 
 	public function fillDB()

@@ -9,15 +9,18 @@ class Language extends Model
 	protected $guarded = ['id'];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
-	public function countries()
+	public function country()
 	{
-		return $this->belongsToMany( Country::class );
+		return $this->hasOne( Country::class );
 	}
 
-	public function users()
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function profile()
 	{
-		return $this->belongsToMany( User::class );
+		return $this->hasOne( Profile::class );
 	}
 }

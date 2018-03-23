@@ -18,6 +18,18 @@ const dashboardContinent = () => import( '@/pages/dashboard/continent' );
 const continentEdit = () => import( '@/pages/dashboard/continent/edit' );
 const continentCreate = () => import( '@/pages/dashboard/continent/create' );
 
+const dashboardCurrency = () => import( '@/pages/dashboard/currency' );
+const currencyEdit = () => import( '@/pages/dashboard/currency/edit' );
+const currencyCreate = () => import( '@/pages/dashboard/currency/create' );
+
+const dashboardLanguage = () => import( '@/pages/dashboard/language' );
+const languageEdit = () => import( '@/pages/dashboard/language/edit' );
+const languageCreate = () => import( '@/pages/dashboard/language/create' );
+
+const dashboardCountry = () => import( '@/pages/dashboard/country' );
+const countryEdit = () => import( '@/pages/dashboard/country/edit' );
+const countryCreate = () => import( '@/pages/dashboard/country/create' );
+
 Vue.use( Router );
 
 export default new Router({
@@ -160,11 +172,87 @@ export default new Router({
 				},
 				{
 					path: 'continents/:continent/edit',
+					props: true,
 					name: 'continentEdit',
 					meta: {
 						title: 'Edit continent'
 					},
 					component: continentEdit
+				},
+				{
+					path: 'currencies',
+					name: 'dashboardCurrency',
+					meta: {
+						title: 'Currencies'
+					},
+					component: dashboardCurrency,
+				},
+				{
+					path: 'currencies/create',
+					name: 'currencyCreate',
+					meta: {
+						title: 'Create currency'
+					},
+					component: currencyCreate
+				},
+				{
+					path: 'currencies/:currency/edit',
+					props: true,
+					name: 'currencyEdit',
+					meta: {
+						title: 'Edit currency'
+					},
+					component: currencyEdit
+				},
+				{
+					path: 'languages',
+					name: 'dashboardLanguage',
+					meta: {
+						title: 'Language'
+					},
+					component: dashboardLanguage,
+				},
+				{
+					path: 'languages/create',
+					name: 'languageCreate',
+					meta: {
+						title: 'Create language'
+					},
+					component: languageCreate
+				},
+				{
+					path: 'languages/:language/edit',
+					props: true,
+					name: 'languageEdit',
+					meta: {
+						title: 'Edit language'
+					},
+					component: languageEdit
+				},
+				{
+					path: 'countries',
+					name: 'dashboardCountry',
+					meta: {
+						title: 'Country'
+					},
+					component: dashboardCountry,
+				},
+				{
+					path: 'countries/create',
+					name: 'countryCreate',
+					meta: {
+						title: 'Create country'
+					},
+					component: countryCreate
+				},
+				{
+					path: 'countries/:country/edit',
+					props: true,
+					name: 'countryEdit',
+					meta: {
+						title: 'Edit country'
+					},
+					component: countryEdit
 				}
 			]
 		}

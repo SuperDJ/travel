@@ -11,11 +11,22 @@ class CurrencyController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Currency[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return Currency::all();
+		if( !empty( $request ) && count( $request->all() ) > 1 )
+		{
+			return Currency::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->withCount( 'country' )
+				->withCount( 'profile' )
+				->paginate( $request->rowsPerPage );
+		} else
+		{
+			return Currency::all();
+		}
 	}
 
 	/**
@@ -26,6 +37,8 @@ class CurrencyController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
 		$stored = Currency::create( $request->all() );
 
 		if( $stored )
@@ -34,6 +47,18 @@ class CurrencyController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Currency not created' ], 400 );
 		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Currency $currency
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Currency $currency )
+	{
+		return response()->json( $currency, 200 );
 	}
 
 	/**
@@ -58,6 +83,8 @@ class CurrencyController extends Controller
 	 */
 	public function update( Request $request, Currency $currency )
 	{
+		$this->validation( $request );
+
 		$updated = $currency->update( $request->all() );
 
 		if( $updated )
@@ -88,16 +115,12 @@ class CurrencyController extends Controller
 		}
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Currency $currency
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Currency $currency )
+	private function validation( Request $request )
 	{
-		return response()->json( $currency, 200 );
+		$request->validate([
+			'name' => 'required',
+			'iso' => 'required'
+		]);
 	}
 
 	/**

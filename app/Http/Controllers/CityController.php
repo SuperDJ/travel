@@ -37,6 +37,18 @@ class CityController extends Controller
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\City $city
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( City $city )
+	{
+		return response()->json( $city, 200 );
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param \App\City $city
@@ -86,18 +98,6 @@ class CityController extends Controller
 		} else {
 			return response( 'City not delete', 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\City $city
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( City $city )
-	{
-		return response()->json( $city, 200 );
 	}
 
 	/**

@@ -16,7 +16,7 @@ class ContinentController extends Controller
 	 */
     public function index( Request $request )
 	{
-		if( !empty( $request ) && count($request->all())>0 )
+		if( !empty( $request ) && count( $request->all() ) > 0 )
 		{
 			return Continent::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
 				->withCount( 'countries' )
@@ -47,6 +47,18 @@ class ContinentController extends Controller
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Continent $continent
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Continent $continent )
+	{
+		return response()->json( $continent, 200 );
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param \App\Continent $continent
@@ -68,6 +80,8 @@ class ContinentController extends Controller
 	 */
 	public function update( Request $request, Continent $continent )
 	{
+		$this->validation( $request );
+
     	$updated = $continent->update( $request->all() );
 
     	if( $updated )
@@ -96,18 +110,6 @@ class ContinentController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Continent not deleted' ], 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Continent $continent
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Continent $continent )
-	{
-    	return response()->json( $continent, 200 );
 	}
 
 	/**
@@ -162,7 +164,7 @@ class ContinentController extends Controller
 		return response()->json( $cities, 200 );
 	}
 
-	public function validation( Request $request )
+	private function validation( Request $request )
 	{
 		$request->validate([
 			'name' => 'required',

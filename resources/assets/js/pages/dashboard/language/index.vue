@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'continentCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'languageCreate' }">
             <v-icon>add</v-icon>
-            Add continent
+            Add language
         </v-btn>
 
         <v-data-table
@@ -31,9 +31,10 @@
                 <tr>
                     <td>{{ props.item.name }}</td>
                     <td>{{ props.item.iso }}</td>
-                    <td class="text-xs-right">{{ props.item.countries_count }}</td>
+                    <td class="text-xs-right">{{ props.item.country_count }}</td>
+                    <td class="text-xs-right">{{ props.item.profile_count }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'continentEdit', params: { continent: props.item.id } }">
+                        <v-btn icon :to="{ name: 'languageEdit', params: { language: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -48,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete continent</span>
+                    <span class="headline">Delete language</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete continent: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete language: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="continentDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="languageDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -68,7 +69,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Continents'
+			title: 'Languages'
 		},
 
 		data()
@@ -79,7 +80,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Continent',
+						text: 'Language',
 						align: 'left',
 						value: 'name'
 					},
@@ -91,12 +92,16 @@
 					{
 						text: 'Countries',
 						align: 'right',
-						value: 'countries_count'
+						value: 'country_count'
+					},
+					{
+						text: 'Users',
+						align: 'right',
+						value: 'profile_count'
 					},
                     {
                     	text: 'Actions',
-                        align: 'left',
-                        value: '',
+                        align: 'left'
                     }
 				]
 			}
@@ -105,12 +110,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.continentIndex;
+				return this.$store.getters.languageIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.continentTotal;
+				return this.$store.getters.languageTotal;
 			}
 		},
 
@@ -119,16 +124,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'continentIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'languageIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            continentDestroy( id )
+            languageDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'continentDestroy', id ).then( () =>
+                this.$store.dispatch( 'languageDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

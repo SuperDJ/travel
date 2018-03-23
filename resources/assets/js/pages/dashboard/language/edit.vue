@@ -3,7 +3,7 @@
         <v-layout row wrap>
             <v-flex xs12 md6>
                 <c-form @submitted="submit" :details="form" />
-                <v-btn flat :to="{ name: 'dashboardContinent' }">
+                <v-btn flat :to="{ name: 'dashboardLanguage' }">
                     <v-icon>arrow_back</v-icon>
                     Back
                 </v-btn>
@@ -16,10 +16,10 @@
 <script>
 	export default {
 		metaInfo: {
-			title: 'Edit continent'
+			title: 'Edit language'
 		},
 
-        props: ['continent'],
+        props: ['language'],
 
 		components: {
 			'c-form': () => import('./form')
@@ -27,20 +27,20 @@
 
         computed: {
 			form() {
-				return this.$store.getters.continentEdit;
+				return this.$store.getters.languageEdit;
             }
         },
 
 		methods: {
 			submit( data )
 			{
-				this.$store.dispatch( 'continentUpdate', { id: this.continent, details: data } );
+				this.$store.dispatch( 'languageUpdate', { id: this.language, details: data } );
 			},
 		},
 
         created()
         {
-        	this.$store.dispatch( 'continentEdit', this.continent );
+        	this.$store.dispatch( 'languageEdit', this.language );
         }
 	}
 </script>

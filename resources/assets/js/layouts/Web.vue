@@ -13,9 +13,14 @@
                 <v-btn icon slot="activator"><v-icon>more_vert</v-icon></v-btn>
 
                 <v-list>
-                    <v-list-tile :to=" { name: 'login' }">Login</v-list-tile>
+                    <div v-if="!this.$store.getters.userLoggedIn">
+                        <v-list-tile :to="{ name: 'login' }">Login</v-list-tile>
 
-                    <v-list-tile :to="{ name: 'register' }">Register</v-list-tile>
+                        <v-list-tile :to="{ name: 'register' }">Register</v-list-tile>
+                    </div>
+                    <div v-else>
+                        <v-list-tile :to="{ name: 'dashboard' }">Dashboard</v-list-tile>
+                    </div>
                 </v-list>
             </v-menu>
         </v-toolbar>

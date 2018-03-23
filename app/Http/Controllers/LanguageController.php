@@ -12,9 +12,17 @@ class LanguageController extends Controller
 	 *
 	 * @return \App\Language[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return Language::all();
+		if( !empty( $request ) && count( $request->all() ) > 1 )
+		{
+			return Language::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->withCount( 'country' )
+				->withCount( 'profile' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return Language::all();
+		}
 	}
 
 	/**
@@ -33,6 +41,18 @@ class LanguageController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Language not created' ], 400 );
 		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Language $language
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Language $language )
+	{
+		return response()->json( $language, 200 );
 	}
 
 	/**
@@ -85,18 +105,6 @@ class LanguageController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Language not deleted' ], 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Language $language
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Language $language )
-	{
-		return response()->json( $language, 200 );
 	}
 
 	/**

@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="Continent name"
+            label="Language name"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            label="Continent ISO code"
+            label="Language ISO code"
             v-model="form.iso"
             required
             minlength="2"
@@ -18,7 +18,7 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save continent
+            Save language
         </v-btn>
     </form>
 </template>

@@ -37,6 +37,18 @@ class TimezoneController extends Controller
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Timezone $timezone
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Timezone $timezone )
+	{
+		return response()->json( $timezone, 200 );
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param \App\Timezone $timezone
@@ -86,18 +98,6 @@ class TimezoneController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Timezone not deleted' ], 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Timezone $timezone
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Timezone $timezone )
-	{
-		return response()->json( $timezone, 200 );
 	}
 
 	/**

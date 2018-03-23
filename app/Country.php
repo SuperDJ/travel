@@ -39,4 +39,12 @@ class Country extends Model
 	{
 		return $this->belongsTo( Language::class );
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function profile()
+	{
+		return $this->hasOne( Profile::class );
+	}
 }

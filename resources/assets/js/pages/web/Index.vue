@@ -42,11 +42,11 @@
 
                 <v-flex xs12>
                     <v-tabs centered color="transparent">
-                        <v-tab v-for="continent in continents" :key="continent.id" :href="`#${continent.name}`">
+                        <v-tab v-for="continent in continents" :key="`continent-${continent.id}`" :href="`#continent-${continent.name}`">
                             {{continent.name}}</v-tab>
 
                         <v-tabs-items>
-                            <v-tab-item v-for="continent in continents" :key="continent.name" :id="`#${continent.name}`">
+                            <v-tab-item v-for="continent in continents" :key="continent.name" :id="`continent-${continent.name}`">
                                 <Destination :destination="continent.id" />
                             </v-tab-item>
                         </v-tabs-items>
@@ -92,12 +92,6 @@
 </template>
 
 <script>
-    import FlightForm from '@/components/index/flight-form';
-    import AccommodationForm from '@/components/index/accommodation-form';
-    import CarForm from '@/components/index/car-form';
-    import Destination from '@/components/index/destination';
-    import Activity from '@/components/index/activity';
-
     export default
     {
 		metaInfo: {
@@ -107,7 +101,6 @@
     	data()
         {
     	    return {
-                form: 'AccommodationForm',
                 image:
                     'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
                 activity: 1,
@@ -122,11 +115,11 @@
         },
 
         components: {
-    		FlightForm,
-            AccommodationForm,
-            CarForm,
-            Destination,
-            Activity,
+    		FlightForm: () => import( '@/components/index/flight-form' ),
+            AccommodationForm: () => import( '@/components/index/accommodation-form' ),
+            CarForm: () => import( '@/components/index/car-form' ),
+            Destination: () => import( '@/components/index/destination' ),
+            Activity: () => import( '@/components/index/activity' ),
         },
 
         methods: {
@@ -137,8 +130,6 @@
 
             changeForm( type )
             {
-                this.form = type;
-
                 let img = '';
                 switch( type )
                 {

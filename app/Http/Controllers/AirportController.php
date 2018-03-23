@@ -37,6 +37,18 @@ class AirportController extends Controller
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Airport $airport
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Airport $airport )
+	{
+		return response()->json( $airport, 200 );
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param \App\Airport $airport
@@ -86,18 +98,6 @@ class AirportController extends Controller
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'City not deleted' ], 400 );
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param \App\Airport $airport
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Airport $airport )
-	{
-		return response()->json( $airport, 200 );
 	}
 
 	/**

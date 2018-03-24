@@ -101,7 +101,9 @@
 					},
                     {
                     	text: 'Actions',
-                        align: 'left'
+                        align: 'left',
+                        value: '',
+						sortable: false,
                     }
 				]
 			}

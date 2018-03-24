@@ -34,10 +34,17 @@ const dashboardTimezone = () => import( '@/pages/dashboard/timezone' );
 const timezoneEdit = () => import( '@/pages/dashboard/timezone/edit' );
 const timezoneCreate = () => import( '@/pages/dashboard/timezone/create' );
 
-
 const dashboardCity = () => import( '@/pages/dashboard/city' );
 const cityEdit = () => import( '@/pages/dashboard/city/edit' );
 const cityCreate = () => import( '@/pages/dashboard/city/create' );
+
+const dashboardAirport = () => import( '@/pages/dashboard/airport' );
+const airportEdit = () => import( '@/pages/dashboard/airport/edit' );
+const airportCreate = () => import( '@/pages/dashboard/airport/create' );
+
+const dashboardAirline = () => import( '@/pages/dashboard/airline' );
+const airlineEdit = () => import( '@/pages/dashboard/airline/edit' );
+const airlineCreate = () => import( '@/pages/dashboard/airline/create' );
 
 Vue.use( Router );
 
@@ -312,6 +319,56 @@ export default new Router({
 						title: 'Edit city'
 					},
 					component: cityEdit
+				},
+				{
+					path: 'airports',
+					name: 'dashboardAirport',
+					meta: {
+						title: 'Airports'
+					},
+					component: dashboardAirport,
+				},
+				{
+					path: 'airports/create',
+					name: 'airportCreate',
+					meta: {
+						title: 'Create airport'
+					},
+					component: airportCreate
+				},
+				{
+					path: 'airports/:airport/edit',
+					props: true,
+					name: 'airportEdit',
+					meta: {
+						title: 'Edit airport'
+					},
+					component: airportEdit
+				},
+				{
+					path: 'airlines',
+					name: 'dashboardAirline',
+					meta: {
+						title: 'Airlines'
+					},
+					component: dashboardAirline,
+				},
+				{
+					path: 'airlines/create',
+					name: 'airlineCreate',
+					meta: {
+						title: 'Create airline'
+					},
+					component: airlineCreate
+				},
+				{
+					path: 'airlines/:airline/edit',
+					props: true,
+					name: 'airlineEdit',
+					meta: {
+						title: 'Edit airline'
+					},
+					component: airlineEdit
 				}
 			]
 		}

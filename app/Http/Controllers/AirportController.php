@@ -13,9 +13,16 @@ class AirportController extends Controller
 	 *
 	 * @return \App\Airport[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return Airport::all();
+		if( !empty( $request ) && count( $request->all() ) > 0 )
+		{
+			return Airport::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with( 'city' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return Airport::all();
+		}
 	}
 
 	/**
@@ -26,6 +33,8 @@ class AirportController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
 		$stored = Airport::create( $request->all() );
 
 		if( $stored )
@@ -70,6 +79,8 @@ class AirportController extends Controller
 	 */
 	public function update( Request $request, Airport $airport )
 	{
+		$this->validation( $request );
+
 		$updated = $airport->update( $request->all() );
 
 		if( $updated )
@@ -138,6 +149,18 @@ class AirportController extends Controller
 		}
 
 	 	return response()->json( $found, 200 );
+	}
+
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'name' => 'required|string',
+			'icao' => 'required|string',
+			'iata' => 'required|string',
+			'latitude' => 'required|string',
+			'longitude' => 'required|string',
+			'city_id' => 'required|integer|exists:cities,id'
+		]);
 	}
 
 	public function fillDB()

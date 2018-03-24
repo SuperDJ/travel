@@ -104,7 +104,7 @@
 					{
 						text: 'Country',
 						align: 'left',
-						value: 'country.name'
+						value: 'country_id',
 					},
 					{
 						text: 'Airports',
@@ -115,6 +115,7 @@
                     	text: 'Actions',
                         align: 'left',
                         value: '',
+                        sortable: false
                     }
 				]
 			}

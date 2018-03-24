@@ -96,17 +96,17 @@
 					{
 						text: 'Continent',
 						align: 'left',
-						value: 'continent.name'
+						value: 'continent_id',
 					},
 					{
 						text: 'Currency',
 						align: 'left',
-						value: 'currency.name'
+						value: 'currency_id',
 					},
 					{
 						text: 'Language',
 						align: 'left',
-						value: 'language.name'
+						value: 'language_id',
 					},
 					{
 						text: 'Cities',
@@ -125,7 +125,9 @@
 					},
                     {
                     	text: 'Actions',
-                        align: 'left'
+                        align: 'left',
+                        value: '',
+						sortable: false,
                     }
 				]
 			}

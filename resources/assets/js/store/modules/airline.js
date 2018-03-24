@@ -8,37 +8,37 @@ export default
 
 	mutations:  {
 		/**
-		 * Set all airports
+		 * Set all airlines
 		 *
 		 * @param state
-		 * @param airports
+		 * @param airlines
 		 */
-		airportIndex( state, airports )
+		airlineIndex( state, airlines )
 		{
-			state.all = airports;
+			state.all = airlines;
 		},
 
-		airportEdit( state, airport )
+		airlineEdit( state, airline )
 		{
-			state.edit = airport;
+			state.edit = airline;
 		},
 
-		airportSearch( state, airports )
+		airlineSearch( state, airlines )
 		{
-			state.search = airports;
+			state.search = airlines;
 		}
 	},
 
 	actions: {
 		/**
-		 * Get all airports from API
+		 * Get all airlines from API
 		 *
 		 * @param context
 		 * @param pagination
 		 */
-		airportIndex( context, pagination )
+		airlineIndex( context, pagination )
 		{
-			let url = '/api/airports';
+			let url = '/api/airlines';
 			if( pagination && Object.keys( pagination ).length > 1 )
 			{
 				url += `?${Object.keys( pagination ).map( key =>  `${key}=${pagination[ key ]}` ).join( '&' ) }`;
@@ -52,20 +52,20 @@ export default
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'airportIndex', response ) )
-				.catch( error => console.error( 'airportIndex', error ) );
+				.then( response => context.commit( 'airlineIndex', response ) )
+				.catch( error => console.error( 'airlineIndex', error ) );
 		},
 
 		/**
-		 * Store airport in DB
+		 * Store airline in DB
 		 *
 		 * @param context
 		 * @param data
 		 * @returns {Promise<any>}
 		 */
-		airportStore( context, data )
+		airlineStore( context, data )
 		{
-			return fetch( '/api/airports', {
+			return fetch( '/api/airlines', {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -86,19 +86,19 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'airportStore', error ) );
+				.catch( error => console.error( 'airlineStore', error ) );
 		},
 
 		/**
-		 * Get information from specific airport
+		 * Get information from specific airline
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		airportEdit( context, id )
+		airlineEdit( context, id )
 		{
-			return fetch( `/api/airports/${id}/edit`, {
+			return fetch( `/api/airlines/${id}/edit`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -108,19 +108,19 @@ export default
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'airportEdit', response ) )
-				.catch( error => console.error( 'airportEdit', error ) );
+				.then( response => context.commit( 'airlineEdit', response ) )
+				.catch( error => console.error( 'airlineEdit', error ) );
 		},
 
 		/**
-		 * Update airport in DB
+		 * Update airline in DB
 		 *
 		 * @param context
 		 * @param data
 		 */
-		airportUpdate( context, data )
+		airlineUpdate( context, data )
 		{
-			return fetch( `/api/airports/${data.id}`, {
+			return fetch( `/api/airlines/${data.id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -141,19 +141,19 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'airportUpdate', error ) );
+				.catch( error => console.error( 'airlineUpdate', error ) );
 		},
 
 		/**
-		 * Destroy airport
+		 * Destroy airline
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		airportDestroy( context, id )
+		airlineDestroy( context, id )
 		{
-			return fetch( `/api/airports/${id}`, {
+			return fetch( `/api/airlines/${id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -173,17 +173,17 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'airportDestroy', error ) );
+				.catch( error => console.error( 'airlineDestroy', error ) );
 		},
 
 		/**
 		 * Get search results from API
 		 *
 		 * @param context
-		 * @param airport
+		 * @param airline
 		 */
-		airportSearch( context, airport ) {
-			return fetch( `/api/airports/${airport}/search`, {
+		airlineSearch( context, airline ) {
+			return fetch( `/api/airlines/${airline}/search`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -191,19 +191,19 @@ export default
 				}
 			})
 				.then( response =>  response.json() )
-				.then( response => context.commit( 'airportSearch', response ) )
-				.catch( error => console.error( 'airportSearch', error ) );
+				.then( response => context.commit( 'airlineSearch', response ) )
+				.catch( error => console.error( 'airlineSearch', error ) );
 		}
 	},
 
 	getters: {
 		/**
-		 * Get all airports
+		 * Get all airlines
 		 *
 		 * @param state
 		 * @returns {{}|state.all|*}
 		 */
-		airportIndex( state )
+		airlineIndex( state )
 		{
 			if( state.all.data )
 			{
@@ -213,22 +213,22 @@ export default
 			}
 		},
 
-		airportEdit( state )
+		airlineEdit( state )
 		{
 			return state.edit;
 		},
 
 		/**
-		 * Get the total amount of airports
+		 * Get the total amount of airlines
 		 * @param state
 		 * @returns {*|number|PaymentItem}
 		 */
-		airportTotal( state )
+		airlineTotal( state )
 		{
 			return state.all.total;
 		},
 
-		airportSearch( state )
+		airlineSearch( state )
 		{
 			return state.search;
 		}

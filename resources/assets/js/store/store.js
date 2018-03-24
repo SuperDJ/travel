@@ -7,6 +7,7 @@ import mutations from './mutations';
 
 
 import accommodation from './modules/accommodation';
+import airline from './modules/airline';
 import airport from './modules/airport';
 import car from './modules/car';
 import city from './modules/city';
@@ -33,6 +34,7 @@ export const store = new Vuex.Store({
 
 	modules: {
 		accommodation,
+		airline,
 		airport,
 		car,
 		city,

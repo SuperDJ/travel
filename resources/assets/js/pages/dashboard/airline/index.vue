@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'timezoneCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'airlineCreate' }">
             <v-icon>add</v-icon>
-            Add timezone
+            Add airline
         </v-btn>
 
         <v-data-table
@@ -30,10 +30,12 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.gmt_offset / 3600 }} hour(s)</td>
-                    <td>{{ props.item.country.name }}</td>
+                    <td>{{ props.item.icao }}</td>
+                    <td>{{ props.item.iso }}</td>
+                    <td><img :src="`https://content.airhex.com/content/logos/airlines_${props.item.iso}_350_100_r.png`"
+                             :alt="props.item.name"></td>
                     <td>
-                        <v-btn icon :to="{ name: 'timezoneEdit', params: { timezone: props.item.id } }">
+                        <v-btn icon :to="{ name: 'airlineEdit', params: { airline: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -48,16 +50,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete timezone</span>
+                    <span class="headline">Delete airline</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete timezone: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete airline: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="timezoneDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="airlineDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -68,7 +70,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Timezones'
+			title: 'Airlines'
 		},
 
 		data()
@@ -79,26 +81,31 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Timezone',
+						text: 'Airport',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'GMT offset',
+						text: 'ICAO',
 						align: 'left',
-						value: 'gmt_offset',
+						value: 'icao',
 					},
 					{
-						text: 'Country',
+						text: 'ISO',
 						align: 'left',
-						value: 'country.name',
-						sortable: false,
+						value: 'iso',
 					},
+                    {
+                    	text: 'Icon',
+                        align: 'left',
+                        value: '',
+                        sortable: false,
+                    },
                     {
                     	text: 'Actions',
                         align: 'left',
                         value: '',
-					    sortable: false,
+                        sortable: false,
                     }
 				]
 			}
@@ -107,12 +114,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.timezoneIndex;
+				return this.$store.getters.airlineIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.timezoneTotal;
+				return this.$store.getters.airlineTotal;
 			}
 		},
 
@@ -121,16 +128,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'timezoneIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'airlineIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            timezoneDestroy( id )
+            airlineDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'timezoneDestroy', id ).then( () =>
+                this.$store.dispatch( 'airlineDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

@@ -12,9 +12,15 @@ class AirlineController extends Controller
 	 *
 	 * @return \App\Airline[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index()
+    public function index( Request $request )
     {
-        return Airline::all();
+    	if( !empty( $request ) && count( $request->all() ) > 0 )
+		{
+			return Airline::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return Airline::all();
+		}
     }
 
     /**
@@ -25,6 +31,8 @@ class AirlineController extends Controller
      */
     public function store( Request $request )
     {
+    	$this->validation( $request );
+
     	$stored = Airline::create( $request->all() );
 
     	if( $stored )
@@ -66,6 +74,8 @@ class AirlineController extends Controller
      */
     public function update( Request $request, Airline $airline )
     {
+    	$this->validation( $request );
+
 		$updated = $airline->update( $request->all() );
 
 		if( $updated )
@@ -95,6 +105,36 @@ class AirlineController extends Controller
 			return response()->json( [ 'success' => false, 'message' => 'Airline not deleted' ], 400 );
 		}
     }
+
+	/**
+	 * Search for airline
+	 *
+	 * @param $search
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+    public function search( $search )
+	{
+		$result = Airline::where( 'name', 'like', '%'.$search.'%' )
+			->orWhere( 'callsign', 'like', '%'.$search.'%' )
+			->orWhere( 'iso', 'like', '%'.$search.'%' )
+			->orWhere( 'icao', 'like', '%'.$search.'%' )
+			->orWhere( 'id', $search )
+			->orderBy( 'name', 'asc' )
+			->get();
+
+		return response()->json( $result, 200 );
+	}
+
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'name' => 'required|string',
+			'callsign' => 'required|string',
+			'iso' => 'required|string',
+			'icao' => 'required|string'
+		]);
+	}
 
     public function fillDB()
 	{

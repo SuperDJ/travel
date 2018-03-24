@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'timezoneCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'airportCreate' }">
             <v-icon>add</v-icon>
-            Add timezone
+            Add airport
         </v-btn>
 
         <v-data-table
@@ -30,10 +30,11 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.gmt_offset / 3600 }} hour(s)</td>
-                    <td>{{ props.item.country.name }}</td>
+                    <td>{{ props.item.iata }}</td>
+                    <td>{{ props.item.icao }}</td>
+                    <td>{{ props.item.city.name }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'timezoneEdit', params: { timezone: props.item.id } }">
+                        <v-btn icon :to="{ name: 'airportEdit', params: { airport: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -48,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete timezone</span>
+                    <span class="headline">Delete airport</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete timezone: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete airport: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="timezoneDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="airportDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -68,7 +69,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Timezones'
+			title: 'Airports'
 		},
 
 		data()
@@ -79,26 +80,30 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Timezone',
+						text: 'Airport',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'GMT offset',
+						text: 'ICAO',
 						align: 'left',
-						value: 'gmt_offset',
+						value: 'icao',
 					},
 					{
-						text: 'Country',
+						text: 'IATA',
 						align: 'left',
-						value: 'country.name',
-						sortable: false,
+						value: 'iata',
+					},
+					{
+						text: 'City',
+						align: 'left',
+						value: 'city_id'
 					},
                     {
                     	text: 'Actions',
                         align: 'left',
                         value: '',
-					    sortable: false,
+                        sortable: false,
                     }
 				]
 			}
@@ -107,12 +112,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.timezoneIndex;
+				return this.$store.getters.airportIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.timezoneTotal;
+				return this.$store.getters.airportTotal;
 			}
 		},
 
@@ -121,16 +126,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'timezoneIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'airportIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            timezoneDestroy( id )
+            airportDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'timezoneDestroy', id ).then( () =>
+                this.$store.dispatch( 'airportDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

@@ -102,7 +102,8 @@
                     {
                     	text: 'Actions',
                         align: 'left',
-                        value: ''
+                        value: '',
+						sortable: false,
                     }
 				]
 			}

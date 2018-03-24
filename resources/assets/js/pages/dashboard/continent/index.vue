@@ -97,6 +97,7 @@
                     	text: 'Actions',
                         align: 'left',
                         value: '',
+                        sortable: false,
                     }
 				]
 			}

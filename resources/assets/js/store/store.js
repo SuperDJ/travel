@@ -15,6 +15,7 @@ import continent from './modules/continent';
 import country from './modules/country';
 import currency from './modules/currency';
 import flight from './modules/flight';
+import group from './modules/group';
 import language from './modules/language';
 import timezone from './modules/timezone';
 import user from './modules/user';
@@ -42,6 +43,7 @@ export const store = new Vuex.Store({
 		country,
 		currency,
 		flight,
+		group,
 		language,
 		timezone,
 		user,

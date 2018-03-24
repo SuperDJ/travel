@@ -46,331 +46,375 @@ const dashboardAirline = () => import( '@/pages/dashboard/airline' );
 const airlineEdit = () => import( '@/pages/dashboard/airline/edit' );
 const airlineCreate = () => import( '@/pages/dashboard/airline/create' );
 
+const dashboardGroup = () => import( '@/pages/dashboard/group' );
+const groupEdit = () => import( '@/pages/dashboard/group/edit' );
+const groupCreate = () => import( '@/pages/dashboard/group/create' );
+
+
 Vue.use( Router );
 
-export default new Router({
-	mode: 'history',
-	routes: [
-		{
-			path: '/',
-			component: web,
-			children: [
-				{
-					path: '',
-					name: 'index',
-					meta: {
-						title: 'Home'
-					},
-					component: index
+const routes = [
+	{
+		path: '/',
+		component: web,
+		children: [
+			{
+				path: '',
+				name: 'index',
+				meta: {
+					title: 'Home'
 				},
-				{
-					path: 'flights',
-					name: 'flights',
-					meta: {
-						title: 'Flights'
-					},
-					component: flights
+				component: index
+			},
+			{
+				path: 'flights',
+				name: 'flights',
+				meta: {
+					title: 'Flights'
 				},
-				{
-					path: 'accommodations',
-					name: 'accommodations',
-					meta: {
-						title: 'Flights'
-					},
+				component: flights
+			},
+			{
+				path: 'accommodations',
+				name: 'accommodations',
+				meta: {
+					title: 'Flights'
 				},
-				{
-					path: 'car-rental',
-					name: 'carRental',
-					meta: {
-						title: 'Car rental'
-					},
+			},
+			{
+				path: 'car-rental',
+				name: 'carRental',
+				meta: {
+					title: 'Car rental'
 				},
-				{
-					path: 'flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
-					props: true,
-					name: 'flightsSearch',
-					meta: {
-						title: 'Flight form :departure to :destination'
-					},
-					component: flights
+			},
+			{
+				path: 'flights/:departure/:departureDate/:destination/:destinationDate/:adults/:children/:infants/:cabinClass',
+				props: true,
+				name: 'flightsSearch',
+				meta: {
+					title: 'Flight form :departure to :destination'
 				},
-				{
-					path: 'continent/:continent',
-					props: true,
-					name: 'continentShow',
-					meta: {
-						title: 'Continent :continent'
-					},
+				component: flights
+			},
+			{
+				path: 'continent/:continent',
+				props: true,
+				name: 'continentShow',
+				meta: {
+					title: 'Continent :continent'
 				},
-			]
-		},
-		{
-			path: '/account',
-			component: account,
-			children: [
-				{
-					path: 'register',
-					name: 'register',
-					meta: {
-						title: 'Register'
-					},
-					component: register,
-					beforeEnter: ( to, form, next ) => {
-						if( store.getters.userLoggedIn )
-						{
-							next( { name: 'dashboard' } )
-						} else {
-							next();
-						}
+			},
+		]
+	},
+	{
+		path: '/account',
+		component: account,
+		children: [
+			{
+				path: 'register',
+				name: 'register',
+				meta: {
+					title: 'Register'
+				},
+				component: register,
+				beforeEnter: ( to, form, next ) => {
+					if( store.getters.userLoggedIn )
+					{
+						next( { name: 'dashboard' } )
+					} else {
+						next();
 					}
-				},
-				{
-					path: 'login',
-					name: 'login',
-					meta: {
-						title: 'Login'
-					},
-					component: login,
-					beforeEnter: ( to, form, next ) => {
-						if( store.getters.userLoggedIn )
-						{
-							next( { name: 'dashboard' } )
-						} else {
-							next();
-						}
-					}
-				}
-			]
-		},
-		{
-			path: '/dashboard',
-			component: dashboard,
-			beforeEnter: ( to, from, next ) => {
-				if( store.getters.userLoggedIn )
-				{
-					next();
-				} else {
-					next( { name: 'login' } );
 				}
 			},
-			children: [
-				{
-					path: '',
-					name: 'dashboard',
-					meta: {
-						title: 'Overview'
-					},
-					component: overview
+			{
+				path: 'login',
+				name: 'login',
+				meta: {
+					title: 'Login'
 				},
-				{
-					path: 'users',
-					name: 'dashboardUser',
-					meta: {
-						title: 'Users'
-					},
-					component: dashboardUser
-				},
-				{
-					path: 'continents',
-					name: 'dashboardContinent',
-					meta: {
-						title: 'Continents'
-					},
-					component: dashboardContinent,
-				},
-				{
-					path: 'continents/create',
-					name: 'continentCreate',
-					meta: {
-						title: 'Create continent'
-					},
-					component: continentCreate
-				},
-				{
-					path: 'continents/:continent/edit',
-					props: true,
-					name: 'continentEdit',
-					meta: {
-						title: 'Edit continent'
-					},
-					component: continentEdit
-				},
-				{
-					path: 'currencies',
-					name: 'dashboardCurrency',
-					meta: {
-						title: 'Currencies'
-					},
-					component: dashboardCurrency,
-				},
-				{
-					path: 'currencies/create',
-					name: 'currencyCreate',
-					meta: {
-						title: 'Create currency'
-					},
-					component: currencyCreate
-				},
-				{
-					path: 'currencies/:currency/edit',
-					props: true,
-					name: 'currencyEdit',
-					meta: {
-						title: 'Edit currency'
-					},
-					component: currencyEdit
-				},
-				{
-					path: 'languages',
-					name: 'dashboardLanguage',
-					meta: {
-						title: 'Language'
-					},
-					component: dashboardLanguage,
-				},
-				{
-					path: 'languages/create',
-					name: 'languageCreate',
-					meta: {
-						title: 'Create language'
-					},
-					component: languageCreate
-				},
-				{
-					path: 'languages/:language/edit',
-					props: true,
-					name: 'languageEdit',
-					meta: {
-						title: 'Edit language'
-					},
-					component: languageEdit
-				},
-				{
-					path: 'countries',
-					name: 'dashboardCountry',
-					meta: {
-						title: 'Country'
-					},
-					component: dashboardCountry,
-				},
-				{
-					path: 'countries/create',
-					name: 'countryCreate',
-					meta: {
-						title: 'Create country'
-					},
-					component: countryCreate
-				},
-				{
-					path: 'countries/:country/edit',
-					props: true,
-					name: 'countryEdit',
-					meta: {
-						title: 'Edit country'
-					},
-					component: countryEdit
-				},
-				{
-					path: 'timezones',
-					name: 'dashboardTimezone',
-					meta: {
-						title: 'Timezone'
-					},
-					component: dashboardTimezone,
-				},
-				{
-					path: 'timezones/create',
-					name: 'timezoneCreate',
-					meta: {
-						title: 'Create timezone'
-					},
-					component: timezoneCreate
-				},
-				{
-					path: 'timezones/:timezone/edit',
-					props: true,
-					name: 'timezoneEdit',
-					meta: {
-						title: 'Edit timezone'
-					},
-					component: timezoneEdit
-				},
-				{
-					path: 'cities',
-					name: 'dashboardCity',
-					meta: {
-						title: 'City'
-					},
-					component: dashboardCity,
-				},
-				{
-					path: 'cities/create',
-					name: 'cityCreate',
-					meta: {
-						title: 'Create city'
-					},
-					component: cityCreate
-				},
-				{
-					path: 'cities/:city/edit',
-					props: true,
-					name: 'cityEdit',
-					meta: {
-						title: 'Edit city'
-					},
-					component: cityEdit
-				},
-				{
-					path: 'airports',
-					name: 'dashboardAirport',
-					meta: {
-						title: 'Airports'
-					},
-					component: dashboardAirport,
-				},
-				{
-					path: 'airports/create',
-					name: 'airportCreate',
-					meta: {
-						title: 'Create airport'
-					},
-					component: airportCreate
-				},
-				{
-					path: 'airports/:airport/edit',
-					props: true,
-					name: 'airportEdit',
-					meta: {
-						title: 'Edit airport'
-					},
-					component: airportEdit
-				},
-				{
-					path: 'airlines',
-					name: 'dashboardAirline',
-					meta: {
-						title: 'Airlines'
-					},
-					component: dashboardAirline,
-				},
-				{
-					path: 'airlines/create',
-					name: 'airlineCreate',
-					meta: {
-						title: 'Create airline'
-					},
-					component: airlineCreate
-				},
-				{
-					path: 'airlines/:airline/edit',
-					props: true,
-					name: 'airlineEdit',
-					meta: {
-						title: 'Edit airline'
-					},
-					component: airlineEdit
+				component: login,
+				beforeEnter: ( to, form, next ) => {
+					if( store.getters.userLoggedIn )
+					{
+						next( { name: 'dashboard' } )
+					} else {
+						next();
+					}
 				}
-			]
-		}
-	]
+			}
+		]
+	},
+	{
+		path: '/dashboard',
+		component: dashboard,
+		meta: {
+			auth: true
+		},
+		children: [
+			{
+				path: '',
+				name: 'dashboard',
+				meta: {
+					title: 'Overview'
+				},
+				component: overview
+			},
+			{
+				path: 'users',
+				name: 'dashboardUser',
+				meta: {
+					title: 'Users'
+				},
+				component: dashboardUser
+			},
+			{
+				path: 'continents',
+				name: 'dashboardContinent',
+				meta: {
+					title: 'Continents'
+				},
+				component: dashboardContinent,
+			},
+			{
+				path: 'continents/create',
+				name: 'continentCreate',
+				meta: {
+					title: 'Create continent'
+				},
+				component: continentCreate
+			},
+			{
+				path: 'continents/:continent/edit',
+				props: true,
+				name: 'continentEdit',
+				meta: {
+					title: 'Edit continent'
+				},
+				component: continentEdit
+			},
+			{
+				path: 'currencies',
+				name: 'dashboardCurrency',
+				meta: {
+					title: 'Currencies'
+				},
+				component: dashboardCurrency,
+			},
+			{
+				path: 'currencies/create',
+				name: 'currencyCreate',
+				meta: {
+					title: 'Create currency'
+				},
+				component: currencyCreate
+			},
+			{
+				path: 'currencies/:currency/edit',
+				props: true,
+				name: 'currencyEdit',
+				meta: {
+					title: 'Edit currency'
+				},
+				component: currencyEdit
+			},
+			{
+				path: 'languages',
+				name: 'dashboardLanguage',
+				meta: {
+					title: 'Language'
+				},
+				component: dashboardLanguage,
+			},
+			{
+				path: 'languages/create',
+				name: 'languageCreate',
+				meta: {
+					title: 'Create language'
+				},
+				component: languageCreate
+			},
+			{
+				path: 'languages/:language/edit',
+				props: true,
+				name: 'languageEdit',
+				meta: {
+					title: 'Edit language'
+				},
+				component: languageEdit
+			},
+			{
+				path: 'countries',
+				name: 'dashboardCountry',
+				meta: {
+					title: 'Country'
+				},
+				component: dashboardCountry,
+			},
+			{
+				path: 'countries/create',
+				name: 'countryCreate',
+				meta: {
+					title: 'Create country'
+				},
+				component: countryCreate
+			},
+			{
+				path: 'countries/:country/edit',
+				props: true,
+				name: 'countryEdit',
+				meta: {
+					title: 'Edit country'
+				},
+				component: countryEdit
+			},
+			{
+				path: 'timezones',
+				name: 'dashboardTimezone',
+				meta: {
+					title: 'Timezone'
+				},
+				component: dashboardTimezone,
+			},
+			{
+				path: 'timezones/create',
+				name: 'timezoneCreate',
+				meta: {
+					title: 'Create timezone'
+				},
+				component: timezoneCreate
+			},
+			{
+				path: 'timezones/:timezone/edit',
+				props: true,
+				name: 'timezoneEdit',
+				meta: {
+					title: 'Edit timezone'
+				},
+				component: timezoneEdit
+			},
+			{
+				path: 'cities',
+				name: 'dashboardCity',
+				meta: {
+					title: 'City'
+				},
+				component: dashboardCity,
+			},
+			{
+				path: 'cities/create',
+				name: 'cityCreate',
+				meta: {
+					title: 'Create city'
+				},
+				component: cityCreate
+			},
+			{
+				path: 'cities/:city/edit',
+				props: true,
+				name: 'cityEdit',
+				meta: {
+					title: 'Edit city'
+				},
+				component: cityEdit
+			},
+			{
+				path: 'airports',
+				name: 'dashboardAirport',
+				meta: {
+					title: 'Airports'
+				},
+				component: dashboardAirport,
+			},
+			{
+				path: 'airports/create',
+				name: 'airportCreate',
+				meta: {
+					title: 'Create airport'
+				},
+				component: airportCreate
+			},
+			{
+				path: 'airports/:airport/edit',
+				props: true,
+				name: 'airportEdit',
+				meta: {
+					title: 'Edit airport'
+				},
+				component: airportEdit
+			},
+			{
+				path: 'airlines',
+				name: 'dashboardAirline',
+				meta: {
+					title: 'Airlines'
+				},
+				component: dashboardAirline,
+			},
+			{
+				path: 'airlines/create',
+				name: 'airlineCreate',
+				meta: {
+					title: 'Create airline'
+				},
+				component: airlineCreate
+			},
+			{
+				path: 'airlines/:airline/edit',
+				props: true,
+				name: 'airlineEdit',
+				meta: {
+					title: 'Edit airline'
+				},
+				component: airlineEdit
+			},
+			{
+				path: 'groups',
+				name: 'dashboardGroup',
+				meta: {
+					title: 'Groups'
+				},
+				component: dashboardGroup,
+			},
+			{
+				path: 'groups/create',
+				name: 'groupCreate',
+				meta: {
+					title: 'Create group'
+				},
+				component: groupCreate
+			},
+			{
+				path: 'groups/:group/edit',
+				props: true,
+				name: 'groupEdit',
+				meta: {
+					title: 'Edit group'
+				},
+				component: groupEdit
+			}
+		]
+	}
+];
+
+const router = new Router({
+	mode: 'history',
+	routes: routes
 });
+
+router.beforeEach( ( to, from, next ) => {
+	if( to.matched[0].meta.auth || to.meta.auth )
+	{
+		if( store.getters.userLoggedIn )
+		{
+			next();
+		} else {
+			next( { name: 'login' } );
+		}
+	}
+
+	next();
+});
+
+
+export default router;

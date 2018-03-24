@@ -88,7 +88,7 @@ module.exports = env => {
 		},
 		plugins: [
 			new ExtractTextPlugin( 'public/css/[name].css' ),
-			new CleanWebpackPlugin(['./public/js', './public/fonts', './public/css']),
+			new CleanWebpackPlugin(['./public/js', './public/fonts', './public/css']),/*
 			new GoogleFonts({
 				fonts: [
 					{
@@ -100,7 +100,7 @@ module.exports = env => {
 				path: 'public/fonts/',
 				apiUrl: 'https://google-webfonts-helper.herokuapp.com/api/fonts',
 				filename: './resources/assets/scss/components/_fonts.scss'
-			})
+			})                                                                          */
 		]
 	}
 };

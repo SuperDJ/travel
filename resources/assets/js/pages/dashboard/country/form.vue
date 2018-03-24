@@ -25,6 +25,7 @@
             item-value="id"
             no-data="No continent found"
             cache-items
+            required
             :error-messages="errors['continent_id']"
             :search-input.sync="continentSearch"
         />
@@ -33,6 +34,7 @@
             label="Language"
             v-model.number="form.language_id"
             autocomplete
+            required
             :items="languages"
             item-text="name"
             item-value="id"
@@ -48,6 +50,7 @@
             autocomplete
             :items="currencies"
             item-text="name"
+            required
             item-value="id"
             no-data="No currency found"
             cache-items
@@ -82,6 +85,9 @@
                     language_id: null,
                     currency_id: null,
 				},
+                continentSearch: null,
+                languageSearch: null,
+                currencySearch: null,
             }
         },
 
@@ -119,7 +125,7 @@
 
 			continent( continent )
 			{
-				if( continent && continent.length > 2 )
+				if( continent && continent.length >= 2 )
 				{
 					this.$store.dispatch( 'continentSearch', continent );
 				}
@@ -127,7 +133,7 @@
 
 			currency( currency )
 			{
-				if( currency && currency.length > 2 )
+				if( currency && currency.length >= 2 )
 				{
 					this.$store.dispatch( 'currencySearch', currency );
 				}
@@ -135,7 +141,7 @@
 
 			language( language )
 			{
-				if( language && language.length > 2 )
+				if( language && language.length >= 2 )
 				{
 					this.$store.dispatch( 'languageSearch', language );
 				}
@@ -146,6 +152,9 @@
         	details( after )
             {
             	this.form = after;
+				this.$store.dispatch( 'continentSearch', after.continent_id );
+				this.$store.dispatch( 'languageSearch', after.language_id );
+				this.$store.dispatch( 'currencySearch', after.currency_id );
             },
 
 			continentSearch( continent )
@@ -163,14 +172,5 @@
 				this.language( language );
 			},
         },
-
-        mounted() {
-    		if( this.details.id )
-            {
-            	this.$store.dispatch( 'continentSearch', this.details.continent_id );
-            	this.$store.dispatch( 'languageSearch', this.details.language_id );
-            	this.$store.dispatch( 'currencySearch', this.details.currency_id );
-            }
-        }
     }
 </script>

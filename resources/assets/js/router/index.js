@@ -30,6 +30,15 @@ const dashboardCountry = () => import( '@/pages/dashboard/country' );
 const countryEdit = () => import( '@/pages/dashboard/country/edit' );
 const countryCreate = () => import( '@/pages/dashboard/country/create' );
 
+const dashboardTimezone = () => import( '@/pages/dashboard/timezone' );
+const timezoneEdit = () => import( '@/pages/dashboard/timezone/edit' );
+const timezoneCreate = () => import( '@/pages/dashboard/timezone/create' );
+
+
+const dashboardCity = () => import( '@/pages/dashboard/city' );
+const cityEdit = () => import( '@/pages/dashboard/city/edit' );
+const cityCreate = () => import( '@/pages/dashboard/city/create' );
+
 Vue.use( Router );
 
 export default new Router({
@@ -253,6 +262,56 @@ export default new Router({
 						title: 'Edit country'
 					},
 					component: countryEdit
+				},
+				{
+					path: 'timezones',
+					name: 'dashboardTimezone',
+					meta: {
+						title: 'Timezone'
+					},
+					component: dashboardTimezone,
+				},
+				{
+					path: 'timezones/create',
+					name: 'timezoneCreate',
+					meta: {
+						title: 'Create timezone'
+					},
+					component: timezoneCreate
+				},
+				{
+					path: 'timezones/:timezone/edit',
+					props: true,
+					name: 'timezoneEdit',
+					meta: {
+						title: 'Edit timezone'
+					},
+					component: timezoneEdit
+				},
+				{
+					path: 'cities',
+					name: 'dashboardCity',
+					meta: {
+						title: 'City'
+					},
+					component: dashboardCity,
+				},
+				{
+					path: 'cities/create',
+					name: 'cityCreate',
+					meta: {
+						title: 'Create city'
+					},
+					component: cityCreate
+				},
+				{
+					path: 'cities/:city/edit',
+					props: true,
+					name: 'cityEdit',
+					meta: {
+						title: 'Edit city'
+					},
+					component: cityEdit
 				}
 			]
 		}

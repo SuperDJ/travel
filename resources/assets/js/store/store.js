@@ -15,6 +15,7 @@ import country from './modules/country';
 import currency from './modules/currency';
 import flight from './modules/flight';
 import language from './modules/language';
+import timezone from './modules/timezone';
 import user from './modules/user';
 
 Vue.use( Vuex );
@@ -40,6 +41,7 @@ export const store = new Vuex.Store({
 		currency,
 		flight,
 		language,
+		timezone,
 		user,
 	}
 });

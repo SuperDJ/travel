@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Country;
 use App\Timezone;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TimezoneController extends Controller
 {
@@ -13,9 +14,15 @@ class TimezoneController extends Controller
 	 *
 	 * @return \App\Timezone[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return Timezone::all();
+		if( !empty( $request ) && count( $request->all() ) > 0 ) {
+			return Timezone::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with( 'country' )
+				->paginate( $request->rowsPerPage );
+		} else{
+			return Timezone::all();
+		}
 	}
 
 	/**
@@ -26,6 +33,8 @@ class TimezoneController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
 		$stored = Timezone::create( $request->all() );
 
 		if( $stored )
@@ -70,6 +79,8 @@ class TimezoneController extends Controller
 	 */
 	public function update( Request $request, Timezone $timezone )
 	{
+		$this->validation( $request );
+
 		$updated = $timezone->update( $request->all() );
 
 		if( $updated )
@@ -115,6 +126,15 @@ class TimezoneController extends Controller
 			->get();
 
 		return response()->json( $result, 200 );
+	}
+
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'name' => $request->input( 'id' ) ? [ 'required', 'string', Rule::unique( 'timezones' )->ignore( $request->input( 'id' ) ) ] : 'required|unique:timezones|string',
+			'gmt_offset' => 'required',
+			'country_id' => 'required|exists:countries,id'
+		]);
 	}
 
 	public function fillDB()

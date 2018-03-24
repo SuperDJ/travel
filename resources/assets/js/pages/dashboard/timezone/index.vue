@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'countryCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'timezoneCreate' }">
             <v-icon>add</v-icon>
-            Add country
+            Add timezone
         </v-btn>
 
         <v-data-table
@@ -30,15 +30,10 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.iso }}</td>
-                    <td>{{ props.item.continent.name }}</td>
-                    <td>{{ props.item.currency.name }}</td>
-                    <td>{{ props.item.language.name }}</td>
-                    <td class="text-xs-right">{{ props.item.cities_count }}</td>
-                    <td class="text-xs-right">{{ props.item.timezones_count }}</td>
-                    <td class="text-xs-right">{{ props.item.profile_count }}</td>
+                    <td>{{ props.item.gmt_offset / 3600 }} hour(s)</td>
+                    <td>{{ props.item.country.name }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'countryEdit', params: { country: props.item.id } }">
+                        <v-btn icon :to="{ name: 'timezoneEdit', params: { timezone: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -53,16 +48,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete country</span>
+                    <span class="headline">Delete timezone</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete country: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete timezone: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="countryDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="timezoneDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -73,7 +68,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Countries'
+			title: 'Timezones'
 		},
 
 		data()
@@ -84,48 +79,24 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Country',
+						text: 'Timezone',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'ISO',
+						text: 'GMT offset',
 						align: 'left',
-						value: 'iso',
+						value: 'gmt_offset',
 					},
 					{
-						text: 'Continent',
+						text: 'Country',
 						align: 'left',
-						value: 'continent.name'
-					},
-					{
-						text: 'Currency',
-						align: 'left',
-						value: 'currency.name'
-					},
-					{
-						text: 'Language',
-						align: 'left',
-						value: 'language.name'
-					},
-					{
-						text: 'Cities',
-						align: 'right',
-						value: 'cities_count'
-					},
-                    {
-                    	text: 'Timezones',
-                        align: 'right',
-                        value: 'timezones_count'
-                    },
-					{
-						text: 'Users',
-						align: 'right',
-						value: 'profile_count'
+						value: 'country.name'
 					},
                     {
                     	text: 'Actions',
-                        align: 'left'
+                        align: 'left',
+                        value: '',
                     }
 				]
 			}
@@ -134,12 +105,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.countryIndex;
+				return this.$store.getters.timezoneIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.countryTotal;
+				return this.$store.getters.timezoneTotal;
 			}
 		},
 
@@ -148,16 +119,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'countryIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'timezoneIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            countryDestroy( id )
+            timezoneDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'countryDestroy', id ).then( () =>
+                this.$store.dispatch( 'timezoneDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

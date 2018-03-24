@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'countryCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'cityCreate' }">
             <v-icon>add</v-icon>
-            Add country
+            Add city
         </v-btn>
 
         <v-data-table
@@ -30,15 +30,13 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
+                    <td>{{ props.item.capital }}</td>
                     <td>{{ props.item.iso }}</td>
-                    <td>{{ props.item.continent.name }}</td>
-                    <td>{{ props.item.currency.name }}</td>
-                    <td>{{ props.item.language.name }}</td>
-                    <td class="text-xs-right">{{ props.item.cities_count }}</td>
-                    <td class="text-xs-right">{{ props.item.timezones_count }}</td>
-                    <td class="text-xs-right">{{ props.item.profile_count }}</td>
+                    <td>{{ props.item.iata }}</td>
+                    <td>{{ props.item.country.name }}</td>
+                    <td class="text-xs-right">{{ props.item.airports_count }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'countryEdit', params: { country: props.item.id } }">
+                        <v-btn icon :to="{ name: 'cityEdit', params: { city: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -53,16 +51,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete country</span>
+                    <span class="headline">Delete city</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete country: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete city: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="countryDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="cityDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -73,7 +71,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Countries'
+			title: 'Cities'
 		},
 
 		data()
@@ -84,9 +82,14 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Country',
+						text: 'City',
 						align: 'left',
 						value: 'name'
+					},
+					{
+						text: 'Country capital',
+						align: 'left',
+						value: 'capital',
 					},
 					{
 						text: 'ISO',
@@ -94,38 +97,24 @@
 						value: 'iso',
 					},
 					{
-						text: 'Continent',
+						text: 'IATA',
 						align: 'left',
-						value: 'continent.name'
+						value: 'iata',
 					},
 					{
-						text: 'Currency',
+						text: 'Country',
 						align: 'left',
-						value: 'currency.name'
+						value: 'country.name'
 					},
 					{
-						text: 'Language',
-						align: 'left',
-						value: 'language.name'
-					},
-					{
-						text: 'Cities',
+						text: 'Airports',
 						align: 'right',
-						value: 'cities_count'
-					},
-                    {
-                    	text: 'Timezones',
-                        align: 'right',
-                        value: 'timezones_count'
-                    },
-					{
-						text: 'Users',
-						align: 'right',
-						value: 'profile_count'
+						value: 'airports_count'
 					},
                     {
                     	text: 'Actions',
-                        align: 'left'
+                        align: 'left',
+                        value: '',
                     }
 				]
 			}
@@ -134,12 +123,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.countryIndex;
+				return this.$store.getters.cityIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.countryTotal;
+				return this.$store.getters.cityTotal;
 			}
 		},
 
@@ -148,16 +137,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'countryIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'cityIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            countryDestroy( id )
+            cityDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'countryDestroy', id ).then( () =>
+                this.$store.dispatch( 'cityDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

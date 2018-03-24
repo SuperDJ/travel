@@ -7,6 +7,7 @@ use App\Currency;
 use App\Language;
 use App\Country;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CountryController extends Controller
 {
@@ -24,6 +25,7 @@ class CountryController extends Controller
 				->with( 'currency' )
 				->with( 'language' )
 				->withCount( 'cities' )
+				->withCount( 'timezones' )
 				->withCount( 'profile' )
 				->paginate( $request->rowsPerPage );
 		} else {
@@ -143,7 +145,7 @@ class CountryController extends Controller
 	{
 		$request->validate([
 			'name' => 'required',
-			'iso' => $request->input('id') ? [ 'required', Rule::unique( 'country' )->ignore($request->input( 'id' ) ) ] : 'required|unique:countries',
+			'iso' => $request->input( 'id' ) ? [ 'required', Rule::unique( 'countries' )->ignore( $request->input( 'id' ) ) ] : 'required|unique:countries',
 			'continent_id' => 'required|integer|exists:continents,id',
 			'currency_id' => 'required|integer|exists:currencies,id',
 			'language_id' => 'required|integer|exists:languages,id'

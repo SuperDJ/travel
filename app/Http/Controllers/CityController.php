@@ -11,11 +11,21 @@ class CityController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\City[]|\Illuminate\Database\Eloquent\Collection
 	 */
-	public function index()
+	public function index( Request $request )
 	{
-		return City::all();
+		if( !empty( $request ) && count( $request->all() ) > 0 )
+		{
+			return City::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with( 'country' )
+				->withCount( 'airports' )
+				->paginate( $request->rowsPerPage );
+		} else {
+			return City::all();
+		}
 	}
 
 	/**
@@ -26,6 +36,8 @@ class CityController extends Controller
 	 */
 	public function store( Request $request )
 	{
+		$this->validation( $request );
+
 		$stored = City::create( $request->all() );
 
 		if( $stored )
@@ -70,6 +82,8 @@ class CityController extends Controller
 	 */
 	public function update( Request $request, City $city )
 	{
+		$this->validation( $request );
+
 		$updated = $city->update( $request->all() );
 
 		if( $updated )
@@ -115,6 +129,19 @@ class CityController extends Controller
 			->get();
 
 		return response()->json( $result, 200 );
+	}
+
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'name' => 'required|string',
+			'capital' => 'boolean',
+			'latitude' => 'required|string',
+			'longitude' => 'required|string',
+			'country_id' => 'required|integer|exists:countries,id',
+			'iso' => 'required|string',
+			'iata' => 'required|string'
+		]);
 	}
 
 	public function fillDB()

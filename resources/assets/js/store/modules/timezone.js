@@ -8,48 +8,48 @@ export default
 
 	mutations: {
 		/**
-		 * Set all city
+		 * Set all timezone
 		 *
 		 * @param state
-		 * @param city
+		 * @param timezone
 		 */
-		cityIndex( state, city ) {
-			state.all = city;
+		timezoneIndex( state, timezone ) {
+			state.all = timezone;
 		},
 
 		/**
-		 * Set edit city
+		 * Set edit timezone
 		 *
 		 * @param state
-		 * @param city
+		 * @param timezone
 		 */
-		cityEdit( state, city )
+		timezoneEdit( state, timezone )
 		{
-			state.edit = city;
+			state.edit = timezone;
 		},
 
 		/**
 		 * Set search results
 		 *
 		 * @param state
-		 * @param city
+		 * @param timezone
 		 */
-		citySearch( state, city ) {
-			state.search = city;
+		timezoneSearch( state, timezone ) {
+			state.search = timezone;
 		}
 	},
 
 	actions: {
 		/**
-		 * Get all city
+		 * Get all timezone
 		 *
 		 * @param context
 		 * @param pagination
 		 * @returns {Promise<any>}
 		 */
-		cityIndex( context, pagination )
+		timezoneIndex( context, pagination )
 		{
-			let url = '/api/cities';
+			let url = '/api/timezones';
 			if( pagination && Object.keys( pagination ).length > 1 )
 			{
 				url += `?${Object.keys( pagination ).map( key =>  `${key}=${pagination[ key ]}` ).join( '&' ) }`;
@@ -63,20 +63,20 @@ export default
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'cityIndex', response ) )
-				.catch( error => console.error( 'cityIndex', error ) );
+				.then( response => context.commit( 'timezoneIndex', response ) )
+				.catch( error => console.error( 'timezoneIndex', error ) );
 		},
 
 		/**
-		 * Store city
+		 * Store timezone
 		 *
 		 * @param context
 		 * @param data
 		 * @returns {Promise<any>}
 		 */
-		cityStore( context, data )
+		timezoneStore( context, data )
 		{
-			return fetch( '/api/cities', {
+			return fetch( '/api/timezones', {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -97,19 +97,19 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'cityStore', error ) );
+				.catch( error => console.error( 'timezoneStore', error ) );
 		},
 
 		/**
-		 * Get data from specific city
+		 * Get data from specific timezone
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		cityEdit( context, id )
+		timezoneEdit( context, id )
 		{
-			return fetch( `/api/cities/${id}/edit`, {
+			return fetch( `/api/timezones/${id}/edit`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -119,20 +119,20 @@ export default
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'cityEdit', response ) )
-				.catch( error => console.error( 'cityEdit', error ) );
+				.then( response => context.commit( 'timezoneEdit', response ) )
+				.catch( error => console.error( 'timezoneEdit', error ) );
 		},
 
 		/**
-		 * Update city
+		 * Update timezone
 		 *
 		 * @param context
 		 * @param data
 		 * @returns {Promise<any>}
 		 */
-		cityUpdate( context, data )
+		timezoneUpdate( context, data )
 		{
-			return fetch( `/api/cities/${data.id}`, {
+			return fetch( `/api/timezones/${data.id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -153,19 +153,19 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'cityUpdate', error ) );
+				.catch( error => console.error( 'timezoneUpdate', error ) );
 		},
 
 		/**
-		 * Destroy city
+		 * Destroy timezone
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		cityDestroy( context, id )
+		timezoneDestroy( context, id )
 		{
-			return fetch( `/api/cities/${id}`, {
+			return fetch( `/api/timezones/${id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -185,17 +185,17 @@ export default
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'cityDestroy', error ) );
+				.catch( error => console.error( 'timezoneDestroy', error ) );
 		},
 
 		/**
 		 * Get search results from API
 		 *
 		 * @param context
-		 * @param city
+		 * @param timezone
 		 */
-		citySearch( context, city ) {
-			return fetch( `/api/cities/${city}/search`, {
+		timezoneSearch( context, timezone ) {
+			return fetch( `/api/timezones/${timezone}/search`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -203,19 +203,19 @@ export default
 				}
 			})
 				.then( response =>  response.json() )
-				.then( response => context.commit( 'citySearch', response ) )
-				.catch( error => console.error( 'citySearch', error ) );
+				.then( response => context.commit( 'timezoneSearch', response ) )
+				.catch( error => console.error( 'timezoneSearch', error ) );
 		}
 	},
 
 	getters: {
 		/**
-		 * Get all city
+		 * Get all timezone
 		 *
 		 * @param state
 		 * @returns {Array|*|{}|state.all}
 		 */
-		cityIndex( state )
+		timezoneIndex( state )
 		{
 			if( state.all.data )
 			{
@@ -227,23 +227,23 @@ export default
 		},
 
 		/**
-		 * Get total amount of city
+		 * Get total amount of timezone
 		 *
 		 * @param state
 		 * @returns {*|number|PaymentItem}
 		 */
-		cityTotal( state )
+		timezoneTotal( state )
 		{
 			return state.all.total
 		},
 
 		/**
-		 * Get city edit
+		 * Get timezone edit
 		 *
 		 * @param state
 		 * @returns {{}|state.edit|*}
 		 */
-		cityEdit( state )
+		timezoneEdit( state )
 		{
 			return state.edit;
 		},
@@ -252,7 +252,7 @@ export default
 		 * Get search results
 		 * @param state
 		 */
-		citySearch( state ) {
+		timezoneSearch( state ) {
 			return state.search;
 		}
 	}

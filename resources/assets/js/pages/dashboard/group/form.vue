@@ -16,6 +16,12 @@
             :error-messages="errors['iso']"
         />
 
+        {{form.routes}}
+
+        <div v-for="route in routes" :key="route.name">
+            <v-checkbox :label="route.name" v-model="form.routes" :value="routes.name"/>
+        </div>
+
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
             Save continent
@@ -38,7 +44,7 @@
         	return {
         		form: {
 					name: '',
-                    iso: ''
+                    routes: [],
 				},
                 routes: []
             }
@@ -69,16 +75,29 @@
 
                 	if( item )
 					{
-						this.routes.push({
-							name: item.name
-						});
+						if( item.name && item.name.length > 0 && this.routes.findIndex( i => i.name === item.name ) === -1 )
+						{
+							this.routes.push( {
+								name: item.name
+							} );
+						}
 
 						if( item.children )
 						{
 							this.storeRoutes( item.children );
 						}
 					} else {
-                		console.log(list);
+                		if( list.name && list.name.length > 0 && this.routes.findIndex( i => i.name === list.name ) === -1 )
+						{
+							this.routes.push( {
+								name: list.name
+							} );
+						}
+
+                		if( list.children )
+                        {
+                        	this.storeRoutes( list.children );
+                        }
                     }
                 }
             }
@@ -94,7 +113,6 @@
         created()
         {
             this.$router.options.routes.forEach( route => {
-            	//console.log(route);
                 this.storeRoutes( route );
             });
         }

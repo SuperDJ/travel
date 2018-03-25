@@ -177,7 +177,6 @@ class AirlineController extends Controller
 		]);
 
 		$response = json_decode( file_get_contents( $host.'/v1/references/airlines/?limit='.$max, false, $context ) );
-		//return response()->json( $response, 200 );
 
 		$total = (int)$response->AirlineResource->Meta->TotalCount;
 		$totalRuns = ceil( $total / $max );
@@ -241,6 +240,6 @@ class AirlineController extends Controller
 		}
 
 		print_r( $notUpdated );
-		return response()->json($data, 200);
+		return response()->json( $data, 200 );
 	}
 }

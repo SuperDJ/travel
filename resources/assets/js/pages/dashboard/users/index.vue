@@ -24,10 +24,11 @@
             <tr>
                 <td>{{ props.item.first_name }}</td>
                 <td>{{ props.item.last_name }}</td>
-                <td v-if="props.item.profile">{{ props.item.profile.birthday }}</td>
-                <td v-if="props.item.profile && props.item.profile.language">{{ props.item.profile.language.name }}</td>
-                <td v-if="props.item.profile && props.item.profile.country">{{ props.item.profile.country.name }}</td>
-                <td v-if="props.item.profile && props.item.profile.currency">{{ props.item.profile.currency.name }}</td>
+                <td v-if="props.item.group">{{ props.item.group.name }}</td><td v-else></td>
+                <td v-if="props.item.profile">{{ props.item.profile.birthday }}</td><td v-else></td>
+                <td v-if="props.item.profile && props.item.profile.language">{{ props.item.profile.language.name }}</td><td v-else></td>
+                <td v-if="props.item.profile && props.item.profile.country">{{ props.item.profile.country.name }}</td><td v-else></td>
+                <td v-if="props.item.profile && props.item.profile.currency">{{ props.item.profile.currency.name }}</td><td v-else></td>
             </tr>
         </template>
     </v-data-table>
@@ -56,25 +57,34 @@
                         align: 'left',
                         value: 'last_name',
                     },
+					{
+						text: 'Group',
+						align: 'left',
+						value: 'group_id',
+					},
                     {
                         text: 'Birthday',
                         align: 'left',
-                        value: 'profile.birthday'
+                        value: 'profile.birthday',
+                        sortable: false,
                     },
                     {
                     	text: 'Language',
                         align: 'left',
-                        value: 'profile.language.name'
+                        value: 'profile.language.name',
+						sortable: false,
                     },
 					{
 						text: 'Country',
 						align: 'left',
-						value: 'profile.country.name'
+						value: 'profile.country.name',
+						sortable: false,
 					},
                     {
                     	text: 'Currency',
                         align: 'left',
-                        value: 'profile.currency.name'
+                        value: 'profile.currency.name',
+						sortable: false,
                     }
                 ]
             }

@@ -3,7 +3,8 @@ export default
 	state: {
 		all: [],
 		data: {},
-		loggedIn: !!sessionStorage.getItem( 'token' )
+		loggedIn: !!sessionStorage.getItem( 'token' ),
+		group: sessionStorage.getItem( 'group' )
 	},
 
 	mutations: {
@@ -22,7 +23,6 @@ export default
 		 * Set user to logged in
 		 *
 		 * @param state
-		 * @param token
 		 */
 		userLogin( state ) {
 			state.loggedIn = true;

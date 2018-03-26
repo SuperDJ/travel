@@ -36,6 +36,11 @@
         <v-btn flat href="http://php.net/manual/en/timezones.php" target="_blank">
             Supported timezones
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardTimezone' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

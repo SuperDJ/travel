@@ -8773,6 +8773,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(_vuex2.default);
 
 var store = exports.store = new _vuex2.default.Store({
+	strict: false,
 	state: {
 		currentDate: '',
 		success: '',
@@ -11406,6 +11407,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     metaInfo: {
@@ -11425,21 +11427,29 @@ exports.default = {
                 align: 'left',
                 value: 'last_name'
             }, {
+                text: 'Group',
+                align: 'left',
+                value: 'group_id'
+            }, {
                 text: 'Birthday',
                 align: 'left',
-                value: 'profile.birthday'
+                value: 'profile.birthday',
+                sortable: false
             }, {
                 text: 'Language',
                 align: 'left',
-                value: 'profile.language.name'
+                value: 'profile.language.name',
+                sortable: false
             }, {
                 text: 'Country',
                 align: 'left',
-                value: 'profile.country.name'
+                value: 'profile.country.name',
+                sortable: false
             }, {
                 text: 'Currency',
                 align: 'left',
-                value: 'profile.currency.name'
+                value: 'profile.currency.name',
+                sortable: false
             }]
         };
     },
@@ -11644,11 +11654,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -11771,6 +11776,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -11825,11 +11835,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12035,11 +12040,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -12162,6 +12162,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -12216,11 +12221,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12426,11 +12426,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -12553,6 +12548,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -12607,11 +12607,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12837,11 +12832,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -13006,6 +12996,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
   props: {
@@ -13102,11 +13097,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -13308,11 +13298,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -13451,6 +13436,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -13515,11 +13505,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -13735,11 +13720,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -13899,6 +13879,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -13969,11 +13954,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -14179,11 +14159,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -14343,6 +14318,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
 	props: {
@@ -14413,11 +14393,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -14625,11 +14600,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 	metaInfo: {
@@ -14768,6 +14738,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
 	props: {
@@ -14825,11 +14800,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -14936,6 +14906,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
 	metaInfo: {
@@ -14955,6 +14926,10 @@ exports.default = {
 				text: 'Routes',
 				align: 'right',
 				value: 'routes'
+			}, {
+				text: 'Users',
+				align: 'right',
+				value: 'user_count'
 			}, {
 				text: 'Actions',
 				align: 'left',
@@ -15015,11 +14990,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -15145,6 +15115,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -15244,11 +15219,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19859,7 +19829,8 @@ exports.default = {
 	state: {
 		all: [],
 		data: {},
-		loggedIn: !!sessionStorage.getItem('token')
+		loggedIn: !!sessionStorage.getItem('token'),
+		group: sessionStorage.getItem('group')
 	},
 
 	mutations: {
@@ -19878,7 +19849,6 @@ exports.default = {
    * Set user to logged in
    *
    * @param state
-   * @param token
    */
 		userLogin: function userLogin(state) {
 			state.loggedIn = true;
@@ -28028,21 +27998,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(props.item.last_name))]),
                 _vm._v(" "),
+                props.item.group
+                  ? _c("td", [_vm._v(_vm._s(props.item.group.name))])
+                  : _c("td"),
+                _vm._v(" "),
                 props.item.profile
                   ? _c("td", [_vm._v(_vm._s(props.item.profile.birthday))])
-                  : _vm._e(),
+                  : _c("td"),
                 _vm._v(" "),
                 props.item.profile && props.item.profile.language
                   ? _c("td", [_vm._v(_vm._s(props.item.profile.language.name))])
-                  : _vm._e(),
+                  : _c("td"),
                 _vm._v(" "),
                 props.item.profile && props.item.profile.country
                   ? _c("td", [_vm._v(_vm._s(props.item.profile.country.name))])
-                  : _vm._e(),
+                  : _c("td"),
                 _vm._v(" "),
                 props.item.profile && props.item.profile.currency
                   ? _c("td", [_vm._v(_vm._s(props.item.profile.currency.name))])
-                  : _vm._e()
+                  : _c("td")
               ])
             ]
           }
@@ -28470,6 +28444,13 @@ var render = function() {
           _vm._v("\n        Save continent\n    ")
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardContinent" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -28510,17 +28491,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardContinent" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -28616,19 +28587,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardContinent" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -29051,6 +29010,13 @@ var render = function() {
           _vm._v("\n        Save currency\n    ")
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardCurrency" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -29091,17 +29057,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCurrency" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -29197,19 +29153,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCurrency" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -29632,6 +29576,13 @@ var render = function() {
           _vm._v("\n        Save language\n    ")
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardLanguage" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -29672,17 +29623,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardLanguage" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -29778,19 +29719,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardLanguage" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -30304,6 +30233,13 @@ var render = function() {
           _vm._v("\n        Save country\n    ")
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardCountry" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -30344,17 +30280,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCountry" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -30450,19 +30376,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCountry" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -30918,6 +30832,13 @@ var render = function() {
           }
         },
         [_vm._v("\n        Supported timezones\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardTimezone" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -30958,17 +30879,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardTimezone" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -31064,19 +30975,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardTimezone" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -31582,6 +31481,13 @@ var render = function() {
         { attrs: { color: "primary", type: "submit" } },
         [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save city\n    ")],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardCity" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -31622,17 +31528,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCity" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -31728,19 +31624,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardCity" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -32230,6 +32114,13 @@ var render = function() {
         { attrs: { color: "primary", type: "submit" } },
         [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save city\n    ")],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardAirport" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -32270,17 +32161,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardAirport" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -32376,19 +32257,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardAirport" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -32846,6 +32715,13 @@ var render = function() {
         { attrs: { color: "primary", type: "submit" } },
         [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save city\n    ")],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardAirline" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     1
@@ -32886,17 +32762,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardAirline" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -32992,19 +32858,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardAirline" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],
@@ -33163,6 +33017,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", { staticClass: "text-xs-right" }, [
                       _vm._v(_vm._s(props.item.routes.length))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-xs-right" }, [
+                      _vm._v(_vm._s(props.item.user_count))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -33415,6 +33273,13 @@ var render = function() {
         { attrs: { color: "primary", type: "submit" } },
         [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save group\n    ")],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { flat: "", to: { name: "dashboardGroup" } } },
+        [_c("v-icon", [_vm._v("arrow_back")]), _vm._v("\n        Back\n    ")],
+        1
       )
     ],
     2
@@ -33455,17 +33320,7 @@ var render = function() {
               _c("c-form", {
                 attrs: { details: _vm.form },
                 on: { submitted: _vm.submit }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardGroup" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -33561,19 +33416,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs12: "", md6: "" } },
-            [
-              _c("c-form", { on: { submitted: _vm.submit } }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { flat: "", to: { name: "dashboardGroup" } } },
-                [
-                  _c("v-icon", [_vm._v("arrow_back")]),
-                  _vm._v("\n                Back\n            ")
-                ],
-                1
-              )
-            ],
+            [_c("c-form", { on: { submitted: _vm.submit } })],
             1
           )
         ],

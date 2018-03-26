@@ -3,12 +3,7 @@
         <v-layout row wrap>
             <v-flex xs12 md6>
                 <c-form @submitted="submit" />
-                <v-btn flat :to="{ name: 'dashboardCurrency' }">
-                    <v-icon>arrow_back</v-icon>
-                    Back
-                </v-btn>
             </v-flex>
-
         </v-layout>
     </v-container>
 </template>

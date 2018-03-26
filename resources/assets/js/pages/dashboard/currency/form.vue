@@ -20,6 +20,11 @@
             <v-icon>save</v-icon>
             Save currency
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardCurrency' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

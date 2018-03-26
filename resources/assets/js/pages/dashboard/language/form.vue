@@ -20,6 +20,11 @@
             <v-icon>save</v-icon>
             Save language
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardLanguage' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

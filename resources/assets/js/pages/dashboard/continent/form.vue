@@ -20,6 +20,11 @@
             <v-icon>save</v-icon>
             Save continent
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardContinent' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

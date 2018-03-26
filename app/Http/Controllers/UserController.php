@@ -34,11 +34,10 @@ class UserController extends Controller
 		if( $attempt )
 		{
 			$user = Auth::user();
-			print_r($user->profile->language);
 			$token = $user->createToken( config( 'app.name' ) )->accessToken;
 			$user->update( [ 'api_token' => $token ] );
 
-			return response()->json( [ 'success' => true, 'token' => $token ], 200 );
+			return response()->json( [ 'success' => true, 'token' => $token, 'group' => $user->group->routes ], 200 );
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Email and password combination not found' ], 401 );
 		}
@@ -104,6 +103,7 @@ class UserController extends Controller
 		if( !empty( $request ) )
 		{
 			return User::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->with( 'group' )
 				->with(['profile' => function( $query ) {
 					$query->with('country');
 					$query->with('currency');

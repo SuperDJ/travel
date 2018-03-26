@@ -18,6 +18,7 @@ class GroupController extends Controller
 		if( !empty( $request ) && count( $request->all() ) > 0 )
 		{
 			return Group::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
+				->withCount( 'user' )
 				->paginate( $request->rowsPerPage );
 		} else {
 			return Group::all();

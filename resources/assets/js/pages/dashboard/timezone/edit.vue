@@ -3,12 +3,7 @@
         <v-layout row wrap>
             <v-flex xs12 md6>
                 <c-form @submitted="submit" :details="form" />
-                <v-btn flat :to="{ name: 'dashboardTimezone' }">
-                    <v-icon>arrow_back</v-icon>
-                    Back
-                </v-btn>
             </v-flex>
-
         </v-layout>
     </v-container>
 </template>

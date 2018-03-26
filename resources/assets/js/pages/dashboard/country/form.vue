@@ -62,6 +62,11 @@
             <v-icon>save</v-icon>
             Save country
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardCountry' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

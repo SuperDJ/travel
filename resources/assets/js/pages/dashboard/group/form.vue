@@ -13,6 +13,11 @@
             <v-icon>save</v-icon>
             Save group
         </v-btn>
+
+        <v-btn flat :to="{ name: 'dashboardGroup' }">
+            <v-icon>arrow_back</v-icon>
+            Back
+        </v-btn>
     </form>
 </template>
 

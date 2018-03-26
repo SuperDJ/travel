@@ -31,6 +31,7 @@
                 <tr>
                     <td>{{ props.item.name }}</td>
                     <td class="text-xs-right">{{ props.item.routes.length }}</td>
+                    <td class="text-xs-right">{{ props.item.user_count }}</td>
                     <td>
                         <v-btn icon :to="{ name: 'groupEdit', params: { group: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
@@ -86,6 +87,11 @@
 						text: 'Routes',
 						align: 'right',
 						value: 'routes',
+					},
+					{
+						text: 'Users',
+						align: 'right',
+						value: 'user_count',
 					},
                     {
                     	text: 'Actions',

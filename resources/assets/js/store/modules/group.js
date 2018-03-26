@@ -58,7 +58,8 @@ export default {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
-					'Accept': 'application/json'
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
 				}
 			})
 				.then( response => response.json() )
@@ -118,7 +119,7 @@ export default {
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'groupEdit', response ) )
+				.then( response => {console.log(response); context.commit( 'groupEdit', response ) })
 				.catch( error => console.error( 'groupEdit', error ) );
 		},
 

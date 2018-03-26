@@ -7,24 +7,11 @@
             :error-messages="errors['name']"
         />
 
-        <v-text-field
-            label="Group ISO code"
-            v-model="form.iso"
-            required
-            minlength="2"
-            maxlength="2"
-            :error-messages="errors['iso']"
-        />
-
-        {{form.routes}}
-
-        <div v-for="route in routes" :key="route.name">
-            <v-checkbox :label="route.name" v-model="form.routes" :value="routes.name"/>
-        </div>
+        <v-checkbox :label="route.name" v-model="form.routes" :value="route.name" :key="route.name" v-for="route in routes"/>
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save continent
+            Save group
         </v-btn>
     </form>
 </template>
@@ -61,10 +48,9 @@
     		submit( data ) {
     		    let details = {
     		    	name: data.name.charAt( 0 ).toUpperCase() + data.name.slice( 1 ),
-                    iso: data.iso.toUpperCase(),
                 };
 
-                this.$emit( 'submitted', details );
+                this.$emit( 'submitted', Object.assign( data, details ) );
             },
 
             storeRoutes( list )

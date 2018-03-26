@@ -26,4 +26,9 @@ class User extends Authenticatable
 	{
 		return $this->hasOne( Profile::class );
 	}
+
+	public function group()
+	{
+		return $this->belongsTo( Group::class );
+	}
 }

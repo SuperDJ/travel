@@ -59,6 +59,15 @@ Route::group( ['middleware' => 'auth:api'], function() {
 	Route::get( '/airlines/{airline}/edit', 'AirlineController@edit' );
 	Route::put( '/airlines/{airline}', 'AirlineController@update' );
 	Route::delete( '/airlines/{airline}', 'AirlineController@destroy' );
+
+	// Groups
+	Route::get( '/groups', 'GroupController@index' );
+	Route::post( '/groups', 'GroupController@store' );
+	Route::get( '/groups/{search}/search', 'GroupController@search' );
+	Route::get( '/groups/{group}', 'GroupController@show' );
+	Route::get( '/groups/{group}/edit', 'GroupController@edit' );
+	Route::put( '/groups/{group}', 'GroupController@update' );
+	Route::delete( '/groups/{group}', 'GroupController@destroy' );
 });
 
 // Continents

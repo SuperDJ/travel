@@ -39,7 +39,6 @@
                     </h2>
                 </v-flex>
 
-
                 <v-flex xs12>
                     <v-tabs centered color="transparent">
                         <v-tab v-for="continent in continents" :key="`continent-${continent.id}`" :href="`#continent-${continent.name}`">
@@ -62,7 +61,6 @@
                 </h2>
             </v-flex>
 
-
             <v-flex xs12>
                 <v-tabs centered color="transparent">
                     <v-tab>Winter</v-tab>
@@ -77,7 +75,6 @@
                 <Activity :activity="activity"/>
             </v-flex>
         </v-layout>
-
 
         <v-layout row wrap>
             <v-flex xs12 sm6 tag="section">
@@ -101,8 +98,7 @@
     	data()
         {
     	    return {
-                image:
-                    'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
+                image: 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb',
                 activity: 1,
             }
         },
@@ -134,8 +130,7 @@
                 switch( type )
                 {
                     case 'flight':
-                    	img =
-                            'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
+                    	img = 'https://images.pexels.com/photos/219014/pexels-photo-219014.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';
                     	break;
                     case 'accommodation':
                     	img = 'https://images.pexels.com/photos/573552/pexels-photo-573552.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb';

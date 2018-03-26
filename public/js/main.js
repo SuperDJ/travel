@@ -9017,9 +9017,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
 
 exports.default = {
     metaInfo: {
@@ -14939,7 +14936,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
 	metaInfo: {
@@ -14952,17 +14948,13 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Continent',
+				text: 'Group',
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'ISO',
-				align: 'left',
-				value: 'iso'
-			}, {
-				text: 'Countries',
+				text: 'Routes',
 				align: 'right',
-				value: 'countries_count'
+				value: 'routes'
 			}, {
 				text: 'Actions',
 				align: 'left',
@@ -15153,19 +15145,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     props: {
@@ -15196,11 +15175,10 @@ exports.default = {
     methods: {
         submit: function submit(data) {
             var details = {
-                name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
-                iso: data.iso.toUpperCase()
+                name: data.name.charAt(0).toUpperCase() + data.name.slice(1)
             };
 
-            this.$emit('submitted', details);
+            this.$emit('submitted', Object.assign(data, details));
         },
         storeRoutes: function storeRoutes(list) {
             var _this = this;
@@ -19091,7 +19069,8 @@ exports.default = {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
-					'Accept': 'application/json'
+					'Accept': 'application/json',
+					'Authorization': 'Bearer ' + sessionStorage.getItem('token')
 				}
 			}).then(function (response) {
 				return response.json();
@@ -19156,7 +19135,7 @@ exports.default = {
 			}).then(function (response) {
 				return response.json();
 			}).then(function (response) {
-				return context.commit('groupEdit', response);
+				console.log(response);context.commit('groupEdit', response);
 			}).catch(function (error) {
 				return console.error('groupEdit', error);
 			});
@@ -33182,10 +33161,8 @@ var render = function() {
                   _c("tr", [
                     _c("td", [_vm._v(_vm._s(props.item.name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.iso))]),
-                    _vm._v(" "),
                     _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(_vm._s(props.item.countries_count))
+                      _vm._v(_vm._s(props.item.routes.length))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -33419,50 +33396,24 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("v-text-field", {
-        attrs: {
-          label: "Group ISO code",
-          required: "",
-          minlength: "2",
-          maxlength: "2",
-          "error-messages": _vm.errors["iso"]
-        },
-        model: {
-          value: _vm.form.iso,
-          callback: function($$v) {
-            _vm.$set(_vm.form, "iso", $$v)
-          },
-          expression: "form.iso"
-        }
-      }),
-      _vm._v("\n\n    " + _vm._s(_vm.form.routes) + "\n\n    "),
       _vm._l(_vm.routes, function(route) {
-        return _c(
-          "div",
-          { key: route.name },
-          [
-            _c("v-checkbox", {
-              attrs: { label: route.name, value: _vm.routes.name },
-              model: {
-                value: _vm.form.routes,
-                callback: function($$v) {
-                  _vm.$set(_vm.form, "routes", $$v)
-                },
-                expression: "form.routes"
-              }
-            })
-          ],
-          1
-        )
+        return _c("v-checkbox", {
+          key: route.name,
+          attrs: { label: route.name, value: route.name },
+          model: {
+            value: _vm.form.routes,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "routes", $$v)
+            },
+            expression: "form.routes"
+          }
+        })
       }),
       _vm._v(" "),
       _c(
         "v-btn",
         { attrs: { color: "primary", type: "submit" } },
-        [
-          _c("v-icon", [_vm._v("save")]),
-          _vm._v("\n        Save continent\n    ")
-        ],
+        [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save group\n    ")],
         1
       )
     ],

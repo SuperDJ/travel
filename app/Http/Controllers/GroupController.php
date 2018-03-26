@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GroupController extends Controller
 {
@@ -46,40 +47,40 @@ class GroupController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param \App\Group $airport
+	 * @param \App\Group $group
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show( Group $airport )
+	public function show( Group $group )
 	{
-		return response()->json( $airport, 200 );
+		return response()->json( $group, 200 );
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param \App\Group $airport
+	 * @param \App\Group $group
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit( Group $airport )
+	public function edit( Group $group )
 	{
-		return response()->json( $airport, 200 );
+		return response()->json( $group, 200 );
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request $request
-	 * @param \App\Group              $airport
+	 * @param \App\Group              $group
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update( Request $request, Group $airport )
+	public function update( Request $request, Group $group )
 	{
 		$this->validation( $request );
 
-		$updated = $airport->update( $request->all() );
+		$updated = $group->update( $request->all() );
 
 		if( $updated )
 		{
@@ -92,14 +93,14 @@ class GroupController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param \App\Group $airport
+	 * @param \App\Group $group
 	 *
 	 * @return \Illuminate\Http\Response
 	 * @throws \Exception
 	 */
-	public function destroy( Group $airport )
+	public function destroy( Group $group )
 	{
-		$destroyed = $airport->delete();
+		$destroyed = $group->delete();
 
 		if( $destroyed )
 		{
@@ -130,7 +131,7 @@ class GroupController extends Controller
 	private function validation( Request $request )
 	{
 		$request->validate([
-			'name' => $request->input( 'id' ) ? ['required', 'string', Rule::unqiue( 'groups' )->ignore( $request->input( 'id' ) ) ] : 'required|string|unique:groups',
+			'name' => $request->input( 'id' ) ? ['required', 'string', Rule::unique( 'groups' )->ignore( $request->input( 'id' ) ) ] : 'required|string|unique:groups',
 		]);
 	}
 }

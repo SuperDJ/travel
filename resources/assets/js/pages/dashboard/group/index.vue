@@ -30,8 +30,7 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.iso }}</td>
-                    <td class="text-xs-right">{{ props.item.countries_count }}</td>
+                    <td class="text-xs-right">{{ props.item.routes.length }}</td>
                     <td>
                         <v-btn icon :to="{ name: 'groupEdit', params: { group: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
@@ -79,19 +78,14 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Continent',
+						text: 'Group',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'ISO',
-						align: 'left',
-						value: 'iso',
-					},
-					{
-						text: 'Countries',
+						text: 'Routes',
 						align: 'right',
-						value: 'countries_count'
+						value: 'routes',
 					},
                     {
                     	text: 'Actions',

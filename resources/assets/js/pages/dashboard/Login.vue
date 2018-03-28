@@ -62,7 +62,11 @@
             {
                 this.$store.dispatch( 'userLogin', data ).then(() => {
 					this.form.password = '';
-					this.$router.push( { name: 'dashboard' } );
+
+					// Make sure the user is logged in before
+					if( sessionStorage.getItem( 'token' ) && sessionStorage.getItem( 'token' ).length > 0 ) {
+						this.$router.push( { name: 'dashboard' } );
+					}
                 });
             }
         },

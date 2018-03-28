@@ -259,6 +259,6 @@ export default {
 		groupSearch( state )
 		{
 			return state.search;
-		}
+		},
 	}
 }

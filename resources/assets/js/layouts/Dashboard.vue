@@ -11,7 +11,55 @@
         </v-toolbar>
 
         <v-navigation-drawer fixed temporary v-model="drawer">
-            <v-list class="pt-0" dense>
+            <v-toolbar flat class="transparent">
+                <v-list>
+                    <v-list-tile avatar>
+                        <v-list-tile-avatar>
+                            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
+                        </v-list-tile-avatar>
+                        <v-list-tile-content>
+                            <v-list-tile-title>
+                                John Leider
+
+                                <v-menu>
+                                    <v-icon slot="activator">expand_more</v-icon>
+
+                                    <v-list>
+                                        <v-list-tile :to="{ name: 'userProfile' }">
+                                            <v-list-tile-action>
+                                                <v-icon>edit</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>
+                                                Edit profile
+                                            </v-list-tile-title>
+                                        </v-list-tile>
+                                        <v-list-tile>
+                                            <v-list-tile-action>
+                                                <v-icon>person_add</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>Google account</v-list-tile-title>
+                                        </v-list-tile>
+                                        <v-list-tile>
+                                            <v-list-tile-action>
+                                                <v-icon>person_add</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>Facebook account</v-list-tile-title>
+                                        </v-list-tile>
+                                        <v-list-tile @click.stop="logout">
+                                            <v-list-tile-action>
+                                                <v-icon>exit_to_app</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>Logout</v-list-tile-title>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-menu>
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+            </v-toolbar>
+
+            <v-list dense>
                 <template v-for="item in items">
                     <v-layout row v-if="item.heading" align-center :key="item.heading">
                         <v-flex xs6>
@@ -76,6 +124,16 @@
                 'success',
                 'errors'
             ])
+        },
+
+        methods: {
+    	    logout()
+            {
+            	console.log('logout');
+            	this.$store.commit('userLogout');
+
+            	this.$router.push( { name: 'index' } );
+            }
         },
 
     	data()

@@ -4,7 +4,8 @@ export default
 		all: [],
 		data: {},
 		loggedIn: !!sessionStorage.getItem( 'token' ),
-		group: sessionStorage.getItem( 'group' )
+		group: sessionStorage.getItem( 'group' ),
+		user: {}
 	},
 
 	mutations: {
@@ -23,8 +24,11 @@ export default
 		 * Set user to logged in
 		 *
 		 * @param state
+		 * @param user
 		 */
-		userLogin( state ) {
+		userLogin( state, user )
+		{
+			state.user = user;
 			state.loggedIn = true;
 		},
 
@@ -37,7 +41,19 @@ export default
 		{
 			state.loggedIn = false;
 			sessionStorage.removeItem( 'token' );
+			sessionStorage.removeItem( 'group' );
 		},
+
+		/**
+		 * Set user profile
+		 *
+		 * @param state
+		 * @param user
+		 */
+		userProfile( state, user )
+		{
+			state.user = user;
+		}
 	},
 
 	actions: {
@@ -101,7 +117,8 @@ export default
 					if( response.token )
 					{
 						sessionStorage.setItem( 'token', response.token ); // Makes sure the user is logged in even after page refresh
-						context.commit( 'userLogin' );
+						sessionStorage.setItem( 'group', response.group ); // Makes sure the users group is defined
+						context.commit( 'userLogin', response.user );
 					}
 				})
 				.catch( error => console.error( 'userLogin', error ) );
@@ -148,6 +165,23 @@ export default
 					context.commit( 'success', response.success ? response.success : false );
 				})
 				.catch( error => console.error( 'userRegister', error ) );
+		},
+
+		userGetProfile( context )
+		{
+			return fetch( '/api/users/profile', {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+				},
+				method: 'GET'
+			})
+				.then( response => response.json() )
+				.then( response => context.commit( response ) )
+				.catch( error => console.error( 'userProfile', error ) );
 		}
 	},
 
@@ -198,6 +232,32 @@ export default
 			} else {
 				return state.data;
 			}
+		},
+
+		/**
+		 * Check if user has access to specific route
+		 *
+		 * @param state
+		 * @returns {function(*=)}
+		 */
+		userAccess: ( state ) => ( route ) =>
+		{
+			if( state.group &&  state.group.length > 0 ) {
+				return state.group.split( ',' ).indexOf( route ) > 0;
+			} else {
+				return true;
+			}
+		},
+
+		/**
+		 * Get profile data
+		 *
+		 * @param state
+		 * @returns {{}|state.user|*}
+		 */
+		userProfile( state )
+		{
+			return state.user;
 		}
 	}
 }

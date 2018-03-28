@@ -37,7 +37,7 @@
             Save city
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardAirline' }">
+        <v-btn flat :to="{ name: 'airlineIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

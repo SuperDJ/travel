@@ -21,7 +21,7 @@
             Save currency
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardCurrency' }">
+        <v-btn flat :to="{ name: 'currencyIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

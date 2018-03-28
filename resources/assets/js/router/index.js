@@ -12,44 +12,51 @@ const login = () => import( '@/pages/dashboard/Login' );
 
 const dashboard = () => import( '@/layouts/Dashboard' );
 const overview = () => import( '@/pages/dashboard/Overview' );
-const dashboardUser = () => import( '@/pages/dashboard/users' );
+const userIndex = () => import( '@/pages/dashboard/users' );
 
-const dashboardContinent = () => import( '@/pages/dashboard/continent' );
+const continentIndex = () => import( '@/pages/dashboard/continent' );
 const continentEdit = () => import( '@/pages/dashboard/continent/edit' );
 const continentCreate = () => import( '@/pages/dashboard/continent/create' );
 
-const dashboardCurrency = () => import( '@/pages/dashboard/currency' );
+const currencyIndex = () => import( '@/pages/dashboard/currency' );
 const currencyEdit = () => import( '@/pages/dashboard/currency/edit' );
 const currencyCreate = () => import( '@/pages/dashboard/currency/create' );
 
-const dashboardLanguage = () => import( '@/pages/dashboard/language' );
+const languageIndex = () => import( '@/pages/dashboard/language' );
 const languageEdit = () => import( '@/pages/dashboard/language/edit' );
 const languageCreate = () => import( '@/pages/dashboard/language/create' );
 
-const dashboardCountry = () => import( '@/pages/dashboard/country' );
+const countryIndex = () => import( '@/pages/dashboard/country' );
 const countryEdit = () => import( '@/pages/dashboard/country/edit' );
 const countryCreate = () => import( '@/pages/dashboard/country/create' );
 
-const dashboardTimezone = () => import( '@/pages/dashboard/timezone' );
+const timezoneIndex = () => import( '@/pages/dashboard/timezone' );
 const timezoneEdit = () => import( '@/pages/dashboard/timezone/edit' );
 const timezoneCreate = () => import( '@/pages/dashboard/timezone/create' );
 
-const dashboardCity = () => import( '@/pages/dashboard/city' );
+const cityIndex = () => import( '@/pages/dashboard/city' );
 const cityEdit = () => import( '@/pages/dashboard/city/edit' );
 const cityCreate = () => import( '@/pages/dashboard/city/create' );
 
-const dashboardAirport = () => import( '@/pages/dashboard/airport' );
+const airportIndex = () => import( '@/pages/dashboard/airport' );
 const airportEdit = () => import( '@/pages/dashboard/airport/edit' );
 const airportCreate = () => import( '@/pages/dashboard/airport/create' );
 
-const dashboardAirline = () => import( '@/pages/dashboard/airline' );
+const airlineIndex = () => import( '@/pages/dashboard/airline' );
 const airlineEdit = () => import( '@/pages/dashboard/airline/edit' );
 const airlineCreate = () => import( '@/pages/dashboard/airline/create' );
 
-const dashboardGroup = () => import( '@/pages/dashboard/group' );
+const groupIndex = () => import( '@/pages/dashboard/group' );
 const groupEdit = () => import( '@/pages/dashboard/group/edit' );
 const groupCreate = () => import( '@/pages/dashboard/group/create' );
 
+const roleIndex = () => import( '@/pages/dashboard/role' );
+const roleEdit = () => import( '@/pages/dashboard/role/edit' );
+const roleCreate = () => import( '@/pages/dashboard/role/create' );
+
+const permissionIndex = () => import( '@/pages/dashboard/permission' );
+const permissionEdit = () => import( '@/pages/dashboard/permission/edit' );
+const permissionCreate = () => import( '@/pages/dashboard/permission/create' );
 
 Vue.use( Router );
 
@@ -162,19 +169,19 @@ const routes = [
 			},
 			{
 				path: 'users',
-				name: 'dashboardUser',
+				name: 'userIndex',
 				meta: {
 					title: 'Users'
 				},
-				component: dashboardUser
+				component: userIndex()
 			},
 			{
 				path: 'continents',
-				name: 'dashboardContinent',
+				name: 'continentIndex',
 				meta: {
 					title: 'Continents'
 				},
-				component: dashboardContinent,
+				component: continentIndex(),
 			},
 			{
 				path: 'continents/create',
@@ -195,11 +202,11 @@ const routes = [
 			},
 			{
 				path: 'currencies',
-				name: 'dashboardCurrency',
+				name: 'currencyIndex',
 				meta: {
 					title: 'Currencies'
 				},
-				component: dashboardCurrency,
+				component: currencyIndex(),
 			},
 			{
 				path: 'currencies/create',
@@ -220,11 +227,11 @@ const routes = [
 			},
 			{
 				path: 'languages',
-				name: 'dashboardLanguage',
+				name: 'languageIndex',
 				meta: {
 					title: 'Language'
 				},
-				component: dashboardLanguage,
+				component: languageIndex(),
 			},
 			{
 				path: 'languages/create',
@@ -245,11 +252,11 @@ const routes = [
 			},
 			{
 				path: 'countries',
-				name: 'dashboardCountry',
+				name: 'countryIndex',
 				meta: {
 					title: 'Country'
 				},
-				component: dashboardCountry,
+				component: countryIndex(),
 			},
 			{
 				path: 'countries/create',
@@ -270,11 +277,11 @@ const routes = [
 			},
 			{
 				path: 'timezones',
-				name: 'dashboardTimezone',
+				name: 'timezoneIndex',
 				meta: {
 					title: 'Timezone'
 				},
-				component: dashboardTimezone,
+				component: timezoneIndex(),
 			},
 			{
 				path: 'timezones/create',
@@ -295,11 +302,11 @@ const routes = [
 			},
 			{
 				path: 'cities',
-				name: 'dashboardCity',
+				name: 'cityIndex',
 				meta: {
 					title: 'City'
 				},
-				component: dashboardCity,
+				component: cityIndex(),
 			},
 			{
 				path: 'cities/create',
@@ -320,11 +327,11 @@ const routes = [
 			},
 			{
 				path: 'airports',
-				name: 'dashboardAirport',
+				name: 'airportIndex',
 				meta: {
 					title: 'Airports'
 				},
-				component: dashboardAirport,
+				component: airportIndex(),
 			},
 			{
 				path: 'airports/create',
@@ -345,11 +352,11 @@ const routes = [
 			},
 			{
 				path: 'airlines',
-				name: 'dashboardAirline',
+				name: 'airlineIndex',
 				meta: {
 					title: 'Airlines'
 				},
-				component: dashboardAirline,
+				component: airlineIndex(),
 			},
 			{
 				path: 'airlines/create',
@@ -370,11 +377,11 @@ const routes = [
 			},
 			{
 				path: 'groups',
-				name: 'dashboardGroup',
+				name: 'groupIndex',
 				meta: {
 					title: 'Groups'
 				},
-				component: dashboardGroup,
+				component: groupIndex(),
 			},
 			{
 				path: 'groups/create',
@@ -392,6 +399,56 @@ const routes = [
 					title: 'Edit group'
 				},
 				component: groupEdit
+			},
+			{
+				path: 'roles',
+				name: 'indexRole',
+				meta: {
+					title: 'Roles'
+				},
+				component: roleIndex,
+			},
+			{
+				path: 'roles/create',
+				name: 'roleCreate',
+				meta: {
+					title: 'Create role'
+				},
+				component: roleCreate
+			},
+			{
+				path: 'roles/:role/edit',
+				props: true,
+				name: 'roleEdit',
+				meta: {
+					title: 'Edit role'
+				},
+				component: roleEdit
+			},
+			{
+				path: 'permissions',
+				name: 'indexRole',
+				meta: {
+					title: 'Roles'
+				},
+				component: permissionIndex,
+			},
+			{
+				path: 'permissions/create',
+				name: 'permissionCreate',
+				meta: {
+					title: 'Create permission'
+				},
+				component: permissionCreate
+			},
+			{
+				path: 'permissions/:permission/edit',
+				props: true,
+				name: 'permissionEdit',
+				meta: {
+					title: 'Edit permission'
+				},
+				component: permissionEdit
 			}
 		]
 	}
@@ -405,7 +462,7 @@ const router = new Router({
 router.beforeEach( ( to, from, next ) => {
 	if( to.matched[0].meta.auth || to.meta.auth )
 	{
-		if( store.getters.userLoggedIn )
+		if( store.getters.userLoggedIn && store.getters.userAccess( to.name ) )
 		{
 			next();
 		} else {

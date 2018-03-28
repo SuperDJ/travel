@@ -14,7 +14,7 @@
             Save group
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardGroup' }">
+        <v-btn flat :to="{ name: 'groupIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

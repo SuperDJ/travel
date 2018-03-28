@@ -7,21 +7,12 @@
             :error-messages="errors['name']"
         />
 
-        <v-text-field
-            label="Language ISO code"
-            v-model="form.iso"
-            required
-            minlength="2"
-            maxlength="2"
-            :error-messages="errors['iso']"
-        />
-
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
             Save language
         </v-btn>
 
-        <v-btn flat :to="{ name: 'languageIndex' }">
+        <v-btn flat :to="{ name: 'dashboardLanguage' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

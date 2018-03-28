@@ -63,7 +63,7 @@
             Save country
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardCountry' }">
+        <v-btn flat :to="{ name: 'countryIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

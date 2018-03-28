@@ -37,7 +37,7 @@
             Supported timezones
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardTimezone' }">
+        <v-btn flat :to="{ name: 'timezoneIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

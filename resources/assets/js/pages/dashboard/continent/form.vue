@@ -21,7 +21,7 @@
             Save continent
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardContinent' }">
+        <v-btn flat :to="{ name: 'continentIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

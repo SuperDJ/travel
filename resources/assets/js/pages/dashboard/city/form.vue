@@ -58,7 +58,7 @@
             Save city
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardCity' }">
+        <v-btn flat :to="{ name: 'cityIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

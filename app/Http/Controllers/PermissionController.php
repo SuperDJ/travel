@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -62,7 +57,7 @@ class PermissionController extends Controller
      */
     public function edit( Permission $permission )
     {
-    	return response()->json( $permission );
+    	return response()->json( $permission, 200 );
     }
 
     /**
@@ -116,5 +111,42 @@ class PermissionController extends Controller
 		$request->validate([
 			'name' => 'required|max:40'
 		]);
+	}
+
+	/**
+	 * Return all possible permissions
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function routes()
+	{
+		$routes = app()->routes->getRoutes();
+
+		$permissions = [];
+		foreach( $routes as $route )
+		{
+			if( !empty( $route->action[ 'as' ] ) && in_array( 'auth:api', $route->action[ 'middleware' ] ) )
+			{
+				$permissions[] = $route->action[ 'as' ];;
+			}
+		}
+
+		$i = 0;
+		foreach( $permissions as $permission )
+		{
+			$created = Permission::updateOrCreate( ['name' => $permission] );
+
+			if( $created )
+			{
+				$i++;
+			}
+		}
+
+		if( count( $permissions ) === $i )
+		{
+			return response()->json( [ 'success' => true, 'message' => 'Permissions up to date' ], 201 );
+		} else {
+			return response()->json( [ 'success' => false, 'message' => 'Permissions not up to date' ], 400 );
+		}
 	}
 }

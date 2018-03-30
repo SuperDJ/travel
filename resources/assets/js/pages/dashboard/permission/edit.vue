@@ -11,10 +11,10 @@
 <script>
 	export default {
 		metaInfo: {
-			title: 'Edit language'
+			title: 'Edit permission'
 		},
 
-        props: ['language'],
+        props: ['permission'],
 
 		components: {
 			'c-form': () => import('./form')
@@ -22,20 +22,20 @@
 
         computed: {
 			form() {
-				return this.$store.getters.languageEdit;
+				return this.$store.getters.permissionEdit;
             }
         },
 
 		methods: {
 			submit( data )
 			{
-				this.$store.dispatch( 'languageUpdate', { id: this.language, details: data } );
+				this.$store.dispatch( 'permissionUpdate', { id: this.permission, details: data } );
 			},
 		},
 
         created()
         {
-        	this.$store.dispatch( 'languageEdit', this.language );
+        	this.$store.dispatch( 'permissionEdit', this.permission );
         }
 	}
 </script>

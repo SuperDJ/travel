@@ -18,10 +18,10 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save language
+            Save permission
         </v-btn>
 
-        <v-btn flat :to="{ name: 'dashboardLanguage' }">
+        <v-btn flat :to="{ name: 'permissionIndex' }">
             <v-icon>arrow_back</v-icon>
             Back
         </v-btn>

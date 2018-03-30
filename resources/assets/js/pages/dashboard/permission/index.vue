@@ -1,8 +1,13 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'groupCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'permissionCreate' }">
             <v-icon>add</v-icon>
-            Add group
+            Add permission
+        </v-btn>
+
+        <v-btn color="primary" slot="activator" flat @click.prevent="permissionServer">
+            <v-icon>add</v-icon>
+            Check server permissions
         </v-btn>
 
         <v-data-table
@@ -30,10 +35,9 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">{{ props.item.routes.length }}</td>
-                    <td class="text-xs-right">{{ props.item.user_count }}</td>
+                    <td>{{ props.item.roles_count }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'groupEdit', params: { group: props.item.id } }">
+                        <v-btn icon :to="{ name: 'permissionEdit', params: { permission: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -48,16 +52,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete group</span>
+                    <span class="headline">Delete permission</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete group: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete permission: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="groupDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="permissionDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -68,7 +72,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Groups'
+			title: 'Permissions'
 		},
 
 		data()
@@ -79,25 +83,20 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Group',
+						text: 'Permission',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'Routes',
+						text: 'Roles',
 						align: 'right',
-						value: 'routes',
-					},
-					{
-						text: 'Users',
-						align: 'right',
-						value: 'user_count',
+						value: 'roles_count',
 					},
                     {
                     	text: 'Actions',
                         align: 'left',
                         value: '',
-                        sortable: false,
+						sortable: false,
                     }
 				]
 			}
@@ -106,12 +105,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.groupIndex;
+				return this.$store.getters.permissionIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.groupTotal;
+				return this.$store.getters.permissionTotal;
 			}
 		},
 
@@ -120,20 +119,29 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'groupIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'permissionIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            groupDestroy( id )
+            permissionDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'groupDestroy', id ).then( () =>
+                this.$store.dispatch( 'permissionDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};
 				});
+            },
+
+            permissionServer()
+            {
+            	this.loading = true;
+
+            	this.$store.dispatch( 'permissionServer' ).then( () => {
+            	    this.data();
+                });
             }
 		},
 

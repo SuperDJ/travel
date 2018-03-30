@@ -11,7 +11,7 @@
 <script>
     export default {
     	metaInfo: {
-    		title: 'Create language'
+    		title: 'Create permission'
         },
 
     	components: {
@@ -21,7 +21,7 @@
         methods: {
     		submit( data )
             {
-                this.$store.dispatch( 'languageStore', data );
+                this.$store.dispatch( 'permissionStore', data );
             }
         }
     }

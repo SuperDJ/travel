@@ -7,48 +7,48 @@ export default {
 
 	mutations: {
 		/**
-		 * Set all groups
+		 * Set all role
 		 *
 		 * @param state
-		 * @param groups
+		 * @param role
 		 */
-		groupIndex( state, groups )  {
-			state.all = groups;
+		roleIndex( state, role ) {
+			state.all = role;
 		},
 
 		/**
-		 * Set edit group
+		 * Set edit role
 		 *
 		 * @param state
-		 * @param group
+		 * @param role
 		 */
-		groupEdit( state, group )
+		roleEdit( state, role )
 		{
-			state.edit = group;
+			state.edit = role;
 		},
 
 		/**
 		 * Set search results
 		 *
 		 * @param state
-		 * @param groups
+		 * @param role
 		 */
-		groupSearch( state, groups ) {
-			state.search = groups;
+		roleSearch( state, role ) {
+			state.search = role;
 		}
 	},
 
 	actions: {
 		/**
-		 * Get all groups
+		 * Get all role
 		 *
 		 * @param context
 		 * @param pagination
 		 * @returns {Promise<any>}
 		 */
-		groupIndex( context, pagination )
+		roleIndex( context, pagination )
 		{
-			let url = '/api/groups';
+			let url = '/api/roles';
 			if( pagination && Object.keys( pagination ).length > 1 )
 			{
 				url += `?${Object.keys( pagination ).map( key =>  `${key}=${pagination[ key ]}` ).join( '&' ) }`;
@@ -63,20 +63,20 @@ export default {
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'groupIndex', response ) )
-				.catch( error => console.error( 'groupIndex', error ) );
+				.then( response => context.commit( 'roleIndex', response ) )
+				.catch( error => console.error( 'roleIndex', error ) );
 		},
 
 		/**
-		 * Store group
+		 * Store role
 		 *
 		 * @param context
 		 * @param data
 		 * @returns {Promise<any>}
 		 */
-		groupStore( context, data )
+		roleStore( context, data )
 		{
-			return fetch( '/api/groups', {
+			return fetch( '/api/roles', {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -97,19 +97,19 @@ export default {
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'groupStore', error ) );
+				.catch( error => console.error( 'roleStore', error ) );
 		},
 
 		/**
-		 * Get data from specific group
+		 * Get data from specific role
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		groupEdit( context, id )
+		roleEdit( context, id )
 		{
-			return fetch( `/api/groups/${id}/edit`, {
+			return fetch( `/api/roles/${id}/edit`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -119,20 +119,20 @@ export default {
 				}
 			})
 				.then( response => response.json() )
-				.then( response => {console.log(response); context.commit( 'groupEdit', response ) })
-				.catch( error => console.error( 'groupEdit', error ) );
+				.then( response => context.commit( 'roleEdit', response ) )
+				.catch( error => console.error( 'roleEdit', error ) );
 		},
 
 		/**
-		 * Update group
+		 * Update role
 		 *
 		 * @param context
 		 * @param data
 		 * @returns {Promise<any>}
 		 */
-		groupUpdate( context, data )
+		roleUpdate( context, data )
 		{
-			return fetch( `/api/groups/${data.id}`, {
+			return fetch( `/api/roles/${data.id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -153,19 +153,19 @@ export default {
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'groupUpdate', error ) );
+				.catch( error => console.error( 'roleUpdate', error ) );
 		},
 
 		/**
-		 * Destroy group
+		 * Destroy role
 		 *
 		 * @param context
 		 * @param id
 		 * @returns {Promise<any>}
 		 */
-		groupDestroy( context, id )
+		roleDestroy( context, id )
 		{
-			return fetch( `/api/groups/${id}`, {
+			return fetch( `/api/roles/${id}`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -185,39 +185,37 @@ export default {
 					context.commit( 'message', response.message );
 					context.commit( 'success', response.success );
 				})
-				.catch( error => console.error( 'groupDestroy', error ) );
+				.catch( error => console.error( 'roleDestroy', error ) );
 		},
 
 		/**
-		 * Get search results
+		 * Get search results from API
 		 *
 		 * @param context
-		 * @param group
-		 * @returns {Promise<any>}
+		 * @param role
 		 */
-		groupSearch( context, group )
-		{
-			return fetch( `/api/groups/${group}/search`, {
+		roleSearch( context, role ) {
+			return fetch( `/api/roles/${role}/search`, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
 					'Accept': 'application/json'
 				}
 			})
-				.then( response => response.json() )
-				.then( response => context.commit( 'groupSearch', response ) )
-				.catch( error => console.error( 'groupSearch', error ) );
+				.then( response =>  response.json() )
+				.then( response => context.commit( 'roleSearch', response ) )
+				.catch( error => console.error( 'roleSearch', error ) );
 		}
 	},
 
 	getters: {
 		/**
-		 * Get all groups
+		 * Get all role
 		 *
 		 * @param state
 		 * @returns {Array|*|{}|state.all}
 		 */
-		groupIndex( state )
+		roleIndex( state )
 		{
 			if( state.all.data )
 			{
@@ -229,36 +227,33 @@ export default {
 		},
 
 		/**
-		 * Get total amount of groups
+		 * Get total amount of role
 		 *
 		 * @param state
 		 * @returns {*|number|PaymentItem}
 		 */
-		groupTotal( state )
+		roleTotal( state )
 		{
 			return state.all.total
 		},
 
 		/**
-		 * Get group edit
+		 * Get role edit
 		 *
 		 * @param state
 		 * @returns {{}|state.edit|*}
 		 */
-		groupEdit( state )
+		roleEdit( state )
 		{
 			return state.edit;
 		},
 
 		/**
 		 * Get search results
-		 *
 		 * @param state
-		 * @returns {{}|state.search|*}
 		 */
-		groupSearch( state )
-		{
+		roleSearch( state ) {
 			return state.search;
-		},
+		}
 	}
 }

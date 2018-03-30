@@ -1,120 +1,129 @@
 <?php
 
-Route::post( '/users/login', 'UserController@login' );
-Route::post( '/users/register', 'UserController@register' );
+Route::post( '/users/login', 'UserController@login' )->name( 'user.login' );
+Route::post( '/users/register', 'UserController@register' )->name( 'user.register' );
 
 Route::group( ['middleware' => 'auth:api'], function() {
-	Route::get( 'users', 'UserController@index' );
+	Route::get( 'users', 'UserController@index' )->name( 'user.index' );
 
 	// Continents
-	Route::post( '/continents', 'ContinentController@store' );
-	Route::get( '/continents/{continent}/edit', 'ContinentController@edit' );
-	Route::put( '/continents/{continent}', 'ContinentController@update' );
-	Route::delete( '/continents/{continent}', 'ContinentController@destroy' );
+	Route::post( '/continents', 'ContinentController@store' )->name( 'continent.store' );
+	Route::get( '/continents/{continent}/edit', 'ContinentController@edit' )->name( 'continent.edit' );
+	Route::put( '/continents/{continent}', 'ContinentController@update' )->name( 'continent.update' );
+	Route::delete( '/continents/{continent}', 'ContinentController@destroy' )->name( 'continent.destroy' );
 
 	// Currencies
-	Route::post( '/currencies', 'CurrencyController@store' );
-	Route::get( '/currencies/{currency}/edit', 'CurrencyController@edit' );
-	Route::put( '/currencies/{currency}', 'CurrencyController@update' );
-	Route::delete( '/currencies/{currency}', 'CurrencyController@destroy' );
+	Route::post( '/currencies', 'CurrencyController@store' )->name( 'currency.store' );
+	Route::get( '/currencies/{currency}/edit', 'CurrencyController@edit' )->name( 'currency.edit' );
+	Route::put( '/currencies/{currency}', 'CurrencyController@update' )->name( 'currency.update' );
+	Route::delete( '/currencies/{currency}', 'CurrencyController@destroy' )->name( 'currency.destroy' );
 
 	// Languages
-	Route::post( '/languages', 'LanguageController@store' );
-	Route::get( '/languages/{language}/edit', 'LanguageController@edit' );
-	Route::put( '/languages/{language}', 'LanguageController@update' );
-	Route::delete( '/languages/{language}', 'LanguageController@destroy' );
+	Route::post( '/languages', 'LanguageController@store' )->name( 'language.store' );
+	Route::get( '/languages/{language}/edit', 'LanguageController@edit' )->name( 'language.edit' );
+	Route::put( '/languages/{language}', 'LanguageController@update' )->name( 'language.update' );
+	Route::delete( '/languages/{language}', 'LanguageController@destroy' )->name( 'language.destroy' );
 
 	// Countries
-	Route::post( '/countries', 'CountryController@store' );
-	Route::get( '/countries/{country}/edit', 'CountryController@edit' );
-	Route::put( '/countries/{country}', 'CountryController@update' );
-	Route::delete( '/countries/{country}', 'CountryController@destroy' );
+	Route::post( '/countries', 'CountryController@store' )->name( 'country.store' );
+	Route::get( '/countries/{country}/edit', 'CountryController@edit' )->name( 'country.edit' );
+	Route::put( '/countries/{country}', 'CountryController@update' )->name( 'country.update' );
+	Route::delete( '/countries/{country}', 'CountryController@destroy' )->name( 'country.destroy' );
 
 	// Timezones
-	Route::post( '/timezones', 'TimezoneController@store' );
-	Route::get( '/timezones/{timezone}/edit', 'TimezoneController@edit' );
-	Route::put( '/timezones/{timezone}', 'TimezoneController@update' );
-	Route::delete( '/timezones/{timezone}', 'TimezoneController@destroy' );
+	Route::post( '/timezones', 'TimezoneController@store' )->name( 'timezone.store' );
+	Route::get( '/timezones/{timezone}/edit', 'TimezoneController@edit' )->name( 'timezone.edit' );
+	Route::put( '/timezones/{timezone}', 'TimezoneController@update' )->name( 'timezone.update' );
+	Route::delete( '/timezones/{timezone}', 'TimezoneController@destroy' )->name( 'timezone.destroy' );
 
 	// Cities
-	Route::post( '/cities', 'CityController@store' );
-	Route::get( '/cities/{city}/edit', 'CityController@edit' );
-	Route::put( '/cities/{city}', 'CityController@update' );
-	Route::delete( '/cities/{city}', 'CityController@destroy' );
+	Route::post( '/cities', 'CityController@store' )->name( 'city.store' );
+	Route::put( '/cities/{city}', 'CityController@update' )->name( 'city.update' );
+	Route::delete( '/cities/{city}', 'CityController@destroy' )->name( 'city.destroy' );
 
 	// Airports
-	Route::post( '/airports', 'AirportController@store' );
-	Route::get( '/airports/{airport}/edit', 'AirportController@edit' );
-	Route::put( '/airports/{airport}', 'AirportController@update' );
-	Route::delete( '/airports/{airport}', 'AirportController@destroy' );
+	Route::post( '/airports', 'AirportController@store' )->name( 'airport.store' );
+	Route::get( '/airports/{airport}/edit', 'AirportController@edit' )->name( 'airport.edit' );
+	Route::put( '/airports/{airport}', 'AirportController@update' )->name( 'airport.update' );
+	Route::delete( '/airports/{airport}', 'AirportController@destroy' )->name( 'airport.destroy' );
 
 	// Airlines
-	Route::post( '/airlines', 'AirlineController@store' );
-	Route::get( '/airlines/{airline}/edit', 'AirlineController@edit' );
-	Route::put( '/airlines/{airline}', 'AirlineController@update' );
-	Route::delete( '/airlines/{airline}', 'AirlineController@destroy' );
+	Route::post( '/airlines', 'AirlineController@store' )->name( 'airline.store' );
+	Route::get( '/airlines/{airline}/edit', 'AirlineController@edit' )->name( 'airline.edit' );
+	Route::put( '/airlines/{airline}', 'AirlineController@update' )->name( 'airline.update' );
+	Route::delete( '/airlines/{airline}', 'AirlineController@destroy' )->name( 'airline.destroy' );
 
 	// Groups
-	Route::get( '/groups', 'GroupController@index' );
-	Route::post( '/groups', 'GroupController@store' );
-	Route::get( '/groups/{search}/search', 'GroupController@search' );
-	Route::get( '/groups/{group}', 'GroupController@show' );
-	Route::get( '/groups/{group}/edit', 'GroupController@edit' );
-	Route::put( '/groups/{group}', 'GroupController@update' );
-	Route::delete( '/groups/{group}', 'GroupController@destroy' );
+	Route::get( '/groups', 'GroupController@index' )->name( 'group.index' );
+	Route::post( '/groups', 'GroupController@store' )->name( 'group.store' );
+	Route::get( '/groups/{search}/search', 'GroupController@search' )->name( 'group.search' );
+	Route::get( '/groups/{group}/edit', 'GroupController@edit' )->name( 'group.edit' );
+	Route::put( '/groups/{group}', 'GroupController@update' )->name( 'group.update' );
+	Route::delete( '/groups/{group}', 'GroupController@destroy' )->name( 'group.destroy' );
+
+	Route::resource( 'roles', 'RoleController' );
+
+	Route::get( '/permissions', 'PermissionController@index' )->name( 'permission.index' );
+	Route::get( '/permissions/routes', 'PermissionController@routes' )->name( 'permission.routes' );
+	Route::post( '/permissions', 'PermissionController@store' )->name( 'permission.store' );
+	Route::get( '/permissions/{search}/search', 'PermissionController@search' )->name( 'permission.search' );
+	Route::get( '/permissions/{permission}/edit', 'PermissionController@edit' )->name( 'permission.edit' );
+	Route::put( '/permissions/{permission}', 'PermissionController@update' )->name( 'permission.update' );
+	Route::delete( '/permissions/{permission}', 'PermissionController@destroy' )->name( 'permission.destroy' );
 });
 
 // Continents
-Route::get( '/continents', 'ContinentController@index' );
-Route::get( '/continents/db', 'ContinentController@fillDB' );
-Route::get( '/continents/{search}/search', 'ContinentController@search' );
-Route::get( '/continents/{continent}', 'ContinentController@show' );
-Route::get( '/continents/{continent}/top-destinations', 'ContinentController@topDestinations' );
+Route::get( '/continents', 'ContinentController@index' )->name( 'continent.index' );
+Route::get( '/continents/db', 'ContinentController@fillDB' )->name( 'continent.database' );
+Route::get( '/continents/{search}/search', 'ContinentController@search' )->name( 'continent.search' );
+Route::get( '/continents/{continent}', 'ContinentController@show' )->name( 'continent.show' );
+Route::get( '/continents/{continent}/top-destinations', 'ContinentController@topDestinations' )->name( 'continent.index' );
 
 // Currencies
-Route::get( '/currencies', 'CurrencyController@index' );
-Route::get( '/currencies/db', 'CurrencyController@fillDB' );
-Route::get( '/currencies/{search}/search', 'CurrencyController@search' );
-Route::get( '/currencies/{currency}', 'CurrencyController@show' );
+Route::get( '/currencies', 'CurrencyController@index' )->name( 'currency.index' );
+Route::get( '/currencies/db', 'CurrencyController@fillDB' )->name( 'currency.database' );
+Route::get( '/currencies/{search}/search', 'CurrencyController@search' )->name( 'currency.search' );
+Route::get( '/currencies/{currency}', 'CurrencyController@show' )->name( 'currency.show' );
 
 // Languages
-Route::get( '/languages', 'LanguageController@index' );
-Route::get( '/languages/db', 'LanguageController@fillDB' );
-Route::get( '/languages/{search}/search', 'LanguageController@search' );
-Route::get( '/languages/{language}', 'LanguageController@show' );
+Route::get( '/languages', 'LanguageController@index' )->name( 'language.index' );
+Route::get( '/languages/db', 'LanguageController@fillDB' )->name( 'language.database' );
+Route::get( '/languages/{search}/search', 'LanguageController@search' )->name( 'language.search' );
+Route::get( '/languages/{language}', 'LanguageController@show' )->name( 'language.show' );
 
 // Countries
-Route::get( '/countries', 'CountryController@index' );
-Route::get( '/countries/db', 'CountryController@fillDB' );
-Route::get( '/countries/{search}/search', 'CountryController@search' );
-Route::get( '/countries/{country}', 'CountryController@show' );
+Route::get( '/countries', 'CountryController@index' )->name( 'country.index' );
+Route::get( '/countries/db', 'CountryController@fillDB' )->name( 'country.database' );
+Route::get( '/countries/{search}/search', 'CountryController@search' )->name( 'country.search' );
+Route::get( '/countries/{country}', 'CountryController@show' )->name( 'country.show' );
 
 // Timezones
-Route::get( '/timezones', 'TimezoneController@index' );
-Route::get( '/timezones/db', 'TimezoneController@fillDB' );
-Route::get( '/timezones/{timezone}', 'TimezoneController@show' );
+Route::get( '/timezones', 'TimezoneController@index' )->name( 'timezone.index' );
+Route::get( '/timezones/db', 'TimezoneController@fillDB' )->name( 'timezone.database' );
+Route::get( '/timezones/{search}/search', 'TimezoneController@search' )->name( 'timezone.search' );
+Route::get( '/timezones/{timezone}', 'TimezoneController@show' )->name( 'timezone.show' );
 
 // Cities
-Route::get( '/cities', 'CityController@index' );
-Route::get( '/cities/{search}/search', 'CityController@search' );
-Route::get( '/cities/db', 'CityController@fillDB' );
-Route::get( '/cities/{city}', 'CityController@show' );
+Route::get( '/cities', 'CityController@index' )->name( 'city.index' );
+Route::get( '/cities/{search}/search', 'CityController@search' )->name( 'city.search' );
+Route::get( '/cities/db', 'CityController@fillDB' )->name( 'city.database' );
+Route::get( '/cities/{city}', 'CityController@show' )->name( 'city.show' );
 
 // Airports
-Route::get( '/airports', 'AirportController@index' );
-Route::get( '/airports/db', 'AirportController@fillDB' );
-Route::get( '/airports/{search}/search', 'AirportController@search' );
-Route::get( '/airports/{airport}', 'AirportController@show' );
+Route::get( '/airports', 'AirportController@index' )->name( 'airport.index' );
+Route::get( '/airports/db', 'AirportController@fillDB' )->name( 'airport.database' );
+Route::get( '/airports/{search}/search', 'AirportController@search' )->name( 'airport.search' );
+Route::get( '/airports/{airport}', 'AirportController@show' )->name( 'airport.show' );
 
 // Flights
-Route::post( '/flights/browse-quotes', 'FlightController@browseQuotes' );
-Route::post( '/flights/browse-routes', 'FlightController@browseRoutes' );
-Route::post( '/flights/browse-dates', 'FlightController@browseDates' );
-Route::post( '/flights/browse-dates-grid', 'FlightController@browseDatesGrid' );
-Route::post( '/flights/session', 'FlightController@createSession' );
+Route::post( '/flights/browse-quotes', 'FlightController@browseQuotes' )->name( 'flight.browseQuotes' );
+Route::post( '/flights/browse-routes', 'FlightController@browseRoutes' )->name( 'flight.browseRoutes' );
+Route::post( '/flights/browse-dates', 'FlightController@browseDates' )->name( 'flight.browseDates' );
+Route::post( '/flights/browse-dates-grid', 'FlightController@browseDatesGrid' )->name( 'flight.browseDatesGrid' );
+Route::post( '/flights/session', 'FlightController@createSession' )->name( 'flight.createSession' );
 
 // Airlines
-Route::get( '/airlines', 'AirlineController@index' );
-Route::get( '/airlines/db', 'AirlineController@fillDB' );
-Route::get( '/airlines/{search}/search', 'AirlineController@search' );
-Route::get( '/airlines/{airline}', 'AirlineController@show' );
+Route::get( '/airlines', 'AirlineController@index' )->name( 'airline.index' );
+Route::get( '/airlines/db', 'AirlineController@fillDB' )->name( 'airline.database' );
+Route::get( '/airlines/{search}/search', 'AirlineController@search' )->name( 'airline.search' );
+Route::get( '/airlines/{airline}', 'AirlineController@show' )->name( 'airline.show' );

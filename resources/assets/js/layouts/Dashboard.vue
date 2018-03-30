@@ -148,57 +148,65 @@
                     },
                     {
                     	title: 'Users',
-                        to: 'dashboardUser',
-                        icon: 'person'
-                    },
-                    {
-                    	title: 'Groups',
-                        to: 'dashboardGroup',
-                        icon: 'group'
+                        icon: 'person',
+                        children: [
+                            {
+                            	title: 'Users',
+                                to: 'userIndex'
+                            },
+                            {
+                            	title: 'Roles',
+                                to: 'roleIndex'
+                            },
+                            {
+                            	title: 'Permissions',
+                                to: 'permissionIndex'
+                            }
+                        ]
                     },
                     {
                     	title: 'Languages',
-                        to: 'dashboardLanguage',
+                        to: 'languageIndex',
                         icon: 'translate'
                     },
                     {
                         title: 'Timezones',
-                        to: 'dashboardTimezone',
+                        to: 'timezoneIndex',
                         icon: 'access_time'
                     },
                     {
                     	title: 'Currencies',
-                        to: 'dashboardCurrency',
+                        to: 'currencyIndex',
                         icon: 'attach_money'
                     },
                     {
                     	title: 'Continents',
-                        to: 'dashboardContinent',
+                        to: 'continentIndex',
                         icon: 'public'
                     },
                     {
                     	title: 'Countries',
-                        to: 'dashboardCountry',
+                        to: 'countryIndex',
                         icon: 'pin_drop'
                     },
                     {
                     	title: 'Cities',
-                        to: 'dashboardCity',
+                        to: 'cityIndex',
                         icon: 'place'
 					},
                     {
                     	title: 'Airports',
-                        to: 'dashboardAirport',
+                        to: 'airportIndex',
                         icon: 'local_airport'
                     },
                     {
                     	title: 'Airlines',
-                        to: 'dashboardAirline',
+                        to: 'airlineIndex',
                         icon: 'flight_takeoff'
                     },
 					{
 						title: 'Contacts',
-						to: 'dashboardContact',
+						to: 'contactIndex',
 						icon: 'contacts'
 					},
                 ]

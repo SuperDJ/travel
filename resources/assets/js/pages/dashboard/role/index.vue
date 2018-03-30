@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn color="primary" slot="activator" :to="{ name: 'languageCreate' }">
+        <v-btn color="primary" slot="activator" :to="{ name: 'roleCreate' }">
             <v-icon>add</v-icon>
-            Add language
+            Add role
         </v-btn>
 
         <v-data-table
@@ -34,7 +34,7 @@
                     <td class="text-xs-right">{{ props.item.country_count }}</td>
                     <td class="text-xs-right">{{ props.item.profile_count }}</td>
                     <td>
-                        <v-btn icon :to="{ name: 'languageEdit', params: { language: props.item.id } }">
+                        <v-btn icon :to="{ name: 'roleEdit', params: { role: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>
 
@@ -49,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete language</span>
+                    <span class="headline">Delete role</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete language: <strong>{{ deleteItem.name }}</strong>?
+                    Are you sure you want to delete role: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
                     <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="languageDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="red" @click="roleDestroy( deleteItem.id )">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -69,7 +69,7 @@
 	export default
 	{
 		metaInfo: {
-			title: 'Languages'
+			title: 'Roles'
 		},
 
 		data()
@@ -112,12 +112,12 @@
 		computed: {
 			items()
 			{
-				return this.$store.getters.languageIndex;
+				return this.$store.getters.roleIndex;
 			},
 
 			totalItems()
 			{
-				return this.$store.getters.languageTotal;
+				return this.$store.getters.roleTotal;
 			}
 		},
 
@@ -126,16 +126,16 @@
 			{
 				this.loading = true;
 
-				this.$store.dispatch( 'languageIndex', this.pagination ).then( () => {
+				this.$store.dispatch( 'roleIndex', this.pagination ).then( () => {
 					this.loading = false;
 				});
 			},
 
-            languageDestroy( id )
+            roleDestroy( id )
             {
                 this.loading = true;
 
-                this.$store.dispatch( 'languageDestroy', id ).then( () =>
+                this.$store.dispatch( 'roleDestroy', id ).then( () =>
 				{
 					this.data(); // Refresh data
                     this.deleteItem = {};

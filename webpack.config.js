@@ -7,8 +7,6 @@ module.exports = env => {
 	return {
 		entry: {
 			'main': './resources/assets/js/main.js',
-			'web': './resources/assets/scss/web.scss',
-			'smaterial': './resources/assets/js/smaterial.js',
 		},
 		output: {
 			path: __dirname,

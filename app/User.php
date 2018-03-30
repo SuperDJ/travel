@@ -32,4 +32,9 @@ class User extends Authenticatable
 	{
 		return $this->belongsTo( Group::class );
 	}
+
+	public function roles()
+	{
+		return $this->hasMany( Role::class );
+	}
 }

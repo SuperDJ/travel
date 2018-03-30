@@ -4,7 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends \Spatie\Permission\Models\Permission
+class Permission extends Model
 {
     public $guarded = ['id'];
+
+    public function roles()
+	{
+		return $this->belongsToMany( Role::class );
+	}
 }

@@ -11,10 +11,10 @@
 <script>
 	export default {
 		metaInfo: {
-			title: 'Edit language'
+			title: 'Edit role'
 		},
 
-        props: ['language'],
+        props: ['role'],
 
 		components: {
 			'c-form': () => import('./form')
@@ -22,20 +22,20 @@
 
         computed: {
 			form() {
-				return this.$store.getters.languageEdit;
+				return this.$store.getters.roleEdit;
             }
         },
 
 		methods: {
 			submit( data )
 			{
-				this.$store.dispatch( 'languageUpdate', { id: this.language, details: data } );
+				this.$store.dispatch( 'roleUpdate', { id: this.role, details: data } );
 			},
 		},
 
         created()
         {
-        	this.$store.dispatch( 'languageEdit', this.language );
+        	this.$store.dispatch( 'roleEdit', this.role );
         }
 	}
 </script>

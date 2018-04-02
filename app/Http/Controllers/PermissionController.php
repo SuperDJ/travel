@@ -13,7 +13,7 @@ class PermissionController extends Controller
 	 *
 	 * @return \App\Permission[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index()
+    public function index( Request $request )
     {
         return Permission::all();
     }

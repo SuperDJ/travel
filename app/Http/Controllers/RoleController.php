@@ -115,7 +115,7 @@ class RoleController extends Controller
 	{
 		$request->validate([
 			'name' => $request->input( 'id' ) ? [ 'required', 'string', Rule::unique( 'roles' )->ignore( $request->input( 'id' ) ) ] : 'require|string|unique:roles',
-			'permissions' => 'required'
+			'permissions' => 'required|array'
 		]);
 	}
 }

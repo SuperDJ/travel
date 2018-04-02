@@ -37,7 +37,7 @@ class UserController extends Controller
 			$token = $user->createToken( config( 'app.name' ) )->accessToken;
 			$user->update( [ 'api_token' => $token ] );
 
-			return response()->json( [ 'success' => true, 'token' => $token, 'group' => $user->group->routes, 'user' => $user ], 200 );
+			return response()->json( [ 'success' => true, 'token' => $token, 'user' => $user ], 200 );
 		} else {
 			return response()->json( [ 'success' => false, 'message' => 'Email and password combination not found' ], 401 );
 		}

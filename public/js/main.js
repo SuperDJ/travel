@@ -15194,6 +15194,33 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -15208,7 +15235,7 @@ exports.default = {
         return {
             form: {
                 name: '',
-                iso: ''
+                permissions: {}
             }
         };
     },
@@ -15217,6 +15244,11 @@ exports.default = {
     computed: {
         errors: function errors() {
             return this.$store.getters.errors;
+        },
+        permissions: function permissions() {
+            var permissions = this.$store.getters.permissionIndex;
+
+            return this.generateObject(permissions);
         }
     },
 
@@ -15228,6 +15260,28 @@ exports.default = {
             };
 
             this.$emit('submitted', details);
+        },
+        generateObject: function generateObject(permissions) {
+            var _this = this;
+
+            var array = {};
+            permissions.map(function (permission) {
+                var name = permission.name.split('.');
+                var controller = name[0];
+                var method = name[1];
+
+                if (!array[controller]) {
+                    array[controller] = [];
+                }
+                array[controller].push({ method: method, id: permission.id });
+            });
+
+            // Set default value for all permissions
+            permissions.map(function (value) {
+                _this.form.permissions[value.id] = false;
+            });
+
+            return array;
         }
     },
 
@@ -15235,6 +15289,10 @@ exports.default = {
         details: function details(after) {
             this.form = after;
         }
+    },
+
+    created: function created() {
+        this.$store.dispatch('permissionIndex');
     }
 };
 
@@ -34212,7 +34270,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Language name",
+          label: "Role name",
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -34224,6 +34282,82 @@ var render = function() {
           expression: "form.name"
         }
       }),
+      _vm._v(" "),
+      _c("h2", { staticClass: "headline" }, [_vm._v("Permissions")]),
+      _vm._v(" "),
+      _c(
+        "v-list",
+        { attrs: { subheader: "" } },
+        _vm._l(_vm.permissions, function(permission, controller) {
+          return _c(
+            "div",
+            { key: controller },
+            [
+              _c("v-subheader", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      controller.charAt(0).toUpperCase() + controller.slice(1)
+                    ) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _vm._l(permission, function(method) {
+                return _c(
+                  "v-list-tile",
+                  { key: method.method, attrs: { href: "javascript:;" } },
+                  [
+                    _c(
+                      "v-list-tile-action",
+                      [
+                        _c("v-checkbox", {
+                          attrs: { readonly: "" },
+                          model: {
+                            value: _vm.form[method.id],
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, method.id, $$v)
+                            },
+                            expression: "form[method.id]"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-tile-content",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.form[method.id]
+                          }
+                        }
+                      },
+                      [
+                        _c("v-list-tile-title", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(method.method) +
+                              " " +
+                              _vm._s(_vm.form[method.id]) +
+                              "\n                    "
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _c("v-divider")
+            ],
+            2
+          )
+        })
+      ),
       _vm._v(" "),
       _c(
         "v-btn",
@@ -34553,7 +34687,9 @@ var render = function() {
               fn: function(props) {
                 return [
                   _c("tr", [
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
+                    _c("td", [
+                      _vm._v(_vm._s(props.item.name.replace(".", " ")))
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(props.item.roles_count))]),
                     _vm._v(" "),

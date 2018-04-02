@@ -34,7 +34,7 @@
 
             <template slot="items" slot-scope="props">
                 <tr>
-                    <td>{{ props.item.name }}</td>
+                    <td>{{ props.item.name.replace( '.', ' ' ) }}</td>
                     <td>{{ props.item.roles_count }}</td>
                     <td>
                         <v-btn icon :to="{ name: 'permissionEdit', params: { permission: props.item.id } }">

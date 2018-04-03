@@ -65,7 +65,7 @@ class RoleController extends Controller
      */
     public function edit( Role $role )
     {
-     	return response()->json( $role );
+     	return response()->json( $role->permissions->getRelatedIds() );
     }
 
     /**

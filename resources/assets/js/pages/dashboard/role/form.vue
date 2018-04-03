@@ -15,7 +15,7 @@
                     {{ controller.charAt( 0 ).toUpperCase() + controller.slice( 1 ) }}
                 </v-subheader>
 
-                <v-list-tile v-for="method in permission" href="javascript:;" :key="method.method">
+                <v-list-tile v-for="method in permission" :key="method.method">
                     <v-list-tile-content>
                         <v-list-tile-title>
                             <v-checkbox

@@ -34293,7 +34293,7 @@ var render = function() {
               _vm._l(permission, function(method) {
                 return _c(
                   "v-list-tile",
-                  { key: method.method, attrs: { href: "javascript:;" } },
+                  { key: method.method },
                   [
                     _c(
                       "v-list-tile-content",

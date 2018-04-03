@@ -16,11 +16,9 @@ class ContinentController extends Controller
 	 */
     public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 0 )
+		if( !empty( $request->all() ) )
 		{
-			return Continent::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->withCount( 'countries' )
-				->paginate( $request->rowsPerPage );
+			return Continent::withCount( 'countries' )->get();
 		} else {
 			return Continent::all();
 		}

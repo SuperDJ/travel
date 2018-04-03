@@ -11,11 +11,18 @@ class PermissionController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Permission[]|\Illuminate\Database\Eloquent\Collection
 	 */
     public function index( Request $request )
     {
-        return Permission::all();
+    	if( !empty( $request->all() ) )
+		{
+			return Permission::withCount( 'roles' )->get();
+		} else {
+			return Permission::all();
+		}
     }
 
     /**

@@ -16,11 +16,19 @@ class RoleController extends Controller
 
 	/**
 	 * Display a listing of the resource.
+	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Role[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index()
+    public function index( Request $request )
     {
-        return Role::all();
+    	if( !empty( $request->all() ) )
+		{
+			return Role::withCount('users')->withCount('permissions')->get();
+		} else {
+			return Role::all();
+		}
     }
 
     /**
@@ -39,7 +47,7 @@ class RoleController extends Controller
 
         if( !empty( $request->permissions ) )
 		{
-			Role::permissions()->attach( $request->permissions );
+			$created->permissions()->attach( $request->permissions );
 		}
 
 		if( $created ) {
@@ -114,7 +122,7 @@ class RoleController extends Controller
     private function validation( Request $request )
 	{
 		$request->validate([
-			'name' => $request->input( 'id' ) ? [ 'required', 'string', Rule::unique( 'roles' )->ignore( $request->input( 'id' ) ) ] : 'require|string|unique:roles',
+			'name' => $request->input( 'id' ) ? [ 'required', 'string', Rule::unique( 'roles' )->ignore( $request->input( 'id' ) ) ] : 'required|string|unique:roles',
 			'permissions' => 'required|array'
 		]);
 	}

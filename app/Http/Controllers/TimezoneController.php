@@ -12,14 +12,14 @@ class TimezoneController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Timezone[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 0 ) {
-			return Timezone::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->with( 'country' )
-				->paginate( $request->rowsPerPage );
+		if( !empty( $request->all() ) ) {
+			return Timezone::with( 'country' )->get();
 		} else{
 			return Timezone::all();
 		}

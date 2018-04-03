@@ -10,23 +10,19 @@
         <h2 class="headline">Permissions</h2>
 
         <v-list subheader>
-            <div v-for="(permission, controller) in permissions" :key="controller">
+            <div v-for="(permission, controller) in controllers" :key="controller">
                 <v-subheader>
                     {{ controller.charAt( 0 ).toUpperCase() + controller.slice( 1 ) }}
                 </v-subheader>
 
                 <v-list-tile v-for="method in permission" href="javascript:;" :key="method.method">
-                    <v-list-tile-action>
-                        <v-checkbox
-                            v-model="form[method.id]"
-                            readonly
-                        ></v-checkbox>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content
-                        @click="form[method.id]">
+                    <v-list-tile-content>
                         <v-list-tile-title>
-                            {{ method.method }} {{form[method.id]}}
+                            <v-checkbox
+                                v-model="form.permissions"
+                                :value="method.id"
+                                :label="method.method"
+                            ></v-checkbox>
                         </v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
@@ -36,7 +32,7 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save language
+            Save role
         </v-btn>
 
         <v-btn flat :to="{ name: 'roleIndex' }">
@@ -61,7 +57,7 @@
         	return {
         		form: {
 					name: '',
-                    permissions: {},
+                    permissions: [],
 				}
             }
         },
@@ -72,46 +68,35 @@
             	return this.$store.getters.errors;
             },
 
-			permissions()
+			controllers()
 			{
 				const permissions = this.$store.getters.permissionIndex;
 
-				return this.generateObject( permissions );
+				let object = {};
+				permissions.map( ( permission ) => {
+					let name = permission.name.split( '.' );
+					let controller = name[0];
+					let method = name[1];
+
+					if( !object[controller] )
+					{
+						object[controller] = [];
+					}
+					object[controller].push( { method: method, id: permission.id } );
+				});
+
+				return object;
 			}
 		},
 
         methods: {
     		submit( data ) {
     		    let details = {
-    		    	name: data.name.charAt( 0 ).toUpperCase() + data.name.slice( 1 ),
-                    iso: data.iso.toUpperCase(),
+    		    	name: data.name.charAt( 0 ).toUpperCase() + data.name.slice( 1 )
                 };
 
-                this.$emit( 'submitted', details );
+                this.$emit( 'submitted', Object.assign( data, details ) );
             },
-
-            generateObject( permissions )
-            {
-				let array = {};
-				permissions.map( ( permission ) => {
-					let name = permission.name.split( '.' );
-					let controller = name[0];
-					let method = name[1];
-
-					if( !array[controller] )
-					{
-						array[controller] = [];
-					}
-					array[controller].push( {method: method, id: permission.id} );
-				});
-
-				// Set default value for all permissions
-				permissions.map( value => {
-					this.form.permissions[value.id] = false;
-				});
-
-				return array;
-            }
         },
 
         watch: {

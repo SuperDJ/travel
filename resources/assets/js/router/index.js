@@ -400,7 +400,7 @@ const routes = [
 				path: 'permissions',
 				name: 'permissionIndex',
 				meta: {
-					title: 'Roles'
+					title: 'Permissions'
 				},
 				component: permissionIndex,
 			},

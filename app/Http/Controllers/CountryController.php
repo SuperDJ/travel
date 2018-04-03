@@ -14,20 +14,21 @@ class CountryController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Country[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 1 )
+		if( !empty( $request->all() ) )
 		{
-			return Country::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->with( 'continent' )
+			return Country::with( 'continent' )
 				->with( 'currency' )
 				->with( 'language' )
 				->withCount( 'cities' )
 				->withCount( 'timezones' )
 				->withCount( 'profile' )
-				->paginate( $request->rowsPerPage );
+				->get();
 		} else {
 			return Country::all();
 		}

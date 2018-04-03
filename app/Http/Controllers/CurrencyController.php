@@ -17,12 +17,11 @@ class CurrencyController extends Controller
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 1 )
+		if( !empty( $request->all() ) )
 		{
-			return Currency::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->withCount( 'country' )
+			return Currency::withCount( 'country' )
 				->withCount( 'profile' )
-				->paginate( $request->rowsPerPage );
+				->get();
 		} else
 		{
 			return Currency::all();

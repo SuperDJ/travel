@@ -8,9 +8,13 @@ class Role extends Model
 {
     public $guarded = ['id'];
 
+    protected $casts = [
+    	'permissions' => 'array'
+	];
+
     public function permissions()
 	{
-		return $this->hasMany( Permission::class );
+		return $this->belongsToMany( Permission::class );
 	}
 
 	public function users()

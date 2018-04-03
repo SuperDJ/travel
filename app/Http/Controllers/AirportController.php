@@ -11,15 +11,15 @@ class AirportController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Airport[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 0 )
+		if( !empty( $request->all() ) )
 		{
-			return Airport::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->with( 'city' )
-				->paginate( $request->rowsPerPage );
+			return Airport::with( 'city' )->get();
 		} else {
 			return Airport::all();
 		}

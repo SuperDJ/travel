@@ -13,7 +13,7 @@ class RedoRolesPermissions extends Migration
      */
     public function up()
     {
-    	/*
+
 		Schema::table('users', function (Blueprint $table) {
 			$table->dropForeign('users_group_id_foreign');
 			$table->dropColumn('group_id');
@@ -52,7 +52,7 @@ class RedoRolesPermissions extends Migration
 			$table->increments('id');
 			$table->integer('permission_id')->unsigned();
 			$table->integer('role_id')->unsigned();
-		});*/
+		});
 
 		Schema::table('role_user', function (Blueprint $table) {
 			$table->foreign('role_id')->references('id')->on('roles');

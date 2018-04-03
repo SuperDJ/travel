@@ -10,16 +10,17 @@ class LanguageController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
 	 * @return \App\Language[]|\Illuminate\Database\Eloquent\Collection
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 1 )
+		if( !empty( $request->all() ) )
 		{
-			return Language::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->withCount( 'country' )
+			return Language::withCount( 'country' )
 				->withCount( 'profile' )
-				->paginate( $request->rowsPerPage );
+				->get();
 		} else {
 			return Language::all();
 		}

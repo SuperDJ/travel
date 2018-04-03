@@ -65,7 +65,13 @@ export default
 		 */
 		userIndex( context, pagination )
 		{
-			return fetch( `/api/users?${Object.keys(pagination).map(key => key + '=' + pagination[key]).join('&')}`, {
+			let url = '/api/users';
+			if( pagination && Object.keys( pagination ).length > 1 )
+			{
+				url += `?${Object.keys( pagination ).map( key =>  `${key}=${pagination[ key ]}` ).join( '&' ) }`;
+			}
+
+			return fetch( url, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -193,7 +199,13 @@ export default
 		 */
 		userIndex( state )
 		{
-			return state.all.data;
+			if( state.all.data )
+			{
+				return state.all.data;
+			} else
+			{
+				return state.all;
+			}
 		},
 
 		/**

@@ -17,12 +17,11 @@ class CityController extends Controller
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) && count( $request->all() ) > 0 )
+		if( !empty( $request->all() ) )
 		{
-			return City::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->with( 'country' )
+			return City::with( 'country' )
 				->withCount( 'airports' )
-				->paginate( $request->rowsPerPage );
+				->get();
 		} else {
 			return City::all();
 		}

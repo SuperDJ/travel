@@ -30,9 +30,8 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.iso }}</td>
-                    <td class="text-xs-right">{{ props.item.country_count }}</td>
-                    <td class="text-xs-right">{{ props.item.profile_count }}</td>
+                    <td class="text-xs-right">{{ props.item.permissions_count }}</td>
+                    <td class="text-xs-right">{{ props.item.users_count }}</td>
                     <td>
                         <v-btn icon :to="{ name: 'roleEdit', params: { role: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
@@ -80,24 +79,19 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Language',
+						text: 'Role',
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'ISO',
-						align: 'left',
-						value: 'iso',
-					},
-					{
-						text: 'Countries',
+						text: 'Permissions',
 						align: 'right',
-						value: 'country_count'
+						value: 'permissions_count',
 					},
 					{
 						text: 'Users',
 						align: 'right',
-						value: 'profile_count'
+						value: 'users_count'
 					},
                     {
                     	text: 'Actions',

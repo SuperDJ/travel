@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ props.item.first_name }}</td>
                 <td>{{ props.item.last_name }}</td>
-                <td v-if="props.item.group">{{ props.item.group.name }}</td><td v-else></td>
+                <td class="text-xs-right">{{ props.item.roles_count }}</td>
                 <td v-if="props.item.profile">{{ props.item.profile.birthday }}</td><td v-else></td>
                 <td v-if="props.item.profile && props.item.profile.language">{{ props.item.profile.language.name }}</td><td v-else></td>
                 <td v-if="props.item.profile && props.item.profile.country">{{ props.item.profile.country.name }}</td><td v-else></td>
@@ -58,9 +58,9 @@
                         value: 'last_name',
                     },
 					{
-						text: 'Group',
-						align: 'left',
-						value: 'group_id',
+						text: 'Roles',
+						align: 'right',
+						value: 'roles_count',
 					},
                     {
                         text: 'Birthday',

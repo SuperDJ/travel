@@ -12,15 +12,9 @@ class AirlineController extends Controller
 	 *
 	 * @return \App\Airline[]|\Illuminate\Database\Eloquent\Collection
 	 */
-    public function index( Request $request )
+    public function index()
     {
-    	if( !empty( $request ) && count( $request->all() ) > 0 )
-		{
-			return Airline::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->paginate( $request->rowsPerPage );
-		} else {
-			return Airline::all();
-		}
+		return Airline::all();
     }
 
     /**

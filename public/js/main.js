@@ -11498,9 +11498,9 @@ exports.default = {
                 align: 'left',
                 value: 'last_name'
             }, {
-                text: 'Group',
-                align: 'left',
-                value: 'group_id'
+                text: 'Roles',
+                align: 'right',
+                value: 'roles_count'
             }, {
                 text: 'Birthday',
                 align: 'left',
@@ -14978,7 +14978,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
 	metaInfo: {
@@ -14991,21 +14990,17 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Language',
+				text: 'Role',
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'ISO',
-				align: 'left',
-				value: 'iso'
-			}, {
-				text: 'Countries',
+				text: 'Permissions',
 				align: 'right',
-				value: 'country_count'
+				value: 'permissions_count'
 			}, {
 				text: 'Users',
 				align: 'right',
-				value: 'profile_count'
+				value: 'users_count'
 			}, {
 				text: 'Actions',
 				align: 'left',
@@ -15217,10 +15212,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
 
 exports.default = {
     props: {
@@ -15235,7 +15226,7 @@ exports.default = {
         return {
             form: {
                 name: '',
-                permissions: {}
+                permissions: []
             }
         };
     },
@@ -15245,43 +15236,32 @@ exports.default = {
         errors: function errors() {
             return this.$store.getters.errors;
         },
-        permissions: function permissions() {
+        controllers: function controllers() {
             var permissions = this.$store.getters.permissionIndex;
 
-            return this.generateObject(permissions);
+            var object = {};
+            permissions.map(function (permission) {
+                var name = permission.name.split('.');
+                var controller = name[0];
+                var method = name[1];
+
+                if (!object[controller]) {
+                    object[controller] = [];
+                }
+                object[controller].push({ method: method, id: permission.id });
+            });
+
+            return object;
         }
     },
 
     methods: {
         submit: function submit(data) {
             var details = {
-                name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
-                iso: data.iso.toUpperCase()
+                name: data.name.charAt(0).toUpperCase() + data.name.slice(1)
             };
 
-            this.$emit('submitted', details);
-        },
-        generateObject: function generateObject(permissions) {
-            var _this = this;
-
-            var array = {};
-            permissions.map(function (permission) {
-                var name = permission.name.split('.');
-                var controller = name[0];
-                var method = name[1];
-
-                if (!array[controller]) {
-                    array[controller] = [];
-                }
-                array[controller].push({ method: method, id: permission.id });
-            });
-
-            // Set default value for all permissions
-            permissions.map(function (value) {
-                _this.form.permissions[value.id] = false;
-            });
-
-            return array;
+            this.$emit('submitted', Object.assign(data, details));
         }
     },
 
@@ -20665,9 +20645,14 @@ exports.default = {
    * @param pagination
    */
 		userIndex: function userIndex(context, pagination) {
-			return fetch('/api/users?' + Object.keys(pagination).map(function (key) {
-				return key + '=' + pagination[key];
-			}).join('&'), {
+			var url = '/api/users';
+			if (pagination && Object.keys(pagination).length > 1) {
+				url += '?' + Object.keys(pagination).map(function (key) {
+					return key + '=' + pagination[key];
+				}).join('&');
+			}
+
+			return fetch(url, {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
@@ -20797,7 +20782,11 @@ exports.default = {
    * @param state
    */
 		userIndex: function userIndex(state) {
-			return state.all.data;
+			if (state.all.data) {
+				return state.all.data;
+			} else {
+				return state.all;
+			}
 		},
 
 
@@ -21400,7 +21389,7 @@ var routes = [{
 		path: 'permissions',
 		name: 'permissionIndex',
 		meta: {
-			title: 'Roles'
+			title: 'Permissions'
 		},
 		component: permissionIndex
 	}, {
@@ -29027,9 +29016,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(props.item.last_name))]),
                 _vm._v(" "),
-                props.item.group
-                  ? _c("td", [_vm._v(_vm._s(props.item.group.name))])
-                  : _c("td"),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.roles_count))
+                ]),
                 _vm._v(" "),
                 props.item.profile
                   ? _c("td", [_vm._v(_vm._s(props.item.profile.birthday))])
@@ -34044,14 +34033,12 @@ var render = function() {
                   _c("tr", [
                     _c("td", [_vm._v(_vm._s(props.item.name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.iso))]),
-                    _vm._v(" "),
                     _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(_vm._s(props.item.country_count))
+                      _vm._v(_vm._s(props.item.permissions_count))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(_vm._s(props.item.profile_count))
+                      _vm._v(_vm._s(props.item.users_count))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -34288,7 +34275,7 @@ var render = function() {
       _c(
         "v-list",
         { attrs: { subheader: "" } },
-        _vm._l(_vm.permissions, function(permission, controller) {
+        _vm._l(_vm.controllers, function(permission, controller) {
           return _c(
             "div",
             { key: controller },
@@ -34309,41 +34296,24 @@ var render = function() {
                   { key: method.method, attrs: { href: "javascript:;" } },
                   [
                     _c(
-                      "v-list-tile-action",
-                      [
-                        _c("v-checkbox", {
-                          attrs: { readonly: "" },
-                          model: {
-                            value: _vm.form[method.id],
-                            callback: function($$v) {
-                              _vm.$set(_vm.form, method.id, $$v)
-                            },
-                            expression: "form[method.id]"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
                       "v-list-tile-content",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.form[method.id]
-                          }
-                        }
-                      },
                       [
-                        _c("v-list-tile-title", [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(method.method) +
-                              " " +
-                              _vm._s(_vm.form[method.id]) +
-                              "\n                    "
-                          )
-                        ])
+                        _c(
+                          "v-list-tile-title",
+                          [
+                            _c("v-checkbox", {
+                              attrs: { value: method.id, label: method.method },
+                              model: {
+                                value: _vm.form.permissions,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.form, "permissions", $$v)
+                                },
+                                expression: "form.permissions"
+                              }
+                            })
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
@@ -34362,10 +34332,7 @@ var render = function() {
       _c(
         "v-btn",
         { attrs: { color: "primary", type: "submit" } },
-        [
-          _c("v-icon", [_vm._v("save")]),
-          _vm._v("\n        Save language\n    ")
-        ],
+        [_c("v-icon", [_vm._v("save")]), _vm._v("\n        Save role\n    ")],
         1
       ),
       _vm._v(" "),

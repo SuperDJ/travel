@@ -100,17 +100,16 @@ class UserController extends Controller
 	 */
 	public function index( Request $request )
 	{
-		if( !empty( $request ) )
+		if( !empty( $request->all() ) )
 		{
-			return User::orderBy( $request->sortBy, $request->descending == 'true' ? 'desc' : 'asc' )
-				->with( 'group' )
+			return User::withCount( 'roles' )
 				->with(['profile' => function( $query ) {
 					$query->with('country');
 					$query->with('currency');
 					$query->with('timezone');
 					$query->with('language');
 				}])
-				->paginate( $request->rowsPerPage );
+				->get();
 		} else {
 			return User::all();
 		}

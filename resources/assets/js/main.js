@@ -5,6 +5,7 @@ import { store } from './store/store';
 import router from './router';
 import Meta from 'vue-meta';
 import VueProgressiveImage from 'vue-progressive-image';
+import permissions from '';
 
 Vue.use( Meta );
 Vue.use( Vuetify );

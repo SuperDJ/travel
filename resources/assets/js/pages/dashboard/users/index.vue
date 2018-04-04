@@ -29,6 +29,11 @@
                 <td v-if="props.item.profile && props.item.profile.language">{{ props.item.profile.language.name }}</td><td v-else></td>
                 <td v-if="props.item.profile && props.item.profile.country">{{ props.item.profile.country.name }}</td><td v-else></td>
                 <td v-if="props.item.profile && props.item.profile.currency">{{ props.item.profile.currency.name }}</td><td v-else></td>
+                <td>
+                    <v-btn icon :to="{ name: 'userEdit', params: { user: props.item.id } }">
+                        <v-icon color="green">edit</v-icon>
+                    </v-btn>
+                </td>
             </tr>
         </template>
     </v-data-table>
@@ -85,6 +90,12 @@
                         align: 'left',
                         value: 'profile.currency.name',
 						sortable: false,
+                    },
+                    {
+                    	text: 'Actions',
+                        align: 'left',
+                        value: '',
+                        sortable: false,
                     }
                 ]
             }

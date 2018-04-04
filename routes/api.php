@@ -4,7 +4,9 @@ Route::post( '/users/login', 'UserController@login' )->name( 'user.login' );
 Route::post( '/users/register', 'UserController@register' )->name( 'user.register' );
 
 Route::group( ['middleware' => 'auth:api'], function() {
-	Route::get( 'users', 'UserController@index' )->name( 'user.index' );
+	Route::get( '/users', 'UserController@index' )->name( 'user.index' );
+	Route::get( '/users/{user}/edit', 'UserController@edit')->name( 'user.edit' );
+	Route::put( '/users/{user}', 'UserController@update' )->name( 'user.update' );
 
 	// Continents
 	Route::post( '/continents', 'ContinentController@store' )->name( 'continent.store' );
@@ -61,8 +63,15 @@ Route::group( ['middleware' => 'auth:api'], function() {
 	Route::put( '/groups/{group}', 'GroupController@update' )->name( 'group.update' );
 	Route::delete( '/groups/{group}', 'GroupController@destroy' )->name( 'group.destroy' );
 
-	Route::resource( 'roles', 'RoleController' );
+	// Roles
+	Route::get( '/roles', 'RoleController@index' )->name( 'role.index' );
+	Route::post( '/roles', 'RoleController@store' )->name( 'role.store' );
+	Route::get( '/roles/{search}/search', 'RoleController@search' )->name( 'role.search' );
+	Route::get( '/roles/{role}/edit', 'RoleController@edit' )->name( 'role.edit' );
+	Route::put( '/roles/{role}', 'RoleController@update' )->name( 'role.update' );
+	Route::delete( '/roles/{role}', 'RoleController@destroy' )->name( 'role.destroy' );
 
+	// Permissions
 	Route::get( '/permissions', 'PermissionController@index' )->name( 'permission.index' );
 	Route::get( '/permissions/routes', 'PermissionController@routes' )->name( 'permission.routes' );
 	Route::post( '/permissions', 'PermissionController@store' )->name( 'permission.store' );

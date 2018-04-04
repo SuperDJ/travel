@@ -13,6 +13,10 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+    	'roles' => 'array'
+	];
+
     /**
      * The attributes that should be hidden for arrays.
      *

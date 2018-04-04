@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -113,5 +114,52 @@ class UserController extends Controller
 		} else {
 			return User::all();
 		}
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\User  $user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit( User $user )
+	{
+		return response()->json( $user->load( 'roles' ), 200 );
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\User  $user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update( Request $request, User $user )
+	{
+		$this->validation( $request );
+
+		$roles = false;
+
+		if( !empty( $request->roles ) )
+		{
+			$roles = $user->roles()->sync( $request->roles );
+		}
+
+		if( $roles )
+		{
+			return response()->json( [ 'success' => true, 'message' => 'User updated' ], 200 );
+		} else {
+			return response()->json( [ 'success' => true, 'message' => 'User did not update' ], 400 );
+		}
+	}
+
+	private function validation( Request $request )
+	{
+		$request->validate([
+			'first_name' => 'required|string',
+			'last_name' => 'required|string',
+			'email' => $request->input( 'id' ) ? ['required', 'string', 'email', Rule::unique( 'users' )->ignore( $request->input( 'id') ) ] : 'required|string|email|unique:users',
+			'roles' => 'required|array'
+		]);
 	}
 }

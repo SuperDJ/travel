@@ -12,7 +12,9 @@ const login = () => import( '@/pages/dashboard/Login' );
 
 const dashboard = () => import( '@/layouts/Dashboard' );
 const overview = () => import( '@/pages/dashboard/Overview' );
+
 const userIndex = () => import( '@/pages/dashboard/users' );
+const userEdit = () => import( '@/pages/dashboard/users/edit' );
 
 const continentIndex = () => import( '@/pages/dashboard/continent' );
 const continentEdit = () => import( '@/pages/dashboard/continent/edit' );
@@ -170,6 +172,15 @@ const routes = [
 					title: 'Users'
 				},
 				component: userIndex
+			},
+			{
+				path: 'users/:user/edit',
+				name: 'userEdit',
+				props: true,
+				meta: {
+					title: 'Edit user'
+				},
+				component: userEdit
 			},
 			{
 				path: 'continents',

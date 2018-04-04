@@ -5,7 +5,8 @@ export default
 		data: {},
 		loggedIn: !!sessionStorage.getItem( 'token' ),
 		group: sessionStorage.getItem( 'group' ),
-		user: {}
+		user: {},
+		edit: {},
 	},
 
 	mutations: {
@@ -18,6 +19,17 @@ export default
 		userIndex( state, users )
 		{
 			state.all = users;
+		},
+
+		/**
+		* Set edit user
+		*
+		* @param state
+		* @param user
+		*/
+		userEdit( state, user )
+		{
+			state.edit = user;
 		},
 
 		/**
@@ -84,6 +96,62 @@ export default
 				.then( response => response.json() )
 				.then( response => context.commit( 'userIndex', response ) )
 				.catch( error => console.error( 'userIndex', error ) );
+		},
+
+		/**
+		 * Get data from specific user
+		 *
+		 * @param context
+		 * @param id
+		 * @returns {Promise<any>}
+		 */
+		userEdit( context, id )
+		{
+			return fetch( `/api/users/${id}/edit`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+				}
+			})
+				.then( response => response.json() )
+				.then( response => context.commit( 'userEdit', response ) )
+				.catch( error => console.error( 'userEdit', error ) );
+		},
+
+		/**
+		 * Update user
+		 *
+		 * @param context
+		 * @param data
+		 * @returns {Promise<any>}
+		 */
+		userUpdate( context, data )
+		{
+			return fetch( `/api/users/${data.id}`, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-token': window.token,
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+				},
+				method: 'PUT',
+				body: JSON.stringify( data.details )
+			})
+				.then( response => response.json() )
+				.then( response => {
+					if( response.errors ) {
+						context.commit( 'errors', response.errors );
+					} else {
+						context.commit( 'errors', []);
+					}
+					context.commit( 'message', response.message );
+					context.commit( 'success', response.success );
+				})
+				.catch( error => console.error( 'userUpdate', error ) );
 		},
 
 		/**
@@ -207,6 +275,19 @@ export default
 				return state.all;
 			}
 		},
+
+		/**
+		 * Get user edit
+		 *
+		 * @param state
+		 * @returns {{}|state.edit|*}
+		 */
+		userEdit( state )
+		{
+			return state.edit;
+		},
+
+
 
 		/**
 		 * Get total amount of users

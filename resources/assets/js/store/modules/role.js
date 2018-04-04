@@ -119,7 +119,17 @@ export default {
 				}
 			})
 				.then( response => response.json() )
-				.then( response => context.commit( 'roleEdit', response ) )
+				.then( response => {
+					// Make array of all permission ids
+					let permissions = [];
+					for( let i  = 0; i < response.permissions.length; i++ )
+					{
+						permissions.push( response.permissions[i].id );
+					}
+					response.permissions = permissions;
+
+					context.commit( 'roleEdit', response );
+				})
 				.catch( error => console.error( 'roleEdit', error ) );
 		},
 
@@ -199,7 +209,9 @@ export default {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-token': window.token,
-					'Accept': 'application/json'
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
 				}
 			})
 				.then( response =>  response.json() )

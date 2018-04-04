@@ -65,7 +65,7 @@ class RoleController extends Controller
      */
     public function edit( Role $role )
     {
-     	return response()->json( $role );
+     	return response()->json( $role->load('permissions'), 200 );
     }
 
     /**
@@ -125,5 +125,15 @@ class RoleController extends Controller
 			'name' => $request->input( 'id' ) ? [ 'required', 'string', Rule::unique( 'roles' )->ignore( $request->input( 'id' ) ) ] : 'required|string|unique:roles',
 			'permissions' => 'required|array'
 		]);
+	}
+
+	public function search( $search )
+	{
+		$results = Role::where('name', 'like', '%'.$search.'%')
+			->orWhere('name', 'like', '%'.$search.'%')
+			->orWhere('id', $search)
+			->get();
+
+		return response()->json( $results, 200 );
 	}
 }

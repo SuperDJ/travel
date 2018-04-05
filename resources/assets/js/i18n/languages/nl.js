@@ -1,11 +1,11 @@
 export default
 {
 	en: {
-		actions: 'Actions',
-		delete: 'Delete',
-		edit: 'Edit',
-		rowsPerPage: 'Rows per page',
-		icon: 'Icon',
+		actions: 'Acties',
+		delete: 'Verwijderen',
+		edit: 'Bewerken',
+		rowsPerPage: 'Rijen per pagina',
+		icon: 'Icoon',
 		countryCapital: 'Country capital',
 		airline: {
 			airline: 'Airline | Airlines | airline | airlines',
@@ -55,7 +55,7 @@ export default
 			birthday: 'Birthday',
 			password: 'Password',
 			passwordRepeat: 'Password repeat',
-			login: 'Login',
+			login: 'Aanmelden',
 			register: 'Register',
 			logout: 'Logout',
 			email: 'Email address'

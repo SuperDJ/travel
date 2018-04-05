@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import { store } from './store/store';
-//import { i18n } from 'i18n';
+import { i18n } from '@/i18n';
 import router from './router';
 import Meta from 'vue-meta';
 import VueProgressiveImage from 'vue-progressive-image';
@@ -17,13 +17,18 @@ import App from '@/pages/App';
 
 new Vue({
 	el: '#app',
+	i18n,
 	store,
 	router,
 	permissions,
 	render: h => h( App )
 });
 
-let token = document.head.querySelector( 'meta[name="csrf-token"]' ).getAttribute( 'content' );
+const language = navigator.language.substr( 0, 2 );
+document.documentElement.lang = language;
+window.language = language;
+
+const token = document.head.querySelector( 'meta[name="csrf-token"]' ).getAttribute( 'content' );
 
 if( token )
 {

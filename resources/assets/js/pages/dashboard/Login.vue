@@ -23,9 +23,9 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn type="submit" color="primary">Login</v-btn>
+            <v-btn type="submit" color="primary">{{ $t( 'user.login' ) }}</v-btn>
 
-            <v-btn flat color="primary" :to="{name: 'register'}">Register</v-btn>
+            <v-btn flat color="primary" :to="{name: 'register'}">{{ $t( 'user.register' ) }}</v-btn>
 
             <v-btn flat color="primary" :to="{name: 'index'}">Back to website</v-btn>
         </v-card-actions>
@@ -35,8 +35,11 @@
 <script>
     export default
     {
-		metaInfo: {
-			title: 'Login'
+		metaInfo()
+        {
+        	return {
+				title: this.$i18n.t( 'user.login' )
+			}
 		},
 
         data()

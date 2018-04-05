@@ -4,4 +4,6 @@ import { AbilityBuilder } from '@casl/ability';
 
 Vue.use( abilitiesPlugin );
 
-export default 
+export default AbilityBuilder.define( can => {
+
+});

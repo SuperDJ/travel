@@ -34,6 +34,10 @@
                     <td class="text-xs-right">{{ props.item.country_count }}</td>
                     <td class="text-xs-right">{{ props.item.profile_count }}</td>
                     <td>
+                        <v-btn icon :to="{ name: 'languageTranslate', params: { language: props.item.id } }">
+                            <v-icon color="blue">translate</v-icon>
+                        </v-btn>
+
                         <v-btn icon :to="{ name: 'languageEdit', params: { language: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
                         </v-btn>

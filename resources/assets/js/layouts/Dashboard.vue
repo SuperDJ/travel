@@ -19,7 +19,7 @@
                         </v-list-tile-avatar>
                         <v-list-tile-content>
                             <v-list-tile-title>
-                                John Leider
+                                {{ userProfile['first_name'] }} {{ userProfile['last_name'] }}
 
                                 <v-menu>
                                     <v-icon slot="activator">expand_more</v-icon>
@@ -61,7 +61,12 @@
 
             <v-list dense>
                 <template v-for="item in items">
-                    <v-layout row v-if="item.heading" align-center :key="item.heading">
+                    <v-layout
+                        row
+                        v-if="item.heading"
+                        align-center
+                        :key="item.heading"
+                    >
                         <v-flex xs6>
                             <v-subheader v-if="item.heading">{{ item.heading }}</v-subheader>
                         </v-flex>
@@ -80,8 +85,12 @@
                             </v-list-tile-content>
                         </v-list-tile>
 
-                        <v-list-tile v-for="(child, i) in item.children" :key="i" :to="{ name: child.to }">
-                            <v-list-tile-action v-if="child.icon">
+                        <v-list-tile
+                            v-for="( child, i ) in item.children"
+                            :key="i"
+                            :to="{ name: child.to }"
+                        >
+                            <v-list-tile-action>
                                 <v-icon>{{ child.icon }}</v-icon>
                             </v-list-tile-action>
 
@@ -122,14 +131,14 @@
             ...mapGetters([
             	'message',
                 'success',
-                'errors'
+                'errors',
+                'userProfile'
             ])
         },
 
         methods: {
     	    logout()
             {
-            	console.log('logout');
             	this.$store.commit('userLogout');
 
             	this.$router.push( { name: 'index' } );
@@ -152,62 +161,74 @@
                         children: [
                             {
                             	title: 'Users',
-                                to: 'userIndex'
+                                to: 'userIndex',
+                                can: 'user.index'
                             },
                             {
                             	title: 'Roles',
-                                to: 'roleIndex'
+                                to: 'roleIndex',
+                                can: 'role.index'
                             },
                             {
                             	title: 'Permissions',
-                                to: 'permissionIndex'
+                                to: 'permissionIndex',
+                                can: 'permission.index'
                             }
                         ]
                     },
                     {
                     	title: 'Languages',
                         to: 'languageIndex',
-                        icon: 'translate'
+                        icon: 'translate',
+                        can: 'language.index'
                     },
                     {
                         title: 'Timezones',
                         to: 'timezoneIndex',
-                        icon: 'access_time'
+                        icon: 'access_time',
+                        can: 'timezone.index'
                     },
                     {
                     	title: 'Currencies',
                         to: 'currencyIndex',
-                        icon: 'attach_money'
+                        icon: 'attach_money',
+                        can: 'currency.index'
                     },
                     {
                     	title: 'Continents',
                         to: 'continentIndex',
-                        icon: 'public'
+                        icon: 'public',
+                        can: 'continent.index'
                     },
                     {
                     	title: 'Countries',
                         to: 'countryIndex',
-                        icon: 'pin_drop'
+                        icon: 'pin_drop',
+                        can: 'country.index'
                     },
                     {
                     	title: 'Cities',
                         to: 'cityIndex',
-                        icon: 'place'
+                        icon: 'place',
+                        can: 'city.index'
 					},
                     {
                     	title: 'Airports',
                         to: 'airportIndex',
-                        icon: 'local_airport'
+                        icon: 'local_airport',
+                        can: 'airport/index'
                     },
                     {
                     	title: 'Airlines',
                         to: 'airlineIndex',
-                        icon: 'flight_takeoff'
+                        icon: 'flight_takeoff',
+                        can: 'airline.index'
                     },
 					{
 						title: 'Contacts',
 						to: 'contactIndex',
-						icon: 'contacts'
+						icon: 'contacts',
+                        can: 'contact.index'
 					},
                 ]
             }

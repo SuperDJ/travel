@@ -169,7 +169,8 @@ const routes = [
 				path: 'users',
 				name: 'userIndex',
 				meta: {
-					title: 'Users'
+					title: 'Users',
+					permission: 'user.index'
 				},
 				component: userIndex
 			},
@@ -178,7 +179,8 @@ const routes = [
 				name: 'userEdit',
 				props: true,
 				meta: {
-					title: 'Edit user'
+					title: 'Edit user',
+					permission: 'user.edit'
 				},
 				component: userEdit
 			},

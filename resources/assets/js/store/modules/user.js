@@ -2,10 +2,8 @@ export default
 {
 	state: {
 		all: [],
-		data: {},
 		loggedIn: !!sessionStorage.getItem( 'token' ),
-		group: sessionStorage.getItem( 'group' ),
-		user: {},
+		user: JSON.parse( sessionStorage.getItem( 'user' ) ),
 		edit: {},
 	},
 
@@ -36,11 +34,9 @@ export default
 		 * Set user to logged in
 		 *
 		 * @param state
-		 * @param user
 		 */
-		userLogin( state, user )
+		userLogin( state )
 		{
-			state.user = user;
 			state.loggedIn = true;
 		},
 
@@ -53,7 +49,6 @@ export default
 		{
 			state.loggedIn = false;
 			sessionStorage.removeItem( 'token' );
-			sessionStorage.removeItem( 'group' );
 		},
 
 		/**
@@ -191,8 +186,8 @@ export default
 					if( response.token )
 					{
 						sessionStorage.setItem( 'token', response.token ); // Makes sure the user is logged in even after page refresh
-						sessionStorage.setItem( 'group', response.group ); // Makes sure the users group is defined
-						context.commit( 'userLogin', response.user );
+						sessionStorage.setItem( 'user', JSON.stringify( response.user ) );
+						context.commit( 'userLogin' );
 					}
 				})
 				.catch( error => console.error( 'userLogin', error ) );
@@ -311,35 +306,40 @@ export default
 		},
 
 		/**
-		 * Return all data or specific data
+		 * Get all user roles
 		 *
 		 * @param state
-		 * @param detail
-		 * @returns {*}
+		 * @returns {Array|default.computed.roles|roles}
 		 */
-		userData( state, detail = '' )
+		userRoles( state )
 		{
-			if( detail.length > 1 )
-			{
-				return state.data[detail];
-			} else {
-				return state.data;
-			}
+			return state.user.roles;
 		},
 
 		/**
-		 * Check if user has access to specific route
+		 * Get all user permissions
 		 *
 		 * @param state
-		 * @returns {function(*=)}
+		 * @returns {Array}
 		 */
-		userAccess: ( state ) => ( route ) =>
+		userPermissions( state )
 		{
-			if( state.group &&  state.group.length > 0 ) {
-				return state.group.split( ',' ).indexOf( route ) > 0;
-			} else {
-				return true;
+			let permissions = [];
+
+			if( state.user.roles )
+			{
+				for( let i = 0; i < state.user.roles.length; i++ )
+				{
+					let role = state.user.roles[i];
+					for( let j = 0; j < role.permissions.length; j++ )
+					{
+						let permission = role.permissions[j];
+						permissions.push( permission.name );
+					}
+				}
 			}
+
+			return permissions;
 		},
 
 		/**

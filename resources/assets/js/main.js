@@ -5,7 +5,7 @@ import { store } from './store/store';
 import router from './router';
 import Meta from 'vue-meta';
 import VueProgressiveImage from 'vue-progressive-image';
-import permissions from '';
+import permissions from '@/permissions';
 
 Vue.use( Meta );
 Vue.use( Vuetify );
@@ -19,6 +19,7 @@ new Vue({
 	el: '#app',
 	store,
 	router,
+	permissions,
 	render: h => h( App )
 });
 

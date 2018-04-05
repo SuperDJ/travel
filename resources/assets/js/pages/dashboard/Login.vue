@@ -65,6 +65,31 @@
 
 					// Make sure the user is logged in before
 					if( sessionStorage.getItem( 'token' ) && sessionStorage.getItem( 'token' ).length > 0 ) {
+						// Set user permissions
+						let controllers = {};
+						this.$store.getters.userPermissions.map( ( permission ) => {
+							let name = permission.split( '.' );
+							let controller = name[0];
+							let method = name[1];
+
+							if( !controllers[controller] )
+							{
+								controllers[controller] = [];
+							}
+							controllers[controller].push( method );
+						});
+
+						let permissions = [];
+						for( let i = 0; i < Object.keys( controllers ).length; i++ )
+                        {
+                        	permissions.push( {
+                                actions: Object.values( controllers )[i],
+                                subject: Object.keys( controllers )[i]
+                        	});
+                        }
+
+                        this.$ability.update(permissions);
+
 						this.$router.push( { name: 'dashboard' } );
 					}
                 });

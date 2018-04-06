@@ -71,8 +71,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Permissions'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'permission.permission', 2 )
+			}
 		},
 
 		data()

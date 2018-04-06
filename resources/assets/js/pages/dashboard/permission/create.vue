@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create permission'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'permission.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

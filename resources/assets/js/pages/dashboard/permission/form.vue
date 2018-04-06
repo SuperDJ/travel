@@ -18,12 +18,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save permission
+            {{ $t( 'permission.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'permissionIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

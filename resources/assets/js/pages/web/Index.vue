@@ -4,15 +4,15 @@
             <v-layout column align-center justify-center>
                 <v-tabs icons-and-text centered color="primary" slider-color="white" dark card>
                     <v-tab href="#accommodation" @click="changeForm('accommodation')">
-                        Accommodations
+                        {{ $tc( 'accommodation.accommodation', 1 ) }}
                         <v-icon>hotel</v-icon>
                     </v-tab>
                     <v-tab href="#flight" @click="changeForm('flight')">
-                        Flights
+                        {{ $tc( 'flight.flight', 1 ) }}
                         <v-icon>flight</v-icon>
                     </v-tab>
                     <v-tab href="#car" @click="changeForm('car')">
-                        Car rental
+                        {{ $tc( 'carRental.carRental', 1 ) }}
                         <v-icon>directions_car</v-icon>
                     </v-tab>
 

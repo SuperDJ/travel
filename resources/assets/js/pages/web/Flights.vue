@@ -21,7 +21,7 @@
                     <form @keyup.enter="searchFlight()" @submit.prevent="searchFlight()">
                         <v-card-text>
                             <v-select
-                                label="Departure"
+                                :label="$t( 'flight.departure' )"
                                 required
                                 autocomplete
                                 :items="airports"
@@ -48,10 +48,11 @@
                                     </v-list-tile-content>
                                 </template>
                             </v-select>
-                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="currentDate" required />
+                            <v-text-field :label="$t( 'flight.departureDate' )" type="date" v-model="departureDate"
+                                          :min="currentDate" required />
 
                             <v-select
-                                label="Destination"
+                                :label="$t( 'flight.destination' )"
                                 required
                                 autocomplete
                                 :items="airports"
@@ -72,15 +73,19 @@
                                     </v-list-tile-content>
                                 </template>
                             </v-select>
-                            <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
+                            <v-text-field :label="$t( 'flight.returnDate' )" type="date" v-model="destinationDate"
+                                          :min="departureDate" />
 
-                            <v-text-field label="Number of adults" type="number" min="1" required v-model.number="adults" />
-                            <v-text-field label="Number of children (1 - 16 years)" type="number" min="0" max="8" v-model.number="children" />
-                            <v-text-field label="Number of infants (under 12 months)" type="number" min="0" max="8" v-model.number="infants" />
+                            <v-text-field :label="$t( 'flight.numberOfAdults' )" type="number" min="1" required
+                                          v-model.number="adults" />
+                            <v-text-field :label="$t( 'flight.numberOfChildren' )" type="number" min="0" max="8"
+                                          v-model.number="children" />
+                            <v-text-field :label="$t( 'flight.numberOfInfants' )" type="number" min="0" max="8"
+                                          v-model.number="infants" />
 
                             <v-select
                                 :items="cabinClasses"
-                                label="Cabin class"
+                                :label="$t( 'flight.cabinClass' )"
                                 single-line
                                 bottom
                                 required
@@ -118,13 +123,13 @@
                         </v-card-text>
 
                         <v-flex xs12 class="blue darken-4 white--text text-xs-right headline">
-                            {{flight.price}} per person
+                            {{flight.price}} {{ $t( 'flight.perPerson' ) }}
                         </v-flex>
                     </v-card>
                 </div>
 
                 <div v-else-if="flights.length === 0 && departure.length >= 1 && destination.length >= 1 && departureDate.length >= 1">
-                    <v-alert type="error" value="true">No flight results found</v-alert>
+                    <v-alert type="error" value="true">{{ $tc( 'flight.result', 2 ) }}</v-alert>
                     <c-image src="/flight-error.png" alt="Flights error"/>
                 </div>
             </v-flex>

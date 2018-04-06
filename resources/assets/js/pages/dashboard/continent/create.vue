@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create continent'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'continent.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

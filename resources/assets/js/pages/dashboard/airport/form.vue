@@ -55,12 +55,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save city
+            {{ $t( 'airport.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'airportIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

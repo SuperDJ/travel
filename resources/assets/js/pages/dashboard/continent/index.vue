@@ -67,8 +67,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Continents'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'continent.continent', 2 )
+			}
 		},
 
 		data()

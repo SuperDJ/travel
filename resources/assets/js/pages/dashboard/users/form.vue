@@ -39,12 +39,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save user
+            {{ $t( 'user.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'userIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>
@@ -96,8 +96,6 @@
 			details( after )
 			{
 				this.form = after;
-
-				console.log(after.roles);
 
 				if( after.roles )
                 {

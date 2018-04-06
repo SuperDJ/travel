@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit airline'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'airline.edit' )'Create airline'
+			}
 		},
 
         props: ['airline'],

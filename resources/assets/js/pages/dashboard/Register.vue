@@ -2,7 +2,7 @@
     <form @submit.prevent="submit( form )">
         <v-card-text>
             <v-text-field
-                label="Email address"
+                :label="$t( 'user.email' )"
                 type="email"
                 autocomplete="email"
                 required
@@ -11,7 +11,7 @@
             />
 
             <v-text-field
-                label="First name"
+                :label="$t( 'user.firstName' )"
                 autocomplete="given-name"
                 required
                 :error-messages="errors['first_name']"
@@ -19,7 +19,7 @@
             />
 
             <v-text-field
-                label="Last name"
+                :label="$t( 'user.lastName' )"
                 autocomplete="family-name"
                 required
                 :error-messages="errors['last_name']"
@@ -27,7 +27,7 @@
             />
 
             <v-select
-                label="Country"
+                :label="$tc( 'country.country', 1 )"
                 v-model.number="form.country_id"
                 autocomplete
                 :items="countries"
@@ -40,7 +40,7 @@
             />
 
             <v-select
-                label="Language"
+                :label="$tc( 'language.language', 1 )"
                 v-model.number="form.language_id"
                 autocomplete
                 :items="languages"
@@ -53,7 +53,7 @@
             />
 
             <v-select
-                label="Currency"
+                :label="$tc( 'currency.currency', 1 )"
                 v-model.number="form.currency_id"
                 autocomplete
                 :items="currencies"
@@ -66,11 +66,11 @@
             />
 
             <v-text-field
-                label="Password"
-                hint="At least 8 characters"
+                :label="$t( 'user.password' )"
+                :hint="$t( 'user.passwordCharacters' )"
                 minlength="8"
                 :append-icon="passwordVisible ? 'visibility_off' : 'visibility'"
-                :append-icon-cb="() => (passwordVisible = !passwordVisible)"
+                :append-icon-cb="() => ( passwordVisible = !passwordVisible )"
                 :type="passwordVisible ? 'text' : 'password'"
                 required
                 counter
@@ -79,8 +79,8 @@
             />
 
             <v-text-field
-                label="Password repeat"
-                hint="At least 8 characters and must match password"
+                :label="$t( 'user.passwordRepeat' )"
+                :hint="$t( 'user.passwordMatch' )"
                 minlength="8"
                 :append-icon="passwordRepeatVisible ? 'visibility_off' : 'visibility'"
                 :append-icon-cb="() => (passwordRepeatVisible = !passwordRepeatVisible)"
@@ -93,11 +93,11 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn color="primary" type="submit">Register</v-btn>
+            <v-btn color="primary" type="submit">{{ $t( 'user.register' ) }}</v-btn>
 
-            <v-btn flat color="primary" :to="{ name: 'login' }">Login</v-btn>
+            <v-btn flat color="primary" :to="{ name: 'login' }">{{ $t( 'user.login' ) }}</v-btn>
 
-            <v-btn flat color="primary" :to="{ name: 'index' }">Back to website</v-btn>
+            <v-btn flat color="primary" :to="{ name: 'index' }">{{ $t( 'toSite' ) }}</v-btn>
         </v-card-actions>
     </form>
 </template>
@@ -105,8 +105,11 @@
 <script>
     export default
     {
-		metaInfo: {
-			title: 'Register'
+		metaInfo()
+        {
+        	return {
+				title: this.$i18n.t( 'user.register' )
+			}
 		},
 
     	data()

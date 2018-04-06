@@ -10,8 +10,11 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create airline'
+    	metaInfo()
+        {
+        	return {
+				title: this.$i18n.t( 'airline.create' )
+			}
         },
 
     	components: {

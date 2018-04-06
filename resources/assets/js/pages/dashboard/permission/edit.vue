@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit permission'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'permission.edit' )
+			}
 		},
 
         props: ['permission'],

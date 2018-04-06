@@ -60,12 +60,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save country
+            {{ $t( 'country.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'countryIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

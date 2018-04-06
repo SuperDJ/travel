@@ -72,8 +72,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Countries'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'country.country', 2 )
+			}
 		},
 
 		data()

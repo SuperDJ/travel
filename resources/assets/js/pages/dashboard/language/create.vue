@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create language'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'language.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

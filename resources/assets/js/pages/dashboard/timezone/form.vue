@@ -30,7 +30,7 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save timezone
+            {{ $t( 'timezone.save' ) }}
         </v-btn>
 
         <v-btn flat href="http://php.net/manual/en/timezones.php" target="_blank">
@@ -39,7 +39,7 @@
 
         <v-btn flat :to="{ name: 'timezoneIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

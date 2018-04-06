@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit role'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'role.edit' )
+			}
 		},
 
         props: ['role'],

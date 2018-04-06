@@ -67,8 +67,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Timezones'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'timezone.timezone', 2 )
+			}
 		},
 
 		data()

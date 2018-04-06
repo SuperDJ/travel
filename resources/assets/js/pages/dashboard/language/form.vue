@@ -18,12 +18,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save language
+            {{ $t( 'language.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'languageIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

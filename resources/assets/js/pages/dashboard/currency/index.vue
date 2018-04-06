@@ -68,8 +68,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Currencies'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'currency.currency', 2 )
+			}
 		},
 
 		data()

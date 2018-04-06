@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create currency'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'currency.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

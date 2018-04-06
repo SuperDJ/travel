@@ -14,9 +14,9 @@
 
                 <v-list>
                     <div v-if="!this.$store.getters.userLoggedIn">
-                        <v-list-tile :to="{ name: 'login' }">Login</v-list-tile>
+                        <v-list-tile :to="{ name: 'login' }">{{ $t( 'user.login' ) }}</v-list-tile>
 
-                        <v-list-tile :to="{ name: 'register' }">Register</v-list-tile>
+                        <v-list-tile :to="{ name: 'register' }">{{ $t( 'user.register' ) }}</v-list-tile>
                     </div>
                     <div v-else>
                         <v-list-tile :to="{ name: 'dashboard' }">Dashboard</v-list-tile>
@@ -89,17 +89,17 @@
                         icon: 'home'
                     },
                     {
-                    	title: 'Accommodations',
+                    	title: this.$i18n.tc( 'accommodation.accommodation', 1 ),
                         to: 'accommodations',
                         icon: 'hotel'
                     },
                     {
-                    	title: 'Flights',
+                    	title: this.$i18n.tc( 'flight.flight', 1 ),
                         to: 'flights',
                         icon: 'flight'
                     },
                     {
-                    	title: 'Car rental',
+                    	title: this.$i18n.tc( 'carRental.carRental', 1 ),
                         to: 'car-rental',
                         icon: 'directions_car'
                     },

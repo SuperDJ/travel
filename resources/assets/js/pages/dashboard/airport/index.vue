@@ -68,8 +68,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Airports'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'airport.airport', 2 )
+			}
 		},
 
 		data()

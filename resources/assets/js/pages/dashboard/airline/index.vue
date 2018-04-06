@@ -69,8 +69,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Airlines'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'airline.airline', 2 )
+			}
 		},
 
 		data()

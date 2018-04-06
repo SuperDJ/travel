@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create role'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'role.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

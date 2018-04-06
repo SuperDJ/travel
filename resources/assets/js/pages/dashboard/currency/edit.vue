@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit currency'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'currency.edit' )
+			}
 		},
 
         props: ['currency'],

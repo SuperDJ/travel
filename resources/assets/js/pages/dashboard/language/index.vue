@@ -72,8 +72,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Languages'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'language.language', 2 )
+			}
 		},
 
 		data()

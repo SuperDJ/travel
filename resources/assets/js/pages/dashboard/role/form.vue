@@ -32,12 +32,12 @@
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>
-            Save role
+            {{ $t( 'role.save' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'roleIndex' }">
             <v-icon>arrow_back</v-icon>
-            Back
+            {{ $t( 'back') }}
         </v-btn>
     </form>
 </template>

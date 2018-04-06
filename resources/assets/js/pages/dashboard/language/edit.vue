@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit language'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'language.edit' )
+			}
 		},
 
         props: ['language'],

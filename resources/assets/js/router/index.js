@@ -447,9 +447,18 @@ const router = new Router({
 	routes: routes
 });
 
-router.beforeEach( ( to, from, next ) => {
-	const lang = to.params.lang;
-	loadLanguageAsync( lang ).then( () => next() );
+router.beforeEach( ( to, from, next ) =>
+{
+	console.log(to);
+	// Set the language prop
+	let language = to.params.lang;
+	if( !language )
+	{
+		console.log(1);
+		language = 'en';
+		next( { path: `/${language}${to.path}` } );
+	}
+	loadLanguageAsync( language ).then( () => next() );
 
 	if( to.matched[0].meta.auth || to.meta.auth )
 	{

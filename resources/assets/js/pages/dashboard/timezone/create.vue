@@ -10,9 +10,12 @@
 
 <script>
     export default {
-    	metaInfo: {
-    		title: 'Create timezone'
-        },
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'timezone.create' )
+			}
+		},
 
     	components: {
     		'c-form': () => import('./form')

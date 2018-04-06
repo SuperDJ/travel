@@ -67,8 +67,11 @@
 <script>
 	export default
 	{
-		metaInfo: {
-			title: 'Roles'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.tc( 'role.role', 2 )
+			}
 		},
 
 		data()

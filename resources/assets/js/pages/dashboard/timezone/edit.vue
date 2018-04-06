@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit timezone'
+		metaInfo()
+		{
+			return {
+				title: this.$i18n.t( 'timezone.edit' )
+			}
 		},
 
         props: ['timezone'],

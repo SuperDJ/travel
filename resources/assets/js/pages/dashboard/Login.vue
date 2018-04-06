@@ -27,7 +27,7 @@
 
             <v-btn flat color="primary" :to="{name: 'register'}">{{ $t( 'user.register' ) }}</v-btn>
 
-            <v-btn flat color="primary" :to="{name: 'index'}">Back to website</v-btn>
+            <v-btn flat color="primary" :to="{name: 'index'}">{{ $t( 'toSite' ) }}</v-btn>
         </v-card-actions>
     </form>
 </template>

@@ -1,6 +1,6 @@
 export default
 {
-	en: {
+	nl: {
 		actions: 'Acties',
 		delete: 'Verwijderen',
 		edit: 'Bewerken',

@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="Continent name"
+            :label="$tc( 'continent.continent', 1 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            label="Continent ISO code"
+            :label="`${ $tc( 'continent.continent', 1 ) } ISO code`"
             v-model="form.iso"
             required
             minlength="2"

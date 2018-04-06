@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="Airport name"
+            :label="$tc( 'airport.airport', 1 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            label="Airport ICAO code"
+            :label="`${ $tc( 'airport.airport', 1 ) } ICAO code`"
             v-model="form.icao"
             required
             minlength="4"
@@ -17,7 +17,7 @@
         />
 
         <v-text-field
-            label="Airport IATA code"
+            :label="`${ $tc( 'airport.airport', 1 ) } IATA code`"
             v-model="form.iata"
             required
             minlength="3"
@@ -26,14 +26,14 @@
         />
 
         <v-text-field
-            label="Airport location latitude"
+            :label="`${ $tc( 'airport.airport', 1 ) } location latitude`"
             v-model="form.latitude"
             required
             :error-messages="errors['latitude']"
         />
 
         <v-text-field
-            label="Airport location longitude"
+            :label="`${ $tc( 'airport.airport', 1 ) } location longitude`"
             v-model="form.longitude"
             required
             :error-messages="errors['longitude']"

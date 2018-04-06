@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'countryCreate' }">
             <v-icon>add</v-icon>
-            Add country
+            {{ $t( 'country.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' ) }}</th>
                 </tr>
             </template>
 
@@ -53,16 +53,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete country</span>
+                    <span class="headline">{{ $tc( 'country.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete country: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'country.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="countryDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="countryDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -87,7 +87,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Country',
+						text: this.$i18n.tc( 'country.country', 1 ),
 						align: 'left',
 						value: 'name'
 					},
@@ -97,37 +97,37 @@
 						value: 'iso',
 					},
 					{
-						text: 'Continent',
+						text: this.$i18n.tc( 'continent.continent', 1 ),
 						align: 'left',
 						value: 'continent_id',
 					},
 					{
-						text: 'Currency',
+						text: this.$i18n.tc( 'currency.currency', 1 ),
 						align: 'left',
 						value: 'currency_id',
 					},
 					{
-						text: 'Language',
+						text: this.$i18n.tc( 'language.language', 1 ),
 						align: 'left',
 						value: 'language_id',
 					},
 					{
-						text: 'Cities',
+						text: this.$i18n.tc( 'city.city', 2 ),
 						align: 'right',
 						value: 'cities_count'
 					},
                     {
-                    	text: 'Timezones',
+                    	text: this.$i18n.tc( 'timezone.timezone', 2 ),
                         align: 'right',
                         value: 'timezones_count'
                     },
 					{
-						text: 'Users',
+						text: this.$i18n.tc( 'user.user', 2 ),
 						align: 'right',
 						value: 'profile_count'
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
 						sortable: false,

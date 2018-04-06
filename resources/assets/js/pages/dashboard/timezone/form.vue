@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="Timezone name"
+            :label="$tc( 'timezone.timezone', 1 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
@@ -15,7 +15,7 @@
         />
 
         <v-select
-            label="Country"
+            :label="$tc( 'country.country', 1 )"
             v-model.number="form.country_id"
             autocomplete
             :items="countries"

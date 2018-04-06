@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'timezoneCreate' }">
             <v-icon>add</v-icon>
-            Add timezone
+            {{ $t( 'timezone.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -48,16 +48,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete timezone</span>
+                    <span class="headline">{{ $tc( 'timezone.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete timezone: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'timezone.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="timezoneDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="timezoneDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -82,7 +82,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Timezone',
+						text: this.$i18n.tc( 'timezone.timezone', 1 ),
 						align: 'left',
 						value: 'name'
 					},
@@ -98,7 +98,7 @@
 						sortable: false,
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
 					    sortable: false,

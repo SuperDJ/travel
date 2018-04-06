@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'currencyCreate' }">
             <v-icon>add</v-icon>
-            Add currency
+            {{ $t( 'currency.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -49,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete currency</span>
+                    {{ $tc( 'currency.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete currency: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'currency.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="currencyDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="currencyDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -83,7 +83,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Currency',
+						text: this.$i18n.tc( 'currency.currency', 1 ),
 						align: 'left',
 						value: 'name'
 					},
@@ -93,17 +93,17 @@
 						value: 'iso',
 					},
 					{
-						text: 'Countries',
+						text: this.$i18n.tc( 'country.country', 2 ),
 						align: 'right',
 						value: 'country_count'
 					},
 					{
-						text: 'Users',
+						text: this.$i18n.tc( 'user.user', 2 ),
 						align: 'right',
 						value: 'profile_count'
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
 						sortable: false,

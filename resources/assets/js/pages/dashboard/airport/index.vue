@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'airportCreate' }">
             <v-icon>add</v-icon>
-            Add airport
+            {{ $t( 'airport.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -49,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete airport</span>
+                    <span class="headline">{{ $tc( 'airport.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete airport: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'airport.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="airportDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="airportDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -83,7 +83,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Airport',
+						text: this.$i18n.tc( 'airport.airport', 1 ),
 						align: 'left',
 						value: 'name'
 					},
@@ -98,12 +98,12 @@
 						value: 'iata',
 					},
 					{
-						text: 'City',
+						text: this.$i18n.tc( 'city.city', 1 ),
 						align: 'left',
 						value: 'city_id'
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
                         sortable: false,

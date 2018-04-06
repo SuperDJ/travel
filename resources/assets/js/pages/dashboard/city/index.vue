@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'cityCreate' }">
             <v-icon>add</v-icon>
-            Add city
+            {{ $t( 'city.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -51,16 +51,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete city</span>
+                    <span class="headline">{{ $tc( 'city.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete city: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'city.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="cityDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="cityDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -85,12 +85,12 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'City',
+						text: this.$i18n.tc( 'city.city', 1 ),
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'Country capital',
+						text: this.$i18n.t( 'country.capital' ),
 						align: 'left',
 						value: 'capital',
 					},
@@ -105,17 +105,17 @@
 						value: 'iata',
 					},
 					{
-						text: 'Country',
+						text: this.$i18n.tc( 'country.country', 1 ),
 						align: 'left',
 						value: 'country_id',
 					},
 					{
-						text: 'Airports',
+						text: this.$i18n.tc( 'airport.airport', 2 ),
 						align: 'right',
 						value: 'airports_count'
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
                         sortable: false

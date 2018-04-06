@@ -53,46 +53,46 @@
                 loading: false,
         		headers: [
                     {
-                    	text: 'First name',
+                    	text: this.$i18n.t( 'user.firstName' ),
                         align: 'left',
                         value: 'first_name'
                     },
                     {
-                    	text: 'Last name',
+                    	text: this.$i18n.t( 'user.lastName' ),
                         align: 'left',
                         value: 'last_name',
                     },
 					{
-						text: 'Roles',
+						text: this.$i18n.tc( 'role.role', 2 ),
 						align: 'right',
 						value: 'roles_count',
 					},
                     {
-                        text: 'Birthday',
+                        text: this.$i18n.t( 'user.birthday' ),
                         align: 'left',
                         value: 'profile.birthday',
                         sortable: false,
                     },
                     {
-                    	text: 'Language',
+                    	text: this.$i18n.tc( 'language.language', 1 ),
                         align: 'left',
                         value: 'profile.language.name',
 						sortable: false,
                     },
 					{
-						text: 'Country',
+						text: this.$i18n.tc( 'country.country', 1 ),
 						align: 'left',
 						value: 'profile.country.name',
 						sortable: false,
 					},
                     {
-                    	text: 'Currency',
+                    	text: this.$i18n.tc( 'currency.currency', 1 ),
                         align: 'left',
                         value: 'profile.currency.name',
 						sortable: false,
                     },
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.tc( 'actions', 2 ),
                         align: 'left',
                         value: '',
                         sortable: false,

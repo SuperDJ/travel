@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="City name"
+            :label="$tc( 'city.city', 1)"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            label="City ISO code"
+            :label="`${ $tc( 'city.city', 1) } ISO code`"
             v-model="form.iso"
             required
             minlength="4"
@@ -17,7 +17,7 @@
         />
 
         <v-text-field
-            label="City IATA code"
+            :label="`${ $tc( 'city.city', 1) } IATA code`"
             v-model="form.iata"
             required
             minlength="3"
@@ -26,19 +26,19 @@
         />
 
         <v-text-field
-            label="City location latitude"
+            :label="`${ $tc( 'city.city', 1) } location latitude`"
             v-model="form.latitude"
             :error-messages="errors['latitude']"
         />
 
         <v-text-field
-            label="City location longitude"
+            :label="`${ $tc( 'city.city', 1) } location longitude`"
             v-model="form.longitude"
             :error-messages="errors['longitude']"
         />
 
         <v-select
-            label="Country"
+            :label="$tc( 'country.country', 1 )"
             v-model.number="form.country_id"
             autocomplete
             :items="countries"
@@ -51,7 +51,7 @@
             :search-input.sync="countrySearch"
         />
 
-        <v-switch label="Country capital" v-model="form.capital" :error-messages="errors['capital']" />
+        <v-switch :label="$t( 'country.capital' )" v-model="form.capital" :error-messages="errors['capital']" />
 
         <v-btn color="primary" type="submit">
             <v-icon>save</v-icon>

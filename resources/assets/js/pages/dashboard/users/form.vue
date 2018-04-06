@@ -1,28 +1,28 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="First name"
+            :label="$t( 'user.firstName' )"
             v-model="form.first_name"
             disabled
             readonly
         />
 
         <v-text-field
-            label="Last name"
+            :label="$t( 'user.lastName' )"
             v-model="form.last_name"
             disabled
             readonly
         />
 
         <v-text-field
-            label="Email"
+            :label="$t( 'user.email' )"
             v-model="form.email"
             disabled
             readonly
         />
 
         <v-select
-            label="Roles"
+            :label="$tc( 'role.role', 2 )"
             v-model="form.roles"
             autocomplete
             :items="roles"

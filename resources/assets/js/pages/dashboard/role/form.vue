@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            label="Role name"
+            :label="$tc( 'role.role', 1 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
-        <h2 class="headline">Permissions</h2>
+        <h2 class="headline">{{ $tc( 'permission.permission', 2 ) }}</h2>
 
         <v-list subheader>
             <div v-for="(permission, controller) in controllers" :key="controller">

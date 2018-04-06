@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'permissionCreate' }">
             <v-icon>add</v-icon>
-            Add permission
+            {{ $t( 'permission.create' ) }}
         </v-btn>
 
         <v-btn color="primary" slot="activator" flat @click.prevent="permissionServer">
@@ -28,7 +28,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -52,16 +52,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete permission</span>
+                    <span class="headline">{{ $tc( 'permission.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete permission: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'permission.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="permissionDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="permissionDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -86,17 +86,17 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Permission',
+						text: this.$i18n.tc( 'permission.permission', 1 ),
 						align: 'left',
 						value: 'name'
 					},
 					{
-						text: 'Roles',
+						text: this.$i18n.tc( 'role.role', 2 ),
 						align: 'right',
 						value: 'roles_count',
 					},
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
 						sortable: false,

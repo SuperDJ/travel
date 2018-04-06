@@ -13,7 +13,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.t( 'airline.edit' )'Create airline'
+				title: this.$i18n.t( 'airline.edit' )
 			}
 		},
 

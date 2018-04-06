@@ -8669,13 +8669,13 @@ exports.default = {
 		actions: 'Actions',
 		delete: 'Delete | delete',
 		cancel: 'Cancel | cancel',
-		edit: 'Edit',
+		edit: 'Edit | edit',
 		rowsPerPage: 'Rows per page',
-		icon: 'Icon',
-		search: 'Search',
-		date: 'Date | date',
-		back: 'Back',
-		save: 'Save',
+		icon: 'Icon | Icons | icon | icons',
+		search: 'Search | Searched | search | searched',
+		date: 'Date | Dates | date | dates',
+		back: 'Back | back',
+		save: 'Save | Saved | save | saved',
 		toSite: 'Back to website',
 		countryCapital: 'Country capital',
 		airline: {
@@ -8701,7 +8701,8 @@ exports.default = {
 			country: 'Country | Countries | country | countries',
 			create: 'Create @:country.country[3]',
 			edit: 'Edit @:country.country[3]',
-			save: '@:save, @:country.country[3]'
+			save: '@:save, @:country.country[3]',
+			capital: '@:country.country[0] capital'
 		},
 		continent: {
 			continent: 'Continent | Continents | continent | continents',
@@ -11826,39 +11827,39 @@ exports.default = {
             pagination: {},
             loading: false,
             headers: [{
-                text: 'First name',
+                text: this.$i18n.t('user.firstName'),
                 align: 'left',
                 value: 'first_name'
             }, {
-                text: 'Last name',
+                text: this.$i18n.t('user.lastName'),
                 align: 'left',
                 value: 'last_name'
             }, {
-                text: 'Roles',
+                text: this.$i18n.tc('role.role', 2),
                 align: 'right',
                 value: 'roles_count'
             }, {
-                text: 'Birthday',
+                text: this.$i18n.t('user.birthday'),
                 align: 'left',
                 value: 'profile.birthday',
                 sortable: false
             }, {
-                text: 'Language',
+                text: this.$i18n.tc('language.language', 1),
                 align: 'left',
                 value: 'profile.language.name',
                 sortable: false
             }, {
-                text: 'Country',
+                text: this.$i18n.tc('country.country', 1),
                 align: 'left',
                 value: 'profile.country.name',
                 sortable: false
             }, {
-                text: 'Currency',
+                text: this.$i18n.tc('currency.currency', 1),
                 align: 'left',
                 value: 'profile.currency.name',
                 sortable: false
             }, {
-                text: 'Actions',
+                text: this.$i18n.tc('actions', 2),
                 align: 'left',
                 value: '',
                 sortable: false
@@ -12156,7 +12157,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Continent',
+				text: this.$i18n.tc('continent.continent', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -12164,11 +12165,11 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: 'Countries',
+				text: this.$i18n.tc('country.country', 2),
 				align: 'right',
 				value: 'countries_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -12545,7 +12546,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Currency',
+				text: this.$i18n.tc('currency.currency', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -12553,15 +12554,15 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: 'Countries',
+				text: this.$i18n.tc('country.country', 2),
 				align: 'right',
 				value: 'country_count'
 			}, {
-				text: 'Users',
+				text: this.$i18n.tc('user.user', 2),
 				align: 'right',
 				value: 'profile_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -12942,7 +12943,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Language',
+				text: this.$i18n.tc('language.language', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -12950,15 +12951,15 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: 'Countries',
+				text: this.$i18n.tc('country.country', 2),
 				align: 'right',
 				value: 'country_count'
 			}, {
-				text: 'Users',
+				text: this.$i18n.tc('user.user', 2),
 				align: 'right',
 				value: 'profile_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -13339,7 +13340,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Country',
+				text: this.$i18n.tc('country.country', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -13347,31 +13348,31 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: 'Continent',
+				text: this.$i18n.tc('continent.continent', 1),
 				align: 'left',
 				value: 'continent_id'
 			}, {
-				text: 'Currency',
+				text: this.$i18n.tc('currency.currency', 1),
 				align: 'left',
 				value: 'currency_id'
 			}, {
-				text: 'Language',
+				text: this.$i18n.tc('language.language', 1),
 				align: 'left',
 				value: 'language_id'
 			}, {
-				text: 'Cities',
+				text: this.$i18n.tc('city.city', 2),
 				align: 'right',
 				value: 'cities_count'
 			}, {
-				text: 'Timezones',
+				text: this.$i18n.tc('timezone.timezone', 2),
 				align: 'right',
 				value: 'timezones_count'
 			}, {
-				text: 'Users',
+				text: this.$i18n.tc('user.user', 2),
 				align: 'right',
 				value: 'profile_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -13831,7 +13832,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Timezone',
+				text: this.$i18n.tc('timezone.timezone', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -13844,7 +13845,7 @@ exports.default = {
 				value: 'country.name',
 				sortable: false
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -14249,11 +14250,11 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'City',
+				text: this.$i18n.tc('city.city', 1),
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'Country capital',
+				text: this.$i18n.t('country.capital'),
 				align: 'left',
 				value: 'capital'
 			}, {
@@ -14265,15 +14266,15 @@ exports.default = {
 				align: 'left',
 				value: 'iata'
 			}, {
-				text: 'Country',
+				text: this.$i18n.tc('country.country', 1),
 				align: 'left',
 				value: 'country_id'
 			}, {
-				text: 'Airports',
+				text: this.$i18n.tc('airport.airport', 2),
 				align: 'right',
 				value: 'airports_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -14703,7 +14704,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Airport',
+				text: this.$i18n.tc('airport.airport', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -14715,11 +14716,11 @@ exports.default = {
 				align: 'left',
 				value: 'iata'
 			}, {
-				text: 'City',
+				text: this.$i18n.tc('city.city', 1),
 				align: 'left',
 				value: 'city_id'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -15136,7 +15137,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -15150,7 +15150,7 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Airport',
+				text: this.$i18n.tc('airline.airline', 1),
 				align: 'left',
 				value: 'name'
 			}, {
@@ -15162,12 +15162,12 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: 'Icon',
+				text: this.$i18n.t('icon'),
 				align: 'left',
 				value: '',
 				sortable: false
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -15218,9 +15218,59 @@ exports.default = {
 
 /***/ }),
 /* 65 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: C:/xampp/htdocs/travel/resources/assets/js/pages/dashboard/airline/edit.vue: Unexpected token, expected , (16:41)\n\n\u001b[0m \u001b[90m 14 | \u001b[39m\t\t{\n \u001b[90m 15 | \u001b[39m\t\t\t\u001b[36mreturn\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 | \u001b[39m\t\t\t\ttitle\u001b[33m:\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$i18n\u001b[33m.\u001b[39mt( \u001b[32m'airline.edit'\u001b[39m )\u001b[32m'Create airline'\u001b[39m\n \u001b[90m    | \u001b[39m\t\t\t\t                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 17 | \u001b[39m\t\t\t}\n \u001b[90m 18 | \u001b[39m\t\t}\u001b[33m,\u001b[39m\n \u001b[90m 19 | \u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+	metaInfo: function metaInfo() {
+		return {
+			title: this.$i18n.t('airline.edit')
+		};
+	},
+
+
+	props: ['airline'],
+
+	components: {
+		'c-form': function cForm() {
+			return Promise.resolve().then(function () {
+				return __webpack_require__(66);
+			});
+		}
+	},
+
+	computed: {
+		form: function form() {
+			return this.$store.getters.airlineEdit;
+		}
+	},
+
+	methods: {
+		submit: function submit(data) {
+			this.$store.dispatch('airlineUpdate', { id: this.airline, details: data });
+		}
+	},
+
+	created: function created() {
+		this.$store.dispatch('airlineEdit', this.airline);
+	}
+};
 
 /***/ }),
 /* 66 */
@@ -15512,19 +15562,19 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Role',
+				text: this.$i18n.tc('role.role', 1),
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'Permissions',
+				text: this.$i18n.tc('permission.permission', 2),
 				align: 'right',
 				value: 'permissions_count'
 			}, {
-				text: 'Users',
+				text: this.$i18n.tc('user.user', 2),
 				align: 'right',
 				value: 'users_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -15938,15 +15988,15 @@ exports.default = {
 			loading: false,
 			deleteItem: {},
 			headers: [{
-				text: 'Permission',
+				text: this.$i18n.tc('permission.permission', 1),
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'Roles',
+				text: this.$i18n.tc('role.role', 2),
 				align: 'right',
 				value: 'roles_count'
 			}, {
-				text: 'Actions',
+				text: this.$i18n.t('actions'),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -31908,7 +31958,7 @@ var render = function() {
     },
     [
       _c("v-text-field", {
-        attrs: { label: "First name", disabled: "", readonly: "" },
+        attrs: { label: _vm.$t("user.firstName"), disabled: "", readonly: "" },
         model: {
           value: _vm.form.first_name,
           callback: function($$v) {
@@ -31919,7 +31969,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: "Last name", disabled: "", readonly: "" },
+        attrs: { label: _vm.$t("user.lastName"), disabled: "", readonly: "" },
         model: {
           value: _vm.form.last_name,
           callback: function($$v) {
@@ -31930,7 +31980,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: "Email", disabled: "", readonly: "" },
+        attrs: { label: _vm.$t("user.email"), disabled: "", readonly: "" },
         model: {
           value: _vm.form.email,
           callback: function($$v) {
@@ -31942,7 +31992,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Roles",
+          label: _vm.$tc("role.role", 2),
           autocomplete: "",
           items: _vm.roles,
           "item-text": "name",
@@ -32127,7 +32177,7 @@ var render = function() {
         },
         [
           _c("v-icon", [_vm._v("add")]),
-          _vm._v("\n        Add continent\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$t("continent.create")) + "\n    ")
         ],
         1
       ),
@@ -32174,7 +32224,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -32272,13 +32322,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete continent")
+                  _vm._v(_vm._s(_vm.$tc("continent.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete continent: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("continent.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -32297,7 +32349,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -32310,7 +32362,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -32412,7 +32464,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Continent name",
+          label: _vm.$tc("continent.continent", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -32427,7 +32479,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Continent ISO code",
+          label: _vm.$tc("continent.continent", 1) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -32693,7 +32745,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add currency\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("currency.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -32739,7 +32794,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -32840,14 +32895,20 @@ var render = function() {
             "v-card",
             [
               _c("v-card-title", [
-                _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete currency")
-                ])
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.$tc("currency.delete", 1)) +
+                    ": "
+                ),
+                _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
+                _vm._v("?\n            ")
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete currency: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("currency.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -32866,7 +32927,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -32879,7 +32940,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -32981,7 +33042,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Currency name",
+          label: _vm.$tc("currency.currency", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -32996,7 +33057,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Currency ISO code",
+          label: _vm.$tc("currency.currency", 1) + " ISO code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -33262,7 +33323,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add language\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("language.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -33308,7 +33372,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -33429,13 +33493,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete language")
+                  _vm._v(_vm._s(_vm.$tc("language.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete language: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("language.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -33454,7 +33520,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -33467,7 +33533,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -33569,7 +33635,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Language name",
+          label: _vm.$tc("language.language", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -33584,7 +33650,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Language ISO code",
+          label: _vm.$tc("language.language", 1) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -33850,7 +33916,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add country\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("country.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -33896,7 +33965,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -34008,13 +34077,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete country")
+                  _vm._v(_vm._s(_vm.$tc("country.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete country: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("country.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -34033,7 +34104,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -34046,7 +34117,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -34148,7 +34219,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Country name",
+          label: _vm.$tc("country.country", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -34163,7 +34234,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Country ISO code",
+          label: _vm.$tc("country.country", 1) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -34180,7 +34251,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Continent",
+          label: _vm.$tc("continent.continent", 1),
           autocomplete: "",
           items: _vm.continents,
           "item-text": "name",
@@ -34207,7 +34278,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Language",
+          label: _vm.$tc("language.language", 1),
           autocomplete: "",
           required: "",
           items: _vm.languages,
@@ -34234,7 +34305,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Currency",
+          label: _vm.$tc("currency.currency", 1),
           autocomplete: "",
           items: _vm.currencies,
           "item-text": "name",
@@ -34510,7 +34581,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add timezone\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("timezone.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -34556,7 +34630,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -34654,13 +34728,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete timezone")
+                  _vm._v(_vm._s(_vm.$tc("timezone.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete timezone: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("timezone.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -34679,7 +34755,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -34692,7 +34768,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -34794,7 +34870,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Timezone name",
+          label: _vm.$tc("timezone.timezone", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -34824,7 +34900,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Country",
+          label: _vm.$tc("country.country", 1),
           autocomplete: "",
           items: _vm.countries,
           "item-text": "name",
@@ -35112,7 +35188,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add city\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("city.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -35158,7 +35237,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -35261,12 +35340,16 @@ var render = function() {
             "v-card",
             [
               _c("v-card-title", [
-                _c("span", { staticClass: "headline" }, [_vm._v("Delete city")])
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v(_vm._s(_vm.$tc("city.delete", 2)))
+                ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete city: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("city.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -35285,7 +35368,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -35298,7 +35381,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -35400,7 +35483,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "City name",
+          label: _vm.$tc("city.city", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -35415,7 +35498,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "City ISO code",
+          label: _vm.$tc("city.city", 1) + " ISO code",
           required: "",
           minlength: "4",
           maxlength: "4",
@@ -35432,7 +35515,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "City IATA code",
+          label: _vm.$tc("city.city", 1) + " IATA code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -35449,7 +35532,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "City location latitude",
+          label: _vm.$tc("city.city", 1) + " location latitude",
           "error-messages": _vm.errors["latitude"]
         },
         model: {
@@ -35463,7 +35546,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "City location longitude",
+          label: _vm.$tc("city.city", 1) + " location longitude",
           "error-messages": _vm.errors["longitude"]
         },
         model: {
@@ -35477,7 +35560,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "Country",
+          label: _vm.$tc("country.country", 1),
           autocomplete: "",
           items: _vm.countries,
           "item-text": "name",
@@ -35504,7 +35587,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-switch", {
         attrs: {
-          label: "Country capital",
+          label: _vm.$t("country.capital"),
           "error-messages": _vm.errors["capital"]
         },
         model: {
@@ -35767,7 +35850,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add airport\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("airport.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -35813,7 +35899,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -35911,13 +35997,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete airport")
+                  _vm._v(_vm._s(_vm.$tc("airport.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete airport: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("airport.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -35936,7 +36024,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -35949,7 +36037,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -36051,7 +36139,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Airport name",
+          label: _vm.$tc("airport.airport", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -36066,7 +36154,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airport ICAO code",
+          label: _vm.$tc("airport.airport", 1) + " ICAO code",
           required: "",
           minlength: "4",
           maxlength: "4",
@@ -36083,7 +36171,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airport IATA code",
+          label: _vm.$tc("airport.airport", 1) + " IATA code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -36100,7 +36188,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airport location latitude",
+          label: _vm.$tc("airport.airport", 1) + " location latitude",
           required: "",
           "error-messages": _vm.errors["latitude"]
         },
@@ -36115,7 +36203,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airport location longitude",
+          label: _vm.$tc("airport.airport", 1) + " location longitude",
           required: "",
           "error-messages": _vm.errors["longitude"]
         },
@@ -36406,7 +36494,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add airline\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("airline.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -36452,7 +36543,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -36560,13 +36651,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete airline")
+                  _vm._v(_vm._s(_vm.$tc("airline.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete airline: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("airline.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -36585,7 +36678,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -36598,7 +36691,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -36650,7 +36743,7 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_edit_vue__["default"],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_edit_vue___default.a,
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2a6b8772_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_edit_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
@@ -36700,7 +36793,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Airline name",
+          label: _vm.$tc("airline.airline", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -36715,7 +36808,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airline callsign",
+          label: _vm.$tc("airline.airline", 1) + " callsign",
           required: "",
           "error-messages": _vm.errors["callsign"]
         },
@@ -36730,7 +36823,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airline ICAO code",
+          label: _vm.$tc("airline.airline", 1) + " ICAO code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -36747,7 +36840,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "Airline ISO code",
+          label: _vm.$tc("airline.airline", 1) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -37013,7 +37106,10 @@ var render = function() {
           },
           slot: "activator"
         },
-        [_c("v-icon", [_vm._v("add")]), _vm._v("\n        Add role\n    ")],
+        [
+          _c("v-icon", [_vm._v("add")]),
+          _vm._v("\n        " + _vm._s(_vm.$t("role.create")) + "\n    ")
+        ],
         1
       ),
       _vm._v(" "),
@@ -37059,7 +37155,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -37158,12 +37254,16 @@ var render = function() {
             "v-card",
             [
               _c("v-card-title", [
-                _c("span", { staticClass: "headline" }, [_vm._v("Delete role")])
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v(_vm._s(_vm.$tc("role.delete", 2)))
+                ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete role: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("role.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -37182,7 +37282,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -37195,7 +37295,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1
@@ -37297,7 +37397,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Role name",
+          label: _vm.$tc("role.role", 1),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -37310,7 +37410,9 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("h2", { staticClass: "headline" }, [_vm._v("Permissions")]),
+      _c("h2", { staticClass: "headline" }, [
+        _vm._v(_vm._s(_vm.$tc("permission.permission", 2)))
+      ]),
       _vm._v(" "),
       _c(
         "v-list",
@@ -37622,7 +37724,7 @@ var render = function() {
         },
         [
           _c("v-icon", [_vm._v("add")]),
-          _vm._v("\n        Add permission\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$t("permission.create")) + "\n    ")
         ],
         1
       ),
@@ -37688,7 +37790,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
+                      _c("th", [_vm._v(_vm._s(_vm.$t("actions")))])
                     ],
                     2
                   )
@@ -37784,13 +37886,15 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Delete permission")
+                  _vm._v(_vm._s(_vm.$tc("permission.delete", 2)))
                 ])
               ]),
               _vm._v(" "),
               _c("v-card-text", [
                 _vm._v(
-                  "\n                Are you sure you want to delete permission: "
+                  "\n                " +
+                    _vm._s(_vm.$tc("permission.delete", 1)) +
+                    ": "
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.deleteItem.name))]),
                 _vm._v("?\n            ")
@@ -37809,7 +37913,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v(_vm._s(_vm.$tc("cancel", 1)))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -37822,7 +37926,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v(_vm._s(_vm.$tc("delete", 1)))]
                   )
                 ],
                 1

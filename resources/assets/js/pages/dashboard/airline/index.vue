@@ -2,7 +2,7 @@
     <div>
         <v-btn color="primary" slot="activator" :to="{ name: 'airlineCreate' }">
             <v-icon>add</v-icon>
-            Add airline
+            {{ $t( 'airline.create' ) }}
         </v-btn>
 
         <v-data-table
@@ -23,7 +23,7 @@
                         <v-icon small>arrow_upward</v-icon>
                         {{ header.text }}
                     </th>
-                    <th>Actions</th>
+                    <th>{{ $t( 'actions' )}}</th>
                 </tr>
             </template>
 
@@ -32,8 +32,7 @@
                     <td>{{ props.item.name }}</td>
                     <td>{{ props.item.icao }}</td>
                     <td>{{ props.item.iso }}</td>
-                    <td><img :src="`https://content.airhex.com/content/logos/airlines_${props.item.iso}_350_100_r.png`"
-                             :alt="props.item.name"></td>
+                    <td><img :src="`https://content.airhex.com/content/logos/airlines_${props.item.iso}_350_100_r.png`" :alt="props.item.name"></td>
                     <td>
                         <v-btn icon :to="{ name: 'airlineEdit', params: { airline: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
@@ -50,16 +49,16 @@
         <v-dialog v-model="Object.keys( deleteItem ).length > 1" style="max-width: 400px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Delete airline</span>
+                    <span class="headline">{{ $tc( 'airline.delete', 2 ) }}</span>
                 </v-card-title>
 
                 <v-card-text>
-                    Are you sure you want to delete airline: <strong>{{ deleteItem.name }}</strong>?
+                    {{ $tc( 'airline.delete', 1 ) }}: <strong>{{ deleteItem.name }}</strong>?
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-btn flat color="green" @click="deleteItem = {}">Cancel</v-btn>
-                    <v-btn flat color="red" @click="airlineDestroy( deleteItem.id )">Delete</v-btn>
+                    <v-btn flat color="green" @click="deleteItem = {}">{{ $tc( 'cancel', 1 ) }}</v-btn>
+                    <v-btn flat color="red" @click="airlineDestroy( deleteItem.id )">{{ $tc( 'delete', 1 ) }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -84,7 +83,7 @@
                 deleteItem: {},
 				headers: [
 					{
-						text: 'Airport',
+						text: this.$i18n.tc( 'airline.airline', 1 ),
 						align: 'left',
 						value: 'name'
 					},
@@ -99,13 +98,13 @@
 						value: 'iso',
 					},
                     {
-                    	text: 'Icon',
+                    	text: this.$i18n.t( 'icon' ),
                         align: 'left',
                         value: '',
                         sortable: false,
                     },
                     {
-                    	text: 'Actions',
+                    	text: this.$i18n.t( 'actions' ),
                         align: 'left',
                         value: '',
                         sortable: false,

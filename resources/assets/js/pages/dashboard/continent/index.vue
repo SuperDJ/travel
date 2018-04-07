@@ -70,7 +70,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'continent.continent', 2 )
+				title: this.$i18n.tc( 'continent.continent', 1 )
 			}
 		},
 
@@ -92,7 +92,7 @@
 						value: 'iso',
 					},
 					{
-						text: this.$i18n.tc( 'country.country', 2 ),
+						text: this.$i18n.tc( 'country.country', 1 ),
 						align: 'right',
 						value: 'countries_count'
 					},

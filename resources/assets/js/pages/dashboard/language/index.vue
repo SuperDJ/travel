@@ -75,7 +75,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'language.language', 2 )
+				title: this.$i18n.tc( 'language.language', 1 )
 			}
 		},
 
@@ -97,12 +97,12 @@
 						value: 'iso',
 					},
 					{
-						text: this.$i18n.tc( 'country.country', 2 ),
+						text: this.$i18n.tc( 'country.country', 1 ),
 						align: 'right',
 						value: 'country_count'
 					},
 					{
-						text: this.$i18n.tc( 'user.user', 2 ),
+						text: this.$i18n.tc( 'user.user', 1 ),
 						align: 'right',
 						value: 'profile_count'
 					},

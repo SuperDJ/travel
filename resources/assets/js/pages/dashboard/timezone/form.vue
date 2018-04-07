@@ -1,21 +1,21 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'timezone.timezone', 1 )"
+            :label="$tc( 'timezone.timezone', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            label="GMT offset"
+            :label="$t( 'timezone.gmt' )"
             v-model="form.gmt_offset"
             required
             :error-messages="errors['gmt_offset']"
         />
 
         <v-select
-            :label="$tc( 'country.country', 1 )"
+            :label="$tc( 'country.country', 0 )"
             v-model.number="form.country_id"
             autocomplete
             :items="countries"
@@ -34,12 +34,12 @@
         </v-btn>
 
         <v-btn flat href="http://php.net/manual/en/timezones.php" target="_blank">
-            Supported timezones
+            {{ $t( 'timezone.supported' ) }}
         </v-btn>
 
         <v-btn flat :to="{ name: 'timezoneIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

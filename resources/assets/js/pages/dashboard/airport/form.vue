@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'airport.airport', 1 )"
+            :label="$tc( 'airport.airport', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'airport.airport', 1 ) } ICAO code`"
+            :label="`${ $tc( 'airport.airport', 0 ) } ICAO code`"
             v-model="form.icao"
             required
             minlength="4"
@@ -17,7 +17,7 @@
         />
 
         <v-text-field
-            :label="`${ $tc( 'airport.airport', 1 ) } IATA code`"
+            :label="`${ $tc( 'airport.airport', 0 ) } IATA code`"
             v-model="form.iata"
             required
             minlength="3"
@@ -26,21 +26,21 @@
         />
 
         <v-text-field
-            :label="`${ $tc( 'airport.airport', 1 ) } location latitude`"
+            :label="`${ $tc( 'airport.airport', 0 ) } ${ $t( 'locationLatitude' ) }`"
             v-model="form.latitude"
             required
             :error-messages="errors['latitude']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'airport.airport', 1 ) } location longitude`"
+            :label="`${ $tc( 'airport.airport', 0 ) } ${ $t( 'locationLongitude' ) }`"
             v-model="form.longitude"
             required
             :error-messages="errors['longitude']"
         />
 
         <v-select
-            label="City"
+            :label="$tc( 'city.city', 0 )"
             v-model.number="form.city_id"
             autocomplete
             :items="cities"
@@ -60,7 +60,7 @@
 
         <v-btn flat :to="{ name: 'airportIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

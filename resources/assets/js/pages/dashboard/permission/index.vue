@@ -35,7 +35,7 @@
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>{{ props.item.name.replace( '.', ' ' ) }}</td>
-                    <td>{{ props.item.roles_count }}</td>
+                    <td class="text-xs-right">{{ props.item.roles_count }}</td>
                     <td>
                         <v-btn icon :to="{ name: 'permissionEdit', params: { permission: props.item.id } }">
                             <v-icon color="green">edit</v-icon>
@@ -74,7 +74,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'permission.permission', 2 )
+				title: this.$i18n.tc( 'permission.permission', 1 )
 			}
 		},
 
@@ -91,7 +91,7 @@
 						value: 'name'
 					},
 					{
-						text: this.$i18n.tc( 'role.role', 2 ),
+						text: this.$i18n.tc( 'role.role', 1 ),
 						align: 'right',
 						value: 'roles_count',
 					},

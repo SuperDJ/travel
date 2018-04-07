@@ -40,10 +40,13 @@
 </template>
 
 <script>
-    export default
+	export default
     {
-    	metaInfo: {
-    	    title: 'Users'
+    	metaInfo()
+        {
+    		return {
+    			title: this.$i18n.tc( 'user.user', 0 )
+    		}
         },
 
         data()
@@ -63,7 +66,7 @@
                         value: 'last_name',
                     },
 					{
-						text: this.$i18n.tc( 'role.role', 2 ),
+						text: this.$i18n.tc( 'role.role', 1 ),
 						align: 'right',
 						value: 'roles_count',
 					},

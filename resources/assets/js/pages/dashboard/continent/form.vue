@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'continent.continent', 1 )"
+            :label="$tc( 'continent.continent', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'continent.continent', 1 ) } ISO code`"
+            :label="`${ $tc( 'continent.continent', 0 ) } ISO code`"
             v-model="form.iso"
             required
             minlength="2"
@@ -23,7 +23,7 @@
 
         <v-btn flat :to="{ name: 'continentIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

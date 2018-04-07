@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'role.role', 1 )"
+            :label="$tc( 'role.role', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
-        <h2 class="headline">{{ $tc( 'permission.permission', 2 ) }}</h2>
+        <h2 class="headline">{{ $tc( 'permission.permission', 1 ) }}</h2>
 
         <v-list subheader>
             <div v-for="(permission, controller) in controllers" :key="controller">
@@ -37,7 +37,7 @@
 
         <v-btn flat :to="{ name: 'roleIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

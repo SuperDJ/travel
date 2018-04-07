@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'country.country', 1 )"
+            :label="$tc( 'country.country', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'country.country', 1 ) } ISO code`"
+            :label="`${ $tc( 'country.country', 0 ) } ISO code`"
             v-model="form.iso"
             required
             minlength="2"
@@ -17,7 +17,7 @@
         />
 
         <v-select
-            :label="$tc( 'continent.continent', 1 )"
+            :label="$tc( 'continent.continent', 0 )"
             v-model.number="form.continent_id"
             autocomplete
             :items="continents"
@@ -31,7 +31,7 @@
         />
 
         <v-select
-            :label="$tc( 'language.language', 1 )"
+            :label="$tc( 'language.language', 0 )"
             v-model.number="form.language_id"
             autocomplete
             required
@@ -45,7 +45,7 @@
         />
 
         <v-select
-            :label="$tc( 'currency.currency', 1 )"
+            :label="$tc( 'currency.currency', 0 )"
             v-model.number="form.currency_id"
             autocomplete
             :items="currencies"
@@ -65,7 +65,7 @@
 
         <v-btn flat :to="{ name: 'countryIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

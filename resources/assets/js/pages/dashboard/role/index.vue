@@ -70,7 +70,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'role.role', 2 )
+				title: this.$i18n.tc( 'role.role', 1 )
 			}
 		},
 
@@ -87,12 +87,12 @@
 						value: 'name'
 					},
 					{
-						text: this.$i18n.tc( 'permission.permission', 2 ),
+						text: this.$i18n.tc( 'permission.permission', 1 ),
 						align: 'right',
 						value: 'permissions_count',
 					},
 					{
-						text: this.$i18n.tc( 'user.user', 2 ),
+						text: this.$i18n.tc( 'user.user', 1 ),
 						align: 'right',
 						value: 'users_count'
 					},

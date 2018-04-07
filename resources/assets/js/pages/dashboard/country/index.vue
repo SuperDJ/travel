@@ -75,7 +75,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'country.country', 2 )
+				title: this.$i18n.tc( 'country.country', 1 )
 			}
 		},
 
@@ -112,17 +112,17 @@
 						value: 'language_id',
 					},
 					{
-						text: this.$i18n.tc( 'city.city', 2 ),
+						text: this.$i18n.tc( 'city.city', 1 ),
 						align: 'right',
 						value: 'cities_count'
 					},
                     {
-                    	text: this.$i18n.tc( 'timezone.timezone', 2 ),
+                    	text: this.$i18n.tc( 'timezone.timezone', 1 ),
                         align: 'right',
                         value: 'timezones_count'
                     },
 					{
-						text: this.$i18n.tc( 'user.user', 2 ),
+						text: this.$i18n.tc( 'user.user', 1 ),
 						align: 'right',
 						value: 'profile_count'
 					},

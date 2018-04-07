@@ -1,21 +1,21 @@
 <template>
     <form @submit.prevent="submit( form )">
         <v-text-field
-            :label="$tc( 'airline.airline', 1 )"
+            :label="$tc( 'airline.airline', 0 )"
             v-model="form.name"
             required
             :error-messages="errors['name']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'airline.airline', 1 ) } callsign`"
+            :label="`${ $tc( 'airline.airline', 0 ) } callsign`"
             v-model="form.callsign"
             required
             :error-messages="errors['callsign']"
         />
 
         <v-text-field
-            :label="`${ $tc( 'airline.airline', 1 ) } ICAO code`"
+            :label="`${ $tc( 'airline.airline', 0 ) } ICAO code`"
             v-model="form.icao"
             required
             minlength="3"
@@ -24,7 +24,7 @@
         />
 
         <v-text-field
-            :label="`${ $tc( 'airline.airline', 1 ) } ISO code`"
+            :label="`${ $tc( 'airline.airline', 0 ) } ISO code`"
             v-model="form.iso"
             required
             minlength="2"
@@ -39,7 +39,7 @@
 
         <v-btn flat :to="{ name: 'airlineIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1 ) }}
         </v-btn>
     </form>
 </template>

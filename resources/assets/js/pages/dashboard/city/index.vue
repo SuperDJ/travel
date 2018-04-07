@@ -73,7 +73,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'city.city', 2 )
+				title: this.$i18n.tc( 'city.city', 1 )
 			}
 		},
 
@@ -110,7 +110,7 @@
 						value: 'country_id',
 					},
 					{
-						text: this.$i18n.tc( 'airport.airport', 2 ),
+						text: this.$i18n.tc( 'airport.airport', 1 ),
 						align: 'right',
 						value: 'airports_count'
 					},

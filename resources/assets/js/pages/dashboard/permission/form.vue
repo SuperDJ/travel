@@ -23,7 +23,7 @@
 
         <v-btn flat :to="{ name: 'permissionIndex' }">
             <v-icon>arrow_back</v-icon>
-            {{ $t( 'back') }}
+            {{ $tc( 'back', 1) }}
         </v-btn>
     </form>
 </template>

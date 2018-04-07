@@ -70,7 +70,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'timezone.timezone', 2 )
+				title: this.$i18n.tc( 'timezone.timezone', 1 )
 			}
 		},
 
@@ -87,12 +87,12 @@
 						value: 'name'
 					},
 					{
-						text: 'GMT offset',
+						text: this.$i18n.t( 'timezone.gmt' ),
 						align: 'left',
 						value: 'gmt_offset',
 					},
 					{
-						text: 'Country',
+						text: this.$i18n.tc( 'country.country', 0 ),
 						align: 'left',
 						value: 'country.name',
 						sortable: false,

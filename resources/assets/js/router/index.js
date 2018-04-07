@@ -173,7 +173,7 @@ const routes = [
 				path: 'users',
 				name: 'userIndex',
 				meta: {
-					title: i18n.tc( 'user.user', 2 ),
+					title: i18n.tc( 'user.user', 1 ),
 					permission: 'user.index'
 				},
 				component: userIndex
@@ -192,7 +192,7 @@ const routes = [
 				path: 'continents',
 				name: 'continentIndex',
 				meta: {
-					title: i18n.tc( 'continent.continent', 2 )
+					title: i18n.tc( 'continent.continent', 1 )
 				},
 				component: continentIndex,
 			},
@@ -217,7 +217,7 @@ const routes = [
 				path: 'currencies',
 				name: 'currencyIndex',
 				meta: {
-					title: i18n.tc( 'currency.currency', 2 )
+					title: i18n.tc( 'currency.currency', 1 )
 				},
 				component: currencyIndex,
 			},
@@ -242,7 +242,7 @@ const routes = [
 				path: 'languages',
 				name: 'languageIndex',
 				meta: {
-					title: i18n.tc( 'language.language', 2 )
+					title: i18n.tc( 'language.language', 1 )
 				},
 				component: languageIndex,
 			},
@@ -267,7 +267,7 @@ const routes = [
 				path: 'countries',
 				name: 'countryIndex',
 				meta: {
-					title: i18n.tc( 'country.country', 2 )
+					title: i18n.tc( 'country.country', 1 )
 				},
 				component: countryIndex,
 			},
@@ -292,7 +292,7 @@ const routes = [
 				path: 'timezones',
 				name: 'timezoneIndex',
 				meta: {
-					title: i18n.tc( 'timezone.timezone', 2 )
+					title: i18n.tc( 'timezone.timezone', 1 )
 				},
 				component: timezoneIndex,
 			},
@@ -317,7 +317,7 @@ const routes = [
 				path: 'cities',
 				name: 'cityIndex',
 				meta: {
-					title: i18n.tc( 'city.city', 2 )
+					title: i18n.tc( 'city.city', 1 )
 				},
 				component: cityIndex,
 			},
@@ -342,7 +342,7 @@ const routes = [
 				path: 'airports',
 				name: 'airportIndex',
 				meta: {
-					title: i18n.tc( 'airport.airport', 2 )
+					title: i18n.tc( 'airport.airport', 1 )
 				},
 				component: airportIndex,
 			},
@@ -367,7 +367,7 @@ const routes = [
 				path: 'airlines',
 				name: 'airlineIndex',
 				meta: {
-					title: i18n.tc( 'airline.airline', 2 )
+					title: i18n.tc( 'airline.airline', 1 )
 				},
 				component: airlineIndex,
 			},
@@ -392,7 +392,7 @@ const routes = [
 				path: 'roles',
 				name: 'roleIndex',
 				meta: {
-					title: i18n.tc( 'role.role', 2 )
+					title: i18n.tc( 'role.role', 1 )
 				},
 				component: roleIndex,
 			},
@@ -417,7 +417,7 @@ const routes = [
 				path: 'permissions',
 				name: 'permissionIndex',
 				meta: {
-					title: i18n.tc( 'permission.permission', 2 )
+					title: i18n.tc( 'permission.permission', 1 )
 				},
 				component: permissionIndex,
 			},
@@ -449,12 +449,10 @@ const router = new Router({
 
 router.beforeEach( ( to, from, next ) =>
 {
-	console.log(to);
 	// Set the language prop
 	let language = to.params.lang;
 	if( !language )
 	{
-		console.log(1);
 		language = 'en';
 		next( { path: `/${language}${to.path}` } );
 	}

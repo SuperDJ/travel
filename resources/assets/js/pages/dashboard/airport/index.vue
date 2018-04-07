@@ -71,7 +71,7 @@
 		metaInfo()
 		{
 			return {
-				title: this.$i18n.tc( 'airport.airport', 2 )
+				title: this.$i18n.tc( 'airport.airport', 1 )
 			}
 		},
 
@@ -98,7 +98,7 @@
 						value: 'iata',
 					},
 					{
-						text: this.$i18n.tc( 'city.city', 1 ),
+						text: this.$i18n.tc( 'city.city', 0 ),
 						align: 'left',
 						value: 'city_id'
 					},

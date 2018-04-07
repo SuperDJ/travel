@@ -98,7 +98,7 @@
 						value: 'iso',
 					},
                     {
-                    	text: this.$i18n.t( 'icon' ),
+                    	text: this.$i18n.tc( 'icon', 0 ),
                         align: 'left',
                         value: '',
                         sortable: false,

@@ -8677,60 +8677,71 @@ exports.default = {
 		back: 'Back | back',
 		save: 'Save | Saved | save | saved',
 		toSite: 'Back to website',
+		locationLatitude: 'location latitude',
+		locationLongitude: 'location longitude',
 		countryCapital: 'Country capital',
 		airline: {
 			airline: 'Airline | Airlines | airline | airlines',
-			create: 'Create @:airline.airline[3]',
-			edit: 'Edit @:airline.airline[3]',
-			save: '@:save, @:airline.airline[3]',
-			delete: 'Delete @:airline.airline[3] | Are you sure you want to delete @:airline.airline[3]'
+			create: 'Create airline',
+			edit: 'Edit airline',
+			save: 'Save airline',
+			delete: 'Delete airline | Are you sure you want to delete airline'
 		},
 		airport: {
 			airport: 'Airport | Airports | airport | airports',
-			create: 'Create @:airport.airport[3]',
-			edit: 'Edit @:airport.airport[3]',
-			save: '@:save, @:airport.airport[3]'
+			create: 'Create airport',
+			edit: 'Edit airport',
+			save: 'Save airport',
+			delete: 'Delete airport | Are you sure you want to delete airport'
 		},
 		city: {
 			city: 'City | Cities | city | cities',
-			create: 'Create @:city.city[3]',
-			edit: 'Edit @:city.city[3]',
-			save: '@:save, @:city.city[3]'
+			create: 'Create city',
+			edit: 'Edit city',
+			save: 'Save city',
+			delete: 'Delete city | Are you sure you want to delete city'
 		},
 		country: {
 			country: 'Country | Countries | country | countries',
-			create: 'Create @:country.country[3]',
-			edit: 'Edit @:country.country[3]',
-			save: '@:save, @:country.country[3]',
-			capital: '@:country.country[0] capital'
+			create: 'Create country',
+			edit: 'Edit country',
+			save: 'Save country',
+			capital: 'Country capital',
+			delete: 'Delete country | Are you sure you want to delete country'
 		},
 		continent: {
 			continent: 'Continent | Continents | continent | continents',
-			create: 'Create @:continent.continent[3]',
-			edit: 'Edit @:continent.continent[3]',
-			save: '@:save, @:continent.continent[3]'
+			create: 'Create continent',
+			edit: 'Edit continent',
+			save: 'Save continent',
+			delete: 'Delete continent | Are you sure you want to delete continent'
 		},
 		currency: {
 			currency: 'Currency | Currencies | currency | currencies',
-			create: 'Create @:currency.currency[3]',
-			edit: 'Edit @:currency.currency[3]',
-			save: '@:save, @:currency.currency[3]'
+			create: 'Create currency',
+			edit: 'Edit currency',
+			save: 'Save currency',
+			delete: 'Delete currency | Are you sure you want to delete currency'
 		},
 		language: {
 			language: 'Language | Languages | language | languages',
-			create: 'Create @:language.language[3]',
-			edit: 'Edit @:language.language[3]',
-			save: '@:save, @:language.language[3]'
+			create: 'Create language',
+			edit: 'Edit language',
+			save: 'Save language',
+			delete: 'Delete language | Are you sure you want to delete language'
 		},
 		timezone: {
 			timezone: 'Timezone | Timezones | timezone | timezones',
-			create: 'Create @:timezone.timezone[3]',
-			edit: 'Edit @:timezone.timezone[3]',
-			save: '@:save, @:timezone.timezone[3]'
+			create: 'Create timezone',
+			edit: 'Edit timezone',
+			save: 'Save timezone',
+			gmt: 'GMT offset',
+			supported: 'Supported timezones',
+			delete: 'Delete timezone | Are you sure you want to delete timezone'
 		},
 		user: {
 			user: 'User | Users | user | users',
-			edit: 'Edit @:user.user[3]',
+			edit: 'Edit user',
 			lastName: 'Last name',
 			firstName: 'First name',
 			birthday: 'Birthday',
@@ -8742,23 +8753,26 @@ exports.default = {
 			register: 'Register',
 			logout: 'Logout',
 			email: 'Email address',
-			save: '@:save, @:user.user[3]'
+			save: 'Save user',
+			delete: 'Delete user | Are you sure you want to delete user'
 		},
 		permission: {
 			permission: 'Permission | Permissions | permission | permissions',
-			create: 'Create @:permission.permission[3]',
-			edit: 'Edit @:permission.permission[3]',
-			save: '@:save, @:permission.permission[3]'
+			create: 'Create permission',
+			edit: 'Edit permission',
+			save: 'Save permission',
+			delete: 'Delete permission | Are you sure you want to delete permission'
 		},
 		role: {
 			role: 'Role | Roles | role | roles',
-			create: 'Create @:role.role[3]',
-			edit: 'Edit @:role.role[3]',
-			save: '@:save, @:role.role[3]'
+			create: 'Create role',
+			edit: 'Edit role',
+			save: 'Save role',
+			delete: 'Delete role | Are you sure you want to delete role'
 		},
 		accommodation: {
 			accommodation: 'Accommodation | Accommodations | accommodation | accommodations',
-			search: '@:search @:accommodation[1]',
+			search: 'Search @:accommodation[1]',
 			destination: 'Destination',
 			checkInDate: 'Check in date',
 			checkOutDate: 'Check out date',
@@ -8766,11 +8780,11 @@ exports.default = {
 		},
 		flight: {
 			flight: 'Flight | Flights | flight | flights',
-			search: '@:search @:flight.flight[1]',
+			search: 'Search flight',
 			departure: 'Departure',
 			destination: 'destination',
-			departureDate: '@:flight.departure @:date[2]',
-			returnDate: 'Return @:date[2]',
+			departureDate: 'Departure date',
+			returnDate: 'Return date',
 			numberOfAdults: 'Number of adults',
 			numberOfChildren: 'Number of children',
 			numberOfInfants: 'Number of infants',
@@ -8780,7 +8794,7 @@ exports.default = {
 		},
 		carRental: {
 			carRental: 'Car rental | car rental',
-			search: '@:search @:carRental.carRental[2]',
+			search: 'Search car rental',
 			pickup: 'Pickup place',
 			dropoff: 'Dropoff place',
 			driverAge: 'Driver age',
@@ -9017,73 +9031,139 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	nl: {
 		actions: 'Acties',
-		delete: 'Verwijderen',
-		edit: 'Bewerken',
+		delete: 'Verwijder | Verwijderen | verwijder | verwijderen',
+		cancel: 'Annuleren | annuleren',
+		edit: 'Bewerk | Bewerken | bewerk | bewerken',
 		rowsPerPage: 'Rijen per pagina',
-		icon: 'Icoon',
-		countryCapital: 'Country capital',
+		icon: 'Icoon | Iconen | icoon | iconen',
+		search: 'Zoek | Gezocht | zoek | gezocht',
+		date: 'Datum | Datums | datum | datums',
+		back: 'Terug | terug',
+		save: 'Opslaan | Opgeslagen | opslaan | opgeslagen',
+		toSite: 'Terug naar website',
+		locationLatitude: 'locatie latitude',
+		locationLongitude: 'locatie longitude',
+		countryCapital: 'Hoofdstad van land',
 		airline: {
-			airline: 'Airline | Airlines | airline | airlines',
-			create: 'Create @:airline.airline[3]',
-			edit: 'Edit @:airline.airline[3]'
+			airline: 'Vliegmaatschappij | Vliegmaatschappijen | vliegmaatschappij | vliegmaatschappijen',
+			create: 'Vliegmaatschappij maken',
+			edit: 'Vliegmaatschappij bewerken',
+			save: 'Vliegmaatschappij opslaan',
+			delete: 'Vliegmaatschappij verwijderen | Weet je zeker dat je de airline wil verwijderen'
 		},
 		airport: {
-			airport: 'Airport | Airports | airport | airports',
-			create: 'Create @:airport.airport[3]',
-			edit: 'Edit @:airport.airport[3]'
+			airport: 'Luchthaven | Luchthavens | luchthaven | luchthavens',
+			create: 'Luchthaven maken',
+			edit: 'Luchthaven bewerken',
+			save: 'Luchthaven opslaan',
+			delete: 'Verwijder luchthaven | Weet je zeker dat je de luchthaven wil verwijderen'
 		},
 		city: {
-			city: 'City | Cities',
-			create: 'Create @:city.city[3]',
-			edit: 'Edit @:city.city[3]'
+			city: 'Stad | Steden | stad | steden',
+			create: 'Stad maken',
+			edit: 'Stad bewerken',
+			save: 'Stad osplaan',
+			delete: 'Verwijder stad | Weet je zeker dat je de stad wil verwijderen'
 		},
 		country: {
-			country: 'Country | Countries | country | countries',
-			create: 'Create @:country.country[3]',
-			edit: 'Edit @:country.country[3]'
+			country: 'Land | Landen | land | land',
+			create: 'Land maken',
+			edit: 'Land bewerken',
+			save: 'Land opslaan',
+			capital: 'Hoofdstad van land',
+			delete: 'Verwijder land | Weet je zeker dat je het land wil verwijderen'
 		},
 		continent: {
-			continent: 'Continent | Continents | continent | continents',
-			create: 'Create @:continent.continent[3]',
-			edit: 'Edit @:continent.continent[3]'
+			continent: 'Continent | Continenten | continent | continenten',
+			create: 'Continent maken',
+			edit: 'Continent bewerken',
+			save: 'Continent opslaan',
+			delete: 'Verwijder continent | Weet je zeker dat je het continent wil verwijderen'
 		},
 		currency: {
-			currency: 'Currency | Currencies | currency | currencies',
-			create: 'Create @:currency.currency[3]',
-			edit: 'Edit @:currency.currency[3]'
+			currency: 'Valuta | Valutas | valuta | valutas',
+			create: 'Valuta maken',
+			edit: 'Valuta bewerken',
+			save: 'Valuta opslaan',
+			delete: 'Verwijder valuta | Weet je zeker dat je de valuta wil verwijderen'
 		},
 		language: {
-			language: 'Language | Languages | language | languages',
-			create: 'Create @:language.language[3]',
-			edit: 'Edit @:language.language[3]'
+			language: 'Taal | Talen | taal | talen',
+			create: 'Taal maken',
+			edit: 'Taal bewerken',
+			save: 'Taal opslaan',
+			delete: 'Verwijder taal | Weet je zeker dat je de taal wil verwijderen'
 		},
 		timezone: {
-			timezone: 'Timezone | Timezones | timezone | timezones',
-			create: 'Create @:timezone.timezone[3]',
-			edit: 'Edit @:timezone.timezone[3]'
+			timezone: 'Tijdzone | Tijdzones | tijdzone | tijdzones',
+			create: 'Tijdzone maken',
+			edit: 'Tijdzone bewerken',
+			save: 'Tijdzone opslaan',
+			gmt: 'GMT afwijking',
+			supported: 'Ondersteunde tijdzones',
+			delete: 'Verwijder tijdzone | Weet je zeker dat je de tijdzone wil verwijderen'
 		},
 		user: {
-			user: 'User | Users | user | users',
-			edit: 'Edit @:user.user[3]',
-			last_name: 'Last name',
-			first_name: 'First name',
-			birthday: 'Birthday',
-			password: 'Password',
-			passwordRepeat: 'Password repeat',
+			user: 'Gebruiker | Gebruikers | gebruiker | gebruikers',
+			edit: 'Edit gebruiker',
+			lastName: 'Achternaam',
+			firstName: 'Voornaam',
+			birthday: 'Verjaardag',
+			password: 'Wachtwoord',
+			passwordRepeat: 'Wachtwoord herhalen',
+			passwordCharacters: 'Tenminste 8 karakter',
+			passwordMatch: 'Tenminste 8 karakter en moet overeen komen met wachtwoord',
 			login: 'Aanmelden',
-			register: 'Register',
-			logout: 'Logout',
-			email: 'Email address'
+			register: 'Registreren',
+			logout: 'Afmelden',
+			email: 'Email adres',
+			save: 'Gebruiker opslaan',
+			delete: 'Verwijder gebruiker | Weet je zeker dat je de gebruiker wil verwijderen'
 		},
 		permission: {
-			permission: 'Permission | Permissions | permission | permissions',
-			create: 'Create @:permission.permission[3]',
-			edit: 'Edit @:permission.permission[3]'
+			permission: 'Toestemming | Toestemmingen | toestemming | toestemmingen',
+			create: 'Toestemming maken',
+			edit: 'Toestemming bewerken',
+			save: 'Toestemming opslaan',
+			delete: 'Verwijder toestemming | Weet je zeker dat je de toestemming wil verwijderen'
 		},
 		role: {
-			role: 'Role | Roles | role | roles',
-			create: 'Create @:role.role[3]',
-			edit: 'Edit @:role.role[3]'
+			role: 'Rol | Rols | rol | rols',
+			create: 'Rol maken',
+			edit: 'Rol bewerken',
+			save: 'Rol opslaan',
+			delete: 'Verwijder rol | Weet je zeker dat je de rol wil verwijderen'
+		},
+		accommodation: {
+			accommodation: 'Accommodation | Accommodations | accommodation | accommodations',
+			search: 'Search @:accommodation[1]',
+			destination: 'Destination',
+			checkInDate: 'Check in date',
+			checkOutDate: 'Check out date',
+			numberOfPersons: 'Number of persons'
+		},
+		flight: {
+			flight: 'Flight | Flights | flight | flights',
+			search: 'Search flight',
+			departure: 'Departure',
+			destination: 'destination',
+			departureDate: 'Departure date',
+			returnDate: 'Return date',
+			numberOfAdults: 'Number of adults',
+			numberOfChildren: 'Number of children',
+			numberOfInfants: 'Number of infants',
+			cabinClass: 'Cabin class',
+			perPerson: 'Per person',
+			result: 'Results found | No results found'
+		},
+		carRental: {
+			carRental: 'Car rental | car rental',
+			search: 'Search car rental',
+			pickup: 'Pickup place',
+			dropoff: 'Dropoff place',
+			driverAge: 'Driver age',
+			pickupDate: 'Pickup date and time',
+			dropoffDate: 'Return date and time'
 		}
 	}
 };
@@ -11818,10 +11898,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    metaInfo: {
-        title: 'Users'
+    metaInfo: function metaInfo() {
+        return {
+            title: this.$i18n.tc('user.user', 0)
+        };
     },
-
     data: function data() {
         return {
             pagination: {},
@@ -11835,7 +11916,7 @@ exports.default = {
                 align: 'left',
                 value: 'last_name'
             }, {
-                text: this.$i18n.tc('role.role', 2),
+                text: this.$i18n.tc('role.role', 1),
                 align: 'right',
                 value: 'roles_count'
             }, {
@@ -12148,7 +12229,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('continent.continent', 2)
+			title: this.$i18n.tc('continent.continent', 1)
 		};
 	},
 	data: function data() {
@@ -12165,7 +12246,7 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: this.$i18n.tc('country.country', 2),
+				text: this.$i18n.tc('country.country', 1),
 				align: 'right',
 				value: 'countries_count'
 			}, {
@@ -12537,7 +12618,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('currency.currency', 2)
+			title: this.$i18n.tc('currency.currency', 1)
 		};
 	},
 	data: function data() {
@@ -12554,11 +12635,11 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: this.$i18n.tc('country.country', 2),
+				text: this.$i18n.tc('country.country', 1),
 				align: 'right',
 				value: 'country_count'
 			}, {
-				text: this.$i18n.tc('user.user', 2),
+				text: this.$i18n.tc('user.user', 1),
 				align: 'right',
 				value: 'profile_count'
 			}, {
@@ -12934,7 +13015,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('language.language', 2)
+			title: this.$i18n.tc('language.language', 1)
 		};
 	},
 	data: function data() {
@@ -12951,11 +13032,11 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: this.$i18n.tc('country.country', 2),
+				text: this.$i18n.tc('country.country', 1),
 				align: 'right',
 				value: 'country_count'
 			}, {
-				text: this.$i18n.tc('user.user', 2),
+				text: this.$i18n.tc('user.user', 1),
 				align: 'right',
 				value: 'profile_count'
 			}, {
@@ -13331,7 +13412,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('country.country', 2)
+			title: this.$i18n.tc('country.country', 1)
 		};
 	},
 	data: function data() {
@@ -13360,15 +13441,15 @@ exports.default = {
 				align: 'left',
 				value: 'language_id'
 			}, {
-				text: this.$i18n.tc('city.city', 2),
+				text: this.$i18n.tc('city.city', 1),
 				align: 'right',
 				value: 'cities_count'
 			}, {
-				text: this.$i18n.tc('timezone.timezone', 2),
+				text: this.$i18n.tc('timezone.timezone', 1),
 				align: 'right',
 				value: 'timezones_count'
 			}, {
-				text: this.$i18n.tc('user.user', 2),
+				text: this.$i18n.tc('user.user', 1),
 				align: 'right',
 				value: 'profile_count'
 			}, {
@@ -13823,7 +13904,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('timezone.timezone', 2)
+			title: this.$i18n.tc('timezone.timezone', 1)
 		};
 	},
 	data: function data() {
@@ -13836,11 +13917,11 @@ exports.default = {
 				align: 'left',
 				value: 'name'
 			}, {
-				text: 'GMT offset',
+				text: this.$i18n.t('timezone.gmt'),
 				align: 'left',
 				value: 'gmt_offset'
 			}, {
-				text: 'Country',
+				text: this.$i18n.tc('country.country', 0),
 				align: 'left',
 				value: 'country.name',
 				sortable: false
@@ -14241,7 +14322,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('city.city', 2)
+			title: this.$i18n.tc('city.city', 1)
 		};
 	},
 	data: function data() {
@@ -14270,7 +14351,7 @@ exports.default = {
 				align: 'left',
 				value: 'country_id'
 			}, {
-				text: this.$i18n.tc('airport.airport', 2),
+				text: this.$i18n.tc('airport.airport', 1),
 				align: 'right',
 				value: 'airports_count'
 			}, {
@@ -14695,7 +14776,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('airport.airport', 2)
+			title: this.$i18n.tc('airport.airport', 1)
 		};
 	},
 	data: function data() {
@@ -14716,7 +14797,7 @@ exports.default = {
 				align: 'left',
 				value: 'iata'
 			}, {
-				text: this.$i18n.tc('city.city', 1),
+				text: this.$i18n.tc('city.city', 0),
 				align: 'left',
 				value: 'city_id'
 			}, {
@@ -15162,7 +15243,7 @@ exports.default = {
 				align: 'left',
 				value: 'iso'
 			}, {
-				text: this.$i18n.t('icon'),
+				text: this.$i18n.tc('icon', 0),
 				align: 'left',
 				value: '',
 				sortable: false
@@ -15553,7 +15634,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('role.role', 2)
+			title: this.$i18n.tc('role.role', 1)
 		};
 	},
 	data: function data() {
@@ -15566,11 +15647,11 @@ exports.default = {
 				align: 'left',
 				value: 'name'
 			}, {
-				text: this.$i18n.tc('permission.permission', 2),
+				text: this.$i18n.tc('permission.permission', 1),
 				align: 'right',
 				value: 'permissions_count'
 			}, {
-				text: this.$i18n.tc('user.user', 2),
+				text: this.$i18n.tc('user.user', 1),
 				align: 'right',
 				value: 'users_count'
 			}, {
@@ -15979,7 +16060,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	metaInfo: function metaInfo() {
 		return {
-			title: this.$i18n.tc('permission.permission', 2)
+			title: this.$i18n.tc('permission.permission', 1)
 		};
 	},
 	data: function data() {
@@ -15992,7 +16073,7 @@ exports.default = {
 				align: 'left',
 				value: 'name'
 			}, {
-				text: this.$i18n.tc('role.role', 2),
+				text: this.$i18n.tc('role.role', 1),
 				align: 'right',
 				value: 'roles_count'
 			}, {
@@ -23897,7 +23978,7 @@ var routes = [{
 		path: 'users',
 		name: 'userIndex',
 		meta: {
-			title: _i18n.i18n.tc('user.user', 2),
+			title: _i18n.i18n.tc('user.user', 1),
 			permission: 'user.index'
 		},
 		component: userIndex
@@ -23914,7 +23995,7 @@ var routes = [{
 		path: 'continents',
 		name: 'continentIndex',
 		meta: {
-			title: _i18n.i18n.tc('continent.continent', 2)
+			title: _i18n.i18n.tc('continent.continent', 1)
 		},
 		component: continentIndex
 	}, {
@@ -23936,7 +24017,7 @@ var routes = [{
 		path: 'currencies',
 		name: 'currencyIndex',
 		meta: {
-			title: _i18n.i18n.tc('currency.currency', 2)
+			title: _i18n.i18n.tc('currency.currency', 1)
 		},
 		component: currencyIndex
 	}, {
@@ -23958,7 +24039,7 @@ var routes = [{
 		path: 'languages',
 		name: 'languageIndex',
 		meta: {
-			title: _i18n.i18n.tc('language.language', 2)
+			title: _i18n.i18n.tc('language.language', 1)
 		},
 		component: languageIndex
 	}, {
@@ -23980,7 +24061,7 @@ var routes = [{
 		path: 'countries',
 		name: 'countryIndex',
 		meta: {
-			title: _i18n.i18n.tc('country.country', 2)
+			title: _i18n.i18n.tc('country.country', 1)
 		},
 		component: countryIndex
 	}, {
@@ -24002,7 +24083,7 @@ var routes = [{
 		path: 'timezones',
 		name: 'timezoneIndex',
 		meta: {
-			title: _i18n.i18n.tc('timezone.timezone', 2)
+			title: _i18n.i18n.tc('timezone.timezone', 1)
 		},
 		component: timezoneIndex
 	}, {
@@ -24024,7 +24105,7 @@ var routes = [{
 		path: 'cities',
 		name: 'cityIndex',
 		meta: {
-			title: _i18n.i18n.tc('city.city', 2)
+			title: _i18n.i18n.tc('city.city', 1)
 		},
 		component: cityIndex
 	}, {
@@ -24046,7 +24127,7 @@ var routes = [{
 		path: 'airports',
 		name: 'airportIndex',
 		meta: {
-			title: _i18n.i18n.tc('airport.airport', 2)
+			title: _i18n.i18n.tc('airport.airport', 1)
 		},
 		component: airportIndex
 	}, {
@@ -24068,7 +24149,7 @@ var routes = [{
 		path: 'airlines',
 		name: 'airlineIndex',
 		meta: {
-			title: _i18n.i18n.tc('airline.airline', 2)
+			title: _i18n.i18n.tc('airline.airline', 1)
 		},
 		component: airlineIndex
 	}, {
@@ -24090,7 +24171,7 @@ var routes = [{
 		path: 'roles',
 		name: 'roleIndex',
 		meta: {
-			title: _i18n.i18n.tc('role.role', 2)
+			title: _i18n.i18n.tc('role.role', 1)
 		},
 		component: roleIndex
 	}, {
@@ -24112,7 +24193,7 @@ var routes = [{
 		path: 'permissions',
 		name: 'permissionIndex',
 		meta: {
-			title: _i18n.i18n.tc('permission.permission', 2)
+			title: _i18n.i18n.tc('permission.permission', 1)
 		},
 		component: permissionIndex
 	}, {
@@ -24139,11 +24220,9 @@ var router = new _vueRouter2.default({
 });
 
 router.beforeEach(function (to, from, next) {
-	console.log(to);
 	// Set the language prop
 	var language = to.params.lang;
 	if (!language) {
-		console.log(1);
 		language = 'en';
 		next({ path: '/' + language + to.path });
 	}
@@ -32464,7 +32543,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("continent.continent", 1),
+          label: _vm.$tc("continent.continent", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -32479,7 +32558,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("continent.continent", 1) + " ISO code",
+          label: _vm.$tc("continent.continent", 0) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -32509,7 +32588,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "continentIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -33042,7 +33121,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("currency.currency", 1),
+          label: _vm.$tc("currency.currency", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -33057,7 +33136,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("currency.currency", 1) + " ISO code",
+          label: _vm.$tc("currency.currency", 0) + " ISO code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -33087,7 +33166,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "currencyIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -33635,7 +33714,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("language.language", 1),
+          label: _vm.$tc("language.language", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -33650,7 +33729,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("language.language", 1) + " ISO code",
+          label: _vm.$tc("language.language", 0) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -33680,7 +33759,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "languageIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 0)) + "\n    ")
         ],
         1
       )
@@ -34219,7 +34298,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("country.country", 1),
+          label: _vm.$tc("country.country", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -34234,7 +34313,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("country.country", 1) + " ISO code",
+          label: _vm.$tc("country.country", 0) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -34251,7 +34330,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("continent.continent", 1),
+          label: _vm.$tc("continent.continent", 0),
           autocomplete: "",
           items: _vm.continents,
           "item-text": "name",
@@ -34278,7 +34357,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("language.language", 1),
+          label: _vm.$tc("language.language", 0),
           autocomplete: "",
           required: "",
           items: _vm.languages,
@@ -34305,7 +34384,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("currency.currency", 1),
+          label: _vm.$tc("currency.currency", 0),
           autocomplete: "",
           items: _vm.currencies,
           "item-text": "name",
@@ -34345,7 +34424,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "countryIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -34870,7 +34949,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("timezone.timezone", 1),
+          label: _vm.$tc("timezone.timezone", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -34885,7 +34964,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: "GMT offset",
+          label: _vm.$t("timezone.gmt"),
           required: "",
           "error-messages": _vm.errors["gmt_offset"]
         },
@@ -34900,7 +34979,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("country.country", 1),
+          label: _vm.$tc("country.country", 0),
           autocomplete: "",
           items: _vm.countries,
           "item-text": "name",
@@ -34944,7 +35023,7 @@ var render = function() {
             target: "_blank"
           }
         },
-        [_vm._v("\n        Supported timezones\n    ")]
+        [_vm._v("\n        " + _vm._s(_vm.$t("timezone.supported")) + "\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -34952,7 +35031,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "timezoneIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -35483,7 +35562,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("city.city", 1),
+          label: _vm.$tc("city.city", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -35498,7 +35577,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("city.city", 1) + " ISO code",
+          label: _vm.$tc("city.city", 0) + " ISO code",
           required: "",
           minlength: "4",
           maxlength: "4",
@@ -35515,7 +35594,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("city.city", 1) + " IATA code",
+          label: _vm.$tc("city.city", 0) + " IATA code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -35532,7 +35611,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("city.city", 1) + " location latitude",
+          label: _vm.$tc("city.city", 0) + " location latitude",
           "error-messages": _vm.errors["latitude"]
         },
         model: {
@@ -35546,7 +35625,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("city.city", 1) + " location longitude",
+          label: _vm.$tc("city.city", 0) + " location longitude",
           "error-messages": _vm.errors["longitude"]
         },
         model: {
@@ -35560,7 +35639,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("country.country", 1),
+          label: _vm.$tc("country.country", 0),
           autocomplete: "",
           items: _vm.countries,
           "item-text": "name",
@@ -35614,7 +35693,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "cityIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -36139,7 +36218,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airport.airport", 1),
+          label: _vm.$tc("airport.airport", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -36154,7 +36233,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airport.airport", 1) + " ICAO code",
+          label: _vm.$tc("airport.airport", 0) + " ICAO code",
           required: "",
           minlength: "4",
           maxlength: "4",
@@ -36171,7 +36250,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airport.airport", 1) + " IATA code",
+          label: _vm.$tc("airport.airport", 0) + " IATA code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -36188,7 +36267,8 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airport.airport", 1) + " location latitude",
+          label:
+            _vm.$tc("airport.airport", 0) + " " + _vm.$t("locationLatitude"),
           required: "",
           "error-messages": _vm.errors["latitude"]
         },
@@ -36203,7 +36283,8 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airport.airport", 1) + " location longitude",
+          label:
+            _vm.$tc("airport.airport", 0) + " " + _vm.$t("locationLongitude"),
           required: "",
           "error-messages": _vm.errors["longitude"]
         },
@@ -36218,7 +36299,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: "City",
+          label: _vm.$tc("city.city", 0),
           autocomplete: "",
           items: _vm.cities,
           "item-text": "name",
@@ -36258,7 +36339,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "airportIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -36793,7 +36874,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airline.airline", 1),
+          label: _vm.$tc("airline.airline", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -36808,7 +36889,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airline.airline", 1) + " callsign",
+          label: _vm.$tc("airline.airline", 0) + " callsign",
           required: "",
           "error-messages": _vm.errors["callsign"]
         },
@@ -36823,7 +36904,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airline.airline", 1) + " ICAO code",
+          label: _vm.$tc("airline.airline", 0) + " ICAO code",
           required: "",
           minlength: "3",
           maxlength: "3",
@@ -36840,7 +36921,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("airline.airline", 1) + " ISO code",
+          label: _vm.$tc("airline.airline", 0) + " ISO code",
           required: "",
           minlength: "2",
           maxlength: "2",
@@ -36870,7 +36951,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "airlineIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -37397,7 +37478,7 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: _vm.$tc("role.role", 1),
+          label: _vm.$tc("role.role", 0),
           required: "",
           "error-messages": _vm.errors["name"]
         },
@@ -37411,7 +37492,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("h2", { staticClass: "headline" }, [
-        _vm._v(_vm._s(_vm.$tc("permission.permission", 2)))
+        _vm._v(_vm._s(_vm.$tc("permission.permission", 1)))
       ]),
       _vm._v(" "),
       _c(
@@ -37486,7 +37567,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "roleIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )
@@ -37806,7 +37887,9 @@ var render = function() {
                       _vm._v(_vm._s(props.item.name.replace(".", " ")))
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.roles_count))]),
+                    _c("td", { staticClass: "text-xs-right" }, [
+                      _vm._v(_vm._s(props.item.roles_count))
+                    ]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -38073,7 +38156,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "permissionIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 1)) + "\n    ")
         ],
         1
       )

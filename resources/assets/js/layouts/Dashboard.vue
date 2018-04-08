@@ -30,7 +30,7 @@
                                                 <v-icon>edit</v-icon>
                                             </v-list-tile-action>
                                             <v-list-tile-title>
-                                                Edit profile
+                                                {{ $t( 'user.profileEdit' ) }}
                                             </v-list-tile-title>
                                         </v-list-tile>
                                         <v-list-tile>
@@ -49,7 +49,7 @@
                                             <v-list-tile-action>
                                                 <v-icon>exit_to_app</v-icon>
                                             </v-list-tile-action>
-                                            <v-list-tile-title>Logout</v-list-tile-title>
+                                            <v-list-tile-title>{{ $t( 'user.logout' ) }}</v-list-tile-title>
                                         </v-list-tile>
                                     </v-list>
                                 </v-menu>
@@ -133,7 +133,7 @@
                 'success',
                 'errors',
                 'userProfile'
-            ])
+            ]),
         },
 
         methods: {
@@ -156,76 +156,76 @@
                         icon: 'home'
                     },
                     {
-                    	title: 'Users',
+                    	title: this.$i18n.tc( 'user.user', 1 ),
                         icon: 'person',
                         children: [
                             {
-                            	title: 'Users',
+                            	title: this.$i18n.tc( 'user.user', 1 ),
                                 to: 'userIndex',
                                 can: 'user.index'
                             },
                             {
-                            	title: 'Roles',
+                            	title: this.$i18n.tc( 'role.role', 1 ),
                                 to: 'roleIndex',
                                 can: 'role.index'
                             },
                             {
-                            	title: 'Permissions',
+                            	title: this.$i18n.tc( 'permission.permission', 1 ),
                                 to: 'permissionIndex',
                                 can: 'permission.index'
                             }
                         ]
                     },
                     {
-                    	title: 'Languages',
+                    	title: this.$i18n.tc( 'language.language', 1 ),
                         to: 'languageIndex',
                         icon: 'translate',
                         can: 'language.index'
                     },
                     {
-                        title: 'Timezones',
+                        title: this.$i18n.tc( 'timezone.timezone', 1 ),
                         to: 'timezoneIndex',
                         icon: 'access_time',
                         can: 'timezone.index'
                     },
                     {
-                    	title: 'Currencies',
+                    	title: this.$i18n.tc( 'currency.currency', 1 ),
                         to: 'currencyIndex',
                         icon: 'attach_money',
                         can: 'currency.index'
                     },
                     {
-                    	title: 'Continents',
+                    	title: this.$i18n.tc( 'continent.continent', 1 ),
                         to: 'continentIndex',
                         icon: 'public',
                         can: 'continent.index'
                     },
                     {
-                    	title: 'Countries',
+                    	title: this.$i18n.tc( 'country.country', 1 ),
                         to: 'countryIndex',
                         icon: 'pin_drop',
                         can: 'country.index'
                     },
                     {
-                    	title: 'Cities',
+                    	title: this.$i18n.tc( 'city.city', 1 ),
                         to: 'cityIndex',
                         icon: 'place',
                         can: 'city.index'
 					},
                     {
-                    	title: 'Airports',
+                    	title: this.$i18n.tc( 'airport.airport', 1 ),
                         to: 'airportIndex',
                         icon: 'local_airport',
                         can: 'airport/index'
                     },
                     {
-                    	title: 'Airlines',
+                    	title: this.$i18n.tc( 'airline.airline', 1 ),
                         to: 'airlineIndex',
                         icon: 'flight_takeoff',
                         can: 'airline.index'
                     },
 					{
-						title: 'Contacts',
+						title: this.$i18n.tc( 'contact.contact', 1 ),
 						to: 'contactIndex',
 						icon: 'contacts',
                         can: 'contact.index'

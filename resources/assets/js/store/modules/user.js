@@ -313,7 +313,7 @@ export default
 		 */
 		userRoles( state )
 		{
-			return state.user.roles;
+			return state.user ? state.user.roles : [];
 		},
 
 		/**
@@ -326,7 +326,7 @@ export default
 		{
 			let permissions = [];
 
-			if( state.user.roles )
+			if( state.user && state.user.roles )
 			{
 				for( let i = 0; i < state.user.roles.length; i++ )
 				{

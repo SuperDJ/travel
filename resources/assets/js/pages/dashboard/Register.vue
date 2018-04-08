@@ -27,7 +27,7 @@
             />
 
             <v-select
-                :label="$tc( 'country.country', 1 )"
+                :label="$tc( 'country.country', 0 )"
                 v-model.number="form.country_id"
                 autocomplete
                 :items="countries"
@@ -40,7 +40,7 @@
             />
 
             <v-select
-                :label="$tc( 'language.language', 1 )"
+                :label="$tc( 'language.language', 0 )"
                 v-model.number="form.language_id"
                 autocomplete
                 :items="languages"
@@ -53,7 +53,7 @@
             />
 
             <v-select
-                :label="$tc( 'currency.currency', 1 )"
+                :label="$tc( 'currency.currency', 0 )"
                 v-model.number="form.currency_id"
                 autocomplete
                 :items="currencies"

@@ -5,7 +5,7 @@
                 <v-layout row wrap>
                     <v-flex xs4>
                         <v-select
-                            label="Destination"
+                            :label="$t( 'accommodation.destination' )"
                             required
                             autocomplete
                             :items="cities"
@@ -34,13 +34,17 @@
                     </v-flex>
 
                     <v-flex xs4>
-                        <v-text-field label="Check in date" type="date" v-model="checkinDate" required />
-                        <v-text-field label="Check out date" type="date" v-model="checkoutDate" required />
+                        <v-text-field :label="$t( 'accommodation.checkInDate' )" type="date" v-model="checkinDate"
+                                      required />
+                        <v-text-field :label="$t( 'accommodation.checkOutDate' )" type="date" v-model="checkoutDate"
+                                      required />
                     </v-flex>
 
                     <v-flex xs4>
-                        <v-text-field label="Number of persons" type="number" v-model="persons" required min="1"/>
-                        <v-text-field label="Number of rooms" type="number" v-model="rooms" required min="1"/>
+                        <v-text-field :label="$t( 'accommodation.numberOfPersons' )" type="number" v-model="persons"
+                                      required min="1"/>
+                        <v-text-field :label="$t( 'accommodation.numberOfRooms' )" type="number" v-model="rooms"
+                                      required min="1"/>
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -49,7 +53,7 @@
         <v-card-actions>
             <v-btn flat color="primary">
                 <v-icon>search</v-icon>
-                Search accommodations
+                {{ $t( 'accommodation.search' ) }}
             </v-btn>
         </v-card-actions>
     </v-card>

@@ -2,15 +2,15 @@
     <form @submit.prevent="submit( form )">
         <v-card-text>
             <v-text-field
-                label="Email address"
+                :label="$t( 'user.email' )"
                 required
                 :error-messages="errors['email']"
                 v-model="form.email"
             />
 
             <v-text-field
-                label="Password"
-                hint="At least 8 characters"
+                :label="$t( 'user.password' )"
+                :hint="$t( 'user.passwordCharacters' )"
                 minlength="8"
                 :append-icon="passwordVisible ? 'visibility_off' : 'visibility'"
                 :append-icon-cb="() => (passwordVisible = !passwordVisible)"
@@ -67,32 +67,8 @@
 					this.form.password = '';
 
 					// Make sure the user is logged in before
-					if( sessionStorage.getItem( 'token' ) && sessionStorage.getItem( 'token' ).length > 0 ) {
-						// Set user permissions
-						let controllers = {};
-						this.$store.getters.userPermissions.map( ( permission ) => {
-							let name = permission.split( '.' );
-							let controller = name[0];
-							let method = name[1];
-
-							if( !controllers[controller] )
-							{
-								controllers[controller] = [];
-							}
-							controllers[controller].push( method );
-						});
-
-						let permissions = [];
-						for( let i = 0; i < Object.keys( controllers ).length; i++ )
-                        {
-                        	permissions.push( {
-                                actions: Object.values( controllers )[i],
-                                subject: Object.keys( controllers )[i]
-                        	});
-                        }
-
-                        this.$ability.update(permissions);
-
+					if( sessionStorage.getItem( 'token' ) && sessionStorage.getItem( 'token' ).length > 0 )
+					{
 						this.$router.push( { name: 'dashboard' } );
 					}
                 });

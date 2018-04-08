@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { store } from '@/store/store';
-import { i18n, loadLanguageAsync } from '@/i18n';
+import { i18n } from '@/i18n';
 import Router from 'vue-router';
 
 const web = () => import( '@/layouts/Web' );
@@ -449,14 +449,16 @@ const router = new Router({
 
 router.beforeEach( ( to, from, next ) =>
 {
+	console.log(to);
 	// Set the language prop
 	let language = to.params.lang;
 	if( !language )
 	{
 		language = 'en';
 		next( { path: `/${language}${to.path}` } );
+	} else {
+		i18n.locale = language;
 	}
-	loadLanguageAsync( language ).then( () => next() );
 
 	if( to.matched[0].meta.auth || to.meta.auth )
 	{

@@ -5,7 +5,7 @@
                 <v-layout row wrap>
                     <v-flex xs4>
                         <v-select
-                            label="Pickup place"
+                            :label="$t( 'carRental.pickup' )"
                             required
                             autocomplete
                             :items="cities"
@@ -31,12 +31,14 @@
                                 </v-list-tile-content>
                             </template>
                         </v-select>
-                        <v-text-field label="Pickup date and time" type="datetime-local" v-model="pickupDateTime" required />
+                        <v-text-field :label="$t( 'carRental.pickupDate' )" type="datetime-local"
+                                      v-model="pickupDateTime"
+                                      required />
                     </v-flex>
 
                     <v-flex xs4>
                         <v-select
-                            label="Dropoff place"
+                            :label="$t( 'carRental.dropoff' )"
                             required
                             autocomplete
                             :items="cities"
@@ -57,17 +59,18 @@
                                 <v-list-tile-content>
                                     <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
                                     <v-list-tile-sub-title>
-                                        <div v-if="data.item.country">Country: {{data.item.country.name}}</div>
+                                        <div v-if="data.item.country">{{ $tc( 'country.country', 0 ) }}: {{ data.item.country.name }}</div>
                                     </v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </template>
                         </v-select>
-                        <v-text-field label="Return date and time" type="datetime-local" v-model="dropoffDateTime"
+                        <v-text-field :label="$t( 'carRental.dropoffDate' )" type="datetime-local"
+                                      v-model="dropoffDateTime"
                                       required min="1"/>
                     </v-flex>
 
                     <v-flex xs4>
-                        <v-text-field label="Driver age" type="number" required min="18" v-model="driverAge" />
+                        <v-text-field :label="$t( 'carRental.driverAge' )" type="number" required min="18" v-model="driverAge" />
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -76,7 +79,7 @@
         <v-card-actions>
             <v-btn flat color="primary">
                 <v-icon>search</v-icon>
-                Search car rentals
+                {{ $t( 'carRental.search' ) }}
             </v-btn>
         </v-card-actions>
     </v-card>

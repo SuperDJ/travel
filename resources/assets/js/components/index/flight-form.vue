@@ -6,7 +6,7 @@
                     <v-layout row wrap>
                         <v-flex xs3>
                             <v-select
-                                label="Departure"
+                                :label="$t( 'flight.departure' )"
                                 required
                                 autocomplete
                                 :items="airports"
@@ -27,18 +27,20 @@
                                     <v-list-tile-content>
                                         <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
                                         <v-list-tile-sub-title>
-                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
-                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                            <div v-if="data.item.city && data.item.city.country">{{ $tc( 'country.country', 0 ) }}: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">{{ $tc( 'city.city', 0 ) }}: {{data.item.city.name}}</div>
                                         </v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </template>
                             </v-select>
-                            <v-text-field label="Departure date" type="date" v-model="departureDate" :min="currentDate" required />
+                            <v-text-field :label="$t( 'flight.departureDate' )" type="date"
+                                          v-model="departureDate"
+                                          :min="currentDate" required />
                         </v-flex>
 
                         <v-flex xs3>
                             <v-select
-                                label="Destination"
+                                :label="$t( 'flight.destination' )"
                                 required
                                 autocomplete
                                 :items="airports"
@@ -53,25 +55,36 @@
                                     <v-list-tile-content>
                                         <v-list-tile-title>{{data.item.name}}</v-list-tile-title>
                                         <v-list-tile-sub-title>
-                                            <div v-if="data.item.city && data.item.city.country">Country: {{data.item.city.country.name}}</div>
-                                            <div v-if="data.item.city">City: {{data.item.city.name}}</div>
+                                            <div v-if="data.item.city && data.item.city.country">{{ $tc( 'country.country', 0 ) }}: {{data.item.city.country.name}}</div>
+                                            <div v-if="data.item.city">{{ $tc( 'city.city', 0 ) }}: {{data.item.city.name}}</div>
                                         </v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </template>
                             </v-select>
-                            <v-text-field label="Return date" type="date" v-model="destinationDate" :min="departureDate" />
+                            <v-text-field :label="$t( 'flight.returnDate' )" type="date"
+                                          v-model="destinationDate"
+                                          :min="departureDate" />
                         </v-flex>
 
                         <v-flex xs3>
-                            <v-text-field label="Number of adults" type="number" min="1" required v-model.number="adults" />
-                            <v-text-field label="Number of children (1 - 16 years)" type="number" min="0" max="8" v-model.number="children" />
-                            <v-text-field label="Number of infants (under 12 months)" type="number" min="0" max="8" v-model.number="infants" />
+                            <v-text-field :label="$t( 'flight.numberOfAdults' )" type="number" min="1"
+                                          required
+                                          v-model.number="adults" />
+                            <v-text-field :label="$t( 'flight.numberOfChildren' )"
+                                          type="number"
+                                          min="0"
+                                          max="8"
+                                          v-model.number="children" />
+                            <v-text-field :label="$t( 'flight.numberOfInfants' )" type="number"
+                                          min="0"
+                                          max="8"
+                                          v-model.number="infants" />
                         </v-flex>
 
                         <v-flex xs3>
                             <v-select
                                 :items="cabinClasses"
-                                label="Cabin class"
+                                :label="$t( 'flight.cabinClass' )"
                                 single-line
                                 bottom
                                 required
@@ -85,7 +98,7 @@
             <v-card-actions>
                 <v-btn flat color="primary" type="submit">
                     <v-icon>search</v-icon>
-                    Search flights
+                    {{ $t( 'flight.search' ) }}
                 </v-btn>
             </v-card-actions>
         </form>

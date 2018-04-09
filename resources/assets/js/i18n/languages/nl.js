@@ -75,7 +75,7 @@ export default
 	},
 	user: {
 		user: 'Gebruiker | Gebruikers | gebruiker | gebruikers',
-		edit: 'Edit gebruiker',
+		edit: 'Gebruiker bewerken',
 		lastName: 'Achternaam',
 		firstName: 'Voornaam',
 		birthday: 'Verjaardag',

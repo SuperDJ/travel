@@ -104,11 +104,11 @@ class UserController extends Controller
 		if( !empty( $request->all() ) )
 		{
 			return User::withCount( 'roles' )
-				->with(['profile' => function( $query ) {
-					$query->with('country');
-					$query->with('currency');
-					$query->with('timezone');
-					$query->with('language');
+				->with( [ 'profile' => function( $query ) {
+					$query->with( 'country' );
+					$query->with( 'currency' );
+					$query->with( 'timezone' );
+					$query->with( 'language' );
 				}])
 				->get();
 		} else {
@@ -124,7 +124,7 @@ class UserController extends Controller
 	 */
 	public function edit( User $user )
 	{
-		return response()->json( $user->load( 'roles' ), 200 );
+		return response()->json( $user->load( 'roles', 'profile' ), 200 );
 	}
 
 	/**
@@ -153,11 +153,32 @@ class UserController extends Controller
 		}
 	}
 
+	public function search( $search )
+	{
+		$result = User::where( 'first_name', 'like', '%'.$search.'%' )
+			->orWhere( 'last_name', 'like', '%'.$search.'%' )
+			->orWhere( 'id', $search )
+			->withCount( 'roles' )
+			->with( [ 'profile' => function( $query ) {
+				$query->with( 'country' );
+				$query->with( 'currency' );
+				$query->with( 'timezone' );
+				$query->with( 'language' );
+			}])
+			->get();
+
+		return response()->json( $result, 200 );
+	}
+
 	private function validation( Request $request )
 	{
 		$request->validate([
 			'first_name' => 'required|string',
 			'last_name' => 'required|string',
+			'language_id' => 'required|integer|exists:languages,id',
+			'currency_id' => 'required|integer|exists:currencies,id',
+			'country_id' => 'required|integer|exists:countries,id',
+			'timezone_id' => 'required|integer|exists:timezones,id',
 			'email' => $request->input( 'id' ) ? ['required', 'string', 'email', Rule::unique( 'users' )->ignore( $request->input( 'id') ) ] : 'required|string|email|unique:users',
 			'roles' => 'required|array'
 		]);

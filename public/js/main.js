@@ -11670,9 +11670,12 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	metaInfo: {
-		title: 'Edit user'
+	metaInfo: function metaInfo() {
+		return {
+			title: this.$i18n.t('user.edit')
+		};
 	},
+
 
 	props: ['user'],
 
@@ -11762,11 +11765,72 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
 	props: {
 		details: {
 			type: Object,
+			required: false,
+			default: null
+		},
+		user: {
+			type: Number,
 			required: false,
 			default: null
 		}
@@ -11778,9 +11842,17 @@ exports.default = {
 				first_name: '',
 				last_name: '',
 				email: '',
+				language_id: 0,
+				country_id: 0,
+				currency_id: 0,
+				timezone_id: 0,
 				roles: []
 			},
-			roleSearch: null
+			languageSearch: null,
+			countrySearch: null,
+			currencySearch: null,
+			roleSearch: null,
+			timezoneSearch: null
 		};
 	},
 
@@ -11791,17 +11863,37 @@ exports.default = {
 		},
 		roles: function roles() {
 			return Object.values(this.$store.getters.roleSearch);
+		},
+		languages: function languages() {
+			return Object.values(this.$store.getters.languageSearch);
+		},
+		countries: function countries() {
+			return Object.values(this.$store.getters.countrySearch);
+		},
+		currencies: function currencies() {
+			return Object.values(this.$store.getters.currencySearch);
+		},
+		timezones: function timezones() {
+			return Object.values(this.$store.getters.timezoneSearch);
 		}
 	},
 
 	methods: {
 		submit: function submit(data) {
 			this.$emit('submitted', data);
+		},
+		me: function me() {
+			if (this.user === this.$store.getters.userProfile.id) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	},
 
 	watch: {
 		details: function details(after) {
+			console.log(after);
 			this.form = after;
 
 			if (after.roles) {
@@ -11809,10 +11901,46 @@ exports.default = {
 					this.$store.dispatch('roleSearch', after.roles[i].id);
 				}
 			}
+
+			if (after.language_id) {
+				this.$store.dispatch('languageSearch', after.language_id);
+			}
+
+			if (after.timezone_id) {
+				this.$store.dispatch('timezoneSearch', after.timezone_id);
+			}
+
+			if (after.country_id) {
+				this.$store.dispatch('countrySearch', after.country_id);
+			}
+
+			if (after.currency_id) {
+				this.$store.dispatch('currencySearch', after.currency_id);
+			}
 		},
 		roleSearch: function roleSearch(role) {
 			if (role && role.length >= 2) {
 				this.$store.dispatch('roleSearch', role);
+			}
+		},
+		languageSearch: function languageSearch(language) {
+			if (language && language.length >= 2) {
+				this.$store.dispatch('languageSearch', language);
+			}
+		},
+		countrySearch: function countrySearch(country) {
+			if (country && country.length >= 2) {
+				this.$store.dispatch('countrySearch', country);
+			}
+		},
+		currencySearch: function currencySearch(currency) {
+			if (currency && currency.length >= 2) {
+				this.$store.dispatch('currencySearch', currency);
+			}
+		},
+		timezoneSearch: function timezoneSearch(timezone) {
+			if (timezone && timezone.length >= 2) {
+				this.$store.dispatch('timezoneSearch', timezone);
 			}
 		}
 	}
@@ -21608,7 +21736,22 @@ exports.default = {
    * @returns {{}|state.edit|*}
    */
 		userEdit: function userEdit(state) {
-			return state.edit;
+			var user = state.edit;
+
+			if (user) {
+				user = {
+					first_name: user.first_name,
+					last_name: user.last_name,
+					email: user.email,
+					currency_id: user.profile ? user.profile.currency_id : null,
+					country_id: user.profile ? user.profile.country_id : null,
+					timezone_id: user.profile ? user.profile.timezone_id : null,
+					language_id: user.profile ? user.profile.language_id : null,
+					roles: user.roles
+				};
+			}
+
+			return user;
 		},
 
 
@@ -23546,7 +23689,7 @@ exports.default = {
 	},
 	user: {
 		user: 'Gebruiker | Gebruikers | gebruiker | gebruikers',
-		edit: 'Edit gebruiker',
+		edit: 'Gebruiker bewerken',
 		lastName: 'Achternaam',
 		firstName: 'Voornaam',
 		birthday: 'Verjaardag',
@@ -24191,7 +24334,6 @@ var router = new _vueRouter2.default({
 });
 
 router.beforeEach(function (to, from, next) {
-	console.log(to);
 	// Set the language prop
 	var language = to.params.lang;
 	if (!language) {
@@ -31351,7 +31493,14 @@ var render = function() {
                                       _c(
                                         "v-list-tile",
                                         {
-                                          attrs: { to: { name: "userProfile" } }
+                                          attrs: {
+                                            to: {
+                                              name: "userEdit",
+                                              params: {
+                                                user: _vm.userProfile["id"]
+                                              }
+                                            }
+                                          }
                                         },
                                         [
                                           _c(
@@ -32041,7 +32190,11 @@ var render = function() {
     },
     [
       _c("v-text-field", {
-        attrs: { label: _vm.$t("user.firstName"), disabled: "", readonly: "" },
+        attrs: {
+          label: _vm.$t("user.firstName"),
+          disabled: !_vm.me,
+          readonly: ""
+        },
         model: {
           value: _vm.form.first_name,
           callback: function($$v) {
@@ -32052,7 +32205,11 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: _vm.$t("user.lastName"), disabled: "", readonly: "" },
+        attrs: {
+          label: _vm.$t("user.lastName"),
+          disabled: !_vm.me,
+          readonly: ""
+        },
         model: {
           value: _vm.form.last_name,
           callback: function($$v) {
@@ -32063,7 +32220,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: _vm.$t("user.email"), disabled: "", readonly: "" },
+        attrs: { label: _vm.$t("user.email"), disabled: !_vm.me, readonly: "" },
         model: {
           value: _vm.form.email,
           callback: function($$v) {
@@ -32075,7 +32232,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-select", {
         attrs: {
-          label: _vm.$tc("role.role", 2),
+          label: _vm.$tc("role.role", 1),
           autocomplete: "",
           items: _vm.roles,
           "item-text": "name",
@@ -32102,6 +32259,114 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("v-select", {
+        attrs: {
+          label: _vm.$tc("country.country", 0),
+          autocomplete: "",
+          items: _vm.countries,
+          "item-text": "name",
+          "item-value": "id",
+          "no-data": "No countries found",
+          "cache-items": "",
+          disabled: !_vm.me,
+          "error-messages": _vm.errors["country_id"],
+          "search-input": _vm.countrySearch
+        },
+        on: {
+          "update:searchInput": function($event) {
+            _vm.countrySearch = $event
+          }
+        },
+        model: {
+          value: _vm.form.country_id,
+          callback: function($$v) {
+            _vm.$set(_vm.form, "country_id", _vm._n($$v))
+          },
+          expression: "form.country_id"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-select", {
+        attrs: {
+          label: _vm.$tc("language.language", 0),
+          autocomplete: "",
+          items: _vm.languages,
+          "item-text": "name",
+          "item-value": "id",
+          "no-data": "No languages found",
+          "cache-items": "",
+          disabled: !_vm.me,
+          "error-messages": _vm.errors["language_id"],
+          "search-input": _vm.languageSearch
+        },
+        on: {
+          "update:searchInput": function($event) {
+            _vm.languageSearch = $event
+          }
+        },
+        model: {
+          value: _vm.form.language_id,
+          callback: function($$v) {
+            _vm.$set(_vm.form, "language_id", _vm._n($$v))
+          },
+          expression: "form.language_id"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-select", {
+        attrs: {
+          label: _vm.$tc("currency.currency", 0),
+          autocomplete: "",
+          items: _vm.currencies,
+          "item-text": "name",
+          "item-value": "id",
+          "no-data": "No currency found",
+          "cache-items": "",
+          disabled: !_vm.me,
+          "error-messages": _vm.errors["currency_id"],
+          "search-input": _vm.currencySearch
+        },
+        on: {
+          "update:searchInput": function($event) {
+            _vm.currencySearch = $event
+          }
+        },
+        model: {
+          value: _vm.form.currency_id,
+          callback: function($$v) {
+            _vm.$set(_vm.form, "currency_id", _vm._n($$v))
+          },
+          expression: "form.currency_id"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-select", {
+        attrs: {
+          label: _vm.$tc("timezone.timezone", 0),
+          autocomplete: "",
+          items: _vm.timezones,
+          "item-text": "name",
+          "item-value": "id",
+          "no-data": "No timezone found",
+          "cache-items": "",
+          disabled: !_vm.me,
+          "error-messages": _vm.errors["timezone_id"],
+          "search-input": _vm.timezoneSearch
+        },
+        on: {
+          "update:searchInput": function($event) {
+            _vm.timezoneSearch = $event
+          }
+        },
+        model: {
+          value: _vm.form.timezone_id,
+          callback: function($$v) {
+            _vm.$set(_vm.form, "timezone_id", _vm._n($$v))
+          },
+          expression: "form.timezone_id"
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-btn",
         { attrs: { color: "primary", type: "submit" } },
@@ -32117,7 +32382,7 @@ var render = function() {
         { attrs: { flat: "", to: { name: "userIndex" } } },
         [
           _c("v-icon", [_vm._v("arrow_back")]),
-          _vm._v("\n        " + _vm._s(_vm.$t("back")) + "\n    ")
+          _vm._v("\n        " + _vm._s(_vm.$tc("back", 0)) + "\n    ")
         ],
         1
       )
@@ -32158,7 +32423,7 @@ var render = function() {
             { attrs: { xs12: "", md6: "" } },
             [
               _c("c-form", {
-                attrs: { details: _vm.form },
+                attrs: { details: _vm.form, user: parseInt(this.user) },
                 on: { submitted: _vm.submit }
               })
             ],

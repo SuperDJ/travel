@@ -279,7 +279,23 @@ export default
 		 */
 		userEdit( state )
 		{
-			return state.edit;
+			let user = state.edit;
+
+			if( user )
+			{
+				user = {
+					first_name: user.first_name,
+					last_name: user.last_name,
+					email: user.email,
+					currency_id: user.profile ? user.profile.currency_id : null,
+					country_id: user.profile ? user.profile.country_id : null,
+					timezone_id: user.profile ? user.profile.timezone_id : null,
+					language_id: user.profile ? user.profile.language_id : null,
+					roles: user.roles
+				};
+			}
+
+			return user;
 		},
 
 

@@ -25,7 +25,7 @@
                                     <v-icon slot="activator">expand_more</v-icon>
 
                                     <v-list>
-                                        <v-list-tile :to="{ name: 'userProfile' }">
+                                        <v-list-tile :to="{ name: 'userEdit', params: { user: userProfile['id'] } }">
                                             <v-list-tile-action>
                                                 <v-icon>edit</v-icon>
                                             </v-list-tile-action>

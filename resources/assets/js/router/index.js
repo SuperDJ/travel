@@ -167,7 +167,7 @@ const routes = [
 				meta: {
 					title: 'Overview'
 				},
-				component: overview
+				component: overview,
 			},
 			{
 				path: 'users',
@@ -176,7 +176,7 @@ const routes = [
 					title: i18n.tc( 'user.user', 1 ),
 					permission: 'user.index'
 				},
-				component: userIndex
+				component: userIndex,
 			},
 			{
 				path: 'users/:user/edit',
@@ -186,7 +186,7 @@ const routes = [
 					title: i18n.t( 'user.edit' ),
 					permission: 'user.edit'
 				},
-				component: userEdit
+				component: userEdit,
 			},
 			{
 				path: 'continents',
@@ -202,7 +202,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'continent.create' )
 				},
-				component: continentCreate
+				component: continentCreate,
 			},
 			{
 				path: 'continents/:continent/edit',
@@ -211,7 +211,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'continent.edit' )
 				},
-				component: continentEdit
+				component: continentEdit,
 			},
 			{
 				path: 'currencies',
@@ -227,7 +227,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'currency.create' )
 				},
-				component: currencyCreate
+				component: currencyCreate,
 			},
 			{
 				path: 'currencies/:currency/edit',
@@ -236,7 +236,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'currency.edit' )
 				},
-				component: currencyEdit
+				component: currencyEdit,
 			},
 			{
 				path: 'languages',
@@ -252,7 +252,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'language.create' )
 				},
-				component: languageCreate
+				component: languageCreate,
 			},
 			{
 				path: 'languages/:language/edit',
@@ -261,7 +261,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'language.edit' )
 				},
-				component: languageEdit
+				component: languageEdit,
 			},
 			{
 				path: 'countries',
@@ -277,7 +277,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'country.create' )
 				},
-				component: countryCreate
+				component: countryCreate,
 			},
 			{
 				path: 'countries/:country/edit',
@@ -286,7 +286,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'country.edit' )
 				},
-				component: countryEdit
+				component: countryEdit,
 			},
 			{
 				path: 'timezones',
@@ -302,7 +302,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'timezone.create' )
 				},
-				component: timezoneCreate
+				component: timezoneCreate,
 			},
 			{
 				path: 'timezones/:timezone/edit',
@@ -311,7 +311,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'timezone.edit' )
 				},
-				component: timezoneEdit
+				component: timezoneEdit,
 			},
 			{
 				path: 'cities',
@@ -327,7 +327,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'city.create' )
 				},
-				component: cityCreate
+				component: cityCreate,
 			},
 			{
 				path: 'cities/:city/edit',
@@ -336,7 +336,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'city.edit' )
 				},
-				component: cityEdit
+				component: cityEdit,
 			},
 			{
 				path: 'airports',
@@ -352,7 +352,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'airport.create' )
 				},
-				component: airportCreate
+				component: airportCreate,
 			},
 			{
 				path: 'airports/:airport/edit',
@@ -361,7 +361,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'airport.edit' )
 				},
-				component: airportEdit
+				component: airportEdit,
 			},
 			{
 				path: 'airlines',
@@ -377,7 +377,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'airline.create' )
 				},
-				component: airlineCreate
+				component: airlineCreate,
 			},
 			{
 				path: 'airlines/:airline/edit',
@@ -386,7 +386,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'airline.edit' )
 				},
-				component: airlineEdit
+				component: airlineEdit,
 			},
 			{
 				path: 'roles',
@@ -402,7 +402,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'role.create' )
 				},
-				component: roleCreate
+				component: roleCreate,
 			},
 			{
 				path: 'roles/:role/edit',
@@ -411,7 +411,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'role.edit' )
 				},
-				component: roleEdit
+				component: roleEdit,
 			},
 			{
 				path: 'permissions',
@@ -427,7 +427,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'permission.create' )
 				},
-				component: permissionCreate
+				component: permissionCreate,
 			},
 			{
 				path: 'permissions/:permission/edit',
@@ -436,7 +436,7 @@ const routes = [
 				meta: {
 					title: i18n.t( 'permission.edit' )
 				},
-				component: permissionEdit
+				component: permissionEdit,
 			}
 		]
 	}
@@ -449,7 +449,6 @@ const router = new Router({
 
 router.beforeEach( ( to, from, next ) =>
 {
-	console.log(to);
 	// Set the language prop
 	let language = to.params.lang;
 	if( !language )

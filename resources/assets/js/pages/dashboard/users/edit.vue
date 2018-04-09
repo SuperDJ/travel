@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-layout row wrap>
             <v-flex xs12 md6>
-                <c-form @submitted="submit" :details="form" />
+                <c-form @submitted="submit" :details="form" :user="parseInt( this.user )" />
             </v-flex>
         </v-layout>
     </v-container>
@@ -10,8 +10,11 @@
 
 <script>
 	export default {
-		metaInfo: {
-			title: 'Edit user'
+		metaInfo()
+        {
+        	return {
+				title: this.$i18n.t( 'user.edit' )
+			}
 		},
 
 		props: ['user'],

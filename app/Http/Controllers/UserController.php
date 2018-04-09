@@ -145,11 +145,19 @@ class UserController extends Controller
 			$roles = $user->roles()->sync( $request->roles );
 		}
 
-		if( $roles )
+		$profile = $user->profile()->update([
+			'birthday' => $request->birthday,
+			'country_id' => $request->country_id,
+			'currency_id' => $request->currency_id,
+			'language_id' => $request->language_id,
+			'timezone_id' => $request->timezone_id
+		]);
+
+		if( $roles && $profile )
 		{
 			return response()->json( [ 'success' => true, 'message' => 'User updated' ], 200 );
 		} else {
-			return response()->json( [ 'success' => true, 'message' => 'User did not update' ], 400 );
+			return response()->json( [ 'success' => false, 'message' => 'User did not update' ], 400 );
 		}
 	}
 
@@ -175,6 +183,7 @@ class UserController extends Controller
 		$request->validate([
 			'first_name' => 'required|string',
 			'last_name' => 'required|string',
+			'birthday' => 'nullable|string|date',
 			'language_id' => 'required|integer|exists:languages,id',
 			'currency_id' => 'required|integer|exists:currencies,id',
 			'country_id' => 'required|integer|exists:countries,id',

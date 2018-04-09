@@ -284,9 +284,11 @@ export default
 			if( user )
 			{
 				user = {
+					id: user.id,
 					first_name: user.first_name,
 					last_name: user.last_name,
 					email: user.email,
+					birthday: user.birthday,
 					currency_id: user.profile ? user.profile.currency_id : null,
 					country_id: user.profile ? user.profile.country_id : null,
 					timezone_id: user.profile ? user.profile.timezone_id : null,

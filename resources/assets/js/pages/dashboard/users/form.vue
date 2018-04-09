@@ -3,22 +3,26 @@
         <v-text-field
             :label="$t( 'user.firstName' )"
             v-model="form.first_name"
-            :disabled="!me"
-            readonly
+            :disabled="!me()"
         />
 
         <v-text-field
             :label="$t( 'user.lastName' )"
             v-model="form.last_name"
-            :disabled="!me"
-            readonly
+            :disabled="!me()"
         />
 
         <v-text-field
             :label="$t( 'user.email' )"
             v-model="form.email"
-            :disabled="!me"
-            readonly
+            :disabled="!me()"
+        />
+
+        <v-text-field
+            :label="$t( 'user.birthday' )"
+            type="date"
+            v-model="form.birthday"
+            :disabled="!me()"
         />
 
         <v-select
@@ -46,7 +50,7 @@
             item-value="id"
             no-data="No countries found"
             cache-items
-            :disabled="!me"
+            :disabled="!me()"
             :error-messages="errors['country_id']"
             :search-input.sync="countrySearch"
         />
@@ -60,7 +64,7 @@
             item-value="id"
             no-data="No languages found"
             cache-items
-            :disabled="!me"
+            :disabled="!me()"
             :error-messages="errors['language_id']"
             :search-input.sync="languageSearch"
         />
@@ -74,7 +78,7 @@
             item-value="id"
             no-data="No currency found"
             cache-items
-            :disabled="!me"
+            :disabled="!me()"
             :error-messages="errors['currency_id']"
             :search-input.sync="currencySearch"
         />
@@ -88,7 +92,7 @@
             item-value="id"
             no-data="No timezone found"
             cache-items
-            :disabled="!me"
+            :disabled="!me()"
             :error-messages="errors['timezone_id']"
             :search-input.sync="timezoneSearch"
         />
@@ -128,6 +132,7 @@
 					first_name: '',
                     last_name: '',
                     email: '',
+                    birthday: '00-00-0000',
 					language_id: 0,
 					country_id: 0,
 					currency_id: 0,
@@ -182,19 +187,13 @@
 
             me()
             {
-            	if( this.user === this.$store.getters.userProfile.id )
-                {
-                	return true;
-                } else {
-            		return false;
-                }
+            	return this.user === this.$store.getters.userProfile.id;
             }
 		},
 
 		watch: {
 			details( after )
 			{
-				console.log(after);
 				this.form = after;
 
 				if( after.roles )

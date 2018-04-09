@@ -11821,6 +11821,10 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
 
 exports.default = {
 	props: {
@@ -11842,6 +11846,7 @@ exports.default = {
 				first_name: '',
 				last_name: '',
 				email: '',
+				birthday: '00-00-0000',
 				language_id: 0,
 				country_id: 0,
 				currency_id: 0,
@@ -11883,17 +11888,12 @@ exports.default = {
 			this.$emit('submitted', data);
 		},
 		me: function me() {
-			if (this.user === this.$store.getters.userProfile.id) {
-				return true;
-			} else {
-				return false;
-			}
+			return this.user === this.$store.getters.userProfile.id;
 		}
 	},
 
 	watch: {
 		details: function details(after) {
-			console.log(after);
 			this.form = after;
 
 			if (after.roles) {
@@ -21740,9 +21740,11 @@ exports.default = {
 
 			if (user) {
 				user = {
+					id: user.id,
 					first_name: user.first_name,
 					last_name: user.last_name,
 					email: user.email,
+					birthday: user.birthday,
 					currency_id: user.profile ? user.profile.currency_id : null,
 					country_id: user.profile ? user.profile.country_id : null,
 					timezone_id: user.profile ? user.profile.timezone_id : null,
@@ -32190,11 +32192,7 @@ var render = function() {
     },
     [
       _c("v-text-field", {
-        attrs: {
-          label: _vm.$t("user.firstName"),
-          disabled: !_vm.me,
-          readonly: ""
-        },
+        attrs: { label: _vm.$t("user.firstName"), disabled: !_vm.me() },
         model: {
           value: _vm.form.first_name,
           callback: function($$v) {
@@ -32205,11 +32203,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: {
-          label: _vm.$t("user.lastName"),
-          disabled: !_vm.me,
-          readonly: ""
-        },
+        attrs: { label: _vm.$t("user.lastName"), disabled: !_vm.me() },
         model: {
           value: _vm.form.last_name,
           callback: function($$v) {
@@ -32220,13 +32214,28 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: _vm.$t("user.email"), disabled: !_vm.me, readonly: "" },
+        attrs: { label: _vm.$t("user.email"), disabled: !_vm.me() },
         model: {
           value: _vm.form.email,
           callback: function($$v) {
             _vm.$set(_vm.form, "email", $$v)
           },
           expression: "form.email"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-text-field", {
+        attrs: {
+          label: _vm.$t("user.birthday"),
+          type: "date",
+          disabled: !_vm.me()
+        },
+        model: {
+          value: _vm.form.birthday,
+          callback: function($$v) {
+            _vm.$set(_vm.form, "birthday", $$v)
+          },
+          expression: "form.birthday"
         }
       }),
       _vm._v(" "),
@@ -32268,7 +32277,7 @@ var render = function() {
           "item-value": "id",
           "no-data": "No countries found",
           "cache-items": "",
-          disabled: !_vm.me,
+          disabled: !_vm.me(),
           "error-messages": _vm.errors["country_id"],
           "search-input": _vm.countrySearch
         },
@@ -32295,7 +32304,7 @@ var render = function() {
           "item-value": "id",
           "no-data": "No languages found",
           "cache-items": "",
-          disabled: !_vm.me,
+          disabled: !_vm.me(),
           "error-messages": _vm.errors["language_id"],
           "search-input": _vm.languageSearch
         },
@@ -32322,7 +32331,7 @@ var render = function() {
           "item-value": "id",
           "no-data": "No currency found",
           "cache-items": "",
-          disabled: !_vm.me,
+          disabled: !_vm.me(),
           "error-messages": _vm.errors["currency_id"],
           "search-input": _vm.currencySearch
         },
@@ -32349,7 +32358,7 @@ var render = function() {
           "item-value": "id",
           "no-data": "No timezone found",
           "cache-items": "",
-          disabled: !_vm.me,
+          disabled: !_vm.me(),
           "error-messages": _vm.errors["timezone_id"],
           "search-input": _vm.timezoneSearch
         },

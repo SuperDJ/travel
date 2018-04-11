@@ -4,7 +4,7 @@
             <v-layout row wrap>
                 <v-flex xs12 md4 offset-md4>
                     <v-card>
-                        <v-card-title primary-title class="headline white--text primary">{{ this.$route.meta.title }}</v-card-title>
+                        <v-card-title primary-title class="headline white--text primary">{{ title }}</v-card-title>
 
                         <v-alert :type="success ? 'success' : 'error'" :value="message && message.length > 1" transition="scale-transition">
                             {{ message }}
@@ -26,7 +26,18 @@
 			...mapGetters([
 				'message',
 				'success',
-			])
+			]),
+
+            title()
+			{
+				const title = this.$route.meta.title;
+
+				if( Array.isArray( title ) ) {
+					return this.$i18n.tc( title[0], title[1] );
+                } else {
+					return this.$i18n.tc( title );
+                }
+            }
 		}
     }
 </script>

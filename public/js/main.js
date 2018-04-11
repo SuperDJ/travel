@@ -8954,6 +8954,19 @@ exports.default = {
                 children: [{ title: 'Africa', to: '/location/africa' }, { title: 'Antarctica', to: '/location/antarctica' }, { title: 'Asia', to: '/location/asia' }, { title: 'Europe', to: '/location/europe' }, { title: 'North America', to: '/location/north-america' }, { title: 'Oceania', to: '/location/oceania' }, { title: 'South America', to: '/location/south-america' }]
             }]
         };
+    },
+
+
+    computed: {
+        title: function title() {
+            var title = this.$route.meta.title;
+
+            if (Array.isArray(title)) {
+                return this.$i18n.tc(title[0], title[1]);
+            } else {
+                return this.$i18n.tc(title);
+            }
+        }
     }
 };
 
@@ -9724,9 +9737,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 //
 //
 //
@@ -9938,68 +9948,18 @@ exports.default = {
         getData: function getData() {
             var _this = this;
 
-            return fetch('/api/continents/' + this.destination + '/top-destinations').then(function (response) {
+            return fetch("/api/continents/" + this.destination + "/top-destinations").then(function (response) {
                 return response.json();
             }).then(function (response) {
                 return _this.data = response;
             }).catch(function (error) {
                 return console.error(error);
             });
-        },
-        image: function image(orientation, country, city) {
-            var _this2 = this;
-
-            var search = country.replace(/ /g, '+');
-
-            if (city && city.length > 0) {
-                search += '+' + city.replace(/ /g, '+');
-            }
-
-            var img = function () {
-                var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                    var response, json;
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                        while (1) {
-                            switch (_context.prev = _context.next) {
-                                case 0:
-                                    _context.next = 2;
-                                    return fetch('https://pixabay.com/api/?key=' + window.pixabay + '&q=' + search + '&image_type=photo&safesearch=true&orientation=' + orientation);
-
-                                case 2:
-                                    response = _context.sent;
-                                    _context.next = 5;
-                                    return response.json();
-
-                                case 5:
-                                    json = _context.sent;
-
-
-                                    console.log(json);
-                                    return _context.abrupt('return', json);
-
-                                case 8:
-                                case 'end':
-                                    return _context.stop();
-                            }
-                        }
-                    }, _callee, _this2);
-                }));
-
-                return function img() {
-                    return _ref.apply(this, arguments);
-                };
-            }();
-
-            return img;
         }
     },
 
     mounted: function mounted() {
         this.getData();
-
-        console.log(this.image('horizontal', 'netherlands', 'groningen').then(function (resp) {
-            return resp;
-        }));
     }
 };
 
@@ -10974,7 +10934,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _vuex = __webpack_require__(4);
 
 exports.default = {
-	computed: _extends({}, (0, _vuex.mapGetters)(['message', 'success']))
+	computed: _extends({}, (0, _vuex.mapGetters)(['message', 'success']), {
+		title: function title() {
+			var title = this.$route.meta.title;
+
+			if (Array.isArray(title)) {
+				return this.$i18n.tc(title[0], title[1]);
+			} else {
+				return this.$i18n.tc(title);
+			}
+		}
+	})
 };
 
 /***/ }),
@@ -11404,11 +11374,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 var _vuex = __webpack_require__(4);
 
 exports.default = {
-    computed: _extends({}, (0, _vuex.mapGetters)(['message', 'success', 'errors', 'userProfile'])),
+    computed: _extends({}, (0, _vuex.mapGetters)(['message', 'success', 'errors', 'userProfile']), {
+        title: function title() {
+            var title = this.$route.meta.title;
+
+            if (Array.isArray(title)) {
+                return this.$i18n.tc(title[0], title[1]);
+            } else {
+                return this.$i18n.tc(title);
+            }
+        }
+    }),
 
     methods: {
         logout: function logout() {
@@ -11524,6 +11506,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
 //
 //
 //
@@ -12022,6 +12007,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -12344,6 +12332,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
 //
 //
 //
@@ -12807,7 +12798,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -13134,6 +13124,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
 //
 //
 //
@@ -13697,6 +13690,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -14046,6 +14042,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
 //
 //
 //
@@ -14569,6 +14568,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -14948,6 +14950,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
 //
 //
 //
@@ -15427,6 +15432,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
 	metaInfo: function metaInfo() {
@@ -15783,6 +15791,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
 //
 //
 //
@@ -23470,6 +23481,8 @@ exports.default = {
 	cancel: 'Cancel | cancel',
 	edit: 'Edit | edit',
 	rowsPerPage: 'Rows per page',
+	noData: 'No data available',
+	noResults: 'No matching records found',
 	icon: 'Icon | Icons | icon | icons',
 	search: 'Search | Searched | search | searched',
 	date: 'Date | Dates | date | dates',
@@ -23621,6 +23634,8 @@ exports.default = {
 	cancel: 'Annuleren | annuleren',
 	edit: 'Bewerk | Bewerken | bewerk | bewerken',
 	rowsPerPage: 'Rijen per pagina',
+	noData: 'Geen data beschikbaar',
+	noResults: 'Geen overeenkomende resultaten gevonden',
 	icon: 'Icoon | Iconen | icoon | iconen',
 	search: 'Zoek | Gezocht | zoek | gezocht',
 	date: 'Datum | Datums | datum | datums',
@@ -24051,7 +24066,7 @@ var routes = [{
 		path: 'register',
 		name: 'register',
 		meta: {
-			title: _i18n.i18n.t('user.register')
+			title: 'user.register'
 		},
 		component: register,
 		beforeEnter: function beforeEnter(to, form, next) {
@@ -24065,7 +24080,7 @@ var routes = [{
 		path: 'login',
 		name: 'login',
 		meta: {
-			title: _i18n.i18n.t('user.login')
+			title: 'user.login'
 		},
 		component: login,
 		beforeEnter: function beforeEnter(to, form, next) {
@@ -24094,7 +24109,7 @@ var routes = [{
 		path: 'users',
 		name: 'userIndex',
 		meta: {
-			title: _i18n.i18n.tc('user.user', 1),
+			title: ['user.user', 1],
 			permission: 'user.index'
 		},
 		component: userIndex
@@ -24103,7 +24118,7 @@ var routes = [{
 		name: 'userEdit',
 		props: true,
 		meta: {
-			title: _i18n.i18n.t('user.edit'),
+			title: 'user.edit',
 			permission: 'user.edit'
 		},
 		component: userEdit
@@ -24111,14 +24126,14 @@ var routes = [{
 		path: 'continents',
 		name: 'continentIndex',
 		meta: {
-			title: _i18n.i18n.tc('continent.continent', 1)
+			title: ['continent.continent', 1]
 		},
 		component: continentIndex
 	}, {
 		path: 'continents/create',
 		name: 'continentCreate',
 		meta: {
-			title: _i18n.i18n.t('continent.create')
+			title: 'continent.create'
 		},
 		component: continentCreate
 	}, {
@@ -24126,21 +24141,21 @@ var routes = [{
 		props: true,
 		name: 'continentEdit',
 		meta: {
-			title: _i18n.i18n.t('continent.edit')
+			title: 'continent.edit'
 		},
 		component: continentEdit
 	}, {
 		path: 'currencies',
 		name: 'currencyIndex',
 		meta: {
-			title: _i18n.i18n.tc('currency.currency', 1)
+			title: ['currency.currency', 1]
 		},
 		component: currencyIndex
 	}, {
 		path: 'currencies/create',
 		name: 'currencyCreate',
 		meta: {
-			title: _i18n.i18n.t('currency.create')
+			title: 'currency.create'
 		},
 		component: currencyCreate
 	}, {
@@ -24148,21 +24163,21 @@ var routes = [{
 		props: true,
 		name: 'currencyEdit',
 		meta: {
-			title: _i18n.i18n.t('currency.edit')
+			title: 'currency.edit'
 		},
 		component: currencyEdit
 	}, {
 		path: 'languages',
 		name: 'languageIndex',
 		meta: {
-			title: _i18n.i18n.tc('language.language', 1)
+			title: ['language.language', 1]
 		},
 		component: languageIndex
 	}, {
 		path: 'languages/create',
 		name: 'languageCreate',
 		meta: {
-			title: _i18n.i18n.t('language.create')
+			title: 'language.create'
 		},
 		component: languageCreate
 	}, {
@@ -24170,21 +24185,21 @@ var routes = [{
 		props: true,
 		name: 'languageEdit',
 		meta: {
-			title: _i18n.i18n.t('language.edit')
+			title: 'language.edit'
 		},
 		component: languageEdit
 	}, {
 		path: 'countries',
 		name: 'countryIndex',
 		meta: {
-			title: _i18n.i18n.tc('country.country', 1)
+			title: ['country.country', 1]
 		},
 		component: countryIndex
 	}, {
 		path: 'countries/create',
 		name: 'countryCreate',
 		meta: {
-			title: _i18n.i18n.t('country.create')
+			title: 'country.create'
 		},
 		component: countryCreate
 	}, {
@@ -24192,21 +24207,21 @@ var routes = [{
 		props: true,
 		name: 'countryEdit',
 		meta: {
-			title: _i18n.i18n.t('country.edit')
+			title: 'country.edit'
 		},
 		component: countryEdit
 	}, {
 		path: 'timezones',
 		name: 'timezoneIndex',
 		meta: {
-			title: _i18n.i18n.tc('timezone.timezone', 1)
+			title: ['timezone.timezone', 1]
 		},
 		component: timezoneIndex
 	}, {
 		path: 'timezones/create',
 		name: 'timezoneCreate',
 		meta: {
-			title: _i18n.i18n.t('timezone.create')
+			title: 'timezone.create'
 		},
 		component: timezoneCreate
 	}, {
@@ -24214,21 +24229,21 @@ var routes = [{
 		props: true,
 		name: 'timezoneEdit',
 		meta: {
-			title: _i18n.i18n.t('timezone.edit')
+			title: 'timezone.edit'
 		},
 		component: timezoneEdit
 	}, {
 		path: 'cities',
 		name: 'cityIndex',
 		meta: {
-			title: _i18n.i18n.tc('city.city', 1)
+			title: ['city.city', 1]
 		},
 		component: cityIndex
 	}, {
 		path: 'cities/create',
 		name: 'cityCreate',
 		meta: {
-			title: _i18n.i18n.t('city.create')
+			title: 'city.create'
 		},
 		component: cityCreate
 	}, {
@@ -24236,21 +24251,21 @@ var routes = [{
 		props: true,
 		name: 'cityEdit',
 		meta: {
-			title: _i18n.i18n.t('city.edit')
+			title: 'city.edit'
 		},
 		component: cityEdit
 	}, {
 		path: 'airports',
 		name: 'airportIndex',
 		meta: {
-			title: _i18n.i18n.tc('airport.airport', 1)
+			title: ['airport.airport', 1]
 		},
 		component: airportIndex
 	}, {
 		path: 'airports/create',
 		name: 'airportCreate',
 		meta: {
-			title: _i18n.i18n.t('airport.create')
+			title: 'airport.create'
 		},
 		component: airportCreate
 	}, {
@@ -24258,21 +24273,21 @@ var routes = [{
 		props: true,
 		name: 'airportEdit',
 		meta: {
-			title: _i18n.i18n.t('airport.edit')
+			title: 'airport.edit'
 		},
 		component: airportEdit
 	}, {
 		path: 'airlines',
 		name: 'airlineIndex',
 		meta: {
-			title: _i18n.i18n.tc('airline.airline', 1)
+			title: ['airline.airline', 1]
 		},
 		component: airlineIndex
 	}, {
 		path: 'airlines/create',
 		name: 'airlineCreate',
 		meta: {
-			title: _i18n.i18n.t('airline.create')
+			title: 'airline.create'
 		},
 		component: airlineCreate
 	}, {
@@ -24280,21 +24295,21 @@ var routes = [{
 		props: true,
 		name: 'airlineEdit',
 		meta: {
-			title: _i18n.i18n.t('airline.edit')
+			title: 'airline.edit'
 		},
 		component: airlineEdit
 	}, {
 		path: 'roles',
 		name: 'roleIndex',
 		meta: {
-			title: _i18n.i18n.tc('role.role', 1)
+			title: ['role.role', 1]
 		},
 		component: roleIndex
 	}, {
 		path: 'roles/create',
 		name: 'roleCreate',
 		meta: {
-			title: _i18n.i18n.t('role.create')
+			title: 'role.create'
 		},
 		component: roleCreate
 	}, {
@@ -24302,21 +24317,21 @@ var routes = [{
 		props: true,
 		name: 'roleEdit',
 		meta: {
-			title: _i18n.i18n.t('role.edit')
+			title: 'role.edit'
 		},
 		component: roleEdit
 	}, {
 		path: 'permissions',
 		name: 'permissionIndex',
 		meta: {
-			title: _i18n.i18n.tc('permission.permission', 1)
+			title: ['permission.permission', 1]
 		},
 		component: permissionIndex
 	}, {
 		path: 'permissions/create',
 		name: 'permissionCreate',
 		meta: {
-			title: _i18n.i18n.t('permission.create')
+			title: 'permission.create'
 		},
 		component: permissionCreate
 	}, {
@@ -24324,7 +24339,7 @@ var routes = [{
 		props: true,
 		name: 'permissionEdit',
 		meta: {
-			title: _i18n.i18n.t('permission.edit')
+			title: 'permission.edit'
 		},
 		component: permissionEdit
 	}]
@@ -24345,7 +24360,7 @@ router.beforeEach(function (to, from, next) {
 		_i18n.i18n.locale = language;
 	}
 
-	if (to.matched[0].meta.auth || to.meta.auth) {
+	if (to && to.matched[0].meta.auth || to.meta.auth) {
 		if (_store.store.getters.userLoggedIn) {
 			next();
 		} else {
@@ -26899,7 +26914,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v(_vm._s(this.$route.meta.title))]),
+          _c("v-toolbar-title", [_vm._v(_vm._s(_vm.title))]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
@@ -28317,11 +28332,8 @@ var render = function() {
                         hover: "",
                         height: "616px",
                         to: "#",
-                        img: _vm.image(
-                          "horizontal",
-                          this.data[0].name,
-                          this.data[0].cities[0]
-                        )
+                        img:
+                          "https://images.pexels.com/photos/695/city-sky-cloudy-skyline.jpg?cs=srgb&dl=center-city-cloudy-695.jpg&fm=jpg"
                       }
                     },
                     [
@@ -30839,7 +30851,7 @@ var render = function() {
                           staticClass: "headline white--text primary",
                           attrs: { "primary-title": "" }
                         },
-                        [_vm._v(_vm._s(this.$route.meta.title))]
+                        [_vm._v(_vm._s(_vm.title))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -31417,7 +31429,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v(_vm._s(this.$route.meta.title))]),
+          _c("v-toolbar-title", [_vm._v(_vm._s(_vm.title))]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
@@ -31470,13 +31482,19 @@ var render = function() {
                           _c(
                             "v-list-tile-title",
                             [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.userProfile["first_name"]) +
-                                  " " +
-                                  _vm._s(_vm.userProfile["last_name"]) +
-                                  "\n\n                            "
-                              ),
+                              _vm.userProfile["first_name"] &&
+                              _vm.userProfile["last_name"]
+                                ? _c("div", [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(_vm.userProfile["first_name"]) +
+                                        " " +
+                                        _vm._s(_vm.userProfile["last_name"]) +
+                                        "\n                            "
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
                               _c(
                                 "v-menu",
                                 [
@@ -31949,7 +31967,10 @@ var render = function() {
         totalItems: _vm.totalItems,
         "item-key": "id",
         loading: _vm.loading,
-        pagination: _vm.pagination
+        pagination: _vm.pagination,
+        "no-data-text": _vm.$t("noData"),
+        "no-result-text": _vm.$t("noResults"),
+        "rows-per-page-text": _vm.$t("rowsPerPage")
       },
       on: {
         "update:pagination": function($event) {
@@ -32548,7 +32569,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -33118,7 +33142,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -33696,7 +33723,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -33756,25 +33786,6 @@ var render = function() {
                     _c(
                       "td",
                       [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              icon: "",
-                              to: {
-                                name: "languageTranslate",
-                                params: { language: props.item.id }
-                              }
-                            }
-                          },
-                          [
-                            _c("v-icon", { attrs: { color: "blue" } }, [
-                              _vm._v("translate")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
                         _c(
                           "v-btn",
                           {
@@ -34289,7 +34300,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -34954,7 +34968,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -35561,7 +35578,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -36223,7 +36243,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -36869,7 +36892,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -37481,7 +37507,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {
@@ -38116,7 +38145,10 @@ var render = function() {
             totalItems: _vm.totalItems,
             "item-key": "id",
             loading: _vm.loading,
-            pagination: _vm.pagination
+            pagination: _vm.pagination,
+            "no-data-text": _vm.$t("noData"),
+            "no-result-text": _vm.$t("noResults"),
+            "rows-per-page-text": _vm.$t("rowsPerPage")
           },
           on: {
             "update:pagination": function($event) {

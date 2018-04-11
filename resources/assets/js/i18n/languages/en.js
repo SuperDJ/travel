@@ -5,6 +5,8 @@ export default
 	cancel: 'Cancel | cancel',
 	edit: 'Edit | edit',
 	rowsPerPage: 'Rows per page',
+	noData: 'No data available',
+	noResults: 'No matching records found',
 	icon: 'Icon | Icons | icon | icons',
 	search: 'Search | Searched | search | searched',
 	date: 'Date | Dates | date | dates',

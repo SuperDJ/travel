@@ -5,6 +5,8 @@ export default
 	cancel: 'Annuleren | annuleren',
 	edit: 'Bewerk | Bewerken | bewerk | bewerken',
 	rowsPerPage: 'Rijen per pagina',
+	noData: 'Geen data beschikbaar',
+	noResults: 'Geen overeenkomende resultaten gevonden',
 	icon: 'Icoon | Iconen | icoon | iconen',
 	search: 'Zoek | Gezocht | zoek | gezocht',
 	date: 'Datum | Datums | datum | datums',

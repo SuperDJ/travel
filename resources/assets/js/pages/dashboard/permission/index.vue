@@ -17,6 +17,9 @@
             item-key="id"
             :loading="loading"
             :pagination.sync="pagination"
+            :no-data-text="$t( 'noData' )"
+            :no-result-text="$t( 'noResults' )"
+            :rows-per-page-text="$t( 'rowsPerPage' )"
         >
             <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
             <template slot="header" slot-scope="props">

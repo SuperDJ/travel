@@ -123,7 +123,7 @@ const routes = [
 				path: 'register',
 				name: 'register',
 				meta: {
-					title: i18n.t( 'user.register' )
+					title: 'user.register'
 				},
 				component: register,
 				beforeEnter: ( to, form, next ) => {
@@ -139,7 +139,7 @@ const routes = [
 				path: 'login',
 				name: 'login',
 				meta: {
-					title: i18n.t( 'user.login' )
+					title: 'user.login'
 				},
 				component: login,
 				beforeEnter: ( to, form, next ) => {
@@ -173,7 +173,7 @@ const routes = [
 				path: 'users',
 				name: 'userIndex',
 				meta: {
-					title: i18n.tc( 'user.user', 1 ),
+					title:  ['user.user', 1],
 					permission: 'user.index'
 				},
 				component: userIndex,
@@ -183,7 +183,7 @@ const routes = [
 				name: 'userEdit',
 				props: true,
 				meta: {
-					title: i18n.t( 'user.edit' ),
+					title: 'user.edit',
 					permission: 'user.edit'
 				},
 				component: userEdit,
@@ -192,7 +192,7 @@ const routes = [
 				path: 'continents',
 				name: 'continentIndex',
 				meta: {
-					title: i18n.tc( 'continent.continent', 1 )
+					title: [ 'continent.continent', 1 ]
 				},
 				component: continentIndex,
 			},
@@ -200,7 +200,7 @@ const routes = [
 				path: 'continents/create',
 				name: 'continentCreate',
 				meta: {
-					title: i18n.t( 'continent.create' )
+					title: 'continent.create'
 				},
 				component: continentCreate,
 			},
@@ -209,7 +209,7 @@ const routes = [
 				props: true,
 				name: 'continentEdit',
 				meta: {
-					title: i18n.t( 'continent.edit' )
+					title: 'continent.edit'
 				},
 				component: continentEdit,
 			},
@@ -217,7 +217,7 @@ const routes = [
 				path: 'currencies',
 				name: 'currencyIndex',
 				meta: {
-					title: i18n.tc( 'currency.currency', 1 )
+					title: [ 'currency.currency', 1 ]
 				},
 				component: currencyIndex,
 			},
@@ -225,7 +225,7 @@ const routes = [
 				path: 'currencies/create',
 				name: 'currencyCreate',
 				meta: {
-					title: i18n.t( 'currency.create' )
+					title: 'currency.create'
 				},
 				component: currencyCreate,
 			},
@@ -234,7 +234,7 @@ const routes = [
 				props: true,
 				name: 'currencyEdit',
 				meta: {
-					title: i18n.t( 'currency.edit' )
+					title: 'currency.edit'
 				},
 				component: currencyEdit,
 			},
@@ -242,7 +242,7 @@ const routes = [
 				path: 'languages',
 				name: 'languageIndex',
 				meta: {
-					title: i18n.tc( 'language.language', 1 )
+					title: [ 'language.language', 1 ]
 				},
 				component: languageIndex,
 			},
@@ -250,7 +250,7 @@ const routes = [
 				path: 'languages/create',
 				name: 'languageCreate',
 				meta: {
-					title: i18n.t( 'language.create' )
+					title: 'language.create'
 				},
 				component: languageCreate,
 			},
@@ -259,7 +259,7 @@ const routes = [
 				props: true,
 				name: 'languageEdit',
 				meta: {
-					title: i18n.t( 'language.edit' )
+					title: 'language.edit'
 				},
 				component: languageEdit,
 			},
@@ -267,7 +267,7 @@ const routes = [
 				path: 'countries',
 				name: 'countryIndex',
 				meta: {
-					title: i18n.tc( 'country.country', 1 )
+					title: [ 'country.country', 1 ]
 				},
 				component: countryIndex,
 			},
@@ -275,7 +275,7 @@ const routes = [
 				path: 'countries/create',
 				name: 'countryCreate',
 				meta: {
-					title: i18n.t( 'country.create' )
+					title: 'country.create'
 				},
 				component: countryCreate,
 			},
@@ -284,7 +284,7 @@ const routes = [
 				props: true,
 				name: 'countryEdit',
 				meta: {
-					title: i18n.t( 'country.edit' )
+					title: 'country.edit'
 				},
 				component: countryEdit,
 			},
@@ -292,7 +292,7 @@ const routes = [
 				path: 'timezones',
 				name: 'timezoneIndex',
 				meta: {
-					title: i18n.tc( 'timezone.timezone', 1 )
+					title: [ 'timezone.timezone', 1 ]
 				},
 				component: timezoneIndex,
 			},
@@ -300,7 +300,7 @@ const routes = [
 				path: 'timezones/create',
 				name: 'timezoneCreate',
 				meta: {
-					title: i18n.t( 'timezone.create' )
+					title: 'timezone.create'
 				},
 				component: timezoneCreate,
 			},
@@ -309,7 +309,7 @@ const routes = [
 				props: true,
 				name: 'timezoneEdit',
 				meta: {
-					title: i18n.t( 'timezone.edit' )
+					title: 'timezone.edit'
 				},
 				component: timezoneEdit,
 			},
@@ -317,7 +317,7 @@ const routes = [
 				path: 'cities',
 				name: 'cityIndex',
 				meta: {
-					title: i18n.tc( 'city.city', 1 )
+					title: [ 'city.city', 1 ]
 				},
 				component: cityIndex,
 			},
@@ -325,7 +325,7 @@ const routes = [
 				path: 'cities/create',
 				name: 'cityCreate',
 				meta: {
-					title: i18n.t( 'city.create' )
+					title: 'city.create'
 				},
 				component: cityCreate,
 			},
@@ -334,7 +334,7 @@ const routes = [
 				props: true,
 				name: 'cityEdit',
 				meta: {
-					title: i18n.t( 'city.edit' )
+					title: 'city.edit'
 				},
 				component: cityEdit,
 			},
@@ -342,7 +342,7 @@ const routes = [
 				path: 'airports',
 				name: 'airportIndex',
 				meta: {
-					title: i18n.tc( 'airport.airport', 1 )
+					title: [ 'airport.airport', 1 ]
 				},
 				component: airportIndex,
 			},
@@ -350,7 +350,7 @@ const routes = [
 				path: 'airports/create',
 				name: 'airportCreate',
 				meta: {
-					title: i18n.t( 'airport.create' )
+					title: 'airport.create'
 				},
 				component: airportCreate,
 			},
@@ -359,7 +359,7 @@ const routes = [
 				props: true,
 				name: 'airportEdit',
 				meta: {
-					title: i18n.t( 'airport.edit' )
+					title: 'airport.edit'
 				},
 				component: airportEdit,
 			},
@@ -367,7 +367,7 @@ const routes = [
 				path: 'airlines',
 				name: 'airlineIndex',
 				meta: {
-					title: i18n.tc( 'airline.airline', 1 )
+					title: [ 'airline.airline', 1 ]
 				},
 				component: airlineIndex,
 			},
@@ -375,7 +375,7 @@ const routes = [
 				path: 'airlines/create',
 				name: 'airlineCreate',
 				meta: {
-					title: i18n.t( 'airline.create' )
+					title: 'airline.create'
 				},
 				component: airlineCreate,
 			},
@@ -384,7 +384,7 @@ const routes = [
 				props: true,
 				name: 'airlineEdit',
 				meta: {
-					title: i18n.t( 'airline.edit' )
+					title: 'airline.edit'
 				},
 				component: airlineEdit,
 			},
@@ -392,7 +392,7 @@ const routes = [
 				path: 'roles',
 				name: 'roleIndex',
 				meta: {
-					title: i18n.tc( 'role.role', 1 )
+					title: [ 'role.role', 1 ]
 				},
 				component: roleIndex,
 			},
@@ -400,7 +400,7 @@ const routes = [
 				path: 'roles/create',
 				name: 'roleCreate',
 				meta: {
-					title: i18n.t( 'role.create' )
+					title: 'role.create'
 				},
 				component: roleCreate,
 			},
@@ -409,7 +409,7 @@ const routes = [
 				props: true,
 				name: 'roleEdit',
 				meta: {
-					title: i18n.t( 'role.edit' )
+					title: 'role.edit'
 				},
 				component: roleEdit,
 			},
@@ -417,7 +417,7 @@ const routes = [
 				path: 'permissions',
 				name: 'permissionIndex',
 				meta: {
-					title: i18n.tc( 'permission.permission', 1 )
+					title: [ 'permission.permission', 1 ]
 				},
 				component: permissionIndex,
 			},
@@ -425,7 +425,7 @@ const routes = [
 				path: 'permissions/create',
 				name: 'permissionCreate',
 				meta: {
-					title: i18n.t( 'permission.create' )
+					title: 'permission.create'
 				},
 				component: permissionCreate,
 			},
@@ -434,7 +434,7 @@ const routes = [
 				props: true,
 				name: 'permissionEdit',
 				meta: {
-					title: i18n.t( 'permission.edit' )
+					title: 'permission.edit'
 				},
 				component: permissionEdit,
 			}
@@ -459,7 +459,7 @@ router.beforeEach( ( to, from, next ) =>
 		i18n.locale = language;
 	}
 
-	if( to.matched[0].meta.auth || to.meta.auth )
+	if( to && to.matched[0].meta.auth || to.meta.auth )
 	{
 		if( store.getters.userLoggedIn )
 		{

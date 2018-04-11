@@ -3,7 +3,7 @@
         <v-toolbar color="primary">
             <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
 
-            <v-toolbar-title>{{ this.$route.meta.title }}</v-toolbar-title>
+            <v-toolbar-title>{{ title }}</v-toolbar-title>
 
             <v-spacer />
 
@@ -19,7 +19,9 @@
                         </v-list-tile-avatar>
                         <v-list-tile-content>
                             <v-list-tile-title>
+                                <div v-if="userProfile['first_name'] && userProfile['last_name']">
                                 {{ userProfile['first_name'] }} {{ userProfile['last_name'] }}
+                                </div>
 
                                 <v-menu>
                                     <v-icon slot="activator">expand_more</v-icon>
@@ -134,6 +136,17 @@
                 'errors',
                 'userProfile'
             ]),
+
+			title()
+			{
+				const title = this.$route.meta.title;
+
+				if( Array.isArray( title ) ) {
+					return this.$i18n.tc( title[0], title[1] );
+				} else {
+					return this.$i18n.tc( title );
+				}
+			}
         },
 
         methods: {

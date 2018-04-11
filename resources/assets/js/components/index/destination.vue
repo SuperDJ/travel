@@ -7,7 +7,7 @@
                     hover
                     height="616px"
                     to="#"
-                    :img="image( 'horizontal', this.data[0].name, this.data[0].cities[0] )"
+                    img="https://images.pexels.com/photos/695/city-sky-cloudy-skyline.jpg?cs=srgb&dl=center-city-cloudy-695.jpg&fm=jpg"
                 >
                     <v-card-text class="fill-height px-0 py-0">
                         <v-jumbotron gradient="to top, rgba(33, 33, 33, 0.4) 15%, rgba(255, 255, 255, 0) 33%" height="100%">
@@ -213,35 +213,12 @@
                     .then( response => response.json() )
                     .then( response => this.data = response )
                     .catch( error => console.error( error ) );
-            },
-            image( orientation, country, city )
-            {
-            	let search = country.replace( / /g, '+' );
-
-            	if( city && city.length > 0 )
-            	{
-            		search += `+${city.replace( / /g, '+' ) }`;
-                }
-
-                const img = async () =>
-				{
-					const response = await fetch(
-						`https://pixabay.com/api/?key=${window.pixabay}&q=${search}&image_type=photo&safesearch=true&orientation=${orientation}` );
-					const json = await response.json();
-
-					console.log(json);
-					return json;
-				};
-
-            	return img;
             }
         },
 
         mounted()
         {
     	    this.getData();
-
-    	    console.log(this.image('horizontal', 'netherlands', 'groningen').then(resp => resp));
         }
     }
 </script>

@@ -1,7 +1,8 @@
 const path = require('path'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
 	CleanWebpackPlugin = require('clean-webpack-plugin'),
-	GoogleFonts = require('google-fonts-webpack-plugin');
+	GoogleFonts = require('google-fonts-webpack-plugin'),
+	swp = require('sw-precache-webpack-plugin');
 
 module.exports = env => {
 	return {
@@ -62,7 +63,7 @@ module.exports = env => {
 								sizes: [600, 960, 1280, 1920],
 								placeholder: true,
 								placeholderSize: 50,
-								name: '/images/[hash]-[width].[ext]',
+								name: '/public/images/[hash]-[width].[ext]',
 							}
 						},
 						{
@@ -98,7 +99,57 @@ module.exports = env => {
 				path: 'public/fonts/',
 				apiUrl: 'https://google-webfonts-helper.herokuapp.com/api/fonts',
 				filename: './resources/assets/scss/components/_fonts.scss'
-			})                                                                          */
+			})
+			                                                                          */
+			new swp({
+				cacheId: 'travel-app',
+				filename: 'service-worker.js',
+				minify: !env.dev,
+				staticFileGlobs: [
+					'public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}',
+					'https://maps.googleapis.com/maps/api/js?key=AIzaSyDuy_qF0zXiupeh0-NKW78LoCamYYFR6kU',
+					'https://fonts.googleapis.com/icon?family=Material+Icons',
+					'https://unpkg.com/vuetify/dist/vuetify.min.css',
+					'/en',
+					'/nl',
+					'/'
+
+				],
+				handleFetch: true,
+				stripPrefix: 'public',
+				dynamicUrlToDependencies: {
+					'/': ['resources/views/index.blade.php'],
+					'/en/': ['resources/views/index.blade.php'],
+					'/en': ['resources/views/index.blade.php'],
+				},
+				runtimeCaching: [
+					{
+						urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+						handler: 'cacheFirst'
+					},
+					{
+						urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+						handler: 'cacheFirst'
+					},
+					{
+						urlPattern: /^https:\/\/maps\.gstatic\.com\//,
+						handler: 'cacheFirst'
+					},
+					{
+						urlPattern: /^https:\/\/unpkg\.com\//,
+						handler: 'cacheFirst'
+					},
+					{
+						urlPattern: /^https:\/\/travel\.dsuper\.nl\/api\//,
+						handler: 'cacheFirst'
+					},
+					{
+						urlPattern: /^https:\/\/images\.pexels\.com\//,
+						handler: 'cacheFirst'
+					}
+				],
+				staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /manifest\.json$/, /service-worker\.js$/],
+			})
 		]
 	}
 };

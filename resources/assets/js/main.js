@@ -36,3 +36,29 @@ if( token )
 } else {
 	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+// Register service worker
+if( 'serviceWorker' in navigator ) {
+	window.addEventListener( 'load', () => {
+		navigator.serviceWorker.register( '/service-worker.js' ).then( registration => {
+			// Registration was successful
+			console.log( 'ServiceWorker registration successful with scope: ', registration.scope );
+		}, err => {
+			// registration failed :(
+			console.log( 'ServiceWorker registration failed: ', err );
+		});
+	});
+}
+
+// Add install banner
+window.addEventListener('beforeinstallprompt', ( e ) =>  {
+	e.userChoice.then( choiceResult => {
+		console.log( choiceResult.outcome );
+
+		if( choiceResult.outcome === 'dismissed' ) {
+			console.log( 'User cancelled home screen install' );
+		} else {
+			console.log( 'User added to home screen' );
+		}
+	});
+});

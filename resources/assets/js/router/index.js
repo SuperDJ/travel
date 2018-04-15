@@ -459,7 +459,7 @@ router.beforeEach( ( to, from, next ) =>
 		i18n.locale = language;
 	}
 
-	if( to && to.matched[0].meta.auth || to.meta.auth )
+	if( to && to.matched[0] && to.matched[0].meta.auth || to.meta.auth )
 	{
 		if( store.getters.userLoggedIn )
 		{

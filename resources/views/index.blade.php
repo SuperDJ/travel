@@ -19,10 +19,11 @@
     <body>
         <div id="app"></div>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ config( 'app.googleApi' ) }}"></script>
         <script>
-            window.pixabay = '{{ config( 'app.pixabay' ) }}';
+			window.pixabay = '{{ config( 'app.pixabay' ) }}';
         </script>
         <script src="{{ asset( '/js/main.js' ) }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ config( 'app.googleApi' ) }}"></script>
+        <script src="/service-worker.js"></script>
     </body>
 </html>

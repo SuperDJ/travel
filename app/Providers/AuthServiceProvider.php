@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Airline;
+use App\Policies\AirlinePolicy;
 use Carbon\Carbon;
-use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -15,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+    	Airline::class => AirlinePolicy::class,
     ];
 
     /**
@@ -26,11 +27,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-       	Passport::routes();
-
-       	Passport::tokensExpireIn( Carbon::now()->addDays( 15 ) );
-
-       	Passport::refreshTokensExpireIn( Carbon::now()->addDays( 30 ) );
     }
 }

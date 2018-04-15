@@ -55,14 +55,6 @@ Route::group( ['middleware' => 'auth:api'], function() {
 	Route::put( '/airlines/{airline}', 'AirlineController@update' )->name( 'airline.update' );
 	Route::delete( '/airlines/{airline}', 'AirlineController@destroy' )->name( 'airline.destroy' );
 
-	// Groups
-	Route::get( '/groups', 'GroupController@index' )->name( 'group.index' );
-	Route::post( '/groups', 'GroupController@store' )->name( 'group.store' );
-	Route::get( '/groups/{search}/search', 'GroupController@search' )->name( 'group.search' );
-	Route::get( '/groups/{group}/edit', 'GroupController@edit' )->name( 'group.edit' );
-	Route::put( '/groups/{group}', 'GroupController@update' )->name( 'group.update' );
-	Route::delete( '/groups/{group}', 'GroupController@destroy' )->name( 'group.destroy' );
-
 	// Roles
 	Route::get( '/roles', 'RoleController@index' )->name( 'role.index' );
 	Route::post( '/roles', 'RoleController@store' )->name( 'role.store' );
